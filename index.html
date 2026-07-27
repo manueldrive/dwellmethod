@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dwell — a guide for meditating on Scripture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        hsl(40,33%,98%);
+    --fg:        hsl(210,20%,20%);
+    --muted:     hsl(210,10%,40%);
+    --secondary: hsl(14,51%,63%);
+    --font:      'Josefin Slab', serif;
+    --dark:      #2c3649;
+    --peach:     #E8BA9E;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  .header-band {
+    background: linear-gradient(to bottom, #eaeae7, #d6d6d2);
+    position: relative;
+  }
+  .print-btn {
+    position: absolute; right: 24px; top: 20px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 999px;
+    background: #2c3649; color: #fff;
+    font-family: var(--font); font-size: 14px; font-weight: 600;
+    border: none; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    transition: opacity .15s;
+  }
+  .print-btn:hover { opacity: .8; }
+  .print-btn svg { width: 16px; height: 16px; }
+  .print-btn-label { display: none; }
+  @media (min-width: 480px) { .print-btn-label { display: inline; } }
+
+  .header-wordmark {
+    text-align: center;
+    padding: 32px 16px 20px;
+  }
+  .header-wordmark img {
+    height: clamp(56px, 7.5vw, 84px);
+    width: auto;
+    mix-blend-mode: multiply;
+  }
+  .header-tagline {
+    font-style: italic;
+    font-size: clamp(12px, 1.4vw, 15px);
+    color: #5a5a56;
+    margin-top: 6px;
+  }
+
+  .day-nav { display: flex; width: 100%; }
+  .day-nav button {
+    flex: 1; border: none; cursor: pointer;
+    padding: 12px 4px;
+    font-family: var(--font);
+    font-size: clamp(11px, 1.2vw, 14px);
+    font-weight: 700;
+    color: var(--dark);
+    letter-spacing: .04em;
+    white-space: nowrap;
+    transition: opacity .15s;
+  }
+  .day-nav button:hover { opacity: .8; }
+
+  /* ── Main ── */
+  main { max-width: 768px; margin: 0 auto; padding: 0 16px 128px; }
+  @media (min-width: 768px) { main { padding: 0 32px 128px; } }
+
+  /* ── Prayer ── */
+  .prayer {
+    padding: 48px 24px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    max-width: 512px; margin: 0 auto;
+  }
+  .prayer-line { width: 64px; height: 1px; background: rgba(203,127,87,.4); }
+  .prayer p {
+    font-style: italic;
+    font-size: clamp(20px, 2.5vw, 24px);
+    color: rgba(44,54,73,.8);
+    line-height: 1.7;
+    margin: 32px 0;
+  }
+
+  /* ── Day section ── */
+  .day-section { padding: 48px 0; scroll-margin-top: 80px; }
+  @media (min-width: 768px) { .day-section { padding: 64px 0; } }
+
+  .pill-row { display: flex; align-items: center; margin-bottom: 32px; }
+  .pill {
+    flex: 1;
+    border-radius: 12px;
+    padding: 11px 32px;
+  }
+  .pill-label {
+    font-size: clamp(17px, 2.4vw, 22px);
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--dark);
+    white-space: nowrap;
+  }
+  .icon-circle {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: #f4f1ec;
+    flex-shrink: 0; margin-left: -40px; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .icon-circle img { width: 32px; height: 32px; object-fit: contain; }
+
+  .prompts { font-size: clamp(18px, 2vw, 20px); line-height: 1.7; color: rgba(44,54,73,.9); font-weight: 500; }
+  .prompts p + p { margin-top: 16px; }
+  .center-line { display: block; text-align: center; margin-top: 12px; }
+  .bell-row {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-top: 12px; color: rgba(44,54,73,.6);
+  }
+  .bell-row svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .bell-row em { font-size: 16px; }
+
+  /* ── How To accordion ── */
+  .howto {
+    margin-top: 24px;
+    background: #fff;
+    border-left: 3px solid rgba(203,127,87,.7);
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    overflow: hidden;
+  }
+  .howto-toggle {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; background: none; border: none; cursor: pointer; text-align: left;
+  }
+  .howto-label {
+    font-weight: 700; font-size: 12px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--fg);
+  }
+  .howto-toggle svg { width: 16px; height: 16px; color: var(--muted); transition: transform .2s; flex-shrink: 0; }
+  .howto-toggle.open svg { transform: rotate(180deg); }
+  .howto-body { display: none; padding: 0 20px 20px; }
+  .howto-body.open { display: block; }
+  .howto-body ul { list-style: disc; padding-left: 20px; }
+  .howto-body li + li { margin-top: 12px; }
+  .howto-body li { font-size: clamp(14px, 1.6vw, 16px); color: var(--muted); line-height: 1.6; }
+  .howto-body a { color: var(--secondary); text-decoration: none; }
+  .howto-body a:hover { text-decoration: underline; }
+
+  /* ── Gradients ── */
+  .g1, .g2 { background: linear-gradient(to right, #D8E4D8, #C8D8C8); }
+  .g3, .g4 { background: linear-gradient(to right, #D3DBE2, #C8D2DC); }
+  .g5       { background: linear-gradient(to right, #E8BA9E, #E8A0B8); }
+
+  /* ── Print bookmark ── */
+  .print-page-1, .print-page-2 { display: none; }
+
+  @media print {
+    @page { margin: .2in; }
+    body { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header, main { display: none !important; }
+    .print-page-1, .print-page-2 {
+      display: flex !important;
+      flex-direction: row;
+      align-items: stretch;
+      gap: .12in;
+      width: 100%;
+      background: white;
+    }
+    .print-page-1 { break-after: page; page-break-after: always; }
+  }
+
+  /* ── Bookmark inner styles ── */
+  .bm {
+    flex: 1; padding: .22in .2in;
+    background: #fff; font-family: var(--font);
+    color: var(--dark); font-size: 15px; line-height: 1.6;
+    display: flex; flex-direction: column; gap: 20px;
+    box-sizing: border-box; break-inside: avoid;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .bm-header { margin: -.22in -.2in 0; overflow: hidden; }
+  .bm-wordmark {
+    background: #fff; text-align: center;
+    padding: .12in .15in .1in;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .bm-wordmark img { height: 54px; width: auto; mix-blend-mode: multiply; }
+  .bm-tagline { font-style: italic; font-size: 14px; color: var(--dark); opacity: .75; margin-top: 5px; line-height: 1.45; }
+  .bm-strip { display: flex; }
+  .bm-strip div { flex: 1; height: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .bm-prayer { text-align: center; padding: 2px 6px; }
+  .bm-prayer-line { width: 28px; height: 2px; background: var(--peach); margin: 0 auto 9px; border-radius: 1px; }
+  .bm-prayer p { font-style: italic; font-size: 15px; line-height: 1.7; }
+  .bm-prayer-line-b { width: 28px; height: 2px; background: var(--peach); margin: 9px auto 0; border-radius: 1px; }
+  .bm-pill-row { display: flex; align-items: center; margin-bottom: 10px; }
+  .bm-pill {
+    flex: 1; border-radius: 10px; padding: 2px 16px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .bm-pill span {
+    font-size: 17px; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase; color: var(--dark); white-space: nowrap;
+  }
+  .bm-icon {
+    width: 44px; height: 44px; border-radius: 50%; background: #f4f1ec;
+    flex-shrink: 0; margin-left: -20px;
+    display: flex; align-items: center; justify-content: center;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .bm-icon img { width: 20px; height: 20px; object-fit: contain; }
+  .bm-day ul { list-style: none; padding: 0; margin: 0; }
+  .bm-day li + li { margin-top: 8px; }
+  .bm-center { display: block; text-align: center; margin-top: 4px; }
+  .bm-bell {
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    font-style: italic; opacity: .65;
+  }
+  .bm-bell svg { width: 10px; height: 10px; flex-shrink: 0; }
+
+  .s1, .s2 { background: #D8E4D8; }
+  .s3, .s4 { background: #D3DBE2; }
+  .s5       { background: #E8BA9E; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════ -->
+<header>
+  <div class="header-band">
+    <button class="print-btn" onclick="window.print()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      <span class="print-btn-label">Print Bookmark</span>
+    </button>
+    <div class="header-wordmark">
+      <img src="icons/dwell-title.png" alt="Dwell" />
+      <p class="header-tagline">a guide for meditating on Scripture</p>
+    </div>
+    <nav class="day-nav">
+      <button style="background:linear-gradient(to right,#D8E4D8,#C8D8C8)" onclick="scrollToDay('day-1')">Day 1</button>
+      <button style="background:linear-gradient(to right,#D8E4D8,#C8D8C8)" onclick="scrollToDay('day-2')">Day 2</button>
+      <button style="background:linear-gradient(to right,#D3DBE2,#C8D2DC)" onclick="scrollToDay('day-3')">Day 3</button>
+      <button style="background:linear-gradient(to right,#D3DBE2,#C8D2DC)" onclick="scrollToDay('day-4')">Day 4</button>
+      <button style="background:linear-gradient(to right,#E8BA9E,#E8A0B8)" onclick="scrollToDay('day-5')">Day 5</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════ -->
+<main>
+  <div style="padding-top:32px">
+    <div class="prayer">
+      <div class="prayer-line"></div>
+      <p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p>
+      <div class="prayer-line"></div>
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <section id="day-1" class="day-section">
+    <div class="pill-row">
+      <div class="pill g1"><span class="pill-label">1&nbsp;|&nbsp;Discover</span></div>
+      <div class="icon-circle"><img src="icons/discover.png" alt="Discover" /></div>
+    </div>
+    <div class="prompts">
+      <p>Use a study Bible or trusted online resource to review historical context:<br>
+        <span class="center-line">author · time frame · audience · purpose</span>
+      </p>
+      <p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p>
+    </div>
+    <div class="howto">
+      <button class="howto-toggle" onclick="toggleHowTo(this)">
+        <span class="howto-label">How to approach this</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="howto-body">
+        <ul>
+          <li>It is important to get historical context so that you can place where we are in the Big Story and get a better perspective for how different the culture would have been from today.</li>
+          <li>Much of this information can be found on reliable sites: <strong>Bible Hub – Introductions</strong> (<a href="https://biblehub.com" target="_blank">biblehub.com</a>) and <strong>Blue Letter Bible – Introductions</strong> (<a href="https://blueletterbible.org" target="_blank">blueletterbible.org</a>)</li>
+          <li>Now that you have your historical context, put away all resources for now (including AI)</li>
+          <li>Repetitively read through your passage and surrounding text as you let the Holy Spirit transform you.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY 2 -->
+  <section id="day-2" class="day-section">
+    <div class="pill-row">
+      <div class="pill g2"><span class="pill-label">2&nbsp;|&nbsp;Word Work</span></div>
+      <div class="icon-circle"><img src="icons/wordwork.png" alt="Word Work" /></div>
+    </div>
+    <div class="prompts">
+      <p>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</p>
+      <p>Which words need more clarity? Look them up — what do you learn?</p>
+      <p>How would you summarize the passage in 1–2 sentences?</p>
+    </div>
+    <div class="howto">
+      <button class="howto-toggle" onclick="toggleHowTo(this)">
+        <span class="howto-label">How to approach this</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="howto-body">
+        <ul>
+          <li>Simply use highlighters and pens to annotate the text.</li>
+          <li>If you do not have a Bible you want to write in, get one or print the text out so that you can mark up the page.</li>
+          <li>Use a simple dictionary as you are getting started like <strong>Dictionary.com</strong> (<a href="https://dictionary.com" target="_blank">dictionary.com</a>)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="prayer">
+    <div class="prayer-line"></div>
+    <p>Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p>
+    <div class="prayer-line"></div>
+  </div>
+
+  <!-- DAY 3 -->
+  <section id="day-3" class="day-section">
+    <div class="pill-row">
+      <div class="pill g3"><span class="pill-label">3&nbsp;|&nbsp;Evaluate</span></div>
+      <div class="icon-circle"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+    </div>
+    <div class="prompts">
+      <p>Reread the passage — what questions come to mind?</p>
+      <p>Review other translations, cross references &amp; surrounding passages — do they shed any light on your questions?</p>
+      <p>How would the original audience have understood this passage?</p>
+    </div>
+    <div class="howto">
+      <button class="howto-toggle" onclick="toggleHowTo(this)">
+        <span class="howto-label">How to approach this</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="howto-body">
+        <ul>
+          <li>Don't rush to commentaries or AI for answers to your questions.</li>
+          <li>Use scripture to verify scripture, by first using another translation of the passage to gain clarity.</li>
+          <li>You should also use cross-references to clarify difficult verses and to integrate this passage into the larger, unified story of the Bible: <strong>Bible Hub – Cross References</strong> (<a href="https://biblehub.com" target="_blank">biblehub.com</a>)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY 4 -->
+  <section id="day-4" class="day-section">
+    <div class="pill-row">
+      <div class="pill g4"><span class="pill-label">4&nbsp;|&nbsp;Learn</span></div>
+      <div class="icon-circle"><img src="icons/learn.png" alt="Learn" /></div>
+    </div>
+    <div class="prompts">
+      <p>What truth does this passage reveal about God's character and purpose?</p>
+      <p>What cultural or personal lies does this truth challenge today?</p>
+      <div class="bell-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <em>Check your findings in community</em>
+      </div>
+    </div>
+    <div class="howto">
+      <button class="howto-toggle" onclick="toggleHowTo(this)">
+        <span class="howto-label">How to approach this</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="howto-body">
+        <ul>
+          <li>If you are faced with an unclear passage or verse, read ahead in the book to gain clarity, and look for other clear passages on the same subject. Often times the New Testament writers will interpret passages from the Old Testament.</li>
+          <li>Protect against bias here by refining your findings in a community group.</li>
+          <li>Feel free to bring back in reliable external sources (commentaries, sermons, etc.) to refine what you have learned.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY 5 -->
+  <section id="day-5" class="day-section">
+    <div class="pill-row">
+      <div class="pill g5"><span class="pill-label">5&nbsp;|&nbsp;Live</span></div>
+      <div class="icon-circle"><img src="icons/live.png" alt="Live" /></div>
+    </div>
+    <div class="prompts">
+      <p>How will this truth shape your prayers, thoughts, words and/or actions today?</p>
+    </div>
+    <div class="howto">
+      <button class="howto-toggle" onclick="toggleHowTo(this)">
+        <span class="howto-label">How to approach this</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="howto-body">
+        <ul>
+          <li>Consider how living out this truth would change things in your home, your church and your community and beyond.</li>
+          <li>Pray for God to reveal to you how you should be living this out and when necessary ask for accountability from other believers.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══════════════════════════════════════════
+     PRINT BOOKMARK — Page 1 (3 fronts)
+══════════════════════════════════════════ -->
+<div class="print-page-1">
+
+  <!-- front × 3 -->
+  <div class="bm">
+    <div class="bm-header">
+      <div class="bm-wordmark">
+        <img src="icons/dwell-title.png" alt="Dwell" />
+        <div class="bm-tagline">a guide for meditating on Scripture</div>
+      </div>
+      <div class="bm-strip">
+        <div style="background:#D8E4D8"></div>
+        <div style="background:#D8E4D8"></div>
+        <div style="background:#D3DBE2"></div>
+        <div style="background:#D3DBE2"></div>
+        <div style="background:#E8BA9E"></div>
+      </div>
+    </div>
+    <div class="bm-prayer">
+      <div class="bm-prayer-line"></div>
+      <p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p>
+      <div class="bm-prayer-line-b"></div>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s1"><span>1&nbsp;|&nbsp;Discover</span></div>
+        <div class="bm-icon"><img src="icons/discover.png" alt="Discover" /></div>
+      </div>
+      <ul>
+        <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s2"><span>2&nbsp;|&nbsp;Word Work</span></div>
+        <div class="bm-icon"><img src="icons/wordwork.png" alt="Word Work" /></div>
+      </div>
+      <ul>
+        <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
+        <li>Which words need more clarity? Look them up — what do you learn?</li>
+        <li>How would you summarize the passage in 1–2 sentences?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bm">
+    <div class="bm-header">
+      <div class="bm-wordmark">
+        <img src="icons/dwell-title.png" alt="Dwell" />
+        <div class="bm-tagline">a guide for meditating on Scripture</div>
+      </div>
+      <div class="bm-strip">
+        <div style="background:#D8E4D8"></div>
+        <div style="background:#D8E4D8"></div>
+        <div style="background:#D3DBE2"></div>
+        <div style="background:#D3DBE2"></div>
+        <div style="background:#E8BA9E"></div>
+      </div>
+    </div>
+    <div class="bm-prayer">
+      <div class="bm-prayer-line"></div>
+      <p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p>
+      <div class="bm-prayer-line-b"></div>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s1"><span>1&nbsp;|&nbsp;Discover</span></div>
+        <div class="bm-icon"><img src="icons/discover.png" alt="Discover" /></div>
+      </div>
+      <ul>
+        <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s2"><span>2&nbsp;|&nbsp;Word Work</span></div>
+        <div class="bm-icon"><img src="icons/wordwork.png" alt="Word Work" /></div>
+      </div>
+      <ul>
+        <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
+        <li>Which words need more clarity? Look them up — what do you learn?</li>
+        <li>How would you summarize the passage in 1–2 sentences?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bm">
+    <div class="bm-header">
+      <div class="bm-wordmark">
+        <img src="icons/dwell-title.png" alt="Dwell" />
+        <div class="bm-tagline">a guide for meditating on Scripture</div>
+      </div>
+      <div class="bm-strip">
+        <div style="background:#D8E4D8"></div>
+        <div style="background:#D8E4D8"></div>
+        <div style="background:#D3DBE2"></div>
+        <div style="background:#D3DBE2"></div>
+        <div style="background:#E8BA9E"></div>
+      </div>
+    </div>
+    <div class="bm-prayer">
+      <div class="bm-prayer-line"></div>
+      <p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p>
+      <div class="bm-prayer-line-b"></div>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s1"><span>1&nbsp;|&nbsp;Discover</span></div>
+        <div class="bm-icon"><img src="icons/discover.png" alt="Discover" /></div>
+      </div>
+      <ul>
+        <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s2"><span>2&nbsp;|&nbsp;Word Work</span></div>
+        <div class="bm-icon"><img src="icons/wordwork.png" alt="Word Work" /></div>
+      </div>
+      <ul>
+        <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
+        <li>Which words need more clarity? Look them up — what do you learn?</li>
+        <li>How would you summarize the passage in 1–2 sentences?</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     PRINT BOOKMARK — Page 2 (3 backs)
+══════════════════════════════════════════ -->
+<div class="print-page-2">
+
+  <!-- back × 3 -->
+  <div class="bm">
+    <div class="bm-prayer">
+      <div class="bm-prayer-line"></div>
+      <p>Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p>
+      <div class="bm-prayer-line-b"></div>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
+        <div class="bm-icon"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+      </div>
+      <ul>
+        <li>Reread the passage — what questions come to mind?</li>
+        <li>Review other translations, cross references &amp; surrounding passages — do they shed any light on your questions?</li>
+        <li>How would the original audience have understood this passage?</li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s4"><span>4&nbsp;|&nbsp;Learn</span></div>
+        <div class="bm-icon"><img src="icons/learn.png" alt="Learn" /></div>
+      </div>
+      <ul>
+        <li>What truth does this passage reveal about God's character and purpose?</li>
+        <li>What cultural or personal lies does this truth challenge today?</li>
+        <li class="bm-bell">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span>Check your findings in community</span>
+        </li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s5"><span>5&nbsp;|&nbsp;Live</span></div>
+        <div class="bm-icon"><img src="icons/live.png" alt="Live" /></div>
+      </div>
+      <ul>
+        <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bm">
+    <div class="bm-prayer">
+      <div class="bm-prayer-line"></div>
+      <p>Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p>
+      <div class="bm-prayer-line-b"></div>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
+        <div class="bm-icon"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+      </div>
+      <ul>
+        <li>Reread the passage — what questions come to mind?</li>
+        <li>Review other translations, cross references &amp; surrounding passages — do they shed any light on your questions?</li>
+        <li>How would the original audience have understood this passage?</li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s4"><span>4&nbsp;|&nbsp;Learn</span></div>
+        <div class="bm-icon"><img src="icons/learn.png" alt="Learn" /></div>
+      </div>
+      <ul>
+        <li>What truth does this passage reveal about God's character and purpose?</li>
+        <li>What cultural or personal lies does this truth challenge today?</li>
+        <li class="bm-bell">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span>Check your findings in community</span>
+        </li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s5"><span>5&nbsp;|&nbsp;Live</span></div>
+        <div class="bm-icon"><img src="icons/live.png" alt="Live" /></div>
+      </div>
+      <ul>
+        <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bm">
+    <div class="bm-prayer">
+      <div class="bm-prayer-line"></div>
+      <p>Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p>
+      <div class="bm-prayer-line-b"></div>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
+        <div class="bm-icon"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+      </div>
+      <ul>
+        <li>Reread the passage — what questions come to mind?</li>
+        <li>Review other translations, cross references &amp; surrounding passages — do they shed any light on your questions?</li>
+        <li>How would the original audience have understood this passage?</li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s4"><span>4&nbsp;|&nbsp;Learn</span></div>
+        <div class="bm-icon"><img src="icons/learn.png" alt="Learn" /></div>
+      </div>
+      <ul>
+        <li>What truth does this passage reveal about God's character and purpose?</li>
+        <li>What cultural or personal lies does this truth challenge today?</li>
+        <li class="bm-bell">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span>Check your findings in community</span>
+        </li>
+      </ul>
+    </div>
+    <div class="bm-day">
+      <div class="bm-pill-row">
+        <div class="bm-pill s5"><span>5&nbsp;|&nbsp;Live</span></div>
+        <div class="bm-icon"><img src="icons/live.png" alt="Live" /></div>
+      </div>
+      <ul>
+        <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function scrollToDay(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+  function toggleHowTo(btn) {
+    const body = btn.nextElementSibling;
+    const open = body.classList.toggle('open');
+    btn.classList.toggle('open', open);
+  }
+</script>
+</body>
+</html>
