@@ -34,7 +34,8 @@
   }
   .print-btn {
     position: absolute; right: 24px; top: 20px;
-    display: flex; align-items: center; gap: 8px;
+    display: none; /* Hidden on mobile by default */
+    align-items: center; gap: 8px;
     padding: 8px 16px; border-radius: 999px;
     background: #2c3649; color: #fff;
     font-family: var(--font); font-size: 14px; font-weight: 600;
@@ -44,7 +45,10 @@
   .print-btn:hover { opacity: .8; }
   .print-btn svg { width: 16px; height: 16px; }
   .print-btn-label { display: none; }
-  @media (min-width: 480px) { .print-btn-label { display: inline; } }
+  @media (min-width: 480px) { 
+    .print-btn { display: flex; }
+    .print-btn-label { display: inline; } 
+  }
 
   .header-wordmark {
     text-align: center;
@@ -173,7 +177,7 @@
   .print-page-1, .print-page-2 { display: none; }
 
   @media print {
-    @page { margin: .2in; }
+    @page { size: landscape; margin: .2in; }
     body { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     header, main { display: none !important; }
     .print-page-1, .print-page-2 {
