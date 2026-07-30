@@ -146,12 +146,19 @@
   }
   .icon-circle {
     width: 80px; height: 80px; border-radius: 50%;
-    background: #f4f1ec;
+    background: #fff;
     flex-shrink: 0; margin-left: -40px; z-index: 1;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Added slight depth */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
   .icon-circle img { width: 44px; height: 44px; object-fit: contain; }
+
+  /* Section-specific matching borders for the icon circle */
+  .sec-1 .icon-circle { border: 4px solid #cbe3cb; }
+  .sec-2 .icon-circle { border: 4px solid #cbe3cb; }
+  .sec-3 .icon-circle { border: 4px solid #c9d8e6; }
+  .sec-4 .icon-circle { border: 4px solid #c9d8e6; }
+  .sec-5 .icon-circle { border: 4px solid #f2a9c4; }
 
   /* New Card Container */
   .day-card {
@@ -283,7 +290,7 @@
     letter-spacing: .15em; text-transform: uppercase; color: var(--dark); white-space: nowrap;
   }
   .bm-icon {
-    width: 44px; height: 44px; border-radius: 50%; background: #f4f1ec;
+    width: 44px; height: 44px; border-radius: 50%; background: #fff;
     flex-shrink: 0; margin-left: -20px;
     display: flex; align-items: center; justify-content: center;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
@@ -335,7 +342,7 @@
   </div>
 
   <!-- DAY 1 -->
-  <section id="day-1" class="day-section">
+  <section id="day-1" class="day-section sec-1">
     <div class="pill-row">
       <div class="pill g1"><span class="pill-label">1&nbsp;|&nbsp;Discover</span></div>
       <div class="icon-circle"><img src="icons/discover.png" alt="Discover" /></div>
@@ -369,7 +376,7 @@
   </section>
 
   <!-- DAY 2 -->
-  <section id="day-2" class="day-section">
+  <section id="day-2" class="day-section sec-2">
     <div class="pill-row">
       <div class="pill g2"><span class="pill-label">2&nbsp;|&nbsp;Word Work</span></div>
       <div class="icon-circle"><img src="icons/word-work.png" alt="Word Work" /></div>
@@ -407,7 +414,7 @@
   </div>
 
   <!-- DAY 3 -->
-  <section id="day-3" class="day-section">
+  <section id="day-3" class="day-section sec-3">
     <div class="pill-row">
       <div class="pill g3"><span class="pill-label">3&nbsp;|&nbsp;Evaluate</span></div>
       <div class="icon-circle"><img src="icons/evaluate.png" alt="Evaluate" /></div>
@@ -442,7 +449,7 @@
   </section>
 
   <!-- DAY 4 -->
-  <section id="day-4" class="day-section">
+  <section id="day-4" class="day-section sec-4">
     <div class="pill-row">
       <div class="pill g4"><span class="pill-label">4&nbsp;|&nbsp;Learn</span></div>
       <div class="icon-circle"><img src="icons/learn.png" alt="Learn" /></div>
@@ -477,7 +484,7 @@
   </section>
 
   <!-- DAY 5 -->
-  <section id="day-5" class="day-section">
+  <section id="day-5" class="day-section sec-5">
     <div class="pill-row">
       <div class="pill g5"><span class="pill-label">5&nbsp;|&nbsp;Live</span></div>
       <div class="icon-circle"><img src="icons/live.png" alt="Live" /></div>
@@ -534,7 +541,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s1"><span>1&nbsp;|&nbsp;Discover</span></div>
-        <div class="bm-icon"><img src="icons/discover.png" alt="Discover" /></div>
+        <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
         <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
@@ -544,7 +551,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s2"><span>2&nbsp;|&nbsp;Word Work</span></div>
-        <div class="bm-icon"><img src="icons/word-work.png" alt="Word Work" /></div>
+        <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/word-work.png" alt="Word Work" /></div>
       </div>
       <ul>
         <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
@@ -576,7 +583,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s1"><span>1&nbsp;|&nbsp;Discover</span></div>
-        <div class="bm-icon"><img src="icons/discover.png" alt="Discover" /></div>
+        <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
         <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
@@ -586,7 +593,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s2"><span>2&nbsp;|&nbsp;Word Work</span></div>
-        <div class="bm-icon"><img src="icons/wordwork.png" alt="Word Work" /></div>
+        <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/wordwork.png" alt="Word Work" /></div>
       </div>
       <ul>
         <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
@@ -618,7 +625,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s1"><span>1&nbsp;|&nbsp;Discover</span></div>
-        <div class="bm-icon"><img src="icons/discover.png" alt="Discover" /></div>
+        <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
         <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
@@ -628,7 +635,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s2"><span>2&nbsp;|&nbsp;Word Work</span></div>
-        <div class="bm-icon"><img src="icons/wordwork.png" alt="Word Work" /></div>
+        <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/wordwork.png" alt="Word Work" /></div>
       </div>
       <ul>
         <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
@@ -655,7 +662,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
-        <div class="bm-icon"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Evaluate" /></div>
       </div>
       <ul>
         <li>Reread the passage — what questions come to mind?</li>
@@ -666,7 +673,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s4"><span>4&nbsp;|&nbsp;Learn</span></div>
-        <div class="bm-icon"><img src="icons/learn.png" alt="Learn" /></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/learn.png" alt="Learn" /></div>
       </div>
       <ul>
         <li>What truth does this passage reveal about God's character and purpose?</li>
@@ -680,7 +687,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s5"><span>5&nbsp;|&nbsp;Live</span></div>
-        <div class="bm-icon"><img src="icons/live.png" alt="Live" /></div>
+        <div class="bm-icon" style="border: 3px solid #f2a9c4;"><img src="icons/live.png" alt="Live" /></div>
       </div>
       <ul>
         <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
@@ -697,7 +704,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
-        <div class="bm-icon"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Evaluate" /></div>
       </div>
       <ul>
         <li>Reread the passage — what questions come to mind?</li>
@@ -708,7 +715,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s4"><span>4&nbsp;|&nbsp;Learn</span></div>
-        <div class="bm-icon"><img src="icons/learn.png" alt="Learn" /></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/learn.png" alt="Learn" /></div>
       </div>
       <ul>
         <li>What truth does this passage reveal about God's character and purpose?</li>
@@ -722,7 +729,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s5"><span>5&nbsp;|&nbsp;Live</span></div>
-        <div class="bm-icon"><img src="icons/live.png" alt="Live" /></div>
+        <div class="bm-icon" style="border: 3px solid #f2a9c4;"><img src="icons/live.png" alt="Live" /></div>
       </div>
       <ul>
         <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
@@ -739,7 +746,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
-        <div class="bm-icon"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Evaluate" /></div>
       </div>
       <ul>
         <li>Reread the passage — what questions come to mind?</li>
@@ -750,7 +757,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s4"><span>4&nbsp;|&nbsp;Learn</span></div>
-        <div class="bm-icon"><img src="icons/learn.png" alt="Learn" /></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/learn.png" alt="Learn" /></div>
       </div>
       <ul>
         <li>What truth does this passage reveal about God's character and purpose?</li>
@@ -764,7 +771,7 @@
     <div class="bm-day">
       <div class="bm-pill-row">
         <div class="bm-pill s5"><span>5&nbsp;|&nbsp;Live</span></div>
-        <div class="bm-icon"><img src="icons/live.png" alt="Live" /></div>
+        <div class="bm-icon" style="border: 3px solid #f2a9c4;"><img src="icons/live.png" alt="Live" /></div>
       </div>
       <ul>
         <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
