@@ -82,26 +82,24 @@
 
   /* ── Prayer ── */
   .prayer {
-    padding: 24px 24px;
     display: flex; flex-direction: column; align-items: center; text-align: center;
     max-width: 512px; margin: 0 auto;
+    padding: 0 24px;
+  }
+  .top-prayer {
+    margin-top: 48px; /* Perfectly balances with .day-section top padding */
+  }
+  @media (min-width: 768px) {
+    .top-prayer { margin-top: 64px; }
   }
   .prayer-line { width: 64px; height: 1px; background: rgba(203,127,87,.4); }
   .prayer p {
     font-style: italic;
     font-size: clamp(20px, 2.5vw, 24px);
     color: rgba(44,54,73,.8);
-    line-height: 1.7;
-    margin: 16px 0;
+    line-height: 1.5;
+    margin: 16px 0; /* Creates limited, even white space around the 4 text lines */
   }
-
-  /* Specific adjustments to match the top spacing above the first prayer
-     - The wrapper above the first prayer uses inline padding-top:16px
-     - Make bottom of the first prayer 16px
-     - Make top and bottom of the second prayer 16px
-  */
-  .prayer.first-prayer { padding-bottom: 16px; }
-  .prayer.second-prayer { padding: 16px 24px; }
 
   /* ── Day section ── */
   .day-section { padding: 48px 0; scroll-margin-top: 80px; }
@@ -127,7 +125,7 @@
     flex-shrink: 0; margin-left: -40px; z-index: 1;
     display: flex; align-items: center; justify-content: center;
   }
-  .icon-circle img { width: 40px; height: 40px; object-fit: contain; }
+  .icon-circle img { width: 44px; height: 44px; object-fit: contain; }
 
   .prompts { font-size: clamp(18px, 2vw, 20px); line-height: 1.7; color: rgba(44,54,73,.9); font-weight: 500; }
   .prompts p + p { margin-top: 16px; }
@@ -209,9 +207,9 @@
   .bm-strip { display: flex; }
   .bm-strip div { flex: 1; height: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .bm-prayer { text-align: center; padding: 2px 6px; }
-  .bm-prayer-line { width: 28px; height: 2px; background: var(--peach); margin: 0 auto 9px; border-radius: 1px; }
-  .bm-prayer p { font-style: italic; font-size: 15px; line-height: 1.7; }
-  .bm-prayer-line-b { width: 28px; height: 2px; background: var(--peach); margin: 9px auto 0; border-radius: 1px; }
+  .bm-prayer-line { width: 28px; height: 2px; background: var(--peach); margin: 0 auto 6px; border-radius: 1px; }
+  .bm-prayer p { font-style: italic; font-size: 15px; line-height: 1.5; margin: 6px 0; }
+  .bm-prayer-line-b { width: 28px; height: 2px; background: var(--peach); margin: 6px auto 0; border-radius: 1px; }
   .bm-pill-row { display: flex; align-items: center; margin-bottom: 10px; }
   .bm-pill {
     flex: 1; border-radius: 10px; padding: 2px 16px;
@@ -250,7 +248,7 @@
 <header>
   <div class="header-band">
     <button class="print-btn" onclick="window.print()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       <span class="print-btn-label">Print Bookmark</span>
     </button>
     <div class="header-wordmark">
@@ -271,12 +269,10 @@
      MAIN
 ══════════════════════════════════════════ -->
 <main>
-  <div style="padding-top:16px">
-    <div class="prayer first-prayer">
-      <div class="prayer-line"></div>
-      <p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p>
-      <div class="prayer-line"></div>
-    </div>
+  <div class="prayer top-prayer">
+    <div class="prayer-line"></div>
+    <p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p>
+    <div class="prayer-line"></div>
   </div>
 
   <!-- DAY 1 -->
@@ -299,7 +295,7 @@
       <div class="howto-body">
         <ul>
           <li>It is important to get historical context so that you can place where we are in the Big Story and get a better perspective for how different the culture would have been from today.</li>
-          <li>Much of this information can be found on reliable sites: <strong>Bible Hub – Introductions</strong> (<a href="https://biblehub.com" target="_blank">biblehub.com</a>) and <strong>B[...]
+          <li>Much of this information can be found on reliable sites: <strong>Bible Hub – Introductions</strong> (<a href="https://biblehub.com" target="_blank">biblehub.com</a>) and <strong>Blue Letter Bible – Introductions</strong> (<a href="https://blueletterbible.org" target="_blank">blueletterbible.org</a>)</li>
           <li>Now that you have your historical context, put away all resources for now (including AI)</li>
           <li>Repetitively read through your passage and surrounding text as you let the Holy Spirit transform you.</li>
         </ul>
@@ -333,7 +329,7 @@
     </div>
   </section>
 
-  <div class="prayer second-prayer">
+  <div class="prayer">
     <div class="prayer-line"></div>
     <p>Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p>
     <div class="prayer-line"></div>
@@ -359,7 +355,7 @@
         <ul>
           <li>Don't rush to commentaries or AI for answers to your questions.</li>
           <li>Use scripture to verify scripture, by first using another translation of the passage to gain clarity.</li>
-          <li>You should also use cross-references to clarify difficult verses and to integrate this passage into the larger, unified story of the Bible: <strong>Bible Hub – Cross References</s[...]
+          <li>You should also use cross-references to clarify difficult verses and to integrate this passage into the larger, unified story of the Bible: <strong>Bible Hub – Cross References</strong> (<a href="https://biblehub.com" target="_blank">biblehub.com</a>)</li>
         </ul>
       </div>
     </div>
@@ -375,7 +371,7 @@
       <p>What truth does this passage reveal about God's character and purpose?</p>
       <p>What cultural or personal lies does this truth challenge today?</p>
       <div class="bell-row">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         <em>Check your findings in community</em>
       </div>
     </div>
@@ -386,7 +382,7 @@
       </button>
       <div class="howto-body">
         <ul>
-          <li>If you are faced with an unclear passage or verse, read ahead in the book to gain clarity, and look for other clear passages on the same subject. Often times the New Testament writers wi
+          <li>If you are faced with an unclear passage or verse, read ahead in the book to gain clarity, and look for other clear passages on the same subject. Often times the New Testament writers will interpret passages from the Old Testament.</li>
           <li>Protect against bias here by refining your findings in a community group.</li>
           <li>Feel free to bring back in reliable external sources (commentaries, sermons, etc.) to refine what you have learned.</li>
         </ul>
@@ -584,7 +580,7 @@
         <li>What truth does this passage reveal about God's character and purpose?</li>
         <li>What cultural or personal lies does this truth challenge today?</li>
         <li class="bm-bell">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span>Check your findings in community</span>
         </li>
       </ul>
@@ -626,7 +622,7 @@
         <li>What truth does this passage reveal about God's character and purpose?</li>
         <li>What cultural or personal lies does this truth challenge today?</li>
         <li class="bm-bell">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span>Check your findings in community</span>
         </li>
       </ul>
@@ -668,7 +664,7 @@
         <li>What truth does this passage reveal about God's character and purpose?</li>
         <li>What cultural or personal lies does this truth challenge today?</li>
         <li class="bm-bell">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span>Check your findings in community</span>
         </li>
       </ul>
