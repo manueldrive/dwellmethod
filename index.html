@@ -238,25 +238,39 @@
   }
   .visual-example-text {
     font-family: var(--font-serif);
-    font-size: clamp(18px, 2.2vw, 22px);
+    font-size: clamp(19px, 2.4vw, 23px);
     color: var(--dark);
     font-weight: 600;
-    line-height: 1.8;
+    line-height: 1.6;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
+  }
+  @media (min-width: 640px) {
+    .visual-example-text {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
   }
   .pill-blank {
     display: inline-block;
-    min-width: 140px;
+    width: 100%;
+    max-width: 280px;
+    min-width: 120px;
     height: 36px;
     background: linear-gradient(90deg, #fdfbfb, #ebedee);
     border: 1px solid rgba(44, 54, 73, 0.15);
     border-radius: 999px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
     vertical-align: middle;
+  }
+  @media (min-width: 640px) {
+    .pill-blank {
+      width: 160px;
+    }
   }
 
   /* ── Gradients (Refined and Brightened) ── */
@@ -535,14 +549,15 @@
         <div class="howto-wrapper">
           <div class="howto-inner">
             <ul class="howto-content">
-              <li>Consider how living out this truth would change things in your home, your church and your community and beyond.</li>
-              <li>Write your application in light of what you have learned about God. When we learn His character and purpose, it changes our character and purpose.</li>
+              <li>Consider how living out this truth would change things in your home, your church and your community and beyond</li>
+              <li>Write your application in light of what you have learned about God. When we learn His character and purpose, it changes our character and purpose</li>
               <div class="visual-example-container">
                 <div class="visual-example-text">
-                  God is <span class="pill-blank"></span> Therefore, I <span class="pill-blank"></span>.
+                  <span>God is <span class="pill-blank"></span></span>
+                  <span>Therefore, I <span class="pill-blank"></span></span>
                 </div>
               </div>
-              <li style="margin-top: 16px;">Pray for God to reveal to you how you should be living this out and when necessary ask for accountability from other believers.</li>
+              <li style="margin-top: 16px;">Pray for God to reveal to you how you should be living this out and when necessary ask for accountability from other believers</li>
             </ul>
           </div>
         </div>
