@@ -97,9 +97,11 @@
   @keyframes shakeX{ 10%,90%{transform:translateX(-2px);} 20%,80%{transform:translateX(4px);} 30%,50%,70%{transform:translateX(-7px);} 40%,60%{transform:translateX(7px);} }
   .quiz-tile.shake{ animation:shakeX .45s; }
 
-  .big-number-wrap{ display:flex; align-items:baseline; justify-content:center; gap:8px; margin:10px 0 4px 0; position:relative; z-index:2; }
-  .big-number-lg{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(72px,26vw,120px); color:var(--lime); line-height:.8; letter-spacing:-4px; }
-  .ad-suffix{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(22px,7vw,32px); color:var(--lime); opacity:.85; }
+  /* Full Width Typography Sizing for 60-70 AD */
+  .big-number-wrap{ display:flex; align-items:baseline; justify-content:center; gap:6px; margin:12px 0 4px 0; width:100%; position:relative; z-index:2; }
+  .big-number-lg{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:clamp(72px, 22vw, 110px); color:var(--lime); line-height:.8; letter-spacing:-5px; }
+  .ad-suffix{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(22px, 6.5vw, 32px); color:var(--lime); opacity:.85; }
+  
   .gospel-pills{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; position:relative; z-index:2; margin-top:4px; }
   .gospel-pill{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; background:rgba(255,255,255,0.12); color:#FFF; padding:8px 16px; border-radius:100px; }
   .gospel-pill.highlight{ background:var(--lime); color:var(--ink); }
@@ -382,8 +384,8 @@ const beats = [
             <span class="gospel-pill">John</span>
           </div>
           <div class="sub" style="margin-top:16px;">Of the 4, Mark's was written first — possibly around</div>
-          <div class="big-number-wrap"><span class="big-number-lg">55</span><span class="ad-suffix">AD</span></div>
-          <div class="years-ago">That's <span id="yearsAgoCount">0</span> years ago.</div>
+          <div class="big-number-wrap"><span class="big-number-lg">60–70</span><span class="ad-suffix">AD</span></div>
+          <div class="years-ago">That's about <span id="yearsAgoCount">0</span> years ago.</div>
           </div>
           <div class="tap-hint swipe-hint"><i class="fa-solid fa-chevron-left"></i><i class="fa-solid fa-chevron-right"></i></div>` },
 
@@ -499,7 +501,7 @@ const beats = [
           <div class="final-card" id="finalCard">
             <div class="fhdr"><span class="flabel" style="margin:0;">MS Hang · Mark 1:1–20</span><span class="fbadge">LEADER READY</span></div>
             <div class="flabel">Context</div>
-            <div class="word-chip">Written ~AD 55, the earliest Gospel · Peter's account, recorded by John Mark · written for persecuted believers in Rome under Nero</div>
+            <div class="word-chip">Written ~AD 60–70, the earliest Gospel · Peter's account, recorded by John Mark · written for persecuted believers in Rome under Nero</div>
             <div class="flabel">Scripture</div>
             <div class="word-chip" id="finalVerse"></div>
             <div class="flabel">Observation</div>
@@ -622,7 +624,7 @@ function questAnswer(e, el, gridId, fbId, correctMsg, wrongMsg){
 }
 
 function animateYearsAgo(){
-  const target = new Date().getFullYear() - 55;
+  const target = new Date().getFullYear() - 65; // ~65 AD median point
   const el = document.getElementById('yearsAgoCount');
   if (!el) return;
   const myGen = renderGen;
@@ -872,7 +874,7 @@ async function exportGuide(){
       <div style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; margin:6px 0 18px 0; text-transform:uppercase;">Mark 1:1–20</div>
 
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin-bottom:8px;">Context</div>
-      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:13px; line-height:1.6; margin-bottom:18px;">Written ~AD 55, the earliest Gospel · Peter's eyewitness account, recorded by John Mark · written for persecuted believers in Rome under Nero</div>
+      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:13px; line-height:1.6; margin-bottom:18px;">Written ~AD 60–70, the earliest Gospel · Peter's eyewitness account, recorded by John Mark · written for persecuted believers in Rome under Nero</div>
 
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin-bottom:10px;">Scripture</div>
       ${verseHTML}
