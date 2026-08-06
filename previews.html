@@ -180,7 +180,7 @@
   .final-card .flabel:first-child{ margin-top:0; }
   .word-chip-list{ display:flex; flex-direction:column; gap:6px; }
   .word-chip{ font-family:'Inter', sans-serif; font-size:12.5px; font-weight:700; line-height:1.4; }
-  .word-chip b{ text-transform:capitalize; color:var(--purple); }
+  .word-chip b{ text-transform:capitalize; color:var(--pink); }
   .challenge-box{ background:var(--yellow); border:3px solid var(--ink); border-radius:14px; padding:11px 13px; margin-top:6px; box-shadow:3px 3px 0 var(--ink); font-weight:700; }
   .export-btn{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:.3px; text-transform:uppercase; background:var(--lime); color:var(--ink); border:4px solid var(--ink); border-radius:100px; padding:15px 0; width:100%; margin-top:16px; cursor:pointer; position:relative; z-index:2; flex-shrink:0; box-shadow:5px 5px 0 var(--ink); transition:all .15s ease; }
   .export-btn:active{ transform:translate(3px,3px); box-shadow:0 0 0 var(--ink); }
@@ -398,7 +398,7 @@ const beats = [
 
   { id:'quiz-author', type:'input', blockTap:true, cluster:'history', bgColor:'#A855F7', text:'light',
     html:`<div class="kicker">Author check</div>
-          <div class="hero-wrap" style="flex:0;">${kw([["THE","AUTHOR"],["JOHN","MARK","WAS"],["FRIENDS","WITH..."]],'tight')}</div>
+          <div class="hero-wrap" style="flex:0;">${kw([["THE","AUTHOR"],["MARK","WAS"],["CLOSE","PARTNERS"],["WITH..."]],'tight')}</div>
           <div class="quiz-grid" id="authorGrid">
             <div class="quiz-tile" data-correct="false" onclick="questAnswer(event,this,'authorGrid','fbAuthor','','Good guess, but not the closest connection.')">King David</div>
             <div class="quiz-tile" data-correct="true" onclick="questAnswer(event,this,'authorGrid','fbAuthor','Right — Peter. This Gospel is basically his eyewitness account.','')">Peter</div>
@@ -408,12 +408,12 @@ const beats = [
 
   { id:'reveal-author', type:'tapAuto', cluster:'history', bgColor:'#F43F5E', text:'light', align:'start',
     html:`<div class="kicker">Context</div>
-          <div class="hero-wrap" style="flex:0;">${kw([["PETER'S","VOICE,"],["MARK'S","PEN."]],'tight')}</div>
+          <div class="hero-wrap" style="flex:0;">${kw([["WAS","MARK"],["ONE","OF","THE"],["12","APOSTLES?"]],'tight')}</div>
           <div class="folder-wrap">
             <div class="folder-tab">Mark</div>
             <div class="folder-body">
-              <div class="stat-line"><span class="bullet-icon"><i class="fa-solid fa-comment-dots"></i></span><span>Early church tradition says this Gospel reflects <em>Peter's</em> eyewitness perspective, written down for believers facing <em>persecution</em> in Rome.</span></div>
-              <div class="stat-line"><span class="bullet-icon"><i class="fa-solid fa-plane"></i></span><span>John Mark also traveled with <em>Paul + Barnabas</em> (his cousin) on mission trips.</span></div>
+              <div class="stat-line"><span class="bullet-icon"><i class="fa-solid fa-comment-dots"></i></span><span>Not one of the 12, but early church tradition says this Gospel reflects <em>Peter's</em> eyewitness perspective, written down for believers facing <em>persecution</em> in Rome.</span></div>
+              <div class="stat-line"><span class="bullet-icon"><i class="fa-solid fa-plane"></i></span><span>Mark already traveled with <em>Paul + Barnabas</em> (his cousin) on mission trips — you can trace it in <em>Acts 12–15</em>.</span></div>
               <div class="stat-line"><span class="bullet-icon"><i class="fa-solid fa-bolt"></i></span><span>Facing persecution, Mark moves fast — watch for the word <em>"immediately"</em>, used 40+ times.</span></div>
             </div>
           </div>
@@ -508,7 +508,7 @@ const beats = [
           <div class="final-card" id="finalCard">
             <div class="fhdr"><span class="flabel" style="margin:0;">MS Hang · Mark 1:1–20</span><span class="fbadge">LEADER READY</span></div>
             <div class="flabel">Context</div>
-            <div class="word-chip">Written ~AD 60–70, likely the earliest Gospel · Traditionally credited to Peter's account, recorded by John Mark · Likely written for persecuted believers in Rome</div>
+            <div class="word-chip">Written ~AD 60–70, likely the earliest Gospel · Traditionally credited to Peter's account, recorded by Mark · Likely written for persecuted believers in Rome</div>
             <div class="flabel">Scripture</div>
             <div class="word-chip" id="finalVerse"></div>
             <div class="flabel">Observation</div>
@@ -873,11 +873,11 @@ async function exportGuide(){
     ? `<div style="font-family:'Inter',sans-serif; font-size:13px; opacity:.8;">No words flagged.</div>`
     : limitedWords.map(w=>{
         const d = w.def || 'Look this one up before Sunday.';
-        return `<div style="font-family:'Inter',sans-serif; font-size:13.5px; line-height:1.5; margin-bottom:8px;"><b style="color:#A855F7; text-transform:capitalize;">${w.word}</b> — ${d}</div>`;
+        return `<div style="font-family:'Inter',sans-serif; font-size:13.5px; line-height:1.5; margin-bottom:8px;"><b style="color:#F43F5E; text-transform:capitalize;">${w.word}</b> — ${d}</div>`;
       }).join('');
   const verseHTML = state.charVerse
     ? `<div style="font-family:'Inter',sans-serif; font-weight:700; font-size:16px; line-height:1.5; color:#0D0D0D;">"${passage[state.charVerse-1]}"</div>
-       <div style="font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#A855F7; margin-top:6px;">Mark 1:${state.charVerse}</div>`
+       <div style="font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#F43F5E; margin-top:6px;">Mark 1:${state.charVerse}</div>`
     : `<div style="font-family:'Inter',sans-serif; font-size:13px;">No verse selected.</div>`;
   const trait = state.trait && state.trait.trim() ? state.trait.trim() : 'faithful and true';
 
@@ -887,7 +887,7 @@ async function exportGuide(){
       <div style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; margin:6px 0 18px 0; text-transform:uppercase;">Mark 1:1–20</div>
 
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin-bottom:8px;">Context</div>
-      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:13px; line-height:1.6; margin-bottom:18px;">Written ~AD 60–70, likely the earliest Gospel · Traditionally credited to Peter's eyewitness account, recorded by John Mark · Likely written for persecuted believers in Rome</div>
+      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:13px; line-height:1.6; margin-bottom:18px;">Written ~AD 60–70, likely the earliest Gospel · Traditionally credited to Peter's eyewitness account, recorded by Mark · Likely written for persecuted believers in Rome</div>
 
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin-bottom:10px;">Scripture</div>
       ${verseHTML}
