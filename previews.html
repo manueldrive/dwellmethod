@@ -251,49 +251,47 @@
 
 <script>
 const passage = [
- "The beginning of the Good News of Jesus Christ, the Son of God.",
- "As it is written in the prophets, \"Behold, I send my messenger before your face, who will prepare your way before you.",
- "The voice of one crying in the wilderness, 'Make ready the way of the Lord! Make his paths straight!'\"",
- "John came baptizing in the wilderness and preaching the baptism of repentance for forgiveness of sins.",
- "All the country of Judea and all those of Jerusalem went out to him. They were baptized by him in the Jordan river, confessing their sins.",
- "John was clothed with camel's hair and a leather belt around his waist. He ate locusts and wild honey.",
- "He preached, saying, \"After me comes he who is mightier than I, the thong of whose sandals I am not worthy to stoop down and loosen.",
- "I baptized you in water, but he will baptize you in the Holy Spirit.\"",
- "It happened in those days, that Jesus came from Nazareth of Galilee, and was baptized by John in the Jordan.",
- "Immediately coming up from the water, he saw the heavens parting, and the Spirit descending on him like a dove.",
- "A voice came out of the sky, \"You are my beloved Son, in whom I am well pleased.\"",
- "Immediately the Spirit drove him out into the wilderness.",
- "He was there in the wilderness forty days tempted by Satan. He was with the wild animals; and the angels were serving him.",
- "Now after John was taken into custody, Jesus came into Galilee, preaching the Good News of the Kingdom of God,",
- "and saying, \"The time is fulfilled, and the Kingdom of God is at hand! Repent, and believe in the Good News.\"",
- "Passing along by the sea of Galilee, he saw Simon and Andrew the brother of Simon casting a net into the sea, for they were fishermen.",
- "Jesus said to them, \"Come after me, and I will make you into fishers for men.\"",
- "Immediately they left their nets, and followed him.",
- "Going on a little further from there, he saw James the son of Zebedee, and John, his brother, who were also in the boat mending the nets.",
- "Immediately he called them, and they left their father, Zebedee, in the boat with the hired servants, and went after him."
+ "The beginning of the good news about Jesus the Messiah, the Son of God,",
+ "as it is written in Isaiah the prophet: \"I will send my messenger ahead of you, who will prepare your way\"—",
+ "\"a voice of one calling in the wilderness, 'Prepare the way for the Lord, make straight paths for him.'\"",
+ "And so John the Baptist appeared in the wilderness, preaching a baptism of repentance for the forgiveness of sins.",
+ "The whole Judean countryside and all the people of Jerusalem went out to him. Confessing their sins, they were baptized by him in the Jordan River.",
+ "John wore clothing made of camel's hair, with a leather belt around his waist, and he ate locusts and wild honey.",
+ "And this was his message: \"After me comes the one more powerful than I, the straps of whose sandals I am not worthy to stoop down and untie.",
+ "I baptize you with water, but he will baptize you with the Holy Spirit.\"",
+ "At that time Jesus came from Nazareth in Galilee and was baptized by John in the Jordan.",
+ "Just as Jesus was coming up out of the water, he saw heaven being torn open and the Spirit descending on him like a dove.",
+ "And a voice came from heaven: \"You are my Son, whom I love; with you I am well pleased.\"",
+ "At once the Spirit sent him out into the wilderness,",
+ "and he was in the wilderness forty days, being tempted by Satan. He was with the wild animals, and angels attended him.",
+ "After John was put in prison, Jesus went into Galilee, proclaiming the good news of God.",
+ "\"The time has come,\" he said. \"The kingdom of God has come near. Repent and believe the good news!\"",
+ "As Jesus walked beside the Sea of Galilee, he saw Simon and his brother Andrew casting a net into the lake, for they were fishermen.",
+ "\"Come, follow me,\" Jesus said, \"and I will send you out to fish for people.\"",
+ "At once they left their nets and followed him.",
+ "When he had gone a little farther, he saw James son of Zebedee and his brother John in a boat, preparing their nets.",
+ "Without delay he called them, and they left their father Zebedee in the boat with the hired men and followed him."
 ];
 
 const defs = {
-  "prophets":"People in the Old Testament God chose to speak His messages through — often about what was still to come.",
+  "messiah":"The Hebrew title for God's promised chosen King and Rescuer — in Greek, this word is 'Christ.'",
+  "prophet":"Someone in the Old Testament God chose to speak His messages through — often about what was still to come.",
   "wilderness":"A wild, empty, unpopulated place — no towns, no comforts.",
   "repentance":"Turning away from wrong and turning back toward God.",
   "repent":"To turn away from wrong and turn back toward God.",
-  "baptizing":"Dipping or washing someone in water as a public sign of turning toward God.",
+  "baptize":"To dip or wash someone in water as a public sign of turning toward God.",
   "baptized":"Dipped or washed in water as a public sign of turning toward God.",
   "baptism":"Being dipped or washed in water as a public sign of turning toward God.",
   "jordan":"A river in Israel — the same one where John baptized Jesus.",
+  "judean":"Relating to Judea, a region in southern Israel that includes Jerusalem.",
+  "jerusalem":"The major city in Judea, central to Jewish worship and later the site of Jesus's death and resurrection.",
   "spirit":"Here, the Holy Spirit — God's own presence, active and at work.",
-  "beloved":"Deeply loved — a word for someone treasured.",
   "tempted":"Being pulled or tested toward doing wrong.",
   "satan":"The devil, God's enemy, who tries to pull people away from God.",
-  "custody":"Arrested and held — like being taken into jail.",
   "galilee":"A region in northern Israel where Jesus grew up and did much of His ministry.",
-  "judea":"A region in southern Israel that includes Jerusalem.",
   "nazareth":"The small town in Galilee where Jesus grew up.",
   "zebedee":"The father of the disciples James and John.",
   "kingdom":"God's rule and reign — wherever God is King over people's lives.",
-  "fishers":"Mark's wordplay — instead of catching fish, they'd now be 'catching' people for God.",
-  "mightier":"More powerful.",
   "messenger":"Someone sent ahead to deliver a message or announcement."
 };
 
@@ -301,6 +299,12 @@ const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:fa
 let renderGen = 0;
 
 function truncate(s,n){ s=(s||'').trim(); return s.length>n ? s.slice(0,n)+'…' : s; }
+function quoteVerse(text){
+  const t = (text||'').trim();
+  const startsWithQuote = /^["“]/.test(t);
+  const endsWithQuote = /["”]$/.test(t);
+  return (startsWithQuote ? '' : '"') + text + (endsWithQuote ? '' : '"');
+}
 function normWord(w){ return w.replace(/[^a-zA-Z']/g,'').toLowerCase(); }
 
 function kw(lines, extraClass){
@@ -578,7 +582,7 @@ function renderBeat(i){
   if (b.id === 'reveal-55ad') animateYearsAgo();
   if (b.id === 'char-coaching') {
     document.getElementById('charRef').textContent = 'Mark 1:' + state.charVerse;
-    document.getElementById('charText').textContent = '"' + passage[state.charVerse-1] + '"';
+    document.getElementById('charText').textContent = quoteVerse(passage[state.charVerse-1]);
 
     const arcStem = document.getElementById('arcStemText');
     if (arcStem) arcStem.textContent = `BASED ON VERSE ${state.charVerse}:`;
@@ -796,7 +800,7 @@ function fillFinal(){
   }
   const fv = document.getElementById('finalVerse');
   if (state.charVerse) {
-    fv.innerHTML = `<b>Mark 1:${state.charVerse}</b> — "${passage[state.charVerse-1]}"`;
+    fv.innerHTML = `<b>Mark 1:${state.charVerse}</b> — ${quoteVerse(passage[state.charVerse-1])}`;
   } else {
     fv.textContent = 'No verse selected.';
   }
@@ -900,7 +904,7 @@ async function exportGuide(){
         return `<div style="font-family:'Inter',sans-serif; font-size:13.5px; line-height:1.5; margin-bottom:8px;"><b style="color:#F43F5E; text-transform:capitalize;">${w.word}</b> — ${d}</div>`;
       }).join('');
   const verseHTML = state.charVerse
-    ? `<div style="font-family:'Inter',sans-serif; font-weight:700; font-size:16px; line-height:1.5; color:#0D0D0D;">"${passage[state.charVerse-1]}"</div>
+    ? `<div style="font-family:'Inter',sans-serif; font-weight:700; font-size:16px; line-height:1.5; color:#0D0D0D;">${quoteVerse(passage[state.charVerse-1])}</div>
        <div style="font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#F43F5E; margin-top:6px;">Mark 1:${state.charVerse}</div>`
     : `<div style="font-family:'Inter',sans-serif; font-size:13px;">No verse selected.</div>`;
   const trait = state.trait && state.trait.trim() ? state.trait.trim() : 'faithful and true';
