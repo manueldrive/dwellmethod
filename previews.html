@@ -216,7 +216,7 @@
 
   .focus-pill{ border-radius:22px; padding:16px 20px; text-align:center; position:relative; z-index:2; }
   .focus-pill-label{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:11.5px; letter-spacing:1.2px; text-transform:uppercase; opacity:.7; color:var(--ink); }
-  .focus-pill-value{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:24px; text-transform:uppercase; letter-spacing:.3px; color:var(--ink); margin-top:3px; }
+  .focus-pill-value{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; text-transform:uppercase; letter-spacing:.3px; color:var(--ink); margin-top:3px; }
   .focus-pill.yellow{ background:var(--yellow); }
   .focus-pill.lime{ background:var(--lime); }
   .focus-pill.banner{ margin-bottom:14px; flex-shrink:0; }
@@ -467,7 +467,7 @@ const beats = [
               <div class="book-title" style="margin-bottom:2px;">Holy Bible</div>
               <div class="focus-pill lime">
                 <div class="focus-pill-label">Step 2 of 2</div>
-                <div class="focus-pill-value">Spot a Character Verse</div>
+                <div class="focus-pill-value">Spot a God Shot</div>
               </div>
               <div class="cover-note">Help students identify a verse that speaks to who God is. When we learn His character, it transforms our character.</div>
             </div>
@@ -481,7 +481,7 @@ const beats = [
           <div class="pill-dock">
             <div class="focus-pill lime dock" id="charPill" onclick="event.stopPropagation(); tryAdvanceChar();">
               <div class="focus-pill-label" id="charPillLabel">Step 2 of 2</div>
-              <div class="focus-pill-value" id="charPillValue">Spot a Character Verse</div>
+              <div class="focus-pill-value" id="charPillValue">Spot a God Shot</div>
             </div>
           </div>` },
 
@@ -569,6 +569,7 @@ function renderBeat(i){
   document.querySelectorAll('.beat').forEach(el=>el.classList.remove('active'));
   document.getElementById(`beat-${i}`).classList.add('active');
   renderGen++;
+  stopGhostCycle();
   const b = beats[i];
 
   phoneEl.style.backgroundColor = b.bgColor;
@@ -590,9 +591,11 @@ function renderBeat(i){
       if (state.trait && state.trait.trim()) {
         inp.value = state.trait;
         inp.classList.remove('ghost');
+        stopGhostCycle();
       } else {
-        inp.value = 'e.g. Active';
+        inp.value = 'e.g. ' + ghostExamples[0];
         inp.classList.add('ghost');
+        startGhostCycle();
       }
     }
     document.getElementById('coachBox').classList.toggle('show', !!(state.trait && state.trait.trim()));
@@ -737,7 +740,7 @@ function updateCharPill(){
     valueEl.innerHTML = '<i class="fa-solid fa-check"></i>Tap to Continue';
   } else {
     labelEl.textContent = 'Step 2 of 2';
-    valueEl.textContent = 'Spot a Character Verse';
+    valueEl.textContent = "Spot a God Shot";
   }
 }
 
@@ -745,10 +748,31 @@ function tryAdvanceChar(){
   if (state.charVerse !== null) goNext();
 }
 
+const ghostExamples = ['Active', 'Holy', 'Love'];
+let ghostCycleTimer = null;
+let ghostCycleIndex = 0;
+
+function startGhostCycle(){
+  stopGhostCycle();
+  ghostCycleIndex = 0;
+  const myGen = renderGen;
+  ghostCycleTimer = setInterval(()=>{
+    if (renderGen !== myGen) { stopGhostCycle(); return; }
+    const inp = document.getElementById('customTraitInput');
+    if (!inp || !inp.classList.contains('ghost')) { stopGhostCycle(); return; }
+    ghostCycleIndex = (ghostCycleIndex + 1) % ghostExamples.length;
+    inp.value = 'e.g. ' + ghostExamples[ghostCycleIndex];
+  }, 2200);
+}
+function stopGhostCycle(){
+  if (ghostCycleTimer) { clearInterval(ghostCycleTimer); ghostCycleTimer = null; }
+}
+
 function handleBlankFocus(inp){
   if (inp.classList.contains('ghost')) {
     inp.value = '';
     inp.classList.remove('ghost');
+    stopGhostCycle();
   }
 }
 function handleCustomTrait(val){
