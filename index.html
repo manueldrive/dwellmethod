@@ -170,7 +170,7 @@
   }
   @media (min-width: 768px) { .day-card { padding: 40px 32px; } }
 
-  .prompts { font-size: clamp(18px, 2vw, 20px); line-height: 1.7; color: rgba(44,54,73,.9); font-weight: 500; }
+  .prompts { font-family: var(--font-sans); font-size: clamp(17px, 1.9vw, 19px); line-height: 1.65; color: rgba(44,54,73,.9); font-weight: 500; }
   .prompts p + p { margin-top: 16px; }
   .prompts-list { margin-top: 12px; padding-left: 24px; }
   .prompts-list li { margin-top: 8px; }
@@ -233,47 +233,35 @@
   /* ── Interactive UI Visual Example for Day 5 ── */
   .visual-example-container {
     margin-top: 20px;
-    padding: 24px 20px;
-    background: linear-gradient(135deg, rgba(203,227,203,.28), rgba(203,227,203,.08));
+    padding: 28px 20px;
+    background: rgba(203,227,203,.35);
     border: 1px dashed rgba(203,227,203,.9);
     border-radius: 14px;
     text-align: center;
   }
   .visual-example-text {
     font-family: var(--font-serif);
-    font-size: clamp(19px, 2.4vw, 23px);
+    font-size: clamp(18px, 2.3vw, 21px);
     color: var(--dark);
     font-weight: 600;
-    line-height: 1.6;
+    line-height: 1.4;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
   }
-  @media (min-width: 640px) {
-    .visual-example-text {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-  }
+  .ve-line-second { margin-top: 20px; }
   .pill-blank {
     display: inline-block;
-    width: 100%;
-    max-width: 280px;
-    min-width: 120px;
-    height: 36px;
+    width: 200px;
+    max-width: 80%;
+    height: 32px;
     background: linear-gradient(90deg, #fdfbfb, #ebedee);
     border: 1px solid rgba(44, 54, 73, 0.15);
     border-radius: 999px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
     vertical-align: middle;
-  }
-  @media (min-width: 640px) {
-    .pill-blank {
-      width: 160px;
-    }
   }
 
   /* ── Genre cards visual for Day 1 how-to ── */
@@ -930,8 +918,10 @@
                 <span style="display:block; margin-bottom: 10px;">Write your application in light of what you've learned about God: his character shapes ours.</span>
                 <div class="visual-example-container">
                   <div class="visual-example-text">
-                    <span>God is <span class="pill-blank"></span></span>
-                    <span>Therefore, I <span class="pill-blank"></span></span>
+                    <span class="ve-line">God is</span>
+                    <span class="pill-blank"></span>
+                    <span class="ve-line ve-line-second">Therefore, I</span>
+                    <span class="pill-blank"></span>
                   </div>
                 </div>
               </li>
