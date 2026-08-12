@@ -385,7 +385,7 @@
     margin-top: 12px;
   }
   .ts-inner {
-    min-width: 480px;
+    width: 100%;
     padding-bottom: 4px;
   }
   .ts-bar {
@@ -402,8 +402,8 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: clamp(10px, 3vw, 16px);
-    letter-spacing: .03em;
+    font-size: clamp(9px, 3vw, 16px);
+    letter-spacing: .02em;
     color: var(--dark);
     text-align: center;
     padding: 0 4px;
@@ -419,24 +419,39 @@
     flex-direction: column;
     align-items: center;
     flex: 1;
+    min-width: 0;
   }
   .ts-tick-line {
     width: 1px;
     background: rgba(44,54,73,.45);
   }
   .ts-h1 .ts-tick-line { height: 8px; }
-  .ts-h2 .ts-tick-line { height: 26px; }
-  .ts-h3 .ts-tick-line { height: 44px; }
-  .ts-h4 .ts-tick-line { height: 62px; }
+  .ts-h2 .ts-tick-line { height: 22px; }
+  .ts-h3 .ts-tick-line { height: 36px; }
+  .ts-h4 .ts-tick-line { height: 50px; }
   .ts-tick-label {
-    margin-top: 4px;
+    margin-top: 5px;
     font-family: var(--font-sans);
-    font-size: clamp(8.5px, 2.1vw, 11px);
+    font-size: 8px;
     font-weight: 700;
     color: var(--dark);
     text-align: center;
-    line-height: 1.25;
+    line-height: 1.15;
     white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  @media (min-width: 560px) {
+    .ts-tick-label {
+      writing-mode: horizontal-tb;
+      transform: none;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+    .ts-h1 .ts-tick-line { height: 8px; }
+    .ts-h2 .ts-tick-line { height: 26px; }
+    .ts-h3 .ts-tick-line { height: 44px; }
+    .ts-h4 .ts-tick-line { height: 62px; }
   }
   .sr-only {
     position: absolute;
@@ -791,8 +806,7 @@
         <div class="howto-wrapper">
           <div class="howto-inner">
             <ul class="howto-content" style="list-style: none; padding-left: 20px;">
-              <li>Questions aren't a sign you're missing something. They're where real understanding starts. Jesus asked far more questions than he answered.</li>
-              <li>Before reaching for a commentary or AI, work the question with tools inside the text itself: another translation, the surrounding passages, cross-references. Save commentaries and AI for after.</li>
+              <li>Questions are where real understanding starts. Jesus asked far more than he answered. Work them with tools inside the text first, like another translation, the surrounding passages, or cross-references, before reaching for a commentary or AI.</li>
               <li>
                 <span style="display:block; margin-bottom: 10px;"><strong>Translations.</strong> Scripture is often the best commentary on itself: a second translation can clarify a confusing phrase before you look anywhere else.</span>
                 <div class="ts-scroll" role="img" aria-label="Where common translations fall on the word-for-word to thought-for-thought spectrum">
@@ -803,7 +817,7 @@
                       <div class="ts-bar-half">THOUGHT-FOR-THOUGHT</div>
                     </div>
                     <div class="ts-ticks">
-                      <div class="ts-tick ts-h4"><div class="ts-tick-line"></div><div class="ts-tick-label">RV<br>ASV</div></div>
+                      <div class="ts-tick ts-h4"><div class="ts-tick-line"></div><div class="ts-tick-label">RV/ASV</div></div>
                       <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">KJV</div></div>
                       <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">NKJV</div></div>
                       <div class="ts-tick ts-h3"><div class="ts-tick-line"></div><div class="ts-tick-label">NASB</div></div>
@@ -824,7 +838,13 @@
                 </div>
               </li>
               <li>
-                <span style="display:block;"><strong>Surrounding passage.</strong> Read the chapter or letter around your passage in one sitting. Notice how it fits the bigger flow.</span>
+                <span style="display:block; margin-bottom: 10px;"><strong>Surrounding passage.</strong> Read the chapter or letter around your passage in one sitting. Notice how it fits the bigger flow.</span>
+                <div class="resource-links">
+                  <span class="resource-links-label">See the book's design</span>
+                  <div class="resource-link-row"><span class="rl-name">BibleProject – Old Testament overviews</span><a href="https://bibleproject.com/videos/collections/old-testament/" target="_blank">bibleproject.com</a></div>
+                  <div class="resource-link-row"><span class="rl-name">BibleProject – New Testament overviews</span><a href="https://bibleproject.com/videos/collections/new-testament/" target="_blank">bibleproject.com</a></div>
+                </div>
+                <span style="display:block; margin-top: 10px;">Each book gets a short animated overview that walks through its literary design, so it's easier to see how your passage fits the whole.</span>
               </li>
               <li>
                 <span style="display:block; margin-bottom: 10px;"><strong>Cross-references.</strong> Other passages using the same words or ideas can shed light on your question and show how this passage connects to the rest of Scripture.</span>
