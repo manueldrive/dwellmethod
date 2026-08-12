@@ -396,7 +396,7 @@
     margin-top: 12px;
   }
   .ts-inner {
-    min-width: 640px;
+    min-width: 480px;
     padding-bottom: 4px;
   }
   .ts-bar {
@@ -413,10 +413,11 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: clamp(12px, 1.8vw, 16px);
-    letter-spacing: .04em;
+    font-size: clamp(10px, 3vw, 16px);
+    letter-spacing: .03em;
     color: var(--dark);
     text-align: center;
+    padding: 0 4px;
   }
   .ts-bar-divider { width: 1px; background: rgba(0,0,0,0.15); }
   .ts-ticks {
@@ -441,19 +442,21 @@
   .ts-tick-label {
     margin-top: 4px;
     font-family: var(--font-sans);
-    font-size: 11px;
+    font-size: clamp(8.5px, 2.1vw, 11px);
     font-weight: 700;
     color: var(--dark);
     text-align: center;
     line-height: 1.25;
     white-space: nowrap;
   }
-  .ts-caption {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 10px;
-    text-align: center;
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   /* ── Interpretive bridge diagram (Day 4 how-to) ── */
@@ -649,7 +652,7 @@
     
     <div class="day-card">
       <div class="prompts">
-        <p>Ground the passage in its historical context (using a study Bible or your previous notes):<br>
+        <p>Use a study Bible to ground the passage in historical context:<br>
           <span class="center-line">author · time frame · audience · purpose</span>
         </p>
         <p>Put all outside resources away and read through the passage slowly. Pay attention to the writing style:</p>
@@ -668,7 +671,7 @@
         <div class="howto-wrapper">
           <div class="howto-inner">
             <ul class="howto-content" style="list-style: none; padding-left: 20px;">
-              <li>Historical context helps you place the passage in the Big Story and see how different the original culture and audience were from our own. But context-gathering isn't the whole study — once you have the basics, put commentaries and other outside resources away (including AI) so there's room for the Holy Spirit to teach you directly from the text.</li>
+              <li>Historical context places the passage in the Big Story. Once you have the basics, put commentaries and AI away so there's room for the Holy Spirit to teach you directly from the text.</li>
               <li>
                 <div class="resource-links">
                   <span class="resource-links-label">Trusted resources for context</span>
@@ -677,7 +680,7 @@
                 </div>
               </li>
               <li>
-                <span style="display:block; margin-bottom: 10px;">The Bible is a mix of three literary styles, each read a bit differently — here's how the whole Bible breaks down:</span>
+                <span style="display:block; margin-bottom: 10px;">Three literary styles make up the Bible, each read a bit differently:</span>
                 <div class="genre-cards">
                   <div class="genre-card">
                     <span class="genre-card-pct">43%</span>
@@ -695,7 +698,7 @@
                     <p>Arguments, logic &amp; "therefore" conclusions. E.g. Paul's letters, like Ephesians.</p>
                   </div>
                 </div>
-                <span style="display:block; margin-top: 10px;">For a closer look at these three styles, watch BibleProject's <a href="https://www.youtube.com/watch?v=oUXJ8Owes8E" target="_blank">Literary Styles in the Bible</a>.</span>
+                <span style="display:block; margin-top: 10px;">For more, watch BibleProject's <a href="https://www.youtube.com/watch?v=oUXJ8Owes8E" target="_blank">Literary Styles in the Bible</a>.</span>
               </li>
             </ul>
           </div>
@@ -726,32 +729,32 @@
         <div class="howto-wrapper">
           <div class="howto-inner">
             <ul class="howto-content" style="list-style: none; padding-left: 20px;">
-              <li>Marking up the text as you read is what makes repetition, lists, and comparisons actually jump out. Grab a pen or highlighters, or print the passage if you'd rather not write in your Bible.</li>
+              <li>Marking up the text makes repetition, lists, and comparisons jump out. Grab a pen, highlighters, or a printed copy.</li>
               <li>
                 <div class="resource-links">
                   <span class="resource-links-label">Trusted resources for word study</span>
                   <div class="resource-link-row"><span class="rl-name">Dictionary.com</span><a href="https://dictionary.com" target="_blank">dictionary.com</a></div>
                   <div class="resource-link-row"><span class="rl-name">Blue Letter Bible – Lexicon</span><a href="https://www.blueletterbible.org/resources/lexical/overview.cfm" target="_blank">blueletterbible.org</a></div>
                 </div>
-                <span style="display:block; margin-top: 10px;">Keep Dictionary.com handy for two kinds of words: ones that are genuinely unfamiliar, and "church" words you've heard so often you've stopped asking what they actually mean (justified, sanctified, redeemed).</span>
+                <span style="display:block; margin-top: 10px;">Use it for unfamiliar words, and for "church" words you've stopped questioning (justified, sanctified, redeemed).</span>
               </li>
               <li>
-                <span style="display:block; margin-bottom: 10px;">What counts as emphasis changes with the genre — here's where to focus:</span>
+                <span style="display:block; margin-bottom: 10px;">What counts as emphasis changes with the genre:</span>
                 <div class="wordwork-cards">
                   <div class="wordwork-card">
                     <span class="wordwork-card-title">Narrative</span>
                     <ul>
-                      <li>A word, phrase, or action that repeats as the scene unfolds</li>
+                      <li>A word, phrase, or action that repeats</li>
                       <li>What's said about each character</li>
-                      <li>Whether the phrase that opens the scene also closes it (inclusio)</li>
+                      <li>Whether the opening phrase returns at the close (inclusio)</li>
                     </ul>
                   </div>
                   <div class="wordwork-card">
                     <span class="wordwork-card-title">Poetry</span>
                     <ul>
-                      <li>Two lines saying the same thing in different words, or opposite things (parallelism)</li>
-                      <li>An image or phrase that keeps resurfacing</li>
-                      <li>Whether the first and last lines mirror each other (chiasm)</li>
+                      <li>Two lines saying the same — or opposite — thing (parallelism)</li>
+                      <li>An image or phrase that resurfaces</li>
+                      <li>Whether the first and last lines mirror (chiasm)</li>
                     </ul>
                   </div>
                   <div class="wordwork-card">
@@ -799,11 +802,11 @@
         <div class="howto-wrapper">
           <div class="howto-inner">
             <ul class="howto-content" style="list-style: none; padding-left: 20px;">
-              <li>Questions aren't a sign you're missing something — they're often where real understanding starts. Jesus himself asked far more questions than he answered; wrestling with a text is part of taking it seriously, not a lack of faith.</li>
-              <li>Before reaching for a commentary or AI, work the question with tools that keep you in the text itself — another translation, the surrounding passages, and cross-references. Save commentaries and AI for after you've done that digging.</li>
+              <li>Questions aren't a sign you're missing something — they're where real understanding starts. Jesus asked far more questions than he answered.</li>
+              <li>Before reaching for a commentary or AI, work the question with tools inside the text itself — another translation, the surrounding passages, cross-references. Save commentaries and AI for after.</li>
               <li>
-                <span style="display:block; margin-bottom: 10px;"><strong>Translations.</strong> Scripture is often the best commentary on itself — a second translation can clarify a confusing word or phrase before you look anywhere else.</span>
-                <div class="ts-scroll">
+                <span style="display:block; margin-bottom: 10px;"><strong>Translations.</strong> Scripture is often the best commentary on itself — a second translation can clarify a confusing phrase before you look anywhere else.</span>
+                <div class="ts-scroll" role="img" aria-label="Where common translations fall on the word-for-word to thought-for-thought spectrum">
                   <div class="ts-inner">
                     <div class="ts-bar">
                       <div class="ts-bar-half">WORD-FOR-WORD</div>
@@ -830,13 +833,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="ts-caption">Where common translations fall on the word-for-word ↔ thought-for-thought spectrum</div>
               </li>
               <li>
-                <span style="display:block;"><strong>Surrounding passage.</strong> Read the chapter or letter around your passage in one sitting. Notice what argument or story it's part of, and how your passage fits inside that bigger flow.</span>
+                <span style="display:block;"><strong>Surrounding passage.</strong> Read the chapter or letter around your passage in one sitting. Notice how it fits the bigger flow.</span>
               </li>
               <li>
-                <span style="display:block; margin-bottom: 10px;"><strong>Cross-references.</strong> Other passages that use the same words, images, or ideas can shed light on your question and show how this passage connects to the rest of Scripture.</span>
+                <span style="display:block; margin-bottom: 10px;"><strong>Cross-references.</strong> Other passages using the same words or ideas can shed light on your question and show how this passage connects to the rest of Scripture.</span>
                 <div class="resource-links">
                   <span class="resource-links-label">Trusted resources for cross-references</span>
                   <div class="resource-link-row"><span class="rl-name">Bible Hub – Cross References</span><a href="https://biblehub.com/genesis/1-1.htm#crossref" target="_blank">biblehub.com</a></div>
@@ -862,7 +864,7 @@
         <p>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</p>
         <div class="bell-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <em>Verify your findings in the community badge</em>
+          <em>Verify your findings in community</em>
         </div>
       </div>
       
@@ -875,7 +877,7 @@
           <div class="howto-inner">
             <ul class="howto-content" style="list-style: none; padding-left: 20px;">
               <li>
-                <span style="display:block; margin-bottom: 10px;"><strong>The interpretive bridge.</strong> In <em>Grasping God's Word</em>, Duvall and Hays picture interpretation as a river with two banks, and God's unchanging character as the bridge between them:</span>
+                <span style="display:block; margin-bottom: 10px;"><strong>The interpretive bridge.</strong> In <em>Grasping God's Word</em>, Duvall and Hays picture interpretation as a river — two banks, and God's unchanging character as the bridge:</span>
                 <div class="bridge-diagram">
                   <div class="bridge-bank">
                     <span class="bridge-bank-label">Their World</span>
@@ -891,10 +893,10 @@
                     <p>What's still true for us today?</p>
                   </div>
                 </div>
-                <span style="display:block; margin-top: 10px;">Today's two questions are that bridge in miniature. Once you can name what still holds true, Day 5 will build on it.</span>
+                <span style="display:block; margin-top: 10px;">Today's two questions are that bridge in miniature — name what still holds true, and Day 5 builds on it.</span>
               </li>
-              <li><strong>Community.</strong> Everyone reads with blind spots — assumptions shaped by culture, upbringing, and life experience that are hard to see in yourself. Bringing what you've found to a group, even just a couple of trusted people, is often the fastest way to catch a misreading before it hardens into a conclusion.</li>
-              <li><strong>Now you can consult outside resources.</strong> You put commentaries and AI aside on Day 1 so the text could speak for itself first. By now you've wrestled with it personally and tested it in community — that's the right time to bring in a trusted commentary, study Bible note, or sermon to confirm or sharpen what you've found.</li>
+              <li><strong>Community.</strong> Everyone reads with blind spots shaped by culture and experience. Bringing your findings to a group is the fastest way to catch a misreading before it hardens.</li>
+              <li><strong>Now you can consult outside resources.</strong> You put commentaries and AI aside on Day 1 so the text could speak first. Now that you've wrestled with it personally and in community, bring one in to confirm or sharpen what you found.</li>
             </ul>
           </div>
         </div>
@@ -923,9 +925,9 @@
         <div class="howto-wrapper">
           <div class="howto-inner">
             <ul class="howto-content" style="list-style: none; padding-left: 20px;">
-              <li>Consider how living out this truth would change things in your home, your church and your community and beyond.</li>
+              <li>Consider how living this out would change your home, church, and community.</li>
               <li>
-                <span style="display:block; margin-bottom: 10px;">Write your application in light of what you have learned about God. When we learn His character and purpose, it changes our character and purpose.</span>
+                <span style="display:block; margin-bottom: 10px;">Write your application in light of what you've learned about God — his character shapes ours.</span>
                 <div class="visual-example-container">
                   <div class="visual-example-text">
                     <span>God is <span class="pill-blank"></span></span>
@@ -933,7 +935,7 @@
                   </div>
                 </div>
               </li>
-              <li>Pray for God to reveal to you how you should be living this out and when necessary ask for accountability from other believers.</li>
+              <li>Pray for God to reveal how to live this out, and ask others for accountability when needed.</li>
             </ul>
           </div>
         </div>
@@ -973,7 +975,7 @@
         <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
-        <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Use a study Bible to ground the passage in historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
         <li>Put all outside resources away and read through the passage slowly. Pay attention to the writing style:</li>
         <li><strong>Story:</strong> Watch characters, setting, conflict, &amp; resolution.</li>
         <li><strong>Poetry:</strong> Notice imagery, metaphors, &amp; emotional turns.</li>
@@ -1018,7 +1020,7 @@
         <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
-        <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Use a study Bible to ground the passage in historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
         <li>Put all outside resources away and read through the passage slowly. Pay attention to the writing style:</li>
         <li><strong>Story:</strong> Watch characters, setting, conflict, &amp; resolution.</li>
         <li><strong>Poetry:</strong> Notice imagery, metaphors, &amp; emotional turns.</li>
@@ -1063,7 +1065,7 @@
         <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
-        <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Use a study Bible to ground the passage in historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
         <li>Put all outside resources away and read through the passage slowly. Pay attention to the writing style:</li>
         <li><strong>Story:</strong> Watch characters, setting, conflict, &amp; resolution.</li>
         <li><strong>Poetry:</strong> Notice imagery, metaphors, &amp; emotional turns.</li>
@@ -1118,7 +1120,7 @@
         <li>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</li>
         <li class="bm-bell">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>Verify your findings in the community badge</span>
+          <span>Verify your findings in community</span>
         </li>
       </ul>
     </div>
@@ -1161,7 +1163,7 @@
         <li>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</li>
         <li class="bm-bell">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>Verify your findings in the community badge</span>
+          <span>Verify your findings in community</span>
         </li>
       </ul>
     </div>
@@ -1204,7 +1206,7 @@
         <li>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</li>
         <li class="bm-bell">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>Verify your findings in the community badge</span>
+          <span>Verify your findings in community</span>
         </li>
       </ul>
     </div>
