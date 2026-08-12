@@ -172,6 +172,9 @@
 
   .prompts { font-size: clamp(18px, 2vw, 20px); line-height: 1.7; color: rgba(44,54,73,.9); font-weight: 500; }
   .prompts p + p { margin-top: 16px; }
+  .prompts-list { margin-top: 12px; padding-left: 24px; }
+  .prompts-list li { margin-top: 8px; }
+  .prompts ul.prompts-list + p { margin-top: 16px; }
   .center-line { display: block; text-align: center; margin-top: 12px; }
   .bell-row {
     display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -231,8 +234,8 @@
   .visual-example-container {
     margin-top: 20px;
     padding: 24px 20px;
-    background: linear-gradient(135deg, rgba(250, 204, 174, 0.15), rgba(242, 169, 196, 0.15));
-    border: 1px dashed rgba(242, 169, 196, 0.6);
+    background: linear-gradient(135deg, rgba(203,227,203,.28), rgba(203,227,203,.08));
+    border: 1px dashed rgba(203,227,203,.9);
     border-radius: 14px;
     text-align: center;
   }
@@ -271,6 +274,255 @@
     .pill-blank {
       width: 160px;
     }
+  }
+
+  /* ── Genre cards visual for Day 1 how-to ── */
+  .genre-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 4px 0 4px 0;
+  }
+  @media (min-width: 640px) {
+    .genre-cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  .genre-card {
+    background: linear-gradient(135deg, rgba(203,227,203,.28), rgba(203,227,203,.08));
+    border: 1px solid rgba(203,227,203,.7);
+    border-radius: 10px;
+    padding: 18px 16px 16px;
+    text-align: center;
+  }
+  .genre-card-pct {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 32px);
+    line-height: 1;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .genre-card-title {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .genre-card p {
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── Trusted resources block for Day 1 how-to ── */
+  .resource-links {
+    margin: 4px 0;
+    background: rgba(203,227,203,.14);
+    border: 1px solid rgba(203,227,203,.6);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .resource-links-label {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .resource-link-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+  }
+  .resource-link-row + .resource-link-row { margin-top: 8px; }
+  .resource-link-row .rl-name { color: var(--dark); font-weight: 600; }
+  .resource-link-row a { color: var(--secondary); text-decoration: none; font-weight: 500; white-space: nowrap; }
+  .resource-link-row a:hover { text-decoration: underline; }
+
+  /* ── Word-work "look for" cards for Day 2 how-to ── */
+  .wordwork-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 4px 0;
+  }
+  @media (min-width: 640px) {
+    .wordwork-cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  .wordwork-card {
+    background: linear-gradient(135deg, rgba(203,227,203,.28), rgba(203,227,203,.08));
+    border: 1px solid rgba(203,227,203,.7);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .wordwork-card-title {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .wordwork-card ul {
+    margin: 0;
+    padding-left: 16px;
+  }
+  .wordwork-card li {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .wordwork-card li + li { margin-top: 5px; }
+
+  /* ── Translation spectrum chart (Day 3 how-to) ── */
+  .ts-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 12px;
+  }
+  .ts-inner {
+    min-width: 640px;
+    padding-bottom: 4px;
+  }
+  .ts-bar {
+    height: 52px;
+    border: 2px solid var(--dark);
+    border-radius: 6px;
+    background: linear-gradient(90deg, #f6f6f4, #e3e3df 50%, #f6f6f4);
+    display: flex;
+    align-items: stretch;
+  }
+  .ts-bar-half {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: clamp(12px, 1.8vw, 16px);
+    letter-spacing: .04em;
+    color: var(--dark);
+    text-align: center;
+  }
+  .ts-bar-divider { width: 1px; background: rgba(0,0,0,0.15); }
+  .ts-ticks {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 2px;
+  }
+  .ts-tick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  .ts-tick-line {
+    width: 1px;
+    background: rgba(44,54,73,.45);
+  }
+  .ts-h1 .ts-tick-line { height: 8px; }
+  .ts-h2 .ts-tick-line { height: 26px; }
+  .ts-h3 .ts-tick-line { height: 44px; }
+  .ts-h4 .ts-tick-line { height: 62px; }
+  .ts-tick-label {
+    margin-top: 4px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--dark);
+    text-align: center;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+  .ts-caption {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* ── Interpretive bridge diagram (Day 4 how-to) ── */
+  .bridge-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin: 4px 0;
+  }
+  @media (min-width: 640px) {
+    .bridge-diagram { flex-direction: row; align-items: stretch; gap: 0; }
+  }
+  .bridge-bank {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(203,227,203,.3), rgba(203,227,203,.1));
+    border: 1px solid rgba(203,227,203,.75);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .bridge-bank-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .bridge-bank p {
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .bridge-span {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+  }
+  .bridge-line {
+    width: 2px;
+    height: 22px;
+    margin: 4px auto;
+    background: repeating-linear-gradient(180deg, rgba(44,54,73,.4) 0 5px, transparent 5px 10px);
+  }
+  @media (min-width: 640px) {
+    .bridge-line {
+      width: 100%;
+      height: 2px;
+      min-width: 32px;
+      margin: 4px 0;
+      background: repeating-linear-gradient(90deg, rgba(44,54,73,.4) 0 5px, transparent 5px 10px);
+    }
+  }
+  .bridge-span-label {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--dark);
+    text-align: center;
+    line-height: 1.3;
+    max-width: 90px;
   }
 
   /* ── Gradients (Refined and Brightened) ── */
@@ -396,10 +648,15 @@
     
     <div class="day-card">
       <div class="prompts">
-        <p>Use a study Bible or trusted online resource to review historical context:<br>
+        <p>Ground the passage in its historical context (using a study Bible or your previous notes):<br>
           <span class="center-line">author · time frame · audience · purpose</span>
         </p>
-        <p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p>
+        <p>Put all outside resources away and read through the passage slowly. Pay attention to the writing style:</p>
+        <ul class="prompts-list">
+          <li><strong>Story:</strong> Watch characters, setting, conflict, &amp; resolution.</li>
+          <li><strong>Poetry:</strong> Notice imagery, metaphors, &amp; emotional turns.</li>
+          <li><strong>Discourse / Letters:</strong> Follow arguments, logic, &amp; "therefore" conclusions.</li>
+        </ul>
       </div>
       
       <div class="howto">
@@ -409,11 +666,36 @@
         </button>
         <div class="howto-wrapper">
           <div class="howto-inner">
-            <ul class="howto-content">
-              <li>It is important to get historical context so that you can place where we are in the Big Story and get a better perspective for how different the culture would have been from today.</li>
-              <li>Much of this information can be found on reliable sites: <strong>Bible Hub – Introductions</strong> (<a href="https://biblehub.com/genesis/" target="_blank">biblehub.com/genesis/</a>) and <strong>Blue Letter Bible – Introductions</strong> (<a href="https://www.blueletterbible.org/resources/intros.cfm" target="_blank">blueletterbible.org/resources/intros.cfm</a>)</li>
-              <li>Now that you have your historical context, put away all resources for now (including AI).</li>
-              <li>Repetitively read through your passage and surrounding text as you let the Holy Spirit transform you.</li>
+            <ul class="howto-content" style="list-style: none; padding-left: 20px;">
+              <li>Historical context helps you place the passage in the Big Story and see how different the original culture and audience were from our own. But context-gathering isn't the whole study — once you have the basics, put commentaries and other outside resources away (including AI) so there's room for the Holy Spirit to teach you directly from the text.</li>
+              <li>
+                <div class="resource-links">
+                  <span class="resource-links-label">Trusted resources for context</span>
+                  <div class="resource-link-row"><span class="rl-name">Bible Hub – Introductions</span><a href="https://biblehub.com/genesis/" target="_blank">biblehub.com/genesis</a></div>
+                  <div class="resource-link-row"><span class="rl-name">Blue Letter Bible – Introductions</span><a href="https://www.blueletterbible.org/resources/intros.cfm" target="_blank">blueletterbible.org</a></div>
+                </div>
+              </li>
+              <li>
+                <span style="display:block; margin-bottom: 10px;">The Bible is a mix of three literary styles, each read a bit differently — here's how the whole Bible breaks down:</span>
+                <div class="genre-cards">
+                  <div class="genre-card">
+                    <span class="genre-card-pct">43%</span>
+                    <span class="genre-card-title">Narrative</span>
+                    <p>Characters, setting, conflict &amp; resolution. E.g. the Red Sea crossing in Exodus 14.</p>
+                  </div>
+                  <div class="genre-card">
+                    <span class="genre-card-pct">33%</span>
+                    <span class="genre-card-title">Poetry</span>
+                    <p>Imagery, parallelism &amp; emotional turns. E.g. that same story retold as a song in Exodus 15.</p>
+                  </div>
+                  <div class="genre-card">
+                    <span class="genre-card-pct">24%</span>
+                    <span class="genre-card-title">Discourse / Letters</span>
+                    <p>Arguments, logic &amp; "therefore" conclusions. E.g. Paul's letters, like Ephesians.</p>
+                  </div>
+                </div>
+                <span style="display:block; margin-top: 10px;">For a closer look at these three styles, watch BibleProject's <a href="https://www.youtube.com/watch?v=oUXJ8Owes8E" target="_blank">Literary Styles in the Bible</a>.</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -442,10 +724,45 @@
         </button>
         <div class="howto-wrapper">
           <div class="howto-inner">
-            <ul class="howto-content">
-              <li>Simply use highlighters and pens to annotate the text.</li>
-              <li>If you do not have a Bible you want to write in, get one or print the text out so that you can mark up the page.</li>
-              <li>Use a simple dictionary as you are getting started like: <strong>Dictionary.com</strong> (<a href="https://dictionary.com" target="_blank">dictionary.com</a>)</li>
+            <ul class="howto-content" style="list-style: none; padding-left: 20px;">
+              <li>Marking up the text as you read is what makes repetition, lists, and comparisons actually jump out. Grab a pen or highlighters, or print the passage if you'd rather not write in your Bible.</li>
+              <li>
+                <div class="resource-links">
+                  <span class="resource-links-label">Trusted resources for word study</span>
+                  <div class="resource-link-row"><span class="rl-name">Dictionary.com</span><a href="https://dictionary.com" target="_blank">dictionary.com</a></div>
+                  <div class="resource-link-row"><span class="rl-name">Blue Letter Bible – Lexicon</span><a href="https://www.blueletterbible.org/resources/lexical/overview.cfm" target="_blank">blueletterbible.org</a></div>
+                </div>
+                <span style="display:block; margin-top: 10px;">Keep Dictionary.com handy for two kinds of words: ones that are genuinely unfamiliar, and "church" words you've heard so often you've stopped asking what they actually mean (justified, sanctified, redeemed).</span>
+              </li>
+              <li>
+                <span style="display:block; margin-bottom: 10px;">What counts as emphasis changes with the genre — here's where to focus:</span>
+                <div class="wordwork-cards">
+                  <div class="wordwork-card">
+                    <span class="wordwork-card-title">Narrative</span>
+                    <ul>
+                      <li>A word, phrase, or action that repeats as the scene unfolds</li>
+                      <li>What's said about each character</li>
+                      <li>Whether the phrase that opens the scene also closes it (inclusio)</li>
+                    </ul>
+                  </div>
+                  <div class="wordwork-card">
+                    <span class="wordwork-card-title">Poetry</span>
+                    <ul>
+                      <li>Two lines saying the same thing in different words, or opposite things (parallelism)</li>
+                      <li>An image or phrase that keeps resurfacing</li>
+                      <li>Whether the first and last lines mirror each other (chiasm)</li>
+                    </ul>
+                  </div>
+                  <div class="wordwork-card">
+                    <span class="wordwork-card-title">Discourse / Letters</span>
+                    <ul>
+                      <li>Connector words: therefore, but, for, so that</li>
+                      <li>A key term repeated through the argument</li>
+                      <li>Lists — commands, virtues, qualifications</li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -462,15 +779,15 @@
   <!-- DAY 3 -->
   <section id="day-3" class="day-section sec-3">
     <div class="pill-row">
-      <div class="pill g3"><span class="pill-label">3&nbsp;|&nbsp;Evaluate</span></div>
-      <div class="icon-circle"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+      <div class="pill g3"><span class="pill-label">3&nbsp;|&nbsp;Expand</span></div>
+      <div class="icon-circle"><img src="icons/evaluate.png" alt="Expand" /></div>
     </div>
     
     <div class="day-card">
       <div class="prompts">
-        <p>Reread the passage — what questions come to mind?</p>
-        <p>Review other translations, cross references &amp; surrounding passages — do they shed any light on your questions?</p>
-        <p>How would the original audience have understood this passage?</p>
+        <p>Reread the passage—what questions come to mind? Can other translations clarify them?</p>
+        <p>Read the passages right before and after this section—how do they connect to this passage?</p>
+        <p>Review 1–2 cross references—how does this passage fit into the larger story of Scripture?</p>
       </div>
       
       <div class="howto">
@@ -480,12 +797,49 @@
         </button>
         <div class="howto-wrapper">
           <div class="howto-inner">
-            <ul class="howto-content">
-              <li>Don't rush to commentaries or AI for answers to your questions.</li>
-              <li>Use scripture to verify scripture, by first using another translation of the passage to gain clarity.</li>
-              <li>You should also use cross-references to clarify difficult verses and to integrate this passage into the larger, unified story of the Bible: <strong>Bible Hub – Cross References</strong> (<a href="https://biblehub.com/genesis/1-1.htm#crossref" target="_blank">biblehub.com/genesis/1-1.htm#crossref</a>)</li>
-              <li style="list-style: none; margin-left: -20px; margin-top: 16px;">
-                <img src="icons/translations.png" alt="Bible Translation Comparison Chart" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 12px rgba(0,0,0,0.05);" />
+            <ul class="howto-content" style="list-style: none; padding-left: 20px;">
+              <li>Questions aren't a sign you're missing something — they're often where real understanding starts. Jesus himself asked far more questions than he answered; wrestling with a text is part of taking it seriously, not a lack of faith.</li>
+              <li>Before reaching for a commentary or AI, work the question with tools that keep you in the text itself — another translation, the surrounding passages, and cross-references. Save commentaries and AI for after you've done that digging.</li>
+              <li>
+                <span style="display:block; margin-bottom: 10px;"><strong>Translations.</strong> Scripture is often the best commentary on itself — a second translation can clarify a confusing word or phrase before you look anywhere else.</span>
+                <div class="ts-scroll">
+                  <div class="ts-inner">
+                    <div class="ts-bar">
+                      <div class="ts-bar-half">WORD-FOR-WORD</div>
+                      <div class="ts-bar-divider"></div>
+                      <div class="ts-bar-half">THOUGHT-FOR-THOUGHT</div>
+                    </div>
+                    <div class="ts-ticks">
+                      <div class="ts-tick ts-h4"><div class="ts-tick-line"></div><div class="ts-tick-label">RV<br>ASV</div></div>
+                      <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">KJV</div></div>
+                      <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">NKJV</div></div>
+                      <div class="ts-tick ts-h3"><div class="ts-tick-line"></div><div class="ts-tick-label">NASB</div></div>
+                      <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">ESV</div></div>
+                      <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">RSV</div></div>
+                      <div class="ts-tick ts-h3"><div class="ts-tick-line"></div><div class="ts-tick-label">NRSV</div></div>
+                      <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">CSB</div></div>
+                      <div class="ts-tick ts-h3"><div class="ts-tick-line"></div><div class="ts-tick-label">NAB</div></div>
+                      <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">NET</div></div>
+                      <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">RNJB</div></div>
+                      <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">NIV</div></div>
+                      <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">REB</div></div>
+                      <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">CEB</div></div>
+                      <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">NLT</div></div>
+                      <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">MSG</div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ts-caption">Where common translations fall on the word-for-word ↔ thought-for-thought spectrum</div>
+              </li>
+              <li>
+                <span style="display:block;"><strong>Surrounding passage.</strong> Read the chapter or letter around your passage in one sitting. Notice what argument or story it's part of, and how your passage fits inside that bigger flow.</span>
+              </li>
+              <li>
+                <span style="display:block; margin-bottom: 10px;"><strong>Cross-references.</strong> Other passages that use the same words, images, or ideas can shed light on your question and show how this passage connects to the rest of Scripture.</span>
+                <div class="resource-links">
+                  <span class="resource-links-label">Trusted resources for cross-references</span>
+                  <div class="resource-link-row"><span class="rl-name">Bible Hub – Cross References</span><a href="https://biblehub.com/genesis/1-1.htm#crossref" target="_blank">biblehub.com</a></div>
+                </div>
               </li>
             </ul>
           </div>
@@ -503,11 +857,11 @@
     
     <div class="day-card">
       <div class="prompts">
-        <p>What truth does this passage reveal about God's character and purpose?</p>
-        <p>What cultural or personal lies does this truth challenge today?</p>
+        <p>How would the original audience have understood this passage?</p>
+        <p>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</p>
         <div class="bell-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <em>Check your findings in community</em>
+          <em>Verify your findings in the community badge</em>
         </div>
       </div>
       
@@ -518,10 +872,28 @@
         </button>
         <div class="howto-wrapper">
           <div class="howto-inner">
-            <ul class="howto-content">
-              <li>If you are faced with an unclear passage or verse, read ahead in the book to gain clarity, and look for other clear passages on the same subject. Often times the New Testament writers will interpret passages from the Old Testament.</li>
-              <li>Protect against bias here by refining your findings in a community group.</li>
-              <li>Feel free to bring back in reliable external sources (commentaries, sermons, etc.) to refine what you have learned.</li>
+            <ul class="howto-content" style="list-style: none; padding-left: 20px;">
+              <li>
+                <span style="display:block; margin-bottom: 10px;"><strong>The interpretive bridge.</strong> In <em>Grasping God's Word</em>, Duvall and Hays picture interpretation as a river with two banks, and God's unchanging character as the bridge between them:</span>
+                <div class="bridge-diagram">
+                  <div class="bridge-bank">
+                    <span class="bridge-bank-label">Their World</span>
+                    <p>How would the original audience have understood this passage?</p>
+                  </div>
+                  <div class="bridge-span">
+                    <div class="bridge-line"></div>
+                    <span class="bridge-span-label">God's unchanging character</span>
+                    <div class="bridge-line"></div>
+                  </div>
+                  <div class="bridge-bank">
+                    <span class="bridge-bank-label">Our World</span>
+                    <p>What's still true for us today?</p>
+                  </div>
+                </div>
+                <span style="display:block; margin-top: 10px;">Today's two questions are that bridge in miniature. Once you can name what still holds true, Day 5 will build on it.</span>
+              </li>
+              <li><strong>Community.</strong> Everyone reads with blind spots — assumptions shaped by culture, upbringing, and life experience that are hard to see in yourself. Bringing what you've found to a group, even just a couple of trusted people, is often the fastest way to catch a misreading before it hardens into a conclusion.</li>
+              <li><strong>Now you can consult outside resources.</strong> You put commentaries and AI aside on Day 1 so the text could speak for itself first. By now you've wrestled with it personally and tested it in community — that's the right time to bring in a trusted commentary, study Bible note, or sermon to confirm or sharpen what you've found.</li>
             </ul>
           </div>
         </div>
@@ -538,7 +910,8 @@
     
     <div class="day-card">
       <div class="prompts">
-        <p>How will this truth shape your prayers, thoughts, words and/or actions today?</p>
+        <p>What cultural or personal lies are challenged by the truth of who God is?</p>
+        <p>How will the truth from this passage shape your prayers, thoughts, words, and actions today?</p>
       </div>
       
       <div class="howto">
@@ -548,16 +921,18 @@
         </button>
         <div class="howto-wrapper">
           <div class="howto-inner">
-            <ul class="howto-content">
+            <ul class="howto-content" style="list-style: none; padding-left: 20px;">
               <li>Consider how living out this truth would change things in your home, your church and your community and beyond.</li>
-              <li>Write your application in light of what you have learned about God. When we learn His character and purpose, it changes our character and purpose.</li>
-              <div class="visual-example-container">
-                <div class="visual-example-text">
-                  <span>God is <span class="pill-blank"></span></span>
-                  <span>Therefore, I <span class="pill-blank"></span></span>
+              <li>
+                <span style="display:block; margin-bottom: 10px;">Write your application in light of what you have learned about God. When we learn His character and purpose, it changes our character and purpose.</span>
+                <div class="visual-example-container">
+                  <div class="visual-example-text">
+                    <span>God is <span class="pill-blank"></span></span>
+                    <span>Therefore, I <span class="pill-blank"></span></span>
+                  </div>
                 </div>
-              </div>
-              <li style="margin-top: 16px;">Pray for God to reveal to you how you should be living this out and when necessary ask for accountability from other believers.</li>
+              </li>
+              <li>Pray for God to reveal to you how you should be living this out and when necessary ask for accountability from other believers.</li>
             </ul>
           </div>
         </div>
@@ -597,8 +972,8 @@
         <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
-        <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
-        <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
+        <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Put all outside resources away and read through the passage slowly, paying attention to the writing style — story, poetry, or discourse/letters.</li>
       </ul>
     </div>
     <div class="bm-day">
@@ -639,8 +1014,8 @@
         <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
-        <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
-        <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
+        <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Put all outside resources away and read through the passage slowly, paying attention to the writing style — story, poetry, or discourse/letters.</li>
       </ul>
     </div>
     <div class="bm-day">
@@ -681,8 +1056,8 @@
         <div class="bm-icon" style="border: 3px solid #cbe3cb;"><img src="icons/discover.png" alt="Discover" /></div>
       </div>
       <ul>
-        <li>Use a study Bible or trusted online resource to review historical context:<span class="bm-center">author · time frame · audience · purpose</span></li>
-        <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
+        <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
+        <li>Put all outside resources away and read through the passage slowly, paying attention to the writing style — story, poetry, or discourse/letters.</li>
       </ul>
     </div>
     <div class="bm-day">
@@ -714,13 +1089,13 @@
     </div>
     <div class="bm-day">
       <div class="bm-pill-row">
-        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
-        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Expand</span></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Expand" /></div>
       </div>
       <ul>
-        <li>Reread the passage — what questions come to mind?</li>
-        <li>Review other translations, cross references &amp; surrounding passages — do they shed any light on your questions?</li>
-        <li>How would the original audience have understood this passage?</li>
+        <li>Reread the passage—what questions come to mind? Can other translations clarify them?</li>
+        <li>Read the passages right before and after this section—how do they connect to this passage?</li>
+        <li>Review 1–2 cross references—how does this passage fit into the larger story of Scripture?</li>
       </ul>
     </div>
     <div class="bm-day">
@@ -729,11 +1104,11 @@
         <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/learn.png" alt="Learn" /></div>
       </div>
       <ul>
-        <li>What truth does this passage reveal about God's character and purpose?</li>
-        <li>What cultural or personal lies does this truth challenge today?</li>
+        <li>How would the original audience have understood this passage?</li>
+        <li>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</li>
         <li class="bm-bell">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>Check your findings in community</span>
+          <span>Verify your findings in the community badge</span>
         </li>
       </ul>
     </div>
@@ -743,7 +1118,8 @@
         <div class="bm-icon" style="border: 3px solid #f2a9c4;"><img src="icons/live.png" alt="Live" /></div>
       </div>
       <ul>
-        <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
+        <li>What cultural or personal lies are challenged by the truth of who God is?</li>
+        <li>How will the truth from this passage shape your prayers, thoughts, words, and actions today?</li>
       </ul>
     </div>
   </div>
@@ -756,13 +1132,13 @@
     </div>
     <div class="bm-day">
       <div class="bm-pill-row">
-        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
-        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Expand</span></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Expand" /></div>
       </div>
       <ul>
-        <li>Reread the passage — what questions come to mind?</li>
-        <li>Review other translations, cross references &amp; surrounding passages — do they shed any light on your questions?</li>
-        <li>How would the original audience have understood this passage?</li>
+        <li>Reread the passage—what questions come to mind? Can other translations clarify them?</li>
+        <li>Read the passages right before and after this section—how do they connect to this passage?</li>
+        <li>Review 1–2 cross references—how does this passage fit into the larger story of Scripture?</li>
       </ul>
     </div>
     <div class="bm-day">
@@ -771,11 +1147,11 @@
         <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/learn.png" alt="Learn" /></div>
       </div>
       <ul>
-        <li>What truth does this passage reveal about God's character and purpose?</li>
-        <li>What cultural or personal lies does this truth challenge today?</li>
+        <li>How would the original audience have understood this passage?</li>
+        <li>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</li>
         <li class="bm-bell">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>Check your findings in community</span>
+          <span>Verify your findings in the community badge</span>
         </li>
       </ul>
     </div>
@@ -785,7 +1161,8 @@
         <div class="bm-icon" style="border: 3px solid #f2a9c4;"><img src="icons/live.png" alt="Live" /></div>
       </div>
       <ul>
-        <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
+        <li>What cultural or personal lies are challenged by the truth of who God is?</li>
+        <li>How will the truth from this passage shape your prayers, thoughts, words, and actions today?</li>
       </ul>
     </div>
   </div>
@@ -798,13 +1175,13 @@
     </div>
     <div class="bm-day">
       <div class="bm-pill-row">
-        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Evaluate</span></div>
-        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Evaluate" /></div>
+        <div class="bm-pill s3"><span>3&nbsp;|&nbsp;Expand</span></div>
+        <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/evaluate.png" alt="Expand" /></div>
       </div>
       <ul>
-        <li>Reread the passage — what questions come to mind?</li>
-        <li>Review other translations, cross references &amp; surrounding passages — do they shed any light on your questions?</li>
-        <li>How would the original audience have understood this passage?</li>
+        <li>Reread the passage—what questions come to mind? Can other translations clarify them?</li>
+        <li>Read the passages right before and after this section—how do they connect to this passage?</li>
+        <li>Review 1–2 cross references—how does this passage fit into the larger story of Scripture?</li>
       </ul>
     </div>
     <div class="bm-day">
@@ -813,11 +1190,11 @@
         <div class="bm-icon" style="border: 3px solid #c9d8e6;"><img src="icons/learn.png" alt="Learn" /></div>
       </div>
       <ul>
-        <li>What truth does this passage reveal about God's character and purpose?</li>
-        <li>What cultural or personal lies does this truth challenge today?</li>
+        <li>How would the original audience have understood this passage?</li>
+        <li>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</li>
         <li class="bm-bell">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>Check your findings in community</span>
+          <span>Verify your findings in the community badge</span>
         </li>
       </ul>
     </div>
@@ -827,7 +1204,8 @@
         <div class="bm-icon" style="border: 3px solid #f2a9c4;"><img src="icons/live.png" alt="Live" /></div>
       </div>
       <ul>
-        <li>How will this truth shape your prayers, thoughts, words and/or actions today?</li>
+        <li>What cultural or personal lies are challenged by the truth of who God is?</li>
+        <li>How will the truth from this passage shape your prayers, thoughts, words, and actions today?</li>
       </ul>
     </div>
   </div>
