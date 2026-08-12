@@ -549,6 +549,7 @@
       align-items: stretch;
       gap: .12in;
       width: 100%;
+      height: 8.1in;
       background: white;
     }
     .print-page-1 { break-after: page; page-break-after: always; }
@@ -556,52 +557,52 @@
 
   /* ── Bookmark inner styles ── */
   .bm {
-    flex: 1; padding: .16in .18in;
+    flex: 1; padding: .2in .2in;
     background: #fff; font-family: var(--font-serif);
-    color: var(--dark); font-size: 15px; line-height: 1.45;
-    display: flex; flex-direction: column; gap: 13px;
+    color: var(--dark); font-size: 16px; line-height: 1.5;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
     box-sizing: border-box; break-inside: avoid;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
-  .bm-header { margin: -.16in -.18in 0; overflow: hidden; }
+  .bm-header { margin: -.2in -.2in 0; overflow: hidden; }
   .bm-wordmark {
     background: #fff; text-align: center;
-    padding: .09in .15in .07in;
+    padding: .1in .15in .08in;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
-  .bm-wordmark img { height: 42px; width: auto; mix-blend-mode: multiply; }
-  .bm-tagline { font-family: var(--font-sans); font-style: italic; font-size: 11px; color: var(--dark); opacity: .75; margin-top: 3px; line-height: 1.35; }
+  .bm-wordmark img { height: 46px; width: auto; mix-blend-mode: multiply; }
+  .bm-tagline { font-family: var(--font-sans); font-style: italic; font-size: 12px; color: var(--dark); opacity: .75; margin-top: 4px; line-height: 1.35; }
   .bm-strip { display: flex; }
-  .bm-strip div { flex: 1; height: 10px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .bm-strip div { flex: 1; height: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .bm-prayer { text-align: center; padding: 0 6px; }
-  .bm-prayer-line { width: 24px; height: 2px; background: var(--peach); margin: 0 auto 4px; border-radius: 1px; }
-  .bm-prayer p { font-style: italic; font-size: 12.5px; line-height: 1.4; margin: 4px 0; }
-  .bm-prayer-line-b { width: 24px; height: 2px; background: var(--peach); margin: 4px auto 0; border-radius: 1px; }
-  .bm-pill-row { display: flex; align-items: center; margin-bottom: 6px; }
+  .bm-prayer-line { width: 26px; height: 2px; background: var(--peach); margin: 0 auto 5px; border-radius: 1px; }
+  .bm-prayer p { font-style: italic; font-size: 13.5px; line-height: 1.45; margin: 5px 0; }
+  .bm-prayer-line-b { width: 26px; height: 2px; background: var(--peach); margin: 5px auto 0; border-radius: 1px; }
+  .bm-pill-row { display: flex; align-items: center; margin-bottom: 7px; }
   .bm-pill {
-    flex: 1; border-radius: 10px; padding: 1px 14px;
+    flex: 1; border-radius: 10px; padding: 2px 15px;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   .bm-pill span {
     font-family: var(--font-sans);
-    font-size: 13.5px; font-weight: 700;
-    letter-spacing: .12em; text-transform: uppercase; color: var(--dark); white-space: nowrap;
+    font-size: 14.5px; font-weight: 700;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--dark); white-space: nowrap;
   }
   .bm-icon {
-    width: 36px; height: 36px; border-radius: 50%; background: #fff;
-    flex-shrink: 0; margin-left: -16px;
+    width: 40px; height: 40px; border-radius: 50%; background: #fff;
+    flex-shrink: 0; margin-left: -18px;
     display: flex; align-items: center; justify-content: center;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
-  .bm-icon img { width: 20px; height: 20px; object-fit: contain; }
-  .bm-day ul { list-style: none; padding: 0; margin: 0; font-family: var(--font-sans); font-size: 13px; line-height: 1.4; }
-  .bm-day li + li { margin-top: 5px; }
+  .bm-icon img { width: 22px; height: 22px; object-fit: contain; }
+  .bm-day ul { list-style: none; padding: 0; margin: 0; font-family: var(--font-sans); font-size: 14px; line-height: 1.45; }
+  .bm-day li + li { margin-top: 7px; }
   .bm-center { display: block; text-align: center; margin-top: 4px; }
   .bm-bell {
     display: flex; align-items: center; justify-content: center; gap: 4px;
     font-style: italic; opacity: .65;
   }
-  .bm-bell svg { width: 9px; height: 9px; flex-shrink: 0; }
+  .bm-bell svg { width: 10px; height: 10px; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -973,7 +974,10 @@
       </div>
       <ul>
         <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
-        <li>Put all outside resources away and read through the passage slowly, paying attention to the writing style — story, poetry, or discourse/letters.</li>
+        <li>Put all outside resources away and read through the passage slowly. Pay attention to the writing style:</li>
+        <li><strong>Story:</strong> Watch characters, setting, conflict, &amp; resolution.</li>
+        <li><strong>Poetry:</strong> Notice imagery, metaphors, &amp; emotional turns.</li>
+        <li><strong>Discourse / Letters:</strong> Follow arguments, logic, &amp; "therefore" conclusions.</li>
       </ul>
     </div>
     <div class="bm-day">
@@ -1015,7 +1019,10 @@
       </div>
       <ul>
         <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
-        <li>Put all outside resources away and read through the passage slowly, paying attention to the writing style — story, poetry, or discourse/letters.</li>
+        <li>Put all outside resources away and read through the passage slowly. Pay attention to the writing style:</li>
+        <li><strong>Story:</strong> Watch characters, setting, conflict, &amp; resolution.</li>
+        <li><strong>Poetry:</strong> Notice imagery, metaphors, &amp; emotional turns.</li>
+        <li><strong>Discourse / Letters:</strong> Follow arguments, logic, &amp; "therefore" conclusions.</li>
       </ul>
     </div>
     <div class="bm-day">
@@ -1057,7 +1064,10 @@
       </div>
       <ul>
         <li>Ground the passage in its historical context (using a study Bible or your previous notes):<span class="bm-center">author · time frame · audience · purpose</span></li>
-        <li>Put all outside resources away and read through the passage slowly, paying attention to the writing style — story, poetry, or discourse/letters.</li>
+        <li>Put all outside resources away and read through the passage slowly. Pay attention to the writing style:</li>
+        <li><strong>Story:</strong> Watch characters, setting, conflict, &amp; resolution.</li>
+        <li><strong>Poetry:</strong> Notice imagery, metaphors, &amp; emotional turns.</li>
+        <li><strong>Discourse / Letters:</strong> Follow arguments, logic, &amp; "therefore" conclusions.</li>
       </ul>
     </div>
     <div class="bm-day">
