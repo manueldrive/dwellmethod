@@ -894,11 +894,7 @@ function checkVocabComplete(){
     textEl.innerHTML = '<i class="fa-solid fa-check"></i> Continue';
   } else {
     const n = state.wordTaps.length;
-    if (n > 0 && !state.scrolledToEnd) {
-      textEl.textContent = `${n} flagged, finish reading`;
-    } else {
-      textEl.textContent = n > 0 ? `${n} word${n===1?'':'s'} flagged` : 'Flag Key Words';
-    }
+    textEl.textContent = n > 0 ? `${n} word${n===1?'':'s'} flagged` : 'Flag Key Words';
   }
 }
 
@@ -1094,7 +1090,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* SWIPE + TAP-ZONE NAVIGATION (Instagram/Snapchat-style: tap left/right to step, swipe still works) */
-const NAV_EXCLUDE = '.quiz-tile, .verse-tile, .w, .focus-pill-dock, button, input, textarea, a, .breath-visual';
+const NAV_EXCLUDE = '.quiz-tile, .verse-tile, .w, .w-plain, .flow-para, .focus-pill-dock, button, input, textarea, a, .breath-visual';
 let lastGestureTime = 0;
 
 function tapZoneNav(clientX){
