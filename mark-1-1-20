@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MS Hang Prep — Mark 1</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --paper:#FFFFFF;
+    --cream:#EAE6DF;
+    --lime:#C3F53C;
+    --pink:#F43F5E;
+    --blue:#38BDF8;
+    --yellow:#FFC72C;
+    --purple:#A855F7;
+  }
+  *{box-sizing:border-box;}
+  html,body{ margin:0; padding:0; height:100%; background:#000; font-family:'Inter', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior:none; }
+  .phone{ position:relative; width:100%; max-width:430px; height:100vh; height:100dvh; margin:0 auto; background:var(--cream); overflow:hidden; box-shadow:0 0 60px rgba(0,0,0,0.5); display:flex; flex-direction:column; transition:background-color .3s ease; }
+  @media (min-width:431px){ body{ display:flex; align-items:center; justify-content:center; } .phone{ height:90vh; height:90dvh; border-radius:36px; border:4px solid #FFF; } }
+
+  .line-art{ position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.12; background-image:radial-gradient(#000 2px, transparent 2px); background-size:24px 24px; }
+  #beat-0::before{ content:""; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.14; background-image:radial-gradient(#000 2px, transparent 2px); background-size:24px 24px; -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 35%, rgba(0,0,0,0.15) 100%); mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 35%, rgba(0,0,0,0.15) 100%); }
+  #beat-6::before{ content:""; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.06; background-image:radial-gradient(#000 2px, transparent 2px); background-size:24px 24px; }
+
+  .hud-header{ position:relative; z-index:50; padding:14px 18px 6px 18px; display:flex; flex-direction:column; gap:7px; }
+  .progress-row{ display:flex; gap:6px; align-items:center; }
+  .prog-cluster{ flex:1; height:5px; border-radius:3px; background:rgba(13,13,29,0.15); overflow:hidden; position:relative; }
+  .tx-light .prog-cluster{ background:rgba(255,255,255,0.28); }
+  .prog-cluster .fill{ position:absolute; left:0; top:0; bottom:0; width:0%; background:var(--ink); border-radius:3px; transition:width .25s ease; }
+  .tx-light .prog-cluster .fill{ background:#FFF; }
+  .story-meta{ display:flex; justify-content:space-between; font-family:'Space Grotesk', sans-serif; font-size:10.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; opacity:.8; }
+
+
+
+  .stage{ position:relative; flex:1; overflow:hidden; z-index:1; perspective:1400px; }
+  .beat{ position:absolute; inset:0; display:flex; flex-direction:column; padding:16px 20px 24px 20px; opacity:0; transform:translateY(10px) scale(0.98); transition:opacity .25s ease, transform .25s ease; pointer-events:none; z-index:1; }
+  .beat.active{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; z-index:2; }
+  .tx-dark{ color:var(--ink); }
+  .tx-light{ color:#FFF; }
+
+  .kicker{ font-family:'Space Grotesk', sans-serif; font-size:12.5px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; opacity:.8; margin-bottom:6px; position:relative; z-index:2; }
+  .instr{ font-family:'Space Grotesk', sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; opacity:.65; margin-bottom:12px; position:relative; z-index:2; }
+  .emoji{ font-size:42px; line-height:1; margin-bottom:6px; position:relative; z-index:2; }
+
+  .hero-wrap{ flex:1; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; }
+  .kline{ overflow:hidden; }
+  .kword{ display:inline-block; opacity:0; transform:translateY(16px) scale(0.92); font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:-1.5px; text-transform:uppercase; }
+  .beat.active .kword{ animation:kwIn .5s cubic-bezier(.2,.85,.25,1) forwards; }
+  @keyframes kwIn{ to{ opacity:1; transform:translateY(0) scale(1); } }
+  .hero-title .kword{ font-size:clamp(36px, 13vw, 56px); line-height:0.95; }
+  .hero-title.tight .kword{ font-size:clamp(28px, 10vw, 42px); }
+  .hero-title.xl .kword{ font-size:clamp(42px, 15vw, 66px); line-height:0.95; }
+
+  .sub{ font-family:'Inter', sans-serif; font-size:16px; font-weight:800; line-height:1.4; opacity:.94; margin-top:14px; position:relative; z-index:2; }
+  .folder-wrap{ margin-top:18px; display:flex; flex-direction:column; flex:1; position:relative; z-index:2; }
+  .folder-tab{ align-self:flex-start; margin-left:8px; background:#E4B563; border:3.5px solid var(--ink); border-bottom:none; border-radius:10px 10px 0 0; padding:7px 20px 10px 20px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink); position:relative; z-index:3; margin-bottom:-4px; }
+  .folder-body{ flex:1; display:flex; flex-direction:column; justify-content:center; background:#F3D48B; border:3.5px solid var(--ink); border-radius:3px 16px 16px 16px; box-shadow:5px 5px 0 var(--ink); padding:6px 22px; position:relative; z-index:2; }
+  .stat-line{ display:flex; gap:18px; align-items:center; font-family:'Inter', sans-serif; font-size:15px; font-weight:800; line-height:1.45; padding:20px 0; border-bottom:2px dashed rgba(13,13,29,0.25); color:var(--ink); }
+  .stat-line:last-child{ border-bottom:none; }
+  .stat-line .bullet-icon{ font-size:19px; line-height:1; flex-shrink:0; width:46px; height:46px; border-radius:50%; background:var(--ink); color:#F3D48B; display:flex; align-items:center; justify-content:center; }
+  .stat-line em{ font-style:normal; color:#B0413E; }
+
+  .continue-btn{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16px; letter-spacing:.3px; text-transform:uppercase; background:var(--ink); color:#FFF; border:4px solid var(--ink); border-radius:100px; padding:15px 0; width:100%; margin-top:14px; cursor:pointer; opacity:.35; pointer-events:none; box-shadow:4px 4px 0 rgba(0,0,0,0.25); transition:all .18s ease; position:relative; z-index:5; flex-shrink:0; }
+  .continue-btn.ready{ opacity:1; pointer-events:auto; box-shadow:5px 5px 0 var(--ink); }
+  .continue-btn.ready:active{ transform:translate(3px,3px); box-shadow:0 0 0 var(--ink); }
+
+  .tap-hint{ font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; opacity:.65; margin-top:auto; text-align:center; padding-top:14px; position:relative; z-index:2; }
+  .swipe-hint{ display:flex; align-items:center; justify-content:center; gap:22px; }
+  .swipe-hint i{ font-size:17px; }
+  .swipe-hint .fa-chevron-left{ animation:nudgeLeft 1.6s ease-in-out infinite; }
+  .swipe-hint .fa-chevron-right{ animation:nudgeRight 1.6s ease-in-out infinite; }
+  @keyframes nudgeLeft{ 0%,100%{ transform:translateX(0); opacity:.45; } 50%{ transform:translateX(-5px); opacity:1; } }
+  @keyframes nudgeRight{ 0%,100%{ transform:translateX(0); opacity:.45; } 50%{ transform:translateX(5px); opacity:1; } }
+
+  .crumb-row{ display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-top:16px; position:relative; z-index:2; }
+  .crumb{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px; background:rgba(255,255,255,0.85); color:var(--ink); border:2.5px solid var(--ink); padding:7px 12px; border-radius:20px; opacity:0; transform:translateY(8px); box-shadow:2px 2px 0 var(--ink); }
+  .crumb.final{ background:var(--yellow); }
+  .crumb-arrow{ opacity:0; font-weight:700; }
+  .beat.active .crumb, .beat.active .crumb-arrow{ animation:crumbIn .4s ease forwards; }
+  .beat.active .crumb:nth-child(1){ animation-delay:.15s; }
+  .beat.active .crumb-arrow:nth-child(2){ animation-delay:.5s; }
+  .beat.active .crumb:nth-child(3){ animation-delay:.7s; }
+  .beat.active .crumb-arrow:nth-child(4){ animation-delay:1.05s; }
+  .beat.active .crumb:nth-child(5){ animation-delay:1.25s; }
+  @keyframes crumbIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  .quiz-grid{ display:flex; flex-direction:column; gap:11px; margin-top:6px; position:relative; z-index:2; overflow-y:auto; padding:2px 8px 8px 2px; }
+  .quiz-grid.fill-grid{ flex:1; }
+  .quiz-grid.fill-grid .quiz-tile{ flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .quiz-tile.testament-tile{ text-align:center; }
+  .quiz-tile.testament-tile .qt-title-big{ display:block; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:28px; margin-bottom:12px; }
+  .quiz-tile.testament-tile .qt-badge-under{ display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:12.5px; font-weight:700; background:var(--ink); color:#FFF; padding:7px 16px; border-radius:100px; letter-spacing:.3px; margin-bottom:18px; }
+  .quiz-tile.testament-tile.correct .qt-badge-under, .quiz-tile.testament-tile.incorrect .qt-badge-under{ background:rgba(0,0,0,0.3); }
+  .quiz-tile.testament-tile .qt-desc-big{ display:block; font-family:'Inter',sans-serif; font-size:15px; font-weight:700; opacity:.75; line-height:1.45; max-width:270px; }
+  .quiz-tile{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16.5px; background:#FFF; color:var(--ink); border:3.5px solid var(--ink); border-radius:16px; padding:13px 15px; cursor:pointer; transition:all .13s ease; box-shadow:4px 4px 0 var(--ink); }
+  .quiz-tile:active{ transform:translate(2px,2px); box-shadow:0 0 0 var(--ink); }
+  .quiz-tile .qt-desc{ display:block; font-family:'Inter',sans-serif; font-size:11.5px; font-weight:700; opacity:.7; margin-top:3px; text-transform:none; letter-spacing:0; }
+  .qt-row{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+  .qt-title{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16.5px; }
+  .qt-badge-inline{ font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:700; background:var(--ink); color:#FFF; padding:3px 9px; border-radius:100px; white-space:nowrap; flex-shrink:0; }
+  .quiz-tile.correct .qt-badge-inline, .quiz-tile.incorrect .qt-badge-inline{ background:rgba(0,0,0,0.25); }
+  .quiz-tile .qt-badge{ display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:700; background:var(--ink); color:#FFF; padding:3px 9px; border-radius:100px; margin-top:6px; letter-spacing:.3px; }
+  .quiz-tile.selected{ background:var(--lime); }
+  .quiz-tile.correct{ background:var(--lime) !important; color:var(--ink) !important; box-shadow:4px 4px 0 var(--ink) !important; }
+  .quiz-tile.incorrect{ background:var(--pink) !important; color:#FFF !important; }
+  .quiz-tile.locked{ pointer-events:none; }
+  @keyframes shakeX{ 10%,90%{transform:translateX(-2px);} 20%,80%{transform:translateX(4px);} 30%,50%,70%{transform:translateX(-7px);} 40%,60%{transform:translateX(7px);} }
+  .quiz-tile.shake{ animation:shakeX .45s; }
+
+  .feedback-box{ font-family:'Inter', sans-serif; font-size:13px; font-weight:800; margin-top:10px; padding:11px 13px; border-radius:14px; opacity:0; transition:opacity .15s ease; position:relative; z-index:2; flex-shrink:0; background:#FFF; color:var(--ink); border:3px solid var(--ink); box-shadow:3px 3px 0 var(--ink); min-height:64px; box-sizing:border-box; }
+  .feedback-box.show{ opacity:1; }
+  .feedback-box.good{ background:var(--lime); }
+  .feedback-box.bad{ background:var(--pink); color:#FFF; }
+
+  .big-number{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(56px,20vw,92px); color:var(--lime); line-height:.85; letter-spacing:-3px; margin:10px 0 4px 0; position:relative; z-index:2; }
+  .gospel-pills{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; position:relative; z-index:2; margin-top:4px; }
+  .gospel-pill{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; background:rgba(255,255,255,0.12); color:#FFF; padding:8px 16px; border-radius:100px; }
+  .gospel-pill.highlight{ background:var(--lime); color:var(--ink); }
+  .big-number-wrap{ display:flex; align-items:baseline; justify-content:center; gap:8px; margin:10px 0 4px 0; position:relative; z-index:2; flex-wrap:wrap; }
+  .big-number-lg{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(52px,19vw,88px); color:var(--lime); line-height:.8; letter-spacing:-3px; white-space:nowrap; }
+  .ad-suffix{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(20px,6.5vw,30px); color:var(--lime); opacity:.85; }
+  .years-ago{ font-family:'Inter', sans-serif; font-size:16px; font-weight:800; opacity:.95; position:relative; z-index:2; }
+  .years-ago span{ color:var(--lime); }
+
+  .passage-ref{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12.5px; letter-spacing:1px; text-transform:uppercase; margin-bottom:0; position:relative; z-index:2; }
+  .passage-scroll{ overflow-y:auto; flex:1; padding:15px; color:var(--ink); }
+  .flow-para{ margin:0 0 16px 0; font-size:17px; line-height:1.7; font-family:'Inter',sans-serif; font-weight:700; }
+  .flow-para:last-child{ margin-bottom:0; }
+  .verse-num-inline{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--purple); font-size:.6em; vertical-align:super; margin:0 2px 0 6px; }
+  .w{ cursor:pointer; border-bottom:2px dotted rgba(13,13,13,0.35); padding:3px 2px; border-radius:3px; }
+  .w.flagged{ background:var(--yellow); border-bottom-color:transparent; font-weight:900; }
+  .tap-count{ font-family:'Space Grotesk', sans-serif; font-size:11.5px; font-weight:700; opacity:.7; margin-top:8px; position:relative; z-index:2; flex-shrink:0; }
+
+  .review-card{ background:#FFF; border:3px solid var(--ink); border-radius:14px; padding:12px 14px; margin-bottom:10px; font-family:'Inter', sans-serif; font-size:13.5px; font-weight:700; line-height:1.4; box-shadow:3px 3px 0 var(--ink); color:var(--ink); position:relative; z-index:2; }
+  .review-card b{ color:var(--purple); text-transform:capitalize; }
+  .review-scroll{ flex:1; overflow-y:auto; position:relative; z-index:2; padding:2px 8px 8px 2px; }
+  .pill-cloud{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .research-pill{ font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:700; background:var(--ink); color:#FFF; padding:7px 13px; border-radius:100px; text-transform:capitalize; }
+  .pill-cloud-label{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; opacity:.7; margin:10px 0 2px 0; }
+
+  .verse-pick-list{ overflow-y:auto; flex:1; margin-top:0; position:relative; z-index:2; padding:2px 4px 4px 0; }
+  .verse-tile{ display:flex; gap:9px; align-items:flex-start; padding:11px 8px; cursor:pointer; transition:background .13s ease; color:var(--ink); border-bottom:2px solid rgba(13,13,13,0.12); border-radius:10px; }
+  .verse-tile:last-child{ border-bottom:none; }
+  .verse-tile:active{ background:rgba(13,13,13,0.06); }
+  .verse-tile .vnum{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--purple); flex-shrink:0; width:16px; }
+  .verse-tile .vtext{ font-size:13.5px; line-height:1.4; font-family:'Inter',sans-serif; font-weight:700; }
+  .verse-tile.selected{ background:var(--lime); }
+
+
+
+  .dark-scripture-card{ background:var(--ink); color:#FFF; border:3.5px solid var(--ink); border-radius:18px; padding:14px; box-shadow:4px 4px 0 rgba(0,0,0,0.25); flex-shrink:0; position:relative; z-index:2; }
+  .dark-scripture-card .ref{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--lime); margin-bottom:4px; }
+  .dark-scripture-card .vt{ font-style:normal; font-family:'Inter',sans-serif; font-weight:700; font-size:13.5px; line-height:1.4; opacity:.95; }
+
+  .circle-hero-container{ position:relative; z-index:2; flex-shrink:0; display:flex; justify-content:center; margin:16px 0 10px 0; }
+  .circle-hero{ width:195px; height:195px; border-radius:50%; background:#FFF; color:var(--ink); border:3.5px solid var(--ink); box-shadow:4.5px 4.5px 0 var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:16px; flex-shrink:0; }
+  .circle-hero .arc-stem-text{ font-family:'Space Grotesk', sans-serif; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:1px; opacity:.6; margin-bottom:6px; }
+  .circle-hero .label-god-is{ font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:24px; letter-spacing:-.5px; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+  .blank-input{ width:85%; border:none; border-bottom:3px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:15px; font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 0; transition:all .2s ease; }
+  .blank-input.ghost{ color:rgba(13,13,29,.35); font-style:italic; }
+
+  .inline-tip{ margin-top:12px; margin-bottom:8px; position:relative; z-index:2; flex-shrink:0; color:var(--ink); opacity:0; transform:translateY(6px); transition:all .25s ease; }
+  .inline-tip.show{ opacity:1; transform:translateY(0); }
+  .inline-tip .tip-text{ font-family:'Inter', sans-serif; font-size:13px; font-weight:700; line-height:1.45; }
+  .inline-tip .tip-text b{ font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:.5px; }
+
+  .breath-circle{ width:180px; height:180px; border-radius:50%; margin:26px auto; background:var(--purple); border:4px solid var(--ink); animation:breathe 5s ease-in-out infinite; position:relative; z-index:2; flex-shrink:0; }
+  @keyframes breathe{ 0%,100%{ transform:scale(0.85); background:var(--purple); } 50%{ transform:scale(1.15); background:var(--lime); } }
+  .breath-text{ font-family:'Inter', sans-serif; font-size:19.5px; font-weight:800; line-height:1.5; text-align:center; position:relative; z-index:2; max-width:340px; margin:0 auto; }
+
+  .final-card{ background:#FFF; color:var(--ink); border:4px solid var(--ink); border-radius:22px; padding:18px; position:relative; z-index:2; overflow-y:auto; flex:1; box-shadow:5px 5px 0 var(--ink); display:flex; flex-direction:column; }
+  .final-card .fhdr{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+  .final-card .fhdr .fbadge{ font-family:'Space Grotesk',sans-serif; font-size:9px; font-weight:700; background:var(--lime); border:2px solid var(--ink); padding:4px 10px; border-radius:100px; }
+  .final-card .flabel{ font-family:'Space Grotesk', sans-serif; font-size:10.5px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:#666; margin-bottom:5px; margin-top:13px; }
+  .final-card .flabel:first-child{ margin-top:0; }
+  .word-chip-list{ display:flex; flex-direction:column; gap:6px; }
+  .word-chip{ font-family:'Inter', sans-serif; font-size:12.5px; font-weight:700; line-height:1.4; }
+  .word-chip b{ text-transform:capitalize; color:var(--pink); }
+  .challenge-box{ background:var(--yellow); border:3px solid var(--ink); border-radius:14px; padding:11px 13px; margin-top:6px; box-shadow:3px 3px 0 var(--ink); font-weight:700; }
+  .export-btn{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:.3px; text-transform:uppercase; background:var(--lime); color:var(--ink); border:4px solid var(--ink); border-radius:100px; padding:15px 0; width:100%; margin-top:16px; cursor:pointer; position:relative; z-index:2; flex-shrink:0; box-shadow:5px 5px 0 var(--ink); transition:all .15s ease; }
+  .export-btn:active{ transform:translate(3px,3px); box-shadow:0 0 0 var(--ink); }
+
+  /* ---------- page-flip transition (reading-intro -> vocab-scan) ---------- */
+  .beat.page-flip-out{
+    animation: pageFlipOut .6s cubic-bezier(.45,.05,.55,.95) forwards;
+    transform-origin: left center;
+    backface-visibility: hidden;
+    z-index:5 !important;
+  }
+  @keyframes pageFlipOut{
+    0%{ transform:rotateY(0deg); opacity:1; }
+    70%{ opacity:1; }
+    100%{ transform:rotateY(-100deg); opacity:0; }
+  }
+
+  /* ---------- book cover visual ---------- */
+  .full-page{ flex:1; display:flex; flex-direction:column; min-height:0; }
+  .book-title{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:30px; line-height:1.05; letter-spacing:1px; text-transform:uppercase; text-align:center; }
+
+  .leather-cover{
+    flex:1; display:flex; border-radius:20px; overflow:hidden; min-height:0; position:relative;
+    border:4px solid var(--ink); box-shadow:6px 6px 0 var(--ink);
+    background:
+      radial-gradient(circle at 28% 18%, rgba(255,255,255,0.10), transparent 42%),
+      repeating-linear-gradient(135deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 7px),
+      linear-gradient(160deg, #7a4a2c, #452817);
+  }
+  .leather-spine{ width:16px; background:rgba(0,0,0,0.38); flex-shrink:0; border-right:2px solid rgba(0,0,0,0.3); }
+  .leather-cover-inner{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:20px; color:#F1E3D3; text-align:center; }
+  .leather-cover-inner .book-title{ color:#F1E3D3; text-shadow:0 1px 0 rgba(0,0,0,0.3); }
+
+  .focus-pill{ border-radius:22px; padding:16px 20px; text-align:center; position:relative; z-index:2; }
+  .focus-pill-label{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:11.5px; letter-spacing:1.2px; text-transform:uppercase; opacity:.7; color:var(--ink); }
+  .focus-pill-value{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; text-transform:uppercase; letter-spacing:.3px; color:var(--ink); margin-top:3px; }
+  .focus-pill.yellow{ background:var(--yellow); }
+  .focus-pill.lime{ background:var(--lime); }
+  .focus-pill.banner{ margin-bottom:14px; flex-shrink:0; }
+  .cover-note{ font-family:'Inter', sans-serif; font-size:12.5px; font-weight:700; line-height:1.45; color:rgba(255,255,255,0.92); max-width:280px; margin-top:2px; }
+
+  .passage-scroll-wrap{ flex:1; position:relative; min-height:0; display:flex; }
+  .read-progress-track{ position:absolute; top:0; left:0; right:0; height:4px; background:rgba(13,13,29,0.12); z-index:4; border-radius:2px; overflow:hidden; }
+  .read-progress-fill{ height:100%; width:0%; background:var(--yellow); border-radius:2px; }
+  .def-popover{ position:absolute; z-index:50; max-width:230px; background:var(--ink); color:#FFF; font-family:'Inter',sans-serif; font-size:12.5px; font-weight:700; line-height:1.4; padding:10px 12px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.35); opacity:0; pointer-events:none; transform:translateY(4px); transition:opacity .15s ease, transform .15s ease; }
+  .def-popover.show{ opacity:1; transform:translateY(0); }
+  .def-popover .dp-word{ display:block; font-family:'Space Grotesk',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--lime); font-size:11px; margin-bottom:3px; }
+  .passage-scroll{ overflow-y:auto; flex:1; padding:16px 4px 4px 0; color:var(--ink); }
+  .scroll-more-hint{ position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:center; padding:10px 0 4px 0; pointer-events:none; opacity:1; transition:opacity .25s ease; background:linear-gradient(to bottom, transparent, var(--cream) 65%); }
+  .scroll-more-hint.hide{ opacity:0; }
+  .scroll-more-hint i{ font-size:16px; color:var(--ink); opacity:.55; animation:scrollBounce 1.4s ease-in-out infinite; }
+  @keyframes scrollBounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(5px); } }
+
+  .pill-dock{ flex-shrink:0; margin-top:18px; display:flex; justify-content:center; }
+  .focus-pill.dock{ width:100%; cursor:pointer; box-shadow:4px 4px 0 var(--ink); border:3px solid var(--ink); opacity:.5; pointer-events:none; transition:opacity .2s ease, transform .15s ease; }
+  .focus-pill.dock.ready{ opacity:1; pointer-events:auto; }
+  .focus-pill.dock.ready:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+  .focus-pill.dock .focus-pill-value i{ margin-right:8px; }
+</style>
+</head>
+<body>
+
+<div class="phone" id="phone">
+  <div class="line-art"></div>
+  <div class="hud-header">
+    <div class="progress-row" id="progressRow"></div>
+    <div class="story-meta"><span>MS Hang Prep</span><span>Mark 1:1–20</span></div>
+  </div>
+  <div class="stage" id="stage"></div>
+</div>
+
+<div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:400px;"></div>
+
+<script>
+const passage = [
+ "The beginning of the good news about Jesus the Messiah, the Son of God,",
+ "as it is written in Isaiah the prophet: \"I will send my messenger ahead of you, who will prepare your way\"—",
+ "\"a voice of one calling in the wilderness, 'Prepare the way for the Lord, make straight paths for him.'\"",
+ "And so John the Baptist appeared in the wilderness, preaching a baptism of repentance for the forgiveness of sins.",
+ "The whole Judean countryside and all the people of Jerusalem went out to him. Confessing their sins, they were baptized by him in the Jordan River.",
+ "John wore clothing made of camel's hair, with a leather belt around his waist, and he ate locusts and wild honey.",
+ "And this was his message: \"After me comes the one more powerful than I, the straps of whose sandals I am not worthy to stoop down and untie.",
+ "I baptize you with water, but he will baptize you with the Holy Spirit.\"",
+ "At that time Jesus came from Nazareth in Galilee and was baptized by John in the Jordan.",
+ "Just as Jesus was coming up out of the water, he saw heaven being torn open and the Spirit descending on him like a dove.",
+ "And a voice came from heaven: \"You are my Son, whom I love; with you I am well pleased.\"",
+ "At once the Spirit sent him out into the wilderness,",
+ "and he was in the wilderness forty days, being tempted by Satan. He was with the wild animals, and angels attended him.",
+ "After John was put in prison, Jesus went into Galilee, proclaiming the good news of God.",
+ "\"The time has come,\" he said. \"The kingdom of God has come near. Repent and believe the good news!\"",
+ "As Jesus walked beside the Sea of Galilee, he saw Simon and his brother Andrew casting a net into the lake, for they were fishermen.",
+ "\"Come, follow me,\" Jesus said, \"and I will send you out to fish for people.\"",
+ "At once they left their nets and followed him.",
+ "When he had gone a little farther, he saw James son of Zebedee and his brother John in a boat, preparing their nets.",
+ "Without delay he called them, and they left their father Zebedee in the boat with the hired men and followed him."
+];
+
+const defs = {
+  "messiah":"The Hebrew title for God's promised chosen King and Rescuer — in Greek, this word is 'Christ.'",
+  "prophet":"Someone in the Old Testament God chose to speak His messages through — often about what was still to come.",
+  "wilderness":"A wild, empty, unpopulated place — no towns, no comforts.",
+  "repentance":"Turning away from wrong and turning back toward God.",
+  "repent":"To turn away from wrong and turn back toward God.",
+  "baptize":"To dip or wash someone in water as a public sign of turning toward God.",
+  "baptized":"Dipped or washed in water as a public sign of turning toward God.",
+  "baptism":"Being dipped or washed in water as a public sign of turning toward God.",
+  "jordan":"A river in Israel — the same one where John baptized Jesus.",
+  "judean":"Relating to Judea, a region in southern Israel that includes Jerusalem.",
+  "jerusalem":"The major city in Judea, central to Jewish worship and later the site of Jesus's death and resurrection.",
+  "spirit":"Here, the Holy Spirit — God's own presence, active and at work.",
+  "tempted":"Being pulled or tested toward doing wrong.",
+  "satan":"The devil, God's enemy, who tries to pull people away from God.",
+  "galilee":"A region in northern Israel where Jesus grew up and did much of His ministry.",
+  "nazareth":"The small town in Galilee where Jesus grew up.",
+  "zebedee":"The father of the disciples James and John.",
+  "kingdom":"God's rule and reign — wherever God is King over people's lives.",
+  "messenger":"Someone sent ahead to deliver a message or announcement."
+};
+
+const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false };
+let renderGen = 0;
+
+function truncate(s,n){ s=(s||'').trim(); return s.length>n ? s.slice(0,n)+'…' : s; }
+function quoteVerse(text){
+  const t = (text||'').trim();
+  const startsWithQuote = /^["“]/.test(t);
+  const endsWithQuote = /["”]$/.test(t);
+  return (startsWithQuote ? '' : '"') + text + (endsWithQuote ? '' : '"');
+}
+function normWord(w){ return w.replace(/[^a-zA-Z']/g,'').toLowerCase(); }
+
+function kw(lines, extraClass){
+  let i = 0;
+  const body = lines.map(line=>{
+    const words = line.map(w=>{
+      const delay = (i * 0.09).toFixed(2); i++;
+      return `<span class="kword" style="animation-delay:${delay}s">${w}</span>`;
+    }).join(' ');
+    return `<div class="kline">${words}</div>`;
+  }).join('');
+  return `<div class="hero-title${extraClass ? ' '+extraClass : ''}">${body}</div>`;
+}
+
+const paragraphEnds = [3, 8, 11, 13, 15, 18, 20]; // last verse of each NIV paragraph
+
+function passageWordsHTML(){
+  let out = '<p class="flow-para">';
+  passage.forEach((v,i)=>{
+    const verseNum = i+1;
+    const words = v.split(/\s+/);
+    const spans = words.map((w,wi)=>{
+      const norm = normWord(w);
+      const marker = wi === 0 ? `<span class="verse-num-inline">${verseNum}</span>` : '';
+      return `${marker}<span class="w" data-word="${norm}" onclick="tapWord(event,this)">${w}</span>`;
+    }).join(' ');
+    out += spans + ' ';
+    if (paragraphEnds.includes(verseNum) && verseNum !== passage.length) out += '</p><p class="flow-para">';
+  });
+  out += '</p>';
+  return out;
+}
+function versePickHTML(){
+  return passage.map((v,i)=>`
+    <div class="verse-tile" data-v="${i+1}" onclick="pickCharVerse(event,${i+1})">
+      <div class="vnum">${i+1}</div><div class="vtext">${v}</div>
+    </div>`).join('');
+}
+
+const beats = [
+  { id:'intro', type:'tapAuto', cluster:'intro', bgColor:'#C3F53C', text:'dark', align:'start',
+    html:`<div class="emoji">👋</div><div class="hero-wrap">${kw([["MS","HANG"],["IS","BACK."]],'xl')}
+          <div class="sub">Take 5 minutes to prep for Mark 1:1-20 with us before Sunday.</div></div>
+          <div class="tap-hint swipe-hint"><i class="fa-solid fa-chevron-left"></i><i class="fa-solid fa-chevron-right"></i></div>` },
+
+  { id:'quest-testament', type:'input', blockTap:true, cluster:'hunt', bgColor:'#38BDF8', text:'dark',
+    html:`<div class="kicker">Locate the book of Mark.</div>
+          <div class="hero-wrap" style="flex:0;">${kw([["WHICH","TESTAMENT"],["IS","THE","BOOK"],["OF","MARK","IN?"]],'tight')}</div>
+          <div class="quiz-grid fill-grid" id="questTestamentGrid">
+            <div class="quiz-tile testament-tile" data-correct="false" onclick="questAnswer(event,this,'questTestamentGrid','fbTestament','New Testament — 27 books tracing Jesus and the early church.','Not that one — Mark is about Jesus, so think newer.')">
+              <span class="qt-title-big">Old Testament</span>
+              <span class="qt-badge-under">39 books · 1000+ yrs in the making</span>
+              <span class="qt-desc-big">The Hebrew scriptures pointing toward a promised Messiah</span>
+            </div>
+            <div class="quiz-tile testament-tile" data-correct="true" onclick="questAnswer(event,this,'questTestamentGrid','fbTestament','Exactly — Mark is one of 27 New Testament books.','')">
+              <span class="qt-title-big">New Testament</span>
+              <span class="qt-badge-under">27 books · ~40 yrs in the making</span>
+              <span class="qt-desc-big">Jesus's life and the early church</span>
+            </div>
+          </div>` },
+
+  { id:'quest-section', type:'input', blockTap:true, cluster:'hunt', bgColor:'#A855F7', text:'light',
+    html:`<div class="hero-wrap" style="flex:0;">${kw([["WHICH","SECTION"],["OF","THE"],["NEW","TESTAMENT?"]],'tight')}</div>
+          <div class="quiz-grid" id="questSectionGrid">
+            <div class="quiz-tile" data-correct="true" onclick="questAnswer(event,this,'questSectionGrid','fbSection','Right — Mark is one of the 4 Gospels.','')">
+              <div class="qt-row"><span class="qt-title">The Gospels</span><span class="qt-badge-inline">4 books</span></div>
+              <span class="qt-desc">Multiple accounts of Jesus's life, death, and resurrection</span>
+            </div>
+            <div class="quiz-tile" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid','fbSection','','Not quite — that one traces the early church, not the story of Jesus himself.')">
+              <div class="qt-row"><span class="qt-title">Church History</span><span class="qt-badge-inline">1 book</span></div>
+              <span class="qt-desc">The Holy Spirit's arrival and the church's growth</span>
+            </div>
+            <div class="quiz-tile" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid','fbSection','','Not quite — those are letters, not the story of Jesus himself.')">
+              <div class="qt-row"><span class="qt-title">Paul's Letters</span><span class="qt-badge-inline">13 books</span></div>
+              <span class="qt-desc">Helping churches live out the gospel</span>
+            </div>
+            <div class="quiz-tile" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid','fbSection','','Not quite — try the section with eyewitness accounts of Jesus.')">
+              <div class="qt-row"><span class="qt-title">General Letters</span><span class="qt-badge-inline">8 books</span></div>
+              <span class="qt-desc">Guidance for scattered early believers</span>
+            </div>
+            <div class="quiz-tile" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid','fbSection','','Not quite — that one is Revelation, a vision of the future.')">
+              <div class="qt-row"><span class="qt-title">Prophecy</span><span class="qt-badge-inline">1 book</span></div>
+              <span class="qt-desc">A visionary look at how it all ends</span>
+            </div>
+          </div>` },
+
+  { id:'reveal-55ad', type:'tapAuto', cluster:'history', bgColor:'#0D0D0D', text:'light', align:'center',
+    html:`<div class="hero-wrap" style="align-items:center; text-align:center;">
+          <div class="kicker">There are 4 Gospel accounts.</div>
+          <div class="gospel-pills">
+            <span class="gospel-pill">Matthew</span>
+            <span class="gospel-pill highlight">Mark</span>
+            <span class="gospel-pill">Luke</span>
+            <span class="gospel-pill">John</span>
+          </div>
+          <div class="sub" style="margin-top:16px;">Most scholars agree Mark's was written first — likely around</div>
+          <div class="big-number-wrap"><span class="big-number-lg">60–70</span><span class="ad-suffix">AD</span></div>
+          <div class="years-ago">That's about <span id="yearsAgoCount">0</span> years ago.</div>
+          </div>
+          <div class="tap-hint swipe-hint"><i class="fa-solid fa-chevron-left"></i><i class="fa-solid fa-chevron-right"></i></div>` },
+
+  { id:'quiz-author', type:'input', blockTap:true, cluster:'history', bgColor:'#A855F7', text:'light',
+    html:`<div class="kicker">Author check</div>
+          <div class="hero-wrap" style="flex:0;">${kw([["THE","AUTHOR"],["MARK","WAS"],["CLOSE","PARTNERS"],["WITH..."]],'tight')}</div>
+          <div class="quiz-grid" id="authorGrid">
+            <div class="quiz-tile" data-correct="false" onclick="questAnswer(event,this,'authorGrid','fbAuthor','','Good guess, but not the closest connection.')">King David</div>
+            <div class="quiz-tile" data-correct="true" onclick="questAnswer(event,this,'authorGrid','fbAuthor','Right — Peter. This Gospel is basically his eyewitness account.','')">Peter</div>
+            <div class="quiz-tile" data-correct="false" onclick="questAnswer(event,this,'authorGrid','fbAuthor','','Good guess, but not the closest connection.')">John the Baptist</div>
+            <div class="quiz-tile" data-correct="false" onclick="questAnswer(event,this,'authorGrid','fbAuthor','','Good guess, but not the closest connection.')">Timothy</div>
+          </div>` },
+
+  { id:'reveal-author', type:'tapAuto', cluster:'history', bgColor:'#F43F5E', text:'light', align:'start',
+    html:`<div class="kicker">Context</div>
+          <div class="hero-wrap" style="flex:0;">${kw([["WAS","MARK"],["ONE","OF","THE"],["12","APOSTLES?"]],'tight')}</div>
+          <div class="folder-wrap">
+            <div class="folder-tab">Mark</div>
+            <div class="folder-body">
+              <div class="stat-line"><span class="bullet-icon"><i class="fa-solid fa-comment-dots"></i></span><span>Not one of the 12, but early church tradition says this Gospel reflects <em>Peter's</em> eyewitness perspective, written down for believers facing <em>persecution</em> in Rome.</span></div>
+              <div class="stat-line"><span class="bullet-icon"><i class="fa-solid fa-plane"></i></span><span>Mark already traveled with <em>Paul + Barnabas</em> (his cousin) on mission trips — you can trace it in <em>Acts 12–15</em>.</span></div>
+              <div class="stat-line"><span class="bullet-icon"><i class="fa-solid fa-bolt"></i></span><span>Facing persecution, Mark moves fast — watch for the word <em>"immediately"</em>, used 40+ times.</span></div>
+            </div>
+          </div>
+          <div class="tap-hint swipe-hint"><i class="fa-solid fa-chevron-left"></i><i class="fa-solid fa-chevron-right"></i></div>` },
+
+  { id:'breath-prayer', type:'tapAuto', cluster:'prayer', bgColor:'#EAE6DF', text:'dark', align:'center',
+    html:`<div class="hero-wrap" style="align-items:center; text-align:center;">${kw([["TAKE","A"],["BREATH."]],'tight')}
+          <div class="breath-circle"></div>
+          <div class="breath-text">"God, open my eyes to see who You are in this passage. Help me lead our students well."</div>
+          </div>
+          <div class="tap-hint swipe-hint"><i class="fa-solid fa-chevron-left"></i><i class="fa-solid fa-chevron-right"></i></div>` },
+
+  { id:'reading-intro', type:'tapAuto', cluster:'reading', bgColor:'#EAE6DF', text:'dark', align:'start',
+    html:`<div class="leather-cover">
+            <div class="leather-spine"></div>
+            <div class="leather-cover-inner">
+              <div class="book-title" style="margin-bottom:2px;">Holy Bible</div>
+              <div class="focus-pill yellow">
+                <div class="focus-pill-label">Step 1 of 2</div>
+                <div class="focus-pill-value">Flag Tricky Words</div>
+              </div>
+              <div class="cover-note">Students don't always know church lingo. Flag 2–4 tricky words you'll want to define before Sunday.</div>
+            </div>
+          </div>
+          <div class="tap-hint swipe-hint"><i class="fa-solid fa-chevron-left"></i><i class="fa-solid fa-chevron-right"></i></div>` },
+
+  { id:'vocab-scan', type:'input', blockTap:true, cluster:'reading', bgColor:'#EAE6DF', text:'dark',
+    html:`<div class="full-page">
+            <div class="passage-scroll-wrap">
+              <div class="read-progress-track"><div class="read-progress-fill" id="readProgressFill"></div></div>
+              <div class="passage-scroll" id="passageScrollEl">${passageWordsHTML()}</div>
+              <div class="scroll-more-hint" id="scrollMoreHint"><i class="fa-solid fa-chevron-down"></i></div>
+              <div class="def-popover" id="defPopover"></div>
+            </div>
+          </div>
+          <div class="pill-dock">
+            <div class="focus-pill yellow dock" id="vocabPill" onclick="event.stopPropagation(); tryAdvanceVocab();">
+              <div class="focus-pill-label" id="vocabPillLabel">Step 1 of 2</div>
+              <div class="focus-pill-value" id="vocabPillValue">Flag Tricky Words</div>
+            </div>
+          </div>` },
+
+  { id:'vocab-review', type:'input', blockTap:true, cluster:'reading', bgColor:'#FFC72C', text:'dark',
+    html:`<div class="kicker">Observation</div>
+          <div class="hero-wrap" style="flex:0;">${kw([["VOCAB","TO"],["REVIEW."]],'tight')}</div>
+          <div class="review-scroll" id="vocabReviewBox"></div>
+          <button class="continue-btn ready" onclick="event.stopPropagation(); goNext();">Next: shift focus</button>` },
+
+  { id:'character-prompt', type:'tapAuto', cluster:'character', bgColor:'#EAE6DF', text:'dark', align:'start',
+    html:`<div class="leather-cover">
+            <div class="leather-spine"></div>
+            <div class="leather-cover-inner">
+              <div class="book-title" style="margin-bottom:2px;">Holy Bible</div>
+              <div class="focus-pill lime">
+                <div class="focus-pill-label">Step 2 of 2</div>
+                <div class="focus-pill-value">Spot a God Shot</div>
+              </div>
+              <div class="cover-note">Help students identify a verse that speaks to who God is. When we learn His character, it transforms our character.</div>
+            </div>
+          </div>
+          <div class="tap-hint swipe-hint"><i class="fa-solid fa-chevron-left"></i><i class="fa-solid fa-chevron-right"></i></div>` },
+
+  { id:'char-verse-pick', type:'input', blockTap:true, cluster:'character', bgColor:'#EAE6DF', text:'dark',
+    html:`<div class="full-page">
+            <div class="verse-pick-list">${versePickHTML()}</div>
+          </div>
+          <div class="pill-dock">
+            <div class="focus-pill lime dock" id="charPill" onclick="event.stopPropagation(); tryAdvanceChar();">
+              <div class="focus-pill-label" id="charPillLabel">Step 2 of 2</div>
+              <div class="focus-pill-value" id="charPillValue">Spot a God Shot</div>
+            </div>
+          </div>` },
+
+  { id:'char-coaching', type:'input', blockTap:true, cluster:'character', bgColor:'#C3F53C', text:'dark',
+    html:`<div class="kicker">Scripture</div>
+          <div class="dark-scripture-card">
+            <div class="ref" id="charRef"></div>
+            <div class="vt" id="charText"></div>
+          </div>
+          <div class="circle-hero-container">
+            <div class="circle-hero">
+              <div class="arc-stem-text" id="arcStemText">BASED ON VERSE:</div>
+              <div class="label-god-is">GOD IS...</div>
+              <input class="blank-input ghost" id="customTraitInput" value="e.g. Active" onfocus="handleBlankFocus(this)" oninput="handleCustomTrait(this.value)" onclick="event.stopPropagation();" />
+            </div>
+          </div>
+          <div class="inline-tip" id="coachBox">
+            <div class="tip-text"><b>TIP:</b> Have students look down at verse <span id="tipVerseNum"></span> and share what they think it reveals about God's character. Silence is okay—give it 7 seconds before jumping in.</div>
+          </div>
+          <button class="continue-btn" id="coachContinue" style="margin-top:auto;" onclick="event.stopPropagation(); goNext();">Finish & View Prep Summary</button>` },
+
+  { id:'final', type:'input', blockTap:true, cluster:null, bgColor:'#EAE6DF', text:'dark', align:'start',
+    html:`<div class="emoji">🎉</div><div class="hero-wrap" style="flex:0;">${kw([["YOU'RE","READY."]],'tight')}</div>
+          <div class="final-card" id="finalCard">
+            <div class="fhdr"><span class="flabel" style="margin:0;">MS Hang · Mark 1:1–20</span><span class="fbadge">LEADER READY</span></div>
+            <div class="flabel">Context</div>
+            <div class="word-chip">Written ~AD 60–70, likely the earliest Gospel · Traditionally credited to Peter's account, recorded by Mark · Likely written for persecuted believers in Rome</div>
+            <div class="flabel">Scripture</div>
+            <div class="word-chip" id="finalVerse"></div>
+            <div class="flabel">Observation</div>
+            <div class="word-chip-list" id="finalWords"></div>
+            <div class="flabel">Application & Reflection</div>
+            <div class="challenge-box" id="finalChallenge"></div>
+          </div>
+          <button class="export-btn" onclick="event.stopPropagation(); exportGuide();">Download prep guide</button>` }
+];
+
+let clusterBeatMap = [];
+
+function buildProgressBar(){
+  const row = document.getElementById('progressRow');
+  row.innerHTML = '';
+  clusterBeatMap = [];
+  let key = undefined;
+  beats.forEach((b,i)=>{
+    if (i===beats.length-1) return;
+    if (b.cluster !== key){ clusterBeatMap.push([]); key = b.cluster; }
+    clusterBeatMap[clusterBeatMap.length-1].push(i);
+  });
+  clusterBeatMap.forEach(()=>{
+    const el = document.createElement('div');
+    el.className = 'prog-cluster';
+    const fill = document.createElement('div');
+    fill.className = 'fill';
+    el.appendChild(fill);
+    row.appendChild(el);
+  });
+}
+function updateProgressBar(){
+  const els = document.querySelectorAll('.prog-cluster');
+  clusterBeatMap.forEach((idxs, ci)=>{
+    const fill = els[ci] && els[ci].querySelector('.fill');
+    if (!fill) return;
+    const first = idxs[0], last = idxs[idxs.length-1];
+    let pct;
+    if (state.index > last) pct = 100;
+    else if (state.index < first) pct = 0;
+    else pct = ((idxs.indexOf(state.index)+1) / idxs.length) * 100;
+    fill.style.width = pct + '%';
+  });
+}
+
+const stage = document.getElementById('stage');
+const phoneEl = document.getElementById('phone');
+beats.forEach((b,i)=>{
+  const div=document.createElement('div');
+  div.className = `beat ${b.text === 'light' ? 'tx-light' : 'tx-dark'}`;
+  div.id = `beat-${i}`;
+  div.style.background = b.bgColor;
+  div.innerHTML = b.html;
+  stage.appendChild(div);
+});
+
+function renderBeat(i){
+  document.querySelectorAll('.beat').forEach(el=>el.classList.remove('active'));
+  document.getElementById(`beat-${i}`).classList.add('active');
+  renderGen++;
+  stopGhostCycle();
+  const b = beats[i];
+
+  phoneEl.style.backgroundColor = b.bgColor;
+  document.querySelector('.hud-header').className = 'hud-header ' + (b.text === 'light' ? 'tx-light' : 'tx-dark');
+
+  if (b.id === 'reveal-55ad') animateYearsAgo();
+  if (b.id === 'char-coaching') {
+    document.getElementById('charRef').textContent = 'Mark 1:' + state.charVerse;
+    document.getElementById('charText').textContent = quoteVerse(passage[state.charVerse-1]);
+
+    const arcStem = document.getElementById('arcStemText');
+    if (arcStem) arcStem.textContent = `BASED ON VERSE ${state.charVerse}:`;
+
+    const verseNumEl = document.getElementById('tipVerseNum');
+    if (verseNumEl) verseNumEl.textContent = state.charVerse;
+
+    const inp = document.getElementById('customTraitInput');
+    if (inp) {
+      if (state.trait && state.trait.trim()) {
+        inp.value = state.trait;
+        inp.classList.remove('ghost');
+        stopGhostCycle();
+      } else {
+        inp.value = 'e.g. ' + ghostExamples[0];
+        inp.classList.add('ghost');
+        startGhostCycle();
+      }
+    }
+    document.getElementById('coachBox').classList.toggle('show', !!(state.trait && state.trait.trim()));
+    toggleContinue('coachContinue', !!(state.trait && state.trait.trim()));
+  }
+  if (b.id === 'final') fillFinal();
+  if (b.id === 'vocab-scan') { updateWordUI(); checkPassageScroll(); }
+  if (b.id === 'vocab-review') renderVocabReview();
+  if (b.id === 'char-verse-pick') {
+    document.querySelectorAll('#beat-'+i+' .verse-tile').forEach(t=>t.classList.toggle('selected', Number(t.dataset.v)===state.charVerse));
+    updateCharPill();
+  }
+
+  updateProgressBar();
+}
+
+function toggleContinue(id, ready){ const btn=document.getElementById(id); if (btn) btn.classList.toggle('ready', ready); }
+
+const answeredBeats = new Set();
+
+function questAnswer(e, el, gridId, fbId, correctMsg, wrongMsg){
+  e.stopPropagation();
+  if (el.classList.contains('locked')) return;
+  const isCorrect = el.dataset.correct === 'true';
+  const fb = document.getElementById(fbId);
+  if (isCorrect) {
+    const grid = document.getElementById(gridId);
+    grid.querySelectorAll('.quiz-tile').forEach(t=>t.classList.add('locked'));
+    el.classList.add('correct');
+    answeredBeats.add(state.index);
+    if (fb) { fb.textContent = correctMsg; fb.classList.remove('bad'); fb.classList.add('good','show'); }
+    const myGen = renderGen;
+    setTimeout(()=>{ if (renderGen === myGen) goNext(); }, 800);
+  } else {
+    el.classList.add('incorrect','shake');
+    if (fb) { fb.textContent = wrongMsg; fb.classList.remove('good'); fb.classList.add('bad','show'); }
+    setTimeout(()=>{ el.classList.remove('shake','incorrect'); }, 500);
+  }
+}
+
+function animateYearsAgo(){
+  const target = new Date().getFullYear() - 65; // midpoint of the 60-70 AD range
+  const el = document.getElementById('yearsAgoCount');
+  if (!el) return;
+  const myGen = renderGen;
+  let start = null;
+  const dur = 1300;
+  function step(ts){
+    if (renderGen !== myGen) return;
+    if (!start) start = ts;
+    const p = Math.min(1, (ts-start)/dur);
+    el.textContent = Math.round(p * target).toLocaleString();
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+let popTimer = null;
+function tapWord(e, el){
+  e.stopPropagation();
+  const word = el.dataset.word;
+  if (!word) return;
+  const already = el.classList.contains('flagged');
+  if (already) {
+    el.classList.remove('flagged');
+    state.wordTaps = state.wordTaps.filter(w => w.el !== el);
+    hideDefPopover();
+  } else {
+    const def = defs[word] || null;
+    el.classList.add('flagged');
+    state.wordTaps.push({ el, word, def });
+    if (def) showDefPopover(el, word, def); else hideDefPopover();
+  }
+  updateWordUI();
+}
+
+function showDefPopover(el, word, def){
+  const pop = document.getElementById('defPopover');
+  const wrapEl = pop ? pop.closest('.passage-scroll-wrap') : null;
+  if (!pop || !wrapEl) return;
+  pop.innerHTML = `<span class="dp-word">${word}</span>${def}`;
+  const wordRect = el.getBoundingClientRect();
+  const wrapRect = wrapEl.getBoundingClientRect();
+  const popWidth = 230;
+  const estPopHeight = 70;
+  let left = (wordRect.left - wrapRect.left) - 10;
+  left = Math.max(8, Math.min(left, wrapRect.width - popWidth - 8));
+  let top = (wordRect.bottom - wrapRect.top) + 8;
+  if (top + estPopHeight > wrapRect.height) {
+    top = (wordRect.top - wrapRect.top) - estPopHeight - 8;
+  }
+  pop.style.left = left + 'px';
+  pop.style.top = Math.max(4, top) + 'px';
+  pop.classList.add('show');
+  clearTimeout(popTimer);
+  popTimer = setTimeout(hideDefPopover, 2800);
+}
+function hideDefPopover(){
+  clearTimeout(popTimer);
+  const pop = document.getElementById('defPopover');
+  if (pop) pop.classList.remove('show');
+}
+
+function updateWordUI(){
+  checkVocabComplete();
+}
+
+function checkVocabComplete(){
+  const pill = document.getElementById('vocabPill');
+  if (!pill) return;
+  const labelEl = document.getElementById('vocabPillLabel');
+  const valueEl = document.getElementById('vocabPillValue');
+  const hasWord = state.wordTaps.length > 0;
+  const ready = hasWord && state.scrolledToEnd;
+  pill.classList.toggle('ready', ready);
+  if (ready) {
+    labelEl.textContent = 'Nice work!';
+    valueEl.innerHTML = '<i class="fa-solid fa-check"></i>Tap to Continue';
+  } else {
+    labelEl.textContent = 'Step 1 of 2';
+    const n = state.wordTaps.length;
+    valueEl.textContent = n > 0 ? `${n} word${n===1?'':'s'} flagged` : 'Flag Tricky Words';
+  }
+}
+
+function tryAdvanceVocab(){
+  if (state.wordTaps.length > 0 && state.scrolledToEnd) goNext();
+}
+
+function checkPassageScroll(){
+  const el = document.getElementById('passageScrollEl');
+  const hint = document.getElementById('scrollMoreHint');
+  const fill = document.getElementById('readProgressFill');
+  if (!el) return;
+  hideDefPopover();
+  const maxScroll = el.scrollHeight - el.clientHeight;
+  const pct = maxScroll > 0 ? Math.min(100, Math.max(0, (el.scrollTop / maxScroll) * 100)) : 100;
+  if (fill) fill.style.width = pct + '%';
+  const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 24;
+  if (atBottom && !state.scrolledToEnd) {
+    state.scrolledToEnd = true;
+    checkVocabComplete();
+  }
+  if (hint) hint.classList.toggle('hide', atBottom);
+}
+
+function renderVocabReview(){
+  const box = document.getElementById('vocabReviewBox');
+  if (state.wordTaps.length === 0) {
+    box.innerHTML = `<div class="review-card">No words flagged! You think students know this text inside and out — awesome!</div>`;
+    return;
+  }
+  const defined = state.wordTaps.filter(w => w.def);
+  const undefinedWords = state.wordTaps.filter(w => !w.def);
+  let html = defined.map(w => `<div class="review-card"><b>${w.word}:</b> ${w.def}</div>`).join('');
+  if (undefinedWords.length > 0) {
+    html += `<div class="pill-cloud-label">Look these up before Sunday</div>
+             <div class="pill-cloud">${undefinedWords.map(w => `<div class="research-pill">${w.word}</div>`).join('')}</div>`;
+  }
+  box.innerHTML = html;
+}
+
+function pickCharVerse(e, v){
+  e.stopPropagation();
+  state.charVerse = v;
+  document.querySelectorAll('.verse-tile').forEach(t=>t.classList.toggle('selected', Number(t.dataset.v)===v));
+  updateCharPill();
+}
+
+function updateCharPill(){
+  const pill = document.getElementById('charPill');
+  if (!pill) return;
+  const labelEl = document.getElementById('charPillLabel');
+  const valueEl = document.getElementById('charPillValue');
+  const ready = state.charVerse !== null;
+  pill.classList.toggle('ready', ready);
+  if (ready) {
+    labelEl.textContent = `Selected Verse ${state.charVerse}`;
+    valueEl.innerHTML = '<i class="fa-solid fa-check"></i>Tap to Continue';
+  } else {
+    labelEl.textContent = 'Step 2 of 2';
+    valueEl.textContent = "Spot a God Shot";
+  }
+}
+
+function tryAdvanceChar(){
+  if (state.charVerse !== null) goNext();
+}
+
+const ghostExamples = ['Active', 'Holy', 'Love'];
+let ghostCycleTimer = null;
+let ghostCycleIndex = 0;
+
+function startGhostCycle(){
+  stopGhostCycle();
+  ghostCycleIndex = 0;
+  const myGen = renderGen;
+  ghostCycleTimer = setInterval(()=>{
+    if (renderGen !== myGen) { stopGhostCycle(); return; }
+    const inp = document.getElementById('customTraitInput');
+    if (!inp || !inp.classList.contains('ghost')) { stopGhostCycle(); return; }
+    ghostCycleIndex = (ghostCycleIndex + 1) % ghostExamples.length;
+    inp.value = 'e.g. ' + ghostExamples[ghostCycleIndex];
+  }, 2200);
+}
+function stopGhostCycle(){
+  if (ghostCycleTimer) { clearInterval(ghostCycleTimer); ghostCycleTimer = null; }
+}
+
+function handleBlankFocus(inp){
+  if (inp.classList.contains('ghost')) {
+    inp.value = '';
+    inp.classList.remove('ghost');
+    stopGhostCycle();
+  }
+}
+function handleCustomTrait(val){
+  state.trait = val;
+  const box = document.getElementById('coachBox');
+  const hasContent = !!(val && val.trim());
+  if (box) box.classList.toggle('show', hasContent);
+  toggleContinue('coachContinue', hasContent);
+}
+
+function fillFinal(){
+  const list = document.getElementById('finalWords');
+  if (state.wordTaps.length === 0) {
+    list.innerHTML = `<div class="word-chip">No words flagged.</div>`;
+  } else {
+    const limitedTaps = state.wordTaps.slice(0, 3);
+    list.innerHTML = limitedTaps.map(w=>{
+      const d = w.def || 'Look this one up before Sunday.';
+      return `<div class="word-chip"><b>${w.word}</b> — ${d}</div>`;
+    }).join('');
+  }
+  const fv = document.getElementById('finalVerse');
+  if (state.charVerse) {
+    fv.innerHTML = `<b>Mark 1:${state.charVerse}</b> — ${quoteVerse(passage[state.charVerse-1])}`;
+  } else {
+    fv.textContent = 'No verse selected.';
+  }
+  const trait = state.trait && state.trait.trim() ? state.trait.trim() : 'faithful and true';
+  document.getElementById('finalChallenge').innerHTML = `Read Mark 1:1–20 in your own Bible before Sunday: <em>"If God is ${trait}, what will your response be this week?"</em>`;
+}
+
+function goNext(){
+  const b = beats[state.index];
+  if (b.blockTap) {
+    if (b.id === 'char-verse-pick' && state.charVerse === null) return;
+    if (b.id === 'char-coaching' && !(state.trait && state.trait.trim())) return;
+  }
+  if (state.index < beats.length - 1) {
+    const nextBeat = beats[state.index + 1];
+    const isFlipPair = (b.id === 'reading-intro' && nextBeat.id === 'vocab-scan') ||
+                        (b.id === 'character-prompt' && nextBeat.id === 'char-verse-pick');
+    if (isFlipPair) {
+      const curEl = document.getElementById('beat-' + state.index);
+      if (curEl) {
+        curEl.classList.add('page-flip-out');
+        setTimeout(()=>{ curEl.classList.remove('page-flip-out'); }, 650);
+      }
+    }
+    state.index++; renderBeat(state.index);
+  }
+}
+function goPrev(){ if (state.index > 0) { state.index--; renderBeat(state.index); } }
+
+let suppressClick = false;
+
+document.getElementById('stage').addEventListener('click', (e)=>{
+  if (suppressClick) { suppressClick = false; return; }
+  const b = beats[state.index];
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const isForwardZone = x >= rect.width*0.35;
+  if (b.blockTap) {
+    if (isForwardZone && answeredBeats.has(state.index)) goNext();
+    return;
+  }
+  if (!isForwardZone) goPrev(); else goNext();
+});
+let lastTouchTime = 0;
+let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+document.getElementById('stage').addEventListener('touchstart', (e)=>{
+  const t = e.changedTouches[0];
+  touchStartX = t.clientX; touchStartY = t.clientY; touchStartTime = Date.now();
+  lastTouchTime = Date.now();
+}, { passive: true });
+
+document.getElementById('stage').addEventListener('touchend', (e)=>{
+  const b = beats[state.index];
+  const t = e.changedTouches[0];
+  const dx = t.clientX - touchStartX;
+  const dy = t.clientY - touchStartY;
+  const dt = Date.now() - touchStartTime;
+  const isSwipe = Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 600;
+  if (!isSwipe) return;
+  if (b.blockTap) {
+    if (dx > 0) { suppressClick = true; goPrev(); }
+    else if (dx < 0 && answeredBeats.has(state.index)) { suppressClick = true; goNext(); }
+    return;
+  }
+  suppressClick = true;
+  if (dx < 0) goNext(); else goPrev();
+}, { passive: true });
+
+// mouse-drag equivalent, for desktop use (mice don't fire touch events)
+let mouseStartX = 0, mouseStartY = 0, mouseStartTime = 0, mouseIsDown = false;
+document.getElementById('stage').addEventListener('mousedown', (e)=>{
+  if (Date.now() - lastTouchTime < 800) return; // a real touch was just handled above; ignore any trailing synthetic mouse event
+  mouseIsDown = true;
+  mouseStartX = e.clientX; mouseStartY = e.clientY; mouseStartTime = Date.now();
+});
+document.getElementById('stage').addEventListener('mouseup', (e)=>{
+  if (!mouseIsDown) return;
+  mouseIsDown = false;
+  const b = beats[state.index];
+  const dx = e.clientX - mouseStartX;
+  const dy = e.clientY - mouseStartY;
+  const dt = Date.now() - mouseStartTime;
+  const isSwipe = Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 600;
+  if (!isSwipe) return;
+  if (b.blockTap) {
+    if (dx > 0) { suppressClick = true; goPrev(); }
+    else if (dx < 0 && answeredBeats.has(state.index)) { suppressClick = true; goNext(); }
+    return;
+  }
+  suppressClick = true;
+  if (dx < 0) goNext(); else goPrev();
+});
+
+async function exportGuide(){
+  const target = document.getElementById('exportTarget');
+  const limitedWords = state.wordTaps.slice(0, 3);
+  const wordsHTML = limitedWords.length === 0
+    ? `<div style="font-family:'Inter',sans-serif; font-size:13px; opacity:.8;">No words flagged.</div>`
+    : limitedWords.map(w=>{
+        const d = w.def || 'Look this one up before Sunday.';
+        return `<div style="font-family:'Inter',sans-serif; font-size:13.5px; line-height:1.5; margin-bottom:8px;"><b style="color:#F43F5E; text-transform:capitalize;">${w.word}</b> — ${d}</div>`;
+      }).join('');
+  const verseHTML = state.charVerse
+    ? `<div style="font-family:'Inter',sans-serif; font-weight:700; font-size:16px; line-height:1.5; color:#0D0D0D;">${quoteVerse(passage[state.charVerse-1])}</div>
+       <div style="font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#F43F5E; margin-top:6px;">Mark 1:${state.charVerse}</div>`
+    : `<div style="font-family:'Inter',sans-serif; font-size:13px;">No verse selected.</div>`;
+  const trait = state.trait && state.trait.trim() ? state.trait.trim() : 'faithful and true';
+
+  target.innerHTML = `
+    <div style="font-family:'Inter',sans-serif; background:#FFF; color:#0D0D0D; padding:30px 26px; border:5px solid #0D0D0D;">
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#A855F7;">MS Hang · Prep Guide</div>
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; margin:6px 0 18px 0; text-transform:uppercase;">Mark 1:1–20</div>
+
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin-bottom:8px;">Context</div>
+      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:13px; line-height:1.6; margin-bottom:18px;">Written ~AD 60–70, likely the earliest Gospel · Traditionally credited to Peter's eyewitness account, recorded by Mark · Likely written for persecuted believers in Rome</div>
+
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin-bottom:10px;">Scripture</div>
+      ${verseHTML}
+
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">Observation</div>
+      ${wordsHTML}
+
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">Application & Reflection</div>
+      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:13.5px; line-height:1.5; background:#FFC72C; border:3px solid #0D0D0D; border-radius:14px; padding:12px 13px;">Read Mark 1:1–20 in your own Bible before Sunday: "If God is ${trait}, what will your response be this week?"</div>
+
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:11px; opacity:.6; margin-top:24px;">Generated ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+    </div>`;
+  try{
+    const canvas = await html2canvas(target.firstElementChild, { scale: 2, backgroundColor: null, useCORS: true });
+    const filename = 'MS_Hang_Mark1_Prep.png';
+
+    canvas.toBlob(async (blob) => {
+      if (!blob) { openImageFallback(canvas.toDataURL('image/png')); return; }
+
+      // Best mobile experience: native share sheet (Save Image / AirDrop / etc.)
+      try {
+        const file = new File([blob], filename, { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: 'MS Hang Prep Guide' });
+          return;
+        }
+      } catch (shareErr) {
+        // user cancelled the share sheet, or share failed — fall through to download
+      }
+
+      // Standard download link (works on desktop and most Android browsers)
+      try {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(()=> URL.revokeObjectURL(url), 4000);
+      } catch (dlErr) {
+        // Last resort: open the image so it can be long-pressed and saved manually
+        openImageFallback(canvas.toDataURL('image/png'));
+      }
+    }, 'image/png');
+  } catch(err){ console.error(err); alert('Export failed. Try taking a screenshot instead.'); }
+}
+
+function openImageFallback(dataUrl){
+  const w = window.open();
+  if (w) {
+    w.document.write('<body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;"><img src="'+dataUrl+'" style="max-width:100%;height:auto;"></body>');
+  } else {
+    alert('Could not open the image automatically. Please take a screenshot instead.');
+  }
+}
+
+/* init calls moved to the end of the script, after all declarations */
+
+const passageScrollElInit = document.getElementById('passageScrollEl');
+if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPassageScroll, { passive: true });
+
+buildProgressBar();
+renderBeat(0);
+</script>
+</body>
+</html>
