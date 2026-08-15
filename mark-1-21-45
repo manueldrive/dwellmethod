@@ -85,11 +85,14 @@
   .hero-title.xl .kword{ font-size:clamp(36px, 12.5vw, 54px); line-height:1.1; }
 
   .sub{ font-family:'Inter', sans-serif; font-size:16.5px; font-weight:800; line-height:1.42; opacity:.92; margin-top:10px; position:relative; z-index:2; }
+  .recap-bullets{ display:flex; flex-direction:column; gap:11px; margin-top:12px; position:relative; z-index:2; }
+  .recap-bullet{ font-family:'Inter', sans-serif; font-size:16px; font-weight:800; line-height:1.44; }
+  .recap-tag{ display:inline-block; font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:800; letter-spacing:0.6px; text-transform:uppercase; background:var(--ink); color:#fff; border-radius:6px; padding:2px 8px; margin-right:8px; vertical-align:middle; }
   .folder-wrap{ margin-top:14px; display:flex; flex-direction:column; justify-content:flex-start; flex:1; position:relative; z-index:2; }
   .folder-tab{ align-self:flex-start; margin-left:8px; background:#E4B563; border:3.5px solid var(--ink); border-bottom:none; border-radius:10px 10px 0 0; padding:6px 16px 8px 16px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:12.5px; letter-spacing:1px; text-transform:uppercase; color:var(--ink); position:relative; z-index:3; margin-bottom:-4px; flex-shrink:0; }
-  .folder-body{ display:flex; flex-direction:column; justify-content:space-evenly; background:#F3D48B; border:3.5px solid var(--ink); border-radius:3px 16px 16px 16px; box-shadow:5px 5px 0 var(--ink); padding:10px 18px; position:relative; z-index:2; flex-shrink:0; gap:10px; }
-  .stat-line{ display:flex; gap:14px; align-items:center; font-family:'Inter', sans-serif; font-size:16px; font-weight:800; line-height:1.48; padding:6px 0; color:var(--ink); }
-  .stat-line .bullet-icon{ font-size:19px; line-height:1; flex-shrink:0; width:44px; height:44px; border-radius:50%; background:var(--ink); color:#F3D48B; display:flex; align-items:center; justify-content:center; }
+  .folder-body{ display:flex; flex-direction:column; justify-content:space-evenly; background:#F3D48B; border:3.5px solid var(--ink); border-radius:3px 16px 16px 16px; box-shadow:5px 5px 0 var(--ink); padding:9px 16px; position:relative; z-index:2; flex-shrink:0; gap:7px; }
+  .stat-line{ display:flex; gap:11px; align-items:center; font-family:'Inter', sans-serif; font-size:14.5px; font-weight:800; line-height:1.38; padding:4px 0; color:var(--ink); }
+  .stat-line .bullet-icon{ font-size:16px; line-height:1; flex-shrink:0; width:38px; height:38px; border-radius:50%; background:var(--ink); color:#F3D48B; display:flex; align-items:center; justify-content:center; }
   .stat-line em{ font-style:normal; color:#B0413E; }
 
   /* EXPAND / FULL-BLEED BOTTOM-LEFT GAUGE WITH FLUID, SMOOTH-DECELERATING TRANSITIONS */
@@ -105,13 +108,13 @@
   .rings-bg .r3{ width:105px; height:105px; }
   .rings-bg .r4{ width:50px; height:50px; border-color:rgba(195,245,60,0.35); }
 
-  .xref-compact-list{ flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:10px; position:relative; z-index:2; margin-top:4px; }
-  .xref-item{ display:flex; gap:13px; align-items:center; position:relative; }
-  .xref-icon-node{ width:42px; height:42px; border-radius:50%; background:var(--lime); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; border:2.5px solid var(--ink); }
+  .xref-compact-list{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:38px; position:relative; z-index:2; margin-top:4px; }
+  .xref-item{ display:flex; gap:18px; align-items:center; position:relative; }
+  .xref-icon-node{ width:58px; height:58px; border-radius:50%; background:var(--lime); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:23px; flex-shrink:0; border:2.5px solid var(--ink); }
   .xref-content{ flex:1; display:flex; flex-direction:column; gap:2px; }
   .xref-meta-line{ display:flex; align-items:baseline; justify-content:flex-start; margin-bottom:2px; }
-  .xref-topic{ font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:800; letter-spacing:0.8px; text-transform:uppercase; color:var(--lime); }
-  .xref-body{ font-family:'Inter',sans-serif; font-size:14.5px; font-weight:700; line-height:1.5; color:rgba(255,255,255,0.92); }
+  .xref-topic{ font-family:'Space Grotesk',sans-serif; font-size:15.5px; font-weight:800; letter-spacing:0.8px; text-transform:uppercase; color:var(--lime); }
+  .xref-body{ font-family:'Inter',sans-serif; font-size:18px; font-weight:700; line-height:1.6; color:rgba(255,255,255,0.92); }
   .xref-body em{ font-style:normal; color:var(--lime); }
 
   /* SUBTLE NAVIGATION HINTS */
@@ -156,12 +159,12 @@
   .quiz-tile.shake{ animation:shakeX .45s; }
 
   .passage-scroll-wrap{ flex:1; position:relative; min-height:0; display:flex; }
-  .passage-scroll{ overflow-y:auto; flex:1; padding:16px 4px 4px 0; color:var(--ink); }
-  .flow-para{ margin:0 0 16px 0; font-size:16.5px; line-height:1.65; font-family:'Inter',sans-serif; font-weight:700; }
+  .passage-scroll{ overflow-y:auto; flex:1; padding:2px 4px 4px 0; color:var(--ink); }
+  .flow-para{ margin:0 0 16px 0; font-size:18.5px; line-height:1.62; font-family:'Inter',sans-serif; font-weight:400; }
   .verse-num-inline{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--purple); font-size:.65em; vertical-align:super; margin:0 2px 0 6px; }
-  .w{ cursor:pointer; border-bottom:2px dotted rgba(13,13,13,0.35); padding:2px 1px; border-radius:3px; }
+  .w{ cursor:pointer; padding:2px 1px; border-radius:3px; transition:background .15s ease; }
   .w-plain{ padding:2px 1px; }
-  .w.flagged{ background:var(--yellow); border-bottom-color:transparent; font-weight:900; }
+  .w.flagged{ background:var(--yellow); font-weight:900; }
 
   .review-section-header{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--ink); opacity:.75; margin:14px 0 6px 0; display:flex; align-items:center; gap:6px; }
   .review-section-header:first-child{ margin-top:4px; }
@@ -172,11 +175,10 @@
   .research-pill{ font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:700; background:var(--ink); color:#FFF; padding:7px 13px; border-radius:100px; text-transform:capitalize; }
 
   .verse-pick-list{ overflow-y:auto; flex:1; margin-top:0; position:relative; z-index:2; padding:2px 4px 4px 0; }
-  .verse-tile{ display:flex; gap:9px; align-items:flex-start; padding:11px 8px; cursor:pointer; transition:background .13s ease; color:var(--ink); border-bottom:2px solid rgba(13,13,29,0.12); border-radius:100px; }
-  .verse-tile:last-child{ border-bottom:none; }
+  .verse-tile{ display:flex; gap:9px; align-items:flex-start; padding:11px 8px; cursor:pointer; transition:background .13s ease; color:var(--ink); border-radius:14px; }
   .verse-tile.selected{ background:var(--lime); }
   .verse-tile .vnum{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--purple); flex-shrink:0; width:22px; }
-  .verse-tile .vtext{ font-size:13.5px; line-height:1.4; font-family:'Inter',sans-serif; font-weight:700; }
+  .verse-tile .vtext{ font-size:18.5px; line-height:1.4; font-family:'Inter',sans-serif; font-weight:400; }
 
   .dark-scripture-card{ background:var(--ink); color:#FFF; border:3.5px solid var(--ink); border-radius:18px; padding:14px; box-shadow:4px 4px 0 rgba(0,0,0,0.25); flex-shrink:0; position:relative; z-index:2; }
   .dark-scripture-card .ref{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--lime); margin-bottom:4px; }
@@ -195,9 +197,18 @@
   .inline-tip .tip-text{ font-family:'Inter', sans-serif; font-size:12px; font-weight:700; line-height:1.4; }
   .inline-tip .tip-text b{ font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:.5px; }
 
-  .breath-circle{ width:180px; height:180px; border-radius:50%; margin:26px auto; background:var(--purple); border:4px solid var(--ink); animation:breathe 5s ease-in-out infinite; position:relative; z-index:2; flex-shrink:0; }
-  @keyframes breathe{ 0%,100%{ transform:scale(0.85); background:var(--purple); } 50%{ transform:scale(1.15); background:var(--lime); } }
-  .breath-text{ font-family:'Inter', sans-serif; font-size:17.5px; font-weight:800; line-height:1.5; text-align:center; position:relative; z-index:2; max-width:340px; margin:0 auto; }
+  .breath-visual{ position:relative; width:200px; height:200px; margin:60px auto 22px auto; flex-shrink:0; }
+  .breath-circle{ position:absolute; inset:0; border-radius:50%; background:#C9B8E8; border:4px solid var(--ink); box-shadow:0 0 22px rgba(168,85,247,0.22); transform:scale(0.8); z-index:2; }
+  .beat.active .breath-circle{ animation:breathe 9s ease-in-out infinite; }
+  @keyframes breathe{ 0%,100%{ transform:scale(0.8); background:#C9B8E8; box-shadow:0 0 18px rgba(168,85,247,0.22); } 50%{ transform:scale(1.2); background:#DCEFA0; box-shadow:0 0 26px rgba(163,220,60,0.22); } }
+  .breath-label-wrap{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; pointer-events:none; }
+  .breath-label{ position:absolute; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink); opacity:0; }
+  .breath-label.inhale{ opacity:1; }
+  .beat.active .breath-label.inhale{ animation:breathLabelInhale 9s ease-in-out infinite; }
+  .beat.active .breath-label.exhale{ animation:breathLabelExhale 9s ease-in-out infinite; }
+  @keyframes breathLabelInhale{ 0%{ opacity:1; } 45%{ opacity:1; } 50%{ opacity:0; } 100%{ opacity:0; } }
+  @keyframes breathLabelExhale{ 0%,50%{ opacity:0; } 55%{ opacity:1; } 95%{ opacity:1; } 100%{ opacity:0; } }
+
 
   .final-card{ background:#FFF; color:var(--ink); border:4px solid var(--ink); border-radius:22px; padding:18px; position:relative; z-index:2; overflow-y:auto; flex:1; min-height:0; box-shadow:5px 5px 0 var(--ink); display:flex; flex-direction:column; }
   .final-card .fhdr{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
@@ -277,15 +288,16 @@ const passage = [
 
 /* THEOLOGICAL GLOSSARY WITH EXPANDED DEMON/SPIRIT DEFINITION (GFC UNSEEN SERIES) */
 const defs = {
+  "jesus":"Jesus of Nazareth: the Son of God and promised Messiah, whose ministry of teaching, healing, and casting out evil spirits is the subject of Mark's Gospel.",
   "sabbath":"The traditional Jewish day of rest and worship (Saturday).",
   "synagogue":"A Jewish house of prayer and community center for studying Scripture.",
-  "impurespirit":"Another name for a demon — a created, fallen angel operating in spiritual rebellion under Satan's hierarchy. Real and deceptive, but finite: not all-powerful, all-knowing, or a match for Christ's authority.",
+  "impurespirit":"Another name for a demon: a created, fallen angel operating in spiritual rebellion under Satan's hierarchy. Real and deceptive, but finite: not all-powerful, all-knowing, or a match for Christ's authority.",
   "leprosy":"A severe skin disease causing social exclusion; sufferers were treated as outcasts (Leviticus 13).",
   "indignant":"Feeling deep anger or emotion at unfair treatment, sin, or disease.",
   "galilee":"The northern region of Israel where Jesus conducted much of His early ministry.",
   "capernaum":"A bustling fishing village on the Sea of Galilee that served as Jesus's ministry hub.",
-  "jesusofnazareth":"Nazareth was a small, obscure village in Galilee — easy to overlook and looked down on by outsiders (John 1:46). Calling Jesus \"of Nazareth\" marked Him, by human standards, as an unlikely candidate for Messiah.",
-  "holyoneofgod":"A title acknowledging Jesus's divine identity and authority. It's notable that a demon says it first — even the spiritual realm recognized who Jesus was on sight."
+  "jesusofnazareth":"Nazareth was a small, obscure village in Galilee, easy to overlook and looked down on by outsiders (John 1:46). Calling Jesus \"of Nazareth\" marked Him, by human standards, as an unlikely candidate for Messiah.",
+  "holyoneofgod":"A title acknowledging Jesus's divine identity and authority. It's notable that a demon says it first: even the spiritual realm recognized who Jesus was on sight."
 };
 
 /* Multi-word terms that should flag/define as a single unit rather than word-by-word.
@@ -342,11 +354,7 @@ function passageWordsHTML(){
         continue;
       }
       const norm = normed[wi];
-      if (stopWords.has(norm)) {
-        pieces.push(`${marker}<span class="w-plain">${words[wi]}</span>`);
-      } else {
-        pieces.push(`${marker}<span class="w" data-word="${norm}" onclick="tapWord(event,this)">${words[wi]}</span>`);
-      }
+      pieces.push(`${marker}<span class="w" data-word="${norm}" onclick="tapWord(event,this)">${words[wi]}</span>`);
       wi++;
     }
     out += pieces.join(' ') + ' ';
@@ -501,31 +509,39 @@ const beats = [
   /* FOLDER CONTEXT SLIDE WITH ESV STUDY BIBLE IN TAB & REFINED RECAP */
   { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-pink)', text:'light', align:'start',
     html:`<div class="hero-wrap" style="flex:0;">${kw([["SET","THE","SCENE"]],'tight')}
-          <div class="sub">Jesus <b>announces the Kingdom has come</b>, <b>recruits His disciples</b>, and dives into ministry. To feel why His authority stunned the crowds, see it through ancient eyes:</div>
+          <div class="recap-bullets">
+            <div class="recap-bullet"><span class="recap-tag">Last Week</span>Jesus announces that the Kingdom of God is near and begins recruiting fishermen.</div>
+            <div class="recap-bullet"><span class="recap-tag">This Week</span>Jesus is going to begin to display his authority. Here are a few details to help you understand the culture of that time:</div>
+          </div>
           </div>
           <div class="folder-wrap">
             <div class="folder-tab">ESV Study Bible</div>
             <div class="folder-body">
               <div class="stat-line">
-                <span class="bullet-icon"><i class="fa-solid fa-book-bible"></i></span>
-                <div>Rabbis normally taught by quoting <em>earlier, respected rabbis</em> — never with authority of their own.</div>
+                <span class="bullet-icon"><i class="fa-solid fa-building-columns"></i></span>
+                <div>A synagogue was a Jewish <em>house of prayer and community center</em> for studying Scripture.</div>
+              </div>
+              <div class="stat-line">
+                <span class="bullet-icon"><i class="fa-solid fa-comments"></i></span>
+                <div>When rabbis spoke in the synagogues, they often <em>echoed earlier respected rabbis</em> or debated two different points of view.</div>
               </div>
               <div class="stat-line">
                 <span class="bullet-icon"><i class="fa-solid fa-ghost"></i></span>
-                <div>Jewish culture relied on <em>strange rituals to cast out spirits</em> with questionable success—casting out demons with a simple word was completely unprecedented.</div>
-              </div>
-              <div class="stat-line">
-                <span class="bullet-icon"><i class="fa-solid fa-hand-holding-medical"></i></span>
-                <div>Jewish law required lepers to live <em>outside the camp</em> — isolated, and considered ceremonially unclean.</div>
+                <div>If rabbis ever attempted to cast out demons, they had elaborate rituals to do so and a <em>very questionable success rate</em>.</div>
               </div>
             </div>
           </div>
           ${standardSwipeHint}` },
 
   { id:'breath-prayer', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'center',
-    html:`<div class="hero-wrap" style="align-items:center; text-align:center;">${kw([["BREATHE"]],'tight')}
-          <div class="breath-circle"></div>
-          <div class="breath-text">"God, open my eyes to see who You are in this passage. Help me lead our students well."</div>
+    html:`<div class="hero-wrap" style="align-items:center; text-align:center;">${kw([["BEFORE","WE","READ"],["BE","STILL"]],'tight')}
+          <div class="breath-visual">
+            <div class="breath-circle"></div>
+            <div class="breath-label-wrap">
+              <span class="breath-label inhale">Inhale</span>
+              <span class="breath-label exhale">Exhale</span>
+            </div>
+          </div>
           </div>
           ${standardSwipeHint}` },
 
@@ -537,7 +553,7 @@ const beats = [
               <div class="focus-pill yellow">
                 <div class="focus-pill-value">Flag Tricky Words</div>
               </div>
-              <div class="cover-note">Students don't always know church lingo. Flag 2–4 tricky words you'll want to define before Sunday.</div>
+              <div class="cover-note">Flag 2–4 words students may not know before Sunday.</div>
             </div>
           </div>
           ${standardSwipeHint}` },
@@ -560,65 +576,27 @@ const beats = [
           <div class="review-scroll" id="vocabReviewBox"></div>
           ${standardSwipeHint}` },
 
-  /* EXPAND INTRO STAGES WITH SMOOTHED TRANSITIONS & NEW EXPAND COPY */
-  { id:'expand-zoom-verse', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-dark)', text:'light', align:'start',
-    html:`<div class="zoom-stage">
-            <div class="zoom-caption">${expandUniversalCaption}</div>
-            <div class="zoom-graphic">${zoomRings(0)}</div>
-          </div>
-          ${standardSwipeHint}` },
-
-  { id:'expand-zoom-passage', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-dark)', text:'light', align:'start',
-    html:`<div class="zoom-stage">
-            <div class="zoom-caption">${expandUniversalCaption}</div>
-            <div class="zoom-graphic">${zoomRings(1)}</div>
-          </div>
-          ${standardSwipeHint}` },
-
-  { id:'expand-zoom-book', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-dark)', text:'light', align:'start',
-    html:`<div class="zoom-stage">
-            <div class="zoom-caption">${expandUniversalCaption}</div>
-            <div class="zoom-graphic">${zoomRings(2)}</div>
-          </div>
-          ${standardSwipeHint}` },
-
-  { id:'expand-zoom-bible', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-dark)', text:'light', align:'start',
-    html:`<div class="zoom-stage">
-            <div class="zoom-caption">${expandUniversalCaption}</div>
-            <div class="zoom-graphic">${zoomRings(3)}</div>
-          </div>
-          ${standardSwipeHint}` },
-
   /* FULL COPY ZERO-SCROLL CROSS REFERENCES SLIDE WITH SCRIPTURE CITATIONS AS HEADERS */
   { id:'expand-cross-refs', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-dark)', text:'light', align:'start',
     html:`<div class="rings-bg"><span class="r1"></span><span class="r2"></span><span class="r3"></span><span class="r4"></span></div>
-          <div class="hero-wrap" style="flex:0;">${kw([["CROSS"],["REFERENCES"]],'tight')}</div>
+          <div class="hero-wrap" style="flex:0;">${kw([["MAKE"],["CONNECTIONS"]],'tight')}</div>
           <div class="xref-compact-list">
             <div class="xref-item">
-              <div class="xref-icon-node"><i class="fa-solid fa-book-bible"></i></div>
+              <div class="xref-icon-node"><i class="fa-solid fa-quote-right"></i></div>
               <div class="xref-content">
                 <div class="xref-meta-line">
-                  <span class="xref-topic">Matthew 7:28–29 · Matthew 28:18</span>
+                  <span class="xref-topic">Matthew 28:18</span>
                 </div>
-                <div class="xref-body">Matthew notes the crowd's amazement at Jesus's <em>real authority</em>, unlike the scribes who could only echo earlier masters — authority He later claims fully, over heaven and earth.</div>
+                <div class="xref-body">Mark shows Jesus teaching with real authority. Matthew writes that Jesus said, "<em>All authority</em> in heaven and earth has been given to me."</div>
               </div>
             </div>
             <div class="xref-item">
               <div class="xref-icon-node"><i class="fa-solid fa-ghost"></i></div>
               <div class="xref-content">
                 <div class="xref-meta-line">
-                  <span class="xref-topic">Mark 1:24 · James 2:19 · Luke 4:36</span>
+                  <span class="xref-topic">James 2:19</span>
                 </div>
-                <div class="xref-body">The demon names Jesus <em>“the Holy One of God”</em> on sight — even demons recognize Him, James writes, and tremble. Luke adds the crowd was astonished by both His authority and power.</div>
-              </div>
-            </div>
-            <div class="xref-item">
-              <div class="xref-icon-node"><i class="fa-solid fa-hand-holding-medical"></i></div>
-              <div class="xref-content">
-                <div class="xref-meta-line">
-                  <span class="xref-topic">Leviticus 13:45–46 · Mark 1:41</span>
-                </div>
-                <div class="xref-body">Leviticus exiled lepers outside the camp, crying “unclean!” Jesus reverses that — His touch sends <em>purity and healing outward</em> instead of catching defilement.</div>
+                <div class="xref-body">Mark shows a demon obeying Jesus on the spot. James writes that even demons <em>believe</em>, and <em>shudder</em>.</div>
               </div>
             </div>
           </div>
@@ -632,7 +610,7 @@ const beats = [
               <div class="focus-pill lime">
                 <div class="focus-pill-value">Spot a God Shot</div>
               </div>
-              <div class="cover-note">Help students identify a verse that speaks to who God is. When we learn His character, it transforms our character.</div>
+              <div class="cover-note">Find a verse that shows who God is.</div>
             </div>
           </div>
           ${standardSwipeHint}` },
@@ -660,7 +638,7 @@ const beats = [
             </div>
           </div>
           <div class="inline-tip" id="coachBox">
-            <div class="tip-text" id="coachBoxText"><b>TIP:</b> Have students look down at verse 5 and share what they think it reveals about God's character. Silence is okay—give it 7 seconds before jumping in.</div>
+            <div class="tip-text" id="coachBoxText"><b>TIP:</b> Have students look down at verse 5 and share what they think it reveals about God's character. Silence is okay, give it 7 seconds before jumping in.</div>
           </div>
           ${standardSwipeHint}` },
 
@@ -675,7 +653,7 @@ const beats = [
             <div class="flabel">S — Scripture</div>
             <div class="word-chip" id="finalVerse"></div>
             
-            <div class="flabel">O — Observation</div>
+            <div class="flabel">O — Review Challenging Words</div>
             <div class="word-chip-list" id="finalWords"></div>
             
             <div class="flabel">A — Application</div>
@@ -701,15 +679,11 @@ const sectionLabels = [
   'Word Work',          // 5  reading-intro
   'Word Work',          // 6  vocab-scan
   'Word Work',          // 7  vocab-review
-  'Expand',             // 8  expand-zoom-verse
-  'Expand',             // 9  expand-zoom-passage
-  'Expand',             // 10 expand-zoom-book
-  'Expand',             // 11 expand-zoom-bible
-  'Expand',             // 12 expand-cross-refs
-  'Learn Truth',        // 13 character-prompt
-  'Learn Truth',        // 14 char-verse-pick
-  'Learn Truth',        // 15 char-coaching
-  'SOAR Guide'          // 16 final
+  'Expand',             // 8  expand-cross-refs
+  'Learn Truth',        // 9  character-prompt
+  'Learn Truth',        // 10 char-verse-pick
+  'Learn Truth',        // 11 char-coaching
+  'SOAR Guide'          // 12 final
 ];
 
 function initNotches(){
@@ -817,6 +791,7 @@ function renderBeat(i){
   document.getElementById(`beat-${i}`).classList.add('active');
   renderGen++;
   stopGhostCycle();
+  stopZoomCycle();
   const b = beats[i];
 
   phoneEl.style.background = b.bgGrad;
@@ -834,7 +809,7 @@ function renderBeat(i){
     if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
 
     const coachText = document.getElementById('coachBoxText');
-    if (coachText) coachText.innerHTML = `<b>TIP:</b> Have students look down at verse ${activeVerse} and share what they think it reveals about God's character. Silence is okay—give it 7 seconds before jumping in.`;
+    if (coachText) coachText.innerHTML = `<b>TIP:</b> Have students look down at verse ${activeVerse} and share what they think it reveals about God's character. Silence is okay, give it 7 seconds before jumping in.`;
 
     const inp = document.getElementById('customTraitInput');
     if (inp) {
@@ -893,8 +868,9 @@ function tapWord(e, el){
     state.wordTaps = state.wordTaps.filter(w => w.el !== el);
   } else {
     const def = defs[key] || null;
+    const isStop = stopWords.has(key);
     el.classList.add('flagged');
-    state.wordTaps.push({ el, word, def });
+    state.wordTaps.push({ el, word, def, isStop });
   }
   updateWordUI();
 }
@@ -905,18 +881,14 @@ function checkVocabComplete(){
   const pill = document.getElementById('vocabPill');
   const textEl = document.getElementById('vocabPillText');
   if (!pill || !textEl) return;
-  const hasWord = state.wordTaps.length > 0;
+  const n = state.wordTaps.length;
+  const hasWord = n > 0;
   const ready = hasWord && state.scrolledToEnd;
   pill.classList.toggle('ready', ready);
   if (ready) {
     textEl.innerHTML = '<i class="fa-solid fa-check"></i> Continue';
   } else {
-    const n = state.wordTaps.length;
-    if (n > 0 && !state.scrolledToEnd) {
-      textEl.textContent = `${n} flagged — finish reading`;
-    } else {
-      textEl.textContent = n > 0 ? `${n} word${n===1?'':'s'} flagged` : 'Flag Key Words';
-    }
+    textEl.textContent = n > 0 ? `${n} word${n===1?'':'s'} flagged` : 'Flag Key Words';
   }
 }
 
@@ -1004,6 +976,29 @@ function stopGhostCycle(){
   if (ghostCycleTimer) { clearInterval(ghostCycleTimer); ghostCycleTimer = null; }
 }
 
+/* Ambient auto-cycling ring highlight for the consolidated expand-zoom beat —
+   ring highlight advances on its own so the whole verse->passage->book->bible
+   idea plays out on one slide instead of needing 4 swipes to see it. */
+let zoomCycleTimer = null;
+let zoomCycleIndex = 0;
+
+function startZoomCycle(){
+  stopZoomCycle();
+  zoomCycleIndex = 0;
+  const myGen = renderGen;
+  zoomCycleTimer = setInterval(()=>{
+    if (renderGen !== myGen) { stopZoomCycle(); return; }
+    const el = document.getElementById('zoomGraphic');
+    if (!el) { stopZoomCycle(); return; }
+    zoomCycleIndex = (zoomCycleIndex + 1) % 4;
+    el.innerHTML = zoomRings(zoomCycleIndex);
+  }, 1800);
+}
+
+function stopZoomCycle(){
+  if (zoomCycleTimer) { clearInterval(zoomCycleTimer); zoomCycleTimer = null; }
+}
+
 function handleBlankFocus(inp){
   if (inp.classList.contains('ghost')) {
     inp.value = '';
@@ -1088,7 +1083,17 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') goPrev();
 });
 
-/* SWIPE NAVIGATION */
+/* SWIPE + TAP-ZONE NAVIGATION (Instagram/Snapchat-style: tap left/right to step, swipe still works) */
+const NAV_EXCLUDE = '.quiz-tile, .verse-tile, .w, .w-plain, .flow-para, .focus-pill-dock, button, input, textarea, a, .breath-visual';
+let lastGestureTime = 0;
+
+function tapZoneNav(clientX){
+  const rect = stageEl.getBoundingClientRect();
+  const relX = clientX - rect.left;
+  if (relX < rect.width * 0.32) goPrev();
+  else goNext();
+}
+
 let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
 const stageEl = document.getElementById('stage');
 
@@ -1104,18 +1109,24 @@ stageEl.addEventListener('touchend', (e) => {
   const dx = t.clientX - touchStartX;
   const dy = t.clientY - touchStartY;
   const dt = Date.now() - touchStartTime;
-  
+
   if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4 && dt < 500) {
+    lastGestureTime = Date.now();
     if (dx < 0) goNext();
     else goPrev();
+  } else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && dt < 400) {
+    if (e.target.closest(NAV_EXCLUDE)) return;
+    lastGestureTime = Date.now();
+    tapZoneNav(t.clientX);
   }
 }, { passive: true });
 
-let mouseStartX = 0, mouseStartY = 0, mouseIsDown = false;
+let mouseStartX = 0, mouseStartY = 0, mouseIsDown = false, mouseDidDrag = false;
 
 stageEl.addEventListener('mousedown', (e) => {
-  if (['INPUT', 'BUTTON', 'TEXTAREA'].includes(e.target.tagName) || e.target.closest('.quiz-tile, .verse-tile, .w, .focus-pill-dock')) return;
+  if (['INPUT', 'BUTTON', 'TEXTAREA'].includes(e.target.tagName) || e.target.closest(NAV_EXCLUDE)) return;
   mouseIsDown = true;
+  mouseDidDrag = false;
   mouseStartX = e.clientX;
   mouseStartY = e.clientY;
 });
@@ -1125,11 +1136,23 @@ stageEl.addEventListener('mouseup', (e) => {
   mouseIsDown = false;
   const dx = e.clientX - mouseStartX;
   const dy = e.clientY - mouseStartY;
-  
+
   if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+    mouseDidDrag = true;
+    lastGestureTime = Date.now();
     if (dx < 0) goNext();
     else goPrev();
+  } else if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+    mouseDidDrag = true; // small-but-real drag: don't also treat the trailing click as a tap
   }
+});
+
+/* Click = tap-zone advance (mirrors Instagram/Snapchat: tap left third to go back, right to go forward) */
+stageEl.addEventListener('click', (e) => {
+  if (mouseDidDrag) { mouseDidDrag = false; return; }
+  if (Date.now() - lastGestureTime < 500) return; // ignore the synthetic click a touch tap already handled
+  if (e.target.closest(NAV_EXCLUDE)) return;
+  tapZoneNav(e.clientX);
 });
 
 async function exportGuide(){
@@ -1159,12 +1182,12 @@ async function exportGuide(){
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin-bottom:10px;">S — Scripture</div>
       ${verseHTML}
 
-      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">O — Observation</div>
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">O — Review Challenging Words</div>
       ${wordsHTML}
 
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">A — Application</div>
-      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:13.5px; line-height:1.5; background:#FFC72C; border:3px solid #0D0D0D; border-radius:14px; padding:12px 13px;">God is <b>${trait}</b>. Therefore, I ________.</div>
-      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:11.5px; line-height:1.4; opacity:.85; margin-top:8px;">Take this into your personal journal before Sunday: In light of who God is in Mark 1, how is He calling you to respond?</div>
+      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:13.5px; line-height:1.5; margin-bottom:8px;">God is <b style="color:#F43F5E; text-transform:capitalize;">${trait}</b>. Therefore, I ________.</div>
+      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:11.5px; line-height:1.45; background:rgba(168,85,247,0.1); border:2px dashed #A855F7; border-radius:12px; padding:10px 12px; color:#0D0D0D;">Take this into your personal journal before Sunday: In light of who God is in Mark 1, how is He calling you to respond?</div>
 
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">R — Reflection</div>
       <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:11.5px; line-height:1.45; background:rgba(168,85,247,0.1); border:2px dashed #A855F7; border-radius:12px; padding:11px 13px; color:#0D0D0D;">Read Mark 1:1–20 in your own Bible before Sunday. Reflect on his character in prayer.</div>
