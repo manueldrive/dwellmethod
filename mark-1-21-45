@@ -29,7 +29,8 @@
   }
   *{box-sizing:border-box;}
   html,body{ margin:0; padding:0; height:100%; background:#000; font-family:'Inter', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior:none; }
-  .phone{ position:relative; width:100%; max-width:430px; height:100vh; height:100dvh; margin:0 auto; background:var(--bg-cream); overflow:hidden; box-shadow:0 0 60px rgba(0,0,0,0.5); display:flex; flex-direction:column; transition:background .4s ease; }
+  .phone{ position:relative; width:100%; max-width:430px; height:100vh; height:100dvh; margin:0 auto; background:var(--bg-cream); overflow:hidden; box-shadow:0 0 60px rgba(0,0,0,0.5); display:flex; flex-direction:column; transition:background .4s ease; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+  input, textarea, [contenteditable]{ -webkit-user-select:text; user-select:text; -webkit-touch-callout:default; }
   @media (min-width:431px){ body{ display:flex; align-items:center; justify-content:center; } .phone{ height:90vh; height:90dvh; border-radius:36px; border:4px solid #FFF; } }
 
   /* HEADER & CONTINUOUS PROGRESS BAR */
@@ -130,11 +131,14 @@
 
   /* BIBLE DOCK BUTTON */
   .pill-dock-integrated{ width:100%; margin-top:auto; position:relative; z-index:5; }
-  .focus-pill-dock{ width:100%; border:3.5px solid var(--ink); border-radius:100px; padding:12px 18px; text-align:center; background:rgba(255,255,255,0.45); opacity:.6; box-shadow:3px 3px 0 rgba(13,13,13,0.3); cursor:pointer; transition:all .22s ease; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:var(--ink); }
+  .focus-pill-dock{ width:100%; border:3.5px solid var(--ink); border-radius:100px; padding:12px 18px; text-align:center; background:rgba(255,255,255,0.45); opacity:.6; box-shadow:3px 3px 0 rgba(13,13,13,0.3); cursor:pointer; transition:background .4s ease, opacity .4s ease, box-shadow .4s ease, border-color .4s ease, color .4s ease; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:var(--ink); -webkit-tap-highlight-color:transparent; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+  .focus-pill-dock *{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+  .focus-pill-dock *{ -webkit-tap-highlight-color:transparent; }
   .focus-pill-dock.ready{ opacity:1; background:var(--lime); box-shadow:4px 4px 0 var(--ink); }
   #vocabPill.ready{ background:var(--yellow); }
   .focus-pill-dock.ready:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
   .focus-pill-dock.warn{ animation:shakeX .45s; background:var(--yellow) !important; opacity:1 !important; color:var(--ink) !important; border-color:var(--ink) !important; }
+  #charPill.warn{ background:var(--lime) !important; }
 
   /* QUIZ GRID & TESTAMENT TILES */
   .quiz-grid{ display:flex; flex-direction:column; gap:11px; margin-top:6px; position:relative; z-index:2; overflow-y:auto; padding:2px 8px 8px 2px; }
@@ -185,27 +189,27 @@
   .dark-scripture-card .vt{ font-style:normal; font-family:'Inter',sans-serif; font-weight:700; font-size:13.5px; line-height:1.4; opacity:.95; }
 
   /* CIRCLE HERO SLIDE */
-  .circle-hero-container{ position:relative; z-index:2; flex-shrink:0; display:flex; justify-content:center; margin:8px 0; }
-  .circle-hero{ width:250px; height:250px; border-radius:50%; background:#FFF; color:var(--ink); border:4px solid var(--ink); box-shadow:6px 6px 0 var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; flex-shrink:0; }
+  .circle-hero-container{ position:relative; z-index:2; flex-shrink:0; display:flex; justify-content:center; align-items:center; margin:8px 0; }
+  .circle-hero{ width:300px; height:300px; border-radius:50%; background:#FFF; color:var(--ink); border:4px solid var(--ink); box-shadow:6px 6px 0 var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; flex-shrink:0; }
   .circle-hero .arc-stem-text{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; opacity:.65; margin-bottom:6px; }
   .circle-hero .label-god-is{ font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:28px; letter-spacing:-.5px; text-transform:uppercase; line-height:1; margin-bottom:12px; }
-  .blank-input{ width:88%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:18px; font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 0; transition:all .2s ease; }
+  .blank-input{ width:88%; max-width:88%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:18px; font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 0; transition:all .2s ease; white-space:normal; overflow-wrap:break-word; word-break:break-word; }
   .blank-input.ghost{ color:rgba(13,13,29,.35); font-style:italic; }
 
   .inline-tip{ margin-top:8px; margin-bottom:4px; position:relative; z-index:2; flex-shrink:0; color:var(--ink); opacity:0; transform:translateY(6px); transition:all .25s ease; }
   .inline-tip.show{ opacity:1; transform:translateY(0); }
   .inline-tip .tip-text{ font-family:'Inter', sans-serif; font-size:12px; font-weight:700; line-height:1.4; }
-  .inline-tip .tip-text b{ font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:.5px; }
+  .inline-tip .tip-text b{ font-family:'Space Grotesk', sans-serif; font-weight:900; letter-spacing:.5px; }
 
   .breath-visual{ position:relative; width:200px; height:200px; margin:60px auto 22px auto; flex-shrink:0; }
   .breath-circle{ position:absolute; inset:0; border-radius:50%; background:#C9B8E8; border:4px solid var(--ink); box-shadow:0 0 22px rgba(168,85,247,0.22); transform:scale(0.8); z-index:2; }
-  .beat.active .breath-circle{ animation:breathe 9s ease-in-out infinite; }
+  .beat.active .breath-circle{ animation:breathe 9s ease-in-out 3; animation-fill-mode:forwards; }
   @keyframes breathe{ 0%,100%{ transform:scale(0.8); background:#C9B8E8; box-shadow:0 0 18px rgba(168,85,247,0.22); } 50%{ transform:scale(1.2); background:#DCEFA0; box-shadow:0 0 26px rgba(163,220,60,0.22); } }
   .breath-label-wrap{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; pointer-events:none; }
   .breath-label{ position:absolute; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink); opacity:0; }
   .breath-label.inhale{ opacity:1; }
-  .beat.active .breath-label.inhale{ animation:breathLabelInhale 9s ease-in-out infinite; }
-  .beat.active .breath-label.exhale{ animation:breathLabelExhale 9s ease-in-out infinite; }
+  .beat.active .breath-label.inhale{ animation:breathLabelInhale 9s ease-in-out 3; animation-fill-mode:forwards; }
+  .beat.active .breath-label.exhale{ animation:breathLabelExhale 9s ease-in-out 3; animation-fill-mode:forwards; }
   @keyframes breathLabelInhale{ 0%{ opacity:1; } 45%{ opacity:1; } 50%{ opacity:0; } 100%{ opacity:0; } }
   @keyframes breathLabelExhale{ 0%,50%{ opacity:0; } 55%{ opacity:1; } 95%{ opacity:1; } 100%{ opacity:0; } }
 
@@ -534,7 +538,7 @@ const beats = [
           ${standardSwipeHint}` },
 
   { id:'breath-prayer', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'center',
-    html:`<div class="hero-wrap" style="align-items:center; text-align:center;">${kw([["BEFORE","WE","READ"],["BE","STILL"]],'tight')}
+    html:`<div class="hero-wrap" style="align-items:center; text-align:center;">${kw([["BEFORE","WE","READ,"],["LET'S","BREATHE"]],'tight')}
           <div class="breath-visual">
             <div class="breath-circle"></div>
             <div class="breath-label-wrap">
@@ -653,7 +657,7 @@ const beats = [
             <div class="flabel">S — Scripture</div>
             <div class="word-chip" id="finalVerse"></div>
             
-            <div class="flabel">O — Review Challenging Words</div>
+            <div class="flabel">O — Observation</div>
             <div class="word-chip-list" id="finalWords"></div>
             
             <div class="flabel">A — Application</div>
@@ -667,7 +671,7 @@ const beats = [
               Read Mark 1:1–20 in your own Bible before Sunday. Reflect on his character in prayer.
             </div>
           </div>
-          <button class="export-btn" onclick="event.stopPropagation(); exportGuide();">Download Prep Sheet</button>` }
+          <button class="export-btn" onclick="event.stopPropagation(); exportGuide();">Download SOAR Guide</button>` }
 ];
 
 const sectionLabels = [
@@ -1182,7 +1186,7 @@ async function exportGuide(){
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin-bottom:10px;">S — Scripture</div>
       ${verseHTML}
 
-      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">O — Review Challenging Words</div>
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">O — Observation</div>
       ${wordsHTML}
 
       <div style="font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#A855F7; margin:20px 0 8px 0;">A — Application</div>
