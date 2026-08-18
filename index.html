@@ -1633,7 +1633,7 @@ main { margin: 0; padding: 0; width: 100%; }
           </div>
         </div>
 
-        <p class="digi-prayer page-bookmark-prayer">"Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen."</p>
+        <p class="digi-prayer page-bookmark-prayer" data-prayer="1">"Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen."</p>
 
         <div class="digi-day" data-day="discover">
           <div class="digi-day-header" style="background:var(--d-discover);">
@@ -1662,7 +1662,7 @@ main { margin: 0; padding: 0; width: 100%; }
             </ul>
         </div>
 
-        <p class="digi-prayer page-bookmark-prayer">"Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen."</p>
+        <p class="digi-prayer page-bookmark-prayer" data-prayer="2">"Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen."</p>
 
         <div class="digi-day" data-day="expand">
           <div class="digi-day-header" style="background:var(--d-expand);">
@@ -2483,7 +2483,13 @@ function openSection(key) {
     block.classList.toggle('is-collapsed', isDayKey && block.dataset.day !== key);
   });
   document.querySelectorAll('.page-bookmark-prayer').forEach(p => {
-    p.classList.toggle('is-hidden', isDayKey);
+    if (!isDayKey) {
+      p.classList.remove('is-hidden');
+      return;
+    }
+    const wantsFirst = (key === 'discover' || key === 'wordwork');
+    const isFirst = p.dataset.prayer === '1';
+    p.classList.toggle('is-hidden', wantsFirst ? !isFirst : isFirst);
   });
 
   const dotsNav = document.getElementById('section-dots-nav');
