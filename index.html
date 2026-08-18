@@ -760,6 +760,146 @@ main { margin: 0; padding: 0; width: 100%; }
   font-size: 14.5px;
 }
 
+/* ── DWELL Scroll Animation: Intro Letters, List Reveal, Falling Separator ── */
+.dwell-intro-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 22px 0 30px;
+  max-height: 400px;
+  overflow: hidden;
+  transition: max-height .5s ease .1s, margin .5s ease .1s, opacity .4s ease .1s;
+}
+.dwell-intro-row.is-collapsed {
+  max-height: 0;
+  margin: 0;
+  opacity: 0;
+}
+.dwell-intro-cube {
+  width: 84px;
+  height: 84px;
+  border-radius: 18px;
+  margin-right: 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 12px;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  transition: opacity .5s ease, transform .5s ease, width .5s ease .1s, margin-right .5s ease .1s, padding .5s ease .1s;
+  will-change: transform, opacity, width;
+}
+.dwell-intro-cube:last-child { margin-right: 0; }
+.dwell-intro-cube.is-used {
+  opacity: 0;
+  box-shadow: none;
+  transform: scale(0.5) translateY(10px);
+  width: 0;
+  padding: 0;
+  margin-right: 0;
+}
+
+/* The whole list card stays invisible (but still occupies its space) until its
+   letter lands — no empty placeholder box waiting on screen. */
+.js .about-acronym-item {
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  transition: opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.js .about-acronym-item.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.js .about-acronym-icon,
+.js .about-acronym-title,
+.js .about-acronym-content .about-kicker,
+.js .about-acronym-content p {
+  opacity: 0;
+}
+.js .about-acronym-icon {
+  transform: scale(0.35);
+  transition: opacity .45s ease, transform .45s cubic-bezier(.34,1.56,.64,1);
+}
+.js .about-acronym-title,
+.js .about-acronym-content .about-kicker,
+.js .about-acronym-content p {
+  transform: translateY(8px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.js .about-acronym-item.is-active .about-acronym-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+.js .about-acronym-item.is-active .about-acronym-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .1s;
+}
+.js .about-acronym-item.is-active .about-acronym-content .about-kicker {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .18s;
+}
+.js .about-acronym-item.is-active .about-acronym-content p {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .26s;
+}
+
+.dwell-flip-clone {
+  position: fixed;
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 19px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  opacity: 1;
+  transition: transform .55s cubic-bezier(.5,0,.15,1), border-radius .55s ease, opacity .55s ease .1s;
+  will-change: transform, opacity;
+}
+
+/* Centered separator between Flexible Building Blocks and The Role of the Holy
+   Spirit: the five blocks drop into place in full color and stay that way. */
+.dwell-regroup {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+  min-height: 54px;
+}
+.dwell-regroup-slot {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.16);
+  opacity: 0;
+  transform: translateY(-56px) scale(0.5);
+  transition: opacity .5s ease, transform .5s cubic-bezier(.3,.9,.4,1.1);
+}
+.dwell-regroup-slot:nth-child(1) { transition-delay: 0s; }
+.dwell-regroup-slot:nth-child(2) { transition-delay: .1s; }
+.dwell-regroup-slot:nth-child(3) { transition-delay: .2s; }
+.dwell-regroup-slot:nth-child(4) { transition-delay: .3s; }
+.dwell-regroup-slot:nth-child(5) { transition-delay: .4s; }
+.dwell-regroup.is-visible .dwell-regroup-slot[data-key="discover"] { opacity: 1; transform: scale(1) rotate(-6deg) translateY(-4px); }
+.dwell-regroup.is-visible .dwell-regroup-slot[data-key="wordwork"] { opacity: 1; transform: scale(1) rotate(4deg); }
+.dwell-regroup.is-visible .dwell-regroup-slot[data-key="expand"]   { opacity: 1; transform: scale(1) rotate(-3deg) translateY(-6px); }
+.dwell-regroup.is-visible .dwell-regroup-slot[data-key="learn"]    { opacity: 1; transform: scale(1) rotate(5deg); }
+.dwell-regroup.is-visible .dwell-regroup-slot[data-key="live"]     { opacity: 1; transform: scale(1) rotate(-4deg) translateY(-3px); }
+
 /* ── Dwell Guides Container & Cards ── */
 .dwell-container {
   display: grid;
@@ -1746,6 +1886,8 @@ main { margin: 0; padding: 0; width: 100%; }
 </div>
 
 <script>
+document.documentElement.classList.add('js');
+
 const colorways = [
   { id: "coast-rust", category: "Earth & Nature", name: "Coast & Rust", tag: "Default", tokens: { "--ink": "#16252d", "--paper": "#fbf9f5", "--paper-dim": "#ede8e1", "--card-grey-blue": "#e9eff2", "--d-discover": "#2b5c68", "--d-wordwork": "#e07a5f", "--d-expand": "#5b8e7d", "--d-learn": "#f4a261", "--d-live": "#1d3557" } },
   { id: "earthy-botanical", category: "Earth & Nature", name: "Earthy Botanical", tag: "Organic", tokens: { "--ink": "#1f2421", "--paper": "#f7f9f6", "--paper-dim": "#e4ebe2", "--card-grey-blue": "#e5ede9", "--d-discover": "#3d5a52", "--d-wordwork": "#c86d51", "--d-expand": "#709775", "--d-learn": "#dca455", "--d-live": "#283833" } },
@@ -2143,9 +2285,17 @@ const sectionData = {
     `,
     howto: `
       <p>Dwell is a 5-step way to read the Bible with perspective, curiosity, and purpose. There is no real secret to Bible Study other than reading and then re-reading again and again. The usefulness of Dwell is that it helps keep you engaged by giving your mind and eyes a specific job through each read through of a passage:</p>
+
+      <div class="dwell-intro-row" id="dwell-intro-row" aria-hidden="true">
+        <div class="dwell-intro-cube" data-key="discover" style="background:var(--d-discover);">D</div>
+        <div class="dwell-intro-cube" data-key="wordwork" style="background:var(--d-wordwork);">W</div>
+        <div class="dwell-intro-cube" data-key="expand" style="background:var(--d-expand);">E</div>
+        <div class="dwell-intro-cube" data-key="learn" style="background:var(--d-learn);">L</div>
+        <div class="dwell-intro-cube" data-key="live" style="background:var(--d-live);">L</div>
+      </div>
       
       <div class="about-acronym-list">
-        <div class="about-acronym-item">
+        <div class="about-acronym-item" data-key="discover">
           <div class="about-acronym-icon" style="border-color:var(--d-discover); color:var(--d-discover);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="m20 20-4.35-4.35"/></svg>
           </div>
@@ -2156,7 +2306,7 @@ const sectionData = {
           </div>
         </div>
 
-        <div class="about-acronym-item">
+        <div class="about-acronym-item" data-key="wordwork">
           <div class="about-acronym-icon" style="border-color:var(--d-wordwork); color:var(--d-wordwork);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
           </div>
@@ -2167,7 +2317,7 @@ const sectionData = {
           </div>
         </div>
 
-        <div class="about-acronym-item">
+        <div class="about-acronym-item" data-key="expand">
           <div class="about-acronym-icon" style="border-color:var(--d-expand); color:var(--d-expand);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10.5"/></svg>
           </div>
@@ -2178,7 +2328,7 @@ const sectionData = {
           </div>
         </div>
 
-        <div class="about-acronym-item">
+        <div class="about-acronym-item" data-key="learn">
           <div class="about-acronym-icon" style="border-color:var(--d-learn); color:var(--d-learn);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           </div>
@@ -2189,7 +2339,7 @@ const sectionData = {
           </div>
         </div>
 
-        <div class="about-acronym-item">
+        <div class="about-acronym-item" data-key="live">
           <div class="about-acronym-icon" style="border-color:var(--d-live); color:var(--d-live);">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
           </div>
@@ -2204,6 +2354,14 @@ const sectionData = {
       <div class="about-section-heading">Flexible Building Blocks</div>
       <p>You do not always have to do all five steps at once. Practicing even one block—like doing "Word Work" on a single verse or exploring "Context" before reading a chapter—sharpens your Bible literacy skills. However, when you stack all five blocks together, the compound effect helps you discover far richer details you would normally miss.</p>
 
+      <div class="dwell-regroup" id="dwell-regroup">
+        <div class="dwell-regroup-slot" data-key="discover" style="background:var(--d-discover);"></div>
+        <div class="dwell-regroup-slot" data-key="wordwork" style="background:var(--d-wordwork);"></div>
+        <div class="dwell-regroup-slot" data-key="expand" style="background:var(--d-expand);"></div>
+        <div class="dwell-regroup-slot" data-key="learn" style="background:var(--d-learn);"></div>
+        <div class="dwell-regroup-slot" data-key="live" style="background:var(--d-live);"></div>
+      </div>
+
       <div class="about-section-heading">The Role of the Holy Spirit</div>
       <p>A study method cannot produce spiritual life on its own. Good study habits, cross-references, and highlighters are just tools to keep you focused.</p>
 
@@ -2211,6 +2369,103 @@ const sectionData = {
     `
   }
 };
+
+function initDwellAnim() {
+  const container = document.getElementById('section-howto');
+  if (!container) return;
+
+  const items = Array.from(container.querySelectorAll('.about-acronym-item[data-key]'));
+  const introRow = document.getElementById('dwell-intro-row');
+  const introCubes = container.querySelectorAll('.dwell-intro-cube[data-key]');
+  const cubeMap = {};
+  introCubes.forEach(c => { cubeMap[c.dataset.key] = c; });
+  const regroup = document.getElementById('dwell-regroup');
+
+  // Fly a clone (colored with colorValue) from fromEl to land on toRect, then fade out.
+  function flightClone(fromEl, toRect, colorValue, label) {
+    const from = fromEl.getBoundingClientRect();
+    const clone = document.createElement('div');
+    clone.className = 'dwell-flip-clone';
+    if (label) clone.textContent = label;
+    clone.style.left = from.left + 'px';
+    clone.style.top = from.top + 'px';
+    clone.style.width = from.width + 'px';
+    clone.style.height = from.height + 'px';
+    clone.style.background = colorValue;
+    document.body.appendChild(clone);
+
+    requestAnimationFrame(() => {
+      const dx = toRect.left - from.left + (toRect.width - from.width) / 2;
+      const dy = toRect.top - from.top + (toRect.height - from.height) / 2;
+      const scale = toRect.width / from.width;
+      clone.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+      clone.style.borderRadius = '14px';
+      clone.style.opacity = '0';
+    });
+    setTimeout(() => clone.remove(), 650);
+  }
+
+  // Letter cube -> pops the (previously invisible) list card into view and
+  // flies into its icon slot at the same time.
+  function activate(item) {
+    if (item.classList.contains('is-active')) return;
+    item.classList.add('is-active');
+
+    const cube = cubeMap[item.dataset.key];
+    const icon = item.querySelector('.about-acronym-icon');
+    if (cube && icon && !cube.classList.contains('is-used')) {
+      flightClone(cube, icon.getBoundingClientRect(), getComputedStyle(cube).backgroundColor, cube.textContent);
+      cube.classList.add('is-used');
+    }
+
+    // Once the last letter has landed, close up the intro row entirely so
+    // scrolling back up shows no leftover gap — just the bulleted list.
+    if (item === items[items.length - 1] && introRow) {
+      setTimeout(() => introRow.classList.add('is-collapsed'), 500);
+    }
+  }
+
+  // Always activate in order D → W → E → L → L, even on a fast scroll.
+  function activateThrough(index) {
+    for (let i = 0; i <= index; i++) {
+      if (!items[i].classList.contains('is-active')) activate(items[i]);
+    }
+  }
+
+  let revealObserver = null;
+  function beginReveal() {
+    if (revealObserver || !('IntersectionObserver' in window)) return;
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) activateThrough(items.indexOf(entry.target));
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -35% 0px' });
+    items.forEach(item => revealObserver.observe(item));
+  }
+
+  if ('IntersectionObserver' in window) {
+    // Nothing moves until the user actually scrolls; then D leads the reveal.
+    window.addEventListener('scroll', beginReveal, { once: true, passive: true });
+
+    // Centered separator between the two sections: the five blocks drop into
+    // place, staggered, once it scrolls into view — full color, no fade-out.
+    if (regroup) {
+      const dropObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            regroup.classList.add('is-visible');
+            dropObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.2 });
+      dropObserver.observe(regroup);
+    }
+  } else {
+    items.forEach(item => item.classList.add('is-active'));
+    if (regroup) regroup.classList.add('is-visible');
+    if (introRow) introRow.classList.add('is-collapsed');
+  }
+}
 
 function openSection(key) {
   currentOpenKey = key;
@@ -2220,6 +2475,7 @@ function openSection(key) {
   document.getElementById('card2-tag').textContent = data.tag || "Scaffolding & Reference";
   document.getElementById('card2-title').textContent = data.card2Title || "Why & How";
   document.getElementById('section-howto').innerHTML = data.howto;
+  if (key === 'about') initDwellAnim();
 
   const dayBlocks = document.querySelectorAll('#page-bookmark .digi-day');
   const isDayKey = ['discover', 'wordwork', 'expand', 'learn', 'live'].includes(key);
