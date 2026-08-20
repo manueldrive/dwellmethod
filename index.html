@@ -12,9 +12,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ink:            #1a141e; /* Reference ink */
-  --paper:          #f2ece6; /* Reference off-white paper */
-  --paper-dim:      #e8e0d7; /* Reference dimmer paper */
+  --ink:            #1a141e;
+  --paper:          #f2ece6;
+  --paper-dim:      #e8e0d7;
   
   /* Baseline: Golden Hour Horizon */
   --d-discover:     #e28a5c;
@@ -23,7 +23,7 @@
   --d-learn:        #5d587e;
   --d-live:         #2d324f;
 
-  /* Text colors for optimal contrast per column when open */
+  /* Text colors */
   --d-intro-text:    var(--ink);
   --d-discover-text: #ffffff;
   --d-wordwork-text: #ffffff;
@@ -39,11 +39,14 @@
 
 html, body {
   height: 100%;
+  height: 100dvh;
   width: 100%;
+  width: 100dvw;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
   overflow: hidden;
+  position: fixed;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -51,7 +54,9 @@ html, body {
 .columns-wrapper {
   display: flex;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -86,7 +91,6 @@ html, body {
 .col-learn    { background: var(--d-learn); color: var(--d-learn-text); }
 .col-live     { background: var(--d-live); color: var(--d-live-text); }
 
-/* Ensure consistent text coloring for common elements when open */
 .col-headline, .col-nav-cue { color: inherit; }
 .col-subtext, .col-prompt-list li, .col-sub-prompt-list li { color: inherit; opacity: 0.95; }
 .col-step-tag, .col-nav-cue { opacity: 0.85; }
@@ -132,7 +136,6 @@ html, body {
   text-orientation: mixed;
 }
 
-/* Introduction layout when open */
 .col-intro.is-expanded .col-letter-target { display: none; }
 
 /* Brand Lockup */
@@ -153,7 +156,7 @@ html, body {
   color: var(--ink);
 }
 
-/* ── Original 5-Tile Plus Logo Mark ── */
+/* ── 5-Tile Logo Mark ── */
 .dwell-mark {
   display: inline-grid;
   grid-template-columns: repeat(3, 6px);
@@ -174,7 +177,7 @@ html, body {
 .dm-right  { grid-column: 3; grid-row: 2; background: var(--d-expand); }
 .dm-bottom { grid-column: 2; grid-row: 3; background: var(--d-live); }
 
-/* Rotated Vertical Title (Desktop & Mobile Landscape) */
+/* Rotated Vertical Title */
 .col-vertical-title {
   position: absolute;
   left: 50%;
@@ -197,7 +200,6 @@ html, body {
   opacity: 0;
 }
 
-/* Spine text colors when closed */
 .col-discover:not(.is-expanded) .col-vertical-title,
 .col-wordwork:not(.is-expanded) .col-vertical-title {
   color: #ffffff;
@@ -241,6 +243,11 @@ html, body {
   letter-spacing: -0.03em;
 }
 
+.col-subtext {
+  font-size: clamp(14px, 1.1vw, 16.5px);
+  line-height: 1.55;
+}
+
 /* Prompts / Questions */
 .col-prompt-list {
   list-style: none;
@@ -266,7 +273,7 @@ html, body {
   font-weight: 700;
 }
 
-/* Indented sub-bullets for Discovery */
+/* Indented sub-bullets */
 .col-sub-prompt-list {
   list-style: none;
   display: grid;
@@ -359,6 +366,14 @@ html, body {
 
   .dwell-column:not(.is-expanded) .col-header {
     height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .dwell-column:not(.is-expanded) .col-header-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
   }
 
   .dwell-column:not(.is-expanded) .col-vertical-title {
@@ -370,12 +385,14 @@ html, body {
     opacity: 0.95;
     pointer-events: none;
     letter-spacing: -0.01em;
+    color: #ffffff;
   }
 
   .dwell-column:not(.is-expanded) .col-letter-target {
     font-size: 22px;
     width: 26px;
     justify-content: flex-start;
+    color: #ffffff;
   }
 
   .dwell-column.is-expanded {
@@ -438,7 +455,7 @@ html, body {
   }
 }
 
-/* ── Landscape Compact Heights ── */
+/* ── Landscape Compact Heights (Mobile Landscape Scrolling & Sizing) ── */
 @media (orientation: landscape) and (max-height: 550px) {
   .dwell-column {
     padding: 16px 20px;
@@ -453,6 +470,10 @@ html, body {
   .dwell-column.is-expanded .col-expanded-body {
     margin-top: 14px;
     gap: 10px;
+  }
+
+  .col-intro .col-subtext {
+    display: none;
   }
 
   .col-headline {
@@ -476,7 +497,7 @@ html, body {
   }
 }
 
-/* ── UI Style Tester Widget ── */
+/* ── Style Tester Floating Widget ── */
 .tester-wrap {
   position: fixed;
   bottom: 18px;
@@ -614,7 +635,7 @@ html, body {
         <span class="col-step-tag">Building Blocks for Biblical Literacy</span>
         <h2 class="col-headline">Slow down. Re-read.<br>Be transformed.</h2>
         <p class="col-subtext">
-          A study tool cannot produce spiritual life; only the Holy Spirit transforms. Dwell is just a framework to slow down across five readings of a passage, quieting the noise so your heart is open to what He wants to speak. Practice a single step or stack all five.
+          True transformation comes from the Holy Spirit. Dwell is simply a rhythm to slow down across five readings so Scripture can dwell in you richly. Like the tree planted by streams in Psalm 1, it helps you delight, take root, and listen. Practice one step or stack all five.
         </p>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-discover')">
           <span class="cue-label">Begin with Discover</span>
