@@ -81,6 +81,9 @@ html, body {
 .dwell-column.is-expanded {
   flex: 4.8;
   cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Background & Body Text Colors */
@@ -102,6 +105,7 @@ html, body {
   gap: 16px;
   width: 100%;
   z-index: 2;
+  flex-shrink: 0;
 }
 
 .col-header-left {
@@ -210,7 +214,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 18px;
+  gap: 16px;
   opacity: 0;
   max-height: 0;
   transform: translateY(18px);
@@ -219,6 +223,7 @@ html, body {
   max-width: 620px;
   z-index: 2;
   overflow: hidden;
+  margin-top: auto;
 }
 
 .dwell-column.is-expanded .col-expanded-body {
@@ -226,6 +231,21 @@ html, body {
   max-height: 1000px;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+/* ── Microcapsule Prayer Tag ── */
+.col-prayer-tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 4px 12px;
+  width: fit-content;
+  letter-spacing: 0.02em;
+  margin-bottom: -2px;
 }
 
 .col-step-tag {
@@ -237,14 +257,14 @@ html, body {
 
 .col-headline {
   font-family: var(--font-display);
-  font-size: clamp(24px, 3.2vw, 42px);
+  font-size: clamp(22px, 2.8vw, 38px);
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -0.03em;
 }
 
 .col-subtext {
-  font-size: clamp(14px, 1.1vw, 16.5px);
+  font-size: clamp(14px, 1.1vw, 16px);
   line-height: 1.55;
 }
 
@@ -253,11 +273,11 @@ html, body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   padding: 0;
-  margin: 4px 0 6px;
-  font-size: clamp(15px, 1.25vw, 17.5px);
-  line-height: 1.55;
+  margin: 2px 0 4px;
+  font-size: clamp(14.5px, 1.15vw, 16.5px);
+  line-height: 1.5;
 }
 
 .col-prompt-list li {
@@ -278,8 +298,8 @@ html, body {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px 16px;
-  margin-top: 8px;
+  gap: 4px 16px;
+  margin-top: 6px;
   padding-left: 4px;
 }
 
@@ -398,7 +418,7 @@ html, body {
   .dwell-column.is-expanded {
     flex: 8.5 1 0px !important;
     padding: 24px 24px 28px;
-    justify-content: flex-start;
+    justify-content: space-between;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -429,13 +449,13 @@ html, body {
   }
 
   .col-headline {
-    font-size: 22px;
+    font-size: 21px;
     line-height: 1.2;
   }
 
   .col-prompt-list {
     gap: 10px;
-    font-size: 14.5px;
+    font-size: 14px;
     line-height: 1.45;
   }
 
@@ -459,32 +479,36 @@ html, body {
 @media (orientation: landscape) and (max-height: 550px) {
   .dwell-column {
     padding: 16px 20px;
+    justify-content: space-between !important;
   }
   
   .dwell-column.is-expanded {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between !important;
   }
 
   .dwell-column.is-expanded .col-expanded-body {
-    margin-top: 14px;
-    gap: 10px;
+    margin-top: auto !important;
+    gap: 8px;
   }
 
-  .col-intro .col-subtext {
+  .col-intro .col-subtext,
+  .col-prayer-tag {
     display: none;
   }
 
   .col-headline {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.2;
   }
 
   .col-prompt-list {
     font-size: 13px;
-    line-height: 1.45;
-    gap: 8px;
+    line-height: 1.4;
+    gap: 6px;
   }
 
   .col-vertical-title {
@@ -497,7 +521,7 @@ html, body {
   }
 }
 
-/* ── Style Tester Floating Widget ── */
+/* ── UI Style Tester Widget (Icon Only) ── */
 .tester-wrap {
   position: fixed;
   bottom: 18px;
@@ -512,22 +536,21 @@ html, body {
 .tester-toggle-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   background: var(--ink);
   color: var(--paper);
   border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 999px;
-  padding: 8px 16px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   opacity: 0.95;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 .tester-toggle-btn:hover { transform: translateY(-2px); opacity: 1; }
-.tester-toggle-btn svg { width: 15px; height: 15px; }
+.tester-toggle-btn svg { width: 20px; height: 20px; }
 
 .tester-panel {
   display: none;
@@ -655,11 +678,12 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
+        <span class="col-prayer-tag">Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are.</span>
         <span class="col-step-tag">Step One &bull; Discover</span>
         <h2 class="col-headline">Find the historical background.</h2>
         <ul class="col-prompt-list">
           <li>
-            Use the book introduction in a study Bible to find your place:
+            Use a study Bible or trusted resource briefly to set the scene:
             <ul class="col-sub-prompt-list">
               <li><strong>Author:</strong> Who wrote this?</li>
               <li><strong>Audience:</strong> Who received it?</li>
@@ -667,7 +691,7 @@ html, body {
               <li><strong>Purpose:</strong> Why was it written?</li>
             </ul>
           </li>
-          <li>Read straight through the passage once just to map the scene and notice the characters.</li>
+          <li><strong>Set extra resources aside for now.</strong> Read straight through the passage on your own to map the scene and characters.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-wordwork')">
           <span class="cue-label">Advance to Word Work</span>
@@ -716,8 +740,8 @@ html, body {
         <h2 class="col-headline">Connect to the bigger picture.</h2>
         <ul class="col-prompt-list">
           <li>Read the surrounding chapters to see how this passage fits into the whole book.</li>
-          <li>Compare two different translations to clear up tricky sentences.</li>
-          <li>Follow 1–2 related verses in the margins to see where else this idea appears.</li>
+          <li>Compare two different translations to clear up tricky phrasing.</li>
+          <li>Follow cross-references in the margins to see where else this idea appears throughout Scripture.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-learn')">
           <span class="cue-label">Advance to Learn</span>
@@ -742,7 +766,7 @@ html, body {
         <ul class="col-prompt-list">
           <li>What was the main takeaway for the very first people who read this?</li>
           <li>What does this passage teach us about who God is and how He works?</li>
-          <li>Now check commentaries, study notes, or talk with others to verify what you learned.</li>
+          <li>Check your findings in community, study notes, or commentaries to verify what you learned.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-live')">
           <span class="cue-label">Advance to Live</span>
@@ -762,11 +786,12 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
+        <span class="col-prayer-tag">Lord, correct any lies I believe. Let this knowledge increase my love, not my pride.</span>
         <span class="col-step-tag">Step Five &bull; Live</span>
         <h2 class="col-headline">Put the truth into practice.</h2>
         <ul class="col-prompt-list">
-          <li>What everyday thoughts or habits does this truth challenge?</li>
-          <li>What is one concrete way this truth will change your words and actions today?</li>
+          <li>What cultural or personal lies does this truth expose?</li>
+          <li>How will this truth shape your prayers, thoughts, words, or actions today?</li>
         </ul>
       </div>
     </section>
@@ -782,9 +807,8 @@ html, body {
       <div class="tester-list" id="paletteList"></div>
     </div>
 
-    <button type="button" class="tester-toggle-btn" onclick="toggleTester(event)">
+    <button type="button" class="tester-toggle-btn" onclick="toggleTester(event)" aria-label="Toggle Palettes">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-      Palettes (3)
     </button>
   </div>
 
