@@ -2,1260 +2,577 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Dwell | Building blocks for Biblical literacy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700;800&family=Karla:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&family=Roboto:wght@400;500;700;900&family=Spectral:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@400;600;700;900&family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Quattrocento:wght@400;700&family=Quattrocento+Sans:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Proza+Libre:wght@400;500;600;700;800&family=Raleway:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&family=Hind:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700;800;900&family=Nunito:wght@400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Raleway:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 
 <style>
-/* ══════════════════════════════════════════
-   DWELL — Shared Tokens (Palette Variables)
-══════════════════════════════════════════ */
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Default: Coast & Rust */
-  --ink:            #16252d;
-  --paper:          #fbf9f5;
-  --paper-dim:      #ede8e1;
-  --card-grey-blue: #e9eff2;
+  --ink:            #1a141e; /* Reference ink */
+  --paper:          #f2ece6; /* Reference off-white paper */
+  --paper-dim:      #e8e0d7; /* Reference dimmer paper */
   
-  --d-discover:     #2b5c68; /* Deep Teal - Logo Top */
-  --d-wordwork:     #e07a5f; /* Terracotta - Logo Left */
-  --d-expand:       #5b8e7d; /* Sage Green - Logo Right */
-  --d-learn:        #f4a261; /* Warm Orange - Logo Center */
-  --d-live:         #1d3557; /* Deep Navy - Logo Bottom */
-  
-  --active-bookmark-bg: var(--paper-dim);
+  /* Baseline: Golden Hour Horizon */
+  --d-discover:     #e28a5c;
+  --d-wordwork:     #d76b65;
+  --d-expand:       #9e6488;
+  --d-learn:        #5d587e;
+  --d-live:         #2d324f;
+
+  /* Text colors for optimal contrast per column when open */
+  --d-intro-text:    var(--ink);
+  --d-discover-text: #ffffff;
+  --d-wordwork-text: #ffffff;
+  --d-expand-text:   #ffffff;
+  --d-learn-text:    #ffffff;
+  --d-live-text:     #ffffff;
 
   --font-display: 'Raleway', sans-serif;
-  --font-sans:    'Open Sans', sans-serif;
-  --font-serif:   'Raleway', sans-serif;
+  --font-sans:    'Plus Jakarta Sans', sans-serif;
+  --font-mono:    'Space Grotesk', monospace;
+  --font-serif:   'Fraunces', serif;
 }
 
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--font-sans);
+html, body {
+  height: 100%;
+  width: 100%;
   background: var(--paper);
   color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  text-align: left;
-  padding: 10px;
-  min-height: 100vh;
+  font-family: var(--font-sans);
+  overflow: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-a { color: inherit; text-decoration: none; }
+/* ── Columns Wrapper ── */
+.columns-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 
-main { margin: 0; padding: 0; width: 100%; }
-
-/* ── Home Bento Grid ── */
-.mosaic {
+.dwell-column {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-/* ══════════════════════════════════════════
-   BOOKMARK CONTENT — lives inside the hero tile itself
-══════════════════════════════════════════ */
-.bookmark-content {
-  width: 100%;
-}
-.digi-header {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-@media (min-width: 760px) {
-  .digi-header { margin-bottom: 14px; }
-}
-.digi-header .site-wordmark-lg {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(40px, 7.5vw, 58px);
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-.digi-header .site-logo-img { 
-  --block-size: clamp(9px, 1.4vw, 12px);
-  --block-gap: clamp(3px, 0.5vw, 4px); 
+  justify-content: space-between;
+  padding: clamp(20px, 3vw, 40px);
+  cursor: pointer;
+  overflow: hidden;
+  transition: flex 0.5s cubic-bezier(0.25, 1, 0.3, 1), filter 0.2s ease, background-color 0.4s ease, color 0.4s ease;
+  user-select: none;
 }
 
-.tile-bookmark-cta {
+.dwell-column:hover:not(.is-expanded) {
+  flex: 1.25;
+  filter: brightness(1.03);
+}
+
+.dwell-column.is-expanded {
+  flex: 4.8;
+  cursor: default;
+}
+
+/* Background & Body Text Colors */
+.col-intro    { background: var(--paper-dim); color: var(--d-intro-text); }
+.col-discover { background: var(--d-discover); color: var(--d-discover-text); }
+.col-wordwork { background: var(--d-wordwork); color: var(--d-wordwork-text); }
+.col-expand   { background: var(--d-expand); color: var(--d-expand-text); }
+.col-learn    { background: var(--d-learn); color: var(--d-learn-text); }
+.col-live     { background: var(--d-live); color: var(--d-live-text); }
+
+/* Ensure consistent text coloring for common elements when open */
+.col-headline, .col-nav-cue { color: inherit; }
+.col-subtext, .col-prompt-list li, .col-sub-prompt-list li { color: inherit; opacity: 0.95; }
+.col-step-tag, .col-nav-cue { opacity: 0.85; }
+
+/* Header */
+.col-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  z-index: 2;
+}
+
+.col-header-left {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  border: none;
-  border-radius: 10px;
-  background: var(--ink);
-  color: var(--paper);
-  font: inherit;
-  font-weight: 700;
-  font-size: 14px;
-  padding: 11px 20px;
-  cursor: pointer;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-}
-.tile-bookmark-cta svg { width: 16px; height: 16px; }
-.tile-bookmark-cta:hover { opacity: 0.85; }
-.tile-bookmark-cta:active { transform: scale(0.97); }
-
-.tile {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
-  color: #ffffff;
-  overflow: hidden;
-  transition: transform .2s ease, filter .18s ease, background-color 0.3s ease;
-  cursor: pointer;
-  border: none;
-  font: inherit;
-  text-align: inherit;
-  width: 100%;
-  outline-offset: 3px;
-}
-.tile:hover { filter: brightness(0.95); transform: translateY(-2px); }
-.tile:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
-
-/* ══════════════════════════════════════════
-   HERO = THE BOOKMARK ITSELF, + SQUARE DAY TILES
-══════════════════════════════════════════ */
-.tile-bookmark {
-  grid-column: 1 / -1;
-  background: var(--active-bookmark-bg);
-  color: var(--ink);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: default;
-  padding: 30px 20px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-.tile-bookmark:hover { filter: none; transform: none; }
-
-/* Maintain square proportions on mobile day tiles */
-.tile-day, .tile-about {
-  aspect-ratio: 1 / 1;
-}
-
-.t-discover   { grid-column: 1 / span 1; grid-row: 2; background: var(--d-discover); }
-.t-wordwork   { grid-column: 2 / span 1; grid-row: 2; background: var(--d-wordwork); }
-.t-expand     { grid-column: 1 / span 1; grid-row: 3; background: var(--d-expand); }
-.t-learn      { grid-column: 2 / span 1; grid-row: 3; background: var(--d-learn); }
-.t-live       { grid-column: 1 / span 1; grid-row: 4; background: var(--d-live); }
-.tile-about   { grid-column: 2 / span 1; grid-row: 4; background: var(--paper-dim); color: var(--ink); }
-
-/* Desktop Grid Override */
-@media (min-width: 760px) {
-  body { padding: 12px; }
-  .mosaic {
-    grid-template-columns: 3fr 3fr 5fr 5fr;
-    grid-template-rows: repeat(3, 1fr);
-    gap: 12px;
-    height: calc(100vh - 24px);
-  }
-  .tile-bookmark {
-    padding: clamp(34px, 4vw, 46px) clamp(21px, 2.4vw, 33px) clamp(21px, 2.4vw, 33px);
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-  .mosaic .tile-bookmark {
-    grid-column: 1 / span 2;
-    grid-row: 1 / span 3;
-  }
-  .tile-day, .tile-about { aspect-ratio: unset; }
-  .t-discover    { grid-column: 3; grid-row: 1; }
-  .t-wordwork    { grid-column: 4; grid-row: 1; }
-  .t-expand      { grid-column: 3; grid-row: 2; }
-  .t-learn       { grid-column: 4; grid-row: 2; }
-  .t-live        { grid-column: 3; grid-row: 3; }
-  .tile-about    { grid-column: 4; grid-row: 3; }
-}
-
-/* ══════════════════════════════════════════
-   CARD BACKGROUND DESIGNS & WATERMARKS
-══════════════════════════════════════════ */
-
-.t-discover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('isaiahscroll.jpeg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.00;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.t-wordwork::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: 
-    linear-gradient(90deg, transparent 20%, rgba(255, 240, 150, 0.25) 20%, rgba(255, 240, 150, 0.25) 75%, transparent 75%) 0 25% / 100% 12px no-repeat,
-    linear-gradient(90deg, transparent 10%, rgba(255, 240, 150, 0.25) 10%, rgba(255, 240, 150, 0.25) 50%, transparent 50%) 0 45% / 100% 12px no-repeat,
-    repeating-linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.06) 0px,
-      rgba(255, 255, 255, 0.06) 1px,
-      transparent 1px,
-      transparent 14px
-    );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.t-wordwork:hover::before {
-  opacity: 0.45;
-}
-
-.t-learn .learn-halo {
-  position: absolute;
-  left: -6%;
-  bottom: -8%;
-  width: 92%;
-  height: 82%;
-  background: radial-gradient(ellipse at 32% 68%,
-    rgba(255,250,235,.5) 0%,
-    rgba(255,240,205,.26) 32%,
-    rgba(255,232,185,.1) 56%,
-    transparent 76%);
-  filter: blur(9px);
-  pointer-events: none;
-  z-index: 1;
-  animation: learnBreathe 9s ease-in-out infinite;
-}
-@keyframes learnBreathe {
-  0%, 100% { opacity: .55; }
-  50%      { opacity: .85; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .t-learn .learn-halo { animation: none; opacity: .65; }
-}
-
-/* ══════════════════════════════════════════
-   BOOKMARK TILE — CONTENT LAYOUT
-══════════════════════════════════════════ */
-.digi-prayer {
-  font-family: var(--font-serif);
-  font-size: clamp(15px, 2vw, 17px);
-  text-align: center;
-  color: var(--ink);
-  opacity: 0.8;
-  line-height: 1.55;
-  margin: 22px auto;
-  max-width: 46ch;
-}
-@media (min-width: 760px) {
-  .digi-prayer { margin: 26px auto; }
-}
-
-.digi-day {
-  margin-bottom: 26px;
-}
-.digi-day-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-radius: 9px;
-  padding: 6px 38px 6px 14px;
-  margin-bottom: 18px;
-  transition: background-color 0.3s ease;
-}
-.digi-day-header-text {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: normal;
-  color: #ffffff;
-  white-space: nowrap;
-}
-.digi-day-header-icon-circle {
-  position: absolute;
-  right: -6px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  background: #ffffff;
-  border: 2px solid;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.3s ease, color 0.3s ease;
-}
-.digi-day-header-icon-circle svg { width: 23px; height: 23px; }
-.digi-day ul { list-style: none; padding: 0; margin: 0; }
-.digi-day.is-collapsed { display: none; }
-.page-bookmark-prayer.is-hidden { display: none; }
-.section-dots-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-}
-.section-dots-nav span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-}
-.section-dots-nav span.is-active {
-  width: 20px;
-  border-radius: 4px;
-}
-.digi-day li {
-  font-size: clamp(15px, 2vw, 17px);
-  line-height: 1.55;
-  color: var(--ink);
-  margin-bottom: 10px;
-}
-
-.digi-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 8px;
   gap: 16px;
 }
-.digi-footer-dots { display: flex; justify-content: center; gap: 7px; }
-.digi-footer-dots span { width: 7px; height: 7px; border-radius: 50%; transition: background-color 0.3s ease; }
 
-.logo-header {
+/* Spine Letter Container */
+.col-letter-target {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  line-height: 1;
+  font-weight: 600;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(38px, 4.2vw, 54px);
+  letter-spacing: -0.02em;
+  opacity: 0.95;
+  transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+  color: #ffffff;
 }
 
-/* ══════════════════════════════════════════
-   DWELL LOGO MARK CSS MAPPING
-══════════════════════════════════════════ */
+/* Introduction closed state brand spine */
+.col-intro:not(.is-expanded) .col-brand-lockup {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Introduction layout when open */
+.col-intro.is-expanded .col-letter-target { display: none; }
+
+/* Brand Lockup */
+.col-brand-lockup {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.col-brand-text {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 4.8vw, 64px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* ── Original 5-Tile Plus Logo Mark ── */
 .dwell-mark {
   display: inline-grid;
-  grid-template-columns: repeat(3, var(--block-size, 10px));
-  grid-template-rows: repeat(3, var(--block-size, 10px));
-  gap: var(--block-gap, 3px);
+  grid-template-columns: repeat(3, 6px);
+  grid-template-rows: repeat(3, 6px);
+  gap: 2.5px;
   flex-shrink: 0;
+  transform: translateY(-3px);
 }
-.dwell-mark span {
-  width: var(--block-size, 10px);
-  height: var(--block-size, 10px);
-  border-radius: 2px;
-  transition: background-color 0.3s ease;
+.dwell-mark span { 
+  width: 6px; 
+  height: 6px; 
+  border-radius: 1.5px; 
+  transition: background-color 0.4s ease; 
 }
-.dwell-mark .dm-top    { grid-column: 2; grid-row: 1; background: var(--d-discover); }
-.dwell-mark .dm-left   { grid-column: 1; grid-row: 2; background: var(--d-wordwork); }
-.dwell-mark .dm-center { grid-column: 2; grid-row: 2; background: var(--d-learn); }
-.dwell-mark .dm-right  { grid-column: 3; grid-row: 2; background: var(--d-expand); }
-.dwell-mark .dm-bottom { grid-column: 2; grid-row: 3; background: var(--d-live); }
+.dm-top    { grid-column: 2; grid-row: 1; background: var(--d-discover); }
+.dm-left   { grid-column: 1; grid-row: 2; background: var(--d-wordwork); }
+.dm-center { grid-column: 2; grid-row: 2; background: var(--d-learn); }
+.dm-right  { grid-column: 3; grid-row: 2; background: var(--d-expand); }
+.dm-bottom { grid-column: 2; grid-row: 3; background: var(--d-live); }
 
-.site-logo-img { --block-size: 7px; --block-gap: 2px; }
-
-.site-wordmark-lg {
-  font-family: var(--font-sans);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  display: inline-block;
-  line-height: 1;
-}
-
-.bookmark-tagline {
-  font-size: 13px;
-  line-height: 1.35;
-  color: var(--ink);
-  text-align: center;
-  max-width: 32ch;
-  margin: 0 auto;
-}
-@media (min-width: 760px) {
-  .bookmark-tagline { font-size: clamp(12px, 1.8vw, 15px); max-width: 36ch; }
-}
-
-/* Day Tiles typography */
-.tile-day {
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 16px;
-}
-@media (min-width: 760px) {
-  .tile-day { padding: 20px; }
-}
-.tile-day .day-tile-name {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(19px, 4.2vw, 36px);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-/* About Tile */
-.tile-about {
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 16px;
-}
-@media (min-width: 760px) {
-  .tile-about { padding: 20px; }
-}
-.tile-about .about-logo-mark {
-  --block-size: 7px;
-  --block-gap: 2px;
-}
-.tile-about .about-tagline {
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--ink);
-  opacity: 0.75;
-  margin: 10px 0 0;
-}
-@media (min-width: 760px) {
-  .tile-about .about-tagline { font-size: clamp(12px, 1.3vw, 14px); }
-}
-.tile-about .about-label-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 12px;
-}
-.tile-about .about-label {
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: .04em;
-  color: var(--ink);
-  opacity: 0.8;
-}
-.tile-about .about-arrow { width: 15px; height: 15px; color: var(--ink); opacity: 0.8; }
-
-/* ══════════════════════════════════════════
-   MOBILE TOP APP BAR (DETAIL VIEW ONLY)
-══════════════════════════════════════════ */
-.mobile-nav-lockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: transparent;
-  border: none;
-  color: var(--ink);
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 12px;
-  margin-bottom: 18px;
-  margin-left: -8px;
-  transition: background-color 0.15s ease, transform 0.15s ease;
-}
-.mobile-nav-lockup:hover { background: rgba(0,0,0,0.04); }
-.mobile-nav-lockup:active { transform: scale(0.98); }
-
-.mobile-back-icon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink);
-  opacity: 0.85;
-}
-.mobile-back-icon svg { width: 20px; height: 20px; }
-
-.mobile-brand-title {
-  font-family: var(--font-sans);
-  font-weight: 800;
-  font-size: 26px;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.mobile-nav-lockup .dwell-mark {
-  --block-size: 6px;
-  --block-gap: 2px;
-}
-
-/* ══════════════════════════════════════════
-   DETAIL PAGE LAYOUT
-══════════════════════════════════════════ */
-.page-view {
-  display: none;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  width: 100%;
-}
-
-@media (min-width: 760px) {
-  .page-view {
-    grid-template-columns: 6fr 10fr;
-    gap: 12px;
-    align-items: start;
-  }
-
-  .page-view .tile-bookmark {
-    grid-column: 1;
-    display: flex;
-    position: sticky;
-    top: 12px;
-    height: calc(100vh - 24px);
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-}
-
-@media (max-width: 759px) {
-  .page-view .tile-bookmark {
-    display: none;
-  }
-}
-
-.content-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-width: 0;
-  width: 100%;
-  padding-bottom: 40px;
-}
-
-@media (min-width: 760px) {
-  .content-stack { gap: 14px; }
-}
-
-.card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: clamp(20px, 4vw, 36px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-  border: 1px solid rgba(0,0,0,0.06);
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.howto-card {
-  background: var(--card-grey-blue);
-  border: none;
-  box-shadow: none;
-  position: relative;
-  overflow: hidden;
-  transition: background-color 0.3s ease;
-}
-
-.howto-header-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 18px;
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.card-tag {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--ink);
-  opacity: 0.6;
-}
-
-.howto-title {
-  font-family: var(--font-sans);
-  font-size: clamp(20px, 2.4vw, 25px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.context-line { display: block; text-align: center; margin-top: 6px; }
-
-.howto-list {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  font-size: 14.5px;
-  line-height: 1.65;
-  color: var(--ink);
-  position: relative;
-}
-.howto-list a { color: var(--d-wordwork); font-weight: 600; text-decoration: underline; }
-
-.howto-context-line {
-  text-align: center;
-  font-weight: 700;
-  margin: 6px 0 0;
-}
-
-.howto-callout {
-  background: var(--paper);
-  border-radius: 14px;
-  padding: 16px 18px;
-  transition: background-color 0.3s ease;
-}
-.howto-callout p { margin: 0; }
-.howto-callout p + p { margin-top: 4px; }
-
-.howto-envelope-hero {
-  display: flex;
-  justify-content: center;
-  padding: 8px 0;
-}
-.envelope-hero-svg {
-  width: 130px;
-  height: auto;
-  color: var(--d-discover);
-  animation: envelopeFloat 4s ease-in-out infinite;
-}
-@keyframes envelopeFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-.big-story-arc {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 10px 4px 4px;
-}
-.big-story-arc::before {
-  content: "";
+/* Rotated Vertical Title (Desktop & Mobile Landscape) */
+.col-vertical-title {
   position: absolute;
-  left: 8px;
-  right: 8px;
-  top: 8px;
-  height: 2px;
-  background: rgba(0,0,0,0.15);
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  color: #ffffff;
 }
-.bsa-stop {
-  position: relative;
+
+.dwell-column.is-expanded .col-vertical-title {
+  opacity: 0;
+}
+
+/* Spine text colors when closed */
+.col-discover:not(.is-expanded) .col-vertical-title,
+.col-wordwork:not(.is-expanded) .col-vertical-title {
+  color: #ffffff;
+}
+
+/* Expanded Body Content */
+.col-expanded-body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
+  justify-content: flex-end;
+  gap: 18px;
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, max-height 0.35s ease;
+  max-width: 620px;
+  z-index: 2;
+  overflow: hidden;
 }
-.bsa-dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 3px solid var(--card-grey-blue);
-  box-sizing: border-box;
+
+.dwell-column.is-expanded .col-expanded-body {
+  opacity: 1;
+  max-height: 1000px;
+  transform: translateY(0);
+  pointer-events: auto;
 }
-.bsa-label {
-  font-family: var(--font-display);
+
+.col-step-tag {
   font-size: 11px;
   font-weight: 800;
-  text-align: center;
-  color: var(--ink);
-}
-
-.genre-cards, .wordwork-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin: 10px 0;
-}
-@media (min-width: 600px) {
-  .genre-cards, .wordwork-cards { grid-template-columns: repeat(3, 1fr); }
-}
-.genre-card, .wordwork-card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 14px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-}
-.genre-card-pct { font-weight: 900; font-size: 24px; display: block; color: var(--ink); }
-.genre-card-title, .wordwork-card-title { font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; display: block; margin: 4px 0; color: var(--ink); }
-.genre-card p, .wordwork-card li { font-size: 12.5px; opacity: 0.85; line-height: 1.45; }
-.wordwork-card ul { padding-left: 16px; margin: 0; }
-
-.resource-links {
-  background: #fff;
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin: 8px 0;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-}
-.resource-links-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; opacity: 0.7; display: block; margin-bottom: 8px; }
-.resource-link-row { display: flex; justify-content: space-between; font-size: 13px; margin-top: 6px; }
-
-/* ── About Section Typography & Styling ── */
-.about-section-heading {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-top: 14px;
-  margin-bottom: -4px;
-}
-
-.about-acronym-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 6px 0;
-}
-
-.about-acronym-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: #ffffff;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-}
-
-.about-acronym-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: #ffffff;
-  border: 2px solid;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.about-acronym-icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.about-acronym-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.about-kicker {
-  font-size: 10.5px;
-  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.16em;
+}
+
+.col-headline {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.2vw, 42px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+/* Prompts / Questions */
+.col-prompt-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+  margin: 4px 0 6px;
+  font-size: clamp(15px, 1.25vw, 17.5px);
+  line-height: 1.55;
+}
+
+.col-prompt-list li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.col-prompt-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  opacity: 0.55;
+  font-weight: 700;
+}
+
+/* Indented sub-bullets for Discovery */
+.col-sub-prompt-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 16px;
+  margin-top: 8px;
+  padding-left: 4px;
+}
+
+.col-sub-prompt-list li {
+  padding-left: 14px;
+  font-size: 0.92em;
+}
+
+.col-sub-prompt-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
   opacity: 0.7;
 }
 
-.about-acronym-title {
-  font-weight: 800;
-  color: var(--ink);
-  font-size: 14.5px;
-}
-
-/* ── DWELL Scroll Animation: Intro Letters, List Reveal, Falling Separator ── */
-.dwell-intro-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 22px 0 30px;
-  max-height: 400px;
-  overflow: hidden;
-  transition: max-height .5s ease .1s, margin .5s ease .1s, opacity .4s ease .1s;
-}
-.dwell-intro-row.is-collapsed {
-  max-height: 0;
-  margin: 0;
-  opacity: 0;
-}
-.dwell-intro-cube {
-  width: 84px;
-  height: 84px;
-  border-radius: 18px;
-  margin-right: 14px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 12px;
-  overflow: hidden;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 30px;
-  line-height: 1;
-  color: #ffffff;
-  flex-shrink: 0;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  transition: opacity .5s ease, transform .5s ease, width .5s ease .1s, margin-right .5s ease .1s, padding .5s ease .1s;
-  will-change: transform, opacity, width;
-}
-.dwell-intro-cube:last-child { margin-right: 0; }
-.dwell-intro-cube.is-used {
-  opacity: 0;
-  box-shadow: none;
-  transform: scale(0.5) translateY(10px);
-  width: 0;
-  padding: 0;
-  margin-right: 0;
-}
-
-/* The whole list card stays invisible (but still occupies its space) until its
-   letter lands — no empty placeholder box waiting on screen. */
-.js .about-acronym-item {
-  opacity: 0;
-  transform: translateY(14px) scale(0.96);
-  transition: opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1);
-}
-.js .about-acronym-item.is-active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.js .about-acronym-icon,
-.js .about-acronym-title,
-.js .about-acronym-content .about-kicker,
-.js .about-acronym-content p {
-  opacity: 0;
-}
-.js .about-acronym-icon {
-  transform: scale(0.35);
-  transition: opacity .45s ease, transform .45s cubic-bezier(.34,1.56,.64,1);
-}
-.js .about-acronym-title,
-.js .about-acronym-content .about-kicker,
-.js .about-acronym-content p {
-  transform: translateY(8px);
-  transition: opacity .5s ease, transform .5s ease;
-}
-.js .about-acronym-item.is-active .about-acronym-icon {
-  opacity: 1;
-  transform: scale(1);
-}
-.js .about-acronym-item.is-active .about-acronym-title {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: .1s;
-}
-.js .about-acronym-item.is-active .about-acronym-content .about-kicker {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: .18s;
-}
-.js .about-acronym-item.is-active .about-acronym-content p {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: .26s;
-}
-
-.dwell-flip-clone {
-  position: fixed;
-  border-radius: 12px;
-  pointer-events: none;
-  z-index: 9999;
-  display: flex;
+/* Navigation hint gesture */
+.col-nav-cue {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 19px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  gap: 10px;
+  margin-top: 4px;
+  padding: 6px 0;
+  cursor: pointer;
+  width: fit-content;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  user-select: none;
+}
+
+.col-nav-cue:hover {
   opacity: 1;
-  transition: transform .55s cubic-bezier(.5,0,.15,1), border-radius .55s ease, opacity .55s ease .1s;
-  will-change: transform, opacity;
+  transform: translateX(4px);
 }
 
-/* Centered separator between Flexible Building Blocks and The Role of the Holy
-   Spirit: the five blocks drop into place in full color and stay that way. */
-.dwell-regroup {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 8px;
-  min-height: 54px;
-}
-.dwell-regroup-slot {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  box-shadow: 0 5px 12px rgba(0,0,0,0.16);
-  opacity: 0;
-  transform: translateY(-56px) scale(0.5);
-  transition: opacity .5s ease, transform .5s cubic-bezier(.3,.9,.4,1.1);
-}
-.dwell-regroup-slot:nth-child(1) { transition-delay: 0s; }
-.dwell-regroup-slot:nth-child(2) { transition-delay: .1s; }
-.dwell-regroup-slot:nth-child(3) { transition-delay: .2s; }
-.dwell-regroup-slot:nth-child(4) { transition-delay: .3s; }
-.dwell-regroup-slot:nth-child(5) { transition-delay: .4s; }
-.dwell-regroup.is-visible .dwell-regroup-slot[data-key="discover"] { opacity: 1; transform: scale(1) rotate(-6deg) translateY(-4px); }
-.dwell-regroup.is-visible .dwell-regroup-slot[data-key="wordwork"] { opacity: 1; transform: scale(1) rotate(4deg); }
-.dwell-regroup.is-visible .dwell-regroup-slot[data-key="expand"]   { opacity: 1; transform: scale(1) rotate(-3deg) translateY(-6px); }
-.dwell-regroup.is-visible .dwell-regroup-slot[data-key="learn"]    { opacity: 1; transform: scale(1) rotate(5deg); }
-.dwell-regroup.is-visible .dwell-regroup-slot[data-key="live"]     { opacity: 1; transform: scale(1) rotate(-4deg) translateY(-3px); }
-
-/* ── Dwell Guides Container & Cards ── */
-.dwell-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  width: 100%;
-  margin: 0.5rem 0 1rem;
-  font-family: var(--font-sans);
-}
-
-.dwell-card {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 180px;
-  padding: 1.25rem;
-  border-radius: 12px;
-  text-decoration: none !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.dwell-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.dwell-card .tag {
-  font-size: 0.75rem;
+.cue-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  opacity: 0.85;
 }
 
-.dwell-card .passage-title {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 700;
-  line-height: 1.25;
-  margin: auto 0;
-}
-
-.dwell-card .action-label {
-  font-size: 0.85rem;
-  font-weight: 600;
+.cue-arrow {
+  width: 22px;
+  height: 22px;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  animation: nudgeForward 2.2s infinite ease-in-out;
 }
 
-.card-teal {
-  background-color: var(--d-discover);
+@keyframes nudgeForward {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
 }
 
-.card-terracotta {
-  background-color: var(--d-wordwork);
+/* ── Mobile Layout (< 768px in Portrait Only) ── */
+@media (max-width: 768px) and (orientation: portrait) {
+  html, body {
+    overflow: hidden;
+    height: 100dvh;
+  }
+  
+  .columns-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .dwell-column {
+    flex: 1 1 0px !important;
+    min-height: 0;
+    padding: 0 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    justify-content: center;
+    transition: flex 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  }
+
+  .col-intro:not(.is-expanded) .col-brand-lockup {
+    position: static;
+    transform: none;
+    writing-mode: horizontal-tb;
+  }
+
+  .dwell-column:not(.is-expanded) .col-header {
+    height: 100%;
+  }
+
+  .dwell-column:not(.is-expanded) .col-vertical-title {
+    position: static;
+    transform: none;
+    writing-mode: horizontal-tb;
+    font-size: 18px;
+    font-weight: 800;
+    opacity: 0.95;
+    pointer-events: none;
+    letter-spacing: -0.01em;
+  }
+
+  .dwell-column:not(.is-expanded) .col-letter-target {
+    font-size: 22px;
+    width: 26px;
+    justify-content: flex-start;
+  }
+
+  .dwell-column.is-expanded {
+    flex: 8.5 1 0px !important;
+    padding: 24px 24px 28px;
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dwell-column.is-expanded .col-header {
+    margin-bottom: auto;
+  }
+
+  .dwell-column.is-expanded .col-vertical-title {
+    display: none;
+  }
+
+  .dwell-column.is-expanded .col-letter-target {
+    font-size: 30px;
+    width: auto;
+  }
+
+  .col-brand-text {
+    font-size: 38px;
+  }
+
+  .dwell-mark {
+    transform: translateY(-2px);
+  }
+
+  .dwell-column.is-expanded .col-expanded-body {
+    margin-top: auto;
+  }
+
+  .col-headline {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .col-prompt-list {
+    gap: 10px;
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+
+  .col-sub-prompt-list {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  @keyframes nudgeForward {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  .col-nav-cue .cue-arrow svg {
+    transform: rotate(90deg);
+  }
 }
 
-.card-sage {
-  background-color: var(--d-expand);
+/* ── Landscape Compact Heights ── */
+@media (orientation: landscape) and (max-height: 550px) {
+  .dwell-column {
+    padding: 16px 20px;
+  }
+  
+  .dwell-column.is-expanded {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+
+  .dwell-column.is-expanded .col-expanded-body {
+    margin-top: 14px;
+    gap: 10px;
+  }
+
+  .col-headline {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .col-prompt-list {
+    font-size: 13px;
+    line-height: 1.45;
+    gap: 8px;
+  }
+
+  .col-vertical-title {
+    bottom: 20px;
+    font-size: 18px;
+  }
+
+  .col-intro:not(.is-expanded) .col-brand-lockup {
+    bottom: 20px;
+  }
 }
 
-.card-disabled {
-  background-color: #e5e7eb;
-  color: #9ca3af !important;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-.card-disabled:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-.ts-scroll { 
-  margin-top: 10px; 
-  background: #fff; 
-  padding: 12px 8px; 
-  border-radius: 12px; 
-  border: 1px solid rgba(0,0,0,0.05); 
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02); 
-  width: 100%;
-  box-sizing: border-box;
-}
-.ts-inner { width: 100%; }
-.ts-bar { 
-  height: 36px; 
-  border: 2px solid var(--ink); 
-  border-radius: 6px; 
-  background: linear-gradient(90deg, #f6f6f4, #e3e3df 50%, #f6f6f4); 
-  display: flex; 
-}
-.ts-bar-half { 
-  flex: 1; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-weight: 800; 
-  font-size: clamp(8px, 2.5vw, 11px); 
-  letter-spacing: .02em; 
-  color: var(--ink); 
-  text-align: center;
-  padding: 0 2px;
-}
-.ts-bar-divider { width: 1px; background: rgba(0,0,0,0.15); }
-.ts-ticks { display: flex; align-items: flex-start; padding: 0 2px; }
-.ts-tick { display: flex; flex-direction: column; align-items: center; flex: 1; }
-.ts-tick-line { width: 1px; background: rgba(22,37,45,.45); }
-.ts-h1 .ts-tick-line { height: 8px; }
-.ts-h2 .ts-tick-line { height: 18px; }
-.ts-h3 .ts-tick-line { height: 28px; }
-.ts-h4 .ts-tick-line { height: 36px; }
-.ts-tick-label { 
-  margin-top: 4px; 
-  font-size: clamp(8px, 2.3vw, 10px); 
-  font-weight: 700; 
-  color: var(--ink); 
-  text-align: center; 
-  line-height: 1.1; 
-}
-
-.bridge-diagram { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
-@media (min-width: 600px) { .bridge-diagram { flex-direction: row; align-items: center; gap: 0; } }
-.bridge-bank { flex: 1; background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; padding: 14px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-.bridge-bank-label { font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: 4px; color: var(--ink); }
-.bridge-bank p { font-size: 12.5px; opacity: 0.85; margin: 0; }
-.bridge-span { display: flex; flex-direction: column; align-items: center; padding: 6px 10px; }
-.bridge-line { width: 2px; height: 14px; background: repeating-linear-gradient(180deg, var(--ink) 0 4px, transparent 4px 8px); }
-@media (min-width: 600px) { .bridge-line { width: 20px; height: 2px; background: repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 8px); } }
-.bridge-span-label { font-size: 10px; font-weight: 800; text-align: center; max-width: 100px; margin: 2px 0; }
-
-.visual-example-container {
-  margin-top: 10px;
-  padding: 18px;
-  background: #fff;
-  border-radius: 12px;
-  text-align: center;
-  font-family: var(--font-serif);
-  font-size: 18px;
-  font-weight: 700;
-  border: 1px dashed rgba(0,0,0,0.18);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-}
-.pill-blank {
-  display: inline-block;
-  width: 120px;
-  height: 26px;
-  background: var(--paper-dim);
-  border-radius: 999px;
-  vertical-align: middle;
-  margin: 0 4px;
-}
-
-/* ══════════════════════════════════════════
-   UI TESTER — SUBTLE FLOATING GLOBE BUTTON & DRAWER
-══════════════════════════════════════════ */
-.palette-tester {
+/* ── UI Style Tester Widget ── */
+.tester-wrap {
   position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 10000;
+  bottom: 18px;
+  right: 18px;
+  z-index: 999999;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   font-family: var(--font-sans);
 }
 
-.palette-toggle-btn {
+.tester-toggle-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
+  gap: 8px;
   background: var(--ink);
   color: var(--paper);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
+  padding: 8px 16px;
   cursor: pointer;
-  opacity: 0.28;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-  transition: opacity 0.25s ease, transform 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  opacity: 0.95;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
-.palette-toggle-btn:hover {
-  opacity: 1;
-  transform: scale(1.08);
-  filter: brightness(1.15);
-}
-.palette-toggle-btn svg { width: 17px; height: 17px; }
+.tester-toggle-btn:hover { transform: translateY(-2px); opacity: 1; }
+.tester-toggle-btn svg { width: 15px; height: 15px; }
 
-.palette-panel {
+.tester-panel {
   display: none;
   background: #ffffff;
+  color: #16252d;
   border-radius: 18px;
   padding: 16px;
   margin-bottom: 10px;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.25);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.25);
   border: 1px solid rgba(0,0,0,0.12);
-  width: 330px;
-  max-height: 560px;
+  width: 320px;
+  max-height: 480px;
   overflow-y: auto;
 }
-.palette-panel.open { display: block; animation: panelFade .2s ease-out; }
-@keyframes panelFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.tester-panel.open { display: block; }
 
-.palette-panel-header {
+.tester-panel-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(0,0,0,0.08);
 }
-.palette-panel-title {
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--ink);
-}
-.palette-count {
+.tester-title {
   font-size: 11px;
-  font-weight: 700;
-  color: rgba(22,37,45,0.55);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #16252d;
 }
 
-.palette-tabs {
+.tester-list {
   display: flex;
+  flex-direction: column;
   gap: 6px;
-  margin-bottom: 12px;
-}
-.palette-tab {
-  flex: 1;
-  border: none;
-  border-radius: 8px;
-  background: rgba(0,0,0,0.05);
-  color: var(--ink);
-  opacity: 0.6;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 7px 0;
-  cursor: pointer;
-  transition: background 0.15s ease, opacity 0.15s ease;
-}
-.palette-tab:hover { opacity: 0.85; }
-.palette-tab.active {
-  background: var(--ink);
-  color: var(--paper);
-  opacity: 1;
 }
 
-.font-list {
+.tester-card {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-}
-.font-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 10px 12px;
-  background: #fbfbfb;
-  border: 1.5px solid rgba(0,0,0,0.06);
-  border-radius: 9px;
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
-}
-.font-card:hover {
-  background: #f4f7f8;
-  border-color: var(--ink);
-  transform: translateY(-1px);
-}
-.font-card.active {
-  border-color: var(--ink);
-  background: #edf3f5;
-}
-.font-card-name {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.font-card-name span.tag {
-  font-size: 9px;
-  text-transform: uppercase;
-  font-weight: 800;
-  padding: 2px 5px;
-  background: rgba(0,0,0,0.06);
-  border-radius: 4px;
-}
-.font-preview {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.font-preview-display {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.1;
-}
-.font-preview-sans {
-  font-size: 12px;
-  color: rgba(22,37,45,0.7);
-  line-height: 1.3;
-}
-
-.palette-group-label {
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: rgba(22,37,45,0.45);
-  margin: 10px 0 6px 2px;
-}
-
-.palette-list {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.palette-card {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   padding: 8px 10px;
   background: #fbfbfb;
   border: 1.5px solid rgba(0,0,0,0.06);
   border-radius: 9px;
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
-.palette-card:hover {
+.tester-card:hover {
   background: #f4f7f8;
-  border-color: var(--ink);
-  transform: translateY(-1px);
+  border-color: #16252d;
 }
-.palette-card.active {
-  border-color: var(--ink);
+.tester-card.active {
+  border-color: #16252d;
   background: #edf3f5;
 }
 
-.palette-card-name {
+.tester-card-name {
   font-size: 12px;
   font-weight: 700;
-  color: var(--ink);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.palette-card-name span.tag {
+.tester-card-name span.tag {
   font-size: 9px;
   text-transform: uppercase;
   font-weight: 800;
@@ -1264,1265 +581,329 @@ main { margin: 0; padding: 0; width: 100%; }
   border-radius: 4px;
 }
 
-.palette-swatches {
+.tester-swatches {
   display: flex;
-  gap: 4px;
-  height: 16px;
-  border-radius: 4px;
+  gap: 3px;
+  height: 12px;
+  border-radius: 3px;
   overflow: hidden;
 }
-.palette-swatches span { flex: 1; }
-
-.custom-hex-section {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(0,0,0,0.08);
-}
-.custom-hex-title {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--ink);
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.custom-hex-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-.hex-field {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: #f7f7f7;
-  padding: 4px 6px;
-  border-radius: 6px;
-  border: 1px solid rgba(0,0,0,0.08);
-}
-.hex-field label {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--ink);
-  flex: 1;
-  line-height: 1.2;
-}
-.hex-field input[type="color"] {
-  -webkit-appearance: none;
-  border: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  background: none;
-}
-.hex-field input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-.hex-field input[type="color"]::-webkit-color-swatch { border-radius: 4px; border: 1px solid rgba(0,0,0,0.15); }
-
-/* ══════════════════════════════════════════
-   3-UP LANDSCAPE PRINT ENGINE
-══════════════════════════════════════════ */
-.print-page-1, .print-page-2 { display: none; }
-
-@media print {
-  @page {
-    size: landscape;
-    margin: 0.2in;
-  }
-
-  body {
-    background: #ffffff !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .palette-tester, main, body > *:not(.print-page-1):not(.print-page-2) {
-    display: none !important;
-  }
-
-  .print-page-1, .print-page-2 {
-    display: flex !important;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: center;
-    gap: 0.25in;
-    width: 100%;
-    background: #ffffff;
-    box-sizing: border-box;
-  }
-
-  .print-page-1 {
-    height: 6.3in;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  .print-bm {
-    flex: 1;
-    background: #ffffff !important;
-    border-radius: 16px;
-    padding: 0.2in 0.2in;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 8px;
-    position: relative;
-    box-sizing: border-box;
-    break-inside: avoid;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .print-bm-spacer { height: 16px; }
-
-  .print-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .print-wordmark {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 50px;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-  }
-
-  .print-logo-img {
-    --block-size: 8px;
-    --block-gap: 2px;
-  }
-
-  .print-prayer {
-    font-family: var(--font-serif);
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--ink);
-    text-align: left;
-  }
-  .print-card {
-    background: #ffffff !important;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .print-pill-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 6px;
-  }
-
-  .print-pill {
-    flex: 1;
-    background: var(--accent-color) !important;
-    color: #ffffff !important;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-family: var(--font-display);
-    font-size: 19px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-  }
-
-  .print-icon-circle {
-    width: 58px;
-    height: 58px;
-    border-radius: 10px;
-    background: #ffffff !important;
-    border: 3px solid var(--accent-color) !important;
-    margin-left: -29px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-  }
-
-  .print-banner-icon {
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-    color: var(--accent-color);
-  }
-
-  .print-body {
-    padding: 8px 12px;
-    font-size: 12px;
-    line-height: 1.42;
-    color: var(--ink);
-  }
-
-  .print-body p { margin-bottom: 5px; }
-  .print-body ul { list-style: none; padding-left: 0; margin-top: 4px; margin-bottom: 0; }
-  .print-body li { margin-bottom: 3px; }
-
-  .print-page-2 .print-header { gap: 6px; margin-bottom: -2px; }
-  .print-page-2 .print-wordmark { font-size: 30px; }
-  .print-page-2 .print-logo-img { --block-size: 5px; --block-gap: 1.5px; }
-  .print-page-2 .print-bm { gap: 5px; }
-  .print-page-2 .print-bm-spacer { height: 8px; }
-  .print-page-2 .print-prayer { font-size: 12px; line-height: 1.35; }
-  .print-page-2 .print-pill { padding: 7px 16px; font-size: 15px; }
-  .print-page-2 .print-icon-circle { width: 44px; height: 44px; margin-left: -22px; border-width: 2px; }
-  .print-page-2 .print-banner-icon { width: 22px; height: 22px; }
-  .print-page-2 .print-pill-row { margin-bottom: 4px; }
-  .print-page-2 .print-body { padding: 5px 10px; font-size: 10.5px; line-height: 1.3; }
-  .print-page-2 .print-body li { margin-bottom: 2px; }
-
-  .context-list-print {
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin: 4px 0 5px 0;
-    color: var(--ink);
-    text-align: center;
-  }
-
-  .print-footer-group { display: flex; flex-direction: column; gap: 6px; }
-  .print-dots { display: flex; justify-content: center; gap: 6px; }
-  .print-dot { width: 6px; height: 6px; border-radius: 50%; }
-  .print-footer { padding-top: 4px; font-size: 10px; text-align: center; opacity: 0.8; font-weight: 600; }
-}
+.tester-swatches span { flex: 1; }
 </style>
 </head>
 <body>
 
-<main>
-  <div class="mosaic" id="home-view">
-    <div class="tile tile-bookmark" id="home-bookmark">
-      <div class="bookmark-content">
-        <div class="digi-header">
-          <div class="logo-header" onclick="closeSection()" style="cursor: pointer;" title="Home">
-            <span class="site-wordmark-lg">Dwell</span>
-            <span class="dwell-mark site-logo-img" role="img" aria-label="Dwell"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span>
+  <!-- Column Accordion -->
+  <main class="columns-wrapper" id="columnsWrapper">
+    
+    <!-- Intro Card -->
+    <section class="dwell-column col-intro is-expanded" onclick="handleColumnClick(this, event)">
+      <div class="col-header">
+        <div class="col-brand-lockup">
+          <span class="col-brand-text">Dwell</span>
+          <div class="dwell-mark">
+            <span class="dm-top"></span>
+            <span class="dm-left"></span>
+            <span class="dm-center"></span>
+            <span class="dm-right"></span>
+            <span class="dm-bottom"></span>
           </div>
-        </div>
-
-        <p class="digi-prayer">"Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen."</p>
-
-        <div class="digi-day">
-          <div class="digi-day-header" style="background:var(--d-discover);">
-            <span class="digi-day-header-text">1 | Discover</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-discover); color:var(--d-discover);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="m20 20-4.35-4.35"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>Use a study Bible to ground the passage in historical context: <span class="context-line"><strong>author · time frame · audience · purpose</strong></span></li>
-              <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
-            </ul>
-        </div>
-
-        <div class="digi-day">
-          <div class="digi-day-header" style="background:var(--d-wordwork);">
-            <span class="digi-day-header-text">2 | Word Work</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-wordwork); color:var(--d-wordwork);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
-              <li>Which words need more clarity? Look them up — what do you learn?</li>
-              <li>How would you summarize the passage in 1–2 sentences?</li>
-            </ul>
-        </div>
-
-        <p class="digi-prayer">"Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen."</p>
-
-        <div class="digi-day">
-          <div class="digi-day-header" style="background:var(--d-expand);">
-            <span class="digi-day-header-text">3 | Expand</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-expand); color:var(--d-expand);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10.5"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>Reread the passage — what questions come to mind? Can other translations clarify them?</li>
-              <li>Read the passages right before and after this section — how do they connect to this passage?</li>
-              <li>Review 1–2 cross references — how does this passage fit into the larger story of Scripture?</li>
-            </ul>
-        </div>
-
-        <div class="digi-day">
-          <div class="digi-day-header" style="background:var(--d-learn);">
-            <span class="digi-day-header-text">4 | Learn</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-learn); color:var(--d-learn);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>How would the original audience have understood this passage?</li>
-              <li>What does this passage reveal about who God is — His character, attributes, or eternal purpose?</li>
-              <li><em>Verify your findings in community.</em></li>
-            </ul>
-        </div>
-
-        <div class="digi-day">
-          <div class="digi-day-header" style="background:var(--d-live);">
-            <span class="digi-day-header-text">5 | Live</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-live); color:var(--d-live);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>What cultural or personal lies are challenged by the truth of who God is?</li>
-              <li>How will the truth from this passage shape your prayers, thoughts, words, and actions today?</li>
-            </ul>
-        </div>
-
-        <div class="digi-footer">
-          <div class="digi-footer-dots">
-            <span style="background:var(--d-discover);"></span>
-            <span style="background:var(--d-wordwork);"></span>
-            <span style="background:var(--d-expand);"></span>
-            <span style="background:var(--d-learn);"></span>
-            <span style="background:var(--d-live);"></span>
-          </div>
-          <button class="tile-bookmark-cta" onclick="window.print()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            Print Bookmark
-          </button>
         </div>
       </div>
-    </div>
-
-    <button type="button" class="tile tile-day t-discover" onclick="openSection('discover')">
-      <span class="day-tile-name">Discover</span>
-    </button>
-
-    <button type="button" class="tile tile-day t-wordwork" onclick="openSection('wordwork')">
-      <span class="day-tile-name">Word Work</span>
-    </button>
-
-    <button type="button" class="tile tile-day t-expand" onclick="openSection('expand')">
-      <span class="day-tile-name">Expand</span>
-    </button>
-
-    <button type="button" class="tile tile-day t-learn" onclick="openSection('learn')">
-      <span class="day-tile-name">Learn</span>
-    </button>
-
-    <button type="button" class="tile tile-day t-live" onclick="openSection('live')">
-      <span class="day-tile-name">Live</span>
-    </button>
-
-    <button type="button" class="tile tile-about" onclick="openSection('about')">
-      <span class="dwell-mark about-logo-mark" role="img" aria-label="Dwell"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span>
-      <p class="about-tagline">Building blocks for Biblical literacy, because quick answers don't produce deep lives.</p>
-      <span class="about-label-row">
-        <span class="about-label">Start Here</span>
-        <svg class="about-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </span>
-    </button>
-  </div>
-
-  <div class="page-view" id="page-view">
-    <div class="tile tile-bookmark" id="page-bookmark">
-      <div class="bookmark-content">
-        <div class="digi-header">
-          <div class="logo-header" onclick="closeSection()" style="cursor: pointer;" title="Home">
-            <span class="site-wordmark-lg">Dwell</span>
-            <span class="dwell-mark site-logo-img" role="img" aria-label="Dwell"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span>
-          </div>
-        </div>
-
-        <p class="digi-prayer page-bookmark-prayer" data-prayer="1">"Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen."</p>
-
-        <div class="digi-day" data-day="discover">
-          <div class="digi-day-header" style="background:var(--d-discover);">
-            <span class="digi-day-header-text">1 | Discover</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-discover); color:var(--d-discover);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="m20 20-4.35-4.35"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>Use a study Bible to ground the passage in historical context: <span class="context-line"><strong>author · time frame · audience · purpose</strong></span></li>
-              <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
-            </ul>
-        </div>
-
-        <div class="digi-day" data-day="wordwork">
-          <div class="digi-day-header" style="background:var(--d-wordwork);">
-            <span class="digi-day-header-text">2 | Word Work</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-wordwork); color:var(--d-wordwork);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
-              <li>Which words need more clarity? Look them up — what do you learn?</li>
-              <li>How would you summarize the passage in 1–2 sentences?</li>
-            </ul>
-        </div>
-
-        <p class="digi-prayer page-bookmark-prayer" data-prayer="2">"Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen."</p>
-
-        <div class="digi-day" data-day="expand">
-          <div class="digi-day-header" style="background:var(--d-expand);">
-            <span class="digi-day-header-text">3 | Expand</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-expand); color:var(--d-expand);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10.5"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>Reread the passage — what questions come to mind? Can other translations clarify them?</li>
-              <li>Read the passages right before and after this section — how do they connect to this passage?</li>
-              <li>Review 1–2 cross references — how does this passage fit into the larger story of Scripture?</li>
-            </ul>
-        </div>
-
-        <div class="digi-day" data-day="learn">
-          <div class="digi-day-header" style="background:var(--d-learn);">
-            <span class="digi-day-header-text">4 | Learn</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-learn); color:var(--d-learn);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>How would the original audience have understood this passage?</li>
-              <li>What does this passage reveal about who God is — His character, attributes, or eternal purpose?</li>
-              <li><em>Verify your findings in community.</em></li>
-            </ul>
-        </div>
-
-        <div class="digi-day" data-day="live">
-          <div class="digi-day-header" style="background:var(--d-live);">
-            <span class="digi-day-header-text">5 | Live</span>
-            <span class="digi-day-header-icon-circle" style="border-color:var(--d-live); color:var(--d-live);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-            </span>
-          </div>
-          <ul>
-              <li>What cultural or personal lies are challenged by the truth of who God is?</li>
-              <li>How will the truth from this passage shape your prayers, thoughts, words, and actions today?</li>
-            </ul>
-        </div>
-
-        <div class="digi-footer">
-          <div class="section-dots-nav" id="section-dots-nav">
-            <span data-day="discover" style="background:var(--d-discover);"></span>
-            <span data-day="wordwork" style="background:var(--d-wordwork);"></span>
-            <span data-day="expand" style="background:var(--d-expand);"></span>
-            <span data-day="learn" style="background:var(--d-learn);"></span>
-            <span data-day="live" style="background:var(--d-live);"></span>
-          </div>
-
-          <button class="tile-bookmark-cta" onclick="window.print()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            Print Bookmark
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="content-stack">
-
-      <div class="card howto-card">
-        <button type="button" class="mobile-nav-lockup home-back-lockup" onclick="closeSection()" title="Back to Home">
-          <span class="mobile-back-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
+      <div class="col-expanded-body">
+        <span class="col-step-tag">Building Blocks for Biblical Literacy</span>
+        <h2 class="col-headline">Slow down. Re-read. Be transformed.</h2>
+        <p class="col-subtext">
+          Good study tools help you slow down; the Holy Spirit brings true transformation. Dwell helps you build the habits to keep you focused across five readings of a passage—quieting distractions so you can truly hear God speak.
+        </p>
+        <div class="col-nav-cue" onclick="goToNextStep(event, '.col-discover')">
+          <span class="cue-label">Begin with Discover</span>
+          <span class="cue-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </span>
-          <span class="mobile-brand-title">Dwell</span>
-          <span class="dwell-mark" role="img" aria-label="Dwell">
-            <span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- D | Discover -->
+    <section class="dwell-column col-discover" onclick="handleColumnClick(this, event)">
+      <div class="col-header">
+        <div class="col-header-left">
+          <span class="col-letter-target">D</span>
+          <span class="col-vertical-title">Discover</span>
+        </div>
+      </div>
+      <div class="col-expanded-body">
+        <span class="col-step-tag">Step One &bull; Discover</span>
+        <h2 class="col-headline">Find the historical background.</h2>
+        <ul class="col-prompt-list">
+          <li>
+            Use the book introduction in a study Bible to find your place:
+            <ul class="col-sub-prompt-list">
+              <li><strong>Author:</strong> Who wrote this?</li>
+              <li><strong>Audience:</strong> Who received it?</li>
+              <li><strong>Time:</strong> When was it written?</li>
+              <li><strong>Purpose:</strong> Why was it written?</li>
+            </ul>
+          </li>
+          <li>Read straight through the passage once just to map the scene and notice the characters.</li>
+        </ul>
+        <div class="col-nav-cue" onclick="goToNextStep(event, '.col-wordwork')">
+          <span class="cue-label">Advance to Word Work</span>
+          <span class="cue-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </span>
-        </button>
-        <div class="howto-header-wrap">
-          <span class="card-tag" id="card2-tag">Scaffolding &amp; Reference</span>
-          <h3 class="howto-title" id="card2-title">Why &amp; How</h3>
-        </div>
-        <div class="howto-list" id="section-howto">
-          </div>
-      </div>
-
-      <div class="card howto-card" id="guides-card" style="display:none;">
-        <div class="howto-header-wrap">
-          <span class="card-tag">Study Guides</span>
-          <h3 class="howto-title">Dwell Guides</h3>
-        </div>
-        <div class="dwell-container">
-          <a href="mark-1-1-20" class="dwell-card card-teal">
-            <span class="tag">Study Guide</span>
-            <span class="passage-title">Mark 1:1&ndash;21</span>
-          </a>
-
-          <a href="mark-1-21-45" class="dwell-card card-terracotta">
-            <span class="tag">Study Guide</span>
-            <span class="passage-title">Mark 1:21&ndash;45</span>
-          </a>
-
-          <a href="mark-2" class="dwell-card card-sage">
-            <span class="tag">Study Guide</span>
-            <span class="passage-title">Mark 2</span>
-          </a>
-
-          <a href="coming-soon" class="dwell-card card-disabled">
-            <span class="tag">Upcoming</span>
-            <span class="passage-title">Coming Soon</span>
-          </a>
         </div>
       </div>
-    </div>
-  </div>
-</main>
+    </section>
 
-<div class="print-page-1">
-  <div class="print-bm">
-    <div class="print-header">
-      <span class="print-wordmark">Dwell</span>
-      <span class="dwell-mark print-logo-img" role="img" aria-label="Dwell"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span>
-    </div>
-    <div class="print-prayer">“Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.”</div>
-    <div class="print-card" style="--accent-color: var(--d-discover);">
-      <div class="print-pill-row"><div class="print-pill"><span>1 | Discover</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="m20 20-4.35-4.35"/></svg></div></div>
-      <div class="print-body"><p>Use a study Bible to ground the passage in historical context:</p><div class="context-list-print">author · time frame · audience · purpose</div><p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p></div>
-    </div>
-    <div class="print-card" style="--accent-color: var(--d-wordwork);">
-      <div class="print-pill-row"><div class="print-pill"><span>2 | Word Work</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></div></div>
-      <div class="print-body"><ul><li>Reread the passage — which words or phrases are being emphasized?</li><li>Which words need more clarity? Look them up — what do you learn?</li><li>How would you summarize the passage in 1–2 sentences?</li></ul></div>
-    </div>
-    <div class="print-bm-spacer"></div>
-    <div class="print-footer-group"><div class="print-dots"><span class="print-dot" style="background:var(--d-discover);"></span><span class="print-dot" style="background:var(--d-wordwork);"></span><span class="print-dot" style="background:var(--d-expand);"></span><span class="print-dot" style="background:var(--d-learn);"></span><span class="print-dot" style="background:var(--d-live);"></span></div><div class="print-footer">dwellstudy.com</div></div>
-  </div>
-  <div class="print-bm">
-    <div class="print-header"><span class="print-wordmark">Dwell</span><span class="dwell-mark print-logo-img"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span></div>
-    <div class="print-prayer">“Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.”</div>
-    <div class="print-card" style="--accent-color: var(--d-discover);"><div class="print-pill-row"><div class="print-pill"><span>1 | Discover</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="m20 20-4.35-4.35"/></svg></div></div><div class="print-body"><p>Use a study Bible to ground the passage in historical context:</p><div class="context-list-print">author · time frame · audience · purpose</div><p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p></div></div>
-    <div class="print-card" style="--accent-color: var(--d-wordwork);"><div class="print-pill-row"><div class="print-pill"><span>2 | Word Work</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></div></div><div class="print-body"><ul><li>Reread the passage — which words or phrases are being emphasized?</li><li>Which words need more clarity? Look them up — what do you learn?</li><li>How would you summarize the passage in 1–2 sentences?</li></ul></div></div>
-    <div class="print-bm-spacer"></div>
-    <div class="print-footer-group"><div class="print-dots"><span class="print-dot" style="background:var(--d-discover);"></span><span class="print-dot" style="background:var(--d-wordwork);"></span><span class="print-dot" style="background:var(--d-expand);"></span><span class="print-dot" style="background:var(--d-learn);"></span><span class="print-dot" style="background:var(--d-live);"></span></div><div class="print-footer">dwellstudy.com</div></div>
-  </div>
-  <div class="print-bm">
-    <div class="print-header"><span class="print-wordmark">Dwell</span><span class="dwell-mark print-logo-img"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span></div>
-    <div class="print-prayer">“Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.”</div>
-    <div class="print-card" style="--accent-color: var(--d-discover);"><div class="print-pill-row"><div class="print-pill"><span>1 | Discover</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="m20 20-4.35-4.35"/></svg></div></div><div class="print-body"><p>Use a study Bible to ground the passage in historical context:</p><div class="context-list-print">author · time frame · audience · purpose</div><p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p></div></div>
-    <div class="print-card" style="--accent-color: var(--d-wordwork);"><div class="print-pill-row"><div class="print-pill"><span>2 | Word Work</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></div></div><div class="print-body"><ul><li>Reread the passage — which words or phrases are being emphasized?</li><li>Which words need more clarity? Look them up — what do you learn?</li><li>How would you summarize the passage in 1–2 sentences?</li></ul></div></div>
-    <div class="print-bm-spacer"></div>
-    <div class="print-footer-group"><div class="print-dots"><span class="print-dot" style="background:var(--d-discover);"></span><span class="print-dot" style="background:var(--d-wordwork);"></span><span class="print-dot" style="background:var(--d-expand);"></span><span class="print-dot" style="background:var(--d-learn);"></span><span class="print-dot" style="background:var(--d-live);"></span></div><div class="print-footer">dwellstudy.com</div></div>
-  </div>
-</div>
-
-<div class="print-page-2">
-  <div class="print-bm">
-    <div class="print-header">
-      <span class="print-wordmark">Dwell</span>
-      <span class="dwell-mark print-logo-img" role="img" aria-label="Dwell"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span>
-    </div>
-    <div class="print-prayer">“Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.”</div>
-    <div class="print-card" style="--accent-color: var(--d-expand);"><div class="print-pill-row"><div class="print-pill"><span>3 | Expand</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10.5"/></svg></div></div><div class="print-body"><ul><li>Reread the passage — what questions come to mind?</li><li>Read the surrounding passages — how do they connect?</li><li>Review 1–2 cross references — how does this fit the larger story?</li></ul></div></div>
-    <div class="print-card" style="--accent-color: var(--d-learn);"><div class="print-pill-row"><div class="print-pill"><span>4 | Learn</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/></svg></div></div><div class="print-body"><ul><li>How would the original audience have understood this passage?</li><li>What does this reveal about who God is — His character and purpose?</li><li><em>Verify your findings in community.</em></li></ul></div></div>
-    <div class="print-card" style="--accent-color: var(--d-live);"><div class="print-pill-row"><div class="print-pill"><span>5 | Live</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div></div><div class="print-body"><ul><li>What cultural or personal lies are challenged by this truth?</li><li>How will this shape your prayers, thoughts, words, and actions today?</li></ul></div></div>
-    <div class="print-bm-spacer"></div>
-    <div class="print-footer-group"><div class="print-dots"><span class="print-dot" style="background:var(--d-discover);"></span><span class="print-dot" style="background:var(--d-wordwork);"></span><span class="print-dot" style="background:var(--d-expand);"></span><span class="print-dot" style="background:var(--d-learn);"></span><span class="print-dot" style="background:var(--d-live);"></span></div><div class="print-footer">dwellstudy.com</div></div>
-  </div>
-  <div class="print-bm">
-    <div class="print-header">
-      <span class="print-wordmark">Dwell</span>
-      <span class="dwell-mark print-logo-img" role="img" aria-label="Dwell"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span>
-    </div>
-    <div class="print-prayer">“Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.”</div>
-    <div class="print-card" style="--accent-color: var(--d-expand);"><div class="print-pill-row"><div class="print-pill"><span>3 | Expand</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10.5"/></svg></div></div><div class="print-body"><ul><li>Reread the passage — what questions come to mind?</li><li>Read the surrounding passages — how do they connect?</li><li>Review 1–2 cross references — how does this fit the larger story?</li></ul></div></div>
-    <div class="print-card" style="--accent-color: var(--d-learn);"><div class="print-pill-row"><div class="print-pill"><span>4 | Learn</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/></svg></div></div><div class="print-body"><ul><li>How would the original audience have understood this passage?</li><li>What does this reveal about who God is — His character and purpose?</li><li><em>Verify your findings in community.</em></li></ul></div></div>
-    <div class="print-card" style="--accent-color: var(--d-live);"><div class="print-pill-row"><div class="print-pill"><span>5 | Live</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div></div><div class="print-body"><ul><li>What cultural or personal lies are challenged by this truth?</li><li>How will this shape your prayers, thoughts, words, and actions today?</li></ul></div></div>
-    <div class="print-bm-spacer"></div>
-    <div class="print-footer-group"><div class="print-dots"><span class="print-dot" style="background:var(--d-discover);"></span><span class="print-dot" style="background:var(--d-wordwork);"></span><span class="print-dot" style="background:var(--d-expand);"></span><span class="print-dot" style="background:var(--d-learn);"></span><span class="print-dot" style="background:var(--d-live);"></span></div><div class="print-footer">dwellstudy.com</div></div>
-  </div>
-  <div class="print-bm">
-    <div class="print-header">
-      <span class="print-wordmark">Dwell</span>
-      <span class="dwell-mark print-logo-img" role="img" aria-label="Dwell"><span class="dm-top"></span><span class="dm-left"></span><span class="dm-center"></span><span class="dm-right"></span><span class="dm-bottom"></span></span>
-    </div>
-    <div class="print-prayer">“Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.”</div>
-    <div class="print-card" style="--accent-color: var(--d-expand);"><div class="print-pill-row"><div class="print-pill"><span>3 | Expand</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10.5"/></svg></div></div><div class="print-body"><ul><li>Reread the passage — what questions come to mind?</li><li>Read the surrounding passages — how do they connect?</li><li>Review 1–2 cross references — how does this fit the larger story?</li></ul></div></div>
-    <div class="print-card" style="--accent-color: var(--d-learn);"><div class="print-pill-row"><div class="print-pill"><span>4 | Learn</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/></svg></div></div><div class="print-body"><ul><li>How would the original audience have understood this passage?</li><li>What does this reveal about who God is — His character and purpose?</li><li><em>Verify your findings in community.</em></li></ul></div></div>
-    <div class="print-card" style="--accent-color: var(--d-live);"><div class="print-pill-row"><div class="print-pill"><span>5 | Live</span></div><div class="print-icon-circle"><svg class="print-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div></div><div class="print-body"><ul><li>What cultural or personal lies are challenged by this truth?</li><li>How will this shape your prayers, thoughts, words, and actions today?</li></ul></div></div>
-    <div class="print-bm-spacer"></div>
-    <div class="print-footer-group"><div class="print-dots"><span class="print-dot" style="background:var(--d-discover);"></span><span class="print-dot" style="background:var(--d-wordwork);"></span><span class="print-dot" style="background:var(--d-expand);"></span><span class="print-dot" style="background:var(--d-learn);"></span><span class="print-dot" style="background:var(--d-live);"></span></div><div class="print-footer">dwellstudy.com</div></div>
-  </div>
-</div>
-
-<div class="palette-tester">
-  <div class="palette-panel" id="palette-panel">
-    <div class="palette-panel-header">
-      <span class="palette-panel-title">Design Suite</span>
-    </div>
-    <div class="palette-tabs">
-      <button type="button" class="palette-tab active" id="tab-btn-colors" onclick="switchTesterTab('colors')">Colors</button>
-      <button type="button" class="palette-tab" id="tab-btn-fonts" onclick="switchTesterTab('fonts')">Fonts</button>
-    </div>
-    <div class="palette-tab-panel" id="tab-panel-colors">
-      <div class="palette-list" id="palette-list"></div>
-      <div class="custom-hex-section">
-        <div class="custom-hex-title"><span>Custom Hex Builder</span></div>
-        <div class="custom-hex-grid">
-          <div class="hex-field"><label>1. Discover (Top)</label><input type="color" id="hex-discover" value="#2b5c68" oninput="updateCustomProp('--d-discover', this.value)"></div>
-          <div class="hex-field"><label>2. Word Work (Left)</label><input type="color" id="hex-wordwork" value="#e07a5f" oninput="updateCustomProp('--d-wordwork', this.value)"></div>
-          <div class="hex-field"><label>3. Expand (Right)</label><input type="color" id="hex-expand" value="#5b8e7d" oninput="updateCustomProp('--d-expand', this.value)"></div>
-          <div class="hex-field"><label>4. Learn (Center)</label><input type="color" id="hex-learn" value="#f4a261" oninput="updateCustomProp('--d-learn', this.value)"></div>
-          <div class="hex-field"><label>5. Live (Bottom)</label><input type="color" id="hex-live" value="#1d3557" oninput="updateCustomProp('--d-live', this.value)"></div>
-          <div class="hex-field"><label>Background</label><input type="color" id="hex-paper" value="#fbf9f5" oninput="updateCustomProp('--paper', this.value)"></div>
-          <div class="hex-field"><label>Scaffold Card</label><input type="color" id="hex-scaffold" value="#e9eff2" oninput="updateCustomProp('--card-grey-blue', this.value)"></div>
-          <div class="hex-field"><label>Bookmark BG</label><input type="color" id="hex-bookmark-bg" value="#ede8e1" oninput="updateCustomProp('--active-bookmark-bg', this.value)"></div>
-          <div class="hex-field"><label>Main Ink</label><input type="color" id="hex-ink" value="#16252d" oninput="updateCustomProp('--ink', this.value)"></div>
+    <!-- W | Word Work -->
+    <section class="dwell-column col-wordwork" onclick="handleColumnClick(this, event)">
+      <div class="col-header">
+        <div class="col-header-left">
+          <span class="col-letter-target">W</span>
+          <span class="col-vertical-title">Word Work</span>
         </div>
       </div>
+      <div class="col-expanded-body">
+        <span class="col-step-tag">Step Two &bull; Word Work</span>
+        <h2 class="col-headline">Inspect the text up close.</h2>
+        <ul class="col-prompt-list">
+          <li>Underline repeated words, lists, comparisons, and key connecting words.</li>
+          <li>Look up simple definitions for any words that seem unfamiliar or confusing.</li>
+          <li>Write out the main point of the passage in one clear sentence.</li>
+        </ul>
+        <div class="col-nav-cue" onclick="goToNextStep(event, '.col-expand')">
+          <span class="cue-label">Advance to Expand</span>
+          <span class="cue-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- E | Expand -->
+    <section class="dwell-column col-expand" onclick="handleColumnClick(this, event)">
+      <div class="col-header">
+        <div class="col-header-left">
+          <span class="col-letter-target">E</span>
+          <span class="col-vertical-title">Expand</span>
+        </div>
+      </div>
+      <div class="col-expanded-body">
+        <span class="col-step-tag">Step Three &bull; Expand</span>
+        <h2 class="col-headline">Connect to the bigger picture.</h2>
+        <ul class="col-prompt-list">
+          <li>Read the surrounding chapters to see how this passage fits into the whole book.</li>
+          <li>Compare two different translations to clear up tricky sentences.</li>
+          <li>Follow 1–2 related verses in the margins to see where else this idea appears.</li>
+        </ul>
+        <div class="col-nav-cue" onclick="goToNextStep(event, '.col-learn')">
+          <span class="cue-label">Advance to Learn</span>
+          <span class="cue-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- L | Learn -->
+    <section class="dwell-column col-learn" onclick="handleColumnClick(this, event)">
+      <div class="col-header">
+        <div class="col-header-left">
+          <span class="col-letter-target">L</span>
+          <span class="col-vertical-title">Learn</span>
+        </div>
+      </div>
+      <div class="col-expanded-body">
+        <span class="col-step-tag">Step Four &bull; Learn</span>
+        <h2 class="col-headline">Discover the timeless truth.</h2>
+        <ul class="col-prompt-list">
+          <li>What was the main takeaway for the very first people who read this?</li>
+          <li>What does this passage teach us about who God is and how He works?</li>
+          <li>Now check commentaries, study notes, or talk with others to verify what you learned.</li>
+        </ul>
+        <div class="col-nav-cue" onclick="goToNextStep(event, '.col-live')">
+          <span class="cue-label">Advance to Live</span>
+          <span class="cue-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- L | Live -->
+    <section class="dwell-column col-live" onclick="handleColumnClick(this, event)">
+      <div class="col-header">
+        <div class="col-header-left">
+          <span class="col-letter-target">L</span>
+          <span class="col-vertical-title">Live</span>
+        </div>
+      </div>
+      <div class="col-expanded-body">
+        <span class="col-step-tag">Step Five &bull; Live</span>
+        <h2 class="col-headline">Put the truth into practice.</h2>
+        <ul class="col-prompt-list">
+          <li>What everyday thoughts or habits does this truth challenge?</li>
+          <li>What is one concrete way this truth will change your words and actions today?</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Style Tester Floating Widget -->
+  <div class="tester-wrap" onclick="event.stopPropagation()">
+    <div class="tester-panel" id="testerPanel">
+      <div class="tester-panel-head">
+        <span class="tester-title">Favorite Palettes (3)</span>
+      </div>
+      <div class="tester-list" id="paletteList"></div>
     </div>
-    <div class="palette-tab-panel" id="tab-panel-fonts" style="display:none;">
-      <div class="font-list" id="font-list"></div>
-    </div>
+
+    <button type="button" class="tester-toggle-btn" onclick="toggleTester(event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      Palettes (3)
+    </button>
   </div>
-  <button type="button" class="palette-toggle-btn" onclick="togglePalettePanel()" title="Test Colorways">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-  </button>
-</div>
 
 <script>
-document.documentElement.classList.add('js');
+/* ── Navigation Accordion ── */
+function handleColumnClick(selectedCol, event) {
+  if (event && event.target.closest('.tester-wrap')) return;
+  
+  const isPortraitMobile = window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches;
+  const isAlreadyExpanded = selectedCol.classList.contains('is-expanded');
+  const allCols = document.querySelectorAll('.dwell-column');
 
-const colorways = [
-  { id: "coast-rust", category: "Earth & Nature", name: "Coast & Rust", tag: "Default", tokens: { "--ink": "#16252d", "--paper": "#fbf9f5", "--paper-dim": "#ede8e1", "--card-grey-blue": "#e9eff2", "--d-discover": "#2b5c68", "--d-wordwork": "#e07a5f", "--d-expand": "#5b8e7d", "--d-learn": "#f4a261", "--d-live": "#1d3557" } },
-  { id: "earthy-botanical", category: "Earth & Nature", name: "Earthy Botanical", tag: "Organic", tokens: { "--ink": "#1f2421", "--paper": "#f7f9f6", "--paper-dim": "#e4ebe2", "--card-grey-blue": "#e5ede9", "--d-discover": "#3d5a52", "--d-wordwork": "#c86d51", "--d-expand": "#709775", "--d-learn": "#dca455", "--d-live": "#283833" } },
-  { id: "olive-grove", category: "Earth & Nature", name: "Olive Grove", tag: "Subdued", tokens: { "--ink": "#232b26", "--paper": "#faf8f2", "--paper-dim": "#eae4d5", "--card-grey-blue": "#e5ebe7", "--d-discover": "#486b59", "--d-wordwork": "#c4704f", "--d-expand": "#7d9b76", "--d-learn": "#d9a05b", "--d-live": "#2a3a30" } },
-  { id: "pacific-northwest", category: "Earth & Nature", name: "Pacific Mist", tag: "Cool Green", tokens: { "--ink": "#192428", "--paper": "#f5f8f8", "--paper-dim": "#dfe8e8", "--card-grey-blue": "#e3ebed", "--d-discover": "#2d6067", "--d-wordwork": "#b8614c", "--d-expand": "#4f8270", "--d-learn": "#cf9456", "--d-live": "#21383d" } },
-  { id: "terracotta-sun", category: "Warm & Sun-Drenched", name: "Terracotta Sun", tag: "Warm Earth", tokens: { "--ink": "#1c1917", "--paper": "#fcfaf7", "--paper-dim": "#ede4da", "--card-grey-blue": "#e4eceb", "--d-discover": "#316068", "--d-wordwork": "#cc583f", "--d-expand": "#4e8773", "--d-learn": "#e7934c", "--d-live": "#223843" } },
-  { id: "desert-clay", category: "Warm & Sun-Drenched", name: "Desert Clay", tag: "Southwest", tokens: { "--ink": "#2b2118", "--paper": "#faf4ee", "--paper-dim": "#ebdcd0", "--card-grey-blue": "#e6ebec", "--d-discover": "#3a6073", "--d-wordwork": "#cb5a3e", "--d-expand": "#648381", "--d-learn": "#e09f3e", "--d-live": "#3b3a4a" } },
-  { id: "golden-hour", category: "Warm & Sun-Drenched", name: "Golden Hour", tag: "Rich Amber", tokens: { "--ink": "#2b201a", "--paper": "#fdfbf7", "--paper-dim": "#f1e7d8", "--card-grey-blue": "#ece9eb", "--d-discover": "#3a6375", "--d-wordwork": "#d45d3c", "--d-expand": "#678f74", "--d-learn": "#e59e35", "--d-live": "#4a354f" } },
-  { id: "oasis-dusk", category: "Warm & Sun-Drenched", name: "Oasis Dusk", tag: "Terracotta & Blue", tokens: { "--ink": "#20242b", "--paper": "#faf6f0", "--paper-dim": "#ebdcd1", "--card-grey-blue": "#e3e9ee", "--d-discover": "#2e6f7e", "--d-wordwork": "#c65f46", "--d-expand": "#5a8c6f", "--d-learn": "#df9b4e", "--d-live": "#253b5c" } },
-  { id: "vintage-editorial", category: "Editorial & Heritage", name: "Vintage Editorial", tag: "Warm Classic", tokens: { "--ink": "#231f20", "--paper": "#faf6ed", "--paper-dim": "#eee5d3", "--card-grey-blue": "#e6ecea", "--d-discover": "#4a6b6c", "--d-wordwork": "#b85d43", "--d-expand": "#6a8d73", "--d-learn": "#cf8d44", "--d-live": "#384d48" } },
-  { id: "deep-parchment", category: "Editorial & Heritage", name: "Deep Parchment", tag: "Sepia Heritage", tokens: { "--ink": "#211a14", "--paper": "#f8f3ea", "--paper-dim": "#e8dcce", "--card-grey-blue": "#e2eaeb", "--d-discover": "#375f6b", "--d-wordwork": "#b2533e", "--d-expand": "#52796f", "--d-learn": "#c98a42", "--d-live": "#2c3e50" } },
-  { id: "warm-ember", category: "Editorial & Heritage", name: "Warm Ember", tag: "Deep Tone", tokens: { "--ink": "#221c1b", "--paper": "#faf6f0", "--paper-dim": "#ece3d4", "--card-grey-blue": "#e7ece8", "--d-discover": "#2d545e", "--d-wordwork": "#bd4f39", "--d-expand": "#5f7f67", "--d-learn": "#e08d4b", "--d-live": "#3a3648" } },
-  { id: "muted-autumn", category: "Editorial & Heritage", name: "Muted Autumn", tag: "Harvest", tokens: { "--ink": "#271e1b", "--paper": "#faf7f2", "--paper-dim": "#ece0d1", "--card-grey-blue": "#e4eae8", "--d-discover": "#3a606e", "--d-wordwork": "#b34a36", "--d-expand": "#63845b", "--d-learn": "#d48c3b", "--d-live": "#413b4d" } },
-  { id: "muted-nordic", category: "Cool & Atmospheric", name: "Muted Nordic", tag: "Crisp Slate", tokens: { "--ink": "#1a2129", "--paper": "#f4f6f8", "--paper-dim": "#dfe5eb", "--card-grey-blue": "#e2e8ec", "--d-discover": "#345b63", "--d-wordwork": "#c26d60", "--d-expand": "#548281", "--d-learn": "#d39c63", "--d-live": "#193441" } },
-  { id: "nordic-forest", category: "Cool & Atmospheric", name: "Nordic Forest", tag: "Spruce & Clay", tokens: { "--ink": "#182226", "--paper": "#f5f7f7", "--paper-dim": "#dde6e7", "--card-grey-blue": "#e3e9ec", "--d-discover": "#26545e", "--d-wordwork": "#c16654", "--d-expand": "#4a7c6f", "--d-learn": "#cb9b58", "--d-live": "#1f2d3d" } },
-  { id: "clay-indigo", category: "Cool & Atmospheric", name: "Clay & Indigo", tag: "Deep Contrast", tokens: { "--ink": "#1c232f", "--paper": "#f8f9fb", "--paper-dim": "#e2e8ef", "--card-grey-blue": "#e7ecf2", "--d-discover": "#245f73", "--d-wordwork": "#c35e4d", "--d-expand": "#4f857d", "--d-learn": "#dc974a", "--d-live": "#162544" } },
-  { id: "kyoto-minimal", category: "Minimal & Zen", name: "Kyoto Minimal", tag: "Matcha & Ink", tokens: { "--ink": "#1f2322", "--paper": "#faf8f5", "--paper-dim": "#ece6dc", "--card-grey-blue": "#e4ece7", "--d-discover": "#3f615b", "--d-wordwork": "#bd634c", "--d-expand": "#6a8c79", "--d-learn": "#cca15d", "--d-live": "#2d3835" } },
-  { id: "high-desert-sage", category: "Minimal & Zen", name: "High Desert Sage", tag: "Calm Earth", tokens: { "--ink": "#202528", "--paper": "#fbf9f6", "--paper-dim": "#ebe6dc", "--card-grey-blue": "#e5edea", "--d-discover": "#366b70", "--d-wordwork": "#c56a52", "--d-expand": "#68947f", "--d-learn": "#dca25e", "--d-live": "#263e47" } },
-  { id: "clean-slate", category: "Minimal & Zen", name: "Clean Modern", tag: "Vibrant Slate", tokens: { "--ink": "#1e293b", "--paper": "#ffffff", "--paper-dim": "#e2e8f0", "--card-grey-blue": "#f1f5f9", "--d-discover": "#0f766e", "--d-wordwork": "#e1536b", "--d-expand": "#10b981", "--d-learn": "#f59e0b", "--d-live": "#1e3a8a" } },
+  allCols.forEach(col => col.classList.remove('is-expanded'));
 
-  { id: "literary-parchment", category: "Warm & Literary", name: "Literary Parchment", tag: "Book Cloth", tokens: { "--ink": "#2b1f18", "--paper": "#f7f0e3", "--paper-dim": "#ecdfc8", "--card-grey-blue": "#e8e2d6", "--d-discover": "#6b3f3f", "--d-wordwork": "#a86b2d", "--d-expand": "#4f6b4a", "--d-learn": "#b3562c", "--d-live": "#2c3a4a" } },
-  { id: "modern-slate-suite", category: "Clean & Modern", name: "Modern Slate", tag: "Studio", tokens: { "--ink": "#1a1d21", "--paper": "#f7f8fa", "--paper-dim": "#e7eaee", "--card-grey-blue": "#eef1f5", "--d-discover": "#2563eb", "--d-wordwork": "#f97316", "--d-expand": "#0d9488", "--d-learn": "#eab308", "--d-live": "#1e1b4b" } },
-  { id: "sunny-meadow", category: "Friendly & Approachable", name: "Sunny Meadow", tag: "Cheerful", tokens: { "--ink": "#2f2a26", "--paper": "#fffaf3", "--paper-dim": "#fdecd2", "--card-grey-blue": "#eaf4f1", "--d-discover": "#4a9d8f", "--d-wordwork": "#f4805d", "--d-expand": "#79b473", "--d-learn": "#f4b942", "--d-live": "#6c63a6" } },
-  { id: "bold-editorial", category: "Bold & Editorial", name: "Bold Editorial", tag: "Magazine", tokens: { "--ink": "#111111", "--paper": "#f5f2ea", "--paper-dim": "#e6e0d0", "--card-grey-blue": "#e8e8e8", "--d-discover": "#c1272d", "--d-wordwork": "#1c3f60", "--d-expand": "#4c7031", "--d-learn": "#d4a017", "--d-live": "#4a2545" } },
-  { id: "ms-hang-neon", category: "Neo-Brutalist (MS Hang Match)", name: "MS Hang Neon", tag: "Story Guide", tokens: { "--ink": "#000000", "--paper": "#faf6ec", "--paper-dim": "#f0e6cf", "--card-grey-blue": "#eef0e0", "--d-discover": "#a8e10c", "--d-wordwork": "#ff6fae", "--d-expand": "#7c5cff", "--d-learn": "#2f6fed", "--d-live": "#000000" } },
-  { id: "original-dwell", category: "Original Dwell Site", name: "Original Dwell", tag: "From dwellstudy.com", tokens: { "--ink": "#263445", "--paper": "#f7f3ec", "--paper-dim": "#e3ded4", "--card-grey-blue": "#eef1ee", "--d-discover": "#9cc08f", "--d-wordwork": "#7fb8a8", "--d-expand": "#8fb4d9", "--d-learn": "#7ca3d1", "--d-live": "#e8a099" } },
-  { id: "bookmark-pastel", category: "Original Dwell Site", name: "Bookmark Pastel", tag: "Print Bookmark v7", tokens: { "--ink": "#2f3b42", "--paper": "#faf8f4", "--paper-dim": "#ece8e0", "--card-grey-blue": "#eef0ee", "--d-discover": "#b9d4b0", "--d-wordwork": "#b7d2c4", "--d-expand": "#b9c8dc", "--d-learn": "#a8bfdb", "--d-live": "#e0a9a0" } }
-];
-
-let activePaletteId = "coast-rust";
-
-function renderPalettePicker() {
-  const container = document.getElementById("palette-list");
-  container.innerHTML = "";
-  let lastCategory = "";
-
-  colorways.forEach(cw => {
-    if (cw.category !== lastCategory) {
-      const catLabel = document.createElement("div");
-      catLabel.className = "palette-group-label";
-      catLabel.textContent = cw.category;
-      container.appendChild(catLabel);
-      lastCategory = cw.category;
-    }
-
-    const card = document.createElement("div");
-    card.className = `palette-card ${cw.id === activePaletteId ? 'active' : ''}`;
-    card.onclick = () => applyColorway(cw.id);
-
-    card.innerHTML = `
-      <div class="palette-card-name"><span>${cw.name}</span>${cw.tag ? `<span class="tag">${cw.tag}</span>` : ''}</div>
-      <div class="palette-swatches">
-        <span style="background:${cw.tokens['--d-discover']}"></span>
-        <span style="background:${cw.tokens['--d-wordwork']}"></span>
-        <span style="background:${cw.tokens['--d-learn']}"></span>
-        <span style="background:${cw.tokens['--d-expand']}"></span>
-        <span style="background:${cw.tokens['--d-live']}"></span>
-      </div>
-    `;
-    container.appendChild(card);
-  });
+  if (!isPortraitMobile || !isAlreadyExpanded) {
+    selectedCol.classList.add('is-expanded');
+  }
 }
 
-function applyColorway(id) {
-  const selected = colorways.find(c => c.id === id);
-  if (!selected) return;
+function goToNextStep(event, selector) {
+  if (event) event.stopPropagation();
+  const nextCol = document.querySelector(selector);
+  if (nextCol) {
+    const allCols = document.querySelectorAll('.dwell-column');
+    allCols.forEach(col => col.classList.remove('is-expanded'));
+    nextCol.classList.add('is-expanded');
+  }
+}
 
+/* ── Top 3 Favorite Palettes ── */
+const palettes = [
+  {
+    id: "golden-hour-horizon",
+    name: "1. Golden Hour Horizon",
+    tag: "Contrast-Corrected",
+    tokens: {
+      "--ink": "#211a24",
+      "--paper": "#f2ece6",
+      "--paper-dim": "#e8e0d7",
+      "--d-discover": "#e28a5c",
+      "--d-wordwork": "#d76b65",
+      "--d-expand": "#9e6488",
+      "--d-learn": "#5d587e",
+      "--d-live": "#2d324f",
+      "--d-intro-text": "var(--ink)",
+      "--d-discover-text": "#ffffff",
+      "--d-wordwork-text": "#ffffff",
+      "--d-expand-text": "#ffffff",
+      "--d-learn-text": "#ffffff",
+      "--d-live-text": "#ffffff"
+    }
+  },
+  {
+    id: "northern-depths",
+    name: "2. Northern Depths",
+    tag: "Contrast-Corrected",
+    tokens: {
+      "--ink": "#142129",
+      "--paper": "#f5f9fb",
+      "--paper-dim": "#e2edf2",
+      "--d-discover": "#38b2a3",
+      "--d-wordwork": "#1d788a",
+      "--d-expand": "#295b87",
+      "--d-learn": "#2d3766",
+      "--d-live": "#141933",
+      "--d-intro-text": "var(--ink)",
+      "--d-discover-text": "#ffffff",
+      "--d-wordwork-text": "#ffffff",
+      "--d-expand-text": "#ffffff",
+      "--d-learn-text": "#ffffff",
+      "--d-live-text": "#ffffff"
+    }
+  },
+  {
+    id: "coastal-dusk-amber",
+    name: "3. Coastal Amber to Teal",
+    tag: "Original (WebAIM Compliant)",
+    tokens: {
+      "--ink": "#182326",
+      "--paper": "#f7faf9",
+      "--paper-dim": "#e8eeeb",
+      "--d-discover": "#e08d53",
+      "--d-wordwork": "#c27471",
+      "--d-expand": "#7d6e87",
+      "--d-learn": "#4c6674",
+      "--d-live": "#223942",
+      "--d-intro-text": "var(--ink)",
+      "--d-discover-text": "#ffffff",
+      "--d-wordwork-text": "#ffffff",
+      "--d-expand-text": "#ffffff",
+      "--d-learn-text": "#ffffff",
+      "--d-live-text": "#ffffff"
+    }
+  }
+];
+
+let activePaletteId = "golden-hour-horizon";
+
+function renderTester() {
+  const palList = document.getElementById("paletteList");
+  if (palList) {
+    palList.innerHTML = "";
+    palettes.forEach(pal => {
+      const card = document.createElement("div");
+      card.className = `tester-card ${pal.id === activePaletteId ? 'active' : ''}`;
+      card.onclick = (e) => { e.stopPropagation(); applyPalette(pal.id); };
+      card.innerHTML = `
+        <div class="tester-card-name"><span>${pal.name}</span><span class="tag">${pal.tag}</span></div>
+        <div class="tester-swatches">
+          <span style="background:${pal.tokens['--d-discover']}"></span>
+          <span style="background:${pal.tokens['--d-wordwork']}"></span>
+          <span style="background:${pal.tokens['--d-expand']}"></span>
+          <span style="background:${pal.tokens['--d-learn']}"></span>
+          <span style="background:${pal.tokens['--d-live']}"></span>
+        </div>
+      `;
+      palList.appendChild(card);
+    });
+  }
+}
+
+function applyPalette(id) {
+  const selected = palettes.find(c => c.id === id);
+  if (!selected) return;
   activePaletteId = id;
   const root = document.documentElement;
   for (const [prop, val] of Object.entries(selected.tokens)) {
     root.style.setProperty(prop, val);
   }
-  root.style.setProperty('--active-bookmark-bg', selected.tokens["--paper-dim"]);
-
-  if (document.getElementById("hex-discover")) {
-    document.getElementById("hex-discover").value = selected.tokens["--d-discover"];
-    document.getElementById("hex-wordwork").value = selected.tokens["--d-wordwork"];
-    document.getElementById("hex-expand").value = selected.tokens["--d-expand"];
-    document.getElementById("hex-learn").value = selected.tokens["--d-learn"];
-    document.getElementById("hex-live").value = selected.tokens["--d-live"];
-    document.getElementById("hex-paper").value = selected.tokens["--paper"];
-    document.getElementById("hex-scaffold").value = selected.tokens["--card-grey-blue"];
-    document.getElementById("hex-ink").value = selected.tokens["--ink"];
-    document.getElementById("hex-bookmark-bg").value = selected.tokens["--paper-dim"];
-  }
-
-  if (currentOpenKey) openSection(currentOpenKey);
-  renderPalettePicker();
+  renderTester();
 }
 
-function updateCustomProp(prop, value) {
-  document.documentElement.style.setProperty(prop, value);
-  activePaletteId = "custom";
-  if (currentOpenKey) openSection(currentOpenKey);
-  renderPalettePicker();
-}
-
-const fontPairings = [
-  { id: "crimson-karla", category: "Warm & Literary", name: "Crimson Pro + Karla", tag: "Elegant", display: "'Crimson Pro', serif", sans: "'Karla', sans-serif" },
-  { id: "lora-roboto", category: "Warm & Literary", name: "Lora + Roboto", tag: "Elegant", display: "'Lora', serif", sans: "'Roboto', sans-serif" },
-  { id: "spectral-karla", category: "Warm & Literary", name: "Spectral + Karla", tag: "Elegant", display: "'Spectral', serif", sans: "'Karla', sans-serif" },
-  { id: "libre-source", category: "Warm & Literary", name: "Libre Baskerville + Source Sans Pro", tag: "Classic", display: "'Libre Baskerville', serif", sans: "'Source Sans Pro', sans-serif" },
-  { id: "lora-merriweather", category: "Warm & Literary", name: "Lora + Merriweather", tag: "Elegant", display: "'Lora', serif", sans: "'Merriweather', serif" },
-  { id: "playfair-source", category: "Warm & Literary", name: "Playfair Display + Source Sans Pro", tag: "Classic", display: "'Playfair Display', serif", sans: "'Source Sans Pro', sans-serif" },
-  { id: "quattrocento", category: "Warm & Literary", name: "Quattrocento + Quattrocento Sans", tag: "Classic", display: "'Quattrocento', serif", sans: "'Quattrocento Sans', sans-serif" },
-  { id: "cormorant-proza", category: "Warm & Literary", name: "Cormorant Garamond + Proza Libre", tag: "Classic", display: "'Cormorant Garamond', serif", sans: "'Proza Libre', sans-serif" },
-
-  { id: "raleway-opensans", category: "Clean & Modern", name: "Raleway + Open Sans", tag: "Current", display: "'Raleway', sans-serif", sans: "'Open Sans', sans-serif" },
-  { id: "montserrat-hind", category: "Clean & Modern", name: "Montserrat + Hind", tag: "Modern", display: "'Montserrat', sans-serif", sans: "'Hind', sans-serif" },
-  { id: "worksans-opensans", category: "Clean & Modern", name: "Work Sans + Open Sans", tag: "Minimal", display: "'Work Sans', sans-serif", sans: "'Open Sans', sans-serif" },
-
-  { id: "nunito-opensans", category: "Friendly & Approachable", name: "Nunito + Open Sans", tag: "Friendly", display: "'Nunito', sans-serif", sans: "'Open Sans', sans-serif" },
-  { id: "quicksand-quicksand", category: "Friendly & Approachable", name: "Quicksand + Quicksand", tag: "Playful", display: "'Quicksand', sans-serif", sans: "'Quicksand', sans-serif" },
-
-  { id: "oswald-merriweather", category: "Bold & Editorial", name: "Oswald + Merriweather", tag: "Contrast", display: "'Oswald', sans-serif", sans: "'Merriweather', serif" }
-];
-
-let activeFontId = "raleway-opensans";
-
-function renderFontPicker() {
-  const container = document.getElementById("font-list");
-  container.innerHTML = "";
-  let lastCategory = "";
-
-  fontPairings.forEach(fp => {
-    if (fp.category !== lastCategory) {
-      const catLabel = document.createElement("div");
-      catLabel.className = "palette-group-label";
-      catLabel.textContent = fp.category;
-      container.appendChild(catLabel);
-      lastCategory = fp.category;
-    }
-
-    const card = document.createElement("div");
-    card.className = `font-card ${fp.id === activeFontId ? 'active' : ''}`;
-    card.onclick = () => applyFontPairing(fp.id);
-
-    card.innerHTML = `
-      <div class="font-card-name"><span>${fp.name}</span>${fp.tag ? `<span class="tag">${fp.tag}</span>` : ''}</div>
-      <div class="font-preview">
-        <span class="font-preview-display" style="font-family:${fp.display};">Dwell</span>
-        <span class="font-preview-sans" style="font-family:${fp.sans};">Building blocks for Biblical literacy.</span>
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
-
-function applyFontPairing(id) {
-  const selected = fontPairings.find(f => f.id === id);
-  if (!selected) return;
-
-  activeFontId = id;
-  const root = document.documentElement;
-  root.style.setProperty('--font-display', selected.display);
-  root.style.setProperty('--font-sans', selected.sans);
-  root.style.setProperty('--font-serif', selected.display);
-
-  if (currentOpenKey) openSection(currentOpenKey);
-  renderFontPicker();
-}
-
-function switchTesterTab(tab) {
-  const colorsPanel = document.getElementById("tab-panel-colors");
-  const fontsPanel = document.getElementById("tab-panel-fonts");
-  const colorsBtn = document.getElementById("tab-btn-colors");
-  const fontsBtn = document.getElementById("tab-btn-fonts");
-
-  if (tab === "fonts") {
-    colorsPanel.style.display = "none";
-    fontsPanel.style.display = "block";
-    colorsBtn.classList.remove("active");
-    fontsBtn.classList.add("active");
-  } else {
-    colorsPanel.style.display = "block";
-    fontsPanel.style.display = "none";
-    fontsBtn.classList.remove("active");
-    colorsBtn.classList.add("active");
-  }
-}
-
-function togglePalettePanel() {
-  document.getElementById("palette-panel").classList.toggle("open");
-}
-
-let currentOpenKey = null;
-
-const sectionData = {
-  discover: {
-    tag: "Discover",
-    card2Title: "Why Does This Matter?",
-    title: "Discover",
-    color: "var(--d-discover)",
-    num: "1",
-    icon: '<circle cx="10" cy="10" r="6"/><path d="m20 20-4.35-4.35"/>',
-    questions: `
-      <li>Use a study Bible to ground the passage in historical context: <span class="context-line"><strong>author · time frame · audience · purpose</strong></span></li>
-      <li>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</li>
-    `,
-    howto: `
-      <p>Discover starts with:</p>
-      <div class="howto-callout">
-        <p>Use a study Bible to ground the passage in historical context:</p>
-        <p class="howto-context-line">author · time frame · audience · purpose</p>
-      </div>
-      <p>The reason for this step is because the Bible is for us, but not to us. Reading a passage or a verse without knowing the historical context is like opening a letter disregarding the envelope and only reading a small part of the letter and thinking that you have the full picture of what that message is about.</p>
-      <div class="howto-envelope-hero" aria-hidden="true">
-        <svg class="envelope-hero-svg" viewBox="0 0 120 100" fill="none">
-          <rect x="35" y="10" width="50" height="45" rx="3" fill="var(--paper)" stroke="currentColor" stroke-width="2.5"/>
-          <line x1="43" y1="24" x2="77" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-          <line x1="43" y1="32" x2="77" y2="32" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-          <line x1="43" y1="40" x2="65" y2="40" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-          <rect x="10" y="40" width="100" height="55" rx="5" fill="var(--card-grey-blue)" stroke="currentColor" stroke-width="2.5"/>
-          <path d="M10 40 L60 70 L110 40" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <p>The amazing thing about learning historical context is that you can begin to place the passage in the Big Story of the Bible.</p>
-      <div class="big-story-arc" aria-hidden="true">
-        <div class="bsa-stop"><span class="bsa-dot" style="background:var(--d-expand);"></span><span class="bsa-label">Creation</span></div>
-        <div class="bsa-stop"><span class="bsa-dot" style="background:var(--d-wordwork);"></span><span class="bsa-label">Fall</span></div>
-        <div class="bsa-stop"><span class="bsa-dot" style="background:var(--d-discover);"></span><span class="bsa-label">Redemption</span></div>
-        <div class="bsa-stop"><span class="bsa-dot" style="background:var(--d-learn);"></span><span class="bsa-label">Restoration</span></div>
-      </div>
-      <p>Once you have the basics of historical context, the next step is:</p>
-      <div class="howto-callout">
-        <p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p>
-      </div>
-      <p>We recommend that you take notes in a real journal, write names, settings and track little things that stand out to you. As you grow in this skill of discovering context you might notice that there are different genres of passages in Scripture:</p>
-      <div class="genre-cards">
-        <div class="genre-card"><span class="genre-card-pct">43%</span><span class="genre-card-title">Narrative</span><p>Characters, setting, conflict & resolution. E.g. Exodus 14.</p></div>
-        <div class="genre-card"><span class="genre-card-pct">33%</span><span class="genre-card-title">Poetry</span><p>Imagery, parallelism & emotional turns. E.g. Exodus 15.</p></div>
-        <div class="genre-card"><span class="genre-card-pct">24%</span><span class="genre-card-title">Discourse / Letters</span><p>Arguments, logic & "therefore" conclusions. E.g. Ephesians.</p></div>
-      </div>
-      <p>For more, watch BibleProject's <a href="https://www.youtube.com/watch?v=oUXJ8Owes8E" target="_blank">Literary Styles in the Bible</a>.</p>
-    `
-  },
-  wordwork: {
-    tag: "Word Work",
-    card2Title: "Why Does This Matter?",
-    title: "Word Work",
-    color: "var(--d-wordwork)",
-    num: "2",
-    icon: '<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>',
-    questions: `
-      <li>Reread the passage — which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
-      <li>Which words need more clarity? Look them up — what do you learn?</li>
-      <li>How would you summarize the passage in 1–2 sentences?</li>
-    `,
-    howto: `
-      <p>Marking up the text makes repetition, lists, and comparisons jump out. Grab a pen, highlighters, or a printed copy.</p>
-      <div class="resource-links">
-        <span class="resource-links-label">Trusted resources for word study</span>
-        <div class="resource-link-row"><span class="rl-name">Dictionary.com</span><a href="https://dictionary.com" target="_blank">dictionary.com</a></div>
-        <div class="resource-link-row"><span class="rl-name">Blue Letter Bible – Lexicon</span><a href="https://www.blueletterbible.org/resources/lexical/overview.cfm" target="_blank">blueletterbible.org</a></div>
-      </div>
-      <p>Use it for unfamiliar words, and for "church" words you've stopped questioning (justified, sanctified, redeemed).</p>
-      <p>What counts as emphasis changes with the genre:</p>
-      <div class="wordwork-cards">
-        <div class="wordwork-card">
-          <span class="wordwork-card-title">Narrative</span>
-          <ul>
-            <li>A word, phrase, or action that repeats</li>
-            <li>What's said about each character</li>
-            <li>Whether the opening phrase returns at the close (inclusio)</li>
-          </ul>
-        </div>
-        <div class="wordwork-card">
-          <span class="wordwork-card-title">Poetry</span>
-          <ul>
-            <li>Two lines saying the same thing, or opposite things (parallelism)</li>
-            <li>An image or phrase that resurfaces</li>
-            <li>Whether the first and last lines mirror (chiasm)</li>
-          </ul>
-        </div>
-        <div class="wordwork-card">
-          <span class="wordwork-card-title">Discourse / Letters</span>
-          <ul>
-            <li>Connector words: therefore, but, for, so that</li>
-            <li>A key term repeated through the argument</li>
-            <li>Lists: commands, virtues, qualifications</li>
-          </ul>
-        </div>
-      </div>
-    `
-  },
-  expand: {
-    tag: "Expand",
-    card2Title: "Why Does This Matter?",
-    title: "Expand",
-    color: "var(--d-expand)",
-    num: "3",
-    icon: '<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10.5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/>',
-    questions: `
-      <li>Reread the passage — what questions come to mind? Can other translations clarify them?</li>
-      <li>Read the passages right before and after this section—how do they connect to this passage?</li>
-      <li>Review 1–2 cross references—how does this passage fit into the larger story of Scripture?</li>
-    `,
-    howto: `
-      <p>Questions are where real understanding starts. Jesus asked far more than he answered. Work them with tools inside the text first, like another translation, the surrounding passages, or cross-references, before reaching for a commentary or AI.</p>
-      <p><strong>Translations.</strong> Scripture is often the best commentary on itself: a second translation can clarify a confusing phrase before you look anywhere else.</p>
-      <div class="ts-scroll">
-        <div class="ts-inner">
-          <div class="ts-bar">
-            <div class="ts-bar-half">WORD-FOR-WORD</div>
-            <div class="ts-bar-divider"></div>
-            <div class="ts-bar-half">THOUGHT-FOR-THOUGHT</div>
-          </div>
-          <div class="ts-ticks">
-            <div class="ts-tick ts-h4"><div class="ts-tick-line"></div><div class="ts-tick-label">RV/ASV</div></div>
-            <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">KJV</div></div>
-            <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">NKJV</div></div>
-            <div class="ts-tick ts-h3"><div class="ts-tick-line"></div><div class="ts-tick-label">NASB</div></div>
-            <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">RSV</div></div>
-            <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">ESV</div></div>
-            <div class="ts-tick ts-h3"><div class="ts-tick-line"></div><div class="ts-tick-label">NRSV</div></div>
-            <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">CSB</div></div>
-            <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">NAB</div></div>
-            <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">NET</div></div>
-            <div class="ts-tick ts-h3"><div class="ts-tick-line"></div><div class="ts-tick-label">RNJB</div></div>
-            <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">NIV</div></div>
-            <div class="ts-tick ts-h2"><div class="ts-tick-line"></div><div class="ts-tick-label">REB</div></div>
-            <div class="ts-tick ts-h3"><div class="ts-tick-line"></div><div class="ts-tick-label">CEB</div></div>
-            <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">NLT</div></div>
-            <div class="ts-tick ts-h1"><div class="ts-tick-line"></div><div class="ts-tick-label">MSG</div></div>
-          </div>
-        </div>
-      </div>
-      <p><strong>Surrounding passage.</strong> Read the chapter or letter around your passage in one sitting. Notice how it fits the bigger flow.</p>
-      <div class="resource-links">
-        <span class="resource-links-label">See the book's design</span>
-        <div class="resource-link-row"><span class="rl-name">BibleProject – Old Testament overviews</span><a href="https://bibleproject.com/videos/collections/old-testament/" target="_blank">bibleproject.com</a></div>
-        <div class="resource-link-row"><span class="rl-name">BibleProject – New Testament overviews</span><a href="https://bibleproject.com/videos/collections/new-testament/" target="_blank">bibleproject.com</a></div>
-      </div>
-      <p>Each book gets a short animated overview that walks through its literary design, so it's easier to see how your passage fits the whole.</p>
-      <p><strong>Cross-references.</strong> Other passages using the same words or ideas can shed light on your question and show how this passage connects to the rest of Scripture.</p>
-      <div class="resource-links">
-        <span class="resource-links-label">Trusted resources for cross-references</span>
-        <div class="resource-link-row"><span class="rl-name">Bible Hub – Cross References</span><a href="https://biblehub.com/genesis/1-1.htm#crossref" target="_blank">biblehub.com</a></div>
-      </div>
-    `
-  },
-  learn: {
-    tag: "Learn",
-    card2Title: "Why Does This Matter?",
-    title: "Learn",
-    color: "var(--d-learn)",
-    num: "4",
-    icon: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
-    questions: `
-      <li>How would the original audience have understood this passage?</li>
-      <li>What does this passage reveal about who God is—His character, attributes, or eternal purpose?</li>
-      <li><em>Verify your findings in community.</em></li>
-    `,
-    howto: `
-      <p><strong>The interpretive bridge.</strong> In <em>Grasping God's Word</em>, Duvall and Hays picture interpretation as a river, with two banks and God's unchanging character as the bridge:</p>
-      <div class="bridge-diagram">
-        <div class="bridge-bank"><span class="bridge-bank-label">Their World</span><p>How would the original audience have understood this passage?</p></div>
-        <div class="bridge-span"><div class="bridge-line"></div><span class="bridge-span-label">God's Character</span><div class="bridge-line"></div></div>
-        <div class="bridge-bank"><span class="bridge-bank-label">Our World</span><p>What's still true for us today?</p></div>
-      </div>
-      <p>Today's two questions are that bridge in miniature: name what still holds true, and Day 5 builds on it.</p>
-      <p><strong>Community.</strong> Everyone reads with blind spots shaped by culture and experience. Bringing your findings to a group is the fastest way to catch a misreading before it hardens.</p>
-      <p><strong>Now you can consult outside resources.</strong> You put commentaries and AI aside on Day 1 so the text could speak first. Now that you've wrestled with it personally and in community, bring one in to confirm or sharpen what you found.</p>
-    `
-  },
-  live: {
-    tag: "Live",
-    card2Title: "Why Does This Matter?",
-    title: "Live",
-    color: "var(--d-live)",
-    num: "5",
-    icon: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
-    questions: `
-      <li>What cultural or personal lies are challenged by the truth of who God is?</li>
-      <li>How will the truth from this passage shape your prayers, thoughts, words, and actions today?</li>
-    `,
-    howto: `
-      <p>Consider how living this out would change your home, church, and community.</p>
-      <p>Write your application in light of what you've learned about God: his character shapes ours.</p>
-      <div class="visual-example-container">God is <span class="pill-blank"></span> <br><br> Therefore, I <span class="pill-blank"></span></div>
-      <p>Pray for God to reveal how to live this out, and ask others for accountability when needed.</p>
-    `
-  },
-  about: {
-    tag: "Start Here",
-    card2Title: "What is Dwell?",
-    title: "About Dwell",
-    color: "var(--paper-dim)",
-    num: "",
-    icon: '',
-    questions: `
-      <li>dwell is a set of biblical literacy building blocks for meditating on Scripture carefully and deeply—small enough to fit inside your Bible and simple enough to share with anyone you're discipling.</li>
-      <li>Because lessons are caught, not taught, disciples value authenticity above all. If we don't delight in Scripture ourselves, we can't expect them to.</li>
-      <li>Ultimately, quick answers don't produce deep lives. A true Bible reader isn't looking for a quick fix or a superficial takeaway; they are like the person described in Psalm 1: a tree planted by streams of water.</li>
-    `,
-    howto: `
-      <p>Dwell is a 5-step way to read the Bible with perspective, curiosity, and purpose. There is no real secret to Bible Study other than reading and then re-reading again and again. The usefulness of Dwell is that it helps keep you engaged by giving your mind and eyes a specific job through each read through of a passage:</p>
-
-      <div class="dwell-intro-row" id="dwell-intro-row" aria-hidden="true">
-        <div class="dwell-intro-cube" data-key="discover" style="background:var(--d-discover);">D</div>
-        <div class="dwell-intro-cube" data-key="wordwork" style="background:var(--d-wordwork);">W</div>
-        <div class="dwell-intro-cube" data-key="expand" style="background:var(--d-expand);">E</div>
-        <div class="dwell-intro-cube" data-key="learn" style="background:var(--d-learn);">L</div>
-        <div class="dwell-intro-cube" data-key="live" style="background:var(--d-live);">L</div>
-      </div>
-      
-      <div class="about-acronym-list">
-        <div class="about-acronym-item" data-key="discover">
-          <div class="about-acronym-icon" style="border-color:var(--d-discover); color:var(--d-discover);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="m20 20-4.35-4.35"/></svg>
-          </div>
-          <div class="about-acronym-content">
-            <span class="about-kicker" style="color:var(--d-discover);">Read One</span>
-            <span class="about-acronym-title">D — Discover</span>
-            <p>Ground yourself in the background (who wrote it, to whom, and why) and notice the style of writing.</p>
-          </div>
-        </div>
-
-        <div class="about-acronym-item" data-key="wordwork">
-          <div class="about-acronym-icon" style="border-color:var(--d-wordwork); color:var(--d-wordwork);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-          </div>
-          <div class="about-acronym-content">
-            <span class="about-kicker" style="color:var(--d-wordwork);">Read Two</span>
-            <span class="about-acronym-title">W — Word Work</span>
-            <p>Slow down to look for repeated words, look up confusing terms, and summarize the main idea.</p>
-          </div>
-        </div>
-
-        <div class="about-acronym-item" data-key="expand">
-          <div class="about-acronym-icon" style="border-color:var(--d-expand); color:var(--d-expand);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10.5"/></svg>
-          </div>
-          <div class="about-acronym-content">
-            <span class="about-kicker" style="color:var(--d-expand);">Read Three</span>
-            <span class="about-acronym-title">E — Expand</span>
-            <p>Compare different Bible translations, check the verses before and after, and look at cross-references to see the bigger story.</p>
-          </div>
-        </div>
-
-        <div class="about-acronym-item" data-key="learn">
-          <div class="about-acronym-icon" style="border-color:var(--d-learn); color:var(--d-learn);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          </div>
-          <div class="about-acronym-content">
-            <span class="about-kicker" style="color:var(--d-learn);">Read Four</span>
-            <span class="about-acronym-title">L — Learn</span>
-            <p>Ask what this meant to the original readers and what it reveals about God’s character.</p>
-          </div>
-        </div>
-
-        <div class="about-acronym-item" data-key="live">
-          <div class="about-acronym-icon" style="border-color:var(--d-live); color:var(--d-live);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          </div>
-          <div class="about-acronym-content">
-            <span class="about-kicker" style="color:var(--d-live);">Read Five</span>
-            <span class="about-acronym-title">L — Live</span>
-            <p>Let God’s truth expose personal or cultural lies, transforming how you think, pray, and act.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="about-section-heading">Flexible Building Blocks</div>
-      <p>You do not always have to do all five steps at once. Practicing even one block—like doing "Word Work" on a single verse or exploring "Context" before reading a chapter—sharpens your Bible literacy skills. However, when you stack all five blocks together, the compound effect helps you discover far richer details you would normally miss.</p>
-
-      <div class="dwell-regroup" id="dwell-regroup">
-        <div class="dwell-regroup-slot" data-key="discover" style="background:var(--d-discover);"></div>
-        <div class="dwell-regroup-slot" data-key="wordwork" style="background:var(--d-wordwork);"></div>
-        <div class="dwell-regroup-slot" data-key="expand" style="background:var(--d-expand);"></div>
-        <div class="dwell-regroup-slot" data-key="learn" style="background:var(--d-learn);"></div>
-        <div class="dwell-regroup-slot" data-key="live" style="background:var(--d-live);"></div>
-      </div>
-
-      <div class="about-section-heading">The Role of the Holy Spirit</div>
-      <p>A study method cannot produce spiritual life on its own. Good study habits, cross-references, and highlighters are just tools to keep you focused.</p>
-
-      <p>The real teacher is always the Holy Spirit. True spiritual revelation—understanding who God is and being transformed by Him—comes only through His guidance. The DWELL method is simply a way of quieting distractions, slowing down, and submitting your heart and mind so you are open to what the Spirit wants to reveal through God's Word.</p>
-    `
-  }
-};
-
-function initDwellAnim() {
-  const container = document.getElementById('section-howto');
-  if (!container) return;
-
-  const items = Array.from(container.querySelectorAll('.about-acronym-item[data-key]'));
-  const introRow = document.getElementById('dwell-intro-row');
-  const introCubes = container.querySelectorAll('.dwell-intro-cube[data-key]');
-  const cubeMap = {};
-  introCubes.forEach(c => { cubeMap[c.dataset.key] = c; });
-  const regroup = document.getElementById('dwell-regroup');
-
-  // Fly a clone (colored with colorValue) from fromEl to land on toRect, then fade out.
-  function flightClone(fromEl, toRect, colorValue, label) {
-    const from = fromEl.getBoundingClientRect();
-    const clone = document.createElement('div');
-    clone.className = 'dwell-flip-clone';
-    if (label) clone.textContent = label;
-    clone.style.left = from.left + 'px';
-    clone.style.top = from.top + 'px';
-    clone.style.width = from.width + 'px';
-    clone.style.height = from.height + 'px';
-    clone.style.background = colorValue;
-    document.body.appendChild(clone);
-
-    requestAnimationFrame(() => {
-      const dx = toRect.left - from.left + (toRect.width - from.width) / 2;
-      const dy = toRect.top - from.top + (toRect.height - from.height) / 2;
-      const scale = toRect.width / from.width;
-      clone.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
-      clone.style.borderRadius = '14px';
-      clone.style.opacity = '0';
-    });
-    setTimeout(() => clone.remove(), 650);
-  }
-
-  // Letter cube -> pops the (previously invisible) list card into view and
-  // flies into its icon slot at the same time.
-  function activate(item) {
-    if (item.classList.contains('is-active')) return;
-    item.classList.add('is-active');
-
-    const cube = cubeMap[item.dataset.key];
-    const icon = item.querySelector('.about-acronym-icon');
-    if (cube && icon && !cube.classList.contains('is-used')) {
-      flightClone(cube, icon.getBoundingClientRect(), getComputedStyle(cube).backgroundColor, cube.textContent);
-      cube.classList.add('is-used');
-    }
-
-    // Once the last letter has landed, close up the intro row entirely so
-    // scrolling back up shows no leftover gap — just the bulleted list.
-    if (item === items[items.length - 1] && introRow) {
-      setTimeout(() => introRow.classList.add('is-collapsed'), 500);
-    }
-  }
-
-  // Always activate in order D → W → E → L → L, even on a fast scroll.
-  function activateThrough(index) {
-    for (let i = 0; i <= index; i++) {
-      if (!items[i].classList.contains('is-active')) activate(items[i]);
-    }
-  }
-
-  let revealObserver = null;
-  function beginReveal() {
-    if (revealObserver || !('IntersectionObserver' in window)) return;
-    revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) activateThrough(items.indexOf(entry.target));
-      });
-    }, { threshold: 0, rootMargin: '0px 0px -35% 0px' });
-    items.forEach(item => revealObserver.observe(item));
-  }
-
-  if ('IntersectionObserver' in window) {
-    // Nothing moves until the user actually scrolls; then D leads the reveal.
-    window.addEventListener('scroll', beginReveal, { once: true, passive: true });
-
-    // Centered separator between the two sections: the five blocks drop into
-    // place, staggered, once it scrolls into view — full color, no fade-out.
-    if (regroup) {
-      const dropObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            regroup.classList.add('is-visible');
-            dropObserver.disconnect();
-          }
-        });
-      }, { threshold: 0.2 });
-      dropObserver.observe(regroup);
-    }
-  } else {
-    items.forEach(item => item.classList.add('is-active'));
-    if (regroup) regroup.classList.add('is-visible');
-    if (introRow) introRow.classList.add('is-collapsed');
-  }
-}
-
-function openSection(key) {
-  currentOpenKey = key;
-  const data = sectionData[key];
-  if(!data) return;
-
-  document.getElementById('card2-tag').textContent = data.tag || "Scaffolding & Reference";
-  document.getElementById('card2-title').textContent = data.card2Title || "Why & How";
-  document.getElementById('section-howto').innerHTML = data.howto;
-  if (key === 'about') initDwellAnim();
-
-  const dayBlocks = document.querySelectorAll('#page-bookmark .digi-day');
-  const isDayKey = ['discover', 'wordwork', 'expand', 'learn', 'live'].includes(key);
-  dayBlocks.forEach(block => {
-    block.classList.toggle('is-collapsed', isDayKey && block.dataset.day !== key);
-  });
-  document.querySelectorAll('.page-bookmark-prayer').forEach(p => {
-    if (!isDayKey) {
-      p.classList.remove('is-hidden');
-      return;
-    }
-    const wantsFirst = (key === 'discover' || key === 'wordwork');
-    const isFirst = p.dataset.prayer === '1';
-    p.classList.toggle('is-hidden', wantsFirst ? !isFirst : isFirst);
-  });
-
-  const dotsNav = document.getElementById('section-dots-nav');
-  dotsNav.querySelectorAll('span').forEach(dot => {
-    dot.classList.toggle('is-active', dot.dataset.day === key);
-  });
-
-  document.getElementById('guides-card').style.display = (key === 'about') ? 'block' : 'none';
-
-  document.getElementById('home-view').style.display = 'none';
-  document.getElementById('page-view').style.display = 'grid';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function closeSection() {
-  currentOpenKey = null;
-  document.querySelectorAll('#page-bookmark .digi-day').forEach(block => {
-    block.classList.remove('is-collapsed');
-  });
-  document.querySelectorAll('.page-bookmark-prayer').forEach(p => {
-    p.classList.remove('is-hidden');
-  });
-  document.querySelectorAll('#section-dots-nav span').forEach(dot => {
-    dot.classList.remove('is-active');
-  });
-  document.getElementById('home-view').style.display = 'grid';
-  document.getElementById('page-view').style.display = 'none';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function toggleTester(event) {
+  if (event) event.stopPropagation();
+  document.getElementById("testerPanel").classList.toggle("open");
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  renderPalettePicker();
-  renderFontPicker();
+  renderTester();
+  applyPalette("golden-hour-horizon");
 });
 </script>
 
