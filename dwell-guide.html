@@ -338,7 +338,7 @@
   }
   .clue-badge i{ color: var(--yellow); }
 
-  /* HEADER & HUD */
+  /* HEADER & HUD (ORIGINAL CLEAN STYLE) */
   .hud-header{ 
     position:relative; 
     z-index:50; 
@@ -351,23 +351,15 @@
   }
 
   .progress-container{ position:relative; width:100%; height:7px; background:rgba(13,13,29,0.18); border-radius:100px; }
-  .hud-header.tx-light .progress-container{ background:rgba(255,255,255,0.25); }
+  .tx-light .progress-container{ background:rgba(255,255,255,0.25); }
   .progress-bar-fill{ position:absolute; left:0; top:0; bottom:0; width:0%; background:var(--ink); border-radius:100px; transition:width .3s cubic-bezier(.2,.8,.25,1); }
-  .hud-header.tx-light .progress-bar-fill{ background:#FFF; }
+  .tx-light .progress-bar-fill{ background:#FFF; }
   
   .notches-layer{ position:absolute; inset:0; pointer-events:none; }
-  .prog-notch{ position:absolute; top:50%; transform:translate(-50%, -50%) rotate(0deg); width:9px; height:9px; border-radius:50%; background:rgba(13,13,29,0.3); border:1.5px solid rgba(255,255,255,0.6); transition:all .25s ease; }
-  .hud-header.tx-light .prog-notch{ background:rgba(255,255,255,0.4); border-color:rgba(0,0,0,0.3); }
-  .prog-notch.passed{
-    width:11px; height:11px;
-    border-radius:4px;
-    background: var(--notch-color, var(--lime));
-    border:1.5px solid var(--ink);
-    box-shadow:1.5px 1.5px 0 var(--ink);
-  }
-  .prog-notch.passed:nth-of-type(odd){ transform:translate(-50%, -50%) rotate(-8deg); }
-  .prog-notch.passed:nth-of-type(even){ transform:translate(-50%, -50%) rotate(8deg); }
-  .prog-notch.active{ width:13px; height:13px; border-radius:50%; background:var(--yellow); border-color:var(--ink); box-shadow:0 0 8px rgba(0,0,0,0.3); animation:notchPulse 1.2s infinite ease-in-out; }
+  .prog-notch{ position:absolute; top:50%; transform:translate(-50%, -50%); width:9px; height:9px; border-radius:50%; background:rgba(13,13,29,0.3); border:1.5px solid rgba(255,255,255,0.6); transition:all .25s ease; }
+  .tx-light .prog-notch{ background:rgba(255,255,255,0.4); border-color:rgba(0,0,0,0.3); }
+  .prog-notch.passed{ background:var(--lime); border-color:var(--ink); }
+  .prog-notch.active{ width:13px; height:13px; background:var(--yellow); border-color:var(--ink); box-shadow:0 0 8px rgba(0,0,0,0.3); animation:notchPulse 1.2s infinite ease-in-out; }
   @keyframes notchPulse{ 0%,100%{ transform:translate(-50%, -50%) scale(1); } 50%{ transform:translate(-50%, -50%) scale(1.25); } }
 
   .story-meta{ display:flex; align-items:center; justify-content:space-between; font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; opacity:.85; }
@@ -1524,8 +1516,6 @@ const sectionLabels = [
   'Learn', 'Learn', 'Learn', 'Live'
 ];
 
-const sectionColorKeys = ['', 'discover', 'discover', 'discover', '', 'wordwork', 'wordwork', 'wordwork', 'learn', 'learn', 'learn', 'live'];
-
 function initNotches(){
   const layer = document.getElementById('notchesLayer');
   layer.innerHTML = '';
@@ -1537,8 +1527,6 @@ function initNotches(){
       notch.id = `notch-${i}`;
       const pct = (i / (total - 1)) * 100;
       notch.style.left = `${pct}%`;
-      const colorKey = sectionColorKeys[i];
-      if (colorKey) notch.style.setProperty('--notch-color', `var(--bg-${colorKey})`);
       layer.appendChild(notch);
     }
   });
