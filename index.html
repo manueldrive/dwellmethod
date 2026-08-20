@@ -95,7 +95,7 @@ html, body {
 .col-live     { background: var(--d-live); color: var(--d-live-text); }
 
 .col-headline, .col-nav-cue { color: inherit; }
-.col-subtext, .col-prompt-list li, .col-sub-prompt-list li { color: inherit; opacity: 0.95; }
+.col-subtext, .col-prompt-list li { color: inherit; opacity: 0.95; }
 .col-step-tag, .col-nav-cue { opacity: 0.85; }
 
 /* Header */
@@ -293,26 +293,16 @@ html, body {
   font-weight: 700;
 }
 
-/* Indented sub-bullets */
-.col-sub-prompt-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 4px 16px;
-  margin-top: 6px;
-  padding-left: 4px;
-}
-
-.col-sub-prompt-list li {
-  padding-left: 14px;
+/* Metadata Strip (Author • Audience • Time • Purpose) */
+.col-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
   font-size: 0.92em;
-}
-
-.col-sub-prompt-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  opacity: 0.7;
+  font-weight: 700;
+  opacity: 0.9;
+  margin-top: 4px;
 }
 
 /* Navigation hint gesture */
@@ -457,12 +447,6 @@ html, body {
     gap: 10px;
     font-size: 14px;
     line-height: 1.45;
-  }
-
-  .col-sub-prompt-list {
-    grid-template-columns: 1fr;
-    gap: 4px;
-    margin-top: 6px;
   }
 
   @keyframes nudgeForward {
@@ -683,13 +667,8 @@ html, body {
         <h2 class="col-headline">Find the historical background.</h2>
         <ul class="col-prompt-list">
           <li>
-            Use a study Bible or trusted resource briefly to set the scene:
-            <ul class="col-sub-prompt-list">
-              <li><strong>Author:</strong> Who wrote this?</li>
-              <li><strong>Audience:</strong> Who received it?</li>
-              <li><strong>Time:</strong> When was it written?</li>
-              <li><strong>Purpose:</strong> Why was it written?</li>
-            </ul>
+            Use a study Bible or trusted resource to set the scene:
+            <div class="col-meta-strip">Author &bull; Audience &bull; Time &bull; Purpose</div>
           </li>
           <li><strong>Set extra resources aside for now.</strong> Read straight through the passage on your own to map the scene and characters.</li>
         </ul>
