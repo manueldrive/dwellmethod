@@ -217,9 +217,34 @@
   .rail-swatch-btn[data-color="yellow"].active{ box-shadow: 0 0 0 4px rgba(255,199,44,0.45); }
   .rail-swatch-btn[data-color="pink"]:focus-visible,
   .rail-swatch-btn[data-color="pink"].active{ box-shadow: 0 0 0 4px rgba(244,63,94,0.4); }
+
+  .rail-font-btn{
+    width: auto;
+    height: auto;
+    border: none;
+    background: none;
+    color: var(--ink);
+    padding: 4px 6px;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 1;
+    opacity: 0.65;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .rail-font-btn:active{ transform: scale(0.9); opacity: 1; }
+  .rail-font-btn:disabled{ opacity: 0.2; cursor: default; }
+  .rail-font-btn:disabled:active{ transform: none; }
   @media (min-width: 1024px) {
     .vocab-color-rail{ gap: 20px; }
     .rail-swatch-btn{ width: 38px; height: 38px; border-width: 3px; }
+    .rail-font-btn{ font-size: 22px; }
   }
 
   .action-gate-pill {
@@ -773,7 +798,7 @@
   }
   .flow-para{ 
     margin:0 0 20px 0; 
-    font-size:clamp(18px, 2.3vh, 22px); 
+    font-size:calc(clamp(18px, 2.3vh, 22px) * var(--passage-font-scale, 1)); 
     line-height:1.75; 
     font-family:'Inter',sans-serif; 
     font-weight:400; 
@@ -781,11 +806,11 @@
   }
   @media (min-width: 768px) {
     .passage-scroll{ max-width:960px; padding-bottom:36px; }
-    .flow-para{ font-size:clamp(22px, 2.4vw, 26px); line-height:1.8; max-width:960px; margin-bottom:26px; }
+    .flow-para{ font-size:calc(clamp(22px, 2.4vw, 26px) * var(--passage-font-scale, 1)); line-height:1.8; max-width:960px; margin-bottom:26px; }
   }
   @media (min-width: 1200px) {
     .passage-scroll{ max-width:1300px; }
-    .flow-para{ font-size:clamp(25px, 2vw, 32px); line-height:1.85; max-width:1300px; }
+    .flow-para{ font-size:calc(clamp(25px, 2vw, 32px) * var(--passage-font-scale, 1)); line-height:1.85; max-width:1300px; }
   }
   .verse-num-inline{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--purple); font-size:.65em; vertical-align:super; margin:0 2px 0 6px; }
   
@@ -1277,7 +1302,8 @@ const phrases = [
   { words:['impure','spirits'], key:'impurespirit' }
 ];
 
-const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null } };
+const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2 };
+const FONT_LEVELS = [0.85, 0.925, 1, 1.1, 1.2, 1.3];
 let renderGen = 0;
 
 function quoteVerse(text){
@@ -1660,9 +1686,16 @@ function updateNavShell(){
       ['lime', 'Characters'], ['purple', 'Setting'],
       ['yellow', 'Confusing'], ['pink', 'Repeated']
     ];
-    rail.innerHTML = colors.map(([c, label]) => `
+    const swatchHtml = colors.map(([c, label]) => `
       <button class="rail-swatch-btn ${state.activeTool.vocab === c ? 'active' : ''}" data-color="${c}" title="${label}" aria-label="${label}" onclick="event.stopPropagation(); setPassageHighlighter('${c}', this);"></button>
     `).join('');
+    const atMax = state.passageFontLevel >= FONT_LEVELS.length - 1;
+    const atMin = state.passageFontLevel <= 0;
+    rail.innerHTML = `
+      <button class="rail-font-btn" title="Increase text size" aria-label="Increase text size" ${atMax ? 'disabled' : ''} onclick="event.stopPropagation(); adjustPassageFont(1);">+</button>
+      ${swatchHtml}
+      <button class="rail-font-btn" title="Decrease text size" aria-label="Decrease text size" ${atMin ? 'disabled' : ''} onclick="event.stopPropagation(); adjustPassageFont(-1);">−</button>
+    `;
   } else {
     rail.style.display = 'none';
   }
@@ -1758,6 +1791,18 @@ function setPassageHighlighter(color, btnEl){
     scrollEl.style.setProperty('--active-hl-hover', hoverVal);
   }
 
+  updateNavShell();
+}
+
+function applyPassageFontScale(){
+  document.documentElement.style.setProperty('--passage-font-scale', FONT_LEVELS[state.passageFontLevel]);
+}
+
+function adjustPassageFont(delta){
+  const next = state.passageFontLevel + delta;
+  if (next < 0 || next >= FONT_LEVELS.length) return;
+  state.passageFontLevel = next;
+  applyPassageFontScale();
   updateNavShell();
 }
 
@@ -2253,6 +2298,7 @@ function tryCopyAllNotes(){
 }
 
 initNotches();
+applyPassageFontScale();
 renderBeat(0);
 </script>
 </body>
