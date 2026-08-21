@@ -112,7 +112,6 @@
   @media (max-width: 767px) {
     .fs-toggle-btn { display: none !important; }
   }
-  .fs-toggle-btn:hover { transform: scale(1.08); }
 
   /* ================= MINIMAL BORDERLESS CHEVRON NAVIGATION ================= */
   .persistent-nav-shell {
@@ -143,10 +142,6 @@
   }
   .app-viewport.tx-light .minimal-arrow-btn {
     color: #FFFFFF;
-  }
-  .minimal-arrow-btn:hover {
-    opacity: 1;
-    transform: scale(1.15);
   }
   .minimal-arrow-btn.disabled {
     opacity: 0.15;
@@ -212,19 +207,14 @@
   .rail-swatch-btn[data-color="purple"]{ background: var(--purple); }
   .rail-swatch-btn[data-color="yellow"]{ background: var(--yellow); }
   .rail-swatch-btn[data-color="pink"]{ background: var(--pink); }
-  .rail-swatch-btn:hover,
   .rail-swatch-btn:focus-visible,
   .rail-swatch-btn.active{ transform: scale(1.18); }
-  .rail-swatch-btn[data-color="lime"]:hover,
   .rail-swatch-btn[data-color="lime"]:focus-visible,
   .rail-swatch-btn[data-color="lime"].active{ box-shadow: 0 0 0 4px rgba(195,245,60,0.45); }
-  .rail-swatch-btn[data-color="purple"]:hover,
   .rail-swatch-btn[data-color="purple"]:focus-visible,
   .rail-swatch-btn[data-color="purple"].active{ box-shadow: 0 0 0 4px rgba(168,85,247,0.4); }
-  .rail-swatch-btn[data-color="yellow"]:hover,
   .rail-swatch-btn[data-color="yellow"]:focus-visible,
   .rail-swatch-btn[data-color="yellow"].active{ box-shadow: 0 0 0 4px rgba(255,199,44,0.45); }
-  .rail-swatch-btn[data-color="pink"]:hover,
   .rail-swatch-btn[data-color="pink"]:focus-visible,
   .rail-swatch-btn[data-color="pink"].active{ box-shadow: 0 0 0 4px rgba(244,63,94,0.4); }
   @media (min-width: 1024px) {
@@ -479,7 +469,7 @@
     transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
     color: var(--ink);
   }
-  .folder-deck-card:hover { transform: translateY(-4px); box-shadow: 6px 6px 0 var(--ink); }
+
   .folder-deck-card:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
   .folder-deck-card .c-title { font-family: 'Space Grotesk', sans-serif; font-weight: 800; color: inherit; }
   .folder-deck-card .c-desc { font-family: 'Inter', sans-serif; font-size: clamp(13px, 1.6vh, 15px); color: #444; line-height: 1.45; font-weight: 600; max-width: 320px; }
@@ -805,7 +795,7 @@
     border-radius:6px; 
     transition:background .15s ease, color .15s ease; 
   }
-  .w:hover{ background: var(--active-hl-hover, rgba(255, 199, 44, 0.25)); }
+
   .w.flagged,
   .w.hl-yellow{ background: rgba(255, 199, 44, 0.55); font-weight: 700; }
   .w.hl-lime{ background: rgba(195, 245, 60, 0.5); font-weight: 700; }
@@ -1001,7 +991,7 @@
     transition: all 0.15s ease;
     color: var(--ink);
   }
-  .final-timer-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+
   .final-timer-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
   .final-timer-btn.running { background: var(--lime); }
   .final-timer-btn .timer-icon { font-size: 16px; }
@@ -1029,7 +1019,7 @@
   .dev-bubbles-bar{ display:flex; gap:8px; overflow-x:auto; overflow-y:hidden; padding:2px 40px 6px 2px; scrollbar-width:none; }
   .dev-bubbles-bar::-webkit-scrollbar{ display:none; }
   .dev-bubble{ flex-shrink:0; width:30px; height:30px; border-radius:50%; border:2px solid rgba(0,0,0,0.25); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:12px; cursor:pointer; position:relative; transition:transform .12s ease; }
-  .dev-bubble:hover{ transform:scale(1.12); }
+
   .dev-bubble.active{ border:3px solid var(--ink); box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
   .dev-bubble .note-dot{ position:absolute; top:-3px; right:-3px; width:9px; height:9px; border-radius:50%; background:var(--yellow); border:1.5px solid var(--ink); }
 
@@ -1043,6 +1033,21 @@
   .dnp-status{ font-size:12px; font-weight:700; font-family:'Inter',sans-serif; }
   .dnp-status.ok{ color:#1a7a3c; }
   .dnp-status.warn{ color:#8a5a00; }
+
+  /* Hover-only affordances — restricted to devices with a real mouse/pointer so touch taps on mobile don't get "stuck" showing a hover state */
+  @media (hover: hover) and (pointer: fine) {
+    .fs-toggle-btn:hover { transform: scale(1.08); }
+    .minimal-arrow-btn:hover { opacity: 1; transform: scale(1.15); }
+    .rail-swatch-btn:hover { transform: scale(1.18); }
+    .rail-swatch-btn[data-color="lime"]:hover{ box-shadow: 0 0 0 4px rgba(195,245,60,0.45); }
+    .rail-swatch-btn[data-color="purple"]:hover{ box-shadow: 0 0 0 4px rgba(168,85,247,0.4); }
+    .rail-swatch-btn[data-color="yellow"]:hover{ box-shadow: 0 0 0 4px rgba(255,199,44,0.45); }
+    .rail-swatch-btn[data-color="pink"]:hover{ box-shadow: 0 0 0 4px rgba(244,63,94,0.4); }
+    .folder-deck-card:hover { transform: translateY(-4px); box-shadow: 6px 6px 0 var(--ink); }
+    .w:hover{ background: var(--active-hl-hover, rgba(255, 199, 44, 0.25)); }
+    .final-timer-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+    .dev-bubble:hover{ transform:scale(1.12); }
+  }
 </style>
 </head>
 <body>
