@@ -27,10 +27,10 @@
     --bg-cream: linear-gradient(145deg, #f4f0e8 0%, #d8d2c7 100%);
     --bg-yellow: linear-gradient(145deg, #ffd452 0%, #eab308 100%);
 
-    --bg-discover:  linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-wordwork:  linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
+    --bg-discover:  linear-gradient(145deg, #ff9b5c 0%, #ff6a1f 100%);
+    --bg-wordwork:  linear-gradient(145deg, #ff7c87 0%, #ff3b54 100%);
     --bg-expand:    linear-gradient(145deg, #e37ac4 0%, #c736a0 100%);
-    --bg-learn:     linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
+    --bg-learn:     linear-gradient(145deg, #8f7aff 0%, #6339f0 100%);
     --bg-live:      linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
 
     --bg-terracotta: linear-gradient(145deg, #e48d75 0%, #a15844 100%);
@@ -477,6 +477,8 @@
   .folder-deck-card.shake { animation: shakeX .45s; }
 
   @media (max-width: 767px) {
+    .sketch-lead-title { font-size: clamp(19px, 5.6vw, 25px); margin-bottom: 6px; }
+    .sketch-lead-title.tight { margin-bottom: 4px; }
     .nt-folder-wrap { max-width: 100%; margin-top: 4px; }
     .nt-folder-tab {
       font-size: 11px;
@@ -490,29 +492,63 @@
       border-width: 3px;
       border-radius: 0 16px 16px 16px;
       box-shadow: 4px 4px 0 var(--ink);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      max-height: 100%;
     }
-    .testament-folder-deck,
-    .folder-sections-deck {
+    /* 2-card testament deck: keep stacked, full detail still fits fine */
+    .testament-folder-deck {
       grid-template-columns: 1fr;
       gap: 8px;
     }
-    .testament-folder-deck .folder-deck-card,
-    .folder-sections-deck .folder-deck-card {
+    .testament-folder-deck .folder-deck-card {
       min-height: auto;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 16px 14px;
-      gap: 8px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "title badge"
+        "desc  desc";
+      align-items: start;
+      text-align: left;
+      padding: 14px 14px;
+      column-gap: 8px;
+      row-gap: 6px;
       border-radius: 12px;
       border-width: 2.5px;
       box-shadow: 3px 3px 0 var(--ink);
     }
+    .testament-folder-deck .folder-deck-card .c-title { grid-area: title; font-size: 17px; margin-bottom: 0; align-self: center; }
+    .testament-folder-deck .folder-deck-card .c-badge { grid-area: badge; margin-bottom: 0; justify-self: end; align-self: center; }
+    .testament-folder-deck .folder-deck-card .c-desc { grid-area: desc; display: block !important; font-size: 12px; max-width: none; margin: 0; }
+
+    /* 5-card section deck: 2-column compact grid to save vertical room */
+    .folder-sections-deck {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    .folder-sections-deck .folder-deck-card {
+      min-height: auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "title badge"
+        "desc  desc";
+      align-items: start;
+      justify-content: start;
+      text-align: left;
+      padding: 10px 10px;
+      column-gap: 6px;
+      row-gap: 3px;
+      border-radius: 10px;
+      border-width: 2.5px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .folder-sections-deck .folder-deck-card .c-title { grid-area: title; font-size: 13px; margin-bottom: 0; line-height: 1.15; align-self: center; }
+    .folder-sections-deck .folder-deck-card .c-badge { grid-area: badge; font-size: 9px; padding: 2px 8px; margin-bottom: 0; justify-self: end; align-self: center; }
+    .folder-sections-deck .folder-deck-card .c-desc { grid-area: desc; display: block; font-size: 10.5px; line-height: 1.25; max-width: none; margin: 0; }
+
     .folder-deck-card:hover { transform: none; }
-    .folder-deck-card .c-desc { display: block !important; font-size: 12px; max-width: none; }
-    .testament-folder-deck .folder-deck-card .c-title,
-    .folder-sections-deck .folder-deck-card .c-title { font-size: 18px; margin-bottom: 2px; }
-    .folder-deck-card .c-badge { font-size: 10px; padding: 3px 10px; margin-bottom: 2px; }
+    .folder-deck-card .c-badge { margin-bottom: 2px; }
   }
 
   /* INTRO SLIDE */
@@ -601,6 +637,14 @@
   .circle-hero .label-god-is{ font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(17px, 2.4vh, 22px); letter-spacing:-.5px; text-transform:uppercase; line-height:1; margin-bottom:6px; }
   .circle-hero .static-trait{ font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 22px); font-weight:900; color:var(--purple); text-transform:capitalize; border-bottom:3px solid var(--ink); padding:2px 12px; margin-bottom:4px; }
   .blank-input{ width:88%; max-width:88%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 0; }
+
+  /* Learn / Central Truth "GOD IS..." circle reads too small on phones — give it more room there */
+  @media (max-width: 767px) {
+    .circle-hero.coaching-circle{ width:clamp(190px, 32vh, 240px); height:clamp(190px, 32vh, 240px); padding:16px; }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:10px; margin-bottom:5px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(19px, 3vh, 25px); margin-bottom:8px; }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(17px, 2.6vh, 21px); }
+  }
   
   @media (min-width: 768px) {
     .circle-hero{ width: clamp(230px, 32vh, 300px); height: clamp(230px, 32vh, 300px); padding:20px; border-width:4px; box-shadow:6px 6px 0 var(--ink); }
