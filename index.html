@@ -233,21 +233,6 @@ html, body {
   pointer-events: auto;
 }
 
-/* ── Microcapsule Prayer Tag ── */
-.col-prayer-tag {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.4;
-  opacity: 0.9;
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-  padding: 4px 12px;
-  width: fit-content;
-  letter-spacing: 0.02em;
-  margin-bottom: -2px;
-}
-
 .col-step-tag {
   font-size: 11px;
   font-weight: 800;
@@ -336,12 +321,6 @@ html, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  animation: nudgeForward 2.2s infinite ease-in-out;
-}
-
-@keyframes nudgeForward {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(5px); }
 }
 
 /* ── Mobile Layout (< 768px in Portrait Only) ── */
@@ -449,11 +428,6 @@ html, body {
     line-height: 1.45;
   }
 
-  @keyframes nudgeForward {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(4px); }
-  }
-
   .col-nav-cue .cue-arrow svg {
     transform: rotate(90deg);
   }
@@ -479,8 +453,7 @@ html, body {
     gap: 8px;
   }
 
-  .col-intro .col-subtext,
-  .col-prayer-tag {
+  .col-intro .col-subtext {
     display: none;
   }
 
@@ -662,7 +635,6 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <span class="col-prayer-tag">Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are.</span>
         <span class="col-step-tag">Step One &bull; Discover</span>
         <h2 class="col-headline">Find the historical background.</h2>
         <ul class="col-prompt-list">
@@ -670,7 +642,7 @@ html, body {
             Use a study Bible or trusted resource to set the scene:
             <div class="col-meta-strip">Author &bull; Audience &bull; Time &bull; Purpose</div>
           </li>
-          <li><strong>Set extra resources aside for now.</strong> Read straight through the passage on your own to map the scene and characters.</li>
+          <li>Set aside outside resources to let the passage speak for itself. Read slowly and record what stands out to you.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-wordwork')">
           <span class="cue-label">Advance to Word Work</span>
@@ -741,7 +713,7 @@ html, body {
       </div>
       <div class="col-expanded-body">
         <span class="col-step-tag">Step Four &bull; Learn</span>
-        <h2 class="col-headline">Discover the timeless truth.</h2>
+        <h2 class="col-headline">Uncover the timeless truth.</h2>
         <ul class="col-prompt-list">
           <li>What was the main takeaway for the very first people who read this?</li>
           <li>What does this passage teach us about who God is and how He works?</li>
@@ -765,7 +737,6 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <span class="col-prayer-tag">Lord, correct any lies I believe. Let this knowledge increase my love, not my pride.</span>
         <span class="col-step-tag">Step Five &bull; Live</span>
         <h2 class="col-headline">Put the truth into practice.</h2>
         <ul class="col-prompt-list">
