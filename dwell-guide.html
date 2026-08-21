@@ -834,47 +834,148 @@
   /* SLIDE 7: VOCAB REVIEW */
   .review-scroll{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; position:relative; z-index:2; padding:4px 8px 12px 4px; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-direction:column; justify-content:flex-start; }
   .glossary-panel{
-    background:#FFFDF6;
-    border-radius:14px;
-    padding: clamp(12px, 1.6vh, 16px) clamp(12px, 1.8vw, 16px);
+    background:#FFF;
+    border:3.5px solid var(--ink);
+    border-radius:20px;
+    box-shadow:5px 5px 0 var(--ink);
+    padding: clamp(16px, 2.2vh, 22px) clamp(16px, 2.4vw, 22px);
     margin-top: auto;
     margin-bottom: auto;
   }
-  .review-section-header{ font-family:'Space Grotesk', sans-serif; font-size:11.5px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--ink); opacity:.55; margin:0 0 3px 0; display:flex; align-items:center; gap:8px; }
+  .review-section-header{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    background:var(--ink);
+    color:#FFF;
+    border-radius:100px;
+    padding:5px 12px;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin:0 0 10px 0;
+  }
+  .review-section-header:not(:first-child){ margin-top:16px; }
   .review-def-entry{ 
-    padding: 5px 0; 
-    border-bottom: 1.5px solid rgba(13,13,13,0.14); 
+    padding: 7px 0; 
+    border-bottom: 2px dashed rgba(13,13,13,0.2); 
     font-family: 'Inter', sans-serif; 
     font-size: clamp(13.5px, 1.8vh, 16px); 
-    line-height: 1.3; 
+    line-height: 1.35; 
     color: var(--ink); 
   }
   .review-def-entry:last-child { border-bottom: none; }
-  .review-def-entry .gloss-num{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--purple); font-size:.65em; vertical-align:super; margin-right:3px; }
+  .review-def-entry .gloss-num{ font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; background:var(--purple); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; width:1.5em; height:1.5em; font-size:.62em; vertical-align:middle; margin-right:6px; }
   .review-def-entry .term-word{ font-family: 'Space Grotesk', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink); margin-right: 6px; }
   .review-def-entry .term-word::after{ content:'—'; margin-left:6px; opacity:.4; font-weight:400; }
   @media (min-width: 900px) {
     .review-scroll{ max-width:1300px; }
-    .glossary-panel{ padding:14px 22px; }
-    .review-def-entry{ display:grid; grid-template-columns:210px 1fr; gap:16px; padding:6px 0; align-items:baseline; }
+    .glossary-panel{ padding:20px 26px; border-width:4px; box-shadow:6px 6px 0 var(--ink); }
+    .review-def-entry{ display:grid; grid-template-columns:210px 1fr; gap:16px; padding:8px 0; align-items:baseline; }
     .review-def-entry .term-word{ margin-right:0; }
     .review-def-entry .term-word::after{ content:''; }
   }
   @media (min-width: 1100px) {
-    .glossary-panel{ padding:16px 26px; }
-    .review-section-header{ font-size:13px; }
-    .review-def-entry{ font-size:16.5px; grid-template-columns:240px 1fr; padding:7px 0; }
+    .glossary-panel{ padding:24px 30px; }
+    .review-section-header{ font-size:13px; padding:6px 14px; }
+    .review-def-entry{ font-size:16.5px; grid-template-columns:240px 1fr; padding:9px 0; }
   }
   @media (min-width: 1400px) {
     .review-scroll{ max-width:1700px; }
-    .glossary-panel{ padding:20px 32px; }
-    .review-def-entry{ font-size:18px; grid-template-columns:290px 1fr; gap:22px; padding:8px 0; }
+    .glossary-panel{ padding:28px 36px; border-width:5px; box-shadow:8px 8px 0 var(--ink); }
+    .review-def-entry{ font-size:18px; grid-template-columns:290px 1fr; gap:22px; padding:10px 0; }
   }
   .pill-cloud{ display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
   .research-pill{ font-family:'Space Grotesk', sans-serif; font-size:12.5px; font-weight:700; background:var(--ink); color:#FFF; padding:7px 14px; border-radius:100px; text-transform:capitalize; }
   @media (min-width: 1100px) {
     .research-pill{ font-size:15px; padding:10px 18px; }
   }
+
+  /* GLOSSARY SIDE PANEL — pull-tab + slide-out drawer, tablet/desktop only, progressive reveal so a room of kids isn't hit with every definition at once */
+  .glossary-drawer{ display: none; }
+  @media (min-width: 768px) {
+    .glossary-drawer.gd-visible{ display: block; }
+  }
+  .glossary-tab{
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 130;
+    background: var(--yellow);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    border-left: none;
+    border-radius: 0 14px 14px 0;
+    padding: 16px 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: left .3s ease, transform .15s ease;
+  }
+  .glossary-tab span{ writing-mode: vertical-rl; transform: rotate(180deg); }
+  .glossary-tab i{ font-size: 15px; }
+  .glossary-tab:active{ transform: translateY(-50%) scale(0.96); }
+  .glossary-drawer.open .glossary-tab{ left: min(360px, 84vw); }
+  .glossary-drawer-scrim{
+    position: fixed; inset: 0; z-index: 105;
+    background: rgba(13,13,13,0.28);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .glossary-drawer.open .glossary-drawer-scrim{ opacity: 1; pointer-events: auto; }
+  .glossary-drawer-panel{
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: min(360px, 84vw);
+    background: #FFF;
+    border-right: 4px solid var(--ink);
+    box-shadow: 8px 0 0 rgba(0,0,0,0.12);
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+    z-index: 110;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 20px;
+    gap: 14px;
+  }
+  .glossary-drawer.open .glossary-drawer-panel{ transform: translateX(0); }
+  .glossary-drawer-header{
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .glossary-drawer-close{ background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); padding:4px; line-height:1; }
+  .glossary-drawer-body{ flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; gap: 8px; }
+  .gd-empty{ font-family:'Inter', sans-serif; font-size:14px; opacity:.6; line-height:1.5; }
+  .gd-row{ border: 2.5px solid var(--ink); border-radius: 12px; overflow: hidden; flex-shrink: 0; }
+  .gd-row-term{
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 14px; cursor: pointer; border: none;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 13.5px;
+    background: #FFF; color: var(--ink); text-align: left;
+    transition: background .15s ease, color .15s ease;
+  }
+  .gd-row.revealed .gd-row-term{ background: var(--ink); color: #FFF; }
+  .gd-row-term i{ transition: transform .2s ease; opacity: .6; }
+  .gd-row.revealed .gd-row-term i{ transform: rotate(180deg); }
+  .gd-row-def{
+    max-height: 0; overflow: hidden; transition: max-height .25s ease;
+    font-family: 'Inter', sans-serif; font-size: 13.5px; line-height: 1.45; color: var(--ink);
+    padding: 0 14px;
+  }
+  .gd-row.revealed .gd-row-def{ max-height: 240px; padding: 10px 14px 14px; }
+  .glossary-drawer-body .review-section-header{ margin-top: 4px; }
 
   /* SLIDE 10: CHAR COACHING (RESPONSIVE GRID - SIDE-BY-SIDE ON TABLET/DESKTOP) */
   .coaching-scene {
@@ -1088,6 +1189,22 @@
 
   <!-- VOCAB-SCAN COLOR RAIL (right side) -->
   <div class="vocab-color-rail" id="vocabColorRail" style="display:none;"></div>
+
+  <!-- GLOSSARY SIDE PANEL (tablet/desktop only — mobile keeps the dedicated review slide) -->
+  <div class="glossary-drawer" id="glossaryDrawer">
+    <button class="glossary-tab" id="glossaryTabBtn" onclick="event.stopPropagation(); toggleGlossaryDrawer();" aria-label="Toggle glossary panel">
+      <i class="fa-solid fa-book-bookmark"></i>
+      <span>Glossary</span>
+    </button>
+    <div class="glossary-drawer-scrim" onclick="closeGlossaryDrawer();"></div>
+    <div class="glossary-drawer-panel">
+      <div class="glossary-drawer-header">
+        <span>Glossary</span>
+        <button class="glossary-drawer-close" onclick="event.stopPropagation(); closeGlossaryDrawer();" aria-label="Close glossary panel"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="glossary-drawer-body" id="glossaryDrawerBody"></div>
+    </div>
+  </div>
 
   <div class="dev-notes-overlay" id="devNotesOverlay" style="display:none;">
     <div class="dev-notes-panel">
@@ -1591,6 +1708,17 @@ function renderBeat(i){
     checkPassageScroll();
   }
 
+  const glossaryDrawerEl = document.getElementById('glossaryDrawer');
+  if (glossaryDrawerEl) {
+    if (b.id === 'vocab-scan') {
+      glossaryDrawerEl.classList.add('gd-visible');
+      renderGlossaryDrawer();
+    } else {
+      glossaryDrawerEl.classList.remove('gd-visible');
+      glossaryDrawerEl.classList.remove('open');
+    }
+  }
+
   if (b.id === 'final') renderFinalReflection();
   if (b.id === 'vocab-review') renderVocabReview();
   updateProgressBar();
@@ -1667,6 +1795,7 @@ function tapWord(e, el){
     }
   }
   updateNavShell();
+  renderGlossaryDrawer();
 }
 
 function tapVerseTile(e, v){
@@ -1686,13 +1815,7 @@ function checkPassageScroll(){
   }
 }
 
-function renderVocabReview(){
-  const box = document.getElementById('vocabReviewBox');
-  if (state.wordTaps.length === 0) {
-    box.innerHTML = `<div class="glossary-panel"><div class="review-def-entry" style="border:none; opacity:0.7;">No words highlighted yet!</div></div>`;
-    return;
-  }
-  
+function gatherGlossaryData(){
   const defined = [];
   const undefinedWords = [];
   const seen = new Set();
@@ -1710,18 +1833,72 @@ function renderVocabReview(){
     }
   });
 
-  let html = '<div class="glossary-panel">';
+  return { defined, undefinedWords };
+}
+
+function renderVocabReview(){
+  const box = document.getElementById('vocabReviewBox');
+  const { defined, undefinedWords } = gatherGlossaryData();
+
+  if (defined.length === 0 && undefinedWords.length === 0) {
+    box.innerHTML = `<div class="glossary-panel"><div class="review-def-entry" style="border:none; opacity:0.7;">No words highlighted yet!</div></div>`;
+  } else {
+    let html = '<div class="glossary-panel">';
+    if (defined.length > 0) {
+      html += `<div class="review-section-header"><i class="fa-solid fa-book-bookmark"></i> Defined Terms</div>`;
+      html += defined.map((w,i) => `<div class="review-def-entry"><span class="term-word"><span class="gloss-num">${i+1}</span>${w.word}</span>${w.def}</div>`).join('');
+    }
+    if (undefinedWords.length > 0) {
+      html += `<div class="review-section-header"><i class="fa-solid fa-magnifying-glass"></i> Terms to Define</div>
+               <div class="pill-cloud">${undefinedWords.map(word => `<div class="research-pill">${word}</div>`).join('')}</div>`;
+    }
+    html += '</div>';
+    box.innerHTML = html;
+  }
+
+  renderGlossaryDrawer();
+}
+
+function renderGlossaryDrawer(){
+  const body = document.getElementById('glossaryDrawerBody');
+  if (!body) return;
+  const { defined, undefinedWords } = gatherGlossaryData();
+
+  if (defined.length === 0 && undefinedWords.length === 0) {
+    body.innerHTML = `<div class="gd-empty">Highlight a word in the passage to add it here — tap a term below to reveal its definition.</div>`;
+    return;
+  }
+
+  let html = '';
   if (defined.length > 0) {
-    html += `<div class="review-section-header"><i class="fa-solid fa-book-bookmark"></i> Defined Terms</div>`;
-    html += defined.map((w,i) => `<div class="review-def-entry"><span class="term-word"><span class="gloss-num">${i+1}</span>${w.word}</span>${w.def}</div>`).join('');
+    html += defined.map((w,i) => `
+      <div class="gd-row" id="gdRow${i}">
+        <button class="gd-row-term" onclick="event.stopPropagation(); toggleGlossaryRow(${i});">
+          <span>${w.word}</span><i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="gd-row-def">${w.def}</div>
+      </div>`).join('');
   }
   if (undefinedWords.length > 0) {
     html += `<div class="review-section-header"><i class="fa-solid fa-magnifying-glass"></i> Terms to Define</div>
              <div class="pill-cloud">${undefinedWords.map(word => `<div class="research-pill">${word}</div>`).join('')}</div>`;
   }
-  html += '</div>';
-  box.innerHTML = html;
+  body.innerHTML = html;
 }
+
+function toggleGlossaryRow(idx){
+  const row = document.getElementById('gdRow' + idx);
+  if (row) row.classList.toggle('revealed');
+}
+
+function toggleGlossaryDrawer(force){
+  const d = document.getElementById('glossaryDrawer');
+  if (!d) return;
+  const willOpen = typeof force === 'boolean' ? force : !d.classList.contains('open');
+  d.classList.toggle('open', willOpen);
+}
+function openGlossaryDrawer(){ toggleGlossaryDrawer(true); }
+function closeGlossaryDrawer(){ toggleGlossaryDrawer(false); }
 
 function handleCustomTrait(val){ 
   state.trait = val; 
