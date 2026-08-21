@@ -370,32 +370,137 @@
   }
   .tx-light .locator-emphasis{ background: #FFF; color: var(--ink); }
 
-  .nt-divisions-wrap{
+  /* SLIDE 1 & 2: TABBED MANILA FOLDER BASE SYSTEM */
+  .nt-folder-wrap {
     display: flex;
     flex-direction: column;
-    flex: 0 1 auto;
-    max-height: 100%;
-    max-width: 700px;
+    width: 100%;
+    max-width: 1600px;
     margin: 14px auto 0;
-    border: 3.5px solid var(--ink);
-    border-radius: 18px;
-    padding: 12px;
-    gap: 10px;
-    background: var(--ink);
-    color: #FFF;
+    flex: 1;
+    min-height: 0;
+    justify-content: center;
   }
-  .nt-divisions-label{
+  .nt-folder-tab {
     align-self: flex-start;
+    background: #E4B563;
+    color: var(--ink);
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
-    font-size: clamp(18px, 3.6vh, 22px);
-    letter-spacing: -0.3px;
-    color: #FFF;
+    font-size: clamp(14px, 2vh, 18px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: clamp(8px, 1.4vh, 12px) clamp(20px, 2.5vw, 32px);
+    border-radius: 14px 14px 0 0;
+    border: 4px solid var(--ink);
+    border-bottom: none;
+    margin-left: 16px;
+    margin-bottom: -4px;
+    z-index: 2;
   }
-  .nt-divisions-wrap .sections-5-deck{ flex: none; overflow-y: auto; max-height: 100%; }
-  @media (min-width: 1024px) {
-    .nt-divisions-wrap{ padding: 20px; border-radius: 24px; border-width: 4px; max-width: 880px; margin-top: 24px; }
-    .nt-divisions-label{ font-size: clamp(24px, 3.8vh, 30px); }
+  .nt-folder-body {
+    background: #F3D48B;
+    border: 4px solid var(--ink);
+    border-radius: 0 24px 24px 24px;
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: clamp(18px, 2.8vh, 32px) clamp(16px, 2.2vw, 28px);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    justify-content: center;
+  }
+
+  /* TESTAMENT (2-CARD) FOLDER DECK */
+  .testament-folder-deck {
+    display: grid;
+    grid-template-columns: 1.85fr 1.15fr;
+    gap: clamp(16px, 2vw, 32px);
+    align-items: stretch;
+    min-height: 0;
+    width: 100%;
+  }
+  .testament-folder-deck .folder-deck-card {
+    min-height: clamp(260px, 40vh, 420px);
+    padding: clamp(24px, 3.5vh, 40px) clamp(20px, 2.5vw, 32px);
+  }
+
+  /* SECTION (5-CARD) FOLDER DECK */
+  .folder-sections-deck {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(14px, 1.8vw, 24px);
+    align-items: stretch;
+    min-height: 0;
+    width: 100%;
+  }
+  .folder-sections-deck .folder-deck-card {
+    min-height: clamp(240px, 36vh, 380px);
+    padding: clamp(20px, 3vh, 32px) clamp(12px, 1.5vw, 18px);
+  }
+
+  /* SHARED FOLDER DECK CARD */
+  .folder-deck-card {
+    background: #FFF;
+    border: 3.5px solid var(--ink);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--ink);
+    gap: 12px;
+    transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+    color: var(--ink);
+  }
+  .folder-deck-card:hover { transform: translateY(-4px); box-shadow: 6px 6px 0 var(--ink); }
+  .folder-deck-card:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+  .folder-deck-card .c-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(18px, 2.4vh, 24px); font-weight: 800; color: inherit; }
+  .folder-deck-card .c-desc { font-family: 'Inter', sans-serif; font-size: clamp(13px, 1.6vh, 15px); color: #444; line-height: 1.45; font-weight: 600; max-width: 320px; }
+  .folder-deck-card .c-badge { font-family: 'Space Grotesk', sans-serif; font-size: clamp(11px, 1.4vh, 13px); font-weight: 800; background: var(--ink); color: #FFF; padding: 5px 12px; border-radius: 100px; white-space: nowrap; }
+  .folder-deck-card.correct { background: var(--lime) !important; color: var(--ink) !important; }
+  .folder-deck-card.incorrect { background: var(--pink) !important; color: #FFF !important; }
+  .folder-deck-card.incorrect .c-desc { color: #FFF !important; opacity: 0.95; }
+  .folder-deck-card.incorrect .c-badge { background: #FFF !important; color: var(--ink) !important; }
+  .folder-deck-card.shake { animation: shakeX .45s; }
+
+  @media (max-width: 767px) {
+    .nt-folder-wrap { max-width: 100%; margin-top: 4px; }
+    .nt-folder-tab {
+      font-size: 11px;
+      padding: 5px 14px 6px;
+      margin-left: 8px;
+      border-width: 3px;
+      margin-bottom: -3px;
+    }
+    .nt-folder-body {
+      padding: 8px;
+      border-width: 3px;
+      border-radius: 0 16px 16px 16px;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .testament-folder-deck,
+    .folder-sections-deck {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .testament-folder-deck .folder-deck-card,
+    .folder-sections-deck .folder-deck-card {
+      min-height: auto;
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+      padding: 10px 14px;
+      gap: 10px;
+      border-radius: 10px;
+      border-width: 2.5px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .folder-deck-card:hover { transform: none; }
+    .folder-deck-card .c-desc { display: none; }
+    .folder-deck-card .c-title { font-size: 14.5px; }
+    .folder-deck-card .c-badge { font-size: 10px; padding: 3px 9px; }
   }
 
   /* INTRO SLIDE */
@@ -420,183 +525,61 @@
     .emoji{ font-size:56px; margin-bottom:10px; }
   }
 
-  /* SLIDE 1: TESTAMENT CARDS */
-  .testament-deck {
+  /* SLIDE 3: RECAP (NO DIV CONTAINER, PILLS ON SCREEN) */
+  .recap-context-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     flex: 1;
     min-height: 0;
-    max-width: 1200px;
+    gap: clamp(18px, 3vh, 36px);
+    align-items: center;
+    justify-content: center;
+    max-width: 1100px;
     margin: 0 auto;
     width: 100%;
-    justify-content: center;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  @media (max-width: 767px) {
-    .testament-deck { gap: 10px; }
-    .testament-deck .deck-card {
-      padding: 12px 16px;
-      border-width: 3px;
-      box-shadow: 4px 4px 0 var(--ink);
-    }
-    .testament-deck .dc-title { font-size: clamp(17px, 2.4vh, 21px); margin-bottom: 4px; }
-    .testament-deck .dc-badge { font-size: 10px; padding: 3px 10px; margin-bottom: 6px; }
-    .testament-deck .dc-desc { font-size: 12px; line-height: 1.35; }
-  }
-  @media (max-width: 767px) and (max-height: 700px) {
-    .sketch-lead-title.tight{ margin-bottom:4px; }
-    .testament-deck { gap: 6px; }
-    .testament-deck .deck-card{ padding:8px 14px; }
-    .testament-deck .dc-title{ font-size:16px; margin-bottom:2px; }
-    .testament-deck .dc-badge{ margin-bottom:3px; }
   }
   @media (min-width: 768px) {
-    .testament-deck {
+    .recap-context-grid {
       display: grid;
-      grid-template-columns: 1.85fr 1.15fr;
-      gap: 28px;
-      align-items: stretch;
-      max-height: 480px;
-      overflow-y: visible;
-      margin-top: 22px;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(32px, 4vw, 56px);
     }
   }
-  @media (min-width: 1024px) {
-    .testament-deck { margin-top: 32px; }
-  }
 
-  /* SLIDE 2: 5-COLUMN DECK */
-  .sections-5-deck {
+  .recap-free-flow {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    flex: 1;
-    overflow-y: auto;
-    max-width: 1300px;
-    margin: 0 auto;
+    gap: clamp(12px, 2.2vh, 20px);
     width: 100%;
-    justify-content: space-evenly;
   }
-  @media (max-width: 767px) {
-    .sections-5-deck {
-      gap: 6px;
-      padding: 0 4px 10px 4px;
-    }
-    .sections-5-deck .dc-icon { display: none !important; }
-    .sections-5-deck .deck-card {
-      padding: 8px 12px;
-      border-width: 2.5px;
-      border-radius: 14px;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .sections-5-deck .dc-title { font-size: 15px; margin-bottom: 0; }
-    .sections-5-deck .dc-badge { font-size: 8.5px; padding: 2px 7px; margin-bottom: 4px; }
-    .sections-5-deck .dc-desc { font-size: 11px; line-height: 1.3; }
-    .sections-5-deck .dc-title-row {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      margin-bottom: 4px;
-    }
-  }
-  @media (min-width: 768px) {
-    .sections-5-deck {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 12px;
-      align-items: stretch;
-      overflow-y: visible;
-      align-content: center;
-    }
-    .sections-5-deck .deck-card{ min-height: clamp(220px, 30vh, 300px); }
-  }
-  @media (min-width: 1024px) {
-    .sections-5-deck .deck-card{ min-height: clamp(240px, 32vh, 320px); }
-  }
-
-  .deck-card {
-    background: #FFF;
+  .recap-item-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(13.5px, 1.8vh, 16px);
+    font-weight: 700;
+    line-height: 1.45;
     color: var(--ink);
-    border: 3.5px solid var(--ink);
-    border-radius: 20px;
-    padding: clamp(16px, 2.5vh, 28px);
-    cursor: pointer;
-    transition: all .14s ease;
-    box-shadow: 5px 5px 0 var(--ink);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
   }
-  .deck-card:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
-  .deck-card .dc-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(18px, 2.6vh, 24px); font-weight: 800; margin-bottom: 8px; }
-  .dc-title-row{ display: contents; }
-  .deck-card .dc-icon { font-size: clamp(22px, 3.4vh, 30px); color: var(--ink); margin-bottom: 8px; }
-  .deck-card.correct .dc-icon,
-  .deck-card.incorrect .dc-icon { color: inherit; }
-  .deck-card .dc-badge { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; background: var(--ink); color: #FFF; padding: 4px 12px; border-radius: 100px; margin-bottom: 10px; }
-  .deck-card .dc-desc { font-family: 'Inter', sans-serif; font-size: clamp(12.5px, 1.7vh, 14.5px); font-weight: 700; opacity: 0.85; line-height: 1.45; }
-  .deck-card.correct { background: var(--lime) !important; color: var(--ink) !important; box-shadow: 4px 4px 0 var(--ink) !important; }
-  .deck-card.incorrect { background: var(--pink) !important; color: #FFF !important; }
-  .deck-card.shake { animation: shakeX .45s; }
-  @media (min-width: 768px) {
-    .deck-card .dc-title{ font-size:clamp(22px, 3vh, 30px); }
-    .deck-card .dc-desc{ font-size:clamp(15px, 2vh, 17.5px); }
-    .testament-deck .deck-card { min-height: 380px; padding: 32px 28px; }
+  .recap-tag {
+    align-self: flex-start;
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: #FFF;
+    border-radius: 6px;
+    padding: 3px 10px;
+    margin-bottom: 2px;
   }
   @media (min-width: 1024px) {
-    .testament-deck { max-width: 1500px; max-height: min(64vh, 620px); gap: 40px; }
-    .testament-deck .deck-card { min-height: clamp(400px, 60vh, 600px); padding: 48px 40px; border-width: 4.5px; box-shadow: 7px 7px 0 var(--ink); }
-    .testament-deck .dc-title { font-size: clamp(34px, 4.4vh, 46px); margin-bottom: 16px; }
-    .testament-deck .dc-badge { font-size: 15px; padding: 8px 18px; margin-bottom: 18px; }
-    .testament-deck .dc-desc { font-size: clamp(19px, 2.4vh, 24px); line-height: 1.55; max-width: 480px; }
-  }
-  @media (min-width: 1500px) {
-    .testament-deck { max-width: 1700px; }
-    .testament-deck .dc-desc { max-width: 540px; }
-  }
-  @media (min-width: 1100px) {
-    .sections-5-deck .dc-icon{ font-size: clamp(42px, 6vh, 64px); margin-bottom: 16px; }
-  }
-
-  /* SLIDE 3: RECAP */
-  .set-scene-grid {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-    gap: 14px;
-    align-items: center;
-    justify-content: center;
-    max-width: 1300px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    .set-scene-grid {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 50px;
-      align-items: center;
-    }
-  }
-
-  .folder-wrap{ display:flex; flex-direction:column; justify-content:flex-start; width:100%; position:relative; z-index:2; }
-  .folder-tab{ align-self:flex-start; margin-left:8px; background:#E4B563; border:3.5px solid var(--ink); border-bottom:none; border-radius:10px 10px 0 0; padding:4px 14px 6px 14px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--ink); position:relative; z-index:3; margin-bottom:-4px; flex-shrink:0; }
-  .folder-body{ display:flex; flex-direction:column; justify-content:space-evenly; background:#F3D48B; border:3.5px solid var(--ink); border-radius:3px 18px 18px 18px; box-shadow:5px 5px 0 var(--ink); padding:14px 18px; position:relative; z-index:2; flex-shrink:0; gap:10px; }
-  .folder-bullet{ display:flex; flex-direction:column; gap:3px; font-family:'Inter', sans-serif; font-size:clamp(12.5px, 1.6vh, 15px); font-weight:800; line-height:1.4; color:var(--ink); }
-  .recap-tag{ align-self:flex-start; display:inline-block; font-family:'Space Grotesk', sans-serif; font-size:10px; font-weight:800; letter-spacing:0.6px; text-transform:uppercase; background:var(--ink); color:#fff; border-radius:6px; padding:2px 8px; margin-bottom:2px; }
-  @media (min-width: 1024px) {
-    .folder-body{ padding:38px 42px; gap:26px; border-width:4px; border-radius:4px 22px 22px 22px; }
-    .folder-bullet{ font-size:21px; line-height:1.5; }
-    .folder-tab{ font-size:16px; padding:10px 26px 12px 26px; border-width:4px; }
-    .recap-tag{ font-size:13px; padding:5px 12px; }
+    .recap-free-flow { gap: 26px; }
+    .recap-item-block { font-size: 20px; line-height: 1.5; }
+    .recap-tag { font-size: 13px; padding: 5px 12px; }
   }
 
   /* GOD SHOT CIRCLE DESIGN */
@@ -623,17 +606,9 @@
 
   /* RECAP SCREEN OVERRIDES */
   @media (min-width: 1024px) {
-    #beat-3 .circle-hero{ width: clamp(400px, 54vh, 540px); height: clamp(400px, 54vh, 540px); padding:44px; }
-    #beat-3 .circle-hero .label-god-is{ font-size:clamp(40px, 5.2vh, 52px); }
-    #beat-3 .circle-hero .static-trait{ font-size:clamp(34px, 4.4vh, 44px); }
-    #beat-3 .folder-body{ padding:46px 52px; gap:30px; }
-    #beat-3 .folder-bullet{ font-size:24px; line-height:1.5; }
-    #beat-3 .folder-tab{ font-size:18px; padding:12px 30px 14px 30px; }
-  }
-  @media (min-width: 1500px) {
-    #beat-3 .circle-hero{ width: clamp(460px, 58vh, 600px); height: clamp(460px, 58vh, 600px); }
-    #beat-3 .folder-body{ padding:54px 60px; }
-    #beat-3 .folder-bullet{ font-size:27px; }
+    #beat-3 .circle-hero{ width: clamp(380px, 50vh, 500px); height: clamp(380px, 50vh, 500px); padding:40px; }
+    #beat-3 .circle-hero .label-god-is{ font-size:clamp(38px, 4.8vh, 48px); }
+    #beat-3 .circle-hero .static-trait{ font-size:clamp(32px, 4vh, 40px); }
   }
 
   /* SLIDE 4: PRAYER */
@@ -1111,60 +1086,67 @@ const beats = [
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           </div>` },
 
-  /* 1. LOCATE MARK: TESTAMENT */
+  /* 1. LOCATE MARK: TESTAMENT (MANILA TABBED FOLDER) */
   { id:'quest-testament', type:'input', blockTap:true, isInteractive:true, clue:'Pick an answer to continue', bgGrad:'var(--bg-discover)', text:'dark',
     html:`<div class="sketch-lead-title tight">What testament is the book of <span class="locator-emphasis">Mark</span> in?</div>
-          <div class="testament-deck" id="questTestamentGrid">
-            <div class="deck-card" data-correct="false" onclick="questAnswer(event,this,'questTestamentGrid')">
-              <span class="dc-title">Old Testament</span>
-              <span class="dc-badge">39 books · 1000+ yrs in the making</span>
-              <span class="dc-desc">The Hebrew scriptures pointing toward the coming promise of the Messiah.</span>
-            </div>
-            <div class="deck-card" data-correct="true" onclick="questAnswer(event,this,'questTestamentGrid')">
-              <span class="dc-title">New Testament</span>
-              <span class="dc-badge">27 books · ~40 yrs in the making</span>
-              <span class="dc-desc">Jesus's earthly life, teaching, resurrection, and the birth of the church.</span>
+          <div class="nt-folder-wrap">
+            <div class="nt-folder-tab">One Unified Story</div>
+            <div class="nt-folder-body">
+              <div class="testament-folder-deck" id="questTestamentGrid">
+                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questTestamentGrid')">
+                  <span class="c-badge">39 books · 1000+ yrs</span>
+                  <span class="c-title">Old Testament</span>
+                  <span class="c-desc">The Hebrew scriptures pointing toward the coming promise of the Messiah.</span>
+                </div>
+                <div class="folder-deck-card" data-correct="true" onclick="questAnswer(event,this,'questTestamentGrid')">
+                  <span class="c-badge">27 books · ~40 yrs</span>
+                  <span class="c-title">New Testament</span>
+                  <span class="c-desc">Jesus's earthly life, teaching, resurrection, and the birth of the church.</span>
+                </div>
+              </div>
             </div>
           </div>` },
 
-  /* 2. LOCATE MARK: SECTION */
+  /* 2. LOCATE MARK: SECTION (MANILA TABBED FOLDER) */
   { id:'quest-section', type:'input', blockTap:true, isInteractive:true, clue:'Pick an answer to continue', bgGrad:'var(--bg-discover)', text:'dark',
     html:`<div class="sketch-lead-title tight">What section is the book of <span class="locator-emphasis">Mark</span> in?</div>
-          <div class="nt-divisions-wrap">
-            <div class="nt-divisions-label">New Testament</div>
-            <div class="sections-5-deck" id="questSectionGrid">
-              <div class="deck-card" data-correct="true" onclick="questAnswer(event,this,'questSectionGrid')">
-                <i class="fa-solid fa-cross dc-icon"></i>
-                <div class="dc-title-row"><span class="dc-title">Gospels</span><span class="dc-badge">4 books</span></div>
-                <span class="dc-desc">Accounts of Jesus's life, death, and resurrection</span>
-              </div>
-              <div class="deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
-                <i class="fa-solid fa-fire dc-icon"></i>
-                <div class="dc-title-row"><span class="dc-title">Church History</span><span class="dc-badge">1 book</span></div>
-                <span class="dc-desc">The Holy Spirit's arrival and church growth</span>
-              </div>
-              <div class="deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
-                <i class="fa-solid fa-envelope dc-icon"></i>
-                <div class="dc-title-row"><span class="dc-title">Paul's Letters</span><span class="dc-badge">13 books</span></div>
-                <span class="dc-desc">Helping churches live out the gospel</span>
-              </div>
-              <div class="deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
-                <i class="fa-solid fa-envelopes-bulk dc-icon"></i>
-                <div class="dc-title-row"><span class="dc-title">General Letters</span><span class="dc-badge">8 books</span></div>
-                <span class="dc-desc">Guidance for early believers</span>
-              </div>
-              <div class="deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
-                <i class="fa-solid fa-eye dc-icon"></i>
-                <div class="dc-title-row"><span class="dc-title">Prophecy</span><span class="dc-badge">1 book</span></div>
-                <span class="dc-desc">A visionary look at how it all ends</span>
+          <div class="nt-folder-wrap">
+            <div class="nt-folder-tab">New Testament · 27 Books</div>
+            <div class="nt-folder-body">
+              <div class="folder-sections-deck" id="questSectionGrid">
+                <div class="folder-deck-card" data-correct="true" onclick="questAnswer(event,this,'questSectionGrid')">
+                  <span class="c-badge">4 Books</span>
+                  <span class="c-title">Gospels</span>
+                  <span class="c-desc">Accounts of Jesus's life, death & resurrection</span>
+                </div>
+                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
+                  <span class="c-badge">1 Book</span>
+                  <span class="c-title">Church History</span>
+                  <span class="c-desc">The Holy Spirit's arrival and church growth</span>
+                </div>
+                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
+                  <span class="c-badge">13 Books</span>
+                  <span class="c-title">Paul's Letters</span>
+                  <span class="c-desc">Helping churches live out the gospel</span>
+                </div>
+                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
+                  <span class="c-badge">8 Books</span>
+                  <span class="c-title">General Letters</span>
+                  <span class="c-desc">Guidance for early believers</span>
+                </div>
+                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
+                  <span class="c-badge">1 Book</span>
+                  <span class="c-title">Prophecy</span>
+                  <span class="c-desc">A visionary look at how it all ends</span>
+                </div>
               </div>
             </div>
           </div>` },
 
-  /* 3. RECAP */
+  /* 3. RECAP (FREE FLOW ON SCREEN - NO CONTAINER DIV) */
   { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-discover)', text:'dark', align:'start',
     html:`<div class="sketch-lead-title" style="margin-bottom:8px;">Recap</div>
-          <div class="set-scene-grid">
+          <div class="recap-context-grid">
             <div class="circle-hero-container">
               <div class="circle-hero">
                 <div class="arc-stem-text">Last Week's God Shot</div>
@@ -1172,21 +1154,18 @@ const beats = [
                 <div class="static-trait">King</div>
               </div>
             </div>
-            <div class="folder-wrap">
-              <div class="folder-tab">Set the Scene</div>
-              <div class="folder-body">
-                <div class="folder-bullet">
-                  <span class="recap-tag">Historical Context</span>
-                  <div>Mark | 50&ndash;70 AD | To show Jesus as King and Servant</div>
-                </div>
-                <div class="folder-bullet">
-                  <span class="recap-tag">Last Week</span>
-                  <div>Jesus announces that the Kingdom of God is near and begins recruiting ordinary fishermen to follow Him.</div>
-                </div>
-                <div class="folder-bullet">
-                  <span class="recap-tag">This Week</span>
-                  <div>Jesus begins to openly display His divine authority—teaching with power and commanding unclean spirits.</div>
-                </div>
+            <div class="recap-free-flow">
+              <div class="recap-item-block">
+                <span class="recap-tag">Historical Context</span>
+                <div>Mark | 50&ndash;70 AD | To show Jesus as King and Servant</div>
+              </div>
+              <div class="recap-item-block">
+                <span class="recap-tag">Last Week</span>
+                <div>Jesus announces that the Kingdom of God is near and begins recruiting ordinary fishermen to follow Him.</div>
+              </div>
+              <div class="recap-item-block">
+                <span class="recap-tag">This Week</span>
+                <div>Jesus begins to openly display His divine authority—teaching with power and commanding unclean spirits.</div>
               </div>
             </div>
           </div>` },
@@ -1468,7 +1447,11 @@ const answeredBeats = new Set();
 function questAnswer(e, el, gridId){
   e.stopPropagation();
   const isCorrect = el.dataset.correct === 'true';
+  const grid = document.getElementById(gridId);
   if (isCorrect) {
+    if (grid) {
+      grid.querySelectorAll('.folder-deck-card').forEach(item => item.classList.remove('correct', 'incorrect'));
+    }
     el.classList.add('correct');
     answeredBeats.add(state.index);
     updateNavShell();
