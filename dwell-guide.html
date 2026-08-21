@@ -20,33 +20,33 @@
     --purple:#A855F7;
     --green:#22C55E;
 
-    --bg-lime: linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-purple: linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-pink: linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-dark: linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-cream: linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-yellow: linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
+    --bg-lime: linear-gradient(145deg, #d2f860 0%, #a2e014 100%);
+    --bg-purple: linear-gradient(145deg, #b862f8 0%, #7e22ce 100%);
+    --bg-pink: linear-gradient(145deg, #fb5672 0%, #be123c 100%);
+    --bg-dark: linear-gradient(145deg, #262626 0%, #050505 100%);
+    --bg-cream: linear-gradient(145deg, #f4f0e8 0%, #d8d2c7 100%);
+    --bg-yellow: linear-gradient(145deg, #ffd452 0%, #eab308 100%);
 
     --bg-discover:  linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
     --bg-wordwork:  linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-expand:    linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
+    --bg-expand:    linear-gradient(145deg, #e37ac4 0%, #c736a0 100%);
     --bg-learn:     linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
     --bg-live:      linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
 
-    --bg-terracotta: linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-orange: linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-leather: linear-gradient(160deg, #4c63e8 0%, #1f2fa3 100%);
+    --bg-terracotta: linear-gradient(145deg, #e48d75 0%, #a15844 100%);
+    --bg-orange: linear-gradient(145deg, #f6af77 0%, #b07546 100%);
+    --bg-leather: linear-gradient(160deg, #7a4a2c 0%, #452817 100%);
 
-    --active-hl-hover: rgba(56, 189, 248, 0.35);
+    --active-hl-hover: rgba(255, 199, 44, 0.25);
   }
 
   :root[data-theme="northern"] {
-    --bg-discover:  linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-wordwork:  linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-expand:    linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-learn:     linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-live:      linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
-    --bg-cream:     linear-gradient(145deg, #4c63e8 0%, #1f2fa3 100%);
+    --bg-discover:  linear-gradient(145deg, #4dedc7 0%, #00b894 100%);
+    --bg-wordwork:  linear-gradient(145deg, #3ddcff 0%, #0091b3 100%);
+    --bg-expand:    linear-gradient(145deg, #5c8fff 0%, #2554d6 100%);
+    --bg-learn:     linear-gradient(145deg, #6d7eff 0%, #3644b8 100%);
+    --bg-live:      linear-gradient(145deg, #2e3a8c 0%, #0f1450 100%);
+    --bg-cream:     linear-gradient(145deg, #eef5f8 0%, #d7e6ec 100%);
   }
   *{box-sizing:border-box;}
   
@@ -383,8 +383,8 @@
   }
   .nt-folder-tab {
     align-self: flex-start;
-    background: #4c63e8;
-    color: #FFF;
+    background: #E4B563;
+    color: var(--ink);
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     font-size: clamp(14px, 2vh, 18px);
@@ -399,7 +399,7 @@
     z-index: 2;
   }
   .nt-folder-body {
-    background: #4c63e8;
+    background: #F3D48B;
     border: 4px solid var(--ink);
     border-radius: 0 24px 24px 24px;
     box-shadow: 8px 8px 0 var(--ink);
@@ -424,11 +424,11 @@
     padding: clamp(24px, 3.5vh, 40px) clamp(20px, 2.5vw, 32px);
   }
   .testament-folder-deck .folder-deck-card .c-title {
-    font-size: clamp(32px, 4.8vh, 48px);
+    font-size: clamp(26px, 4.2vh, 42px);
     margin-bottom: 8px;
   }
   .testament-folder-deck .folder-deck-card .c-desc {
-    font-size: clamp(16px, 2.2vh, 20px);
+    font-size: clamp(15px, 2vh, 18px);
     max-width: 420px;
   }
 
@@ -446,7 +446,7 @@
     padding: clamp(20px, 3vh, 32px) clamp(12px, 1.5vw, 18px);
   }
   .folder-sections-deck .folder-deck-card .c-title {
-    font-size: clamp(24px, 3.5vh, 34px);
+    font-size: clamp(22px, 3.2vh, 32px);
   }
 
   /* SHARED FOLDER DECK CARD */
@@ -511,7 +511,7 @@
     .folder-deck-card:hover { transform: none; }
     .folder-deck-card .c-desc { display: block !important; font-size: 12px; max-width: none; }
     .testament-folder-deck .folder-deck-card .c-title,
-    .folder-sections-deck .folder-deck-card .c-title { font-size: 20px; margin-bottom: 2px; }
+    .folder-sections-deck .folder-deck-card .c-title { font-size: 18px; margin-bottom: 2px; }
     .folder-deck-card .c-badge { font-size: 10px; padding: 3px 10px; margin-bottom: 2px; }
   }
 
@@ -1116,7 +1116,7 @@ const beats = [
             <div class="intro-top-title">MS Hang Prep</div>
             ${kw([["MARK"],["1:21–45"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
-          </div>` },
+          ` },
 
   /* 1. LOCATE MARK: TESTAMENT (MANILA TABBED FOLDER) */
   { id:'quest-testament', type:'input', blockTap:true, isInteractive:true, clue:'Pick an answer to continue', bgGrad:'var(--bg-discover)', text:'dark',
@@ -1279,7 +1279,7 @@ const beats = [
             </div>
           </div>` },
 
-  /* 11. FINAL (MINIMAL PROMPT - NO HEADER) */
+  /* 11. FINAL (CLEAN MINIMAL PROMPT - NO HEADER) */
   { id:'final', type:'input', blockTap:true, isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
     html:`<div class="final-live-wrap" style="justify-content:center; flex:1;">
             <div class="final-live-prompt">
@@ -1504,7 +1504,7 @@ function setPassageHighlighter(color, btnEl){
   
   const scrollEl = document.getElementById('passageScrollEl');
   if (scrollEl) {
-    const hoverVal = state.activeTool.vocab ? (hlHoverMap[state.activeTool.vocab] || 'rgba(56, 189, 248, 0.35)') : 'rgba(56, 189, 248, 0.35)';
+    const hoverVal = state.activeTool.vocab ? (hlHoverMap[state.activeTool.vocab] || 'rgba(255, 199, 44, 0.25)') : 'rgba(255, 199, 44, 0.25)';
     scrollEl.style.setProperty('--active-hl-hover', hoverVal);
   }
 
@@ -1949,7 +1949,7 @@ function tryCopyAllNotes(){
   } else {
     status.textContent = 'Clipboard unavailable — select the text above and copy manually.';
     status.className = 'dnp-status warn';
-    retryBtn.style.display = 'inline-block';
+    retryBtn.style.display = 'inline-file';
   }
 }
 
