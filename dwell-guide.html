@@ -208,19 +208,19 @@
     -webkit-tap-highlight-color: transparent;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .rail-swatch-btn[data-color="blue"]{ background: var(--blue); }
-  .rail-swatch-btn[data-color="green"]{ background: var(--green); }
+  .rail-swatch-btn[data-color="lime"]{ background: var(--lime); }
+  .rail-swatch-btn[data-color="purple"]{ background: var(--purple); }
   .rail-swatch-btn[data-color="yellow"]{ background: var(--yellow); }
   .rail-swatch-btn[data-color="pink"]{ background: var(--pink); }
   .rail-swatch-btn:hover,
   .rail-swatch-btn:focus-visible,
   .rail-swatch-btn.active{ transform: scale(1.18); }
-  .rail-swatch-btn[data-color="blue"]:hover,
-  .rail-swatch-btn[data-color="blue"]:focus-visible,
-  .rail-swatch-btn[data-color="blue"].active{ box-shadow: 0 0 0 4px rgba(56,189,248,0.4); }
-  .rail-swatch-btn[data-color="green"]:hover,
-  .rail-swatch-btn[data-color="green"]:focus-visible,
-  .rail-swatch-btn[data-color="green"].active{ box-shadow: 0 0 0 4px rgba(34,197,94,0.4); }
+  .rail-swatch-btn[data-color="lime"]:hover,
+  .rail-swatch-btn[data-color="lime"]:focus-visible,
+  .rail-swatch-btn[data-color="lime"].active{ box-shadow: 0 0 0 4px rgba(195,245,60,0.45); }
+  .rail-swatch-btn[data-color="purple"]:hover,
+  .rail-swatch-btn[data-color="purple"]:focus-visible,
+  .rail-swatch-btn[data-color="purple"].active{ box-shadow: 0 0 0 4px rgba(168,85,247,0.4); }
   .rail-swatch-btn[data-color="yellow"]:hover,
   .rail-swatch-btn[data-color="yellow"]:focus-visible,
   .rail-swatch-btn[data-color="yellow"].active{ box-shadow: 0 0 0 4px rgba(255,199,44,0.45); }
@@ -808,8 +808,8 @@
   .w:hover{ background: var(--active-hl-hover, rgba(255, 199, 44, 0.25)); }
   .w.flagged,
   .w.hl-yellow{ background: rgba(255, 199, 44, 0.55); font-weight: 700; }
-  .w.hl-blue{ background: rgba(56, 189, 248, 0.45); font-weight: 700; }
-  .w.hl-green{ background: rgba(34, 197, 94, 0.40); font-weight: 700; }
+  .w.hl-lime{ background: rgba(195, 245, 60, 0.5); font-weight: 700; }
+  .w.hl-purple{ background: rgba(168, 85, 247, 0.35); font-weight: 700; }
   .w.hl-pink{ background: rgba(244, 63, 94, 0.40); font-weight: 700; }
 
   /* VERSE PICK SCROLL */
@@ -1418,8 +1418,8 @@ const sectionLabels = [
 const sectionColorKeys = ['', 'discover', 'discover', 'discover', '', 'wordwork', 'wordwork', 'wordwork', 'learn', 'learn', 'live', 'live'];
 
 const hlHoverMap = {
-  blue: 'rgba(56, 189, 248, 0.28)',
-  green: 'rgba(34, 197, 94, 0.25)',
+  lime: 'rgba(195, 245, 60, 0.3)',
+  purple: 'rgba(168, 85, 247, 0.25)',
   yellow: 'rgba(255, 199, 44, 0.35)',
   pink: 'rgba(244, 63, 94, 0.25)'
 };
@@ -1535,7 +1535,7 @@ function updateNavShell(){
   if (b.id === 'vocab-scan') {
     rail.style.display = 'flex';
     const colors = [
-      ['blue', 'Characters'], ['green', 'Setting'],
+      ['lime', 'Characters'], ['purple', 'Setting'],
       ['yellow', 'Confusing'], ['pink', 'Repeated']
     ];
     rail.innerHTML = colors.map(([c, label]) => `
@@ -1639,7 +1639,7 @@ function tapWord(e, el){
   if (state.activeTool.vocab) {
     const cls = 'hl-' + state.activeTool.vocab;
     const alreadyThisColor = el.classList.contains(cls);
-    ['hl-blue','hl-green','hl-yellow','hl-pink','flagged'].forEach(c => el.classList.remove(c));
+    ['hl-lime','hl-purple','hl-yellow','hl-pink','flagged'].forEach(c => el.classList.remove(c));
     
     if (!alreadyThisColor) {
       el.classList.add(cls);
@@ -1649,9 +1649,9 @@ function tapWord(e, el){
       state.wordTaps = state.wordTaps.filter(w => w.el !== el);
     }
   } else {
-    const isColored = ['hl-blue','hl-green','hl-yellow','hl-pink'].some(c=>el.classList.contains(c));
+    const isColored = ['hl-lime','hl-purple','hl-yellow','hl-pink'].some(c=>el.classList.contains(c));
     if (isColored) {
-      ['hl-blue','hl-green','hl-yellow','hl-pink'].forEach(c => el.classList.remove(c));
+      ['hl-lime','hl-purple','hl-yellow','hl-pink'].forEach(c => el.classList.remove(c));
       state.wordTaps = state.wordTaps.filter(w => w.el !== el);
     } else if (el.classList.contains('flagged')) {
       el.classList.remove('flagged');
