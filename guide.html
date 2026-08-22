@@ -374,6 +374,12 @@
     width: 100%;
   }
   .sketch-lead-title.tight{ margin-bottom: 6px; }
+  
+  .quest-question-title {
+    font-size: clamp(26px, 4.4vw, 50px);
+    line-height: 1.15;
+  }
+  
   .locator-emphasis{
     display: inline-block;
     background: var(--ink);
@@ -489,6 +495,7 @@
   @media (max-width: 767px) {
     .sketch-lead-title { font-size: clamp(19px, 5.6vw, 25px); margin-bottom: 6px; }
     .sketch-lead-title.tight { margin-bottom: 4px; }
+    .quest-question-title { font-size: clamp(21px, 6vw, 28px); }
     .nt-folder-wrap { max-width: 100%; margin-top: 4px; justify-content: flex-start; min-width: 0; }
     .nt-folder-tab {
       font-size: 11px;
@@ -577,6 +584,7 @@
   @media (max-width: 420px) {
     .sketch-lead-title { font-size: clamp(18px, 5.4vw, 23px); margin-bottom: 5px; }
     .sketch-lead-title.tight { margin-bottom: 4px; }
+    .quest-question-title { font-size: clamp(20px, 5.8vw, 25px); }
     .nt-folder-tab { font-size: 10.5px; padding: 5px 13px 6px; }
     .nt-folder-body { padding: 9px 9px; }
     .folder-sections-deck {
@@ -1403,14 +1411,14 @@ const beats = [
   { id:'intro', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
     html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
-            <div class="intro-top-title">MS Hang</div>
-            ${kw([["MARK", "2"]],'xl')}
+            <div class="intro-top-title">MS HANG GUIDE</div>
+            ${kw([["MARK", "&nbsp;2"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
   /* 1. LOCATE MARK: TESTAMENT (MANILA TABBED FOLDER) */
   { id:'quest-testament', type:'input', blockTap:true, isInteractive:true, clue:'Pick an answer to continue', bgGrad:'var(--bg-expand)', text:'dark',
-    html:`<div class="sketch-lead-title tight" style="color: #FFFFFF;">What testament is the book of <span class="locator-emphasis">Mark</span> in?</div>
+    html:`<div class="sketch-lead-title tight quest-question-title" style="color: #FFFFFF;">What testament is the book of <span class="locator-emphasis">Mark</span> in?</div>
           <div class="nt-folder-wrap">
             <div class="nt-folder-tab">Bible · 66 Books</div>
             <div class="nt-folder-body">
@@ -1431,7 +1439,7 @@ const beats = [
 
   /* 2. LOCATE MARK: SECTION (MANILA TABBED FOLDER) */
   { id:'quest-section', type:'input', blockTap:true, isInteractive:true, clue:'Pick an answer to continue', bgGrad:'var(--bg-expand)', text:'dark',
-    html:`<div class="sketch-lead-title tight" style="color: #FFFFFF;">What section is the book of <span class="locator-emphasis">Mark</span> in?</div>
+    html:`<div class="sketch-lead-title tight quest-question-title" style="color: #FFFFFF;">What section is the book of <span class="locator-emphasis">Mark</span> in?</div>
           <div class="nt-folder-wrap">
             <div class="nt-folder-tab">New Testament · 27 Books</div>
             <div class="nt-folder-body">
