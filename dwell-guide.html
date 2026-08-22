@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dwell Guide</title>
+<title>Mark 2:1–28 | Dwell Guide</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,8 +36,6 @@
     --bg-terracotta: linear-gradient(145deg, #e48d75 0%, #a15844 100%);
     --bg-orange: linear-gradient(145deg, #f6af77 0%, #b07546 100%);
     --bg-leather: linear-gradient(160deg, #7a4a2c 0%, #452817 100%);
-
-    --active-hl-hover: rgba(255, 199, 44, 0.25);
   }
 
   :root[data-theme="northern"] {
@@ -77,7 +75,6 @@
     -webkit-touch-callout: none;
   }
 
-  /* Film-grain overlay for colored (non-cream) beats — softens the vivid gradients without desaturating them */
   .app-viewport.grain-bg::after {
     content: "";
     position: absolute;
@@ -113,7 +110,6 @@
     .fs-toggle-btn { display: none !important; }
   }
 
-  /* ================= MINIMAL BORDERLESS CHEVRON NAVIGATION ================= */
   .persistent-nav-shell {
     position: absolute;
     left: 0;
@@ -166,7 +162,6 @@
     opacity: 1;
   }
 
-  /* CONTEXTUAL FLOATING ISLAND */
   .floating-context-island {
     position: absolute;
     left: 50%;
@@ -180,7 +175,6 @@
     pointer-events: auto;
   }
 
-  /* VOCAB-SCAN COLOR RAIL */
   .vocab-color-rail{
     position: absolute;
     right: clamp(10px, 3vw, 20px);
@@ -284,7 +278,6 @@
   }
   @keyframes shakeX{ 10%,90%{transform:translateX(-3px);} 20%,80%{transform:translateX(5px);} 30%,50%{transform:translateX(-8px);} 40%,60%{transform:translateX(8px);} }
 
-  /* FLOATING NOTICE BADGE */
   .clue-badge{
     position: absolute;
     left: 50%;
@@ -300,7 +293,6 @@
   }
   .clue-badge i{ color: var(--yellow); }
 
-  /* HEADER & HUD */
   .hud-header{ 
     position:relative; 
     z-index:50; 
@@ -349,7 +341,6 @@
     opacity: 0.9;
   }
 
-  /* STAGE & BEATS */
   .stage{ 
     position:relative; 
     flex:1; 
@@ -399,7 +390,6 @@
   }
   .tx-light .locator-emphasis{ background: #FFF; color: var(--ink); }
 
-  /* SLIDE 1 & 2: TABBED MANILA FOLDER BASE SYSTEM */
   .nt-folder-wrap {
     display: flex;
     flex-direction: column;
@@ -439,7 +429,6 @@
     justify-content: center;
   }
 
-  /* TESTAMENT (2-CARD) FOLDER DECK */
   .testament-folder-deck {
     display: grid;
     grid-template-columns: 1.85fr 1.15fr;
@@ -461,7 +450,6 @@
     max-width: 420px;
   }
 
-  /* SECTION (5-CARD) FOLDER DECK */
   .folder-sections-deck {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -478,7 +466,6 @@
     font-size: clamp(22px, 3.2vh, 32px);
   }
 
-  /* SHARED FOLDER DECK CARD */
   .folder-deck-card {
     background: #FFF;
     border: 3.5px solid var(--ink);
@@ -529,7 +516,6 @@
       min-width: 0;
       justify-content: flex-start;
     }
-    /* 2-card testament deck: stacked, grown to fill the available height */
     .testament-folder-deck {
       grid-template-columns: 1fr;
       grid-auto-rows: 1fr;
@@ -559,7 +545,6 @@
     .testament-folder-deck .folder-deck-card .c-badge { grid-area: badge; font-size: clamp(10px, 1.8vh, 13px); padding: clamp(3px, 0.8vh, 5px) clamp(9px, 2vw, 13px); margin-bottom: 0; justify-self: end; align-self: center; }
     .testament-folder-deck .folder-deck-card .c-desc { grid-area: desc; display: block !important; font-size: clamp(13px, 2.6vh, 16px); line-height: 1.4; max-width: none; margin: 0; align-self: start; }
 
-    /* 5-card section deck: 2-column grid, grown to fill the available height */
     .folder-sections-deck {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-auto-rows: 1fr;
@@ -595,7 +580,6 @@
     .folder-deck-card .c-badge { margin-bottom: 2px; }
   }
 
-  /* On narrower phones, stack the 5-card section deck one-per-row instead of squeezing 2 columns, and go tighter so all 5 fit without scrolling */
   @media (max-width: 420px) {
     .sketch-lead-title { font-size: clamp(18px, 5.4vw, 23px); margin-bottom: 5px; }
     .sketch-lead-title.tight { margin-bottom: 4px; }
@@ -637,7 +621,7 @@
     .emoji{ font-size:56px; margin-bottom:10px; }
   }
 
-  /* SLIDE 3: RECAP (FREE FLOW ON SCREEN - NO CONTAINER DIV) */
+  /* SLIDE 3: RECAP */
   .recap-context-grid {
     display: flex;
     flex-direction: column;
@@ -702,7 +686,6 @@
   .circle-hero .static-trait{ font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 22px); font-weight:900; color:var(--purple); text-transform:capitalize; border-bottom:3px solid var(--ink); padding:2px 12px; margin-bottom:4px; }
   .blank-input{ width:88%; max-width:88%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 0; }
 
-  /* Learn / Central Truth "GOD IS..." circle reads too small on phones — give it more room there */
   @media (max-width: 767px) {
     .circle-hero.coaching-circle{ width:clamp(190px, 32vh, 240px); height:clamp(190px, 32vh, 240px); padding:16px; }
     .circle-hero.coaching-circle .arc-stem-text{ font-size:10px; margin-bottom:5px; }
@@ -724,7 +707,6 @@
     .blank-input{ font-size:clamp(24px, 3.2vh, 32px); border-bottom-width:4px; }
   }
 
-  /* RECAP SCREEN OVERRIDES */
   @media (min-width: 1024px) {
     #beat-3 .circle-hero{ width: clamp(380px, 50vh, 500px); height: clamp(380px, 50vh, 500px); padding:40px; }
     #beat-3 .circle-hero .label-god-is{ font-size:clamp(38px, 4.8vh, 48px); }
@@ -918,7 +900,7 @@
     .research-pill{ font-size:15px; padding:10px 18px; }
   }
 
-  /* GLOSSARY SIDE PANEL — pull-tab + slide-out drawer, tablet/desktop only, progressive reveal so a room of kids isn't hit with every definition at once */
+  /* GLOSSARY SIDE PANEL */
   .glossary-drawer{ display: none; }
   @media (min-width: 768px) {
     .glossary-drawer.gd-visible{ display: block; }
@@ -1002,7 +984,7 @@
   .gd-row.revealed .gd-row-def{ max-height: 240px; padding: 10px 14px 14px; }
   .glossary-drawer-body .review-section-header{ margin-top: 4px; }
 
-  /* SLIDE 10: CHAR COACHING (RESPONSIVE GRID - SIDE-BY-SIDE ON TABLET/DESKTOP) */
+  /* SLIDE 10: CHAR COACHING */
   .coaching-scene {
     display: flex;
     flex-direction: column;
@@ -1160,7 +1142,6 @@
   .dnp-status.ok{ color:#1a7a3c; }
   .dnp-status.warn{ color:#8a5a00; }
 
-  /* Hover-only affordances — restricted to devices with a real mouse/pointer so touch taps on mobile don't get "stuck" showing a hover state */
   @media (hover: hover) and (pointer: fine) {
     .fs-toggle-btn:hover { transform: scale(1.08); }
     .minimal-arrow-btn:hover { opacity: 1; transform: scale(1.15); }
@@ -1170,7 +1151,6 @@
     .rail-swatch-btn[data-color="yellow"]:hover{ box-shadow: 0 0 0 4px rgba(255,199,44,0.45); }
     .rail-swatch-btn[data-color="pink"]:hover{ box-shadow: 0 0 0 4px rgba(244,63,94,0.4); }
     .folder-deck-card:hover { transform: translateY(-4px); box-shadow: 6px 6px 0 var(--ink); }
-    .w:hover{ background: var(--active-hl-hover, rgba(255, 199, 44, 0.25)); }
     .final-timer-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
     .dev-bubble:hover{ transform:scale(1.12); }
   }
@@ -1193,7 +1173,7 @@
     <div class="dev-bubbles-bar" id="devBubblesBar" style="display:none;"></div>
     <div class="story-meta" id="storyMetaRow">
       <span id="sectionLabel">Dwell</span>
-      <span id="scriptureMeta">Mark 1:21–45</span>
+      <span id="scriptureMeta">Mark 2:1–28</span>
     </div>
   </div>
 
@@ -1215,7 +1195,7 @@
   <!-- VOCAB-SCAN COLOR RAIL (right side) -->
   <div class="vocab-color-rail" id="vocabColorRail" style="display:none;"></div>
 
-  <!-- GLOSSARY SIDE PANEL (tablet/desktop only — mobile keeps the dedicated review slide) -->
+  <!-- GLOSSARY SIDE PANEL -->
   <div class="glossary-drawer" id="glossaryDrawer">
     <button class="glossary-tab" id="glossaryTabBtn" onclick="event.stopPropagation(); toggleGlossaryDrawer();" aria-label="Toggle glossary panel">
       <i class="fa-solid fa-book-bookmark"></i>
@@ -1254,52 +1234,73 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
+const PASSAGE_START_VERSE = 1;
+
 const passage = [
- "They went to Capernaum, and when the Sabbath came, Jesus went into the synagogue and began to teach.",
- "The people were amazed at his teaching, because he taught them as one who had authority, not as the teachers of the law.",
- "Just then a man in their synagogue who was possessed by an impure spirit cried out,",
- "\"What do you want with us, Jesus of Nazareth? Have you come to destroy us? I know who you are—the Holy One of God!\"",
- "\"Be quiet!\" said Jesus sternly. \"Come out of him!\"",
- "The impure spirit shook the man violently and came out of him with a shriek.",
- "The people were all so amazed that they asked each other, \"What is this? A new teaching—and with authority! He even gives orders to impure spirits and they obey him.\"",
- "News about him spread quickly over the whole region of Galilee.",
- "As soon as they left the synagogue, they went with James and John to the home of Simon and Andrew.",
- "Simon's mother-in-law was in bed with a fever, and they immediately told Jesus about her.",
- "So he went to her, took her hand and helped her up. The fever left her and she began to wait on them.",
- "That evening after sunset the people brought to Jesus all the sick and demon-possessed.",
- "The whole town gathered at the door,",
- "and Jesus healed many who had various diseases. He also drove out many demons, but he would not let the demons speak because they knew who he was.",
- "Very early in the morning, while it was still dark, Jesus got up, left the house and went off to a solitary place, where he prayed.",
- "Simon and his companions went to look for him,",
- "and when they found him, they exclaimed: \"Everyone is looking for you!\"",
- "Jesus replied, \"Let us go somewhere else—to the nearby villages—so I can preach there also. That is why I have come.\"",
- "So he traveled throughout Galilee, preaching in their synagogues and driving out demons.",
- "A man with leprosy came to him and begged him on his knees, \"If you are willing, you can make me clean.\"",
- "Jesus was indignant. He reached out his hand and touched the man. \"I am willing,\" he said. \"Be clean!\"",
- "Immediately the leprosy left him and he was cleansed.",
- "Jesus sent him away at once with a strong warning:",
- "\"See that you don't tell this to anyone. But go, show yourself to the priest and offer the sacrifices that Moses commanded for your cleansing, as a testimony to them.\"",
- "Instead he went out and began to talk freely, spreading the news. As a result, Jesus could no longer enter a town openly but stayed outside in lonely places. Yet the people still came to him from everywhere."
+  "A few days later, when Jesus again entered Capernaum, the people heard that he had come home.",
+  "They gathered in such large numbers that there was no room left, not even outside the door, and he preached the word to them.",
+  "Some men came, bringing to him a paralyzed man, carried by four of them.",
+  "Since they could not get him to Jesus because of the crowd, they made an opening in the roof above Jesus by digging through it and then lowered the mat the man was lying on.",
+  "When Jesus saw their faith, he said to the paralyzed man, “Son, your sins are forgiven.”",
+  "Now some teachers of the law were sitting there, thinking to themselves,",
+  "“Why does this fellow talk like that? He’s blaspheming! Who can forgive sins but God alone?”",
+  "Immediately Jesus knew in his spirit that this was what they were thinking in their hearts, and he said to them, “Why are you thinking these things?",
+  "Which is easier: to say to this paralyzed man, ‘Your sins are forgiven,’ or to say, ‘Get up, take your mat and walk’?",
+  "But I want you to know that the Son of Man has authority on earth to forgive sins.” So he said to the man,",
+  "“I tell you, get up, take your mat and go home.”",
+  "He got up, took his mat and walked out in full view of them all. This amazed everyone and they praised God, saying, “We have never seen anything like this!”",
+  "Once again Jesus went out beside the lake. A large crowd came to him, and he began to teach them.",
+  "As he walked along, he saw Levi son of Alphaeus sitting at the tax collector’s booth. “Follow me,” Jesus told him, and Levi got up and followed him.",
+  "While Jesus was having dinner at Levi’s house, many tax collectors and sinners were eating with him and his disciples, for there were many who followed him.",
+  "When the teachers of the law who were Pharisees saw him eating with the sinners and tax collectors, they asked his disciples: “Why does he eat with tax collectors and sinners?”",
+  "On hearing this, Jesus said to them, “It is not the healthy who need a doctor, but the sick. I have not come to call the righteous, but sinners.”",
+  "Now John’s disciples and the Pharisees were fasting. Some people came and asked Jesus, “How is it that John’s disciples and the disciples of the Pharisees are fasting, but yours are not?”",
+  "Jesus answered, “How can the guests of the bridegroom fast while he is with them? They cannot, so long as they have him with them.",
+  "But the time will come when the bridegroom will be taken from them, and on that day they will fast.",
+  "“No one sews a patch of unshrunk cloth on an old garment. Otherwise, the new piece will pull away from the old, making the tear worse.",
+  "And no one pours new wine into old wineskins. Otherwise, the wine will burst the skins, and both the wine and the wineskins will be ruined. No, they pour new wine into new wineskins.”",
+  "One Sabbath Jesus was going through the grainfields, and as his disciples walked along, they began to pick some heads of grain.",
+  "The Pharisees said to him, “Look, why are they doing what is unlawful on the Sabbath?”",
+  "He answered, “Have you never read what David did when he and his companions were hungry and in need?",
+  "In the days of Abiathar the high priest, he entered the house of God and ate the consecrated bread, which is lawful only for priests to eat. And he also gave some to his companions.”",
+  "Then he said to them, “The Sabbath was made for man, not man for the Sabbath.",
+  "So the Son of Man is Lord even of the Sabbath.”"
 ];
 
 const defs = {
-  "jesus":"Jesus of Nazareth: the Son of God and promised Messiah, whose ministry of teaching, healing, and casting out evil spirits is the subject of Mark's Gospel.",
-  "sabbath":"The traditional Jewish day of rest and worship (Saturday).",
-  "synagogue":"A Jewish house of prayer and community center for studying Scripture.",
-  "impurespirit":"Another name for a demon: a created, fallen angel operating in spiritual rebellion under Satan's hierarchy. Real and deceptive, but finite: not all-powerful, all-knowing, or a match for Christ's authority.",
-  "leprosy":"A severe skin disease causing social exclusion; sufferers were treated as outcasts (Leviticus 13).",
-  "indignant":"Feeling deep anger or emotion at unfair treatment, sin, or disease.",
-  "galilee":"The northern region of Israel where Jesus conducted much of His early ministry.",
-  "capernaum":"A bustling fishing village on the Sea of Galilee that served as Jesus's ministry hub.",
-  "jesusofnazareth":"Nazareth was a small, obscure village in Galilee, easy to overlook and looked down on by outsiders (John 1:46). Calling Jesus \"of Nazareth\" marked Him, by human standards, as an unlikely candidate for Messiah.",
-  "holyoneofgod":"A title acknowledging Jesus's divine identity and authority. It's notable that a demon says it first: even the spiritual realm recognized who Jesus was on sight."
+  "jesus":"Jesus of Nazareth: the Son of God and Messianic King, who exercises divine authority on earth to forgive sins, heal, call outcasts, and redefine God's Kingdom[cite: 2, 122].",
+  "capernaum":"A bustling fishing town on the Sea of Galilee that served as Jesus's ministry base.",
+  "paralyzed":"Unable to move or walk; completely dependent on friends to be brought to Jesus.",
+  "teachersofthelaw":"Religious scholars and scribes dedicated to studying and interpreting Jewish law, who frequently challenged Jesus's authority.",
+  "blaspheming":"Speaking irreverently about God or claiming powers, honor, and authority that belong strictly to God alone.",
+  "sonofman":"Jesus's favorite title for Himself (from Daniel 7): the truly human servant-king endowed with divine cosmic authority to rule, heal, and forgive sins[cite: 175, 230].",
+  "authority":"Legitimate divine power and right to rule, forgive sin, command spirits, and restore creation[cite: 2, 168].",
+  "levi":"Levi (also known as Matthew), son of Alphaeus; a Jewish tax collector who left his booth immediately when Jesus called him.",
+  "alphaeus":"The father of Levi the tax collector.",
+  "taxcollectors":"Jewish citizens hired by the Roman Empire who were despised as traitors and notorious sinners because they routinely extorted extra money to enrich themselves.",
+  "sinners":"People viewed by religious society as moral and ritual outcasts living outside the covenant expectations[cite: 113].",
+  "disciples":"Committed apprentices and followers learning the teachings and lifestyle of a master teacher (rabbi)[cite: 19, 40].",
+  "pharisees":"A strict Jewish religious group known for scrupulous adherence to oral traditions and legal purity laws[cite: 3, 117].",
+  "righteous":"Those in right standing with God; often used by the Pharisees to describe their own religious self-sufficiency.",
+  "fasting":"The spiritual discipline of temporarily abstaining from food to turn physical hunger into spiritual dependence on God.",
+  "bridegroom":"A wedding groom; used as a metaphor for Jesus being joyfully present with His people.",
+  "wineskins":"Animal skin containers used to store fermenting wine; old, brittle skins burst under the expansion of active new wine.",
+  "sabbath":"The weekly seventh-day sacred rest established in Genesis and the Ten Commandments to enjoy God's good provision[cite: 129, 165].",
+  "david":"King David, Israel's legendary shepherd-king whose royal line pointed forward to the Messiah[cite: 168, 172].",
+  "abiathar":"A prominent high priest who assisted David and his companions while they were fleeing Saul (1 Samuel 21–22).",
+  "consecratedbread":"The sacred 'Bread of the Presence' placed before God in the tabernacle, reserved exclusively for the priesthood under Levitical law.",
+  "lord":"The ultimate sovereign ruler and master with supreme authority over creation and institutions[cite: 2, 112]."
 };
 
 const phrases = [
-  { words:['holy','one','of','god'], key:'holyoneofgod' },
-  { words:['jesus','of','nazareth'], key:'jesusofnazareth' },
-  { words:['impure','spirit'], key:'impurespirit' },
-  { words:['impure','spirits'], key:'impurespirit' }
+  { words:['teachers','of','the','law'], key:'teachersofthelaw' },
+  { words:['son','of','man'], key:'sonofman' },
+  { words:['tax','collectors'], key:'taxcollectors' },
+  { words:['tax','collector’s'], key:'taxcollectors' },
+  { words:['tax','collectors’'], key:'taxcollectors' },
+  { words:['high','priest'], key:'abiathar' },
+  { words:['house','of','god'], key:'abiathar' },
+  { words:['consecrated','bread'], key:'consecratedbread' }
 ];
 
 const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2 };
@@ -1310,7 +1311,7 @@ function quoteVerse(text){
   const t = (text||'').trim();
   const startsWithQuote = /^["“]/.test(t);
   const endsWithQuote = /["”]$/.test(t);
-  return (startsWithQuote ? '' : '"') + text + (endsWithQuote ? '' : '"');
+  return (startsWithQuote ? '' : '“') + text + (endsWithQuote ? '' : '”');
 }
 function normWord(w){ return w.replace(/[^a-zA-Z']/g,'').toLowerCase(); }
 
@@ -1328,12 +1329,13 @@ function kw(lines, extraClass){
   return `<div class="hero-title${extraClass ? ' '+extraClass : ''}">${body}</div>`;
 }
 
-const paragraphEnds = [28, 31, 34, 39, 44, 45];
+const paragraphEnds = [12, 17, 22, 28];
 
 function passageWordsHTML(){
   let out = '<p class="flow-para">';
+  const lastVerseNum = PASSAGE_START_VERSE + passage.length - 1;
   passage.forEach((v,i)=>{
-    const verseNum = i + 21;
+    const verseNum = i + PASSAGE_START_VERSE;
     const words = v.replace(/—(?=\S)/g, '— ').split(/\s+/);
     const normed = words.map(normWord);
     const pieces = [];
@@ -1352,7 +1354,7 @@ function passageWordsHTML(){
       wi++;
     }
     out += pieces.join(' ') + ' ';
-    if (paragraphEnds.includes(verseNum) && verseNum !== 45) out += '</p><p class="flow-para">';
+    if (paragraphEnds.includes(verseNum) && verseNum !== lastVerseNum) out += '</p><p class="flow-para">';
   });
   out += '</p>';
   return out;
@@ -1360,8 +1362,8 @@ function passageWordsHTML(){
 
 function versePickHTML(){
   return passage.map((v,i)=>`
-    <div class="verse-tile" data-v="${i+21}" onclick="tapVerseTile(event, ${i+21})">
-      <div class="vnum">${i+21}</div><div class="vtext">${v}</div>
+    <div class="verse-tile" data-v="${i+PASSAGE_START_VERSE}" onclick="tapVerseTile(event, ${i+PASSAGE_START_VERSE})">
+      <div class="vnum">${i+PASSAGE_START_VERSE}</div><div class="vtext">${v}</div>
     </div>`).join('');
 }
 
@@ -1371,7 +1373,7 @@ const beats = [
     html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
             <div class="intro-top-title">MS Hang</div>
-            ${kw([["MARK"],["1:21–45"]],'xl')}
+            ${kw([["MARK"],["2:1–28"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
@@ -1432,7 +1434,7 @@ const beats = [
             </div>
           </div>` },
 
-  /* 3. RECAP (FREE FLOW ON SCREEN - NO CONTAINER DIV) */
+  /* 3. RECAP */
   { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-discover)', text:'dark', align:'start',
     html:`<div class="sketch-lead-title" style="margin-bottom:8px;">Recap</div>
           <div class="recap-context-grid">
@@ -1450,11 +1452,11 @@ const beats = [
               </div>
               <div class="recap-item-block">
                 <span class="recap-tag">Last Week</span>
-                <div>Jesus announces that the Kingdom of God is near and begins recruiting ordinary fishermen to follow Him.</div>
+                <div>Jesus demonstrates His divine authority over disease and demonic powers throughout Galilee.</div>
               </div>
               <div class="recap-item-block">
                 <span class="recap-tag">This Week</span>
-                <div>Jesus begins to openly display His divine authority—teaching with power and commanding unclean spirits.</div>
+                <div>Jesus shows He has authority to forgive sins, calls social outcasts to follow Him, and reveals He is Lord of the Sabbath.</div>
               </div>
             </div>
           </div>` },
@@ -1536,11 +1538,11 @@ const beats = [
             </div>
           </div>` },
 
-  /* 11. FINAL (CLEAN MINIMAL PROMPT - NO HEADER) */
+  /* 11. FINAL */
   { id:'final', type:'input', blockTap:true, isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
     html:`<div class="final-live-wrap">
             <div class="final-live-prompt">
-              If God is <span class="final-trait-badge" id="finalGodIsTrait">Holy</span>, what should our response be?
+              If God is <span class="final-trait-badge" id="finalGodIsTrait">Forgiving</span>, what should our response be?
             </div>
             <div class="final-desktop-timer">
               <button class="final-timer-btn" id="timerCard" onclick="event.stopPropagation(); toggleTimer();" title="Start Reflection Timer" aria-label="Start Reflection Timer">
@@ -1564,13 +1566,6 @@ const sectionLabels = [
 ];
 
 const sectionColorKeys = ['', 'discover', 'discover', 'discover', '', 'wordwork', 'wordwork', 'wordwork', 'learn', 'learn', 'live', 'live'];
-
-const hlHoverMap = {
-  lime: 'rgba(195, 245, 60, 0.3)',
-  purple: 'rgba(168, 85, 247, 0.25)',
-  yellow: 'rgba(255, 199, 44, 0.35)',
-  pink: 'rgba(244, 63, 94, 0.25)'
-};
 
 function initNotches(){
   const layer = document.getElementById('notchesLayer');
@@ -1628,7 +1623,7 @@ function updateHeaderMeta(){
     scriptureEl.innerHTML = `<button class="meta-link-btn" onclick="event.stopPropagation(); exitDevMode();">Close</button>`;
   } else {
     labelEl.textContent = sectionLabels[state.index] || '';
-    scriptureEl.textContent = 'Mark 1:21–45';
+    scriptureEl.textContent = 'Mark 2:1–28';
   }
 }
 
@@ -1727,9 +1722,9 @@ function renderBeat(i){
   updateNavShell();
 
   if (b.id === 'char-coaching') {
-    const activeVerse = state.charVerse || 21;
-    document.getElementById('charRef').textContent = 'Mark 1:' + activeVerse;
-    document.getElementById('charText').textContent = quoteVerse(passage[activeVerse-21]);
+    const activeVerse = state.charVerse || PASSAGE_START_VERSE;
+    document.getElementById('charRef').textContent = 'Mark 2:' + activeVerse;
+    document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
     const arcStem = document.getElementById('arcStemText');
     if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
     const inp = document.getElementById('customTraitInput');
@@ -1784,13 +1779,6 @@ function setPassageHighlighter(color, btnEl){
   } else {
     state.activeTool.vocab = color;
   }
-  
-  const scrollEl = document.getElementById('passageScrollEl');
-  if (scrollEl) {
-    const hoverVal = state.activeTool.vocab ? (hlHoverMap[state.activeTool.vocab] || 'rgba(255, 199, 44, 0.25)') : 'rgba(255, 199, 44, 0.25)';
-    scrollEl.style.setProperty('--active-hl-hover', hoverVal);
-  }
-
   updateNavShell();
 }
 
@@ -1836,7 +1824,7 @@ function tapWord(e, el){
       state.wordTaps = state.wordTaps.filter(w => w.el !== el);
     } else {
       el.classList.add('flagged');
-      state.wordTaps.push({ el, word, def, isStop, key });
+      state.wordTaps = state.wordTaps.filter(w => w.el !== el);
     }
   }
   updateNavShell();
@@ -1951,12 +1939,11 @@ function handleCustomTrait(val){
 }
 
 function renderFinalReflection(){
-  const trait = state.trait && state.trait.trim() ? state.trait.trim() : 'Holy';
+  const trait = state.trait && state.trait.trim() ? state.trait.trim() : 'Forgiving';
   const traitEl = document.getElementById('finalGodIsTrait');
   if (traitEl) traitEl.textContent = trait;
 }
 
-/* 2 MINUTE TIMER LOGIC */
 let timerSeconds = 120;
 let timerInterval = null;
 let timerRunning = false;
@@ -2107,7 +2094,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key.toLowerCase() === 'f' && e.target.tagName !== 'INPUT') toggleFullScreen();
 });
 
-/* TAP-ZONE + SWIPE NAVIGATION */
 (function initGestureNav(){
   const stageEl = document.getElementById('stage');
   if (!stageEl) return;
@@ -2162,7 +2148,7 @@ if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPas
 let devMode = false;
 let devTapCount = 0;
 let devLastTapTime = 0;
-const DEV_NOTES_KEY = 'msHangDevNotes_1_21_45';
+const DEV_NOTES_KEY = 'msHangDevNotes_2_1_28';
 
 function loadDevNotes(){
   try { return JSON.parse(localStorage.getItem(DEV_NOTES_KEY) || '{}'); }
