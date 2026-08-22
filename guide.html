@@ -1945,8 +1945,6 @@ function questAnswer(e, el, gridId){
     el.classList.add('correct');
     answeredBeats.add(state.index);
     updateNavShell();
-    const myGen = renderGen;
-    setTimeout(()=>{ if (renderGen === myGen) goNext(); }, 600);
   } else {
     el.classList.add('incorrect','shake');
     setTimeout(()=>{ el.classList.remove('shake','incorrect'); }, 500);
