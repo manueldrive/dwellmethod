@@ -156,6 +156,44 @@
     opacity: 1;
   }
 
+  .gate-nav-hint{
+    position: absolute;
+    left: 50%;
+    bottom: clamp(14px, 2.5vh, 22px);
+    transform: translateX(-50%);
+    z-index: 91;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    pointer-events: none;
+    text-align: center;
+    opacity: 0;
+  }
+  .gate-nav-hint.light{ color: #FFFFFF; }
+  .gate-nav-hint.dark{ color: #0D0D0D; }
+  .gate-nav-hint.visible{ animation: hintShakeIn 0.5s ease forwards; }
+  @keyframes hintShakeIn{
+    0%   { opacity: 0; transform: translateX(calc(-50% - 14px)); }
+    20%  { opacity: 1; transform: translateX(calc(-50% + 10px)); }
+    40%  { transform: translateX(calc(-50% - 7px)); }
+    60%  { transform: translateX(calc(-50% + 4px)); }
+    80%  { transform: translateX(calc(-50% - 2px)); }
+    100% { opacity: 1; transform: translateX(-50%); }
+  }
+  .gate-nav-hint i{ font-size: 15px; }
+  .gate-nav-hint span{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  @media (min-width: 1024px) {
+    .gate-nav-hint i{ font-size: 19px; }
+    .gate-nav-hint span{ font-size: 13px; }
+  }
+
   .floating-context-island {
     position: absolute;
     left: 50%;
@@ -278,21 +316,6 @@
     50% { transform: scale(1.02); }
   }
   @keyframes shakeX{ 10%,90%{transform:translateX(-3px);} 20%,80%{transform:translateX(5px);} 30%,50%{transform:translateX(-8px);} 40%,60%{transform:translateX(8px);} }
-
-  .clue-badge{
-    position: absolute;
-    left: 50%;
-    bottom: clamp(76px, 12vh, 96px);
-    transform: translateX(-50%);
-    display: flex; align-items: center; gap: 8px;
-    background: var(--ink); color: #FFF;
-    font-family:'Space Grotesk', sans-serif; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px;
-    padding: 10px 18px; border-radius: 100px;
-    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
-    z-index: 100;
-    white-space: nowrap;
-  }
-  .clue-badge i{ color: var(--yellow); }
 
   .hud-header{ 
     position:relative; 
@@ -812,13 +835,16 @@
   @keyframes breathe{ 0%,100%{ transform:scale(0.8); background:#C9B8E8; } 50%{ transform:scale(1.2); background:#DCEFA0; } }
   .breath-label-wrap{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; z-index:3; pointer-events:none; }
   .pray-center-text{ font-family:'Space Grotesk', sans-serif; font-weight:900; font-size:clamp(22px, 3.4vh, 32px); letter-spacing:3px; text-transform:uppercase; color:var(--ink); line-height:1; }
+  .prayer-subtext{ font-family:'Inter', sans-serif; font-weight:700; font-size:clamp(14px, 1.9vh, 17px); line-height:1.4; opacity:.75; color:var(--ink); text-align:center; max-width:280px; }
   @media (min-width: 768px) {
     .breath-visual{ width: clamp(260px, 34vh, 360px); height: clamp(260px, 34vh, 360px); }
     .pray-center-text{ font-size:clamp(24px, 3.4vh, 36px); }
+    .prayer-subtext{ font-size:clamp(16px, 2vh, 19px); max-width:340px; }
   }
   @media (min-width: 1100px) {
     .breath-visual{ width: clamp(340px, 42vh, 480px); height: clamp(340px, 42vh, 480px); }
     .pray-center-text{ font-size:clamp(30px, 4vh, 44px); }
+    .prayer-subtext{ font-size:clamp(19px, 2.4vh, 23px); max-width:420px; }
   }
 
   .leather-cover{ flex:1; display:flex; border-radius:22px; overflow:hidden; min-height:0; position:relative; border:4px solid var(--ink); box-shadow:6px 6px 0 var(--ink); background: radial-gradient(circle at 28% 18%, rgba(255,255,255,0.10), transparent 42%), repeating-linear-gradient(135deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 7px), linear-gradient(160deg, #7a4a2c, #452817); width:100%; }
@@ -913,18 +939,18 @@
   }
   .verse-tile{ display:flex; gap:16px; align-items:flex-start; padding:14px 16px; cursor:pointer; transition:background .13s ease; color:var(--ink); border-radius:16px; width:100%; }
   .verse-tile.selected{ background:var(--lime); }
-  .verse-tile .vnum{ font-family:'Space Grotesk', sans-serif; font-weight:800; color:var(--purple); flex-shrink:0; width:34px; font-size:clamp(18px, 2.2vh, 22px); }
-  .verse-tile .vtext{ font-size:clamp(18px, 2.3vh, 22px); line-height:1.75; font-family:'Inter',sans-serif; font-weight:400; }
+  .verse-tile .vnum{ font-family:'Space Grotesk', sans-serif; font-weight:800; color:var(--purple); flex-shrink:0; width:34px; font-size:calc(clamp(18px, 2.2vh, 22px) * var(--char-font-scale, 1)); }
+  .verse-tile .vtext{ font-size:calc(clamp(18px, 2.3vh, 22px) * var(--char-font-scale, 1)); line-height:1.75; font-family:'Inter',sans-serif; font-weight:400; }
   @media (min-width: 768px) {
     .verse-pick-list{ max-width:960px; }
     .verse-tile{ padding:18px 22px; gap:20px; }
-    .verse-tile .vnum{ font-size:24px; width:40px; }
-    .verse-tile .vtext{ font-size:clamp(22px, 2.4vw, 26px); line-height:1.8; }
+    .verse-tile .vnum{ font-size:calc(24px * var(--char-font-scale, 1)); width:40px; }
+    .verse-tile .vtext{ font-size:calc(clamp(22px, 2.4vw, 26px) * var(--char-font-scale, 1)); line-height:1.8; }
   }
   @media (min-width: 1200px) {
     .verse-pick-list{ max-width:1300px; }
-    .verse-tile .vnum{ font-size:28px; width:48px; }
-    .verse-tile .vtext{ font-size:clamp(25px, 2vw, 32px); line-height:1.85; }
+    .verse-tile .vnum{ font-size:calc(28px * var(--char-font-scale, 1)); width:48px; }
+    .verse-tile .vtext{ font-size:calc(clamp(25px, 2vw, 32px) * var(--char-font-scale, 1)); line-height:1.85; }
   }
 
   .review-scroll{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; position:relative; z-index:2; padding:4px 8px 12px 4px; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-direction:column; justify-content:flex-start; }
@@ -1224,6 +1250,34 @@
   .dev-notes-panel button.dnp-btn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:13px; text-transform:uppercase; background:var(--lime); border:2.5px solid var(--ink); border-radius:100px; padding:10px 16px; cursor:pointer; }
   .dev-notes-panel button.dnp-close{ background:#eee; }
   .dnp-status{ font-size:12px; font-weight:700; font-family:'Inter',sans-serif; }
+
+  .share-trigger-btn{
+    position:relative; z-index:5; pointer-events:auto;
+    background:#FFF; border:3.5px solid var(--ink); border-radius:100px; padding:12px 22px;
+    box-shadow:4px 4px 0 var(--ink); display:inline-flex; align-items:center; gap:9px;
+    cursor:pointer; transition:all .15s ease; color:var(--ink);
+    font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:12.5px; text-transform:uppercase; letter-spacing:.4px;
+  }
+  .share-trigger-btn:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+  .share-trigger-btn i{ font-size:13px; }
+
+  .share-overlay{ position:absolute; inset:0; z-index:210; background:rgba(0,0,0,0.65); display:flex; align-items:center; justify-content:center; padding:22px; }
+  .share-panel{ background:#fff; color:var(--ink); border:4px solid var(--ink); border-radius:20px; padding:22px; width:100%; max-width:380px; max-height:90vh; overflow-y:auto; box-shadow:6px 6px 0 var(--ink); display:flex; flex-direction:column; align-items:center; gap:16px; font-family:'Inter',sans-serif; }
+  .share-panel h3{ font-family:'Space Grotesk',sans-serif; margin:0; font-size:13.5px; text-transform:uppercase; letter-spacing:1px; align-self:flex-start; }
+  .share-card-stage{ width:100%; aspect-ratio:1/1; border-radius:16px; border:3.5px solid var(--ink); display:flex; align-items:center; justify-content:center; padding:22px; transition:background .25s ease; }
+  .share-card-stage .circle-hero{ background:#fff; box-shadow:4px 4px 0 var(--ink); width:100%; height:100%; max-width:240px; max-height:240px; }
+  .share-swatch-row{ display:flex; gap:9px; align-self:flex-start; flex-wrap:wrap; }
+  .share-swatch-btn{ width:28px; height:28px; border-radius:50%; border:2.5px solid var(--ink); padding:0; cursor:pointer; }
+  .share-swatch-btn.active{ box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--ink); }
+  .share-action-row{ display:flex; gap:10px; width:100%; }
+  .share-action-btn{ flex:1; font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:12.5px; text-transform:uppercase; border:2.5px solid var(--ink); border-radius:100px; padding:12px 14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .share-action-btn.primary{ background:var(--lime); }
+  .share-action-btn.secondary{ background:#eee; }
+  .share-action-btn:disabled{ opacity:.6; cursor:default; }
+  @media (min-width:768px){
+    .share-trigger-btn{ display:none; }
+    .share-panel{ max-width:420px; padding:26px; }
+  }
   .dnp-status.ok{ color:#1a7a3c; }
   .dnp-status.warn{ color:#8a5a00; }
 
@@ -1247,8 +1301,6 @@
   <button class="fs-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen (F)" aria-label="Toggle fullscreen">
     <i class="fa-solid fa-expand"></i>
   </button>
-
-  <div class="clue-badge" id="clueBadge" style="display:none;"><i class="fa-solid fa-circle-exclamation"></i><span id="clueBadgeText"></span></div>
 
   <div class="hud-header" id="hudHeader">
     <div class="progress-container" id="normalProgressWrap">
@@ -1274,6 +1326,16 @@
     </button>
   </div>
 
+  <div class="gate-nav-hint light" id="questNavHint">
+    <i class="fa-solid fa-hand-point-up"></i>
+    <span id="questNavHintText">Make a selection</span>
+  </div>
+
+  <div class="gate-nav-hint dark" id="charNavHint">
+    <i class="fa-solid fa-pencil"></i>
+    <span id="charNavHintText">Fill in the blank</span>
+  </div>
+
   <!-- FLOATING CONTEXT ISLAND FOR INTERACTION SLIDES -->
   <div class="floating-context-island" id="floatingContextIsland" style="display:none;"></div>
 
@@ -1293,6 +1355,24 @@
         <button class="glossary-drawer-close" onclick="event.stopPropagation(); closeGlossaryDrawer();" aria-label="Close glossary panel"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="glossary-drawer-body" id="glossaryDrawerBody"></div>
+    </div>
+  </div>
+
+  <div class="share-overlay" id="shareOverlay" style="display:none;" onclick="closeShareOverlay();">
+    <div class="share-panel" onclick="event.stopPropagation();">
+      <h3>Share Your Central Truth</h3>
+      <div class="share-card-stage" id="shareCardStage">
+        <div class="circle-hero" id="shareCircleHero">
+          <div class="arc-stem-text" id="shareArcStem">MARK 2</div>
+          <div class="label-god-is">GOD IS...</div>
+          <div class="static-trait" id="shareTraitText">Forgiving</div>
+        </div>
+      </div>
+      <div class="share-swatch-row" id="shareSwatchRow"></div>
+      <div class="share-action-row" id="shareActionRow">
+        <button class="share-action-btn secondary" onclick="closeShareOverlay();">Cancel</button>
+        <button class="share-action-btn primary" id="shareConfirmBtn" onclick="confirmShareImage();"><i class="fa-solid fa-arrow-up-from-bracket"></i> Share</button>
+      </div>
     </div>
   </div>
 
@@ -1386,7 +1466,7 @@ const phrases = [
   { words:['lord','of','the','sabbath'], key:'lordofthesabbath' }
 ];
 
-const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2 };
+const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2, charFontLevel:2 };
 const FONT_LEVELS = [0.85, 0.925, 1, 1.1, 1.2, 1.3];
 let renderGen = 0;
 
@@ -1550,13 +1630,11 @@ const beats = [
 
   /* 4. PRAYER */
   { id:'breath-prayer', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'center',
-    html:`<div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+    html:`<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; gap:44px;">
             <div class="breath-visual">
               <div class="breath-circle"></div>
-              <div class="breath-label-wrap">
-                <div class="pray-center-text">PRAY</div>
-              </div>
             </div>
+            <div class="prayer-subtext">Pause and pray before moving into reading.</div>
           </div>` },
 
   /* 5. WORD WORK COVER */
@@ -1641,13 +1719,15 @@ const beats = [
               <div class="final-mobile-subtext">
                 Take a few quiet minutes to journal and pray through this on your own.
               </div>
-              <div class="final-guide-complete">Guide Complete</div>
+              <button class="share-trigger-btn" id="shareTruthBtn" onclick="event.stopPropagation(); shareCentralTruthDirect();" style="margin-top:14px;">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i> Share Your Central Truth
+              </button>
             </div>
           </div>` }
 ];
 
 const sectionLabels = [
-  'Dwell Guide', 'Discover', 'Discover', 'Discover',
+  'Guide', 'Discover', 'Discover', 'Discover',
   'Prayer', 'Word Work', 'Word Work', 'Word Work',
   'Learn', 'Learn', 'Learn', 'Live'
 ];
@@ -1735,7 +1815,7 @@ function updateNavShell(){
   else ready = !b.blockTap;
   nextBtn.classList.toggle('ready', ready);
 
-  const hideArrows = (b.id === 'quest-testament' || b.id === 'quest-section') && !answeredBeats.has(state.index);
+  const hideArrows = false;
   prevBtn.style.display = hideArrows ? 'none' : '';
   nextBtn.style.display = (hideArrows || isFinalSlide) ? 'none' : '';
 
@@ -1744,9 +1824,14 @@ function updateNavShell(){
   } else if (b.id === 'vocab-scan') {
     island.style.display = 'flex';
     const isDone = isVocabComplete();
+    const hasWords = state.wordTaps.length > 0;
+    let pillLabel;
+    if (isDone) pillLabel = '<i class="fa-solid fa-check"></i> Continue';
+    else if (hasWords) pillLabel = 'Finish Reading';
+    else pillLabel = 'Highlight Words';
     island.innerHTML = `
       <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="vocabActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-        ${isDone ? '<i class="fa-solid fa-check"></i> Continue' : 'Highlight Words'}
+        ${pillLabel}
       </button>
     `;
   } else if (b.id === 'char-verse-pick') {
@@ -1777,6 +1862,14 @@ function updateNavShell(){
       <button class="rail-font-btn" title="Increase text size" aria-label="Increase text size" ${atMax ? 'disabled' : ''} onclick="event.stopPropagation(); adjustPassageFont(1);">+</button>
       ${swatchHtml}
       <button class="rail-font-btn" title="Decrease text size" aria-label="Decrease text size" ${atMin ? 'disabled' : ''} onclick="event.stopPropagation(); adjustPassageFont(-1);">−</button>
+    `;
+  } else if (b.id === 'char-verse-pick') {
+    rail.style.display = 'flex';
+    const atMax = state.charFontLevel >= FONT_LEVELS.length - 1;
+    const atMin = state.charFontLevel <= 0;
+    rail.innerHTML = `
+      <button class="rail-font-btn" title="Increase text size" aria-label="Increase text size" ${atMax ? 'disabled' : ''} onclick="event.stopPropagation(); adjustCharFont(1);">+</button>
+      <button class="rail-font-btn" title="Decrease text size" aria-label="Decrease text size" ${atMin ? 'disabled' : ''} onclick="event.stopPropagation(); adjustCharFont(-1);">−</button>
     `;
   } else {
     rail.style.display = 'none';
@@ -1881,6 +1974,18 @@ function adjustPassageFont(delta){
   updateNavShell();
 }
 
+function applyCharFontScale(){
+  document.documentElement.style.setProperty('--char-font-scale', FONT_LEVELS[state.charFontLevel]);
+}
+
+function adjustCharFont(delta){
+  const next = state.charFontLevel + delta;
+  if (next < 0 || next >= FONT_LEVELS.length) return;
+  state.charFontLevel = next;
+  applyCharFontScale();
+  updateNavShell();
+}
+
 function tapWord(e, el){
   e.stopPropagation();
   const key = el.dataset.word;
@@ -1920,8 +2025,8 @@ function tapWord(e, el){
 
 function tapVerseTile(e, v){
   e.stopPropagation();
-  state.charVerse = v;
-  document.querySelectorAll('.verse-tile').forEach(t=>t.classList.toggle('selected', Number(t.dataset.v)===v));
+  state.charVerse = (state.charVerse === v) ? null : v;
+  document.querySelectorAll('.verse-tile').forEach(t=>t.classList.toggle('selected', Number(t.dataset.v)===state.charVerse));
   updateNavShell();
 }
 
@@ -2079,58 +2184,64 @@ function toggleTimer(){
   }
 }
 
-let clueTimeout = null;
-function showBadgeClue(text, iconClass){
-  const badge = document.getElementById('clueBadge');
-  const badgeText = document.getElementById('clueBadgeText');
-  const badgeIcon = badge ? badge.querySelector('i') : null;
-  if (!badge || !badgeText) return;
-  badgeText.textContent = text;
-  if (badgeIcon) badgeIcon.className = iconClass || 'fa-solid fa-circle-exclamation';
-  badge.style.display = 'flex';
+const pillMsgTimeouts = {};
+function triggerPillMessage(pillId, tempText){
+  const pill = document.getElementById(pillId);
+  if (!pill) return;
+  pill.classList.remove('shake-warn');
+  void pill.offsetWidth;
+  pill.classList.add('shake-warn');
+  setTimeout(() => pill.classList.remove('shake-warn'), 600);
 
-  clearTimeout(clueTimeout);
-  clueTimeout = setTimeout(() => {
-    badge.style.display = 'none';
-  }, 2200);
+  pill.textContent = tempText;
+
+  clearTimeout(pillMsgTimeouts[pillId]);
+  pillMsgTimeouts[pillId] = setTimeout(() => {
+    updateNavShell();
+  }, 1500);
 }
 
-function triggerGateShake(msg, elementId, iconClass){
-  const el = document.getElementById(elementId) || document.getElementById('shellNextBtn');
-  if (el) {
-    el.classList.remove('shake-warn');
-    void el.offsetWidth;
-    el.classList.add('shake-warn');
-    setTimeout(() => el.classList.remove('shake-warn'), 600);
+const gateHintTimeouts = {};
+function triggerGateNavHint(hintId){
+  const nextBtn = document.getElementById('shellNextBtn');
+  if (nextBtn) {
+    nextBtn.classList.remove('shake-warn');
+    void nextBtn.offsetWidth;
+    nextBtn.classList.add('shake-warn');
+    setTimeout(() => nextBtn.classList.remove('shake-warn'), 600);
   }
-  showBadgeClue(msg, iconClass);
+  const hint = document.getElementById(hintId);
+  if (hint) {
+    hint.classList.remove('visible');
+    void hint.offsetWidth;
+    hint.classList.add('visible');
+    clearTimeout(gateHintTimeouts[hintId]);
+    gateHintTimeouts[hintId] = setTimeout(() => hint.classList.remove('visible'), 1800);
+  }
 }
 
 function handleForwardAttempt(){
   const b = beats[state.index];
   if (b.blockTap) {
     if ((b.id === 'quest-testament' || b.id === 'quest-section') && !answeredBeats.has(state.index)) { 
-      triggerGateShake('Pick an answer to continue', null, 'fa-solid fa-hand-point-up'); 
+      triggerGateNavHint('questNavHint'); 
       return; 
     }
     if (b.id === 'vocab-scan') {
-      if (!state.wordTaps.length && !state.scrolledToEnd) {
-        triggerGateShake('Highlight at least 1 word & scroll down!', 'vocabActionPill');
-        return;
-      } else if (!state.wordTaps.length) {
-        triggerGateShake('Highlight at least 1 word!', 'vocabActionPill');
+      if (!state.wordTaps.length) {
+        triggerPillMessage('vocabActionPill', 'Select 1-2 Words');
         return;
       } else if (!state.scrolledToEnd) {
-        triggerGateShake('Scroll to the bottom first!', 'vocabActionPill');
+        triggerPillMessage('vocabActionPill', 'Finish Reading');
         return;
       }
     }
     if (b.id === 'char-verse-pick' && state.charVerse === null) { 
-      triggerGateShake('Tap a verse to select!', 'verseActionPill'); 
+      triggerPillMessage('verseActionPill', 'Select a Verse'); 
       return; 
     }
     if (b.id === 'char-coaching' && !(state.trait && state.trait.trim())) { 
-      triggerGateShake('Fill in the blank to continue!'); 
+      triggerGateNavHint('charNavHint'); 
       return; 
     }
   }
@@ -2210,6 +2321,8 @@ document.addEventListener('keydown', (e) => {
       goPrev();
     } else if (!b.blockTap) {
       goNext();
+    } else {
+      handleForwardAttempt();
     }
   });
 
@@ -2231,7 +2344,7 @@ document.addEventListener('keydown', (e) => {
       lastSwipeTime = Date.now();
       const b = beats[state.index];
       if (dx < 0) {
-        if (!b.blockTap) goNext();
+        if (!b.blockTap) goNext(); else handleForwardAttempt();
       } else {
         goPrev();
       }
@@ -2310,6 +2423,192 @@ function renderDevBubbles(){
   });
   const activeBub = bar.querySelector('.dev-bubble.active');
   if (activeBub) activeBub.scrollIntoView({ inline: 'center', block: 'nearest' });
+}
+
+const SHARE_BG_COLORS = {
+  discover: ['#d2f860', '#a2e014'],
+  wordwork: ['#fb5672', '#be123c'],
+  expand:   ['#b862f8', '#7e22ce'],
+  learn:    ['#ffd452', '#eab308'],
+  live:     ['#262626', '#050505'],
+  cream:    ['#f4f0e8', '#d8d2c7']
+};
+const SHARE_COLOR_KEYS = Object.keys(SHARE_BG_COLORS);
+
+function roundRectPath(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+// Draws the Central Truth card directly with the Canvas 2D API (no DOM screenshotting).
+// This renders in a few ms, which keeps the tap's "user activation" alive long enough
+// for navigator.share() to be allowed to open the native share sheet.
+function drawCentralTruthCanvas(colorKey, verseNum, traitText){
+  const size = 1000;
+  const canvas = document.createElement('canvas');
+  canvas.width = size; canvas.height = size;
+  const ctx = canvas.getContext('2d');
+
+  const [c1, c2] = SHARE_BG_COLORS[colorKey] || SHARE_BG_COLORS.discover;
+  const grad = ctx.createLinearGradient(0, 0, size, size);
+  grad.addColorStop(0, c1);
+  grad.addColorStop(1, c2);
+  roundRectPath(ctx, 0, 0, size, size, 56);
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  const cx = size / 2, cy = size / 2;
+  const circleR = size * 0.335;
+  const shadowOffset = size * 0.02;
+
+  ctx.beginPath();
+  ctx.arc(cx + shadowOffset, cy + shadowOffset, circleR, 0, Math.PI * 2);
+  ctx.fillStyle = '#0D0D0D';
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, circleR, 0, Math.PI * 2);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fill();
+  ctx.lineWidth = size * 0.008;
+  ctx.strokeStyle = '#0D0D0D';
+  ctx.stroke();
+
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  ctx.fillStyle = 'rgba(13,13,13,0.65)';
+  ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
+  ctx.fillText(`MARK 2:${verseNum}`, cx, cy - circleR * 0.42);
+
+  ctx.fillStyle = '#0D0D0D';
+  ctx.font = `800 ${Math.round(size * 0.05)}px 'Space Grotesk', sans-serif`;
+  ctx.fillText('GOD IS...', cx, cy - circleR * 0.12);
+
+  const traitDisplay = traitText.charAt(0).toUpperCase() + traitText.slice(1);
+  const traitY = cy + circleR * 0.26;
+  const dy = traitY - cy;
+  const halfChord = Math.sqrt(Math.max(circleR * circleR - dy * dy, 0));
+  const maxTraitWidth = halfChord * 2 - size * 0.09;
+
+  let traitFontSize = Math.round(size * 0.05);
+  const minTraitFontSize = Math.round(size * 0.022);
+  ctx.fillStyle = '#A855F7';
+  ctx.font = `900 ${traitFontSize}px 'Inter', sans-serif`;
+  let traitWidth = ctx.measureText(traitDisplay).width;
+  while (traitWidth > maxTraitWidth && traitFontSize > minTraitFontSize) {
+    traitFontSize -= 2;
+    ctx.font = `900 ${traitFontSize}px 'Inter', sans-serif`;
+    traitWidth = ctx.measureText(traitDisplay).width;
+  }
+  ctx.fillText(traitDisplay, cx, traitY);
+  ctx.strokeStyle = '#0D0D0D';
+  ctx.lineWidth = size * 0.007;
+  ctx.beginPath();
+  ctx.moveTo(cx - traitWidth / 2 - 16, traitY + size * 0.032);
+  ctx.lineTo(cx + traitWidth / 2 + 16, traitY + size * 0.032);
+  ctx.stroke();
+
+  return canvas;
+}
+
+async function shareCentralTruthDirect(){
+  try {
+    const activeVerse = state.charVerse || PASSAGE_START_VERSE;
+    const traitText = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Forgiving';
+    const colorKey = SHARE_COLOR_KEYS[Math.floor(Math.random() * SHARE_COLOR_KEYS.length)];
+    const canvas = drawCentralTruthCanvas(colorKey, activeVerse, traitText);
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    if (!blob) throw new Error('canvas produced no image data');
+
+    const file = new File([blob], 'central-truth.png', { type: 'image/png' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file] });
+    } else {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'central-truth.png';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  } catch(err){
+    if (err && err.name === 'AbortError') return; // user dismissed the native share sheet
+    console.error('Direct share failed, falling back to the picker', err);
+    openShareOverlay();
+  }
+}
+
+const SHARE_COLORS = [
+  { key:'discover', dot:'var(--lime)' },
+  { key:'wordwork', dot:'var(--pink)' },
+  { key:'expand',   dot:'var(--purple)' },
+  { key:'learn',    dot:'var(--yellow)' },
+  { key:'live',     dot:'#262626' },
+  { key:'cream',    dot:'var(--cream)' }
+];
+
+function initShareSwatches(){
+  const row = document.getElementById('shareSwatchRow');
+  row.innerHTML = SHARE_COLORS.map(c =>
+    `<button class="share-swatch-btn" data-key="${c.key}" style="background:${c.dot};" onclick="event.stopPropagation(); selectShareColor('${c.key}');" aria-label="${c.key} background"></button>`
+  ).join('');
+}
+
+function selectShareColor(key){
+  state.shareColor = key;
+  const stage = document.getElementById('shareCardStage');
+  if (stage) stage.style.background = `var(--bg-${key})`;
+  document.querySelectorAll('.share-swatch-btn').forEach(b => b.classList.toggle('active', b.dataset.key === key));
+}
+
+function openShareOverlay(){
+  const activeVerse = state.charVerse || PASSAGE_START_VERSE;
+  document.getElementById('shareArcStem').textContent = `MARK 2:${activeVerse}`;
+  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Forgiving';
+  initShareSwatches();
+  selectShareColor(state.shareColor || 'discover');
+  document.getElementById('shareOverlay').style.display = 'flex';
+}
+
+function closeShareOverlay(){
+  document.getElementById('shareOverlay').style.display = 'none';
+}
+
+async function confirmShareImage(){
+  const btn = document.getElementById('shareConfirmBtn');
+  const original = btn.innerHTML;
+  btn.innerHTML = 'Preparing…';
+  btn.disabled = true;
+  try{
+    const node = document.getElementById('shareCardStage');
+    const canvas = await html2canvas(node, { backgroundColor: null, scale: 3, useCORS: true });
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    if (!blob) throw new Error('canvas produced no image data');
+
+    const file = new File([blob], 'central-truth.png', { type: 'image/png' });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file] });
+      closeShareOverlay();
+    } else {
+      // Device/browser doesn't support sharing image files — download as a last resort
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'central-truth.png';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  } catch(err){
+    if (err.name !== 'AbortError') console.error('Share image failed', err);
+  } finally {
+    btn.innerHTML = original;
+    btn.disabled = false;
+  }
 }
 
 function openDevNotesPanel(){
