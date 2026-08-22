@@ -75,7 +75,6 @@
     -webkit-touch-callout: none;
   }
 
-  /* Film-grain overlay for colored (non-cream) beats */
   .app-viewport.grain-bg::after {
     content: "";
     position: absolute;
@@ -111,7 +110,6 @@
     .fs-toggle-btn { display: none !important; }
   }
 
-  /* ================= MINIMAL BORDERLESS CHEVRON NAVIGATION ================= */
   .persistent-nav-shell {
     position: absolute;
     left: 0;
@@ -150,21 +148,14 @@
     animation: chevronPulse 1.6s infinite ease-in-out;
   }
   @keyframes chevronPulse {
-    0%, 100% {
-      transform: translateX(0) scale(1);
-      opacity: 0.8;
-    }
-    50% {
-      transform: translateX(5px) scale(1.22);
-      opacity: 1;
-    }
+    0%, 100% { transform: translateX(0) scale(1); opacity: 0.8; }
+    50% { transform: translateX(5px) scale(1.22); opacity: 1; }
   }
   .minimal-arrow-btn.shake-warn {
     animation: shakeX 0.45s !important;
     opacity: 1;
   }
 
-  /* CONTEXTUAL FLOATING ISLAND */
   .floating-context-island {
     position: absolute;
     left: 50%;
@@ -178,7 +169,6 @@
     pointer-events: auto;
   }
 
-  /* VOCAB-SCAN COLOR RAIL */
   .vocab-color-rail{
     position: absolute;
     right: clamp(10px, 3vw, 20px);
@@ -282,7 +272,6 @@
   }
   @keyframes shakeX{ 10%,90%{transform:translateX(-3px);} 20%,80%{transform:translateX(5px);} 30%,50%{transform:translateX(-8px);} 40%,60%{transform:translateX(8px);} }
 
-  /* FLOATING NOTICE BADGE */
   .clue-badge{
     position: absolute;
     left: 50%;
@@ -298,7 +287,6 @@
   }
   .clue-badge i{ color: var(--yellow); }
 
-  /* HEADER & HUD */
   .hud-header{ 
     position:relative; 
     z-index:50; 
@@ -347,7 +335,6 @@
     opacity: 0.9;
   }
 
-  /* STAGE & BEATS */
   .stage{ 
     position:relative; 
     flex:1; 
@@ -397,7 +384,6 @@
   }
   .tx-light .locator-emphasis{ background: #FFF; color: var(--ink); }
 
-  /* TABBED MANILA FOLDER BASE SYSTEM */
   .nt-folder-wrap {
     display: flex;
     flex-direction: column;
@@ -437,7 +423,6 @@
     justify-content: center;
   }
 
-  /* TESTAMENT (2-CARD) FOLDER DECK */
   .testament-folder-deck {
     display: grid;
     grid-template-columns: 1.85fr 1.15fr;
@@ -459,7 +444,6 @@
     max-width: 420px;
   }
 
-  /* SECTION (5-CARD) FOLDER DECK */
   .folder-sections-deck {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -476,7 +460,6 @@
     font-size: clamp(22px, 3.2vh, 32px);
   }
 
-  /* SHARED FOLDER DECK CARD */
   .folder-deck-card {
     background: #FFF;
     border: 3.5px solid var(--ink);
@@ -610,7 +593,6 @@
     .folder-sections-deck .folder-deck-card .c-badge { font-size: 10px; padding: 3px 8px; }
   }
 
-  /* INTRO SLIDE */
   .intro-top-title{ font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase; opacity:.85; margin-bottom:12px; }
   .intro-duration{ font-family:'Space Grotesk', sans-serif; font-size:13.5px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; opacity:.6; margin-top:16px; display:flex; align-items:center; gap:8px; }
   @media (min-width: 768px) {
@@ -632,7 +614,6 @@
     .emoji{ font-size:56px; margin-bottom:10px; }
   }
 
-  /* RECAP */
   .recap-context-grid {
     display: flex;
     flex-direction: column;
@@ -697,6 +678,29 @@
   .circle-hero .static-trait{ font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 22px); font-weight:900; color:var(--purple); text-transform:capitalize; border-bottom:3px solid var(--ink); padding:2px 12px; margin-bottom:4px; }
   .blank-input{ width:88%; max-width:88%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 0; }
 
+  /* Beat 3 specific God Is Circle size boost */
+  #beat-3 .circle-hero {
+    width: clamp(200px, 28vh, 280px);
+    height: clamp(200px, 28vh, 280px);
+    padding: 16px;
+    border-width: 4px;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  #beat-3 .circle-hero .arc-stem-text {
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    margin-bottom: 6px;
+  }
+  #beat-3 .circle-hero .label-god-is {
+    font-size: clamp(20px, 3vh, 28px);
+    margin-bottom: 8px;
+  }
+  #beat-3 .circle-hero .static-trait {
+    font-size: clamp(20px, 2.8vh, 28px);
+    border-bottom-width: 3.5px;
+    padding: 3px 14px;
+  }
+
   @media (max-width: 767px) {
     .circle-hero.coaching-circle{ width:clamp(190px, 32vh, 240px); height:clamp(190px, 32vh, 240px); padding:16px; }
     .circle-hero.coaching-circle .arc-stem-text{ font-size:10px; margin-bottom:5px; }
@@ -709,6 +713,27 @@
     .circle-hero .arc-stem-text{ font-size:11px; margin-bottom:6px; }
     .circle-hero .label-god-is{ font-size:clamp(22px, 3vh, 28px); margin-bottom:8px; }
     .circle-hero .static-trait{ font-size:clamp(20px, 2.6vh, 26px); padding:2px 14px; margin-bottom:6px; }
+
+    #beat-3 .circle-hero {
+      width: clamp(280px, 38vh, 360px);
+      height: clamp(280px, 38vh, 360px);
+      padding: 24px;
+      border-width: 5px;
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+    #beat-3 .circle-hero .arc-stem-text {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    #beat-3 .circle-hero .label-god-is {
+      font-size: clamp(26px, 3.8vh, 34px);
+      margin-bottom: 10px;
+    }
+    #beat-3 .circle-hero .static-trait {
+      font-size: clamp(24px, 3.2vh, 32px);
+      border-bottom-width: 4px;
+      padding: 4px 18px;
+    }
   }
   @media (min-width: 1024px) {
     .circle-hero{ width: clamp(340px, 46vh, 460px); height: clamp(340px, 46vh, 460px); padding:36px; border-width:5px; box-shadow:8px 8px 0 var(--ink); }
@@ -716,15 +741,19 @@
     .circle-hero .label-god-is{ font-size:clamp(34px, 4.4vh, 44px); margin-bottom:14px; }
     .circle-hero .static-trait{ font-size:clamp(30px, 3.8vh, 38px); border-bottom-width:4px; padding:4px 18px; }
     .blank-input{ font-size:clamp(24px, 3.2vh, 32px); border-bottom-width:4px; }
+
+    #beat-3 .circle-hero{ 
+      width: clamp(400px, 54vh, 520px); 
+      height: clamp(400px, 54vh, 520px); 
+      padding:44px; 
+      border-width:6px;
+      box-shadow:9px 9px 0 var(--ink);
+    }
+    #beat-3 .circle-hero .label-god-is{ font-size:clamp(40px, 5vh, 52px); margin-bottom:16px; }
+    #beat-3 .circle-hero .static-trait{ font-size:clamp(34px, 4.4vh, 44px); border-bottom-width:5px; padding:6px 22px; }
+    #beat-3 .circle-hero .arc-stem-text{ font-size:17px; letter-spacing:1.6px; margin-bottom:14px; }
   }
 
-  @media (min-width: 1024px) {
-    #beat-3 .circle-hero{ width: clamp(380px, 50vh, 500px); height: clamp(380px, 50vh, 500px); padding:40px; }
-    #beat-3 .circle-hero .label-god-is{ font-size:clamp(38px, 4.8vh, 48px); }
-    #beat-3 .circle-hero .static-trait{ font-size:clamp(32px, 4vh, 40px); }
-  }
-
-  /* PRAYER */
   .breath-visual{ position:relative; width: clamp(200px, 30vh, 300px); height: clamp(200px, 30vh, 300px); margin: 0 auto; flex-shrink:0; }
   .breath-circle{ position:absolute; inset:0; border-radius:50%; background:#C9B8E8; border:4px solid var(--ink); box-shadow:0 0 26px rgba(168,85,247,0.25); transform:scale(0.8); z-index:2; }
   .beat.active .breath-circle{ animation:breathe 9s ease-in-out infinite; }
@@ -740,7 +769,6 @@
     .pray-center-text{ font-size:clamp(30px, 4vh, 44px); }
   }
 
-  /* BIBLE COVER */
   .leather-cover{ flex:1; display:flex; border-radius:22px; overflow:hidden; min-height:0; position:relative; border:4px solid var(--ink); box-shadow:6px 6px 0 var(--ink); background: radial-gradient(circle at 28% 18%, rgba(255,255,255,0.10), transparent 42%), repeating-linear-gradient(135deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 7px), linear-gradient(160deg, #7a4a2c, #452817); width:100%; }
   .leather-spine{ width:22px; background:rgba(0,0,0,0.38); flex-shrink:0; border-right:2px solid rgba(0,0,0,0.3); }
   .leather-cover-inner{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap: clamp(14px, 2.5vh, 26px); padding:26px; color:#F1E3D3; text-align:center; }
@@ -769,7 +797,6 @@
     .cover-note{ font-size:20px; max-width:540px; }
   }
 
-  /* PASSAGE SCROLL WRAP */
   .passage-scroll-wrap{ 
     flex:1; 
     position:relative; 
@@ -820,7 +847,6 @@
   .w.hl-purple{ background: rgba(168, 85, 247, 0.35); font-weight: 700; }
   .w.hl-pink{ background: rgba(244, 63, 94, 0.40); font-weight: 700; }
 
-  /* VERSE PICK SCROLL */
   .verse-pick-list{ 
     overflow-y:auto; 
     -webkit-overflow-scrolling:touch; 
@@ -849,7 +875,6 @@
     .verse-tile .vtext{ font-size:clamp(25px, 2vw, 32px); line-height:1.85; }
   }
 
-  /* VOCAB REVIEW */
   .review-scroll{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; position:relative; z-index:2; padding:4px 8px 12px 4px; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-direction:column; justify-content:flex-start; }
   .glossary-panel{
     background:#FFF;
@@ -911,7 +936,6 @@
     .research-pill{ font-size:15px; padding:10px 18px; }
   }
 
-  /* GLOSSARY SIDE PANEL */
   .glossary-drawer{ display: none; }
   @media (min-width: 768px) {
     .glossary-drawer.gd-visible{ display: block; }
@@ -995,7 +1019,6 @@
   .gd-row.revealed .gd-row-def{ max-height: 240px; padding: 10px 14px 14px; }
   .glossary-drawer-body .review-section-header{ margin-top: 4px; }
 
-  /* CHAR COACHING */
   .coaching-scene {
     display: flex;
     flex-direction: column;
@@ -1041,7 +1064,6 @@
     .circle-hero.coaching-circle .blank-input{ font-size:clamp(30px, 3.8vh, 38px); }
   }
 
-  /* FINAL LIVE PROMPT */
   .final-live-wrap {
     flex: 1;
     display: flex;
@@ -1382,7 +1404,7 @@ const beats = [
     html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
             <div class="intro-top-title">MS Hang</div>
-            ${kw([["MARK"],["2"]],'xl')}
+            ${kw([["MARK", "2"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
@@ -1858,6 +1880,17 @@ function checkPassageScroll(){
 }
 
 function gatherGlossaryData(){
+  if (devMode) {
+    const defined = Object.entries(defs).map(([key, def]) => {
+      const phraseMatch = phrases.find(p => p.key === key);
+      const label = phraseMatch 
+        ? phraseMatch.words.join(' ') 
+        : key.charAt(0).toUpperCase() + key.slice(1);
+      return { word: label, def };
+    });
+    return { defined, undefinedWords: [] };
+  }
+
   const defined = [];
   const undefinedWords = [];
   const seen = new Set();
@@ -2186,6 +2219,8 @@ function enterDevMode(){
   document.getElementById('devBubblesBar').style.display = 'flex';
   updateHeaderMeta();
   renderDevBubbles();
+  renderGlossaryDrawer();
+  if (beats[state.index].id === 'vocab-review') renderVocabReview();
 }
 
 function exitDevMode(){
@@ -2194,6 +2229,8 @@ function exitDevMode(){
   document.getElementById('devBubblesBar').style.display = 'none';
   updateHeaderMeta();
   closeDevNotesPanel();
+  renderGlossaryDrawer();
+  if (beats[state.index].id === 'vocab-review') renderVocabReview();
 }
 
 function renderDevBubbles(){
