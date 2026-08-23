@@ -527,14 +527,26 @@
   .bookmap-prompt { font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(24px, 5.4vw, 36px); text-align:center; flex-shrink:0; }
   .bookmap-prompt .locator-emphasis { display:inline-block; }
 
+  .tp-card { position:absolute; box-sizing:border-box; background:var(--tp-color); border:2.5px solid var(--ink); border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:24px; cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform .12s ease, opacity .5s ease, filter .5s ease; }
+  .tp-card:active { transform:scale(.98); }
+  .tp-card.shake { animation: shakeX .45s; }
+  .tp-card.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
+  .tp-card.dimmed { opacity:.4; pointer-events:none; filter:grayscale(.3); }
+  .tp-check { position:absolute; top:14px; right:14px; width:30px; height:30px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:15px; }
+  .tp-card.found .tp-check { display:flex; }
+  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:#FFF; background:rgba(0,0,0,.25); padding:5px 12px; border-radius:100px; font-size:clamp(11px, 1.4vw, 14px); }
+  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(24px, 4vw, 38px); text-align:center; text-shadow:0 1px 3px rgba(0,0,0,.35); }
+  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:clamp(13px, 1.6vw, 16px); text-align:center; opacity:.92; max-width:80%; line-height:1.4; }
+
   .sec-tile { position:absolute; box-sizing:border-box; cursor:pointer; background:var(--sec-color); border:2.5px solid var(--ink); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px; -webkit-tap-highlight-color:transparent; transition:transform .12s ease; }
+  .sec-tile.unveil-in { opacity:0; transform:scale(.82); }
+  .sec-tile.unveil-in.show { opacity:1; transform:scale(1); transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
+  .sec-tile.collapsing { opacity:0; transform:scale(.8); transition:opacity .35s ease, transform .35s ease; pointer-events:none; }
   .sec-tile:active { transform:scale(.97); }
   .sec-tile.shake { animation: shakeX .45s; }
   .sec-tile.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
   .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(16px, 2.4vw, 27px); text-align:center; line-height:1.15; text-shadow:0 1px 3px rgba(0,0,0,.35); }
   .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:clamp(10px, 1.3vw, 14px); text-align:center; opacity:.92; margin-top:6px; line-height:1.35; max-width:92%; }
-  .sec-check { position:absolute; top:9px; right:9px; width:26px; height:26px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:13px; }
-  .sec-tile.found .sec-check { display:flex; }
   .testament-side-label { position:absolute; left:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
   .testament-side-label span { writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(9px, 1.1vw, 12px); text-transform:uppercase; letter-spacing:1px; color:var(--ink); opacity:.65; white-space:nowrap; }
 
@@ -558,7 +570,10 @@
 
   .book-reveal-tile { position:absolute; box-sizing:border-box; background:var(--sec-color); border:1.5px solid var(--paper); border-radius:5px; display:flex; align-items:center; justify-content:center; padding:2px; overflow:hidden; opacity:0; transform:scale(.55); transition:opacity .35s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
   .book-reveal-tile.show { opacity:1; transform:scale(1); }
+  .book-reveal-tile.quest-found { border:3px solid #FFF; box-shadow:0 0 0 1.5px var(--ink), 0 0 14px 2px rgba(195,245,60,.55); z-index:2; }
+  .brt-check { position:absolute; top:4px; right:4px; width:16px; height:16px; border-radius:50%; background:#FFF; color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:8px; }
   .brt-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(7px, 1.1vh, 11px); text-align:center; line-height:1.1; text-shadow:0 1px 2px rgba(0,0,0,.4); overflow-wrap:break-word; word-break:break-word; width:100%; }
+  .book-reveal-tile.quest-found .brt-name { font-weight:900; }
   @media (min-width: 768px) {
     .brt-name { font-size:clamp(10px, 1vw, 13px); }
   }
@@ -1693,7 +1708,7 @@ const BOOK_MAP_SECTIONS = [
 ];
 
 const BOOK_FIND_SEQUENCE = ['Genesis', 'Revelation', 'Daniel', 'Mark'];
-const bookMapState = { foundIndex: 0 };
+const bookMapState = { phase: 'testament', foundIndex: 0 };
 
 /* ---- SHARED JUSTIFIED BOOK LAYOUT --------------------------------------
    Both the find-game and the mosaic reveal use this: books flow
@@ -1877,8 +1892,6 @@ function getSectionBookItems(section){
   return items;
 }
 
-let currentSectionRects = [];
-
 /* Old Testament sections lock into exactly one row (two on mobile), New
    Testament sections lock into exactly one row (two on mobile) directly
    below — rather than letting the general-purpose row-count search pick
@@ -1944,14 +1957,8 @@ function layoutSectionBands(canvasId, tileFn, gap){
   return rects;
 }
 
-function getFoundSectionNames(){
-  return SECTION_FIND_SEQUENCE.slice(0, bookMapState.foundIndex);
-}
-
 function sectionTileHTML(r){
-  const isFound = getFoundSectionNames().includes(r.name);
-  return `<div class="sec-tile${isFound ? ' found' : ''}" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};" onclick="tapSectionTile(event, this)">
-            <div class="sec-check"><i class="fa-solid fa-check"></i></div>
+  return `<div class="sec-tile" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};" onclick="tapSectionTile(event, this)">
             <div class="sec-name">${r.name}</div>
             <div class="sec-desc">${r.desc}</div>
           </div>`;
@@ -1960,14 +1967,135 @@ function sectionTileHTML(r){
 function bookRevealTileHTML(r){
   const compact = isMobileViewport() || r.rw < 90;
   const displayName = compact ? (BOOK_ABBREV[r.name] || r.name) : r.name;
-  return `<div class="book-reveal-tile" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};">
+  const isQuestBook = BOOK_FIND_SEQUENCE.includes(r.name);
+  return `<div class="book-reveal-tile${isQuestBook ? ' quest-found' : ''}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};">
+            ${isQuestBook ? '<div class="brt-check"><i class="fa-solid fa-check"></i></div>' : ''}
             <div class="brt-name">${displayName}</div>
           </div>`;
 }
 
+function renderTestamentGateIntoCanvas(){
+  const canvas = document.getElementById('bookmapCanvas');
+  if (!canvas) return;
+  const frame = canvas.closest('.mosaic-frame');
+  if (!frame) return;
+  const w = frame.clientWidth;
+  const h = frame.clientHeight;
+  if (!w || !h) return;
+  const gap = 10;
+  const bandH = (h - gap) / 2;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  canvas.innerHTML = `
+    <div class="tp-card" data-testament="Old" style="left:0px; top:0px; width:${w}px; height:${bandH.toFixed(1)}px; --tp-color:#C97B4A;" onclick="tapTestamentGate(event, this)">
+      <div class="tp-check"><i class="fa-solid fa-check"></i></div>
+      <div class="tp-badge">39 Books &middot; 1000+ yrs</div>
+      <div class="tp-name">Old Testament</div>
+      <div class="tp-desc">The Hebrew scriptures pointing toward the coming Messiah</div>
+    </div>
+    <div class="tp-card" data-testament="New" style="left:0px; top:${(bandH + gap).toFixed(1)}px; width:${w}px; height:${bandH.toFixed(1)}px; --tp-color:#38BDF8;" onclick="tapTestamentGate(event, this)">
+      <div class="tp-check"><i class="fa-solid fa-check"></i></div>
+      <div class="tp-badge">27 Books &middot; ~40 yrs</div>
+      <div class="tp-name">New Testament</div>
+      <div class="tp-desc">Jesus's life, teaching, resurrection, and the birth of the church</div>
+    </div>
+  `;
+}
+
+function computeSingleTestamentLayout(testament, containerW, containerH, gap, rows){
+  const sections = BOOK_MAP_SECTIONS.filter(s => s.testament === testament);
+  const items = getSectionItemsFor(sections);
+  const rowGroups = partitionIntoRows(items, rows);
+  const { rects, totalHeight } = layoutRowsFullWidth(rowGroups, containerW, gap);
+  const scaleY = totalHeight > 0 ? containerH / totalHeight : 1;
+  return rects.map(r => ({ ...r, ry: r.ry * scaleY, rh: r.rh * scaleY }));
+}
+
+/* Replaces a single testament band with its own section cards, fading
+   and scaling them in from within that same bounding box — so it reads
+   as that band "unveiling" its contents rather than the whole canvas
+   jumping to a new screen. */
+function unveilBandIntoSections(bandEl, testament){
+  const canvas = document.getElementById('bookmapCanvas');
+  if (!canvas || !bandEl) return;
+  const bandRect = {
+    rx: parseFloat(bandEl.style.left),
+    ry: parseFloat(bandEl.style.top),
+    rw: parseFloat(bandEl.style.width),
+    rh: parseFloat(bandEl.style.height)
+  };
+  const rows = isMobileViewport() ? 2 : 1;
+  const rects = computeSingleTestamentLayout(testament, bandRect.rw, bandRect.rh, 6, rows)
+    .map(r => ({ ...r, rx: r.rx + bandRect.rx, ry: r.ry + bandRect.ry }));
+
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = rects.map(r => sectionTileHTML(r)).join('');
+  const newTiles = Array.from(wrapper.children);
+  newTiles.forEach(t => {
+    t.classList.add('unveil-in');
+    t.style.transformOrigin = 'center';
+    canvas.appendChild(t);
+  });
+  bandEl.remove();
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    newTiles.forEach((t, i) => setTimeout(() => t.classList.add('show'), i * 40));
+  }));
+}
+
+function currentTargetBook(){
+  return BOOK_FIND_SEQUENCE[bookMapState.foundIndex];
+}
+
+/* Puts the CURRENT target book's testament into the "already answered
+   and unveiled" state without needing a tap — used to rebuild the view
+   on resize, mid-round. */
+function showSectionPhaseForCurrentBook(){
+  const book = currentTargetBook();
+  if (!book) return;
+  const testament = getSectionForBook(book).testament;
+  renderTestamentGateIntoCanvas();
+  const canvas = document.getElementById('bookmapCanvas');
+  if (!canvas) return;
+  const otherTestament = testament === 'Old' ? 'New' : 'Old';
+  const correctBand = canvas.querySelector(`.tp-card[data-testament="${testament}"]`);
+  const otherBand = canvas.querySelector(`.tp-card[data-testament="${otherTestament}"]`);
+  if (otherBand) otherBand.classList.add('dimmed');
+  if (correctBand) {
+    correctBand.classList.add('found');
+    unveilBandIntoSections(correctBand, testament);
+  }
+}
+
+function tapTestamentGate(e, el){
+  e.stopPropagation();
+  const book = currentTargetBook();
+  const correctTestament = getSectionForBook(book).testament;
+  if (el.dataset.testament === correctTestament) {
+    el.classList.add('found');
+    celebrateFind(el);
+    bookMapState.phase = 'section';
+
+    const canvas = document.getElementById('bookmapCanvas');
+    const otherBand = canvas ? Array.from(canvas.querySelectorAll('.tp-card')).find(c => c !== el) : null;
+    if (otherBand) otherBand.classList.add('dimmed');
+
+    setTimeout(() => {
+      unveilBandIntoSections(el, correctTestament);
+      const promptEl = document.getElementById('bookmapPrompt');
+      if (promptEl) promptEl.innerHTML = `Which section is <span class="locator-emphasis" id="bookmapPromptTarget">${book}</span> in?`;
+    }, 700);
+
+    updateNavShell();
+  } else {
+    el.classList.add('shake');
+    setTimeout(() => el.classList.remove('shake'), 450);
+  }
+}
+
 function renderBookMapHTML(){
   return `<div class="full-page bookmap-wrap">
-            <div class="bookmap-prompt" id="bookmapPrompt">Which section is <span class="locator-emphasis" id="bookmapPromptTarget">${BOOK_FIND_SEQUENCE[0]}</span> in?</div>
+            <div class="bookmap-prompt" id="bookmapPrompt">What testament is <span class="locator-emphasis" id="bookmapPromptTarget">${BOOK_FIND_SEQUENCE[0]}</span> in?</div>
             <div class="mosaic-frame"><div class="mosaic-canvas" id="bookmapCanvas"></div></div>
           </div>`;
 }
@@ -2021,13 +2149,29 @@ function celebrateFind(el){
 
 function revealAllBooksInSections(){
   const canvas = document.getElementById('bookmapCanvas');
-  if (!canvas || !currentSectionRects.length) return;
+  const frame = canvas ? canvas.closest('.mosaic-frame') : null;
+  if (!canvas || !frame) return;
+  const w = frame.clientWidth;
+  const h = frame.clientHeight;
+  if (!w || !h) return;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+
   const canvasRect = canvas.getBoundingClientRect();
   spawnConfetti(canvasRect.left + canvasRect.width / 2, canvasRect.top + canvasRect.height / 2, 44, { min: 120, max: 340 });
   playChime([523.25, 659.25, 783.99, 1046.5]);
 
-  let html = '';
-  currentSectionRects.forEach(sr => {
+  // Recompute a fresh, unified section layout for this moment — rather
+  // than reusing wherever each section happened to land across the four
+  // independent quest rounds — so the whole-Bible reveal always comes
+  // out clean and symmetrical (one OT row, one NT row) regardless of
+  // the order books were found in.
+  const rowsPerTestament = isMobileViewport() ? 2 : 1;
+  const labelWidth = isMobileViewport() ? TESTAMENT_LABEL_WIDTH_MOBILE : TESTAMENT_LABEL_WIDTH_DESKTOP;
+  const { rects: sectionRects, bands } = computeSectionBandLayout(w, h, 6, rowsPerTestament, labelWidth);
+
+  let html = bands.map(b => testamentSideLabelHTML(b, labelWidth)).join('');
+  sectionRects.forEach(sr => {
     const section = BOOK_MAP_SECTIONS.find(s => s.title === sr.name);
     const items = getSectionBookItems(section);
     const { rects } = computeFullRowLayout(items, sr.rw, sr.rh, 3);
@@ -2052,10 +2196,15 @@ function tapSectionTile(e, el){
     celebrateFind(el);
     bookMapState.foundIndex++;
     if (bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
+      bookMapState.phase = 'testament';
       const nextBook = BOOK_FIND_SEQUENCE[bookMapState.foundIndex];
-      const promptTargetEl = document.getElementById('bookmapPromptTarget');
-      if (promptTargetEl) promptTargetEl.textContent = nextBook;
+      setTimeout(() => {
+        renderTestamentGateIntoCanvas();
+        const promptEl = document.getElementById('bookmapPrompt');
+        if (promptEl) promptEl.innerHTML = `What testament is <span class="locator-emphasis" id="bookmapPromptTarget">${nextBook}</span> in?`;
+      }, 900);
     } else {
+      bookMapState.phase = 'done';
       const promptEl = document.getElementById('bookmapPrompt');
       if (promptEl) promptEl.innerHTML = 'All four found! Nice work.';
       setTimeout(() => {
@@ -2081,7 +2230,7 @@ const beats = [
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
-  /* 1. FIND THE BOOK MAP (data-driven, see BOOK_MAP_SECTIONS / BOOK_FIND_SEQUENCE above) */
+  /* 1. FIND THE BOOK MAP (starts as a testament gate, then unveils the section board — see BOOK_MAP_SECTIONS / BOOK_FIND_SEQUENCE above) */
   { id:'book-map', type:'input', blockTap:true, isInteractive:true, clue:'Tap the highlighted book to continue', bgGrad:'var(--bg-cream)', text:'dark',
     html: renderBookMapHTML() },
 
@@ -2296,7 +2445,7 @@ function updateNavShell(){
   prevBtn.classList.toggle('disabled', state.index === 0);
 
   let ready = false;
-  if (b.id === 'book-map') ready = bookMapState.foundIndex >= BOOK_FIND_SEQUENCE.length;
+  if (b.id === 'book-map') ready = bookMapState.phase === 'done';
   else if (b.id === 'vocab-scan') ready = isVocabComplete();
   else if (b.id === 'char-verse-pick') ready = state.charVerse !== null;
   else if (b.id === 'char-coaching') ready = Boolean(state.trait && state.trait.trim());
@@ -2309,13 +2458,17 @@ function updateNavShell(){
 
   if (b.id === 'book-map') {
     island.style.display = 'flex';
-    const isDone = bookMapState.foundIndex >= BOOK_FIND_SEQUENCE.length;
-    const remaining = BOOK_FIND_SEQUENCE.length - bookMapState.foundIndex;
-    island.innerHTML = `
-      <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-        ${isDone ? '<i class="fa-solid fa-check"></i> Continue' : `Find ${remaining} more book${remaining === 1 ? '' : 's'}`}
-      </button>
-    `;
+    if (bookMapState.phase === 'testament') {
+      island.innerHTML = `<button class="action-gate-pill" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">Pick Old or New Testament</button>`;
+    } else {
+      const isDone = bookMapState.phase === 'done';
+      const remaining = BOOK_FIND_SEQUENCE.length - bookMapState.foundIndex;
+      island.innerHTML = `
+        <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
+          ${isDone ? '<i class="fa-solid fa-check"></i> Continue' : `Find ${remaining} more book${remaining === 1 ? '' : 's'}`}
+        </button>
+      `;
+    }
   } else if (b.id === 'vocab-scan') {
     island.style.display = 'flex';
     const isDone = isVocabComplete();
@@ -2397,7 +2550,15 @@ function renderBeat(i){
   updateNavShell();
 
   if (b.id === 'book-map') {
-    requestAnimationFrame(() => requestAnimationFrame(() => { currentSectionRects = layoutSectionBands('bookmapCanvas', sectionTileHTML, 6); }));
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (bookMapState.phase === 'section') {
+        showSectionPhaseForCurrentBook();
+      } else if (bookMapState.phase === 'done') {
+        revealAllBooksInSections();
+      } else {
+        renderTestamentGateIntoCanvas();
+      }
+    }));
   }
 
   if (b.id === 'char-coaching') {
@@ -2744,6 +2905,10 @@ function triggerGateNavHint(hintId){
 function handleForwardAttempt(){
   const b = beats[state.index];
   if (b.blockTap) {
+    if (b.id === 'book-map' && bookMapState.phase === 'testament') {
+      triggerPillMessage('bookmapActionPill', 'Pick a Testament');
+      return;
+    }
     if (b.id === 'book-map' && bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
       triggerPillMessage('bookmapActionPill', `Find ${BOOK_FIND_SEQUENCE[bookMapState.foundIndex]}`);
       return;
@@ -3212,8 +3377,12 @@ applyPassageFontScale();
 renderBeat(0);
 window.addEventListener('resize', () => {
   const cur = beats[state.index] && beats[state.index].id;
-  if (cur === 'book-map' && bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
-    currentSectionRects = layoutSectionBands('bookmapCanvas', sectionTileHTML, 6);
+  if (cur === 'book-map') {
+    if (bookMapState.phase === 'testament') {
+      renderTestamentGateIntoCanvas();
+    } else if (bookMapState.phase === 'section') {
+      showSectionPhaseForCurrentBook();
+    }
   }
 });
 
