@@ -268,6 +268,8 @@
   .rail-font-btn:disabled{ opacity: 0.2; cursor: default; }
   .rail-font-btn:disabled:active{ transform: none; }
   @media (max-width: 767px) {
+    /* Mobile: keep just the two colors that match the highlighting instructions
+       (yellow = confusing, pink/red = repeated). Font size controls stay hidden. */
     .rail-swatch-btn[data-color="lime"],
     .rail-swatch-btn[data-color="purple"],
     .rail-font-btn { display: none; }
@@ -375,11 +377,12 @@
     flex-direction: column;
   }
   .beat{ 
+    --beat-pad-x: clamp(20px, 4vw, 60px);
     position:absolute; 
     inset:0; 
     display:flex; 
     flex-direction:column; 
-    padding: clamp(10px, 2vh, 24px) clamp(20px, 4vw, 60px) clamp(70px, 10vh, 85px); 
+    padding: clamp(10px, 2vh, 24px) var(--beat-pad-x) clamp(70px, 10vh, 85px); 
     opacity:0; 
     transform:translateY(10px) scale(0.98); 
     transition:opacity .25s ease, transform .25s ease; 
@@ -455,9 +458,6 @@
     flex-direction: column;
     min-height: 0;
     justify-content: center;
-    overscroll-behavior-y: contain;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
   }
 
   .testament-folder-deck {
@@ -522,6 +522,49 @@
   .folder-deck-card.incorrect .c-desc { color: #FFF !important; opacity: 0.95; }
   .folder-deck-card.incorrect .c-badge { background: #FFF !important; color: var(--ink) !important; }
   .folder-deck-card.shake { animation: shakeX .45s; }
+
+  .bookmap-wrap { gap:clamp(8px, 1.5vh, 14px); }
+  .bookmap-prompt { font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(24px, 5.4vw, 36px); text-align:center; flex-shrink:0; }
+  .bookmap-prompt .locator-emphasis { display:inline-block; }
+
+  .sec-tile { position:absolute; box-sizing:border-box; cursor:pointer; background:var(--sec-color); border:2.5px solid var(--ink); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px; -webkit-tap-highlight-color:transparent; transition:transform .12s ease; }
+  .sec-tile:active { transform:scale(.97); }
+  .sec-tile.shake { animation: shakeX .45s; }
+  .sec-tile.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
+  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(16px, 2.4vw, 27px); text-align:center; line-height:1.15; text-shadow:0 1px 3px rgba(0,0,0,.35); }
+  .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:clamp(10px, 1.3vw, 14px); text-align:center; opacity:.92; margin-top:6px; line-height:1.35; max-width:92%; }
+  .sec-check { position:absolute; top:9px; right:9px; width:26px; height:26px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:13px; }
+  .sec-tile.found .sec-check { display:flex; }
+  .testament-side-label { position:absolute; left:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+  .testament-side-label span { writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(9px, 1.1vw, 12px); text-transform:uppercase; letter-spacing:1px; color:var(--ink); opacity:.65; white-space:nowrap; }
+
+  .sec-tile.celebrate { animation: tileBounceFlat .55s cubic-bezier(.34,1.56,.64,1), glowPulse .7s ease-out; }
+  @keyframes tileBounceFlat {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.06); }
+    60% { transform: scale(0.97); }
+    100% { transform: scale(1); }
+  }
+  @keyframes glowPulse {
+    0% { box-shadow: 0 0 0 0 rgba(195,245,60,.95), 0 0 0 2px #FFF; }
+    45% { box-shadow: 0 0 0 12px rgba(195,245,60,.4), 0 0 0 2px #FFF; }
+    100% { box-shadow: 0 0 0 26px rgba(195,245,60,0), 0 0 0 2px #FFF; }
+  }
+  .confetti-bit { position:fixed; width:8px; height:8px; border-radius:2px; pointer-events:none; z-index:9999; top:0; left:0; transform:translate(-50%,-50%); animation: confettiPop .7s ease-out forwards; }
+  @keyframes confettiPop {
+    0% { transform:translate(-50%,-50%) rotate(0deg) scale(1); opacity:1; }
+    100% { transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(.4); opacity:0; }
+  }
+
+  .book-reveal-tile { position:absolute; box-sizing:border-box; background:var(--sec-color); border:1.5px solid var(--paper); border-radius:5px; display:flex; align-items:center; justify-content:center; padding:2px; overflow:hidden; opacity:0; transform:scale(.55); transition:opacity .35s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
+  .book-reveal-tile.show { opacity:1; transform:scale(1); }
+  .brt-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(7px, 1.1vh, 11px); text-align:center; line-height:1.1; text-shadow:0 1px 2px rgba(0,0,0,.4); overflow-wrap:break-word; word-break:break-word; width:100%; }
+  @media (min-width: 768px) {
+    .brt-name { font-size:clamp(10px, 1vw, 13px); }
+  }
+
+  .mosaic-frame { flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; }
+  .mosaic-canvas { position:relative; margin:0 auto; }
 
   @media (max-width: 767px) {
     .sketch-lead-title { font-size: clamp(19px, 5.6vw, 25px); margin-bottom: 6px; }
@@ -889,8 +932,6 @@
   .passage-scroll{ 
     overflow-y:auto; 
     -webkit-overflow-scrolling:touch; 
-    overscroll-behavior-y: contain;
-    touch-action: pan-y;
     flex:1; 
     padding:6px 20px 30px 0; 
     color:var(--ink); 
@@ -931,8 +972,6 @@
   .verse-pick-list{ 
     overflow-y:auto; 
     -webkit-overflow-scrolling:touch; 
-    overscroll-behavior-y: contain;
-    touch-action: pan-y;
     flex:1; 
     min-height:0; 
     position:relative; 
@@ -958,22 +997,7 @@
     .verse-tile .vtext{ font-size:calc(clamp(25px, 2vw, 32px) * var(--char-font-scale, 1)); line-height:1.85; }
   }
 
-  .review-scroll{ 
-    flex:1; 
-    overflow-y:auto; 
-    -webkit-overflow-scrolling:touch; 
-    overscroll-behavior-y: contain;
-    touch-action: pan-y;
-    position:relative; 
-    z-index:2; 
-    padding:4px 8px 12px 4px; 
-    width:100%; 
-    max-width:1100px; 
-    margin:0 auto; 
-    display:flex; 
-    flex-direction:column; 
-    justify-content:flex-start; 
-  }
+  .review-scroll{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; position:relative; z-index:2; padding:4px 8px 12px 4px; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-direction:column; justify-content:flex-start; }
   .glossary-panel{
     background:#FFF;
     border:3.5px solid var(--ink);
@@ -1096,16 +1120,7 @@
     flex-shrink: 0;
   }
   .glossary-drawer-close{ background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); padding:4px; line-height:1; }
-  .glossary-drawer-body{ 
-    flex: 1; 
-    overflow-y: auto; 
-    -webkit-overflow-scrolling: touch; 
-    overscroll-behavior-y: contain;
-    touch-action: pan-y;
-    display: flex; 
-    flex-direction: column; 
-    gap: 8px; 
-  }
+  .glossary-drawer-body{ flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; gap: 8px; }
   .gd-empty{ font-family:'Inter', sans-serif; font-size:14px; opacity:.6; line-height:1.5; }
   .gd-row{ border: 2.5px solid var(--ink); border-radius: 12px; overflow: hidden; flex-shrink: 0; }
   .gd-row-term{
@@ -1658,6 +1673,404 @@ function versePickHTML(){
     </div>`).join('');
 }
 
+/* ---- "FIND THE BOOK" ROW LIST -----------------------------------------
+   All 66 books laid out as 10 horizontal rows (one per canonical
+   section, in Bible order), books left-to-right in their real order.
+   Mirrors flipping through an actual table of contents. Tile width
+   scales to word count (a truer measure of length than chapter count).
+   BOOK_FIND_SEQUENCE controls which books students are prompted to
+   locate, and in what order. */
+const BOOK_MAP_SECTIONS = [
+  { title:'Torah (Law)', testament:'Old', color:'#C97B4A', desc:"The foundation of Israel's story and God's covenant", books:[['Genesis',50,38262],['Exodus',40,32685],['Leviticus',27,24541],['Numbers',36,32896],['Deuteronomy',34,28352]] },
+  { title:'History', testament:'Old', color:'#D98F3E', desc:"Israel's journey from conquest to exile", books:[['Joshua',24,18854],['Judges',21,18966],['Ruth',4,2574],['1 Samuel',31,25048],['2 Samuel',24,20600],['1 Kings',22,24513],['2 Kings',25,23517],['1 Chronicles',29,20365],['2 Chronicles',36,26069],['Ezra',10,7440],['Nehemiah',13,10480],['Esther',10,5633]] },
+  { title:'Wisdom & Poetry', testament:'Old', color:'#B08968', desc:'Songs, proverbs, and honest reflections on life', books:[['Job',42,18098],['Psalms',150,42704],['Proverbs',31,15038],['Ecclesiastes',12,5579],['Song of Solomon',8,2658]] },
+  { title:'Prophets', testament:'Old', color:'#8B5E3C', desc:"God's messengers calling His people back — some short, some long", books:[['Isaiah',66,37036],['Jeremiah',52,42654],['Lamentations',5,3411],['Ezekiel',48,39401],['Daniel',12,11602],['Hosea',14,5174],['Joel',3,2033],['Amos',9,4216],['Obadiah',1,669],['Jonah',4,1320],['Micah',7,3152],['Nahum',3,1284],['Habakkuk',3,1475],['Zephaniah',3,1616],['Haggai',2,1130],['Zechariah',14,6443],['Malachi',4,1781]] },
+  { title:'Gospels', testament:'New', color:'#38BDF8', desc:"Jesus's life, death & resurrection", books:[['Matthew',28,23343],['Mark',16,14949],['Luke',24,25640],['John',21,18658]] },
+  { title:'Church History', testament:'New', color:'#22C55E', desc:"The Holy Spirit's arrival and church growth", books:[['Acts',28,24229]] },
+  { title:"Paul's Letters", testament:'New', color:'#A855F7', desc:'Helping churches live out the gospel', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430]] },
+  { title:'General Letters', testament:'New', color:'#F43F5E', desc:'Guidance for early believers', books:[['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
+  { title:'Prophecy', testament:'New', color:'#4338CA', desc:'A visionary look at how it all ends', books:[['Revelation',22,11952]] }
+];
+
+const BOOK_FIND_SEQUENCE = ['Genesis', 'Revelation', 'Daniel', 'Mark'];
+const bookMapState = { foundIndex: 0 };
+
+/* ---- SHARED JUSTIFIED BOOK LAYOUT --------------------------------------
+   Both the find-game and the mosaic reveal use this: books flow
+   left-to-right in real Bible order, wrapping into rows (like a photo
+   gallery), each row scaled to fill the width exactly. No sorting, so
+   canonical order — and the natural section clustering that comes with
+   it — stays intact. computeFitJustified binary-searches the row-height
+   parameter so the result fills the ACTUAL measured container on
+   screen (both width and height), rather than a fixed precomputed
+   aspect ratio that then gets letterboxed. */
+function justifiedLayout(items, containerWidth, targetRowHeight, gap){
+  const rows = [];
+  let row = [];
+  let sum = 0;
+  items.forEach(item => {
+    row.push(item);
+    sum += item.aspect;
+    const widthAtTarget = sum * targetRowHeight + (row.length - 1) * gap;
+    if (widthAtTarget >= containerWidth) {
+      rows.push({ items: row, sum });
+      row = []; sum = 0;
+    }
+  });
+  if (row.length) rows.push({ items: row, sum, isLast: true });
+
+  const rects = [];
+  let y = 0;
+  rows.forEach(r => {
+    const availW = containerWidth - (r.items.length - 1) * gap;
+    const rowHeight = r.isLast ? Math.min(targetRowHeight * 1.4, availW / r.sum) : availW / r.sum;
+    let x = 0;
+    const rowRects = [];
+    r.items.forEach(item => {
+      const w = item.aspect * rowHeight;
+      rowRects.push({ ...item, rx: x, ry: y, rw: w, rh: rowHeight });
+      x += w + gap;
+    });
+    if (r.isLast) {
+      const actualWidth = x - gap;
+      const offset = Math.max(0, (containerWidth - actualWidth) / 2);
+      rowRects.forEach(rr => { rr.rx += offset; });
+    }
+    rects.push(...rowRects);
+    y += rowHeight + gap;
+  });
+  return { rects, totalHeight: Math.max(0, y - gap) };
+}
+
+function computeFitJustified(items, containerW, containerH, gap){
+  let lo = 8, hi = Math.max(containerH * 1.5, 300);
+  let loR = justifiedLayout(items, containerW, lo, gap);
+  let hiR = justifiedLayout(items, containerW, hi, gap);
+  for (let i = 0; i < 40; i++){
+    const mid = (lo + hi) / 2;
+    const r = justifiedLayout(items, containerW, mid, gap);
+    if (r.totalHeight > containerH) { hi = mid; hiR = r; } else { lo = mid; loR = r; }
+  }
+  return Math.abs(loR.totalHeight - containerH) <= Math.abs(hiR.totalHeight - containerH) ? loR : hiR;
+}
+
+/* ---- FIXED ROW-COUNT PARTITION -----------------------------------------
+   Guarantees every row — including the last — ends flush with the full
+   container width, by construction rather than by stretching/centering
+   a leftover row after the fact. Given a target row count N, this splits
+   the items (in their fixed canonical order — never reordered) into N
+   contiguous groups whose weight sums are as balanced as possible (a
+   classic "minimize the largest partition sum" binary search), then
+   stretches each group to exactly fill the width. N itself comes from
+   trying a small range around whatever row count the free-flowing
+   justifiedLayout naturally settles on for this container, picking
+   whichever count lands total height closest to the actual available
+   height. */
+function partitionIntoRows(items, n){
+  const weights = items.map(it => it.aspect);
+  const totalWeight = weights.reduce((a, b) => a + b, 0);
+  const maxSingle = Math.max(...weights);
+
+  function countGroups(maxSum){
+    let groups = 1, cur = 0;
+    for (const w of weights){
+      if (cur > 0 && cur + w > maxSum) { groups++; cur = w; }
+      else { cur += w; }
+    }
+    return groups;
+  }
+
+  let lo = maxSingle, hi = totalWeight;
+  for (let i = 0; i < 60; i++){
+    const mid = (lo + hi) / 2;
+    if (countGroups(mid) <= n) hi = mid; else lo = mid;
+  }
+
+  const threshold = hi;
+  const rows = [];
+  let curRow = [];
+  let curSum = 0;
+  items.forEach(item => {
+    if (curRow.length > 0 && curSum + item.aspect > threshold) { rows.push(curRow); curRow = [item]; curSum = item.aspect; }
+    else { curRow.push(item); curSum += item.aspect; }
+  });
+  if (curRow.length) rows.push(curRow);
+  return rows;
+}
+
+function layoutRowsFullWidth(rows, containerW, gap){
+  const rects = [];
+  let y = 0;
+  rows.forEach(rowItems => {
+    const rowSum = rowItems.reduce((a, b) => a + b.aspect, 0);
+    const availW = containerW - (rowItems.length - 1) * gap;
+    const rowHeight = availW / rowSum;
+    let x = 0;
+    rowItems.forEach(item => {
+      const w = item.aspect * rowHeight;
+      rects.push({ ...item, rx: x, ry: y, rw: w, rh: rowHeight });
+      x += w + gap;
+    });
+    y += rowHeight + gap;
+  });
+  return { rects, totalHeight: Math.max(0, y - gap) };
+}
+
+function computeFullRowLayout(items, containerW, containerH, gap){
+  const { rects: greedyRects } = computeFitJustified(items, containerW, containerH, gap);
+  const baseN = new Set(greedyRects.map(r => r.ry.toFixed(1))).size;
+  let best = null;
+  for (let n = Math.max(1, baseN - 2); n <= baseN + 2; n++){
+    const rows = partitionIntoRows(items, n);
+    const { rects, totalHeight } = layoutRowsFullWidth(rows, containerW, gap);
+    const diff = Math.abs(totalHeight - containerH);
+    if (!best || diff < best.diff) best = { rects, totalHeight, diff };
+  }
+  return best;
+}
+
+const BOOK_ABBREV = {
+  'Genesis':'Gen', 'Exodus':'Exod', 'Leviticus':'Lev', 'Numbers':'Num', 'Deuteronomy':'Deut',
+  'Joshua':'Josh', 'Judges':'Judg', 'Ruth':'Ruth', '1 Samuel':'1 Sam', '2 Samuel':'2 Sam', '1 Kings':'1 Kgs', '2 Kings':'2 Kgs', '1 Chronicles':'1 Chr', '2 Chronicles':'2 Chr', 'Ezra':'Ezra', 'Nehemiah':'Neh', 'Esther':'Esth',
+  'Job':'Job', 'Psalms':'Ps', 'Proverbs':'Prov', 'Ecclesiastes':'Eccl', 'Song of Solomon':'Song',
+  'Isaiah':'Isa', 'Jeremiah':'Jer', 'Lamentations':'Lam', 'Ezekiel':'Ezek', 'Daniel':'Dan',
+  'Hosea':'Hos', 'Joel':'Joel', 'Amos':'Amos', 'Obadiah':'Obad', 'Jonah':'Jonah', 'Micah':'Mic', 'Nahum':'Nah', 'Habakkuk':'Hab', 'Zephaniah':'Zeph', 'Haggai':'Hag', 'Zechariah':'Zech', 'Malachi':'Mal',
+  'Matthew':'Matt', 'Mark':'Mark', 'Luke':'Luke', 'John':'John', 'Acts':'Acts',
+  'Romans':'Rom', '1 Corinthians':'1 Cor', '2 Corinthians':'2 Cor', 'Galatians':'Gal', 'Ephesians':'Eph', 'Philippians':'Phil', 'Colossians':'Col', '1 Thessalonians':'1 Thess', '2 Thessalonians':'2 Thess', '1 Timothy':'1 Tim', '2 Timothy':'2 Tim', 'Titus':'Titus', 'Philemon':'Phlm',
+  'Hebrews':'Heb', 'James':'Jas', '1 Peter':'1 Pet', '2 Peter':'2 Pet', '1 John':'1 John', '2 John':'2 John', '3 John':'3 John', 'Jude':'Jude', 'Revelation':'Rev'
+};
+
+function isMobileViewport(){ return window.innerWidth < 768; }
+
+function getSectionForBook(name){
+  return BOOK_MAP_SECTIONS.find(s => s.books.some(b => b[0] === name));
+}
+const SECTION_FIND_SEQUENCE = BOOK_FIND_SEQUENCE.map(name => getSectionForBook(name).title);
+
+const SECTION_SIZE_MIN_RATIO = 0.55; // smallest sections (Church History, Prophecy — 1 book each) still get a real footprint
+
+function getSectionItemsFor(sectionsSubset){
+  const items = sectionsSubset.map(s => ({
+    raw: Math.sqrt(s.books.reduce((sum, b) => sum + b[1], 0)),
+    name: s.title,
+    testament: s.testament,
+    color: s.color,
+    desc: s.desc
+  }));
+  const rawAvg = items.reduce((a, b) => a + b.raw, 0) / items.length;
+  const minRaw = rawAvg * SECTION_SIZE_MIN_RATIO;
+  items.forEach(b => { b.raw = Math.max(b.raw, minRaw); });
+  const avgWeight = items.reduce((a, b) => a + b.raw, 0) / items.length;
+  items.forEach(b => { b.aspect = b.raw / avgWeight; });
+  return items;
+}
+
+const BOOK_SIZE_MIN_RATIO = 0.85; // used when nesting a section's own books into the finale reveal
+
+function getSectionBookItems(section){
+  const items = section.books.map(([name, chapters, words]) => ({ raw: Math.sqrt(chapters), name, chapters, color: section.color }));
+  const rawAvg = items.reduce((a, b) => a + b.raw, 0) / items.length;
+  const minRaw = rawAvg * BOOK_SIZE_MIN_RATIO;
+  items.forEach(b => { b.raw = Math.max(b.raw, minRaw); });
+  const avgWeight = items.reduce((a, b) => a + b.raw, 0) / items.length;
+  items.forEach(b => { b.aspect = b.raw / avgWeight; });
+  return items;
+}
+
+let currentSectionRects = [];
+
+/* Old Testament sections lock into exactly one row (two on mobile), New
+   Testament sections lock into exactly one row (two on mobile) directly
+   below — rather than letting the general-purpose row-count search pick
+   however many rows it likes. Each row is still stretched to fill the
+   full width, and each section's width within its row still reflects
+   its relative size, so the OT/NT split reads as two clean bands while
+   keeping the same "rough ratios" feel as before. A narrow side label
+   per band ("Old Testament · 39 Books") replaces repeating the testament
+   name on every individual card, freeing room inside each card for its
+   description line instead. */
+const TESTAMENT_LABEL_WIDTH_DESKTOP = 44;
+const TESTAMENT_LABEL_WIDTH_MOBILE = 28;
+
+function computeSectionBandLayout(containerW, containerH, gap, rowsPerTestament, labelWidth){
+  const oldSections = BOOK_MAP_SECTIONS.filter(s => s.testament === 'Old');
+  const newSections = BOOK_MAP_SECTIONS.filter(s => s.testament === 'New');
+  const otItems = getSectionItemsFor(oldSections);
+  const ntItems = getSectionItemsFor(newSections);
+  const cardsW = Math.max(60, containerW - labelWidth - gap);
+
+  const otRows = partitionIntoRows(otItems, rowsPerTestament);
+  const ntRows = partitionIntoRows(ntItems, rowsPerTestament);
+
+  const otLayout = layoutRowsFullWidth(otRows, cardsW, gap);
+  const ntLayoutRaw = layoutRowsFullWidth(ntRows, cardsW, gap);
+  const ntRects = ntLayoutRaw.rects.map(r => ({ ...r, ry: r.ry + otLayout.totalHeight + gap }));
+  const naturalTotal = otLayout.totalHeight + gap + ntLayoutRaw.totalHeight;
+
+  const scaleY = naturalTotal > 0 ? containerH / naturalTotal : 1;
+  const offsetX = labelWidth + gap;
+  const rects = [...otLayout.rects, ...ntRects].map(r => ({ ...r, rx: r.rx + offsetX, ry: r.ry * scaleY, rh: r.rh * scaleY }));
+
+  const bands = [
+    { testament: 'Old', y: 0, h: otLayout.totalHeight * scaleY, bookCount: oldSections.reduce((s, x) => s + x.books.length, 0) },
+    { testament: 'New', y: (otLayout.totalHeight + gap) * scaleY, h: ntLayoutRaw.totalHeight * scaleY, bookCount: newSections.reduce((s, x) => s + x.books.length, 0) }
+  ];
+
+  return { rects, bands };
+}
+
+function testamentSideLabelHTML(band, labelWidth){
+  return `<div class="testament-side-label" style="top:${band.y.toFixed(1)}px; height:${band.h.toFixed(1)}px; width:${labelWidth}px;">
+            <span>${band.testament} Testament &middot; ${band.bookCount} Books</span>
+          </div>`;
+}
+
+function layoutSectionBands(canvasId, tileFn, gap){
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return [];
+  const frame = canvas.closest('.mosaic-frame');
+  if (!frame) return [];
+  const w = frame.clientWidth;
+  const h = frame.clientHeight;
+  if (!w || !h) return [];
+  const mobile = isMobileViewport();
+  const rowsPerTestament = mobile ? 2 : 1;
+  const labelWidth = mobile ? TESTAMENT_LABEL_WIDTH_MOBILE : TESTAMENT_LABEL_WIDTH_DESKTOP;
+  const { rects, bands } = computeSectionBandLayout(w, h, gap, rowsPerTestament, labelWidth);
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  const labelsHtml = bands.map(b => testamentSideLabelHTML(b, labelWidth)).join('');
+  canvas.innerHTML = labelsHtml + rects.map(tileFn).join('');
+  return rects;
+}
+
+function getFoundSectionNames(){
+  return SECTION_FIND_SEQUENCE.slice(0, bookMapState.foundIndex);
+}
+
+function sectionTileHTML(r){
+  const isFound = getFoundSectionNames().includes(r.name);
+  return `<div class="sec-tile${isFound ? ' found' : ''}" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};" onclick="tapSectionTile(event, this)">
+            <div class="sec-check"><i class="fa-solid fa-check"></i></div>
+            <div class="sec-name">${r.name}</div>
+            <div class="sec-desc">${r.desc}</div>
+          </div>`;
+}
+
+function bookRevealTileHTML(r){
+  const compact = isMobileViewport() || r.rw < 90;
+  const displayName = compact ? (BOOK_ABBREV[r.name] || r.name) : r.name;
+  return `<div class="book-reveal-tile" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};">
+            <div class="brt-name">${displayName}</div>
+          </div>`;
+}
+
+function renderBookMapHTML(){
+  return `<div class="full-page bookmap-wrap">
+            <div class="bookmap-prompt" id="bookmapPrompt">Which section is <span class="locator-emphasis" id="bookmapPromptTarget">${BOOK_FIND_SEQUENCE[0]}</span> in?</div>
+            <div class="mosaic-frame"><div class="mosaic-canvas" id="bookmapCanvas"></div></div>
+          </div>`;
+}
+
+function spawnConfetti(cx, cy, count, spread){
+  const colors = ['#C3F53C', '#FFFFFF', '#FFD166', '#38BDF8', '#F43F5E', '#A855F7'];
+  for (let i = 0; i < count; i++){
+    const p = document.createElement('div');
+    p.className = 'confetti-bit';
+    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+    const dist = spread.min + Math.random() * (spread.max - spread.min);
+    const dx = Math.cos(angle) * dist;
+    const dy = Math.sin(angle) * dist;
+    p.style.left = cx + 'px';
+    p.style.top = cy + 'px';
+    p.style.background = colors[i % colors.length];
+    p.style.setProperty('--dx', dx + 'px');
+    p.style.setProperty('--dy', dy + 'px');
+    p.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 750);
+  }
+}
+
+function playChime(freqs){
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    freqs.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, now + i * 0.09);
+      gain.gain.linearRampToValueAtTime(0.18, now + i * 0.09 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.09 + 0.35);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(now + i * 0.09);
+      osc.stop(now + i * 0.09 + 0.4);
+    });
+  } catch (err) { /* audio not available, visuals still play */ }
+}
+
+function celebrateFind(el){
+  el.classList.add('celebrate');
+  setTimeout(() => el.classList.remove('celebrate'), 700);
+  const rect = el.getBoundingClientRect();
+  spawnConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 16, { min: 65, max: 140 });
+  playChime([523.25, 783.99]);
+}
+
+function revealAllBooksInSections(){
+  const canvas = document.getElementById('bookmapCanvas');
+  if (!canvas || !currentSectionRects.length) return;
+  const canvasRect = canvas.getBoundingClientRect();
+  spawnConfetti(canvasRect.left + canvasRect.width / 2, canvasRect.top + canvasRect.height / 2, 44, { min: 120, max: 340 });
+  playChime([523.25, 659.25, 783.99, 1046.5]);
+
+  let html = '';
+  currentSectionRects.forEach(sr => {
+    const section = BOOK_MAP_SECTIONS.find(s => s.title === sr.name);
+    const items = getSectionBookItems(section);
+    const { rects } = computeFullRowLayout(items, sr.rw, sr.rh, 3);
+    rects.forEach(br => {
+      html += bookRevealTileHTML({ ...br, rx: br.rx + sr.rx, ry: br.ry + sr.ry, color: section.color });
+    });
+  });
+  canvas.innerHTML = html;
+
+  const tiles = Array.from(canvas.querySelectorAll('.book-reveal-tile'));
+  tiles.forEach((tile, i) => {
+    setTimeout(() => { tile.classList.add('show'); }, i * 14);
+  });
+}
+
+function tapSectionTile(e, el){
+  e.stopPropagation();
+  if (bookMapState.foundIndex >= BOOK_FIND_SEQUENCE.length) return;
+  const targetSection = SECTION_FIND_SEQUENCE[bookMapState.foundIndex];
+  if (el.dataset.section === targetSection) {
+    el.classList.add('found');
+    celebrateFind(el);
+    bookMapState.foundIndex++;
+    if (bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
+      const nextBook = BOOK_FIND_SEQUENCE[bookMapState.foundIndex];
+      const promptTargetEl = document.getElementById('bookmapPromptTarget');
+      if (promptTargetEl) promptTargetEl.textContent = nextBook;
+    } else {
+      const promptEl = document.getElementById('bookmapPrompt');
+      if (promptEl) promptEl.innerHTML = 'All four found! Nice work.';
+      setTimeout(() => {
+        revealAllBooksInSections();
+        const p = document.getElementById('bookmapPrompt');
+        if (p) p.innerHTML = 'The whole Bible, all 66 books!';
+      }, 900);
+    }
+    updateNavShell();
+  } else {
+    el.classList.add('shake');
+    setTimeout(() => el.classList.remove('shake'), 450);
+  }
+}
+
 const beats = [
   /* 0. INTRO */
   { id:'intro', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
@@ -1668,64 +2081,11 @@ const beats = [
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
-  /* 1. LOCATE MARK: TESTAMENT (MANILA TABBED FOLDER) */
-  { id:'quest-testament', type:'input', blockTap:true, isInteractive:true, clue:'Pick an answer to continue', bgGrad:'var(--bg-expand)', text:'dark',
-    html:`<div class="sketch-lead-title tight quest-question-title" style="color: #FFFFFF;">What testament is the book of <span class="locator-emphasis">Mark</span> in?</div>
-          <div class="nt-folder-wrap">
-            <div class="nt-folder-tab">Bible · 66 Books</div>
-            <div class="nt-folder-body">
-              <div class="testament-folder-deck" id="questTestamentGrid">
-                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questTestamentGrid')">
-                  <span class="c-badge">39 books · 1000+ yrs</span>
-                  <span class="c-title">Old Testament</span>
-                  <span class="c-desc">The Hebrew scriptures pointing toward the coming promise of the Messiah.</span>
-                </div>
-                <div class="folder-deck-card" data-correct="true" onclick="questAnswer(event,this,'questTestamentGrid')">
-                  <span class="c-badge">27 books · ~40 yrs</span>
-                  <span class="c-title">New Testament</span>
-                  <span class="c-desc">Jesus's earthly life, teaching, resurrection, and the birth of the church.</span>
-                </div>
-              </div>
-            </div>
-          </div>` },
+  /* 1. FIND THE BOOK MAP (data-driven, see BOOK_MAP_SECTIONS / BOOK_FIND_SEQUENCE above) */
+  { id:'book-map', type:'input', blockTap:true, isInteractive:true, clue:'Tap the highlighted book to continue', bgGrad:'var(--bg-cream)', text:'dark',
+    html: renderBookMapHTML() },
 
-  /* 2. LOCATE MARK: SECTION (MANILA TABBED FOLDER) */
-  { id:'quest-section', type:'input', blockTap:true, isInteractive:true, clue:'Pick an answer to continue', bgGrad:'var(--bg-expand)', text:'dark',
-    html:`<div class="sketch-lead-title tight quest-question-title" style="color: #FFFFFF;">What section is the book of <span class="locator-emphasis">Mark</span> in?</div>
-          <div class="nt-folder-wrap">
-            <div class="nt-folder-tab">New Testament · 27 Books</div>
-            <div class="nt-folder-body">
-              <div class="folder-sections-deck" id="questSectionGrid">
-                <div class="folder-deck-card" data-correct="true" onclick="questAnswer(event,this,'questSectionGrid')">
-                  <span class="c-badge">4 Books</span>
-                  <span class="c-title">Gospels</span>
-                  <span class="c-desc">Jesus's life, death & resurrection</span>
-                </div>
-                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
-                  <span class="c-badge">1 Book</span>
-                  <span class="c-title">Church History</span>
-                  <span class="c-desc">The Holy Spirit's arrival and church growth</span>
-                </div>
-                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
-                  <span class="c-badge">13 Books</span>
-                  <span class="c-title">Paul's Letters</span>
-                  <span class="c-desc">Helping churches live out the gospel</span>
-                </div>
-                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
-                  <span class="c-badge">8 Books</span>
-                  <span class="c-title">General Letters</span>
-                  <span class="c-desc">Guidance for early believers</span>
-                </div>
-                <div class="folder-deck-card" data-correct="false" onclick="questAnswer(event,this,'questSectionGrid')">
-                  <span class="c-badge">1 Book</span>
-                  <span class="c-title">Prophecy</span>
-                  <span class="c-desc">A visionary look at how it all ends</span>
-                </div>
-              </div>
-            </div>
-          </div>` },
-
-  /* 3. RECAP */
+  /* 2. RECAP */
   { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-discover)', text:'dark', align:'start',
     html:`<div class="sketch-lead-title" style="margin-bottom:8px;">The Book of Mark</div>
           <div class="recap-context-grid">
@@ -1855,12 +2215,12 @@ const beats = [
 ];
 
 const sectionLabels = [
-  'Guide', 'Discover', 'Discover', 'Discover',
+  'Guide', 'Discover', 'Discover',
   'Prayer', 'Word Work', 'Word Work', 'Word Work',
   'Learn', 'Learn', 'Learn', 'Live'
 ];
 
-const sectionColorKeys = ['', 'discover', 'discover', 'discover', '', 'wordwork', 'wordwork', 'wordwork', 'learn', 'learn', 'live', 'live'];
+const sectionColorKeys = ['', 'discover', 'discover', '', 'wordwork', 'wordwork', 'wordwork', 'learn', 'learn', 'live', 'live'];
 
 function initNotches(){
   const layer = document.getElementById('notchesLayer');
@@ -1936,7 +2296,7 @@ function updateNavShell(){
   prevBtn.classList.toggle('disabled', state.index === 0);
 
   let ready = false;
-  if (b.id === 'quest-testament' || b.id === 'quest-section') ready = answeredBeats.has(state.index);
+  if (b.id === 'book-map') ready = bookMapState.foundIndex >= BOOK_FIND_SEQUENCE.length;
   else if (b.id === 'vocab-scan') ready = isVocabComplete();
   else if (b.id === 'char-verse-pick') ready = state.charVerse !== null;
   else if (b.id === 'char-coaching') ready = Boolean(state.trait && state.trait.trim());
@@ -1947,8 +2307,15 @@ function updateNavShell(){
   prevBtn.style.display = hideArrows ? 'none' : '';
   nextBtn.style.display = (hideArrows || isFinalSlide) ? 'none' : '';
 
-  if (b.id === 'quest-testament' || b.id === 'quest-section') {
-    island.style.display = 'none';
+  if (b.id === 'book-map') {
+    island.style.display = 'flex';
+    const isDone = bookMapState.foundIndex >= BOOK_FIND_SEQUENCE.length;
+    const remaining = BOOK_FIND_SEQUENCE.length - bookMapState.foundIndex;
+    island.innerHTML = `
+      <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
+        ${isDone ? '<i class="fa-solid fa-check"></i> Continue' : `Find ${remaining} more book${remaining === 1 ? '' : 's'}`}
+      </button>
+    `;
   } else if (b.id === 'vocab-scan') {
     island.style.display = 'flex';
     const isDone = isVocabComplete();
@@ -2028,6 +2395,10 @@ function renderBeat(i){
 
   updateHeaderMeta();
   updateNavShell();
+
+  if (b.id === 'book-map') {
+    requestAnimationFrame(() => requestAnimationFrame(() => { currentSectionRects = layoutSectionBands('bookmapCanvas', sectionTileHTML, 6); }));
+  }
 
   if (b.id === 'char-coaching') {
     const activeVerse = state.charVerse || PASSAGE_START_VERSE;
@@ -2373,9 +2744,9 @@ function triggerGateNavHint(hintId){
 function handleForwardAttempt(){
   const b = beats[state.index];
   if (b.blockTap) {
-    if ((b.id === 'quest-testament' || b.id === 'quest-section') && !answeredBeats.has(state.index)) { 
-      triggerGateNavHint('questNavHint'); 
-      return; 
+    if (b.id === 'book-map' && bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
+      triggerPillMessage('bookmapActionPill', `Find ${BOOK_FIND_SEQUENCE[bookMapState.foundIndex]}`);
+      return;
     }
     if (b.id === 'vocab-scan') {
       if (!state.wordTaps.length) {
@@ -2463,9 +2834,6 @@ document.addEventListener('keydown', (e) => {
   let lastSwipeTime = 0;
 
   stageEl.addEventListener('click', (e) => {
-    if (e.target.closest('.passage-scroll, .verse-pick-list, .review-scroll, .glossary-drawer-panel, .video-drawer-panel')) {
-      return;
-    }
     if (Date.now() - lastSwipeTime < 500) return;
     const b = beats[state.index];
     const rect = stageEl.getBoundingClientRect();
@@ -2481,10 +2849,6 @@ document.addEventListener('keydown', (e) => {
 
   let touchStartX = 0, touchStartY = 0, touchTracking = false;
   stageEl.addEventListener('touchstart', (e) => {
-    if (e.target.closest('.passage-scroll, .verse-pick-list, .review-scroll, .glossary-drawer-panel, .video-drawer-panel')) {
-      touchTracking = false;
-      return;
-    }
     if (e.touches.length !== 1) return;
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
@@ -2598,10 +2962,13 @@ function roundRectPath(ctx, x, y, w, h, r){
   ctx.arcTo(x + w, y, x + w, y + h, r);
   ctx.arcTo(x + w, y + h, x, y + h, r);
   ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y + x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
   ctx.closePath();
 }
 
+// Draws the Central Truth card directly with the Canvas 2D API (no DOM screenshotting).
+// This renders in a few ms, which keeps the tap's "user activation" alive long enough
+// for navigator.share() to be allowed to open the native share sheet.
 function drawCentralTruthCanvas(colorKey, verseNum, traitText){
   const size = 1000;
   const canvas = document.createElement('canvas');
@@ -2636,7 +3003,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
-  ctx.fillStyle = 'rgba(13,13,29,0.65)';
+  ctx.fillStyle = 'rgba(13,13,13,0.65)';
   ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
   ctx.fillText(`MARK 2:${verseNum}`, cx, cy - circleR * 0.42);
 
@@ -2691,7 +3058,7 @@ async function shareCentralTruthDirect(){
       URL.revokeObjectURL(url);
     }
   } catch(err){
-    if (err && err.name === 'AbortError') return;
+    if (err && err.name === 'AbortError') return; // user dismissed the native share sheet
     console.error('Direct share failed, falling back to the picker', err);
     openShareOverlay();
   }
@@ -2750,6 +3117,7 @@ async function confirmShareImage(){
       await navigator.share({ files: [file] });
       closeShareOverlay();
     } else {
+      // Device/browser doesn't support sharing image files — download as a last resort
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url; a.download = 'central-truth.png';
@@ -2835,13 +3203,20 @@ function tryCopyAllNotes(){
   } else {
     status.textContent = 'Clipboard unavailable — select the text above and copy manually.';
     status.className = 'dnp-status warn';
-    retryBtn.style.display = 'inline-block';
+    retryBtn.style.display = 'inline-file';
   }
 }
 
 initNotches();
 applyPassageFontScale();
 renderBeat(0);
+window.addEventListener('resize', () => {
+  const cur = beats[state.index] && beats[state.index].id;
+  if (cur === 'book-map' && bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
+    currentSectionRects = layoutSectionBands('bookmapCanvas', sectionTileHTML, 6);
+  }
+});
+
 </script>
 </body>
 </html>
