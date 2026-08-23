@@ -568,14 +568,13 @@
     100% { transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(.4); opacity:0; }
   }
 
-  .book-reveal-tile { position:absolute; box-sizing:border-box; background:var(--sec-color); border:1.5px solid var(--paper); border-radius:5px; display:flex; align-items:center; justify-content:center; padding:2px; overflow:hidden; opacity:0; transform:scale(.55); transition:opacity .35s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
-  .book-reveal-tile.show { opacity:1; transform:scale(1); }
-  .book-reveal-tile.quest-found { border:3px solid #FFF; box-shadow:0 0 0 1.5px var(--ink), 0 0 14px 2px rgba(195,245,60,.55); z-index:2; }
-  .brt-check { position:absolute; top:4px; right:4px; width:16px; height:16px; border-radius:50%; background:#FFF; color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:8px; }
-  .brt-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(7px, 1.1vh, 11px); text-align:center; line-height:1.1; text-shadow:0 1px 2px rgba(0,0,0,.4); overflow-wrap:break-word; word-break:break-word; width:100%; }
-  .book-reveal-tile.quest-found .brt-name { font-weight:900; }
+  .book-pill-wrap { position:absolute; box-sizing:border-box; display:flex; flex-wrap:wrap; align-content:flex-start; align-items:flex-start; gap:6px; padding:8px; overflow:hidden; border:2px dashed var(--sec-color); border-radius:14px; }
+  .book-pill { flex:0 0 auto; background:var(--sec-color); border:2px solid var(--ink); border-radius:100px; padding:5px 12px; display:flex; align-items:center; gap:5px; font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(10px, 1.3vw, 14px); white-space:nowrap; text-shadow:0 1px 2px rgba(0,0,0,.35); opacity:0; transform:scale(.65); transition:opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1); }
+  .book-pill.show { opacity:1; transform:scale(1); }
+  .book-pill.quest-found { background:#FFF; color:var(--ink); text-shadow:none; box-shadow:0 0 0 2px var(--ink), 0 0 10px 2px rgba(195,245,60,.6); font-weight:900; }
+  .book-pill.quest-found i { font-size:.85em; }
   @media (min-width: 768px) {
-    .brt-name { font-size:clamp(10px, 1vw, 13px); }
+    .book-pill { font-size:clamp(12px, 1vw, 16px); padding:6px 14px; }
   }
 
   .mosaic-frame { flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; }
@@ -1841,6 +1840,16 @@ function computeFullRowLayout(items, containerW, containerH, gap){
     const diff = Math.abs(totalHeight - containerH);
     if (!best || diff < best.diff) best = { rects, totalHeight, diff };
   }
+  // "Closest match" can still come out taller than the space actually
+  // available (e.g. a section with many books, like a full Prophets
+  // list, needing more rows than its allotted rect anticipated) — force
+  // a hard fit so nested content never overflows into whatever sits
+  // below it, same corrective scale used for the outer testament bands.
+  if (best.totalHeight > containerH && best.totalHeight > 0) {
+    const scaleY = containerH / best.totalHeight;
+    best.rects = best.rects.map(r => ({ ...r, ry: r.ry * scaleY, rh: r.rh * scaleY }));
+    best.totalHeight = containerH;
+  }
   return best;
 }
 
@@ -1964,14 +1973,15 @@ function sectionTileHTML(r){
           </div>`;
 }
 
-function bookRevealTileHTML(r){
-  const compact = isMobileViewport() || r.rw < 90;
-  const displayName = compact ? (BOOK_ABBREV[r.name] || r.name) : r.name;
-  const isQuestBook = BOOK_FIND_SEQUENCE.includes(r.name);
-  return `<div class="book-reveal-tile${isQuestBook ? ' quest-found' : ''}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};">
-            ${isQuestBook ? '<div class="brt-check"><i class="fa-solid fa-check"></i></div>' : ''}
-            <div class="brt-name">${displayName}</div>
-          </div>`;
+function bookPillHTML(name){
+  const abbrev = BOOK_ABBREV[name] || name;
+  const isQuestBook = BOOK_FIND_SEQUENCE.includes(name);
+  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}">${isQuestBook ? '<i class="fa-solid fa-check"></i>' : ''}${abbrev}</div>`;
+}
+
+function bookPillWrapHTML(sr, section){
+  const pills = section.books.map(([name]) => bookPillHTML(name)).join('');
+  return `<div class="book-pill-wrap" style="left:${sr.rx.toFixed(1)}px; top:${sr.ry.toFixed(1)}px; width:${sr.rw.toFixed(1)}px; height:${sr.rh.toFixed(1)}px; --sec-color:${section.color};">${pills}</div>`;
 }
 
 function renderTestamentGateIntoCanvas(){
@@ -2173,17 +2183,13 @@ function revealAllBooksInSections(){
   let html = bands.map(b => testamentSideLabelHTML(b, labelWidth)).join('');
   sectionRects.forEach(sr => {
     const section = BOOK_MAP_SECTIONS.find(s => s.title === sr.name);
-    const items = getSectionBookItems(section);
-    const { rects } = computeFullRowLayout(items, sr.rw, sr.rh, 3);
-    rects.forEach(br => {
-      html += bookRevealTileHTML({ ...br, rx: br.rx + sr.rx, ry: br.ry + sr.ry, color: section.color });
-    });
+    html += bookPillWrapHTML(sr, section);
   });
   canvas.innerHTML = html;
 
-  const tiles = Array.from(canvas.querySelectorAll('.book-reveal-tile'));
-  tiles.forEach((tile, i) => {
-    setTimeout(() => { tile.classList.add('show'); }, i * 14);
+  const pills = Array.from(canvas.querySelectorAll('.book-pill'));
+  pills.forEach((pill, i) => {
+    setTimeout(() => { pill.classList.add('show'); }, i * 14);
   });
 }
 
