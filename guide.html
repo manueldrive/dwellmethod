@@ -21,6 +21,7 @@
     --green:#22C55E;
 
     --bg-cream: linear-gradient(145deg, #f4f0e8 0%, #d8d2c7 100%);
+
     --bg-discover:  linear-gradient(145deg, #d2f860 0%, #a2e014 100%);
     --bg-wordwork:  linear-gradient(145deg, #fb5672 0%, #be123c 100%);
     --bg-expand:    linear-gradient(145deg, #e0f2fe 0%, #bae6fd 100%);
@@ -118,8 +119,13 @@
     opacity: 0.55;
     transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
   }
-  .app-viewport.tx-light .minimal-arrow-btn { color: #FFFFFF; }
-  .minimal-arrow-btn.disabled { opacity: 0.15; pointer-events: none; }
+  .app-viewport.tx-light .minimal-arrow-btn {
+    color: #FFFFFF;
+  }
+  .minimal-arrow-btn.disabled {
+    opacity: 0.15;
+    pointer-events: none;
+  }
   .minimal-arrow-btn.ready {
     opacity: 1;
     animation: chevronPulse 1.6s infinite ease-in-out;
@@ -321,7 +327,9 @@
   @keyframes notchPulse{ 0%,100%{ transform:translate(-50%, -50%) scale(1); } 50%{ transform:translate(-50%, -50%) scale(1.25); } }
 
   .story-meta{ display:flex; align-items:center; justify-content:space-between; font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; opacity:.85; padding-right: 16px; }
-  @media (max-width: 767px) { .story-meta { padding-right: 0; } }
+  @media (max-width: 767px) {
+    .story-meta { padding-right: 0; }
+  }
   .story-meta .meta-link-btn{
     background: none;
     border: none;
@@ -388,33 +396,33 @@
   }
   .tx-light .locator-emphasis{ background: #FFF; color: var(--ink); }
 
-  /* ==================== BOOK MAP ==================== */
+  /* ==================== LOCATOR QUEST GAME STYLES ==================== */
   .bookmap-wrap { gap:clamp(8px, 1.5vh, 14px); }
-  .bookmap-prompt { font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(24px, 5.4vw, 36px); text-align:center; flex-shrink:0; }
+  .bookmap-prompt { font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(18px, 4.4vh, 36px); text-align:center; flex-shrink:0; }
   .bookmap-prompt .locator-emphasis { display:inline-block; }
 
-  .tp-card { position:absolute; box-sizing:border-box; background:var(--tp-color); border:2.5px solid var(--ink); border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:24px; cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform .12s ease, opacity .5s ease, filter .5s ease; }
+  .tp-card { position:absolute; box-sizing:border-box; overflow:hidden; background:var(--tp-color); border:2.5px solid var(--ink); border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:calc(12px * var(--fit-scale, 1)); padding:calc(24px * var(--fit-scale, 1)); cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform .12s ease, opacity .5s ease, filter .5s ease; }
   .tp-card:active { transform:scale(.98); }
   .tp-card.shake { animation: shakeX .45s; }
   .tp-card.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
   .tp-card.dimmed { opacity:.4; pointer-events:none; filter:grayscale(.3); }
   .tp-check { position:absolute; top:14px; right:14px; width:30px; height:30px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:15px; }
   .tp-card.found .tp-check { display:flex; }
-  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:#FFF; background:rgba(0,0,0,.25); padding:5px 12px; border-radius:100px; font-size:clamp(11px, 1.4vw, 14px); }
-  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(24px, 4vw, 38px); text-align:center; text-shadow:0 1px 3px rgba(0,0,0,.35); }
-  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:clamp(13px, 1.6vw, 16px); text-align:center; opacity:.92; max-width:80%; line-height:1.4; }
+  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:#FFF; background:rgba(0,0,0,.25); padding:calc(5px * var(--fit-scale, 1)) calc(12px * var(--fit-scale, 1)); border-radius:100px; font-size:calc(clamp(11px, 1.4vw, 14px) * var(--fit-scale, 1)); white-space:nowrap; }
+  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(24px, 4vw, 38px) * var(--fit-scale, 1)); text-align:center; text-shadow:0 1px 3px rgba(0,0,0,.35); }
+  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:calc(clamp(13px, 1.6vw, 16px) * var(--fit-scale, 1)); text-align:center; opacity:.92; max-width:80%; line-height:1.4; }
 
-  .sec-tile { position:absolute; box-sizing:border-box; cursor:pointer; background:var(--sec-color); border:2.5px solid var(--ink); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px; -webkit-tap-highlight-color:transparent; transition:transform .12s ease; }
+  .sec-tile { position:absolute; box-sizing:border-box; overflow:hidden; cursor:pointer; background:var(--sec-color); border:2.5px solid var(--ink); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:calc(10px * var(--fit-scale, 1)); -webkit-tap-highlight-color:transparent; transition:transform .12s ease; }
   .sec-tile.unveil-in { opacity:0; transform:scale(.82); }
   .sec-tile.unveil-in.show { opacity:1; transform:scale(1); transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
   .sec-tile.collapsing { opacity:0; transform:scale(.8); transition:opacity .35s ease, transform .35s ease; pointer-events:none; }
   .sec-tile:active { transform:scale(.97); }
   .sec-tile.shake { animation: shakeX .45s; }
   .sec-tile.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
-  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:clamp(16px, 2.4vw, 27px); text-align:center; line-height:1.15; text-shadow:0 1px 3px rgba(0,0,0,.35); }
-  .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:clamp(10px, 1.3vw, 14px); text-align:center; opacity:.92; margin-top:6px; line-height:1.35; max-width:92%; }
-  .testament-side-label { position:absolute; left:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
-  .testament-side-label span { writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(9px, 1.1vw, 12px); text-transform:uppercase; letter-spacing:1px; color:var(--ink); opacity:.65; white-space:nowrap; }
+  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(16px, 2.4vw, 27px) * var(--fit-scale, 1)); text-align:center; line-height:1.15; text-shadow:0 1px 3px rgba(0,0,0,.35); }
+  .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--fit-scale, 1)); text-align:center; opacity:.92; margin-top:calc(6px * var(--fit-scale, 1)); line-height:1.35; max-width:92%; }
+  .testament-side-label { position:absolute; left:0; display:flex; align-items:center; justify-content:center; overflow:hidden; pointer-events:none; }
+  .testament-side-label span { writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:calc(clamp(9px, 1.1vw, 12px) * var(--fit-scale, 1)); text-transform:uppercase; letter-spacing:calc(1px * var(--fit-scale, 1)); color:var(--ink); opacity:.65; white-space:nowrap; }
 
   .sec-tile.celebrate { animation: tileBounceFlat .55s cubic-bezier(.34,1.56,.64,1), glowPulse .7s ease-out; }
   @keyframes tileBounceFlat {
@@ -443,12 +451,14 @@
     .book-pill { font-size:calc(clamp(12px, 1vw, 16px) * var(--pill-scale, 1)); padding:calc(6px * var(--pill-scale, 1)) calc(14px * var(--pill-scale, 1)); }
   }
 
-  .mosaic-frame { flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; }
+  .mosaic-frame { flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
   .mosaic-canvas { position:relative; margin:0 auto; }
 
   .intro-top-title{ font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase; opacity:.85; margin-bottom:12px; }
   .intro-duration{ font-family:'Space Grotesk', sans-serif; font-size:13.5px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; opacity:.6; margin-top:16px; display:flex; align-items:center; gap:8px; }
-  @media (min-width: 768px) { .intro-duration { display: none; } }
+  @media (min-width: 768px) {
+    .intro-duration { display: none; }
+  }
   .hero-wrap{ flex:1; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; width:100%; max-width:800px; margin:0 auto; }
 
   .kline{ overflow:hidden; margin-bottom:2px; }
@@ -535,7 +545,9 @@
     min-width: 0;
     flex: 0 1 auto;
   }
-  .book-meta-item:last-child { flex: 1 1 auto; }
+  .book-meta-item:last-child {
+    flex: 1 1 auto;
+  }
   .book-meta-item .bm-label {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 10.5px;
@@ -556,7 +568,7 @@
     .book-meta-item .bm-value { font-size: 19px; }
   }
 
-  /* ==================== TRI-FOCAL SYNTHESIS ==================== */
+  /* ==================== TRI-FOCAL SYNTHESIS (TOP-ALIGNED & DEEP RUNOFF) ==================== */
   #beat-5 {
     padding-bottom: 0 !important;
     overflow: hidden !important;
@@ -670,13 +682,17 @@
     box-shadow: 3px 3px 0 rgba(0,0,0,0.25);
   }
 
+  /* ==================== ANCHOR POSITIONED SO A HEIGHT-CONSISTENT SLICE IS VISIBLE ====================
+     Diameter still scales with width (keeps the wide, gentle arc silhouette), but how much of the
+     circle actually peeks above the bottom edge is driven by height alone via calc(), so it stays a
+     small, sane amount on short landscape screens instead of ballooning with vw. */
   .synthesis-bottom-anchor {
     position: absolute;
-    bottom: clamp(-660px, -62vw, -460px);
     left: 50%;
     transform: translateX(-50%);
     width: clamp(600px, 76vw, 960px);
     height: clamp(600px, 76vw, 960px);
+    bottom: calc(-1 * clamp(600px, 76vw, 960px) + clamp(56px, 16vh, 150px));
     border-radius: 50%;
     background: #FFF;
     border: 5px solid var(--ink);
@@ -684,10 +700,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: clamp(16px, 2.4vh, 28px);
+    padding-top: clamp(10px, 1.8vh, 28px);
     z-index: 10;
     pointer-events: none;
     animation: anchorGlowPulse 2.4s infinite ease-in-out;
+    overflow: hidden;
   }
   @keyframes anchorGlowPulse {
     0%, 100% { box-shadow: 0 0 0 6px rgba(255, 199, 44, 0.4), 0 -8px 0 var(--ink); }
@@ -731,9 +748,20 @@
     border-width: 4px;
     box-shadow: 5px 5px 0 var(--ink);
   }
-  #beat-2 .circle-hero .arc-stem-text { font-size: 11px; letter-spacing: 1.1px; margin-bottom: 6px; }
-  #beat-2 .circle-hero .label-god-is { font-size: clamp(20px, 3vh, 28px); margin-bottom: 8px; }
-  #beat-2 .circle-hero .static-trait { font-size: clamp(20px, 2.8vh, 28px); border-bottom-width: 3.5px; padding: 3px 14px; }
+  #beat-2 .circle-hero .arc-stem-text {
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    margin-bottom: 6px;
+  }
+  #beat-2 .circle-hero .label-god-is {
+    font-size: clamp(20px, 3vh, 28px);
+    margin-bottom: 8px;
+  }
+  #beat-2 .circle-hero .static-trait {
+    font-size: clamp(20px, 2.8vh, 28px);
+    border-bottom-width: 3.5px;
+    padding: 3px 14px;
+  }
 
   @media (max-width: 767px) {
     .circle-hero.coaching-circle{ width:clamp(190px, 32vh, 240px); height:clamp(190px, 32vh, 240px); padding:16px; }
@@ -834,7 +862,6 @@
     padding:2px 4px; 
     border-radius:6px; 
     transition:background .15s ease, color .15s ease; 
-    display:inline;
   }
 
   .w.flagged,
@@ -889,9 +916,10 @@
   .pill-cloud{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
   .research-pill{ font-family:'Space Grotesk', sans-serif; font-size:13px; font-weight:700; background:var(--ink); color:#FFF; padding:7px 14px; border-radius:100px; text-transform:capitalize; }
 
-  /* ==================== GLOSSARY DRAWER & IN CONTEXT ==================== */
   .glossary-drawer{ display: none; }
-  @media (min-width: 768px) { .glossary-drawer.gd-visible{ display: block; } }
+  @media (min-width: 768px) {
+    .glossary-drawer.gd-visible{ display: block; }
+  }
   .glossary-tab{
     position: fixed;
     left: 0;
@@ -920,7 +948,7 @@
   .glossary-tab span{ writing-mode: vertical-rl; transform: rotate(180deg); }
   .glossary-tab i{ font-size: 15px; }
   .glossary-tab:active{ transform: translateY(-50%) scale(0.96); }
-  .glossary-drawer.open .glossary-tab{ left: min(390px, 88vw); }
+  .glossary-drawer.open .glossary-tab{ left: min(360px, 84vw); }
   .glossary-drawer-scrim{
     position: fixed; inset: 0; z-index: 105;
     background: rgba(13,13,29,0.28);
@@ -931,7 +959,7 @@
   .glossary-drawer-panel{
     position: fixed;
     left: 0; top: 0; bottom: 0;
-    width: min(390px, 88vw);
+    width: min(360px, 84vw);
     background: #FFF;
     border-right: 4px solid var(--ink);
     box-shadow: 8px 0 0 rgba(0,0,0,0.12);
@@ -967,136 +995,16 @@
   .gd-row-term i{ transition: transform .2s ease; opacity: .6; }
   .gd-row.revealed .gd-row-term i{ transform: rotate(180deg); }
   .gd-row-def{
-    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    max-height: 0; overflow: hidden; transition: max-height .25s ease;
     font-family: 'Inter', sans-serif; font-size: 13.5px; line-height: 1.45; color: var(--ink);
     padding: 0 14px;
   }
-  .gd-row.revealed .gd-row-def{ max-height: 800px; padding: 12px 14px 16px; }
-
-  /* In Context Box */
-  .gd-notebook-card {
-    margin-top: 10px;
-    padding: 12px 14px;
-    background: #F4F8FC;
-    border: 2px solid var(--ink);
-    border-radius: 10px;
-    box-shadow: 2.5px 2.5px 0 var(--ink);
-  }
-  .gd-notebook-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-  }
-  .gd-notebook-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 10.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #FFF;
-    background: var(--purple);
-    padding: 2.5px 8px;
-    border-radius: 100px;
-  }
-  .gd-notebook-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 12.5px;
-    line-height: 1.45;
-    color: var(--ink);
-    margin: 0;
-  }
-
-  /* Interactive Citation Tag & Popover */
-  .cite-tag-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 9.5px;
-    font-weight: 800;
-    color: var(--ink);
-    background: var(--yellow);
-    border: 1.5px solid var(--ink);
-    border-radius: 6px;
-    padding: 1px 5px;
-    cursor: pointer;
-    vertical-align: middle;
-    margin-left: 4px;
-    transition: transform 0.1s ease;
-  }
-  .cite-tag-btn:hover { transform: scale(1.08); }
-  .cite-tag-btn:active { transform: scale(0.95); }
-
-  .source-modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 250;
-    background: rgba(13,13,29,0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  .source-modal-panel {
-    background: #FFF;
-    border: 4px solid var(--ink);
-    border-radius: 18px;
-    box-shadow: 6px 6px 0 var(--ink);
-    width: 100%;
-    max-width: 440px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .source-modal-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 15px;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .source-modal-close {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: var(--ink);
-  }
-  .source-modal-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .source-modal-item {
-    background: #F8F7F4;
-    border: 2px solid var(--ink);
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    line-height: 1.4;
-    color: var(--ink);
-  }
-  .source-modal-item strong {
-    font-family: 'Space Grotesk', sans-serif;
-    display: block;
-    color: var(--purple);
-    margin-bottom: 2px;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+  .gd-row.revealed .gd-row-def{ max-height: 240px; padding: 10px 14px 14px; }
 
   .video-drawer{ display: none; }
-  @media (min-width: 768px) { .video-drawer.vd-visible{ display: block; } }
+  @media (min-width: 768px) {
+    .video-drawer.vd-visible{ display: block; }
+  }
   .video-tab{
     position: fixed;
     right: 0;
@@ -1254,7 +1162,9 @@
     max-width: 320px;
     margin-top: 0;
   }
-  .final-desktop-timer { display: none; }
+  .final-desktop-timer {
+    display: none;
+  }
   .final-timer-btn {
     background: #FFF;
     border: 3.5px solid var(--ink);
@@ -1268,6 +1178,7 @@
     transition: all 0.15s ease;
     color: var(--ink);
   }
+
   .final-timer-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
   .final-timer-btn.running { background: var(--lime); }
   .final-timer-btn .timer-icon { font-size: 16px; }
@@ -1355,7 +1266,7 @@
     inset: 0;
     z-index: 99999;
     display: none;
-    background: rgba(13,13,29,0.9);
+    background: rgba(13,13,13,0.9);
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
     color: #FFF;
@@ -1471,17 +1382,6 @@
     </div>
   </div>
 
-  <!-- CITATION / SOURCE MODAL -->
-  <div class="source-modal-overlay" id="sourceModalOverlay" style="display:none;" onclick="closeSourceModal();">
-    <div class="source-modal-panel" onclick="event.stopPropagation();">
-      <div class="source-modal-title">
-        <span id="sourceModalTerm">Source Citation</span>
-        <button class="source-modal-close" onclick="closeSourceModal();"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="source-modal-list" id="sourceModalList"></div>
-    </div>
-  </div>
-
   <!-- VIDEO SIDE PANEL -->
   <div class="video-drawer" id="videoDrawer">
     <button class="video-tab" id="videoTabBtn" onclick="event.stopPropagation(); toggleVideoDrawer();" aria-label="Toggle video panel">
@@ -1547,169 +1447,6 @@
 // ==================== MERRIAM-WEBSTER INTERMEDIATE DICTIONARY ====================
 const MW_KEY = "eee0ff38-1739-4feb-89fe-868b69ab391b";
 const mwCache = new Map();
-
-// ==================== IN CONTEXT: NOTEBOOK SYNTHESIS MAP & CITATIONS ====================
-const NOTEBOOK_SYNTHESIS = {
-  "synagogue": {
-    title: "In Context",
-    insight: "The local community gathering place where Jewish people met every week to open the scrolls of Moses, pray, and sit under teaching.",
-    sources: [
-      { name: "Grace Family Church", detail: "Sermon Series: 'Grounded / Scripture in the Bible'" },
-      { name: "BibleProject", detail: "Video: 'How to Read the Gospel'" }
-    ]
-  },
-  "sabbath": {
-    title: "In Context",
-    insight: "From the Hebrew 'Shabbat' ('to stop'). A weekly sacred rhythm pointing to God's continuous provision, liberation, and future restoration—which Jesus fulfills by bringing true healing and life.",
-    sources: [
-      { name: "BibleProject", detail: "Theme: 'The Sabbath & New Creation'" },
-      { name: "BibleProject", detail: "Episode: 'Mark Act One: Galilee'" }
-    ]
-  },
-  "shriveled": {
-    title: "In Context",
-    insight: "A paralyzed or disabled hand. Cultural tradition treated physical brokenness as an obstacle to holiness, but Jesus reveals God's heart by healing directly on the Sabbath.",
-    sources: [
-      { name: "Grace Family Church", detail: "Teaching: 'Mark 2 & 3 Healing Encounters'" },
-      { name: "BibleProject", detail: "Podcast: 'Jesus as the Cosmic Firstborn'" }
-    ]
-  },
-  "pharisees": {
-    title: "In Context",
-    insight: "Highly educated Jewish leaders obsessed with strict rules and outward performance. Acting as self-appointed 'rule police,' they cared more about trapping people and protecting religious traditions than cultivating a real relationship with God.",
-    sources: [
-      { name: "Grace Family Church", detail: "Sermon Series: 'Unseen / The Religious Elite'" },
-      { name: "BibleProject", detail: "Video: 'Sermon on the Mount: True Righteousness'" }
-    ]
-  },
-  "herodians": {
-    title: "In Context",
-    insight: "A political faction loyal to the Roman-backed court of King Herod. Although normally theological rivals with the Pharisees, they joined forces in an unholy alliance to plot Jesus's death.",
-    sources: [
-      { name: "BibleProject", detail: "Podcast: 'The Acts of the Apostles & Political Factions'" },
-      { name: "Grace Family Church", detail: "Teaching Notes: 'Opposition to the Messiah'" }
-    ]
-  },
-  "impure spirits": {
-    title: "In Context",
-    insight: "Dark spiritual powers and demonic forces that rebel against God. Mark highlights that they instantly recognize Jesus's supreme authority as the true Son of God.",
-    sources: [
-      { name: "Grace Family Church", detail: "Sermon Series: 'Unseen: Spiritual Authority & Deliverance'" },
-      { name: "BibleProject", detail: "Video: 'Spiritual Beings: The Satan & Demons'" }
-    ]
-  },
-  "demons": {
-    title: "In Context",
-    insight: "Spiritual powers aligned against God's Kingdom. Jesus's authority to drive them out proves that God's reign is breaking into the present world to liberate humanity.",
-    sources: [
-      { name: "Grace Family Church", detail: "Sermon Series: 'Unseen / Authority in Christ'" },
-      { name: "BibleProject", detail: "Theme: 'The Holy Spirit and the Kingdom'" }
-    ]
-  },
-  "son of god": {
-    title: "In Context",
-    insight: "The foundational claim of Mark's Gospel: Jesus is the physical embodiment of God's glory and the royal servant King who brings God's reign through self-sacrifice.",
-    sources: [
-      { name: "BibleProject", detail: "Video: 'The Gospel of Mark (Act 1 & 2)'" },
-      { name: "BibleProject", detail: "Podcast: 'Son of God & Cosmic Firstborn'" }
-    ]
-  },
-  "apostles": {
-    title: "In Context",
-    insight: "Ordinary people specifically chosen, called by name, and sent out with authority to participate as Jesus's covenant partners in announcing God's Kingdom.",
-    sources: [
-      { name: "Grace Family Church", detail: "Teaching: 'Called, Equipped, and Sent'" },
-      { name: "BibleProject", detail: "Podcast: 'Covenant Partnership & The Twelve'" }
-    ]
-  },
-  "boanerges": {
-    title: "In Context",
-    insight: "An Aramaic nickname meaning 'Sons of Thunder' given to James and John, pointing to their bold, fiery, and zealous personalities.",
-    sources: [
-      { name: "Grace Family Church", detail: "Sermon: 'Transformed by Grace: The Disciples'" }
-    ]
-  },
-  "sons of thunder": {
-    title: "In Context",
-    insight: "An Aramaic nickname (Boanerges) given to James and John, reflecting their bold and fiery personalities that Jesus channeled for God's Kingdom.",
-    sources: [
-      { name: "Grace Family Church", detail: "Teaching: 'Character of the Apostles'" }
-    ]
-  },
-  "simon the zealot": {
-    title: "In Context",
-    insight: "A member of a Jewish patriotic movement fiercely opposed to Roman rule. Jesus placed him alongside Matthew (a Roman tax collector), demonstrating the Kingdom's power to unite enemies.",
-    sources: [
-      { name: "BibleProject", detail: "Video: 'The Upside-Down Kingdom Community'" },
-      { name: "Grace Family Church", detail: "Teaching: 'The Multi-Ethnic, Unified Family of Jesus'" }
-    ]
-  },
-  "zealot": {
-    title: "In Context",
-    insight: "A member of a passionate Jewish patriotic faction opposing Roman rule. Jesus calls sworn political enemies into one unified disciple family.",
-    sources: [
-      { name: "BibleProject", detail: "Video: 'The Gospel of Luke / Ministry to Outcasts'" }
-    ]
-  },
-  "teachers of the law": {
-    title: "In Context",
-    insight: "Scholars and scribes well-versed in copying, studying, and interpreting the Torah. In Mark 3, they travel down from Jerusalem to deliberately discredit Jesus's miracles.",
-    sources: [
-      { name: "Grace Family Church", detail: "Teaching: 'The Law of Moses and the Scribes'" },
-      { name: "BibleProject", detail: "Video: 'Matthew: The Conflict with Scribes'" }
-    ]
-  },
-  "beelzebul": {
-    title: "In Context",
-    insight: "An ancient title for Satan, the prince of demons. Hostile teachers accused Jesus of using demonic power because they refused to acknowledge the Holy Spirit's work.",
-    sources: [
-      { name: "Grace Family Church", detail: "Sermon Series: 'Unseen / Discerning Evil'" },
-      { name: "BibleProject", detail: "Podcast: 'Confronting Spiritual Powers'" }
-    ]
-  },
-  "parables": {
-    title: "In Context",
-    insight: "Short, layered stories Jesus used to reveal the upside-down reality of God's Kingdom to receptive hearts while confronting the stubborn assumptions of religious critics.",
-    sources: [
-      { name: "BibleProject", detail: "Video: 'How to Read the Parables of Jesus'" },
-      { name: "Grace Family Church", detail: "Sermon Series: 'Stories of the Kingdom'" }
-    ]
-  },
-  "blasphemes": {
-    title: "In Context",
-    insight: "Speaking slander against God's divine authority. In Mark 3, it specifically refers to stubbornly looking at the pure, loving work of the Holy Spirit and calling it demonic.",
-    sources: [
-      { name: "Grace Family Church", detail: "Sermon: 'The Unpardonable Sin in Context'" },
-      { name: "BibleProject", detail: "Video: 'Sin, Iniquity, and Transgression'" }
-    ]
-  },
-  "blasphemy": {
-    title: "In Context",
-    insight: "Speaking evil against God or attributing God's Spirit to evil. In Old Testament law, it was considered an ultimate rejection of God's covenant.",
-    sources: [
-      { name: "Grace Family Church", detail: "Teaching Notes: 'Leviticus & Blasphemy'" }
-    ]
-  },
-  "holy spirit": {
-    title: "In Context",
-    insight: "The personal, loving presence and power of God active in creation and human hearts. The Spirit empowers Jesus's ministry and forms the community of the new creation.",
-    sources: [
-      { name: "Grace Family Church", detail: "Sermon Series: 'The Paracletos: The Holy Spirit in You'" },
-      { name: "BibleProject", detail: "Theme: 'Holy Spirit / Ruakh'" }
-    ]
-  }
-};
-
-// Multi-word tokens to bundle as unified units
-const MULTI_WORD_PHRASES = [
-  "teachers of the law",
-  "sons of thunder",
-  "simon the zealot",
-  "impure spirits",
-  "impure spirit",
-  "holy spirit",
-  "son of god"
-];
 
 async function fetchMwIntermediate(cleanTerm) {
   if (mwCache.has(cleanTerm)) return mwCache.get(cleanTerm);
@@ -1782,7 +1519,7 @@ function quoteVerse(text){
   const endsWithQuote = /["”]$/.test(t);
   return (startsWithQuote ? '' : '"') + text + (endsWithQuote ? '' : '"');
 }
-function normWord(w){ return (w||'').replace(/[^a-zA-Z'\s]/g,'').trim().toLowerCase(); }
+function normWord(w){ return (w||'').replace(/[^a-zA-Z']/g,'').toLowerCase(); }
 
 const stopWords = new Set(['a','an','the','and','but','or','nor','for','so','yet','of','to','in','on','at','by','with','from','into','onto','up','out','off','over','under','again','then','than','as','is','am','are','was','were','be','been','being','he','she','it','they','him','her','them','his','its','their','this','that','these','those','who','whom','whose','which','what','i','you','we','me','us','my','your','our','not','no','all','any','some','there','here','when','where','why','how','went','come','came','said','say','says','saw','see','seen','got','get','gets','made','make','makes','took','take','taken','knew','know','known','told','tell','asked','ask','gave','give','given','put','let','called','call','began','begin','left','leave','found','find','ran','run','stood','stand','sat','sit','looked','look','walked','walk','brought','bring','heard','hear','felt','feel','thought','think','wanted','want','one','two','three','man','men','people','day','days','time','way','down','after','before','while','because','if','also','just','only','very','too','back','away','still','around','about','once','more','other','many','much']);
 
@@ -1803,38 +1540,17 @@ const PASSAGE_LAST_VERSE = PASSAGE_START_VERSE + passage.length - 1;
 
 function passageWordsHTML(){
   let out = '<p class="flow-para">';
-  passage.forEach((v, i) => {
+  passage.forEach((v,i)=>{
     const verseNum = i + PASSAGE_START_VERSE;
     const words = v.replace(/—(?=\S)/g, '— ').split(/\s+/);
+    const normed = words.map(normWord);
     const pieces = [];
     let wi = 0;
     while (wi < words.length) {
       const marker = wi === 0 ? `<span class="verse-num-inline">${verseNum}</span>` : '';
-      
-      let matchedPhrase = null;
-      let matchedWordCount = 0;
-
-      for (let len = 4; len >= 2; len--) {
-        if (wi + len <= words.length) {
-          const sliceText = words.slice(wi, wi + len).join(' ');
-          const normSlice = normWord(sliceText);
-          if (MULTI_WORD_PHRASES.includes(normSlice) || NOTEBOOK_SYNTHESIS[normSlice]) {
-            matchedPhrase = sliceText;
-            matchedWordCount = len;
-            break;
-          }
-        }
-      }
-
-      if (matchedPhrase) {
-        const normKey = normWord(matchedPhrase);
-        pieces.push(`${marker}<span class="w" data-word="${normKey}" onclick="tapWord(event,this)">${matchedPhrase}</span>`);
-        wi += matchedWordCount;
-      } else {
-        const singleNorm = normWord(words[wi]);
-        pieces.push(`${marker}<span class="w" data-word="${singleNorm}" onclick="tapWord(event,this)">${words[wi]}</span>`);
-        wi++;
-      }
+      const norm = normed[wi];
+      pieces.push(`${marker}<span class="w" data-word="${norm}" onclick="tapWord(event,this)">${words[wi]}</span>`);
+      wi++;
     }
     out += pieces.join(' ') + ' ';
     if (paragraphEnds.includes(verseNum) && verseNum !== PASSAGE_LAST_VERSE) out += '</p><p class="flow-para">';
@@ -1926,7 +1642,7 @@ const BOOK_ABBREV = {
   'Hebrews':'Heb', 'James':'Jas', '1 Peter':'1 Pet', '2 Peter':'2 Pet', '1 John':'1 John', '2 John':'2 John', '3 John':'3 John', 'Jude':'Jude', 'Revelation':'Rev'
 };
 
-function isMobileViewport(){ return window.innerWidth < 768; }
+function isMobileViewport(){ return window.innerWidth < 768 || window.innerHeight < 500; }
 
 function getSectionForBook(name){
   return BOOK_MAP_SECTIONS.find(s => s.books.some(b => b[0] === name));
@@ -2030,6 +1746,7 @@ function renderTestamentGateIntoCanvas(){
       <div class="tp-desc">Jesus's life, teaching, resurrection, and the birth of the church</div>
     </div>
   `;
+  fitCardsToContainer(canvas.querySelectorAll('.tp-card'), { hideSelector: '.tp-desc' });
 }
 
 function computeSingleTestamentLayout(testament, containerW, containerH, gap, rows){
@@ -2063,6 +1780,8 @@ function unveilBandIntoSections(bandEl, testament){
     canvas.appendChild(t);
   });
   bandEl.remove();
+
+  fitCardsToContainer(newTiles, { hideSelector: '.sec-desc' });
 
   requestAnimationFrame(() => requestAnimationFrame(() => {
     newTiles.forEach((t, i) => setTimeout(() => t.classList.add('show'), i * 40));
@@ -2196,6 +1915,7 @@ function revealAllBooksInSections(){
   canvas.innerHTML = html;
 
   fitBookPillWraps();
+  fitCardsToContainer(canvas.querySelectorAll('.testament-side-label'), { minScale: 0.4 });
 
   const pills = Array.from(canvas.querySelectorAll('.book-pill'));
   pills.forEach((pill, i) => {
@@ -2208,9 +1928,30 @@ function fitBookPillWraps(){
   wraps.forEach(wrap => {
     let scale = 1;
     wrap.style.setProperty('--pill-scale', scale);
+    // shrink in small steps until every pill fits inside its box (or we hit the legibility floor)
     while (wrap.scrollHeight > wrap.clientHeight + 1 && scale > 0.5) {
       scale = Math.max(0.5, scale - 0.05);
       wrap.style.setProperty('--pill-scale', scale);
+    }
+  });
+}
+
+// Generic auto-fit: shrinks a card's content (via --fit-scale) until it fits its own box,
+// and as a last resort hides a secondary element (e.g. a description line) if it still
+// doesn't fit at the smallest legible scale. Used anywhere a card's height is computed
+// from available space rather than its content (testament cards, section tiles) so short
+// landscape viewports shrink text instead of letting it spill into neighboring cards.
+function fitCardsToContainer(elements, { minScale = 0.55, step = 0.05, hideSelector = null } = {}){
+  elements.forEach(el => {
+    let scale = 1;
+    el.style.setProperty('--fit-scale', scale);
+    while (el.scrollHeight > el.clientHeight + 1 && scale > minScale) {
+      scale = Math.max(minScale, scale - step);
+      el.style.setProperty('--fit-scale', scale);
+    }
+    if (hideSelector && el.scrollHeight > el.clientHeight + 1) {
+      const hideEl = el.querySelector(hideSelector);
+      if (hideEl) hideEl.style.display = 'none';
     }
   });
 }
@@ -2311,13 +2052,14 @@ const beats = [
             </div>
           </div>` },
 
-  /* 5. TRI-FOCAL SYNTHESIS */
+  /* 5. TRI-FOCAL SYNTHESIS (~20% VISIBLE ANCHOR) */
   { id:'tri-focal-synthesis', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-expand)', text:'dark', align:'start',
     html:`<div class="synthesis-stage">
             <div class="synthesis-split-grid">
+              <!-- Top Left: Stacked Historical Context -->
               <div class="synthesis-panel">
                 <div class="synthesis-panel-header">
-                  What context is important to understand this Scripture? (author, time, purpose)
+                  What context is important to understand this Scripture?
                 </div>
                 <div class="synthesis-panel-body">
                   <div class="synthesis-stacked-list">
@@ -2337,9 +2079,10 @@ const beats = [
                 </div>
               </div>
 
+              <!-- Top Right: Highlighted Observations -->
               <div class="synthesis-panel">
                 <div class="synthesis-panel-header">
-                  What am I observing as I read the text? (repetition, confusing terms, hyperlinks)
+                  What am I observing as I read the text?
                 </div>
                 <div class="synthesis-panel-body">
                   <div class="synthesis-obs-kicker"><i class="fa-solid fa-pen-nib"></i> You should have defined:</div>
@@ -2348,6 +2091,7 @@ const beats = [
               </div>
             </div>
 
+            <!-- Bottom Anchor: God Is... (~20% visible top dome) -->
             <div class="synthesis-bottom-anchor">
               <div class="anchor-arc-kicker">NEXT UP</div>
               <div class="anchor-title">GOD IS...</div>
@@ -2693,7 +2437,7 @@ async function tapWord(e, el){
   e.stopPropagation();
   const key = el.dataset.word;
   if (!key) return;
-  const rawWord = el.textContent.trim().replace(/^[^A-Za-z'\s]+/, '').replace(/[^A-Za-z'\s]+$/, '');
+  const rawWord = el.textContent.trim().replace(/^[^A-Za-z']+/, '').replace(/[^A-Za-z']+$/, '');
   const isStop = stopWords.has(key);
 
   if (state.activeTool.vocab) {
@@ -2757,9 +2501,7 @@ function gatherGlossaryData(){
 
     const cached = mwCache.get(norm);
     if (cached) {
-      defined.push({ raw: w.word, norm, word: cached.term, def: cached.def, source: cached.source });
-    } else if (NOTEBOOK_SYNTHESIS[norm]) {
-      defined.push({ raw: w.word, norm, word: w.word, def: null, source: null });
+      defined.push({ word: cached.term, def: cached.def, source: cached.source });
     } else {
       undefinedWords.push(w.word);
     }
@@ -2774,42 +2516,24 @@ function renderGlossaryDrawer(){
   const { defined, undefinedWords } = gatherGlossaryData();
 
   if (defined.length === 0 && undefinedWords.length === 0) {
-    body.innerHTML = `<div class="gd-empty">Highlight a word or phrase in the passage to explore definitions and contextual study notes.</div>`;
+    body.innerHTML = `<div class="gd-empty">Highlight a word in the passage to look it up in Merriam-Webster Intermediate Dictionary.</div>`;
     return;
   }
 
   let html = '';
   if (defined.length > 0) {
-    html += defined.map((w,i) => {
-      const note = NOTEBOOK_SYNTHESIS[w.norm];
-      const notebookCardHtml = note ? `
-        <div class="gd-notebook-card">
-          <div class="gd-notebook-header">
-            <span class="gd-notebook-badge"><i class="fa-solid fa-layer-group"></i> ${note.title}</span>
-            <button class="cite-tag-btn" onclick="event.stopPropagation(); openSourceModal('${w.norm}');" title="View Source Videos" aria-label="View source references">
-              <i class="fa-solid fa-circle-info"></i> Sources
-            </button>
-          </div>
-          <p class="gd-notebook-text">${note.insight}</p>
-        </div>` : '';
-
-      const mwDefHtml = w.def ? `
-        <p style="margin:0 0 6px 0;">${w.def}</p>
-        <span style="display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:800; opacity:0.6; text-transform:uppercase; letter-spacing:0.5px;">
-          Source: ${w.source}
-        </span>` : '';
-
-      return `
+    html += defined.map((w,i) => `
       <div class="gd-row" id="gdRow${i}">
         <button class="gd-row-term" onclick="event.stopPropagation(); toggleGlossaryRow(${i});">
           <span>${w.word}</span><i class="fa-solid fa-chevron-down"></i>
         </button>
         <div class="gd-row-def">
-          ${mwDefHtml}
-          ${notebookCardHtml}
+          <p style="margin:0 0 6px 0;">${w.def}</p>
+          <span style="display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:800; opacity:0.6; text-transform:uppercase; letter-spacing:0.5px;">
+            Source: ${w.source}
+          </span>
         </div>
-      </div>`;
-    }).join('');
+      </div>`).join('');
   }
   if (undefinedWords.length > 0) {
     html += `<div class="review-section-header" style="margin-top:14px;"><i class="fa-solid fa-magnifying-glass"></i> Terms Highlighted</div>
@@ -2831,31 +2555,6 @@ function toggleGlossaryDrawer(force){
 }
 function openGlossaryDrawer(){ toggleGlossaryDrawer(true); }
 function closeGlossaryDrawer(){ toggleGlossaryDrawer(false); }
-
-function openSourceModal(normKey){
-  const modal = document.getElementById('sourceModalOverlay');
-  const titleEl = document.getElementById('sourceModalTerm');
-  const listEl = document.getElementById('sourceModalList');
-  if (!modal || !titleEl || !listEl) return;
-
-  const note = NOTEBOOK_SYNTHESIS[normKey];
-  if (!note || !note.sources) return;
-
-  titleEl.textContent = `Sources: ${normKey.toUpperCase()}`;
-  listEl.innerHTML = note.sources.map(s => `
-    <div class="source-modal-item">
-      <strong>${s.name}</strong>
-      <span>${s.detail}</span>
-    </div>
-  `).join('');
-
-  modal.style.display = 'flex';
-}
-
-function closeSourceModal(){
-  const modal = document.getElementById('sourceModalOverlay');
-  if (modal) modal.style.display = 'none';
-}
 
 const MARK_VIDEO_ID = 'YdjRjSIzry4';
 function toggleVideoDrawer(force){
