@@ -847,17 +847,17 @@
   }
   .flow-para{ 
     margin:0 0 20px 0; 
-    font-size:calc(clamp(18px, 2.3vh, 22px) * var(--passage-font-scale, 1)); 
-    line-height:1.75; 
+    font-size:calc(clamp(14px, 4vh, 19px) * var(--passage-font-scale, 1)); 
+    line-height:1.65; 
     font-family:'Inter',sans-serif; 
     font-weight:400; 
     max-width:820px; 
   }
-  @media (min-width: 768px) {
+  @media (min-height: 501px) {
     .passage-scroll{ max-width:960px; padding-bottom:36px; }
-    .flow-para{ font-size:calc(clamp(22px, 2.4vw, 26px) * var(--passage-font-scale, 1)); line-height:1.8; max-width:960px; margin-bottom:26px; }
+    .flow-para{ font-size:calc(clamp(20px, 2.4vw, 26px) * var(--passage-font-scale, 1)); line-height:1.8; max-width:960px; margin-bottom:26px; }
   }
-  @media (min-width: 1200px) {
+  @media (min-height: 900px) {
     .passage-scroll{ max-width:1300px; }
     .flow-para{ font-size:calc(clamp(25px, 2vw, 32px) * var(--passage-font-scale, 1)); line-height:1.85; max-width:1300px; }
   }
