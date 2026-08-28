@@ -301,7 +301,7 @@
     margin: 0 auto;
     display:flex; 
     flex-direction:column; 
-    gap:8px; 
+    gap:10px; 
   }
   @media (max-height: 500px){
     .hud-header{ padding-top: clamp(8px, 1.8vh, 14px); padding-bottom: 4px; gap: 0; }
@@ -325,9 +325,18 @@
   .prog-notch.active{ width:13px; height:13px; border-radius:50%; background:var(--yellow); border-color:var(--ink); box-shadow:0 0 8px rgba(0,0,0,0.3); animation:notchPulse 1.2s infinite ease-in-out; }
   @keyframes notchPulse{ 0%,100%{ transform:translate(-50%, -50%) scale(1); } 50%{ transform:translate(-50%, -50%) scale(1.25); } }
 
-  .story-meta{ display:flex; align-items:center; justify-content:space-between; font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; opacity:.85; padding-right: 16px; }
-  @media (max-width: 767px) {
-    .story-meta { padding-right: 0; }
+  .story-meta{ 
+    display:flex; 
+    flex-direction:row;
+    align-items:center; 
+    justify-content:space-between; 
+    width:100%;
+    font-family:'Space Grotesk', sans-serif; 
+    font-size:12px; 
+    font-weight:800; 
+    letter-spacing:1.2px; 
+    text-transform:uppercase; 
+    opacity:.85; 
   }
   .story-meta .meta-link-btn{
     background: none;
@@ -395,31 +404,84 @@
   }
   .tx-light .locator-emphasis{ background: #FFF; color: var(--ink); }
 
-  /* ==================== LOCATOR QUEST GAME STYLES ==================== */
+  /* ==================== NEO-BRUTALIST QUEST GAME STYLES ==================== */
   .bookmap-wrap { gap:clamp(8px, 1.5vh, 14px); }
   .bookmap-prompt { font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(18px, 4.4vh, 36px); text-align:center; flex-shrink:0; }
   .bookmap-prompt .locator-emphasis { display:inline-block; }
 
-  .tp-card { position:absolute; box-sizing:border-box; overflow:hidden; background:var(--tp-color); border:2.5px solid var(--ink); border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:calc(8px * var(--fit-scale, 1)); padding:calc(20px * var(--fit-scale, 1)); cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform .12s ease, opacity .5s ease, filter .5s ease; }
-  .tp-card:active { transform:scale(.98); }
-  .tp-card.shake { animation: shakeX .45s; }
-  .tp-card.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
-  .tp-card.dimmed { opacity:.4; pointer-events:none; filter:grayscale(.3); }
-  .tp-check { position:absolute; top:14px; right:14px; width:30px; height:30px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:15px; }
-  .tp-card.found .tp-check { display:flex; }
-  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:#FFF; background:rgba(0,0,0,.25); padding:calc(5px * var(--fit-scale, 1)) calc(12px * var(--fit-scale, 1)); border-radius:100px; font-size:calc(clamp(11px, 1.4vw, 14px) * var(--fit-scale, 1)); white-space:nowrap; margin-top:2px; }
-  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(24px, 4vw, 38px) * var(--fit-scale, 1)); text-align:center; text-shadow:0 1px 3px rgba(0,0,0,.35); line-height:1; }
-  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:calc(clamp(13px, 1.6vw, 16px) * var(--fit-scale, 1)); text-align:center; opacity:.92; max-width:80%; line-height:1.4; margin-top:4px; }
+  /* Testament Gate Cards (Old vs New) */
+  .tp-card { 
+    position:absolute; 
+    box-sizing:border-box; 
+    overflow:hidden; 
+    background:var(--tp-color); 
+    color: var(--tp-text, #FFF);
+    border: 3.5px solid var(--ink); 
+    border-radius: 16px; 
+    box-shadow: 4px 4px 0 var(--ink);
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    justify-content:center; 
+    gap:calc(8px * var(--fit-scale, 1)); 
+    padding:calc(20px * var(--fit-scale, 1)); 
+    cursor:pointer; 
+    -webkit-tap-highlight-color:transparent; 
+    transition: transform 0.12s ease, opacity 0.5s ease, filter 0.5s ease, box-shadow 0.2s ease; 
+  }
+  .tp-card[data-testament="Old"] { --tp-color: #A855F7; --tp-text: #FFFFFF; }
+  .tp-card[data-testament="New"] { --tp-color: #0284C7; --tp-text: #FFFFFF; }
 
-  .sec-tile { position:absolute; box-sizing:border-box; overflow:hidden; cursor:pointer; background:var(--sec-color); border:2.5px solid var(--ink); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:calc(10px * var(--fit-scale, 1)); -webkit-tap-highlight-color:transparent; transition:transform .12s ease; }
+  .tp-card:active { 
+    transform: translate(2px, 2px) scale(0.99); 
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .tp-card.shake { animation: shakeX .45s; }
+  .tp-card.found { 
+    border-color: var(--ink); 
+    box-shadow: 0 0 0 4px var(--lime), 4px 4px 0 var(--ink); 
+  }
+  .tp-card.dimmed { opacity:.4; pointer-events:none; filter:grayscale(.3); }
+  .tp-check { position:absolute; top:14px; right:14px; width:30px; height:30px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:15px; border:2.5px solid var(--ink); }
+  .tp-card.found .tp-check { display:flex; }
+  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:inherit; background:rgba(0,0,0,.15); padding:calc(5px * var(--fit-scale, 1)) calc(12px * var(--fit-scale, 1)); border-radius:100px; font-size:calc(clamp(11px, 1.4vw, 14px) * var(--fit-scale, 1)); white-space:nowrap; margin-top:2px; }
+  .tp-card[data-testament="New"] .tp-badge { background:rgba(0,0,0,.25); color:#FFF; }
+  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:inherit; font-size:calc(clamp(24px, 4vw, 38px) * var(--fit-scale, 1)); text-align:center; line-height:1; }
+  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:inherit; font-size:calc(clamp(13px, 1.6vw, 16px) * var(--fit-scale, 1)); text-align:center; opacity:.92; max-width:80%; line-height:1.4; margin-top:4px; }
+
+  /* Section Category Tiles */
+  .sec-tile { 
+    position:absolute; 
+    box-sizing:border-box; 
+    overflow:hidden; 
+    cursor:pointer; 
+    background:var(--sec-color); 
+    color: var(--sec-text, #FFF);
+    border: 3.5px solid var(--ink); 
+    border-radius: 14px; 
+    box-shadow: 4px 4px 0 var(--ink);
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    justify-content:center; 
+    padding:calc(10px * var(--fit-scale, 1)); 
+    -webkit-tap-highlight-color:transparent; 
+    transition: transform 0.12s ease, box-shadow 0.2s ease; 
+  }
   .sec-tile.unveil-in { opacity:0; transform:scale(.82); }
   .sec-tile.unveil-in.show { opacity:1; transform:scale(1); transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
   .sec-tile.collapsing { opacity:0; transform:scale(.8); transition:opacity .35s ease, transform .35s ease; pointer-events:none; }
-  .sec-tile:active { transform:scale(.97); }
+  .sec-tile:active { 
+    transform: translate(2px, 2px) scale(0.98); 
+    box-shadow: 2px 2px 0 var(--ink);
+  }
   .sec-tile.shake { animation: shakeX .45s; }
-  .sec-tile.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
-  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(16px, 2.4vw, 27px) * var(--fit-scale, 1)); text-align:center; line-height:1.15; text-shadow:0 1px 3px rgba(0,0,0,.35); display:flex; flex-direction:column; align-items:center; gap:4px; }
-  .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--fit-scale, 1)); text-align:center; opacity:.92; margin-top:calc(6px * var(--fit-scale, 1)); line-height:1.35; max-width:92%; }
+  .sec-tile.found { 
+    border-color: var(--ink); 
+    box-shadow: 0 0 0 4px var(--lime), 4px 4px 0 var(--ink); 
+  }
+  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:inherit; font-size:calc(clamp(16px, 2.4vw, 27px) * var(--fit-scale, 1)); text-align:center; line-height:1.15; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:inherit; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--fit-scale, 1)); text-align:center; opacity:.92; margin-top:calc(6px * var(--fit-scale, 1)); line-height:1.35; max-width:92%; }
   
   /* Mobile adjustments for quest cards */
   @media (max-width: 767px) {
@@ -440,9 +502,9 @@
     100% { transform: scale(1); }
   }
   @keyframes glowPulse {
-    0% { box-shadow: 0 0 0 0 rgba(195,245,60,.95), 0 0 0 2px #FFF; }
-    45% { box-shadow: 0 0 0 12px rgba(195,245,60,.4), 0 0 0 2px #FFF; }
-    100% { box-shadow: 0 0 0 26px rgba(195,245,60,0), 0 0 0 2px #FFF; }
+    0% { box-shadow: 0 0 0 0 rgba(195,245,60,.95), 4px 4px 0 var(--ink); }
+    45% { box-shadow: 0 0 0 12px rgba(195,245,60,.4), 4px 4px 0 var(--ink); }
+    100% { box-shadow: 0 0 0 26px rgba(195,245,60,0), 4px 4px 0 var(--ink); }
   }
   .confetti-bit { position:fixed; width:8px; height:8px; border-radius:2px; pointer-events:none; z-index:9999; top:0; left:0; transform:translate(-50%,-50%); animation: confettiPop .7s ease-out forwards; }
   @keyframes confettiPop {
@@ -450,7 +512,7 @@
     100% { transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(.4); opacity:0; }
   }
 
-  /* ALL-BOOKS UNIFIED FLEX GRID */
+  /* ALL-BOOKS UNIFIED FLEX GRID & NEO-BRUTALIST PILLS */
   .all-books-unified-grid {
     --grid-gap: clamp(6px, 1vh, 12px);
     display: flex;
@@ -461,14 +523,19 @@
     gap: var(--grid-gap);
     width: 100%;
     height: 100%;
-    padding: 2px;
-    overflow: hidden;
+    padding: clamp(4px, 1vh, 8px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
   }
   .book-pill { 
     flex: 0 0 calc(14.285% - (var(--grid-gap) * 6 / 7)); 
+    box-sizing: border-box;
     background: var(--sec-color); 
     border: 2.5px solid var(--ink); 
     border-radius: 100px; 
+    box-shadow: 2.5px 2.5px 0 var(--ink);
     padding: clamp(6px, 1.2vh, 12px) clamp(8px, 1.2vw, 16px); 
     display: flex; 
     align-items: center; 
@@ -476,10 +543,9 @@
     gap: 6px; 
     font-family: 'Space Grotesk', sans-serif; 
     font-weight: 800; 
-    color: #FFF; 
+    color: var(--pill-text, #FFF); 
     font-size: clamp(11px, 1.4vw, 17px); 
     white-space: nowrap; 
-    text-shadow: 0 1px 2px rgba(0,0,0,.35); 
     opacity: 0; 
     transform: scale(.65); 
     transition: opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1); 
@@ -488,15 +554,15 @@
   .book-pill.quest-found { 
     border-color: var(--ink); 
     font-weight: 900; 
-    animation: foundPillPulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    animation: foundNeoPulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
   }
-  @keyframes foundPillPulse {
+  @keyframes foundNeoPulse {
     0%, 100% {
-      box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px var(--lime);
+      box-shadow: 0 0 0 3.5px var(--lime), 2.5px 2.5px 0 var(--ink);
       transform: scale(1);
     }
     50% {
-      box-shadow: 0 0 0 2px var(--ink), 0 0 0 9px rgba(195, 245, 60, 0.85), 0 0 16px rgba(195, 245, 60, 0.6);
+      box-shadow: 0 0 0 6px var(--lime), 3px 3px 0 var(--ink);
       transform: scale(1.03);
     }
   }
@@ -504,16 +570,34 @@
   @media (max-width: 767px) {
     .all-books-unified-grid {
       --grid-gap: 6px;
+      padding: 4px;
     }
     .book-pill {
       flex: 0 0 calc(20% - 4.8px);
-      padding: 4px 6px;
+      padding: 5px 6px;
       font-size: 10px;
     }
   }
 
-  .mosaic-frame { flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-  .mosaic-canvas { position:relative; margin:0 auto; }
+  /* Mosaic Frame Padding Adjustments to accommodate 4px shadow offset */
+  .mosaic-frame { 
+    flex:1; 
+    min-height:0; 
+    width:100%; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    overflow:hidden; 
+    box-sizing:border-box; 
+    padding: 8px 12px 14px 8px;
+  }
+  .mosaic-canvas { 
+    position:relative; 
+    margin:0 auto; 
+    box-sizing:border-box; 
+    width: 100%;
+    height: 100%;
+  }
 
   .intro-top-title{ font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase; opacity:.85; margin-bottom:12px; }
   .intro-duration{ font-family:'Space Grotesk', sans-serif; font-size:13.5px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; opacity:.6; margin-top:16px; display:flex; align-items:center; gap:8px; }
@@ -633,7 +717,7 @@
     .book-meta-item .bm-value { font-size: 19px; }
   }
 
-  /* ==================== TRI-FOCAL SYNTHESIS & MOBILE WRITE CARD ==================== */
+  /* ==================== TRI-FOCAL SYNTHESIS & INLINE MOBILE GLOSSARY CARD ==================== */
   #beat-5 {
     padding-bottom: 0 !important;
     overflow: hidden !important;
@@ -799,183 +883,90 @@
     line-height: 1;
   }
 
-  /* Mobile-Specific Card View Container */
-  .write-mobile-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 360px;
-    text-align: center;
-    gap: 8px;
-    padding-top: 2px;
-  }
-  .write-mobile-header {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(16px, 2.2vh, 20px);
-    font-weight: 800;
-    text-transform: uppercase;
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .write-mobile-header i {
-    color: var(--purple);
-  }
-  .write-mobile-reminder {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(11.5px, 1.5vh, 13px);
-    line-height: 1.35;
-    color: var(--ink);
-    margin: 0;
-    opacity: 0.9;
-  }
-
-  /* Physical SOAR Card Replica Styling (Flat Edge Paper Look) */
-  .physical-card-preview {
-    position: relative;
-    width: 100%;
-    max-width: 290px;
-    aspect-ratio: 1 / 1.35;
+  /* Inline Dynamic Mobile Glossary Card Container */
+  .mobile-glossary-card {
     background: #FFFFFF;
-    border-radius: 18px;
-    padding: 16px 14px 18px;
-    border: 3.5px solid var(--ink);
-    box-shadow: none;
-    margin-top: 4px;
+    border: 4px solid var(--ink);
+    border-radius: 20px;
+    box-shadow: 5px 5px 0 var(--ink);
+    padding: 16px 16px 18px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
+    gap: 12px;
+    max-height: 82vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     text-align: left;
   }
-  .soar-card-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0 2px;
-    margin-bottom: 2px;
-  }
-  .soar-card-logo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 26px;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-    text-transform: uppercase;
-    color: var(--ink);
-    line-height: 0.85;
-  }
-  .soar-card-name-wrap {
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-  }
-  .soar-card-name-label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 8.5px;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--ink);
-  }
-  .soar-card-name-line {
-    border-bottom: 2px solid var(--ink);
-    width: 80px;
-    height: 8px;
-  }
-  .soar-card-box-top {
-    border: 3px solid var(--ink);
-    background: #FFFFFF;
-    flex: 1;
-    margin-bottom: 6px;
-    border-radius: 14px;
-    box-shadow: 3.5px 3.5px 0 var(--ink);
-    position: relative;
-  }
-  .soar-card-box-bottom {
-    border: 3px solid var(--ink);
-    background: #FFFFFF;
-    flex: 1;
-    margin-top: 6px;
-    border-radius: 14px;
-    box-shadow: 3.5px 3.5px 0 var(--ink);
-    position: relative;
-  }
-  .soar-card-tab-left {
-    position: absolute;
-    top: -2px;
-    left: 14px;
+  .mg-badge-header {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     background: var(--ink);
-    color: #FFFFFF;
+    color: #FFF;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 7px;
+    font-size: 11px;
     font-weight: 800;
-    text-transform: uppercase;
     letter-spacing: 0.8px;
-    padding: 3px 8px;
-    border-radius: 0 0 6px 6px;
-    white-space: nowrap;
-    z-index: 2;
-  }
-  .soar-card-tab-right {
-    position: absolute;
-    bottom: -2px;
-    right: 14px;
-    background: var(--ink);
-    color: #FFFFFF;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 7px;
-    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    padding: 3px 8px;
-    border-radius: 6px 6px 0 0;
-    white-space: nowrap;
-    z-index: 2;
+    padding: 5px 12px;
+    border-radius: 100px;
   }
-  .soar-card-center-circle {
-    position: absolute;
-    top: 54.5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: #FFFFFF;
-    border: 3px solid var(--ink);
-    box-shadow: 3.5px 3.5px 0 var(--ink);
+  .mg-defined-list {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .mg-item-row {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink);
+    padding-bottom: 10px;
+    border-bottom: 1.5px dashed rgba(13,13,13,0.2);
+  }
+  .mg-item-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .mg-num-badge {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 6px;
-    z-index: 10;
-    text-align: center;
-  }
-  .soar-card-circle-kicker {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: #FFFFFF;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 6.5px;
+    font-size: 10px;
+    font-weight: 800;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .mg-item-term {
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    opacity: 0.65;
-    margin-bottom: 1px;
-  }
-  .soar-card-circle-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: -0.3px;
-    text-transform: uppercase;
+    letter-spacing: 0.4px;
     color: var(--ink);
+  }
+  .mg-item-dash {
+    margin: 0 4px;
+    opacity: 0.5;
+  }
+  .mg-item-def {
+    font-weight: 400;
   }
 
   /* Responsive Display Toggles */
   @media (min-width: 768px) {
-    .write-mobile-card {
+    .mobile-glossary-card {
       display: none !important;
     }
     .desktop-only-grid {
@@ -1182,7 +1173,7 @@
   .pill-cloud{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
   .research-pill{ font-family:'Space Grotesk', sans-serif; font-size:13px; font-weight:700; background:var(--ink); color:#FFF; padding:7px 14px; border-radius:100px; text-transform:capitalize; }
 
-  /* ==================== GLOSSARY DRAWER & NOTEBOOK SYNTHESIS CARDS ==================== */
+  /* ==================== GLOSSARY DRAWER ==================== */
   .glossary-drawer{ display: none; }
   @media (min-width: 768px) {
     .glossary-drawer.gd-visible{ display: block; }
@@ -1240,7 +1231,7 @@
   }
   .glossary-drawer.open .glossary-drawer-panel{ transform: translateX(0); }
   .glossary-drawer-header{
-    display: flex; align-items: center; justify-space-between;
+    display: flex; align-items: center; justify-content: space-between;
     font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase;
     flex-shrink: 0;
   }
@@ -1252,7 +1243,7 @@
   .gd-empty{ font-family:'Inter', sans-serif; font-size:14px; opacity:.6; line-height:1.5; }
   .gd-row{ border: 2.5px solid var(--ink); border-radius: 12px; overflow: hidden; flex-shrink: 0; }
   .gd-row-term{
-    width: 100%; display: flex; align-items: center; justify-space-between;
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
     padding: 11px 14px; cursor: pointer; border: none;
     font-family: 'Space Grotesk', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 13.5px;
     background: #FFF; color: var(--ink); text-align: left;
@@ -1274,7 +1265,7 @@
     padding: 10px 12px;
     background: #f0f7ff;
     border: 2px solid var(--ink);
-    border-radius: 10px;
+    border-radius: 100px;
     box-shadow: 2.5px 2.5px 0 var(--ink);
   }
   .gd-notebook-badge {
@@ -1357,7 +1348,7 @@
   }
   .video-drawer.open .video-drawer-panel{ transform: translateX(0); }
   .video-drawer-header{
-    display: flex; align-items: center; justify-space-between;
+    display: flex; align-items: center; justify-content: space-between;
     font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase;
     flex-shrink: 0;
   }
@@ -1864,14 +1855,17 @@ function versePickHTML(){
 }
 
 const BOOK_MAP_SECTIONS = [
-  { title:'Torah (Law)', testament:'Old', color:'#C97B4A', desc:"The foundation of Israel's story and God's covenant", books:[['Genesis',50,38262],['Exodus',40,32685],['Leviticus',27,24541],['Numbers',36,32896],['Deuteronomy',34,28352]] },
-  { title:'History', testament:'Old', color:'#D98F3E', desc:"Israel's journey from conquest to exile", books:[['Joshua',24,18854],['Judges',21,18966],['Ruth',4,2574],['1 Samuel',31,25048],['2 Samuel',24,20600],['1 Kings',22,24513],['2 Kings',25,23517],['1 Chronicles',29,20365],['2 Chronicles',36,26069],['Ezra',10,7440],['Nehemiah',13,10480],['Esther',10,5633]] },
-  { title:'Wisdom & Poetry', testament:'Old', color:'#B08968', desc:'Songs, proverbs, and honest reflections on life', books:[['Job',42,18098],['Psalms',150,42704],['Proverbs',31,15038],['Ecclesiastes',12,5579],['Song of Solomon',8,2658]] },
-  { title:'Prophets', testament:'Old', color:'#8B5E3C', desc:"God's messengers calling His people back — some short, some long", books:[['Isaiah',66,37036],['Jeremiah',52,42654],['Lamentations',5,3411],['Ezekiel',48,39401],['Daniel',12,11602],['Hosea',14,5174],['Joel',3,2033],['Amos',9,4216],['Obadiah',1,669],['Jonah',4,1320],['Micah',7,3152],['Nahum',3,1284],['Habakkuk',3,1475],['Zephaniah',3,1616],['Haggai',2,1130],['Zechariah',14,6443],['Malachi',4,1781]] },
-  { title:'Gospels', testament:'New', color:'#38BDF8', desc:"Jesus's life, death & resurrection", books:[['Matthew',28,23343],['Mark',16,14949],['Luke',24,25640],['John',21,18658]] },
-  { title:'Church History', testament:'New', color:'#22C55E', desc:"The Holy Spirit's arrival and church growth", books:[['Acts',28,24229]] },
-  { title:'Epistles (Letters)', testament:'New', color:'#A855F7', desc:'Letters guiding and strengthening early believers', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430],['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
-  { title:'Prophecy', testament:'New', color:'#4338CA', desc:'A visionary look at how it all ends', books:[['Revelation',22,11952]] }
+  // OLD TESTAMENT (Purple Spectrum Flow: Light Lavender -> Amethyst -> Royal Purple -> Deep Violet)
+  { title:'Torah (Law)', testament:'Old', color:'#D8B4FE', darkText:true, desc:"The foundation of Israel's story and God's covenant", books:[['Genesis',50,38262],['Exodus',40,32685],['Leviticus',27,24541],['Numbers',36,32896],['Deuteronomy',34,28352]] },
+  { title:'History', testament:'Old', color:'#C084FC', darkText:true, desc:"Israel's journey from conquest to exile", books:[['Joshua',24,18854],['Judges',21,18966],['Ruth',4,2574],['1 Samuel',31,25048],['2 Samuel',24,20600],['1 Kings',22,24513],['2 Kings',25,23517],['1 Chronicles',29,20365],['2 Chronicles',36,26069],['Ezra',10,7440],['Nehemiah',13,10480],['Esther',10,5633]] },
+  { title:'Wisdom & Poetry', testament:'Old', color:'#A855F7', darkText:false, desc:'Songs, proverbs, and honest reflections on life', books:[['Job',42,18098],['Psalms',150,42704],['Proverbs',31,15038],['Ecclesiastes',12,5579],['Song of Solomon',8,2658]] },
+  { title:'Prophets', testament:'Old', color:'#7E22CE', darkText:false, desc:"God's messengers calling His people back", books:[['Isaiah',66,37036],['Jeremiah',52,42654],['Lamentations',5,3411],['Ezekiel',48,39401],['Daniel',12,11602],['Hosea',14,5174],['Joel',3,2033],['Amos',9,4216],['Obadiah',1,669],['Jonah',4,1320],['Micah',7,3152],['Nahum',3,1284],['Habakkuk',3,1475],['Zephaniah',3,1616],['Haggai',2,1130],['Zechariah',14,6443],['Malachi',4,1781]] },
+  
+  // NEW TESTAMENT (Blue Spectrum Flow: Sky Cyan -> Bright Azure -> Ocean Blue -> Deep Indigo)
+  { title:'Gospels', testament:'New', color:'#38BDF8', darkText:true, desc:"Jesus's life, death & resurrection", books:[['Matthew',28,23343],['Mark',16,14949],['Luke',24,25640],['John',21,18658]] },
+  { title:'Church History', testament:'New', color:'#0284C7', darkText:false, desc:"The Holy Spirit's arrival and church growth", books:[['Acts',28,24229]] },
+  { title:'Epistles (Letters)', testament:'New', color:'#1D4ED8', darkText:false, desc:'Letters guiding and strengthening early believers', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430],['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
+  { title:'Prophecy', testament:'New', color:'#1E1B4B', darkText:false, desc:'A visionary look at how it all ends', books:[['Revelation',22,11952]] }
 ];
 
 const BOOK_FIND_SEQUENCE = ['Genesis', 'Revelation', 'Psalms', 'Mark'];
@@ -1961,6 +1955,7 @@ function getSectionItemsFor(sectionsSubset){
     name: s.title,
     testament: s.testament,
     color: s.color,
+    darkText: s.darkText,
     desc: s.desc,
     bookCount: s.books.length
   }));
@@ -2000,7 +1995,8 @@ function computeSectionBandLayout(containerW, containerH, gap, rowsPerTestament,
 }
 
 function sectionTileHTML(r){
-  return `<div class="sec-tile" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};" onclick="tapSectionTile(event, this)">
+  const textStyle = r.darkText ? '--sec-text:var(--ink)' : '--sec-text:#FFF';
+  return `<div class="sec-tile" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color}; ${textStyle};" onclick="tapSectionTile(event, this)">
             <div class="sec-name">
               <span>${r.name}</span>
               <div class="tp-badge">${r.bookCount} ${r.bookCount === 1 ? 'Book' : 'Books'}</div>
@@ -2009,10 +2005,11 @@ function sectionTileHTML(r){
           </div>`;
 }
 
-function bookPillHTML(name, sectionColor){
+function bookPillHTML(name, sectionColor, darkText){
   const abbrev = BOOK_ABBREV[name] || name;
   const isQuestBook = BOOK_FIND_SEQUENCE.includes(name);
-  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}" style="--sec-color:${sectionColor};">${abbrev}</div>`;
+  const textStyle = darkText ? '--pill-text:var(--ink)' : '--pill-text:#FFF';
+  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}" style="--sec-color:${sectionColor}; ${textStyle};">${abbrev}</div>`;
 }
 
 function renderTestamentGateIntoCanvas(){
@@ -2020,25 +2017,26 @@ function renderTestamentGateIntoCanvas(){
   if (!canvas) return;
   const frame = canvas.closest('.mosaic-frame');
   if (!frame) return;
-  const w = frame.clientWidth;
-  const h = frame.clientHeight;
+
+  const w = frame.clientWidth - 16;
+  const h = frame.clientHeight - 16;
   if (!w || !h) return;
-  const gap = 10;
+  const gap = 12;
   const bandH = (h - gap) / 2;
   canvas.style.width = w + 'px';
   canvas.style.height = h + 'px';
 
   canvas.innerHTML = `
-    <div class="tp-card" data-testament="Old" style="left:0px; top:0px; width:${w}px; height:${bandH.toFixed(1)}px; --tp-color:var(--purple);" onclick="tapTestamentGate(event, this)">
+    <div class="tp-card" data-testament="Old" style="left:0px; top:0px; width:${w}px; height:${bandH.toFixed(1)}px;" onclick="tapTestamentGate(event, this)">
       <div class="tp-check"><i class="fa-solid fa-check"></i></div>
       <div class="tp-name">Old Testament</div>
-      <div class="tp-badge">39 Books &middot; 1000+ yrs</div>
+      <div class="tp-badge">39 Books &middot; 1000+ yrs in the making</div>
       <div class="tp-desc">The Hebrew scriptures pointing toward the coming Messiah</div>
     </div>
-    <div class="tp-card" data-testament="New" style="left:0px; top:${(bandH + gap).toFixed(1)}px; width:${w}px; height:${bandH.toFixed(1)}px; --tp-color:var(--blue);" onclick="tapTestamentGate(event, this)">
+    <div class="tp-card" data-testament="New" style="left:0px; top:${(bandH + gap).toFixed(1)}px; width:${w}px; height:${bandH.toFixed(1)}px;" onclick="tapTestamentGate(event, this)">
       <div class="tp-check"><i class="fa-solid fa-check"></i></div>
       <div class="tp-name">New Testament</div>
-      <div class="tp-badge">27 Books &middot; ~40 yrs</div>
+      <div class="tp-badge">27 Books &middot; ~40 yrs in the making</div>
       <div class="tp-desc">Jesus's life, teaching, resurrection, and the birth of the church</div>
     </div>
   `;
@@ -2064,7 +2062,7 @@ function unveilBandIntoSections(bandEl, testament){
     rh: parseFloat(bandEl.style.height)
   };
   const rows = isMobileViewport() ? 2 : 1;
-  const rects = computeSingleTestamentLayout(testament, bandRect.rw, bandRect.rh, 6, rows)
+  const rects = computeSingleTestamentLayout(testament, bandRect.rw, bandRect.rh, 8, rows)
     .map(r => ({ ...r, rx: r.rx + bandRect.rx, ry: r.ry + bandRect.ry }));
 
   const wrapper = document.createElement('div');
@@ -2189,8 +2187,8 @@ function revealAllBooksInSections(){
   const canvas = document.getElementById('bookmapCanvas');
   const frame = canvas ? canvas.closest('.mosaic-frame') : null;
   if (!canvas || !frame) return;
-  const w = frame.clientWidth;
-  const h = frame.clientHeight;
+  const w = frame.clientWidth - 16;
+  const h = frame.clientHeight - 16;
   if (!w || !h) return;
   canvas.style.width = w + 'px';
   canvas.style.height = h + 'px';
@@ -2202,7 +2200,7 @@ function revealAllBooksInSections(){
   let allPillsHtml = '';
   BOOK_MAP_SECTIONS.forEach(section => {
     section.books.forEach(([bookName]) => {
-      allPillsHtml += bookPillHTML(bookName, section.color);
+      allPillsHtml += bookPillHTML(bookName, section.color, section.darkText);
     });
   });
 
@@ -2327,39 +2325,8 @@ const beats = [
   /* 5. WRITE / TRI-FOCAL SYNTHESIS */
   { id:'tri-focal-synthesis', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-expand)', text:'dark', align:'start',
     html:`<div class="synthesis-stage">
-            <!-- MOBILE ONLY VIEW FOR GROUP LEADERS -->
-            <div class="write-mobile-card">
-              <div class="write-mobile-header">
-                <i class="fa-solid fa-pen-line"></i> Have Kids Write
-              </div>
-              <p class="write-mobile-reminder">
-                Don't forget to pause and have the students write in Scripture and Observation before moving into the central truth.
-              </p>
-              
-              <!-- REPLICATED PHYSICAL SOAR CARD PREVIEW -->
-              <div class="physical-card-preview">
-                <div class="soar-card-top-bar">
-                  <div class="soar-card-logo">SOAR</div>
-                  <div class="soar-card-name-wrap">
-                    <span class="soar-card-name-label">Name:</span>
-                    <div class="soar-card-name-line"></div>
-                  </div>
-                </div>
-
-                <div class="soar-card-box-top">
-                  <div class="soar-card-tab-left">Scripture &amp; Observation</div>
-                </div>
-
-                <div class="soar-card-center-circle">
-                  <div class="soar-card-circle-kicker">CENTRAL TRUTH</div>
-                  <div class="soar-card-circle-title">God is...</div>
-                </div>
-
-                <div class="soar-card-box-bottom">
-                  <div class="soar-card-tab-right">Application &amp; Reflection</div>
-                </div>
-              </div>
-            </div>
+            <!-- MOBILE GLOSSARY VIEW -->
+            <div class="mobile-glossary-card" id="mobileGlossaryCard"></div>
 
             <!-- DESKTOP / PRESENTATION VIEW -->
             <div class="synthesis-split-grid desktop-only-grid">
@@ -2451,13 +2418,15 @@ const beats = [
           </div>` }
 ];
 
+/* UPDATED SECTION LABELS */
 const sectionLabels = [
-  'Guide', 'Set the Scene', 'Set the Scene',
+  'Guide', 'Discover', 'Discover',
   'Prayer', 'Word Work',
-  'Write', 'Central Truth', 'Central Truth', 'Live'
+  'Word Work', 'Learn', 'Learn', 'Live'
 ];
 
-const sectionColorKeys = ['', 'discover', 'discover', '', 'wordwork', 'expand', 'learn', 'learn', 'live'];
+/* UPDATED SECTION COLOR KEYS */
+const sectionColorKeys = ['', 'discover', 'discover', '', 'wordwork', 'wordwork', 'learn', 'learn', 'live'];
 
 function initNotches(){
   const layer = document.getElementById('notchesLayer');
@@ -2613,12 +2582,48 @@ function updateNavShell(){
 
 function renderSynthesisPanel(){
   const cloud = document.getElementById('synthesisHighlightCloud');
-  if (!cloud) return;
-  let uniqueWords = Array.from(new Set(state.wordTaps.map(w => w.word.charAt(0).toUpperCase() + w.word.slice(1))));
-  if (uniqueWords.length === 0) {
-    uniqueWords = ['Synagogue', 'Sabbath', 'Herodians', 'Beelzebul', 'Parables'];
+  if (cloud) {
+    let uniqueWords = Array.from(new Set(state.wordTaps.map(w => w.word.charAt(0).toUpperCase() + w.word.slice(1))));
+    if (uniqueWords.length === 0) {
+      uniqueWords = ['Synagogue', 'Sabbath', 'Herodians', 'Beelzebul', 'Parables'];
+    }
+    cloud.innerHTML = uniqueWords.map(w => `<span class="research-pill">${w}</span>`).join('');
   }
-  cloud.innerHTML = uniqueWords.map(w => `<span class="research-pill">${w}</span>`).join('');
+
+  const mobileCard = document.getElementById('mobileGlossaryCard');
+  if (mobileCard) {
+    const { defined, undefinedWords } = gatherGlossaryData();
+    let html = '';
+
+    if (defined.length > 0) {
+      html += `<div class="mg-badge-header"><i class="fa-solid fa-book"></i> Defined Terms</div>`;
+      html += `<div class="mg-defined-list">`;
+      defined.forEach((w, i) => {
+        const note = NOTEBOOK_SYNTHESIS[w.norm];
+        const defText = w.def || (note ? note.insight : '');
+        html += `
+          <div class="mg-item-row">
+            <span class="mg-num-badge">${i + 1}</span>
+            <span class="mg-item-term">${w.word}</span>
+            <span class="mg-item-dash">&mdash;</span>
+            <span class="mg-item-def">${defText}</span>
+          </div>`;
+      });
+      html += `</div>`;
+    }
+
+    if (undefinedWords.length > 0) {
+      html += `<div class="mg-badge-header" style="margin-top: 6px;"><i class="fa-solid fa-magnifying-glass"></i> Terms To Define</div>`;
+      html += `<div class="pill-cloud">${undefinedWords.map(word => `<div class="research-pill">${word}</div>`).join('')}</div>`;
+    }
+
+    if (defined.length === 0 && undefinedWords.length === 0) {
+      html = `<div class="mg-badge-header"><i class="fa-solid fa-book"></i> Defined Terms</div>
+              <div class="gd-empty" style="padding-top:4px;">No terms highlighted yet. Highlight words on the Word Work slide to generate definitions here.</div>`;
+    }
+
+    mobileCard.innerHTML = html;
+  }
 }
 
 function renderBeat(i){
@@ -3377,77 +3382,78 @@ function saveCurrentDevNote(val){
   const notes = loadDevNotes();
   notes[state.index + '_' + b.id] = val;
   saveDevNotes(notes);
-  if (devMode) renderDevBubbles();
+  renderDevBubbles();
 }
 
 function clearAllDevNotes(){
-  if (!confirm('Clear all slide notes? This cannot be undone.')) return;
-  saveDevNotes({});
-  const input = document.getElementById('devNoteInput');
-  if (input) input.value = '';
-  const allNotesPanel = document.getElementById('devAllNotesPanel');
-  if (allNotesPanel) allNotesPanel.value = '';
-  if (devMode) renderDevBubbles();
+  if (confirm("Clear all dev notes for this session?")) {
+    saveDevNotes({});
+    renderDevBubbles();
+    if (document.getElementById('devNotesOverlay').style.display !== 'none') openDevNotesPanel();
+  }
 }
 
-function compileAllNotes(){
+function compileDevNotesText(){
   const notes = loadDevNotes();
   const lines = [];
   beats.forEach((b, i) => {
     const key = i + '_' + b.id;
-    const txt = notes[key];
-    if (txt && txt.trim()) lines.push(`[${i}] ${b.id}:\n${txt.trim()}`);
+    if (notes[key] && notes[key].trim()) {
+      lines.push(`[Slide ${i + 1}: ${b.id}]\n${notes[key].trim()}`);
+    }
   });
-  return lines.length ? lines.join('\n\n') : 'No notes yet.';
+  return lines.length === 0 ? "No dev notes recorded." : lines.join('\n\n');
 }
 
-function copyAllDevNotes(){
-  const section = document.getElementById('devAllNotesSection');
-  const panel = document.getElementById('devAllNotesPanel');
-  section.style.display = 'flex';
-  panel.value = compileAllNotes();
-  panel.focus();
-  panel.select();
-  tryCopyAllNotes();
-}
-
-function tryCopyAllNotes(){
-  const panel = document.getElementById('devAllNotesPanel');
-  const status = document.getElementById('dnpStatus');
+async function tryCopyAllNotes(){
+  const text = compileDevNotesText();
+  const statusEl = document.getElementById('dnpStatus');
   const retryBtn = document.getElementById('dnpRetryBtn');
-  panel.focus();
-  panel.select();
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(panel.value).then(() => {
-      status.textContent = '✓ Copied to clipboard';
-      status.className = 'dnp-status ok';
-      retryBtn.style.display = 'none';
-    }).catch(() => {
-      status.textContent = 'Copy failed — select the text above and copy manually.';
-      status.className = 'dnp-status warn';
-      retryBtn.style.display = 'inline-block';
-    });
-  } else {
-    status.textContent = 'Clipboard unavailable — select the text above and copy manually.';
-    status.className = 'dnp-status warn';
+  statusEl.textContent = 'Copying...';
+  statusEl.className = 'dnp-status';
+  retryBtn.style.display = 'none';
+  try {
+    await navigator.clipboard.writeText(text);
+    statusEl.textContent = 'Copied to clipboard!';
+    statusEl.className = 'dnp-status ok';
+  } catch(err) {
+    statusEl.textContent = 'Clipboard blocked. Copy manually below:';
+    statusEl.className = 'dnp-status warn';
     retryBtn.style.display = 'inline-block';
+    const allPanel = document.getElementById('devAllNotesPanel');
+    if (allPanel) {
+      allPanel.focus();
+      allPanel.select();
+    }
   }
 }
 
+function copyAllDevNotes(){
+  const text = compileDevNotesText();
+  const allSec = document.getElementById('devAllNotesSection');
+  const allPanel = document.getElementById('devAllNotesPanel');
+  allSec.style.display = 'flex';
+  allPanel.value = text;
+  tryCopyAllNotes();
+}
+
+// ==================== INITIALIZATION ====================
 initNotches();
 applyPassageFontScale();
+applyCharFontScale();
 renderBeat(0);
 
 window.addEventListener('resize', () => {
-  const cur = beats[state.index] && beats[state.index].id;
-  if (cur === 'book-map') {
-    if (bookMapState.phase === 'testament') {
-      renderTestamentGateIntoCanvas();
-    } else if (bookMapState.phase === 'section') {
+  if (beats[state.index].id === 'book-map') {
+    if (bookMapState.phase === 'section') {
       showSectionPhaseForCurrentBook();
     } else if (bookMapState.phase === 'done') {
       revealAllBooksInSections();
+    } else {
+      renderTestamentGateIntoCanvas();
     }
+  } else if (beats[state.index].id === 'char-coaching') {
+    fitCharVerseText('charText');
   }
 });
 </script>
