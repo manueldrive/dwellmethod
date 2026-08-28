@@ -308,6 +308,13 @@
     flex-direction:column; 
     gap:8px; 
   }
+  /* Compact landscape (real phones previewing, not the Sunday tablet/TV mirror): the progress
+     bar is most useful for a leader tracking live pacing on the big display, and least useful
+     on a personal phone preview — drop it here to win back header height for the content below. */
+  @media (max-height: 500px){
+    .hud-header{ padding-top: clamp(8px, 1.8vh, 14px); padding-bottom: 4px; gap: 0; }
+    #normalProgressWrap{ display:none !important; }
+  }
 
   .progress-container{ position:relative; width:100%; height:7px; background:rgba(13,13,29,0.18); border-radius:100px; }
   .tx-light .progress-container{ background:rgba(255,255,255,0.25); }
@@ -476,23 +483,22 @@
   }
 
   .recap-context-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    align-items: center;
+    gap: clamp(16px, 3vw, 56px);
     flex: 1;
     min-height: 0;
-    gap: clamp(18px, 3vh, 36px);
-    align-items: center;
-    justify-content: center;
     max-width: 1100px;
     margin: 0 auto;
     width: 100%;
   }
-  @media (min-width: 768px) {
-    .recap-context-grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: clamp(32px, 4vw, 56px);
-    }
+  @media (max-height: 500px){
+    /* Compact landscape phone: two columns always (never stack — that's what let the circle
+       drift around as height changed), and if the two columns are still too tall for the
+       text side, drop "This Week" first since it's the least essential of the three blocks. */
+    .recap-context-grid{ gap: clamp(12px, 2.5vw, 28px); }
+    .recap-item-thisweek{ display: none !important; }
   }
 
   .recap-free-flow {
@@ -1929,8 +1935,8 @@ function fitBookPillWraps(){
     let scale = 1;
     wrap.style.setProperty('--pill-scale', scale);
     // shrink in small steps until every pill fits inside its box (or we hit the legibility floor)
-    while (wrap.scrollHeight > wrap.clientHeight + 1 && scale > 0.5) {
-      scale = Math.max(0.5, scale - 0.05);
+    while (wrap.scrollHeight > wrap.clientHeight + 1 && scale > 0.38) {
+      scale = Math.max(0.38, scale - 0.04);
       wrap.style.setProperty('--pill-scale', scale);
     }
   });
@@ -2028,7 +2034,7 @@ const beats = [
                 <span class="recap-tag">Last Week</span>
                 <div>Jesus forgives the paralyzed man, calls tax collectors and outcasts to dinner, and declares He is Lord of the Sabbath.</div>
               </div>
-              <div class="recap-item-block">
+              <div class="recap-item-block recap-item-thisweek">
                 <span class="recap-tag">This Week</span>
                 <div>Jesus heals a shriveled hand on the Sabbath, appoints the Twelve disciples, refutes religious leaders, and redefines true family.</div>
               </div>
@@ -2059,7 +2065,7 @@ const beats = [
               <!-- Top Left: Stacked Historical Context -->
               <div class="synthesis-panel">
                 <div class="synthesis-panel-header">
-                  What context is important to understand this Scripture?
+                  What context is important to understand this Scripture? (author, time, purpose)
                 </div>
                 <div class="synthesis-panel-body">
                   <div class="synthesis-stacked-list">
@@ -2082,7 +2088,7 @@ const beats = [
               <!-- Top Right: Highlighted Observations -->
               <div class="synthesis-panel">
                 <div class="synthesis-panel-header">
-                  What am I observing as I read the text?
+                  What am I observing as I read the text? (repetition, confusing terms, hyperlinks)
                 </div>
                 <div class="synthesis-panel-body">
                   <div class="synthesis-obs-kicker"><i class="fa-solid fa-pen-nib"></i> You should have defined:</div>
@@ -2149,7 +2155,7 @@ const beats = [
 ];
 
 const sectionLabels = [
-  'Guide', 'Discover', 'Discover',
+  'Guide', 'Set the Scene', 'Set the Scene',
   'Prayer', 'Word Work',
   'Expand', 'Learn', 'Learn', 'Live'
 ];
