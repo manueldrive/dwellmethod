@@ -400,16 +400,16 @@
   .bookmap-prompt { font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(18px, 4.4vh, 36px); text-align:center; flex-shrink:0; }
   .bookmap-prompt .locator-emphasis { display:inline-block; }
 
-  .tp-card { position:absolute; box-sizing:border-box; overflow:hidden; background:var(--tp-color); border:2.5px solid var(--ink); border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:calc(12px * var(--fit-scale, 1)); padding:calc(24px * var(--fit-scale, 1)); cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform .12s ease, opacity .5s ease, filter .5s ease; }
+  .tp-card { position:absolute; box-sizing:border-box; overflow:hidden; background:var(--tp-color); border:2.5px solid var(--ink); border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:calc(8px * var(--fit-scale, 1)); padding:calc(20px * var(--fit-scale, 1)); cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform .12s ease, opacity .5s ease, filter .5s ease; }
   .tp-card:active { transform:scale(.98); }
   .tp-card.shake { animation: shakeX .45s; }
   .tp-card.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
   .tp-card.dimmed { opacity:.4; pointer-events:none; filter:grayscale(.3); }
   .tp-check { position:absolute; top:14px; right:14px; width:30px; height:30px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:15px; }
   .tp-card.found .tp-check { display:flex; }
-  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:#FFF; background:rgba(0,0,0,.25); padding:calc(5px * var(--fit-scale, 1)) calc(12px * var(--fit-scale, 1)); border-radius:100px; font-size:calc(clamp(11px, 1.4vw, 14px) * var(--fit-scale, 1)); white-space:nowrap; }
-  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(24px, 4vw, 38px) * var(--fit-scale, 1)); text-align:center; text-shadow:0 1px 3px rgba(0,0,0,.35); }
-  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:calc(clamp(13px, 1.6vw, 16px) * var(--fit-scale, 1)); text-align:center; opacity:.92; max-width:80%; line-height:1.4; }
+  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:#FFF; background:rgba(0,0,0,.25); padding:calc(5px * var(--fit-scale, 1)) calc(12px * var(--fit-scale, 1)); border-radius:100px; font-size:calc(clamp(11px, 1.4vw, 14px) * var(--fit-scale, 1)); white-space:nowrap; margin-top:2px; }
+  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(24px, 4vw, 38px) * var(--fit-scale, 1)); text-align:center; text-shadow:0 1px 3px rgba(0,0,0,.35); line-height:1; }
+  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:calc(clamp(13px, 1.6vw, 16px) * var(--fit-scale, 1)); text-align:center; opacity:.92; max-width:80%; line-height:1.4; margin-top:4px; }
 
   .sec-tile { position:absolute; box-sizing:border-box; overflow:hidden; cursor:pointer; background:var(--sec-color); border:2.5px solid var(--ink); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:calc(10px * var(--fit-scale, 1)); -webkit-tap-highlight-color:transparent; transition:transform .12s ease; }
   .sec-tile.unveil-in { opacity:0; transform:scale(.82); }
@@ -450,14 +450,57 @@
     100% { transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(.4); opacity:0; }
   }
 
-  .book-pill-wrap { position:absolute; box-sizing:border-box; display:flex; flex-wrap:wrap; align-content:flex-start; align-items:flex-start; gap:calc(6px * var(--pill-scale, 1)); padding:calc(8px * var(--pill-scale, 1)); overflow:hidden; border:2px dashed var(--sec-color); border-radius:14px; }
-  .book-pill-wrap.unframed { border:none !important; border-radius:0 !important; background:transparent !important; overflow:visible !important; }
-  .book-pill { flex:0 0 auto; background:var(--sec-color); border:2px solid var(--ink); border-radius:100px; padding:calc(5px * var(--pill-scale, 1)) calc(12px * var(--pill-scale, 1)); display:flex; align-items:center; gap:5px; font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--pill-scale, 1)); white-space:nowrap; text-shadow:0 1px 2px rgba(0,0,0,.35); opacity:0; transform:scale(.65); transition:opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1); }
-  .book-pill.show { opacity:1; transform:scale(1); }
-  .book-pill.quest-found { background:#FFF; color:var(--ink); text-shadow:none; box-shadow:0 0 0 2px var(--ink), 0 0 10px 2px rgba(195,245,60,.6); font-weight:900; }
-  .book-pill.quest-found i { font-size:.85em; }
-  @media (min-width: 768px) {
-    .book-pill { font-size:calc(clamp(12px, 1vw, 16px) * var(--pill-scale, 1)); padding:calc(6px * var(--pill-scale, 1)) calc(14px * var(--pill-scale, 1)); }
+  /* ALL-BOOKS UNIFIED FLEX GRID */
+  .all-books-unified-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: clamp(6px, 1vh, 12px);
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    overflow: hidden;
+  }
+  .book-pill { 
+    flex: 1 1 calc(14.28% - clamp(6px, 1vh, 12px)); 
+    min-width: clamp(60px, 8vw, 110px);
+    background: var(--sec-color); 
+    border: 2px solid var(--ink); 
+    border-radius: 100px; 
+    padding: clamp(6px, 1.2vh, 12px) clamp(8px, 1.2vw, 16px); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 6px; 
+    font-family: 'Space Grotesk', sans-serif; 
+    font-weight: 800; 
+    color: #FFF; 
+    font-size: clamp(11px, 1.4vw, 17px); 
+    white-space: nowrap; 
+    text-shadow: 0 1px 2px rgba(0,0,0,.35); 
+    opacity: 0; 
+    transform: scale(.65); 
+    transition: opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1); 
+  }
+  .book-pill.show { opacity: 1; transform: scale(1); }
+  .book-pill.quest-found { 
+    background: #FFF; 
+    color: var(--ink); 
+    text-shadow: none; 
+    box-shadow: 0 0 0 2px var(--ink), 0 0 10px 2px rgba(195,245,60,.6); 
+    font-weight: 900; 
+  }
+  .book-pill.quest-found i { font-size: .85em; }
+
+  @media (max-width: 767px) {
+    .book-pill {
+      flex: 1 1 calc(20% - 6px);
+      min-width: 45px;
+      padding: 4px 6px;
+      font-size: 10px;
+    }
   }
 
   .mosaic-frame { flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
@@ -1305,7 +1348,7 @@
   }
   .video-drawer.open .video-drawer-panel{ transform: translateX(0); }
   .video-drawer-header{
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-space-between;
     font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase;
     flex-shrink: 0;
   }
@@ -1921,9 +1964,6 @@ function getSectionItemsFor(sectionsSubset){
   return items;
 }
 
-const TESTAMENT_LABEL_WIDTH_DESKTOP = 44;
-const TESTAMENT_LABEL_WIDTH_MOBILE = 28;
-
 function computeSectionBandLayout(containerW, containerH, gap, rowsPerTestament, labelWidth){
   const oldSections = BOOK_MAP_SECTIONS.filter(s => s.testament === 'Old');
   const newSections = BOOK_MAP_SECTIONS.filter(s => s.testament === 'New');
@@ -1951,31 +1991,20 @@ function computeSectionBandLayout(containerW, containerH, gap, rowsPerTestament,
   return { rects, bands };
 }
 
-function testamentSideLabelHTML(band, labelWidth){
-  return `<div class="testament-side-label" style="top:${band.y.toFixed(1)}px; height:${band.h.toFixed(1)}px; width:${labelWidth}px;">
-            <span>${band.testament} Testament &middot; ${band.bookCount} Books</span>
-          </div>`;
-}
-
 function sectionTileHTML(r){
-  const nameText = isMobileViewport() 
-    ? `<span>${r.name}</span><div class="tp-badge" style="margin-top:4px;">${r.bookCount} ${r.bookCount === 1 ? 'Book' : 'Books'}</div>` 
-    : r.name;
   return `<div class="sec-tile" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};" onclick="tapSectionTile(event, this)">
-            <div class="sec-name">${nameText}</div>
+            <div class="sec-name">
+              <span>${r.name}</span>
+              <div class="tp-badge">${r.bookCount} ${r.bookCount === 1 ? 'Book' : 'Books'}</div>
+            </div>
             <div class="sec-desc">${r.desc}</div>
           </div>`;
 }
 
-function bookPillHTML(name){
+function bookPillHTML(name, sectionColor){
   const abbrev = BOOK_ABBREV[name] || name;
   const isQuestBook = BOOK_FIND_SEQUENCE.includes(name);
-  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}">${isQuestBook ? '<i class="fa-solid fa-check"></i>' : ''}${abbrev}</div>`;
-}
-
-function bookPillWrapHTML(sr, section, isUnframed = false){
-  const pills = section.books.map(([name]) => bookPillHTML(name)).join('');
-  return `<div class="book-pill-wrap${isUnframed ? ' unframed' : ''}" style="left:${sr.rx.toFixed(1)}px; top:${sr.ry.toFixed(1)}px; width:${sr.rw.toFixed(1)}px; height:${sr.rh.toFixed(1)}px; --sec-color:${section.color};">${pills}</div>`;
+  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}" style="--sec-color:${sectionColor};">${isQuestBook ? '<i class="fa-solid fa-check"></i>' : ''}${abbrev}</div>`;
 }
 
 function renderTestamentGateIntoCanvas(){
@@ -1994,14 +2023,14 @@ function renderTestamentGateIntoCanvas(){
   canvas.innerHTML = `
     <div class="tp-card" data-testament="Old" style="left:0px; top:0px; width:${w}px; height:${bandH.toFixed(1)}px; --tp-color:var(--purple);" onclick="tapTestamentGate(event, this)">
       <div class="tp-check"><i class="fa-solid fa-check"></i></div>
-      <div class="tp-badge">39 Books &middot; 1000+ yrs</div>
       <div class="tp-name">Old Testament</div>
+      <div class="tp-badge">39 Books &middot; 1000+ yrs</div>
       <div class="tp-desc">The Hebrew scriptures pointing toward the coming Messiah</div>
     </div>
     <div class="tp-card" data-testament="New" style="left:0px; top:${(bandH + gap).toFixed(1)}px; width:${w}px; height:${bandH.toFixed(1)}px; --tp-color:var(--blue);" onclick="tapTestamentGate(event, this)">
       <div class="tp-check"><i class="fa-solid fa-check"></i></div>
-      <div class="tp-badge">27 Books &middot; ~40 yrs</div>
       <div class="tp-name">New Testament</div>
+      <div class="tp-badge">27 Books &middot; ~40 yrs</div>
       <div class="tp-desc">Jesus's life, teaching, resurrection, and the birth of the church</div>
     </div>
   `;
@@ -2162,34 +2191,18 @@ function revealAllBooksInSections(){
   spawnConfetti(canvasRect.left + canvasRect.width / 2, canvasRect.top + canvasRect.height / 2, 44, { min: 120, max: 340 });
   playChime([523.25, 659.25, 783.99, 1046.5]);
 
-  const rowsPerTestament = isMobileViewport() ? 2 : 1;
-  const labelWidth = 0;
-  const { rects: sectionRects } = computeSectionBandLayout(w, h, 6, rowsPerTestament, labelWidth);
-
-  let html = '';
-  sectionRects.forEach(sr => {
-    const section = BOOK_MAP_SECTIONS.find(s => s.title === sr.name);
-    html += bookPillWrapHTML(sr, section, true);
+  let allPillsHtml = '';
+  BOOK_MAP_SECTIONS.forEach(section => {
+    section.books.forEach(([bookName]) => {
+      allPillsHtml += bookPillHTML(bookName, section.color);
+    });
   });
-  canvas.innerHTML = html;
 
-  fitBookPillWraps();
+  canvas.innerHTML = `<div class="all-books-unified-grid">${allPillsHtml}</div>`;
 
   const pills = Array.from(canvas.querySelectorAll('.book-pill'));
   pills.forEach((pill, i) => {
-    setTimeout(() => { pill.classList.add('show'); }, i * 14);
-  });
-}
-
-function fitBookPillWraps(){
-  const wraps = Array.from(document.querySelectorAll('.book-pill-wrap'));
-  wraps.forEach(wrap => {
-    let scale = 1;
-    wrap.style.setProperty('--pill-scale', scale);
-    while (wrap.scrollHeight > wrap.clientHeight + 1 && scale > 0.38) {
-      scale = Math.max(0.38, scale - 0.04);
-      wrap.style.setProperty('--pill-scale', scale);
-    }
+    setTimeout(() => { pill.classList.add('show'); }, i * 12);
   });
 }
 
