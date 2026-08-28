@@ -264,7 +264,7 @@
     text-transform: uppercase;
     background: #FFF;
     color: var(--ink);
-    border: 3px solid var(--ink);
+    border: 3.5px solid var(--ink);
     border-radius: 100px;
     padding: 10px 20px;
     cursor: pointer;
@@ -407,7 +407,6 @@
   /* ==================== NEO-BRUTALIST QUEST GAME STYLES ==================== */
   .bookmap-wrap { gap:clamp(8px, 1.5vh, 14px); }
   
-  /* BALANCED: Clamped quest prompt for optimal readability and vertical headroom */
   .bookmap-prompt { 
     font-family:'Space Grotesk', sans-serif; 
     font-weight:800; 
@@ -492,7 +491,6 @@
   .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:inherit; font-size:calc(clamp(16px, 2.4vw, 27px) * var(--fit-scale, 1)); text-align:center; line-height:1.15; display:flex; flex-direction:column; align-items:center; gap:4px; }
   .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:inherit; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--fit-scale, 1)); text-align:center; opacity:.92; margin-top:calc(6px * var(--fit-scale, 1)); line-height:1.35; max-width:92%; }
   
-  /* Mobile adjustments for quest cards */
   @media (max-width: 767px) {
     .tp-card .tp-desc,
     .sec-tile .sec-desc {
@@ -588,7 +586,6 @@
     }
   }
 
-  /* Mosaic Frame Padding Adjustments to accommodate 4px shadow offset */
   .mosaic-frame { 
     flex:1; 
     min-height:0; 
@@ -892,7 +889,6 @@
     line-height: 1;
   }
 
-  /* Inline Dynamic Mobile Glossary Card Container */
   .mobile-glossary-card {
     background: #FFFFFF;
     border: 4px solid var(--ink);
@@ -973,7 +969,6 @@
     font-weight: 400;
   }
 
-  /* Responsive Display Toggles */
   @media (min-width: 768px) {
     .mobile-glossary-card {
       display: none !important;
@@ -992,7 +987,6 @@
     }
   }
 
-  /* GOD SHOT CIRCLE DESIGN */
   .circle-hero-container{ position:relative; z-index:2; flex-shrink:0; display:flex; flex-direction:column; gap:clamp(10px, 1.8vh, 18px); justify-content:center; align-items:center; }
   .circle-hero{ width: clamp(160px, 22vh, 220px); height: clamp(160px, 22vh, 220px); border-radius:50%; background:#FFF; color:var(--ink); border:3.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:12px; flex-shrink:0; }
   .circle-hero .arc-stem-text{ font-family:'Space Grotesk', sans-serif; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:1px; opacity:.65; margin-bottom:4px; }
@@ -1189,7 +1183,6 @@
   .pill-cloud{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
   .research-pill{ font-family:'Space Grotesk', sans-serif; font-size:13px; font-weight:700; background:var(--ink); color:#FFF; padding:7px 14px; border-radius:100px; text-transform:capitalize; }
 
-  /* ==================== GLOSSARY DRAWER (CONTAINMENT & SCROLL FIX) ==================== */
   .glossary-drawer{ display: none; }
   @media (min-width: 768px) {
     .glossary-drawer.gd-visible{ display: block; }
@@ -1231,7 +1224,6 @@
   }
   .glossary-drawer.open .glossary-drawer-scrim{ opacity: 1; pointer-events: auto; }
   
-  /* UPDATED: Strict panel height containment */
   .glossary-drawer-panel{
     position: fixed;
     left: 0; top: 0; bottom: 0; height: 100%;
@@ -1259,7 +1251,6 @@
     color:var(--ink); padding:6px; line-height:1; display:flex; align-items:center; justify-content:center;
   }
   
-  /* UPDATED: Dedicated internal scrolling container */
   .glossary-drawer-body{ 
     flex: 1; 
     min-height: 0;
@@ -1290,7 +1281,6 @@
   }
   .gd-row.revealed .gd-row-def{ max-height: 600px; padding: 12px 14px 16px; }
 
-  /* In Context Callout Block */
   .gd-notebook-card {
     margin-top: 4px;
     padding: 10px 12px;
@@ -1659,9 +1649,9 @@
       </div>
       <div class="video-drawer-body">
         <div class="video-embed-wrap">
-          <iframe id="markVideoFrame" src="" title="The Book of Mark" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe id="markVideoFrame" src="" title="Jesus Heals the Withered Hand (The Chosen Scene)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <a class="video-drawer-link" href="https://www.youtube.com/watch?v=YdjRjSIzry4" target="_blank" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <a class="video-drawer-link" href="https://www.youtube.com/watch?v=YWoTGzlefq8" target="_blank" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       </div>
     </div>
   </div>
@@ -1709,156 +1699,49 @@
 <script>
 // ==================== IN CONTEXT (7TH GRADE SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
-  synagogue: {
-    title: "In Context",
-    insight: "A local Jewish meeting place for prayer, reading Scripture, and teaching."
-  },
-  shriveled: {
-    title: "In Context",
-    insight: "A hand that was dried up, paralyzed, and completely lacking strength."
-  },
-  jesus: {
-    title: "In Context",
-    insight: "The Messiah and Son of God who brings heaven’s rest and healing to the world."
-  },
-  lawful: {
-    title: "In Context",
-    insight: "Actions allowed by God's law, which focus on loving people, doing good, and saving life."
-  },
-  sabbath: {
-    title: "In Context",
-    insight: "A weekly day of rest created to bring freedom, restoration, and life to humanity."
-  },
-  distressed: {
-    title: "In Context",
-    insight: "Deep sorrow and grief caused by seeing people's stubborn and unloving hearts."
-  },
-  stubborn: {
-    title: "In Context",
-    insight: "A closed-off, unyielding attitude that refuses to accept God's truth and mercy."
-  },
-  pharisees: {
-    title: "In Context",
-    insight: "Strict religious leaders obsessed with rules rather than showing compassion."
-  },
-  herodians: {
-    title: "In Context",
-    insight: "A political group loyal to King Herod that joined the Pharisees to oppose Jesus."
-  },
-  galilee: {
-    title: "In Context",
-    insight: "The northern region of ancient Israel where Jesus did much of His teaching and healing."
-  },
-  judea: {
-    title: "In Context",
-    insight: "The southern region of ancient Israel containing Jerusalem."
-  },
-  jerusalem: {
-    title: "In Context",
-    insight: "The capital city of Israel and the center of Jewish Temple worship and authority."
-  },
-  idumea: {
-    title: "In Context",
-    insight: "A region south of Judea from which large crowds traveled to see Jesus."
-  },
-  jordan: {
-    title: "In Context",
-    insight: "The main river in Israel; people crossed it from distant borders to reach Jesus."
-  },
-  tyre: {
-    title: "In Context",
-    insight: "A non-Jewish coastal city to the northwest where people heard of Jesus and came to Him."
-  },
-  sidon: {
-    title: "In Context",
-    insight: "An ancient non-Jewish coastal city north of Tyre whose residents traveled to see Jesus."
-  },
-  told: {
-    title: "In Context",
-    insight: "A practical instruction Jesus gave His disciples to keep the crowds from pushing against Him."
-  },
-  disciples: {
-    title: "In Context",
-    insight: "Followers and students who learn from Jesus and carry out His mission."
-  },
-  impure_spirits: {
-    title: "In Context",
-    insight: "Evil spiritual forces that cause harm but are forced to bow down and recognize Jesus."
-  },
-  son_of_god: {
-    title: "In Context",
-    insight: "A title showing Jesus’ divine authority as King, which even evil spirits recognize."
-  },
-  appointed: {
-    title: "In Context",
-    insight: "Chosen and set apart by Jesus for a specific mission and leadership role."
-  },
-  demons: {
-    title: "In Context",
-    insight: "Evil spiritual forces that Jesus overpowers and casts out."
-  },
-  judas_iscariot: {
-    title: "In Context",
-    insight: "One of the twelve chosen disciples who later betrayed Jesus."
-  },
-  possessed: {
-    title: "In Context",
-    insight: "A false accusation that Jesus was controlled by evil spirits when He was actually defeating them."
-  },
-  beelzebul: {
-    title: "In Context",
-    insight: "A name used by religious leaders to refer to Satan, the prince of demons."
-  },
-  parables: {
-    title: "In Context",
-    insight: "Short stories and illustrations Jesus used to teach deeper spiritual truths."
-  },
-  satan: {
-    title: "In Context",
-    insight: "The main enemy of God and chief adversary of goodness."
-  },
-  forgiven: {
-    title: "In Context",
-    insight: "Pardoned and freed from guilt through God’s mercy."
-  },
-  sins: {
-    title: "In Context",
-    insight: "Wrong actions and choices that break God's moral law and hurt relationships."
-  },
-  utter: {
-    title: "In Context",
-    insight: "To speak words out loud, including reckless or harmful statements."
-  },
-  blasphemes: {
-    title: "In Context",
-    insight: "Speaking evil of God or stubbornly calling the Holy Spirit's good work demonic."
-  },
-  holy_spirit: {
-    title: "In Context",
-    insight: "God's active personal presence and power working in the world."
-  },
-  eternal: {
-    title: "In Context",
-    insight: "Lasting forever without an end."
-  },
-  sin: {
-    title: "In Context",
-    insight: "Failing to love God and others as He intended."
-  },
-  impure_spirit: {
-    title: "In Context",
-    insight: "A demonic force associated with evil and opposition to God."
-  }
+  synagogue: { title: "In Context", insight: "A local Jewish meeting place for prayer, reading Scripture, and teaching." },
+  shriveled: { title: "In Context", insight: "A hand that was dried up, paralyzed, and completely lacking strength." },
+  jesus: { title: "In Context", insight: "The Messiah and Son of God who brings heaven’s rest and healing to the world." },
+  lawful: { title: "In Context", insight: "Actions allowed by God's law, which focus on loving people, doing good, and saving life." },
+  sabbath: { title: "In Context", insight: "A weekly day of rest created to bring freedom, restoration, and life to humanity." },
+  distressed: { title: "In Context", insight: "Deep sorrow and grief caused by seeing people's stubborn and unloving hearts." },
+  stubborn: { title: "In Context", insight: "A closed-off, unyielding attitude that refuses to accept God's truth and mercy." },
+  pharisees: { title: "In Context", insight: "Strict religious leaders obsessed with rules rather than showing compassion." },
+  herodians: { title: "In Context", insight: "A political group loyal to King Herod that joined the Pharisees to oppose Jesus." },
+  galilee: { title: "In Context", insight: "The northern region of ancient Israel where Jesus did much of His teaching and healing." },
+  judea: { title: "In Context", insight: "The southern region of ancient Israel containing Jerusalem." },
+  jerusalem: { title: "In Context", insight: "The capital city of Israel and the center of Jewish Temple worship and authority." },
+  idumea: { title: "In Context", insight: "A region south of Judea from which large crowds traveled to see Jesus." },
+  jordan: { title: "In Context", insight: "The main river in Israel; people crossed it from distant borders to reach Jesus." },
+  tyre: { title: "In Context", insight: "A non-Jewish coastal city to the northwest where people heard of Jesus and came to Him." },
+  sidon: { title: "In Context", insight: "An ancient non-Jewish coastal city north of Tyre whose residents traveled to see Jesus." },
+  told: { title: "In Context", insight: "A practical instruction Jesus gave His disciples to keep the crowds from pushing against Him." },
+  disciples: { title: "In Context", insight: "Followers and students who learn from Jesus and carry out His mission." },
+  impure_spirits: { title: "In Context", insight: "Evil spiritual forces that cause harm but are forced to bow down and recognize Jesus." },
+  son_of_god: { title: "In Context", insight: "A title showing Jesus’ divine authority as King, which even evil spirits recognize." },
+  appointed: { title: "In Context", insight: "Chosen and set apart by Jesus for a specific mission and leadership role." },
+  demons: { title: "In Context", insight: "Evil spiritual forces that Jesus overpowers and casts out." },
+  judas_iscariot: { title: "In Context", insight: "One of the twelve chosen disciples who later betrayed Jesus." },
+  possessed: { title: "In Context", insight: "A false accusation that Jesus was controlled by evil spirits when He was actually defeating them." },
+  beelzebul: { title: "In Context", insight: "A name used by religious leaders to refer to Satan, the prince of demons." },
+  parables: { title: "In Context", insight: "Short stories and illustrations Jesus used to teach deeper spiritual truths." },
+  satan: { title: "In Context", insight: "The main enemy of God and chief adversary of goodness." },
+  forgiven: { title: "In Context", insight: "Pardoned and freed from guilt through God’s mercy." },
+  sins: { title: "In Context", insight: "Wrong actions and choices that break God's moral law and hurt relationships." },
+  utter: { title: "In Context", insight: "To speak words out loud, including reckless or harmful statements." },
+  blasphemes: { title: "In Context", insight: "Speaking evil of God or stubbornly calling the Holy Spirit's good work demonic." },
+  holy_spirit: { title: "In Context", insight: "God's active personal presence and power working in the world." },
+  eternal: { title: "In Context", insight: "Lasting forever without an end." },
+  sin: { title: "In Context", insight: "Failing to love God and others as He intended." },
+  impure_spirit: { title: "In Context", insight: "A demonic force associated with evil and opposition to God." }
 };
 
-// Map alternate forms to their synthesis key
 NOTEBOOK_SYNTHESIS['impure spirits'] = NOTEBOOK_SYNTHESIS['impure_spirits'];
 NOTEBOOK_SYNTHESIS['son of god'] = NOTEBOOK_SYNTHESIS['son_of_god'];
 NOTEBOOK_SYNTHESIS['judas iscariot'] = NOTEBOOK_SYNTHESIS['judas_iscariot'];
 NOTEBOOK_SYNTHESIS['holy spirit'] = NOTEBOOK_SYNTHESIS['holy_spirit'];
 NOTEBOOK_SYNTHESIS['impure spirit'] = NOTEBOOK_SYNTHESIS['impure_spirit'];
 
-// ==================== MULTI-WORD PHRASE TERMS ====================
 const PHRASE_TERMS = [
   { norm: ['son','of','god'], key: 'son_of_god' },
   { norm: ['holy','spirit'], key: 'holy_spirit' },
@@ -2394,7 +2277,6 @@ function tapSectionTile(e, el){
 
 // ==================== STREAMLINED BEATS ====================
 const beats = [
-  /* 0. INTRO */
   { id:'intro', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
     html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
@@ -2403,11 +2285,9 @@ const beats = [
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
-  /* 1. FIND THE BOOK MAP */
   { id:'book-map', type:'input', blockTap:true, isInteractive:true, clue:'Tap the highlighted book to continue', bgGrad:'var(--bg-cream)', text:'dark',
     html: renderBookMapHTML() },
 
-  /* 2. RECAP (GOD IS HEALER) */
   { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-discover)', text:'dark', align:'start',
     html:`<div class="recap-context-grid">
             <div class="circle-hero-container">
@@ -2437,7 +2317,6 @@ const beats = [
             </div>
           </div>` },
 
-  /* 3. PRAYER */
   { id:'breath-prayer', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'center',
     html:`<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; gap:44px;">
             <div class="breath-visual">
@@ -2446,7 +2325,6 @@ const beats = [
             <div class="prayer-subtext">Pause and pray before moving into reading.</div>
           </div>` },
 
-  /* 4. PASSAGE SCAN (WORD WORK) */
   { id:'vocab-scan', type:'input', blockTap:true, isInteractive:true, clue:'Highlight key words & scroll to bottom', bgGrad:'var(--bg-cream)', text:'dark',
     html:`<div class="full-page">
             <div class="passage-scroll-wrap">
@@ -2454,13 +2332,9 @@ const beats = [
             </div>
           </div>` },
 
-  /* 5. WRITE / TRI-FOCAL SYNTHESIS */
   { id:'tri-focal-synthesis', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-expand)', text:'dark', align:'start',
     html:`<div class="synthesis-stage">
-            <!-- MOBILE GLOSSARY VIEW -->
             <div class="mobile-glossary-card" id="mobileGlossaryCard"></div>
-
-            <!-- DESKTOP / PRESENTATION VIEW -->
             <div class="synthesis-split-grid desktop-only-grid">
               <div class="synthesis-panel">
                 <div class="synthesis-panel-header">
@@ -2501,7 +2375,6 @@ const beats = [
             </div>
           </div>` },
 
-  /* 6. VERSE PICK */
   { id:'char-verse-pick', type:'input', blockTap:true, isInteractive:true, clue:'Select a verse to continue', bgGrad:'var(--bg-cream)', text:'dark',
     html:`<div class="full-page">
             <div class="passage-scroll-wrap">
@@ -2509,7 +2382,6 @@ const beats = [
             </div>
           </div>` },
 
-  /* 7. GOD SHOT COACHING */
   { id:'char-coaching', type:'input', blockTap:true, isInteractive:true, clue:'Fill in the blank to continue', bgGrad:'var(--bg-learn)', text:'dark',
     html:`<div class="coaching-scene">
             <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
@@ -2527,7 +2399,6 @@ const beats = [
             </div>
           </div>` },
 
-  /* 8. FINAL PROMPT */
   { id:'final', type:'input', blockTap:true, isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
     html:`<div class="final-live-wrap">
             <div class="final-live-prompt">
@@ -2644,25 +2515,22 @@ function updateNavShell(){
 
   if (b.id === 'book-map') {
     island.style.display = 'flex';
-    if (bookMapState.phase === 'testament') {
-      island.innerHTML = `<button class="action-gate-pill" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">Pick Old or New Testament</button>`;
-    } else {
-      const isDone = bookMapState.phase === 'done';
-      const remaining = BOOK_FIND_SEQUENCE.length - bookMapState.foundIndex;
-      island.innerHTML = `
-        <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-          ${isDone ? '<i class="fa-solid fa-check"></i> Continue' : `Find ${remaining} more book${remaining === 1 ? '' : 's'}`}
-        </button>
-      `;
-    }
+    const isDone = bookMapState.phase === 'done';
+    const targetBook = BOOK_FIND_SEQUENCE[bookMapState.foundIndex] || 'Book';
+    
+    island.innerHTML = `
+      <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
+        ${isDone ? '<i class="fa-solid fa-check"></i> Continue' : `<i class="fa-solid fa-magnifying-glass"></i> Find ${targetBook}`}
+      </button>
+    `;
   } else if (b.id === 'vocab-scan') {
     island.style.display = 'flex';
     const isDone = isVocabComplete();
     const hasWords = state.wordTaps.length > 0;
     let pillLabel;
     if (isDone) pillLabel = '<i class="fa-solid fa-check"></i> Continue';
-    else if (hasWords) pillLabel = 'Finish Reading';
-    else pillLabel = 'Highlight Words';
+    else if (hasWords) pillLabel = '<i class="fa-solid fa-arrow-down"></i> Scroll to Bottom';
+    else pillLabel = '<i class="fa-solid fa-highlighter"></i> Highlight Key Words';
     island.innerHTML = `
       <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="vocabActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
         ${pillLabel}
@@ -2673,7 +2541,7 @@ function updateNavShell(){
     const isPicked = state.charVerse !== null;
     island.innerHTML = `
       <button class="action-gate-pill ${isPicked ? 'ready' : ''}" id="verseActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-        ${isPicked ? '<i class="fa-solid fa-check"></i> Continue' : 'Spot a God Shot'}
+        ${isPicked ? '<i class="fa-solid fa-check"></i> Continue' : '<i class="fa-solid fa-hand-pointer"></i> Select a Verse'}
       </button>
     `;
   } else {
@@ -2997,7 +2865,7 @@ function toggleGlossaryDrawer(force){
 function openGlossaryDrawer(){ toggleGlossaryDrawer(true); }
 function closeGlossaryDrawer(){ toggleGlossaryDrawer(false); }
 
-const MARK_VIDEO_ID = 'YdjRjSIzry4';
+const MARK_VIDEO_ID = 'YWoTGzlefq8';
 function toggleVideoDrawer(force){
   const d = document.getElementById('videoDrawer');
   if (!d) return;
@@ -3020,7 +2888,6 @@ function renderFinalReflection(){
   if (traitEl) traitEl.textContent = trait;
 }
 
-/* 2 MINUTE TIMER LOGIC */
 let timerSeconds = 120;
 let timerInterval = null;
 let timerRunning = false;
@@ -3096,25 +2963,21 @@ function triggerGateNavHint(hintId){
 function handleForwardAttempt(){
   const b = beats[state.index];
   if (b.blockTap) {
-    if (b.id === 'book-map' && bookMapState.phase === 'testament') {
-      triggerPillMessage('bookmapActionPill', 'Pick a Testament');
-      return;
-    }
     if (b.id === 'book-map' && bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
-      triggerPillMessage('bookmapActionPill', `Find ${BOOK_FIND_SEQUENCE[bookMapState.foundIndex]}`);
+      triggerPillMessage('bookmapActionPill', `Tap ${BOOK_FIND_SEQUENCE[bookMapState.foundIndex]}`);
       return;
     }
     if (b.id === 'vocab-scan') {
       if (!state.wordTaps.length) {
-        triggerPillMessage('vocabActionPill', 'Select 1-2 Words');
+        triggerPillMessage('vocabActionPill', 'Tap & Highlight Words');
         return;
       } else if (!state.scrolledToEnd) {
-        triggerPillMessage('vocabActionPill', 'Finish Reading');
+        triggerPillMessage('vocabActionPill', 'Scroll to End of Text');
         return;
       }
     }
     if (b.id === 'char-verse-pick' && state.charVerse === null) { 
-      triggerPillMessage('verseActionPill', 'Select a Verse'); 
+      triggerPillMessage('verseActionPill', 'Tap a Verse to Select'); 
       return; 
     }
     if (b.id === 'char-coaching' && !(state.trait && state.trait.trim())) { 
@@ -3181,7 +3044,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key.toLowerCase() === 'f' && e.target.tagName !== 'INPUT') toggleFullScreen();
 });
 
-/* TAP-ZONE + SWIPE NAVIGATION */
 (function initGestureNav(){
   const stageEl = document.getElementById('stage');
   if (!stageEl) return;
@@ -3234,7 +3096,6 @@ document.addEventListener('keydown', (e) => {
 const passageScrollElInit = document.getElementById('passageScrollEl');
 if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPassageScroll, { passive: true });
 
-/* ===================== DEV MODE ===================== */
 let devMode = false;
 let devTapCount = 0;
 let devLastTapTime = 0;
@@ -3555,7 +3416,6 @@ function copyAllDevNotes(){
   tryCopyAllNotes();
 }
 
-// ==================== INITIALIZATION ====================
 initNotches();
 applyPassageFontScale();
 applyCharFontScale();
