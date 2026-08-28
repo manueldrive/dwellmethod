@@ -1041,7 +1041,7 @@
     .circle-hero{ width: clamp(340px, 46vh, 460px); height: clamp(340px, 46vh, 460px); padding:36px; border-width:5px; box-shadow:8px 8px 0 var(--ink); }
     .circle-hero .arc-stem-text{ font-size:15px; letter-spacing:1.4px; margin-bottom:12px; }
     .circle-hero .label-god-is{ font-size:clamp(34px, 4.4vh, 44px); margin-bottom:14px; }
-    .circle-hero .static-trait{ font-size:clamp(30px, 3.8vh, 38px); border-bottom-width:4px; padding:4px 18px; }
+    .circle-hero .static-trait{ font-size:clamp(30px, 3.8vh, 38px); border-bottom-width:4px; padding:4px 18px; margin-bottom:6px; }
     .blank-input{ font-size:clamp(24px, 3.2vh, 32px); border-bottom-width:4px; }
 
     #beat-2 .circle-hero{ 
@@ -1126,6 +1126,13 @@
   .w.hl-lime{ background: rgba(195, 245, 60, 0.5); font-weight: 700; }
   .w.hl-purple{ background: rgba(168, 85, 247, 0.35); font-weight: 700; }
   .w.hl-pink{ background: rgba(244, 63, 94, 0.40); font-weight: 700; }
+
+  .w.phrase-term{
+    white-space: nowrap;
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(0,0,0,.35);
+  }
 
   .verse-pick-list{ 
     overflow-y:auto; 
@@ -1261,11 +1268,11 @@
 
   /* In Context Callout Block */
   .gd-notebook-card {
-    margin-top: 10px;
+    margin-top: 4px;
     padding: 10px 12px;
     background: #f0f7ff;
     border: 2px solid var(--ink);
-    border-radius: 100px;
+    border-radius: 12px;
     box-shadow: 2.5px 2.5px 0 var(--ink);
   }
   .gd-notebook-badge {
@@ -1676,84 +1683,178 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
-// ==================== MERRIAM-WEBSTER INTERMEDIATE DICTIONARY ====================
-const MW_KEY = "eee0ff38-1739-4feb-89fe-868b69ab391b";
-const mwCache = new Map();
-
-// ==================== IN CONTEXT (NOTEBOOK SYNTHESIS MAP) ====================
+// ==================== IN CONTEXT (7TH GRADE SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
   synagogue: {
     title: "In Context",
-    insight: "The local community gathering place where Jewish people met every week to open the scrolls of Moses, pray, and sit under teaching."
-  },
-  sabbath: {
-    title: "In Context",
-    insight: "From the Hebrew 'Shabbat' ('to stop'). A weekly sacred rhythm pointing to God's continuous provision, liberation, and future restoration—which Jesus fulfills by bringing true healing and life."
+    insight: "A local Jewish meeting place for prayer, reading Scripture, and teaching."
   },
   shriveled: {
     title: "In Context",
-    insight: "A paralyzed, dried-up, or disabled hand. Under cultural tradition it rendered someone marginalized, but Jesus restores whole-body life in direct defiance of legalistic ritual rules."
+    insight: "A hand that was dried up, paralyzed, and completely lacking strength."
+  },
+  jesus: {
+    title: "In Context",
+    insight: "The Messiah and Son of God who brings heaven’s rest and healing to the world."
+  },
+  lawful: {
+    title: "In Context",
+    insight: "Actions allowed by God's law, which focus on loving people, doing good, and saving life."
+  },
+  sabbath: {
+    title: "In Context",
+    insight: "A weekly day of rest created to bring freedom, restoration, and life to humanity."
+  },
+  distressed: {
+    title: "In Context",
+    insight: "Deep sorrow and grief caused by seeing people's stubborn and unloving hearts."
+  },
+  stubborn: {
+    title: "In Context",
+    insight: "A closed-off, unyielding attitude that refuses to accept God's truth and mercy."
   },
   pharisees: {
     title: "In Context",
-    insight: "Highly educated Jewish leaders obsessed with strict rules and outward performance. Acting as self-appointed 'rule police,' they cared more about trapping people and protecting religious traditions than cultivating a real relationship with God."
+    insight: "Strict religious leaders obsessed with rules rather than showing compassion."
   },
   herodians: {
     title: "In Context",
-    insight: "A political faction loyal to the Roman-backed court of King Herod. Although normally theological rivals with the Pharisees, they joined forces in an unholy alliance to plot Jesus's death."
+    insight: "A political group loyal to King Herod that joined the Pharisees to oppose Jesus."
+  },
+  galilee: {
+    title: "In Context",
+    insight: "The northern region of ancient Israel where Jesus did much of His teaching and healing."
+  },
+  judea: {
+    title: "In Context",
+    insight: "The southern region of ancient Israel containing Jerusalem."
+  },
+  jerusalem: {
+    title: "In Context",
+    insight: "The capital city of Israel and the center of Jewish Temple worship and authority."
+  },
+  idumea: {
+    title: "In Context",
+    insight: "A region south of Judea from which large crowds traveled to see Jesus."
+  },
+  jordan: {
+    title: "In Context",
+    insight: "The main river in Israel; people crossed it from distant borders to reach Jesus."
+  },
+  tyre: {
+    title: "In Context",
+    insight: "A non-Jewish coastal city to the northwest where people heard of Jesus and came to Him."
+  },
+  sidon: {
+    title: "In Context",
+    insight: "An ancient non-Jewish coastal city north of Tyre whose residents traveled to see Jesus."
+  },
+  told: {
+    title: "In Context",
+    insight: "A practical instruction Jesus gave His disciples to keep the crowds from pushing against Him."
+  },
+  disciples: {
+    title: "In Context",
+    insight: "Followers and students who learn from Jesus and carry out His mission."
+  },
+  impure_spirits: {
+    title: "In Context",
+    insight: "Evil spiritual forces that cause harm but are forced to bow down and recognize Jesus."
+  },
+  son_of_god: {
+    title: "In Context",
+    insight: "A title showing Jesus’ divine authority as King, which even evil spirits recognize."
+  },
+  appointed: {
+    title: "In Context",
+    insight: "Chosen and set apart by Jesus for a specific mission and leadership role."
   },
   demons: {
     title: "In Context",
-    insight: "Dark spiritual powers and oppressive forces that rebel against God. Mark highlights that they instantly recognize Jesus's supreme authority as the true Son of God."
+    insight: "Evil spiritual forces that Jesus overpowers and casts out."
   },
-  apostles: {
+  judas_iscariot: {
     title: "In Context",
-    insight: "Ordinary people specifically chosen, called by name, and sent out with authority to participate as Jesus's covenant partners in announcing God's Kingdom."
+    insight: "One of the twelve chosen disciples who later betrayed Jesus."
   },
-  boanerges: {
+  possessed: {
     title: "In Context",
-    insight: "An Aramaic nickname meaning 'Sons of Thunder' given to James and John, pointing to their bold, fiery, and zealous personalities."
-  },
-  zealot: {
-    title: "In Context",
-    insight: "A member of a passionate Jewish patriotic movement fiercely opposed to Roman rule. Jesus calls Simon the Zealot into the same circle as Matthew the former tax collector, uniting sworn enemies."
+    insight: "A false accusation that Jesus was controlled by evil spirits when He was actually defeating them."
   },
   beelzebul: {
     title: "In Context",
-    insight: "An ancient title for Satan, the prince of demons. Hostile teachers accused Jesus of using demonic power because they refused to admit the Holy Spirit was at work."
+    insight: "A name used by religious leaders to refer to Satan, the prince of demons."
   },
   parables: {
     title: "In Context",
-    insight: "Short, layered stories Jesus used to reveal the upside-down reality of God's Kingdom to receptive hearts while confronting the stubborn assumptions of religious critics."
+    insight: "Short stories and illustrations Jesus used to teach deeper spiritual truths."
+  },
+  satan: {
+    title: "In Context",
+    insight: "The main enemy of God and chief adversary of goodness."
+  },
+  forgiven: {
+    title: "In Context",
+    insight: "Pardoned and freed from guilt through God’s mercy."
+  },
+  sins: {
+    title: "In Context",
+    insight: "Wrong actions and choices that break God's moral law and hurt relationships."
+  },
+  utter: {
+    title: "In Context",
+    insight: "To speak words out loud, including reckless or harmful statements."
   },
   blasphemes: {
     title: "In Context",
-    insight: "Speaking slander against God's divine authority. In Mark 3, it specifically refers to stubbornly looking at the pure, loving work of the Holy Spirit and calling it demonic."
+    insight: "Speaking evil of God or stubbornly calling the Holy Spirit's good work demonic."
   },
-  blasphemy: {
+  holy_spirit: {
     title: "In Context",
-    insight: "Speaking evil against God or attributing God's Spirit to evil. In Old Testament law, it carried the severe penalty of stoning because it was an outright rejection of God."
+    insight: "God's active personal presence and power working in the world."
+  },
+  eternal: {
+    title: "In Context",
+    insight: "Lasting forever without an end."
+  },
+  sin: {
+    title: "In Context",
+    insight: "Failing to love God and others as He intended."
+  },
+  impure_spirit: {
+    title: "In Context",
+    insight: "A demonic force associated with evil and opposition to God."
   }
 };
 
-async function fetchMwIntermediate(cleanTerm) {
-  if (mwCache.has(cleanTerm)) return mwCache.get(cleanTerm);
-  try {
-    const res = await fetch(`https://www.dictionaryapi.com/api/v3/references/sd3/json/${encodeURIComponent(cleanTerm)}?key=${MW_KEY}`);
-    const data = await res.json();
-    if (Array.isArray(data) && data.length > 0 && typeof data[0] === 'object' && data[0].shortdef && data[0].shortdef.length) {
-      const result = {
-        term: data[0].hwi && data[0].hwi.hw ? data[0].hwi.hw.replace(/\*/g, '') : cleanTerm,
-        def: data[0].shortdef[0],
-        source: "Merriam-Webster Intermediate Dictionary"
-      };
-      mwCache.set(cleanTerm, result);
-      return result;
+// Map alternate forms to their synthesis key
+NOTEBOOK_SYNTHESIS['impure spirits'] = NOTEBOOK_SYNTHESIS['impure_spirits'];
+NOTEBOOK_SYNTHESIS['son of god'] = NOTEBOOK_SYNTHESIS['son_of_god'];
+NOTEBOOK_SYNTHESIS['judas iscariot'] = NOTEBOOK_SYNTHESIS['judas_iscariot'];
+NOTEBOOK_SYNTHESIS['holy spirit'] = NOTEBOOK_SYNTHESIS['holy_spirit'];
+NOTEBOOK_SYNTHESIS['impure spirit'] = NOTEBOOK_SYNTHESIS['impure_spirit'];
+
+// ==================== MULTI-WORD PHRASE TERMS ====================
+const PHRASE_TERMS = [
+  { norm: ['son','of','god'], key: 'son_of_god' },
+  { norm: ['holy','spirit'], key: 'holy_spirit' },
+  { norm: ['impure','spirits'], key: 'impure_spirits' },
+  { norm: ['impure','spirit'], key: 'impure_spirit' },
+  { norm: ['judas','iscariot'], key: 'judas_iscariot' }
+].sort((a,b) => b.norm.length - a.norm.length);
+
+const PHRASE_KEYS = new Set(PHRASE_TERMS.map(p => p.key));
+
+function matchPhraseAt(normedWords, wi){
+  for (const p of PHRASE_TERMS){
+    const len = p.norm.length;
+    if (wi + len > normedWords.length) continue;
+    let ok = true;
+    for (let k = 0; k < len; k++){
+      if (normedWords[wi+k] !== p.norm[k]) { ok = false; break; }
     }
-  } catch (err) {
-    console.warn(`MW Intermediate API lookup failed for "${cleanTerm}":`, err);
+    if (ok) return { key: p.key, len };
   }
-  mwCache.set(cleanTerm, null);
   return null;
 }
 
@@ -1836,9 +1937,16 @@ function passageWordsHTML(){
     let wi = 0;
     while (wi < words.length) {
       const marker = wi === 0 ? `<span class="verse-num-inline">${verseNum}</span>` : '';
-      const norm = normed[wi];
-      pieces.push(`${marker}<span class="w" data-word="${norm}" onclick="tapWord(event,this)">${words[wi]}</span>`);
-      wi++;
+      const phraseMatch = matchPhraseAt(normed, wi);
+      if (phraseMatch) {
+        const span = words.slice(wi, wi + phraseMatch.len).join(' ');
+        pieces.push(`${marker}<span class="w phrase-term" data-word="${phraseMatch.key}" onclick="tapWord(event,this)">${span}</span>`);
+        wi += phraseMatch.len;
+      } else {
+        const norm = normed[wi];
+        pieces.push(`${marker}<span class="w" data-word="${norm}" onclick="tapWord(event,this)">${words[wi]}</span>`);
+        wi++;
+      }
     }
     out += pieces.join(' ') + ' ';
     if (paragraphEnds.includes(verseNum) && verseNum !== PASSAGE_LAST_VERSE) out += '</p><p class="flow-para">';
@@ -1855,13 +1963,13 @@ function versePickHTML(){
 }
 
 const BOOK_MAP_SECTIONS = [
-  // OLD TESTAMENT (Purple Spectrum Flow: Light Lavender -> Amethyst -> Royal Purple -> Deep Violet)
+  // OLD TESTAMENT
   { title:'Torah (Law)', testament:'Old', color:'#D8B4FE', darkText:true, desc:"The foundation of Israel's story and God's covenant", books:[['Genesis',50,38262],['Exodus',40,32685],['Leviticus',27,24541],['Numbers',36,32896],['Deuteronomy',34,28352]] },
   { title:'History', testament:'Old', color:'#C084FC', darkText:true, desc:"Israel's journey from conquest to exile", books:[['Joshua',24,18854],['Judges',21,18966],['Ruth',4,2574],['1 Samuel',31,25048],['2 Samuel',24,20600],['1 Kings',22,24513],['2 Kings',25,23517],['1 Chronicles',29,20365],['2 Chronicles',36,26069],['Ezra',10,7440],['Nehemiah',13,10480],['Esther',10,5633]] },
   { title:'Wisdom & Poetry', testament:'Old', color:'#A855F7', darkText:false, desc:'Songs, proverbs, and honest reflections on life', books:[['Job',42,18098],['Psalms',150,42704],['Proverbs',31,15038],['Ecclesiastes',12,5579],['Song of Solomon',8,2658]] },
   { title:'Prophets', testament:'Old', color:'#7E22CE', darkText:false, desc:"God's messengers calling His people back", books:[['Isaiah',66,37036],['Jeremiah',52,42654],['Lamentations',5,3411],['Ezekiel',48,39401],['Daniel',12,11602],['Hosea',14,5174],['Joel',3,2033],['Amos',9,4216],['Obadiah',1,669],['Jonah',4,1320],['Micah',7,3152],['Nahum',3,1284],['Habakkuk',3,1475],['Zephaniah',3,1616],['Haggai',2,1130],['Zechariah',14,6443],['Malachi',4,1781]] },
   
-  // NEW TESTAMENT (Blue Spectrum Flow: Sky Cyan -> Bright Azure -> Ocean Blue -> Deep Indigo)
+  // NEW TESTAMENT
   { title:'Gospels', testament:'New', color:'#38BDF8', darkText:true, desc:"Jesus's life, death & resurrection", books:[['Matthew',28,23343],['Mark',16,14949],['Luke',24,25640],['John',21,18658]] },
   { title:'Church History', testament:'New', color:'#0284C7', darkText:false, desc:"The Holy Spirit's arrival and church growth", books:[['Acts',28,24229]] },
   { title:'Epistles (Letters)', testament:'New', color:'#1D4ED8', darkText:false, desc:'Letters guiding and strengthening early believers', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430],['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
@@ -2418,14 +2526,12 @@ const beats = [
           </div>` }
 ];
 
-/* UPDATED SECTION LABELS */
 const sectionLabels = [
   'Guide', 'Discover', 'Discover',
   'Prayer', 'Word Work',
   'Word Work', 'Learn', 'Learn', 'Live'
 ];
 
-/* UPDATED SECTION COLOR KEYS */
 const sectionColorKeys = ['', 'discover', 'discover', '', 'wordwork', 'wordwork', 'learn', 'learn', 'live'];
 
 function initNotches(){
@@ -2600,7 +2706,7 @@ function renderSynthesisPanel(){
       html += `<div class="mg-defined-list">`;
       defined.forEach((w, i) => {
         const note = NOTEBOOK_SYNTHESIS[w.norm];
-        const defText = w.def || (note ? note.insight : '');
+        const defText = note ? note.insight : '';
         html += `
           <div class="mg-item-row">
             <span class="mg-num-badge">${i + 1}</span>
@@ -2619,7 +2725,7 @@ function renderSynthesisPanel(){
 
     if (defined.length === 0 && undefinedWords.length === 0) {
       html = `<div class="mg-badge-header"><i class="fa-solid fa-book"></i> Defined Terms</div>
-              <div class="gd-empty" style="padding-top:4px;">No terms highlighted yet. Highlight words on the Word Work slide to generate definitions here.</div>`;
+              <div class="gd-empty" style="padding-top:4px;">No terms highlighted yet. Highlight words on the Word Work slide to view insights here.</div>`;
     }
 
     mobileCard.innerHTML = html;
@@ -2741,7 +2847,7 @@ function adjustCharFont(delta){
   updateNavShell();
 }
 
-async function tapWord(e, el){
+function tapWord(e, el){
   e.stopPropagation();
   const key = el.dataset.word;
   if (!key) return;
@@ -2757,7 +2863,6 @@ async function tapWord(e, el){
       el.classList.add(cls);
       state.wordTaps = state.wordTaps.filter(w => w.el !== el);
       state.wordTaps.push({ el, word: rawWord, key, isStop });
-      await fetchMwIntermediate(key);
     } else {
       state.wordTaps = state.wordTaps.filter(w => w.el !== el);
     }
@@ -2773,7 +2878,6 @@ async function tapWord(e, el){
       el.classList.add('flagged');
       state.wordTaps = state.wordTaps.filter(w => w.el !== el);
       state.wordTaps.push({ el, word: rawWord, key, isStop });
-      await fetchMwIntermediate(key);
     }
   }
   updateNavShell();
@@ -2803,15 +2907,12 @@ function gatherGlossaryData(){
   const seen = new Set();
 
   state.wordTaps.forEach(w => {
-    const norm = normWord(w.word);
+    const norm = PHRASE_KEYS.has(w.key) ? w.key : normWord(w.word);
     if (seen.has(norm)) return;
     seen.add(norm);
 
-    const cached = mwCache.get(norm);
-    if (cached) {
-      defined.push({ raw: w.word, norm, word: cached.term, def: cached.def, source: cached.source });
-    } else if (NOTEBOOK_SYNTHESIS[norm]) {
-      defined.push({ raw: w.word, norm, word: w.word, def: null, source: null });
+    if (NOTEBOOK_SYNTHESIS[norm]) {
+      defined.push({ raw: w.word, norm, word: w.word });
     } else {
       undefinedWords.push(w.word);
     }
@@ -2826,7 +2927,7 @@ function renderGlossaryDrawer(){
   const { defined, undefinedWords } = gatherGlossaryData();
 
   if (defined.length === 0 && undefinedWords.length === 0) {
-    body.innerHTML = `<div class="gd-empty">Highlight a word in the passage to look it up in Merriam-Webster Intermediate Dictionary.</div>`;
+    body.innerHTML = `<div class="gd-empty">Highlight a word in the passage to view its insight.</div>`;
     return;
   }
 
@@ -2840,19 +2941,12 @@ function renderGlossaryDrawer(){
           <p class="gd-notebook-text">${note.insight}</p>
         </div>` : '';
 
-      const mwDefHtml = w.def ? `
-        <p style="margin:0 0 6px 0;">${w.def}</p>
-        <span style="display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:800; opacity:0.6; text-transform:uppercase; letter-spacing:0.5px;">
-          Source: ${w.source}
-        </span>` : '';
-
       return `
       <div class="gd-row" id="gdRow${i}">
         <button class="gd-row-term" onclick="event.stopPropagation(); toggleGlossaryRow(${i});">
           <span>${w.word}</span><i class="fa-solid fa-chevron-down"></i>
         </button>
         <div class="gd-row-def">
-          ${mwDefHtml}
           ${notebookCardHtml}
         </div>
       </div>`;
