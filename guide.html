@@ -452,22 +452,22 @@
 
   /* ALL-BOOKS UNIFIED FLEX GRID */
   .all-books-unified-grid {
+    --grid-gap: clamp(6px, 1vh, 12px);
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
     align-items: stretch;
     justify-content: flex-start;
-    gap: clamp(6px, 1vh, 12px);
+    gap: var(--grid-gap);
     width: 100%;
     height: 100%;
     padding: 2px;
     overflow: hidden;
   }
   .book-pill { 
-    flex: 1 1 calc(14.28% - clamp(6px, 1vh, 12px)); 
-    min-width: clamp(60px, 8vw, 110px);
+    flex: 0 0 calc(14.285% - (var(--grid-gap) * 6 / 7)); 
     background: var(--sec-color); 
-    border: 2px solid var(--ink); 
+    border: 2.5px solid var(--ink); 
     border-radius: 100px; 
     padding: clamp(6px, 1.2vh, 12px) clamp(8px, 1.2vw, 16px); 
     display: flex; 
@@ -486,18 +486,27 @@
   }
   .book-pill.show { opacity: 1; transform: scale(1); }
   .book-pill.quest-found { 
-    background: #FFF; 
-    color: var(--ink); 
-    text-shadow: none; 
-    box-shadow: 0 0 0 2px var(--ink), 0 0 10px 2px rgba(195,245,60,.6); 
+    border-color: var(--ink); 
     font-weight: 900; 
+    animation: foundPillPulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
   }
-  .book-pill.quest-found i { font-size: .85em; }
+  @keyframes foundPillPulse {
+    0%, 100% {
+      box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px var(--lime);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 2px var(--ink), 0 0 0 9px rgba(195, 245, 60, 0.85), 0 0 16px rgba(195, 245, 60, 0.6);
+      transform: scale(1.03);
+    }
+  }
 
   @media (max-width: 767px) {
+    .all-books-unified-grid {
+      --grid-gap: 6px;
+    }
     .book-pill {
-      flex: 1 1 calc(20% - 6px);
-      min-width: 45px;
+      flex: 0 0 calc(20% - 4.8px);
       padding: 4px 6px;
       font-size: 10px;
     }
@@ -1243,7 +1252,7 @@
   .gd-empty{ font-family:'Inter', sans-serif; font-size:14px; opacity:.6; line-height:1.5; }
   .gd-row{ border: 2.5px solid var(--ink); border-radius: 12px; overflow: hidden; flex-shrink: 0; }
   .gd-row-term{
-    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    width: 100%; display: flex; align-items: center; justify-space-between;
     padding: 11px 14px; cursor: pointer; border: none;
     font-family: 'Space Grotesk', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 13.5px;
     background: #FFF; color: var(--ink); text-align: left;
@@ -1502,7 +1511,7 @@
   .dev-notes-overlay{ position:absolute; inset:0; z-index:200; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; padding:24px; }
   .dev-notes-panel{ background:#fff; color:var(--ink); border:4px solid var(--ink); border-radius:20px; padding:20px; width:100%; max-width:520px; max-height:85vh; overflow-y:auto; box-shadow:6px 6px 0 var(--ink); display:flex; flex-direction:column; gap:12px; font-family:'Inter',sans-serif; }
   .dev-notes-panel h3{ font-family:'Space Grotesk',sans-serif; margin:0; font-size:16px; text-transform:uppercase; }
-  .dev-notes-panel textarea{ width:100%; min-height:90px; border:2.5px solid var(--ink); border-radius:10px; padding:10px; font-family:'Inter',sans-serif; font-size:14px; resize:vertical; }
+  .dev-notes-panel textarea{ width:100%; min-height:90px; border:2.5px solid var(--ink); border-radius:100px; padding:10px; font-family:'Inter',sans-serif; font-size:14px; resize:vertical; }
   .dev-notes-panel .dnp-row{ display:flex; gap:10px; }
   .dev-notes-panel button.dnp-btn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:13px; text-transform:uppercase; background:var(--lime); border:2.5px solid var(--ink); border-radius:100px; padding:10px 16px; cursor:pointer; }
   .dev-notes-panel button.dnp-close{ background:#eee; }
@@ -1861,8 +1870,7 @@ const BOOK_MAP_SECTIONS = [
   { title:'Prophets', testament:'Old', color:'#8B5E3C', desc:"God's messengers calling His people back — some short, some long", books:[['Isaiah',66,37036],['Jeremiah',52,42654],['Lamentations',5,3411],['Ezekiel',48,39401],['Daniel',12,11602],['Hosea',14,5174],['Joel',3,2033],['Amos',9,4216],['Obadiah',1,669],['Jonah',4,1320],['Micah',7,3152],['Nahum',3,1284],['Habakkuk',3,1475],['Zephaniah',3,1616],['Haggai',2,1130],['Zechariah',14,6443],['Malachi',4,1781]] },
   { title:'Gospels', testament:'New', color:'#38BDF8', desc:"Jesus's life, death & resurrection", books:[['Matthew',28,23343],['Mark',16,14949],['Luke',24,25640],['John',21,18658]] },
   { title:'Church History', testament:'New', color:'#22C55E', desc:"The Holy Spirit's arrival and church growth", books:[['Acts',28,24229]] },
-  { title:"Paul's Letters", testament:'New', color:'#A855F7', desc:'Helping churches live out the gospel', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430]] },
-  { title:'General Letters', testament:'New', color:'#F43F5E', desc:'Guidance for early believers', books:[['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
+  { title:'Epistles (Letters)', testament:'New', color:'#A855F7', desc:'Letters guiding and strengthening early believers', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430],['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
   { title:'Prophecy', testament:'New', color:'#4338CA', desc:'A visionary look at how it all ends', books:[['Revelation',22,11952]] }
 ];
 
@@ -2004,7 +2012,7 @@ function sectionTileHTML(r){
 function bookPillHTML(name, sectionColor){
   const abbrev = BOOK_ABBREV[name] || name;
   const isQuestBook = BOOK_FIND_SEQUENCE.includes(name);
-  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}" style="--sec-color:${sectionColor};">${isQuestBook ? '<i class="fa-solid fa-check"></i>' : ''}${abbrev}</div>`;
+  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}" style="--sec-color:${sectionColor};">${abbrev}</div>`;
 }
 
 function renderTestamentGateIntoCanvas(){
