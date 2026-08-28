@@ -589,6 +589,10 @@
     max-width: 1300px;
     margin: 0 auto;
     overflow: hidden;
+    --circle-d-orig: clamp(140px, min(76vw, 40vh), 900px);
+    --card-clear-peek: calc(0.4 * var(--circle-d-orig));
+    --circle-d: calc(var(--circle-d-orig) * 2.5);
+    --peek-h: calc(0.4 * var(--circle-d));
   }
   .synthesis-split-grid {
     display: grid;
@@ -597,14 +601,14 @@
     flex: 1;
     min-height: 0;
     width: 100%;
-    margin-bottom: clamp(130px, 20vh, 200px);
+    margin-bottom: calc(var(--card-clear-peek) * 0.35);
   }
   @media (max-width: 767px) {
     .synthesis-split-grid {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 140px;
+      margin-bottom: calc(var(--card-clear-peek) * 0.35);
     }
   }
   .synthesis-panel {
@@ -688,33 +692,35 @@
     box-shadow: 3px 3px 0 rgba(0,0,0,0.25);
   }
 
-  /* ==================== ANCHOR POSITIONED SO A HEIGHT-CONSISTENT SLICE IS VISIBLE ====================
-     Diameter still scales with width (keeps the wide, gentle arc silhouette), but how much of the
-     circle actually peeks above the bottom edge is driven by height alone via calc(), so it stays a
-     small, sane amount on short landscape screens instead of ballooning with vw. */
+  /* ==================== ANCHOR — 150% BIGGER, STILL 40% OF ITSELF VISIBLE ====================
+     --circle-d is 2.5x the original size-safe diameter (--circle-d-orig, still bounded by both
+     width and height so it stays sane on short screens). The circle's own peek (--peek-h) is 40%
+     of that bigger diameter, but the cards' margin-bottom deliberately keeps referencing the
+     ORIGINAL --card-clear-peek (unscaled) so the rectangles above are completely unaffected by
+     the circle's size — only the circle grew; the reserved card space did not. */
   .synthesis-bottom-anchor {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: clamp(600px, 76vw, 960px);
-    height: clamp(600px, 76vw, 960px);
-    bottom: calc(-1 * clamp(600px, 76vw, 960px) + clamp(56px, 16vh, 150px));
+    width: var(--circle-d);
+    height: var(--circle-d);
+    bottom: calc(-1 * var(--circle-d) + var(--peek-h));
     border-radius: 50%;
     background: #FFF;
     border: 5px solid var(--ink);
-    box-shadow: 0 0 0 8px rgba(255, 199, 44, 0.55), 0 -8px 0 var(--ink);
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.45), 0 -6px 0 var(--ink);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: clamp(10px, 1.8vh, 28px);
     z-index: 10;
     pointer-events: none;
-    animation: anchorGlowPulse 2.4s infinite ease-in-out;
     overflow: hidden;
+    animation: anchorGlowPulseWhite 4.5s infinite ease-in-out;
   }
-  @keyframes anchorGlowPulse {
-    0%, 100% { box-shadow: 0 0 0 6px rgba(255, 199, 44, 0.4), 0 -8px 0 var(--ink); }
-    50% { box-shadow: 0 0 0 14px rgba(255, 199, 44, 0.8), 0 -8px 0 var(--ink); }
+  @keyframes anchorGlowPulseWhite {
+    0%, 100% { box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.3), 0 -6px 0 var(--ink); }
+    50% { box-shadow: 0 0 0 18px rgba(255, 255, 255, 0.8), 0 -6px 0 var(--ink); }
   }
   .synthesis-bottom-anchor .anchor-arc-kicker {
     font-family: 'Space Grotesk', sans-serif;
@@ -740,7 +746,18 @@
   }
 
   /* GOD SHOT CIRCLE DESIGN */
-  .circle-hero-container{ position:relative; z-index:2; flex-shrink:0; display:flex; justify-content:center; align-items:center; }
+  .circle-hero-container{ position:relative; z-index:2; flex-shrink:0; display:flex; flex-direction:column; gap:clamp(10px, 1.8vh, 18px); justify-content:center; align-items:center; }
+  .trait-input-row{ display:flex; align-items:center; justify-content:center; gap:8px; width:88%; max-width:88%; }
+  .trait-input-row .blank-input{ flex:1; width:auto; max-width:none; min-width:0; }
+  .trait-add-btn{ flex-shrink:0; width:28px; height:28px; border-radius:50%; border:2.5px solid var(--ink); background:#FFF; color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:12px; transition:background .15s ease, transform .1s ease; }
+  .trait-add-btn:hover{ background:var(--lime); }
+  .trait-add-btn:active{ transform:scale(.92); }
+  .trait-chip-row{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:280px; }
+  .trait-chip{ display:inline-flex; align-items:center; gap:7px; background:#FFF; border:2px solid var(--ink); border-radius:100px; padding:4px 5px 4px 13px; font-family:'Inter', sans-serif; font-weight:800; font-size:13px; color:var(--ink); text-transform:capitalize; }
+  .trait-chip .chip-remove-btn{ background:var(--ink); color:#FFF; border:none; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; cursor:pointer; flex-shrink:0; padding:0; }
+  .trait-cycle-dots{ display:flex; align-items:center; gap:7px; }
+  .trait-cycle-dot{ width:7px; height:7px; border-radius:50%; background:rgba(13,13,13,.22); transition:background .15s ease, transform .15s ease; }
+  .trait-cycle-dot.active{ background:var(--purple); transform:scale(1.25); }
   .circle-hero{ width: clamp(160px, 22vh, 220px); height: clamp(160px, 22vh, 220px); border-radius:50%; background:#FFF; color:var(--ink); border:3.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:12px; flex-shrink:0; }
   .circle-hero .arc-stem-text{ font-family:'Space Grotesk', sans-serif; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:1px; opacity:.65; margin-bottom:4px; }
   .circle-hero .label-god-is{ font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(17px, 2.4vh, 22px); letter-spacing:-.5px; text-transform:uppercase; line-height:1; margin-bottom:6px; }
@@ -853,13 +870,23 @@
     font-weight:400; 
     max-width:820px; 
   }
+  /* Column width tracks available WIDTH (more width = a wider reading column, same as before) */
+  @media (min-width: 768px) {
+    .passage-scroll{ max-width:960px; }
+    .flow-para{ max-width:960px; }
+  }
+  @media (min-width: 1200px) {
+    .passage-scroll{ max-width:1300px; }
+    .flow-para{ max-width:1300px; }
+  }
+  /* Font size tracks available HEIGHT (a short landscape phone needs smaller text
+     regardless of how wide it is — see the landscape-height responsive rework) */
   @media (min-height: 501px) {
-    .passage-scroll{ max-width:960px; padding-bottom:36px; }
-    .flow-para{ font-size:calc(clamp(20px, 2.4vw, 26px) * var(--passage-font-scale, 1)); line-height:1.8; max-width:960px; margin-bottom:26px; }
+    .passage-scroll{ padding-bottom:36px; }
+    .flow-para{ font-size:calc(clamp(20px, 2.4vw, 26px) * var(--passage-font-scale, 1)); line-height:1.8; margin-bottom:26px; }
   }
   @media (min-height: 900px) {
-    .passage-scroll{ max-width:1300px; }
-    .flow-para{ font-size:calc(clamp(25px, 2vw, 32px) * var(--passage-font-scale, 1)); line-height:1.85; max-width:1300px; }
+    .flow-para{ font-size:calc(clamp(25px, 2vw, 32px) * var(--passage-font-scale, 1)); line-height:1.85; }
   }
   .verse-num-inline{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--purple); font-size:.65em; vertical-align:super; margin:0 2px 0 6px; }
   
@@ -1013,33 +1040,33 @@
   }
   .video-tab{
     position: fixed;
-    right: 0;
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
     z-index: 130;
     background: var(--purple);
     color: #FFF;
     border: 3px solid var(--ink);
-    border-right: none;
-    border-radius: 14px 0 0 14px;
+    border-left: none;
+    border-radius: 0 14px 14px 0;
     padding: 16px 9px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    box-shadow: -4px 4px 0 var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    transition: right .3s ease, transform .15s ease;
+    transition: left .3s ease, transform .15s ease;
   }
-  .video-tab span{ writing-mode: vertical-rl; }
+  .video-tab span{ writing-mode: vertical-rl; transform: rotate(180deg); }
   .video-tab i{ font-size: 15px; }
   .video-tab:active{ transform: translateY(-50%) scale(0.96); }
-  .video-drawer.open .video-tab{ right: min(360px, 84vw); }
+  .video-drawer.open .video-tab{ left: min(360px, 84vw); }
   .video-drawer-scrim{
     position: fixed; inset: 0; z-index: 105;
     background: rgba(13,13,29,0.28);
@@ -1049,12 +1076,12 @@
   .video-drawer.open .video-drawer-scrim{ opacity: 1; pointer-events: auto; }
   .video-drawer-panel{
     position: fixed;
-    right: 0; top: 0; bottom: 0;
+    left: 0; top: 0; bottom: 0;
     width: min(360px, 84vw);
     background: #FFF;
-    border-left: 4px solid var(--ink);
-    box-shadow: -8px 0 0 rgba(0,0,0,0.12);
-    transform: translateX(100%);
+    border-right: 4px solid var(--ink);
+    box-shadow: 8px 0 0 rgba(0,0,0,0.12);
+    transform: translateX(-100%);
     transition: transform .3s ease;
     z-index: 110;
     display: flex;
@@ -1109,6 +1136,13 @@
   .dark-scripture-card{ background:var(--ink); color:#FFF; border:3.5px solid var(--ink); border-radius:20px; padding:clamp(16px, 2.4vh, 28px) clamp(18px, 2.5vw, 32px); box-shadow:4px 4px 0 rgba(0,0,0,0.25); position:relative; z-index:2; width:100%; }
   .dark-scripture-card .ref{ font-family:'Space Grotesk', sans-serif; font-size:clamp(12px, 1.6vh, 16px); font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--lime); margin-bottom:6px; }
   .dark-scripture-card .vt{ font-style:normal; font-family:'Inter',sans-serif; font-weight:700; font-size:clamp(14px, 2vh, 20px); line-height:1.5; opacity:.95; }
+  .verse-cycle-controls{ display:flex; align-items:center; justify-content:center; gap:14px; margin-top:clamp(10px, 1.8vh, 18px); }
+  .verse-cycle-btn{ background:rgba(255,255,255,.12); border:1.5px solid rgba(255,255,255,.35); color:#FFF; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:12px; flex-shrink:0; transition:background .15s ease; }
+  .verse-cycle-btn:hover{ background:rgba(255,255,255,.25); }
+  .verse-cycle-btn:active{ transform:scale(.92); }
+  .verse-cycle-dots{ display:flex; align-items:center; gap:7px; }
+  .verse-cycle-dot{ width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.3); transition:background .15s ease, transform .15s ease; }
+  .verse-cycle-dot.active{ background:var(--lime); transform:scale(1.25); }
   @media (min-width: 1024px) {
     .dark-scripture-card{ padding:44px 48px; border-radius:28px; border-width:4.5px; }
     .dark-scripture-card .ref{ font-size:22px; margin-bottom:14px; }
@@ -1515,7 +1549,7 @@ const passage = [
  "Whoever does God's will is my brother and sister and mother.\""
 ];
 
-const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2, charFontLevel:2 };
+const state = { index:0, wordTaps:[], charVerses:[], charShowIndex:0, trait:'', traits:[], finalTraitIndex:0, scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2, charFontLevel:2 };
 const FONT_LEVELS = [0.85, 0.925, 1, 1.1, 1.2, 1.3];
 let renderGen = 0;
 
@@ -2114,20 +2148,28 @@ const beats = [
 
   /* 7. GOD SHOT COACHING */
   { id:'char-coaching', type:'input', blockTap:true, isInteractive:true, clue:'Fill in the blank to continue', bgGrad:'var(--bg-learn)', text:'dark',
-    html:`<div class="sketch-lead-title" style="margin-bottom:8px;">Central Truth</div>
-          <div class="coaching-scene">
+    html:`<div class="coaching-scene">
             <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
               <div class="dark-scripture-card coaching-card">
                 <div class="ref" id="charRef"></div>
                 <div class="vt" id="charText"></div>
+                <div class="verse-cycle-controls" id="verseCycleControls" style="display:none;" onclick="event.stopPropagation();">
+                  <button class="verse-cycle-btn" onclick="event.stopPropagation(); cycleCharVerse(-1);" aria-label="Previous verse"><i class="fa-solid fa-chevron-left"></i></button>
+                  <div class="verse-cycle-dots" id="verseCycleDots"></div>
+                  <button class="verse-cycle-btn" onclick="event.stopPropagation(); cycleCharVerse(1);" aria-label="Next verse"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
               </div>
             </div>
             <div class="circle-hero-container">
               <div class="circle-hero coaching-circle">
                 <div class="arc-stem-text" id="arcStemText">GOD IS...</div>
                 <div class="label-god-is">GOD IS...</div>
-                <input class="blank-input" id="customTraitInput" placeholder="" oninput="handleCustomTrait(this.value)" onclick="event.stopPropagation();" />
+                <div class="trait-input-row" onclick="event.stopPropagation();">
+                  <input class="blank-input" id="customTraitInput" placeholder="" oninput="handleCustomTrait(this.value)" onkeydown="handleTraitKeydown(event)" onclick="event.stopPropagation();" />
+                  <button class="trait-add-btn" onclick="event.stopPropagation(); commitCurrentTrait();" aria-label="Add another characteristic"><i class="fa-solid fa-plus"></i></button>
+                </div>
               </div>
+              <div class="trait-chip-row" id="traitChipRow" onclick="event.stopPropagation();"></div>
             </div>
           </div>` },
 
@@ -2137,6 +2179,7 @@ const beats = [
             <div class="final-live-prompt">
               If God is <span class="final-trait-badge" id="finalGodIsTrait">Healer</span>, what should our response be?
             </div>
+            <div class="trait-cycle-dots" id="finalTraitCycleDots" style="display:none; margin-top:4px;"></div>
             <div class="final-desktop-timer">
               <button class="final-timer-btn" id="timerCard" onclick="event.stopPropagation(); toggleTimer();" title="Start Reflection Timer" aria-label="Start Reflection Timer">
                 <i class="fa-solid fa-play timer-icon" id="timerIcon"></i>
@@ -2157,7 +2200,7 @@ const beats = [
 const sectionLabels = [
   'Guide', 'Set the Scene', 'Set the Scene',
   'Prayer', 'Word Work',
-  'Expand', 'Learn', 'Learn', 'Live'
+  'Write', 'Central Truth', 'Central Truth', 'Live'
 ];
 
 const sectionColorKeys = ['', 'discover', 'discover', '', 'wordwork', 'expand', 'learn', 'learn', 'live'];
@@ -2238,8 +2281,8 @@ function updateNavShell(){
   let ready = false;
   if (b.id === 'book-map') ready = bookMapState.phase === 'done';
   else if (b.id === 'vocab-scan') ready = isVocabComplete();
-  else if (b.id === 'char-verse-pick') ready = state.charVerse !== null;
-  else if (b.id === 'char-coaching') ready = Boolean(state.trait && state.trait.trim());
+  else if (b.id === 'char-verse-pick') ready = state.charVerses.length > 0;
+  else if (b.id === 'char-coaching') ready = Boolean((state.trait && state.trait.trim()) || state.traits.length > 0);
   else ready = !b.blockTap;
   nextBtn.classList.toggle('ready', ready);
 
@@ -2274,10 +2317,12 @@ function updateNavShell(){
     `;
   } else if (b.id === 'char-verse-pick') {
     island.style.display = 'flex';
-    const isPicked = state.charVerse !== null;
+    const n = state.charVerses.length;
+    const isPicked = n > 0;
+    const label = n === 0 ? 'Spot a God Shot' : `<i class="fa-solid fa-check"></i> Continue (${n} selected)`;
     island.innerHTML = `
       <button class="action-gate-pill ${isPicked ? 'ready' : ''}" id="verseActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-        ${isPicked ? '<i class="fa-solid fa-check"></i> Continue' : 'Spot a God Shot'}
+        ${label}
       </button>
     `;
   } else {
@@ -2366,23 +2411,20 @@ function renderBeat(i){
   }
 
   if (b.id === 'char-coaching') {
-    const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-    document.getElementById('charRef').textContent = 'Mark 3:' + activeVerse;
-    document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
-    const arcStem = document.getElementById('arcStemText');
-    if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
+    if (state.charShowIndex >= state.charVerses.length) state.charShowIndex = 0;
+    renderCharCoachingCard();
+    renderTraitChips();
     const inp = document.getElementById('customTraitInput');
     if (inp) inp.value = state.trait || '';
-    requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
   } else if (b.id === 'char-verse-pick') {
-    document.querySelectorAll('#beat-'+i+' .verse-tile').forEach(t=>t.classList.toggle('selected', state.charVerse !== null && Number(t.dataset.v)===state.charVerse));
+    document.querySelectorAll('#beat-'+i+' .verse-tile').forEach(t=>t.classList.toggle('selected', state.charVerses.includes(Number(t.dataset.v))));
   } else if (b.id === 'vocab-scan') {
     checkPassageScroll();
   }
 
   const glossaryDrawerEl = document.getElementById('glossaryDrawer');
   if (glossaryDrawerEl) {
-    if (b.id === 'vocab-scan') {
+    if (b.id === 'vocab-scan' || b.id === 'tri-focal-synthesis') {
       glossaryDrawerEl.classList.add('gd-visible');
       renderGlossaryDrawer();
     } else {
@@ -2401,7 +2443,8 @@ function renderBeat(i){
     }
   }
 
-  if (b.id === 'final') renderFinalReflection();
+  stopFinalTraitTimer();
+  if (b.id === 'final') { renderFinalReflection(); startFinalTraitTimer(); }
   updateProgressBar();
   if (devMode) renderDevBubbles();
 }
@@ -2478,10 +2521,47 @@ async function tapWord(e, el){
   renderGlossaryDrawer();
 }
 
+function currentCharVerse(){
+  return state.charVerses.length > 0 ? state.charVerses[state.charShowIndex] : PASSAGE_START_VERSE;
+}
+
+function renderCharCoachingCard(){
+  const activeVerse = currentCharVerse();
+  document.getElementById('charRef').textContent = 'Mark 3:' + activeVerse;
+  document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
+  const arcStem = document.getElementById('arcStemText');
+  if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
+
+  const controls = document.getElementById('verseCycleControls');
+  const dotsWrap = document.getElementById('verseCycleDots');
+  const n = state.charVerses.length;
+  if (controls) controls.style.display = n > 1 ? 'flex' : 'none';
+  if (dotsWrap && n > 1) {
+    dotsWrap.innerHTML = state.charVerses.map((v, idx) =>
+      `<div class="verse-cycle-dot ${idx === state.charShowIndex ? 'active' : ''}"></div>`
+    ).join('');
+  }
+
+  requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
+}
+
+function cycleCharVerse(dir){
+  const n = state.charVerses.length;
+  if (n < 2) return;
+  state.charShowIndex = (state.charShowIndex + dir + n) % n;
+  renderCharCoachingCard();
+}
+
 function tapVerseTile(e, v){
   e.stopPropagation();
-  state.charVerse = (state.charVerse === v) ? null : v;
-  document.querySelectorAll('.verse-tile').forEach(t=>t.classList.toggle('selected', Number(t.dataset.v)===state.charVerse));
+  const idx = state.charVerses.indexOf(v);
+  if (idx === -1) {
+    state.charVerses.push(v);
+  } else {
+    state.charVerses.splice(idx, 1);
+  }
+  state.charShowIndex = 0;
+  document.querySelectorAll('.verse-tile').forEach(t=>t.classList.toggle('selected', state.charVerses.includes(Number(t.dataset.v))));
   updateNavShell();
 }
 
@@ -2574,15 +2654,94 @@ function toggleVideoDrawer(force){
   }
 }
 
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
 function handleCustomTrait(val){ 
   state.trait = val; 
   updateNavShell();
 }
 
+function handleTraitKeydown(e){
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    commitCurrentTrait();
+  }
+}
+
+function commitCurrentTrait(){
+  const val = (state.trait || '').trim();
+  if (!val) return;
+  const exists = state.traits.some(t => t.toLowerCase() === val.toLowerCase());
+  if (!exists) state.traits.push(val);
+  state.trait = '';
+  const inp = document.getElementById('customTraitInput');
+  if (inp) inp.value = '';
+  renderTraitChips();
+  updateNavShell();
+}
+
+function removeTrait(idx){
+  state.traits.splice(idx, 1);
+  renderTraitChips();
+  updateNavShell();
+}
+
+function renderTraitChips(){
+  const row = document.getElementById('traitChipRow');
+  if (!row) return;
+  row.innerHTML = state.traits.map((t, idx) => `
+    <span class="trait-chip">${escapeHtml(t)}<button class="chip-remove-btn" onclick="event.stopPropagation(); removeTrait(${idx});" aria-label="Remove ${escapeHtml(t)}"><i class="fa-solid fa-xmark"></i></button></span>
+  `).join('');
+}
+
+function getFinalTraitsList(){
+  if (state.traits.length > 0) return state.traits;
+  if (state.trait && state.trait.trim()) return [state.trait.trim()];
+  return ['Healer'];
+}
+
+function currentFinalTrait(){
+  const traits = getFinalTraitsList();
+  return traits[state.finalTraitIndex] || traits[0];
+}
+
+let finalTraitTimer = null;
+
+function startFinalTraitTimer(){
+  clearInterval(finalTraitTimer);
+  finalTraitTimer = null;
+  const traits = getFinalTraitsList();
+  if (traits.length < 2) return;
+  finalTraitTimer = setInterval(() => {
+    const list = getFinalTraitsList();
+    state.finalTraitIndex = (state.finalTraitIndex + 1) % list.length;
+    renderFinalReflection();
+  }, 4000);
+}
+
+function stopFinalTraitTimer(){
+  clearInterval(finalTraitTimer);
+  finalTraitTimer = null;
+}
+
 function renderFinalReflection(){
-  const trait = state.trait && state.trait.trim() ? state.trait.trim() : 'Healer';
+  const traits = getFinalTraitsList();
+  if (state.finalTraitIndex >= traits.length) state.finalTraitIndex = 0;
+  const trait = traits[state.finalTraitIndex];
   const traitEl = document.getElementById('finalGodIsTrait');
   if (traitEl) traitEl.textContent = trait;
+
+  const dotsWrap = document.getElementById('finalTraitCycleDots');
+  if (dotsWrap) {
+    dotsWrap.style.display = traits.length > 1 ? 'flex' : 'none';
+    if (traits.length > 1) {
+      dotsWrap.innerHTML = traits.map((t, idx) =>
+        `<div class="trait-cycle-dot ${idx === state.finalTraitIndex ? 'active' : ''}"></div>`
+      ).join('');
+    }
+  }
 }
 
 /* 2 MINUTE TIMER LOGIC */
@@ -2678,15 +2837,16 @@ function handleForwardAttempt(){
         return;
       }
     }
-    if (b.id === 'char-verse-pick' && state.charVerse === null) { 
+    if (b.id === 'char-verse-pick' && state.charVerses.length === 0) { 
       triggerPillMessage('verseActionPill', 'Select a Verse'); 
       return; 
     }
-    if (b.id === 'char-coaching' && !(state.trait && state.trait.trim())) { 
+    if (b.id === 'char-coaching' && !((state.trait && state.trait.trim()) || state.traits.length > 0)) { 
       triggerGateNavHint('charNavHint'); 
       return; 
     }
   }
+  if (b.id === 'char-coaching') commitCurrentTrait();
   goNext();
 }
 
@@ -2881,7 +3041,7 @@ function roundRectPath(ctx, x, y, w, h, r){
   ctx.arcTo(x + w, y, x + w, y + h, r);
   ctx.arcTo(x + w, y + h, x, y + h, r);
   ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y + x, y, r);
+  ctx.arcTo(x, y, x + r, y, r);
   ctx.closePath();
 }
 
@@ -2956,8 +3116,8 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 
 async function shareCentralTruthDirect(){
   try {
-    const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-    const traitText = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
+    const activeVerse = currentCharVerse();
+    const traitText = currentFinalTrait();
     const colorKey = SHARE_COLOR_KEYS[Math.floor(Math.random() * SHARE_COLOR_KEYS.length)];
     const canvas = drawCentralTruthCanvas(colorKey, activeVerse, traitText);
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
@@ -3004,9 +3164,9 @@ function selectShareColor(key){
 }
 
 function openShareOverlay(){
-  const activeVerse = state.charVerse || PASSAGE_START_VERSE;
+  const activeVerse = currentCharVerse();
   document.getElementById('shareArcStem').textContent = `MARK 3:${activeVerse}`;
-  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
+  document.getElementById('shareTraitText').textContent = currentFinalTrait();
   initShareSwatches();
   selectShareColor(state.shareColor || 'discover');
   document.getElementById('shareOverlay').style.display = 'flex';
