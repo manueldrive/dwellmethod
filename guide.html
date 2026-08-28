@@ -1132,9 +1132,7 @@
 
   .w.phrase-term{
     white-space: nowrap;
-    text-decoration: underline dotted;
-    text-underline-offset: 3px;
-    text-decoration-color: rgba(0,0,0,.35);
+    text-decoration: none;
   }
 
   .verse-pick-list{ 
@@ -1699,41 +1697,41 @@
 <script>
 // ==================== IN CONTEXT (7TH GRADE SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
-  synagogue: { title: "In Context", insight: "A local Jewish meeting place for prayer, reading Scripture, and teaching." },
-  shriveled: { title: "In Context", insight: "A hand that was dried up, paralyzed, and completely lacking strength." },
-  jesus: { title: "In Context", insight: "The Messiah and Son of God who brings heaven’s rest and healing to the world." },
-  lawful: { title: "In Context", insight: "Actions allowed by God's law, which focus on loving people, doing good, and saving life." },
-  sabbath: { title: "In Context", insight: "A weekly day of rest created to bring freedom, restoration, and life to humanity." },
-  distressed: { title: "In Context", insight: "Deep sorrow and grief caused by seeing people's stubborn and unloving hearts." },
-  stubborn: { title: "In Context", insight: "A closed-off, unyielding attitude that refuses to accept God's truth and mercy." },
-  pharisees: { title: "In Context", insight: "Strict religious leaders obsessed with rules rather than showing compassion." },
-  herodians: { title: "In Context", insight: "A political group loyal to King Herod that joined the Pharisees to oppose Jesus." },
-  galilee: { title: "In Context", insight: "The northern region of ancient Israel where Jesus did much of His teaching and healing." },
-  judea: { title: "In Context", insight: "The southern region of ancient Israel containing Jerusalem." },
-  jerusalem: { title: "In Context", insight: "The capital city of Israel and the center of Jewish Temple worship and authority." },
-  idumea: { title: "In Context", insight: "A region south of Judea from which large crowds traveled to see Jesus." },
-  jordan: { title: "In Context", insight: "The main river in Israel; people crossed it from distant borders to reach Jesus." },
-  tyre: { title: "In Context", insight: "A non-Jewish coastal city to the northwest where people heard of Jesus and came to Him." },
-  sidon: { title: "In Context", insight: "An ancient non-Jewish coastal city north of Tyre whose residents traveled to see Jesus." },
-  told: { title: "In Context", insight: "A practical instruction Jesus gave His disciples to keep the crowds from pushing against Him." },
-  disciples: { title: "In Context", insight: "Followers and students who learn from Jesus and carry out His mission." },
-  impure_spirits: { title: "In Context", insight: "Evil spiritual forces that cause harm but are forced to bow down and recognize Jesus." },
-  son_of_god: { title: "In Context", insight: "A title showing Jesus’ divine authority as King, which even evil spirits recognize." },
-  appointed: { title: "In Context", insight: "Chosen and set apart by Jesus for a specific mission and leadership role." },
-  demons: { title: "In Context", insight: "Evil spiritual forces that Jesus overpowers and casts out." },
-  judas_iscariot: { title: "In Context", insight: "One of the twelve chosen disciples who later betrayed Jesus." },
-  possessed: { title: "In Context", insight: "A false accusation that Jesus was controlled by evil spirits when He was actually defeating them." },
-  beelzebul: { title: "In Context", insight: "A name used by religious leaders to refer to Satan, the prince of demons." },
-  parables: { title: "In Context", insight: "Short stories and illustrations Jesus used to teach deeper spiritual truths." },
-  satan: { title: "In Context", insight: "The main enemy of God and chief adversary of goodness." },
-  forgiven: { title: "In Context", insight: "Pardoned and freed from guilt through God’s mercy." },
-  sins: { title: "In Context", insight: "Wrong actions and choices that break God's moral law and hurt relationships." },
-  utter: { title: "In Context", insight: "To speak words out loud, including reckless or harmful statements." },
-  blasphemes: { title: "In Context", insight: "Speaking evil of God or stubbornly calling the Holy Spirit's good work demonic." },
-  holy_spirit: { title: "In Context", insight: "God's active personal presence and power working in the world." },
-  eternal: { title: "In Context", insight: "Lasting forever without an end." },
-  sin: { title: "In Context", insight: "Failing to love God and others as He intended." },
-  impure_spirit: { title: "In Context", insight: "A demonic force associated with evil and opposition to God." }
+  synagogue: { title: "In Context", insight: "The local Jewish community building where people gathered every week to pray, study Scripture, and learn God’s word together." },
+  shriveled: { title: "In Context", insight: "Describes a hand or arm that is dried up, paralyzed, or completely without strength and movement." },
+  jesus: { title: "In Context", insight: "The promised King and Messiah who brings God’s healing, rescue, and new creation to humanity." },
+  lawful: { title: "In Context", insight: "Doing what God permits and approves, which centers on showing love, acting with justice, and protecting life." },
+  sabbath: { title: "In Context", insight: "A weekly day of rest designed by God for people to stop working, refresh, and enjoy His gifts." },
+  distressed: { title: "In Context", insight: "Feeling deep sorrow and emotional grief over someone else’s pain or stubbornness." },
+  stubborn: { title: "In Context", insight: "Having a hardened, closed-off heart that refuses to listen to truth, reason, or God’s mercy." },
+  pharisees: { title: "In Context", insight: "Highly educated religious leaders who strictly enforced rules and traditional customs but often lacked compassion." },
+  herodians: { title: "In Context", insight: "A political group that supported King Herod and teamed up with religious leaders against Jesus." },
+  galilee: { title: "In Context", insight: "The northern region of ancient Israel where Jesus lived, taught, and performed many miracles." },
+  judea: { title: "In Context", insight: "The southern region of ancient Israel surrounding the capital city of Jerusalem." },
+  jerusalem: { title: "In Context", insight: "The capital city of ancient Israel and the location of the holy Jewish Temple." },
+  idumea: { title: "In Context", insight: "A region south of Judea from which large crowds traveled to hear Jesus teach." },
+  jordan: { title: "In Context", insight: "The main river flowing through ancient Israel that people crossed to reach Jesus." },
+  tyre: { title: "In Context", insight: "An ancient coastal city northwest of Israel whose non-Jewish residents traveled to meet Jesus." },
+  sidon: { title: "In Context", insight: "A non-Jewish coastal city north of Tyre where people heard about Jesus and came to find Him." },
+  told: { title: "In Context", insight: "Giving clear, direct instructions on what to do." },
+  disciples: { title: "In Context", insight: "Students and followers who commit to learning from a teacher and living out their instructions." },
+  impure_spirits: { title: "In Context", insight: "Evil spiritual forces opposed to God that are forced to obey Jesus’ authority." },
+  son_of_god: { title: "In Context", insight: "A title showing Jesus’ unique divine identity, heavenly authority, and royal standing as King." },
+  appointed: { title: "In Context", insight: "Officially chosen, set apart, and assigned a special mission or job to complete." },
+  demons: { title: "In Context", insight: "Evil spiritual forces that work against God but are completely overpowered by Jesus." },
+  judas_iscariot: { title: "In Context", insight: "One of the twelve original disciples selected by Jesus who ultimately turned against Him." },
+  possessed: { title: "In Context", insight: "Being under the direct control or harmful influence of an evil spirit." },
+  beelzebul: { title: "In Context", insight: "A name used by critics to refer to Satan, the ruler of evil spirits." },
+  parables: { title: "In Context", insight: "Short everyday stories Jesus used to teach people how God’s Kingdom works." },
+  satan: { title: "In Context", insight: "A Hebrew title meaning \"The Adversary\" (while \"Devil\" in Greek means \"The Slanderer\"). He is the chief spiritual force of evil fighting against God’s goodness and authority." },
+  forgiven: { title: "In Context", insight: "Released from guilt and debt through mercy, having wrongdoings completely wiped away." },
+  sins: { title: "In Context", insight: "Missing the mark of God’s ideal by failing to love Him and love others properly." },
+  utter: { title: "In Context", insight: "To speak or pronounce words out loud." },
+  blasphemes: { title: "In Context", insight: "Insulting God, speaking evil about holy things, or claiming Satan is behind God’s good work." },
+  holy_spirit: { title: "In Context", insight: "God’s active personal presence and power living in people to guide, heal, and transform them." },
+  eternal: { title: "In Context", insight: "Lasting forever without end." },
+  sin: { title: "In Context", insight: "Missing the mark of God’s ideal by failing to love Him and love others properly." },
+  impure_spirit: { title: "In Context", insight: "A corrupt evil force that works against God’s good designs." }
 };
 
 NOTEBOOK_SYNTHESIS['impure spirits'] = NOTEBOOK_SYNTHESIS['impure_spirits'];
@@ -2682,7 +2680,7 @@ function renderBeat(i){
 
   const glossaryDrawerEl = document.getElementById('glossaryDrawer');
   if (glossaryDrawerEl) {
-    if (b.id === 'vocab-scan' || b.id === 'tri-focal-synthesis') {
+    if (devMode || b.id === 'vocab-scan' || b.id === 'tri-focal-synthesis') {
       glossaryDrawerEl.classList.add('gd-visible');
       renderGlossaryDrawer();
     } else {
@@ -2797,6 +2795,16 @@ function gatherGlossaryData(){
   const defined = [];
   const undefinedWords = [];
   const seen = new Set();
+
+  if (devMode) {
+    Object.keys(NOTEBOOK_SYNTHESIS).forEach(key => {
+      if (seen.has(key)) return;
+      seen.add(key);
+      const displayWord = key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      defined.push({ raw: displayWord, norm: key, word: displayWord });
+    });
+    return { defined, undefinedWords };
+  }
 
   state.wordTaps.forEach(w => {
     const norm = PHRASE_KEYS.has(w.key) ? w.key : normWord(w.word);
