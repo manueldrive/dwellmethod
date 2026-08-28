@@ -418,8 +418,17 @@
   .sec-tile:active { transform:scale(.97); }
   .sec-tile.shake { animation: shakeX .45s; }
   .sec-tile.found { border-color:#FFF; box-shadow:0 0 0 3px var(--ink); }
-  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(16px, 2.4vw, 27px) * var(--fit-scale, 1)); text-align:center; line-height:1.15; text-shadow:0 1px 3px rgba(0,0,0,.35); }
+  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(16px, 2.4vw, 27px) * var(--fit-scale, 1)); text-align:center; line-height:1.15; text-shadow:0 1px 3px rgba(0,0,0,.35); display:flex; flex-direction:column; align-items:center; gap:4px; }
   .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:#FFF; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--fit-scale, 1)); text-align:center; opacity:.92; margin-top:calc(6px * var(--fit-scale, 1)); line-height:1.35; max-width:92%; }
+  
+  /* Mobile adjustments for quest cards */
+  @media (max-width: 767px) {
+    .tp-card .tp-desc,
+    .sec-tile .sec-desc {
+      display: none !important;
+    }
+  }
+
   .testament-side-label { position:absolute; left:0; display:flex; align-items:center; justify-content:center; overflow:hidden; pointer-events:none; }
   .testament-side-label span { writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:calc(clamp(9px, 1.1vw, 12px) * var(--fit-scale, 1)); text-transform:uppercase; letter-spacing:calc(1px * var(--fit-scale, 1)); color:var(--ink); opacity:.65; white-space:nowrap; }
 
@@ -442,6 +451,7 @@
   }
 
   .book-pill-wrap { position:absolute; box-sizing:border-box; display:flex; flex-wrap:wrap; align-content:flex-start; align-items:flex-start; gap:calc(6px * var(--pill-scale, 1)); padding:calc(8px * var(--pill-scale, 1)); overflow:hidden; border:2px dashed var(--sec-color); border-radius:14px; }
+  .book-pill-wrap.unframed { border:none !important; border-radius:0 !important; background:transparent !important; overflow:visible !important; }
   .book-pill { flex:0 0 auto; background:var(--sec-color); border:2px solid var(--ink); border-radius:100px; padding:calc(5px * var(--pill-scale, 1)) calc(12px * var(--pill-scale, 1)); display:flex; align-items:center; gap:5px; font-family:'Space Grotesk', sans-serif; font-weight:800; color:#FFF; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--pill-scale, 1)); white-space:nowrap; text-shadow:0 1px 2px rgba(0,0,0,.35); opacity:0; transform:scale(.65); transition:opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1); }
   .book-pill.show { opacity:1; transform:scale(1); }
   .book-pill.quest-found { background:#FFF; color:var(--ink); text-shadow:none; box-shadow:0 0 0 2px var(--ink), 0 0 10px 2px rgba(195,245,60,.6); font-weight:900; }
@@ -1178,7 +1188,7 @@
   }
   .glossary-drawer.open .glossary-drawer-panel{ transform: translateX(0); }
   .glossary-drawer-header{
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-space-between;
     font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase;
     flex-shrink: 0;
   }
@@ -1817,6 +1827,14 @@ const BOOK_FIND_SEQUENCE = ['Genesis', 'Revelation', 'Psalms', 'Mark'];
 const bookMapState = { phase: 'testament', foundIndex: 0 };
 
 function partitionIntoRows(items, n){
+  if (isMobileViewport()) {
+    const rows = [];
+    for (let i = 0; i < items.length; i += n) {
+      rows.push(items.slice(i, i + n));
+    }
+    return rows;
+  }
+
   const weights = items.map(it => it.aspect);
   const totalWeight = weights.reduce((a, b) => a + b, 0);
   const maxSingle = Math.max(...weights);
@@ -1852,12 +1870,13 @@ function layoutRowsFullWidth(rows, containerW, gap){
   const rects = [];
   let y = 0;
   rows.forEach(rowItems => {
-    const rowSum = rowItems.reduce((a, b) => a + b.aspect, 0);
+    const isMobile = isMobileViewport();
+    const rowSum = isMobile ? rowItems.length : rowItems.reduce((a, b) => a + b.aspect, 0);
     const availW = containerW - (rowItems.length - 1) * gap;
-    const rowHeight = availW / rowSum;
+    const rowHeight = isMobile ? (availW / rowItems.length) : (availW / rowSum);
     let x = 0;
     rowItems.forEach(item => {
-      const w = item.aspect * rowHeight;
+      const w = isMobile ? (availW / rowItems.length) : (item.aspect * rowHeight);
       rects.push({ ...item, rx: x, ry: y, rw: w, rh: rowHeight });
       x += w + gap;
     });
@@ -1891,7 +1910,8 @@ function getSectionItemsFor(sectionsSubset){
     name: s.title,
     testament: s.testament,
     color: s.color,
-    desc: s.desc
+    desc: s.desc,
+    bookCount: s.books.length
   }));
   const rawAvg = items.reduce((a, b) => a + b.raw, 0) / items.length;
   const minRaw = rawAvg * SECTION_SIZE_MIN_RATIO;
@@ -1938,8 +1958,11 @@ function testamentSideLabelHTML(band, labelWidth){
 }
 
 function sectionTileHTML(r){
+  const nameText = isMobileViewport() 
+    ? `<span>${r.name}</span><div class="tp-badge" style="margin-top:4px;">${r.bookCount} ${r.bookCount === 1 ? 'Book' : 'Books'}</div>` 
+    : r.name;
   return `<div class="sec-tile" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color};" onclick="tapSectionTile(event, this)">
-            <div class="sec-name">${r.name}</div>
+            <div class="sec-name">${nameText}</div>
             <div class="sec-desc">${r.desc}</div>
           </div>`;
 }
@@ -1950,9 +1973,9 @@ function bookPillHTML(name){
   return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}">${isQuestBook ? '<i class="fa-solid fa-check"></i>' : ''}${abbrev}</div>`;
 }
 
-function bookPillWrapHTML(sr, section){
+function bookPillWrapHTML(sr, section, isUnframed = false){
   const pills = section.books.map(([name]) => bookPillHTML(name)).join('');
-  return `<div class="book-pill-wrap" style="left:${sr.rx.toFixed(1)}px; top:${sr.ry.toFixed(1)}px; width:${sr.rw.toFixed(1)}px; height:${sr.rh.toFixed(1)}px; --sec-color:${section.color};">${pills}</div>`;
+  return `<div class="book-pill-wrap${isUnframed ? ' unframed' : ''}" style="left:${sr.rx.toFixed(1)}px; top:${sr.ry.toFixed(1)}px; width:${sr.rw.toFixed(1)}px; height:${sr.rh.toFixed(1)}px; --sec-color:${section.color};">${pills}</div>`;
 }
 
 function renderTestamentGateIntoCanvas(){
@@ -1967,6 +1990,7 @@ function renderTestamentGateIntoCanvas(){
   const bandH = (h - gap) / 2;
   canvas.style.width = w + 'px';
   canvas.style.height = h + 'px';
+
   canvas.innerHTML = `
     <div class="tp-card" data-testament="Old" style="left:0px; top:0px; width:${w}px; height:${bandH.toFixed(1)}px; --tp-color:var(--purple);" onclick="tapTestamentGate(event, this)">
       <div class="tp-check"><i class="fa-solid fa-check"></i></div>
@@ -2139,18 +2163,17 @@ function revealAllBooksInSections(){
   playChime([523.25, 659.25, 783.99, 1046.5]);
 
   const rowsPerTestament = isMobileViewport() ? 2 : 1;
-  const labelWidth = isMobileViewport() ? TESTAMENT_LABEL_WIDTH_MOBILE : TESTAMENT_LABEL_WIDTH_DESKTOP;
-  const { rects: sectionRects, bands } = computeSectionBandLayout(w, h, 6, rowsPerTestament, labelWidth);
+  const labelWidth = 0;
+  const { rects: sectionRects } = computeSectionBandLayout(w, h, 6, rowsPerTestament, labelWidth);
 
-  let html = bands.map(b => testamentSideLabelHTML(b, labelWidth)).join('');
+  let html = '';
   sectionRects.forEach(sr => {
     const section = BOOK_MAP_SECTIONS.find(s => s.title === sr.name);
-    html += bookPillWrapHTML(sr, section);
+    html += bookPillWrapHTML(sr, section, true);
   });
   canvas.innerHTML = html;
 
   fitBookPillWraps();
-  fitCardsToContainer(canvas.querySelectorAll('.testament-side-label'), { minScale: 0.4 });
 
   const pills = Array.from(canvas.querySelectorAll('.book-pill'));
   pills.forEach((pill, i) => {
@@ -2208,7 +2231,7 @@ function tapSectionTile(e, el){
       setTimeout(() => {
         revealAllBooksInSections();
         const p = document.getElementById('bookmapPrompt');
-        if (p) p.innerHTML = 'The whole Bible, all 66 books!';
+        if (p) p.innerHTML = '66 Books. One Unified Story.';
       }, 900);
     }
     updateNavShell();
