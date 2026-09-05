@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dwell Guide — Mark 3</title>
+<title>Dwell Guide — Mark 4</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -417,7 +417,6 @@
   }
   .bookmap-prompt .locator-emphasis { display:inline-block; }
 
-  /* Testament Gate Cards (Old vs New) */
   .tp-card { 
     position:absolute; 
     box-sizing:border-box; 
@@ -457,7 +456,6 @@
   .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:inherit; font-size:calc(clamp(24px, 4vw, 38px) * var(--fit-scale, 1)); text-align:center; line-height:1; }
   .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:inherit; font-size:calc(clamp(13px, 1.6vw, 16px) * var(--fit-scale, 1)); text-align:center; opacity:.92; max-width:80%; line-height:1.4; margin-top:4px; }
 
-  /* Section Category Tiles */
   .sec-tile { 
     position:absolute; 
     box-sizing:border-box; 
@@ -519,7 +517,6 @@
     100% { transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(.4); opacity:0; }
   }
 
-  /* ALL-BOOKS UNIFIED FLEX GRID & NEO-BRUTALIST PILLS */
   .all-books-unified-grid {
     --grid-gap: clamp(6px, 1vh, 12px);
     display: flex;
@@ -627,27 +624,20 @@
   }
 
   .recap-context-grid {
-    display: grid;
-    grid-template-columns: 0.95fr 1.05fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: clamp(16px, 3vw, 56px);
     flex: 1;
     min-height: 0;
-    max-width: 1100px;
+    max-width: 700px;
     margin: 0 auto;
     width: 100%;
+    overflow-y: auto;
   }
-  @media (max-width: 600px){
-    .recap-context-grid{
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      gap: clamp(14px, 3vh, 24px);
-    }
-  }
-  @media (max-height: 500px){
-    .recap-context-grid{ gap: clamp(12px, 2.5vw, 28px); }
-    .recap-item-thisweek{ display: none !important; }
+  @media (min-width: 1024px) {
+    .recap-context-grid { max-width: 860px; }
   }
 
   .recap-free-flow {
@@ -661,29 +651,57 @@
     flex-direction: column;
     gap: 4px;
     font-family: 'Inter', sans-serif;
-    font-size: clamp(13.5px, 1.8vh, 16px);
+    font-size: clamp(16px, 2.3vh, 19px);
     font-weight: 700;
-    line-height: 1.45;
+    line-height: 1.5;
     color: var(--ink);
   }
   .recap-tag {
     align-self: flex-start;
     display: inline-block;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 800;
     letter-spacing: 0.6px;
     text-transform: uppercase;
     background: var(--ink);
     color: #FFF;
     border-radius: 6px;
-    padding: 3px 10px;
+    padding: 4px 12px;
     margin-bottom: 2px;
   }
   @media (min-width: 1024px) {
     .recap-free-flow { gap: 26px; }
-    .recap-item-block { font-size: 20px; line-height: 1.5; }
-    .recap-tag { font-size: 13px; padding: 5px 12px; }
+    .recap-item-block { font-size: 25px; line-height: 1.5; }
+    .recap-tag { font-size: 16px; padding: 6px 14px; }
+  }
+
+  .recap-bullet-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .recap-bullet-list li {
+    position: relative;
+    padding-left: 20px;
+  }
+  .recap-bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  @media (min-width: 1024px) {
+    .recap-bullet-list { gap: 14px; }
+    .recap-bullet-list li { padding-left: 24px; }
+    .recap-bullet-list li::before { width: 9px; height: 9px; }
   }
 
   .book-meta-row {
@@ -705,7 +723,7 @@
   }
   .book-meta-item .bm-label {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 10.5px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.6px;
     text-transform: uppercase;
@@ -713,17 +731,28 @@
   }
   .book-meta-item .bm-value {
     font-family: 'Inter', sans-serif;
-    font-size: clamp(13.5px, 1.8vh, 16px);
+    font-size: clamp(16px, 2.3vh, 19px);
     font-weight: 700;
     line-height: 1.35;
     color: var(--ink);
   }
   @media (min-width: 1024px) {
     .book-meta-row { gap: 24px; }
-    .book-meta-item .bm-value { font-size: 19px; }
+    .book-meta-item .bm-label { font-size: 14px; }
+    .book-meta-item .bm-value { font-size: 24px; }
+  }
+  @media (max-height: 500px){
+    .recap-context-grid{ gap: clamp(12px, 2.5vw, 28px); }
+    .recap-free-flow { gap: 8px; }
+    .recap-item-block { font-size: 14px; line-height: 1.35; gap: 3px; }
+    .recap-tag { font-size: 10px; padding: 2px 8px; margin-bottom: 1px; }
+    .recap-bullet-list { gap: 4px; }
+    .recap-bullet-list li { padding-left: 14px; }
+    .recap-bullet-list li::before { width: 5px; height: 5px; }
+    .book-meta-row { gap: 12px; }
+    .book-meta-item .bm-value { font-size: 14px; }
   }
 
-  /* ==================== TRI-FOCAL SYNTHESIS & INLINE MOBILE GLOSSARY CARD ==================== */
   #beat-5 {
     padding-bottom: 0 !important;
     overflow: hidden !important;
@@ -760,6 +789,25 @@
       gap: 12px;
       margin-bottom: calc(var(--card-clear-peek) * 0.85);
     }
+  }
+  .seed-image-row {
+    display: flex;
+    gap: clamp(10px, 1.6vw, 22px);
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    align-items: stretch;
+  }
+  .seed-image-row .seed-image {
+    flex: 1 1 0;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    object-fit: cover;
+    border: 5px solid var(--ink);
+    border-radius: 22px;
+    box-shadow: 5px 5px 0 var(--ink);
+    background: #FFF;
   }
   .synthesis-panel {
     background: #FFF;
@@ -992,35 +1040,13 @@
   .circle-hero .arc-stem-text{ font-family:'Space Grotesk', sans-serif; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:1px; opacity:.65; margin-bottom:4px; }
   .circle-hero .label-god-is{ font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(17px, 2.4vh, 22px); letter-spacing:-.5px; text-transform:uppercase; line-height:1; margin-bottom:6px; }
   .circle-hero .static-trait{ font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 22px); font-weight:900; color:var(--purple); text-transform:capitalize; border-bottom:3px solid var(--ink); padding:2px 12px; margin-bottom:4px; }
-  .blank-input{ width:88%; max-width:88%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 0; }
-
-  #beat-2 .circle-hero {
-    width: clamp(200px, 28vh, 280px);
-    height: clamp(200px, 28vh, 280px);
-    padding: 16px;
-    border-width: 4px;
-    box-shadow: 5px 5px 0 var(--ink);
-  }
-  #beat-2 .circle-hero .arc-stem-text {
-    font-size: 11px;
-    letter-spacing: 1.1px;
-    margin-bottom: 6px;
-  }
-  #beat-2 .circle-hero .label-god-is {
-    font-size: clamp(20px, 3vh, 28px);
-    margin-bottom: 8px;
-  }
-  #beat-2 .circle-hero .static-trait {
-    font-size: clamp(20px, 2.8vh, 28px);
-    border-bottom-width: 3.5px;
-    padding: 3px 14px;
-  }
+  .blank-input{ min-width:180px; max-width:95%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 4px; transition:width 0.1s ease; }
 
   @media (max-width: 767px) {
-    .circle-hero.coaching-circle{ width:clamp(190px, 32vh, 240px); height:clamp(190px, 32vh, 240px); padding:16px; }
-    .circle-hero.coaching-circle .arc-stem-text{ font-size:10px; margin-bottom:5px; }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(19px, 3vh, 25px); margin-bottom:8px; }
-    .circle-hero.coaching-circle .blank-input{ font-size:clamp(17px, 2.6vh, 21px); }
+    .circle-hero.coaching-circle{ width:clamp(220px, 36vh, 280px); height:clamp(220px, 36vh, 280px); padding:18px; }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:11px; margin-bottom:6px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(21px, 3.4vh, 28px); margin-bottom:9px; }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(19px, 2.9vh, 23px); }
   }
   
   @media (min-width: 768px) {
@@ -1029,16 +1055,10 @@
     .circle-hero .label-god-is{ font-size:clamp(22px, 3vh, 28px); margin-bottom:8px; }
     .circle-hero .static-trait{ font-size:clamp(20px, 2.6vh, 26px); padding:2px 14px; margin-bottom:6px; }
 
-    #beat-2 .circle-hero {
-      width: clamp(280px, 38vh, 360px);
-      height: clamp(280px, 38vh, 360px);
-      padding: 24px;
-      border-width: 5px;
-      box-shadow: 7px 7px 0 var(--ink);
-    }
-    #beat-2 .circle-hero .arc-stem-text { font-size: 13px; margin-bottom: 8px; }
-    #beat-2 .circle-hero .label-god-is { font-size: clamp(26px, 3.8vh, 34px); margin-bottom: 10px; }
-    #beat-2 .circle-hero .static-trait { font-size: clamp(24px, 3.2vh, 32px); border-bottom-width: 4px; padding: 4px 18px; }
+    .circle-hero.coaching-circle{ width:clamp(280px, 40vh, 360px); height:clamp(280px, 40vh, 360px); padding:26px; border-width:4.5px; box-shadow:7px 7px 0 var(--ink); }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:13px; margin-bottom:8px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(28px, 3.8vh, 34px); margin-bottom:10px; }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(22px, 3vh, 26px); }
   }
   @media (min-width: 1024px) {
     .circle-hero{ width: clamp(340px, 46vh, 460px); height: clamp(340px, 46vh, 460px); padding:36px; border-width:5px; box-shadow:8px 8px 0 var(--ink); }
@@ -1046,17 +1066,6 @@
     .circle-hero .label-god-is{ font-size:clamp(34px, 4.4vh, 44px); margin-bottom:14px; }
     .circle-hero .static-trait{ font-size:clamp(30px, 3.8vh, 38px); border-bottom-width:4px; padding:4px 18px; margin-bottom:6px; }
     .blank-input{ font-size:clamp(24px, 3.2vh, 32px); border-bottom-width:4px; }
-
-    #beat-2 .circle-hero{ 
-      width: clamp(400px, 54vh, 520px); 
-      height: clamp(400px, 54vh, 520px); 
-      padding:44px; 
-      border-width:6px;
-      box-shadow:9px 9px 0 var(--ink);
-    }
-    #beat-2 .circle-hero .label-god-is{ font-size:clamp(40px, 5vh, 52px); margin-bottom:16px; }
-    #beat-2 .circle-hero .static-trait{ font-size:clamp(34px, 4.4vh, 44px); border-bottom-width:5px; padding:6px 22px; }
-    #beat-2 .circle-hero .arc-stem-text{ font-size:17px; letter-spacing:1.6px; margin-bottom:14px; }
   }
 
   .breath-visual{ position:relative; width: clamp(200px, 30vh, 300px); height: clamp(200px, 30vh, 300px); margin: 0 auto; flex-shrink:0; }
@@ -1388,6 +1397,76 @@
     .video-drawer-header{ font-size: 19px; }
   }
 
+  .timer-drawer{ display: none; }
+  @media (min-width: 768px) {
+    .timer-drawer.td-visible{ display: block; }
+  }
+  .timer-tab{
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 130;
+    background: var(--green);
+    color: #FFF;
+    border: 3px solid var(--ink);
+    border-left: none;
+    border-radius: 0 14px 14px 0;
+    padding: 16px 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: left .3s ease, transform .15s ease;
+  }
+  .timer-tab span{ writing-mode: vertical-rl; transform: rotate(180deg); }
+  .timer-tab i{ font-size: 15px; }
+  .timer-tab:active{ transform: translateY(-50%) scale(0.96); }
+  .timer-drawer.open .timer-tab{ left: min(280px, 78vw); }
+  .timer-drawer-scrim{
+    position: fixed; inset: 0; z-index: 105;
+    background: rgba(13,13,29,0.28);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .timer-drawer.open .timer-drawer-scrim{ opacity: 1; pointer-events: auto; }
+  .timer-drawer-panel{
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: min(280px, 78vw);
+    background: #FFF;
+    border-right: 4px solid var(--ink);
+    box-shadow: 8px 0 0 rgba(0,0,0,0.12);
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+    z-index: 110;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 20px;
+    gap: 18px;
+    align-items: center;
+  }
+  .timer-drawer.open .timer-drawer-panel{ transform: translateX(0); }
+  .timer-drawer-header{
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 15px; text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .timer-drawer-close{ background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); padding:4px; line-height:1; }
+  .timer-drawer-body{ display: flex; justify-content: center; padding: 8px 0 4px; }
+  @media (min-width: 768px) {
+    .timer-drawer-panel { padding: 26px; }
+    .timer-drawer-header { font-size: 17px; }
+  }
+
   .coaching-scene {
     display: flex;
     flex-direction: column;
@@ -1407,12 +1486,7 @@
       gap: clamp(20px, 3vw, 48px);
       align-items: center;
     }
-    .coaching-scene.no-verse-selected {
-      grid-template-columns: 1fr;
-      justify-items: center;
-    }
   }
-  .coaching-scene.no-verse-selected .coaching-card { display: none; }
 
   .dark-scripture-card{ background:var(--ink); color:#FFF; border:3.5px solid var(--ink); border-radius:20px; padding:clamp(16px, 2.4vh, 28px) clamp(18px, 2.5vw, 32px); box-shadow:4px 4px 0 rgba(0,0,0,0.25); position:relative; z-index:2; width:100%; }
   .dark-scripture-card .ref{ font-family:'Space Grotesk', sans-serif; font-size:clamp(12px, 1.6vh, 16px); font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--lime); margin-bottom:6px; }
@@ -1421,73 +1495,112 @@
     .dark-scripture-card{ padding:44px 48px; border-radius:28px; border-width:4.5px; }
     .dark-scripture-card .ref{ font-size:22px; margin-bottom:14px; }
     .dark-scripture-card .vt{ font-size:30px; line-height:1.6; }
-    .circle-hero.coaching-circle{ width:clamp(380px, 48vh, 480px); height:clamp(380px, 48vh, 480px); padding:40px; border-width:6px; box-shadow:9px 9px 0 var(--ink); }
-    .circle-hero.coaching-circle .arc-stem-text{ font-size:16px; letter-spacing:1.5px; margin-bottom:12px; }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(36px, 4.6vh, 46px); margin-bottom:14px; }
-    .circle-hero.coaching-circle .blank-input{ font-size:clamp(26px, 3.4vh, 34px); border-bottom-width:4.5px; }
+    .circle-hero.coaching-circle{ width:clamp(430px, 54vh, 540px); height:clamp(430px, 54vh, 540px); padding:44px; border-width:6.5px; box-shadow:10px 10px 0 var(--ink); }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:17px; letter-spacing:1.5px; margin-bottom:13px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(40px, 5.2vh, 52px); margin-bottom:15px; }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(29px, 3.8vh, 38px); border-bottom-width:5px; }
   }
   @media (min-width: 1400px) {
     .dark-scripture-card{ padding:54px 58px; }
     .dark-scripture-card .ref{ font-size:24px; }
     .dark-scripture-card .vt{ font-size:34px; }
-    .circle-hero.coaching-circle{ width:clamp(440px, 54vh, 540px); height:clamp(440px, 54vh, 540px); }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(42px, 5.2vh, 52px); }
-    .circle-hero.coaching-circle .blank-input{ font-size:clamp(30px, 3.8vh, 38px); }
+    .circle-hero.coaching-circle{ width:clamp(500px, 60vh, 620px); height:clamp(500px, 60vh, 620px); }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(48px, 5.8vh, 58px); }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(33px, 4.2vh, 42px); }
   }
 
+  /* ==================== FINAL SLIDE UN-CARDED & LARGER ==================== */
   .final-live-wrap {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 900px;
+    max-width: 1050px;
     margin: 0 auto;
     width: 100%;
     text-align: center;
     padding: 0 10px;
-    gap: clamp(16px, 3vh, 32px);
+    gap: clamp(20px, 3.5vh, 42px);
   }
-  .final-live-prompt {
+  .final-questions-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 3vh, 34px);
+    width: 100%;
+    text-align: left;
+  }
+  .final-question-card {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(14px, 2.5vw, 24px);
+  }
+  .final-q-num {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(24px, 4.2vw, 48px);
-    font-weight: 800;
-    line-height: 1.25;
-    letter-spacing: -0.5px;
-    color: var(--ink);
-    text-transform: none;
-  }
-  .final-trait-badge {
-    display: inline-block;
-    color: var(--purple);
-    border-bottom: 3.5px solid var(--ink);
-    padding: 0 6px;
-    text-transform: capitalize;
+    font-size: clamp(20px, 3.2vh, 32px);
     font-weight: 900;
+    color: #FFF;
+    background: var(--ink);
+    width: clamp(42px, 5vh, 58px);
+    height: clamp(42px, 5vh, 58px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 3px solid var(--ink);
+    margin-top: 2px;
+  }
+  .final-q-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .final-q-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(22px, 3.8vw, 42px);
+    font-weight: 800;
+    line-height: 1.18;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+  }
+  .final-q-subprompt {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(14px, 1.8vh, 20px);
+    font-weight: 600;
+    color: var(--ink);
+    opacity: 0.85;
+    line-height: 1.35;
+  }
+  .final-q-subprompt span {
+    font-weight: 800;
+    color: var(--purple);
   }
   .final-mobile-subtext {
     font-family: 'Inter', sans-serif;
-    font-size: clamp(14px, 1.9vh, 16px);
+    font-size: clamp(13px, 1.7vh, 16px);
     font-weight: 700;
     line-height: 1.4;
     opacity: 0.8;
     color: var(--ink);
     display: block;
-    max-width: 320px;
+    max-width: 380px;
     margin-top: 0;
-  }
-  .final-desktop-timer {
-    display: none;
   }
   .final-timer-btn {
     background: #FFF;
     border: 3.5px solid var(--ink);
     border-radius: 100px;
-    padding: 10px 24px;
+    padding: 12px 28px;
     box-shadow: 4px 4px 0 var(--ink);
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     cursor: pointer;
     transition: all 0.15s ease;
     color: var(--ink);
@@ -1495,16 +1608,14 @@
 
   .final-timer-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
   .final-timer-btn.running { background: var(--lime); }
-  .final-timer-btn .timer-icon { font-size: 16px; }
-  .final-timer-btn .timer-digits { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 800; line-height: 1; }
+  .final-timer-btn .timer-icon { font-size: 18px; }
+  .final-timer-btn .timer-digits { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800; line-height: 1; }
 
   @media (min-width: 768px) {
     .final-mobile-subtext { display: none; }
-    .final-desktop-timer { display: flex; justify-content: center; }
-    .final-trait-badge { border-bottom-width: 4.5px; padding: 0 10px; }
   }
   @media (max-width: 767px) {
-    .final-live-wrap { justify-content: flex-start; height: 100%; padding-top: clamp(24px, 8vh, 60px); }
+    .final-live-wrap { justify-content: flex-start; height: 100%; padding-top: clamp(16px, 4vh, 30px); }
     .final-bottom-group { margin-top: auto; padding-bottom: clamp(8px, 2vh, 16px); display: flex; flex-direction: column; align-items: center; }
   }
   @media (min-width: 1024px) {
@@ -1515,20 +1626,21 @@
 
   .full-page{ flex:1; display:flex; flex-direction:column; min-height:0; width:100%; }
 
-  /* DEV MODE */
   .dev-bubbles-bar{ display:flex; gap:8px; overflow-x:auto; overflow-y:hidden; padding:2px 40px 6px 2px; scrollbar-width:none; }
   .dev-bubbles-bar::-webkit-scrollbar{ display:none; }
   .dev-bubble{ flex-shrink:0; width:30px; height:30px; border-radius:50%; border:2px solid rgba(0,0,0,0.25); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:12px; cursor:pointer; position:relative; transition:transform .12s ease; }
 
   .dev-bubble.active{ border:3px solid var(--ink); box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
+  .dev-bubble.is-hidden{ opacity:0.4; text-decoration:line-through; }
   .dev-bubble .note-dot{ position:absolute; top:-3px; right:-3px; width:9px; height:9px; border-radius:50%; background:var(--yellow); border:1.5px solid var(--ink); }
-  .dev-bubble.beat-hidden{ opacity:0.32; filter:grayscale(0.6); }
-  .dev-bubble.beat-hidden::after{ content:''; position:absolute; left:2px; right:2px; top:50%; height:2px; background:var(--ink); transform:rotate(-18deg); pointer-events:none; }
 
   .dev-notes-overlay{ position:absolute; inset:0; z-index:200; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; padding:24px; }
   .dev-notes-panel{ background:#fff; color:var(--ink); border:4px solid var(--ink); border-radius:20px; padding:20px; width:100%; max-width:520px; max-height:85vh; overflow-y:auto; box-shadow:6px 6px 0 var(--ink); display:flex; flex-direction:column; gap:12px; font-family:'Inter',sans-serif; }
+  .dev-notes-panel-header{ display:flex; align-items:center; justify-content:space-between; }
   .dev-notes-panel h3{ font-family:'Space Grotesk',sans-serif; margin:0; font-size:16px; text-transform:uppercase; }
-  .dev-notes-panel textarea{ width:100%; min-height:90px; border:2.5px solid var(--ink); border-radius:100px; padding:10px; font-family:'Inter',sans-serif; font-size:14px; resize:vertical; }
+  .dev-hide-btn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:12px; text-transform:uppercase; border:2px solid var(--ink); border-radius:100px; padding:6px 12px; cursor:pointer; background:#fff; color:var(--ink); display:inline-flex; align-items:center; gap:6px; }
+  .dev-hide-btn.is-hidden{ background:var(--pink); color:#fff; }
+  .dev-notes-panel textarea{ width:100%; min-height:90px; border:2.5px solid var(--ink); border-radius:12px; padding:10px; font-family:'Inter',sans-serif; font-size:14px; resize:vertical; }
   .dev-notes-panel .dnp-row{ display:flex; gap:10px; }
   .dev-notes-panel button.dnp-btn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:13px; text-transform:uppercase; background:var(--lime); border:2.5px solid var(--ink); border-radius:100px; padding:10px 16px; cursor:pointer; }
   .dev-notes-panel button.dnp-close{ background:#eee; }
@@ -1590,15 +1702,14 @@
       <div class="notches-layer" id="notchesLayer"></div>
     </div>
     <div class="dev-bubbles-bar" id="devBubblesBar" style="display:none;"></div>
-    <div class="story-meta" id="storyMetaRow">
+    <div class="story-meta" id="storyMetaRow" style="justify-content: space-between;">
       <span id="sectionLabel">Dwell</span>
-      <span id="scriptureMeta">Mark 3</span>
+      <span id="scriptureMeta">Mark 4</span>
     </div>
   </div>
 
   <div class="stage" id="stage"></div>
 
-  <!-- PERSISTENT MINIMAL CHEVRON NAVIGATION SHELL -->
   <div class="persistent-nav-shell">
     <button class="minimal-arrow-btn" id="shellPrevBtn" onclick="goPrev()" aria-label="Previous">
       <i class="fa-solid fa-chevron-left"></i>
@@ -1618,13 +1729,10 @@
     <span id="charNavHintText">Fill in the blank</span>
   </div>
 
-  <!-- FLOATING CONTEXT ISLAND FOR INTERACTION SLIDES -->
   <div class="floating-context-island" id="floatingContextIsland" style="display:none;"></div>
 
-  <!-- VOCAB-SCAN COLOR RAIL (right side) -->
   <div class="vocab-color-rail" id="vocabColorRail" style="display:none;"></div>
 
-  <!-- GLOSSARY SIDE PANEL -->
   <div class="glossary-drawer" id="glossaryDrawer">
     <button class="glossary-tab" id="glossaryTabBtn" onclick="event.stopPropagation(); toggleGlossaryDrawer();" aria-label="Toggle glossary panel">
       <i class="fa-solid fa-book-bookmark"></i>
@@ -1640,7 +1748,6 @@
     </div>
   </div>
 
-  <!-- VIDEO SIDE PANEL -->
   <div class="video-drawer" id="videoDrawer">
     <button class="video-tab" id="videoTabBtn" onclick="event.stopPropagation(); toggleVideoDrawer();" aria-label="Toggle video panel">
       <i class="fa-brands fa-youtube"></i>
@@ -1654,9 +1761,29 @@
       </div>
       <div class="video-drawer-body">
         <div class="video-embed-wrap">
-          <iframe id="markVideoFrame" src="" title="Jesus Heals the Withered Hand (The Chosen Scene)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe id="markVideoFrame" src="" title="The Parable of the Sower (The Chosen Scene)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <a class="video-drawer-link" href="https://www.youtube.com/watch?v=YWoTGzlefq8" target="_blank" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <a class="video-drawer-link" href="https://www.youtube.com/watch?v=XX-aAg4_U2Q" target="_blank" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="timer-drawer" id="timerDrawer">
+    <button class="timer-tab" id="timerTabBtn" onclick="event.stopPropagation(); toggleTimerDrawer();" aria-label="Toggle reflection timer panel">
+      <i class="fa-regular fa-clock"></i>
+      <span>Timer</span>
+    </button>
+    <div class="timer-drawer-scrim" onclick="closeTimerDrawer();"></div>
+    <div class="timer-drawer-panel" onclick="event.stopPropagation();">
+      <div class="timer-drawer-header">
+        <span>Reflection Timer</span>
+        <button class="timer-drawer-close" onclick="event.stopPropagation(); closeTimerDrawer();" aria-label="Close timer panel"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="timer-drawer-body">
+        <button class="final-timer-btn" id="timerCard" onclick="event.stopPropagation(); toggleTimer();" title="Start Reflection Timer" aria-label="Start Reflection Timer">
+          <i class="fa-solid fa-play timer-icon" id="timerIcon"></i>
+          <span class="timer-digits" id="timerDigits">02:00</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1666,9 +1793,9 @@
       <h3>Share Your Central Truth</h3>
       <div class="share-card-stage" id="shareCardStage">
         <div class="circle-hero" id="shareCircleHero">
-          <div class="arc-stem-text" id="shareArcStem">MARK 3</div>
+          <div class="arc-stem-text" id="shareArcStem">MARK 4</div>
           <div class="label-god-is">GOD IS...</div>
-          <div class="static-trait" id="shareTraitText">Healer</div>
+          <div class="static-trait" id="shareTraitText">Sovereign Lord</div>
         </div>
       </div>
       <div class="share-swatch-row" id="shareSwatchRow"></div>
@@ -1681,7 +1808,12 @@
 
   <div class="dev-notes-overlay" id="devNotesOverlay" style="display:none;">
     <div class="dev-notes-panel">
-      <h3 id="dnpTitle">Slide Note</h3>
+      <div class="dev-notes-panel-header">
+        <h3 id="dnpTitle">Slide Note</h3>
+        <button class="dev-hide-btn" id="devHideBtn" onclick="toggleCurrentSlideHidden()">
+          <i class="fa-solid fa-eye-slash"></i> <span id="devHideBtnText">Hide Slide</span>
+        </button>
+      </div>
       <textarea id="devNoteInput" placeholder="Notes for this slide..." oninput="saveCurrentDevNote(this.value)"></textarea>
       <div class="dnp-row">
         <button class="dnp-btn" onclick="copyAllDevNotes()">Copy All Notes</button>
@@ -1702,57 +1834,36 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
-// ==================== IN CONTEXT (7TH GRADE SYNTHESIS MAP) ====================
+// ==================== IN CONTEXT (MARK 4 SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
-  synagogue: { title: "In Context", insight: "The local Jewish community building where people gathered every week to pray, study Scripture, and learn God’s word together." },
-  shriveled: { title: "In Context", insight: "Describes a hand or arm that is dried up, paralyzed, or completely without strength and movement." },
-  jesus: { title: "In Context", insight: "The promised King and Messiah who brings God’s healing, rescue, and new creation to humanity." },
-  lawful: { title: "In Context", insight: "Doing what God permits and approves, which centers on showing love, acting with justice, and protecting life." },
-  sabbath: { title: "In Context", insight: "A weekly day of rest designed by God for people to stop working, refresh, and enjoy His gifts." },
-  distressed: { title: "In Context", insight: "Feeling deep sorrow and emotional grief over someone else’s pain or stubbornness." },
-  stubborn: { title: "In Context", insight: "Having a hardened, closed-off heart that refuses to listen to truth, reason, or God’s mercy." },
-  pharisees: { title: "In Context", insight: "Highly educated religious leaders who strictly enforced rules and traditional customs but often lacked compassion." },
-  herodians: { title: "In Context", insight: "A political group that supported King Herod and teamed up with religious leaders against Jesus." },
-  galilee: { title: "In Context", insight: "The northern region of ancient Israel where Jesus lived, taught, and performed many miracles." },
-  judea: { title: "In Context", insight: "The southern region of ancient Israel surrounding the capital city of Jerusalem." },
-  jerusalem: { title: "In Context", insight: "The capital city of ancient Israel and the location of the holy Jewish Temple." },
-  idumea: { title: "In Context", insight: "A region south of Judea from which large crowds traveled to hear Jesus teach." },
-  jordan: { title: "In Context", insight: "The main river flowing through ancient Israel that people crossed to reach Jesus." },
-  tyre: { title: "In Context", insight: "An ancient coastal city northwest of Israel whose non-Jewish residents traveled to meet Jesus." },
-  sidon: { title: "In Context", insight: "A non-Jewish coastal city north of Tyre where people heard about Jesus and came to find Him." },
-  told: { title: "In Context", insight: "Giving clear, direct instructions on what to do." },
-  disciples: { title: "In Context", insight: "Students and followers who commit to learning from a teacher and living out their instructions." },
-  impure_spirits: { title: "In Context", insight: "Evil spiritual forces opposed to God that are forced to obey Jesus’ authority." },
-  son_of_god: { title: "In Context", insight: "A title showing Jesus’ unique divine identity, heavenly authority, and royal standing as King." },
-  appointed: { title: "In Context", insight: "Officially chosen, set apart, and assigned a special mission or job to complete." },
-  demons: { title: "In Context", insight: "Evil spiritual forces that work against God but are completely overpowered by Jesus." },
-  judas_iscariot: { title: "In Context", insight: "One of the twelve original disciples selected by Jesus who ultimately turned against Him." },
-  possessed: { title: "In Context", insight: "Being under the direct control or harmful influence of an evil spirit." },
-  beelzebul: { title: "In Context", insight: "A name used by critics to refer to Satan, the ruler of evil spirits." },
-  parables: { title: "In Context", insight: "Short everyday stories Jesus used to teach people how God’s Kingdom works." },
-  satan: { title: "In Context", insight: "A Hebrew title meaning \"The Adversary\" (while \"Devil\" in Greek means \"The Slanderer\"). He is the chief spiritual force of evil fighting against God’s goodness and authority." },
-  forgiven: { title: "In Context", insight: "Released from guilt and debt through mercy, having wrongdoings completely wiped away." },
-  sins: { title: "In Context", insight: "Missing the mark of God’s ideal by failing to love Him and love others properly." },
-  utter: { title: "In Context", insight: "To speak or pronounce words out loud." },
-  blasphemes: { title: "In Context", insight: "Insulting God, speaking evil about holy things, or claiming Satan is behind God’s good work." },
-  holy_spirit: { title: "In Context", insight: "God’s active personal presence and power living in people to guide, heal, and transform them." },
-  eternal: { title: "In Context", insight: "Lasting forever without end." },
-  sin: { title: "In Context", insight: "Missing the mark of God’s ideal by failing to love Him and love others properly." },
-  impure_spirit: { title: "In Context", insight: "A corrupt evil force that works against God’s good designs." }
+  parables: { title: "In Context", insight: "Parables are short, imaginative stories that Jesus used to provoke the mind, challenge listeners' expectations, and reveal the upside-down nature of God’s arriving Kingdom." },
+  sow: { title: "In Context", insight: "Scattering seed by hand across a field—a standard farming method in ancient Israel." },
+  sower: { title: "In Context", insight: "A farmer or worker spreading seed across the ground to cultivate a harvest." },
+  path: { title: "In Context", insight: "Hard-packed soil along a walkway where seed cannot penetrate, leaving it exposed to birds." },
+  rocky_places: { title: "In Context", insight: "Shallow soil lying over solid limestone bedrock; plants sprout quickly but wither in heat without deep roots." },
+  thorns: { title: "In Context", insight: "Aggressive weeds and brambles that choke out developing crops and drain their resources." },
+  good_soil: { title: "In Context", insight: "Fertile, well-prepared ground where the word is received and yields a rich harvest." },
+  satan: { title: "In Context", insight: "The spiritual enemy who immediately tries to snatch away God's word from receptive minds." },
+  kingdom_of_god: { title: "In Context", insight: "The active rule and royal reign of God, breaking into human history through Jesus Christ." },
+  lamp: { title: "In Context", insight: "A small terracotta oil lamp meant to illuminate a home when elevated on a stand." },
+  mustard_seed: { title: "In Context", insight: "One of the smallest agricultural seeds in Galilee that grows into a large, branch-filled shrub." },
+  squall: { title: "In Context", insight: "A sudden, violent windstorm rushing down through the cliffs surrounding the Sea of Galilee." },
+  stern: { title: "In Context", insight: "The rear section of a fishing boat, often equipped with a wooden seat or cushion." },
+  faith: { title: "In Context", insight: "Trusting who Jesus is and relying on His authority even during terrifying trials." },
+  disciples: { title: "In Context", insight: "Followers who travel with Jesus to learn His teachings and imitate His way of life." },
+  persecution: { title: "In Context", insight: "Facing opposition, hostility, or suffering specifically because of following God's truth." }
 };
 
-NOTEBOOK_SYNTHESIS['impure spirits'] = NOTEBOOK_SYNTHESIS['impure_spirits'];
-NOTEBOOK_SYNTHESIS['son of god'] = NOTEBOOK_SYNTHESIS['son_of_god'];
-NOTEBOOK_SYNTHESIS['judas iscariot'] = NOTEBOOK_SYNTHESIS['judas_iscariot'];
-NOTEBOOK_SYNTHESIS['holy spirit'] = NOTEBOOK_SYNTHESIS['holy_spirit'];
-NOTEBOOK_SYNTHESIS['impure spirit'] = NOTEBOOK_SYNTHESIS['impure_spirit'];
+NOTEBOOK_SYNTHESIS['rocky places'] = NOTEBOOK_SYNTHESIS['rocky_places'];
+NOTEBOOK_SYNTHESIS['good soil'] = NOTEBOOK_SYNTHESIS['good_soil'];
+NOTEBOOK_SYNTHESIS['kingdom of god'] = NOTEBOOK_SYNTHESIS['kingdom_of_god'];
+NOTEBOOK_SYNTHESIS['mustard seed'] = NOTEBOOK_SYNTHESIS['mustard_seed'];
 
 const PHRASE_TERMS = [
-  { norm: ['son','of','god'], key: 'son_of_god' },
-  { norm: ['holy','spirit'], key: 'holy_spirit' },
-  { norm: ['impure','spirits'], key: 'impure_spirits' },
-  { norm: ['impure','spirit'], key: 'impure_spirit' },
-  { norm: ['judas','iscariot'], key: 'judas_iscariot' }
+  { norm: ['kingdom','of','god'], key: 'kingdom_of_god' },
+  { norm: ['mustard','seed'], key: 'mustard_seed' },
+  { norm: ['good','soil'], key: 'good_soil' },
+  { norm: ['rocky','places'], key: 'rocky_places' }
 ].sort((a,b) => b.norm.length - a.norm.length);
 
 const PHRASE_KEYS = new Set(PHRASE_TERMS.map(p => p.key));
@@ -1773,41 +1884,47 @@ function matchPhraseAt(normedWords, wi){
 const PASSAGE_START_VERSE = 1;
 
 const passage = [
- "Another time Jesus went into the synagogue, and a man with a shriveled hand was there.",
- "Some of them were looking for a reason to accuse Jesus, so they watched him closely to see if he would heal him on the Sabbath.",
- "Jesus said to the man with the shriveled hand, \"Stand up in front of everyone.\"",
- "Then Jesus asked them, \"Which is lawful on the Sabbath: to do good or to do evil, to save life or to kill?\" But they remained silent.",
- "He looked around at them in anger and, deeply distressed at their stubborn hearts, said to the man, \"Stretch out your hand.\" He stretched it out, and his hand was completely restored.",
- "Then the Pharisees went out and began to plot with the Herodians how they might kill Jesus.",
- "Jesus withdrew with his disciples to the lake, and a large crowd from Galilee followed.",
- "When they heard about all he was doing, many people came to him from Judea, Jerusalem, Idumea, and the regions across the Jordan and around Tyre and Sidon.",
- "Because of the crowd he told his disciples to have a small boat ready for him, to keep the people from crowding him.",
- "For he had healed many, so that those with diseases were pushing forward to touch him.",
- "Whenever the impure spirits saw him, they fell down before him and cried out, \"You are the Son of God.\"",
- "But he gave them strict orders not to tell others about him.",
- "Jesus went up on a mountainside and called to him those he wanted, and they came to him.",
- "He appointed twelve that they might be with him and that he might send them out to preach",
- "and to have authority to drive out demons.",
- "These are the twelve he appointed: Simon (to whom he gave the name Peter),",
- "James son of Zebedee and his brother John (to them he gave the name Boanerges, which means \"sons of thunder\"),",
- "Andrew, Philip, Bartholomew, Matthew, Thomas, James son of Alphaeus, Thaddaeus, Simon the Zealot",
- "and Judas Iscariot, who betrayed him.",
- "Then Jesus entered a house, and again a crowd gathered, so that he and his disciples were not even able to eat.",
- "When his family heard about this, they went to take charge of him, for they said, \"He is out of his mind.\"",
- "And the teachers of the law who came down from Jerusalem said, \"He is possessed by Beelzebul! By the prince of demons he is driving out demons.\"",
- "So Jesus called them over to him and began to speak to them in parables: \"How can Satan drive out Satan?",
- "If a kingdom is divided against itself, that kingdom cannot stand.",
- "If a house is divided against itself, that house cannot stand.",
- "And if Satan opposes himself and is divided, he cannot stand; his end has come.",
- "In fact, no one can enter a strong man's house without first tying him up. Then he can plunder the strong man's house.",
- "Truly I tell you, people can be forgiven all their sins and every slander they utter,",
- "but whoever blasphemes against the Holy Spirit will never be forgiven; they are guilty of an eternal sin.\"",
- "He said this because they were saying, \"He has an impure spirit.\"",
- "Then Jesus' mother and brothers arrived. Standing outside, they sent someone in to call him.",
- "A crowd was sitting around him, and they told him, \"Your mother and brothers are outside looking for you.\"",
- "\"Who are my mother and my brothers?\" he asked.",
- "Then he looked at those seated in a circle around him and said, \"Here are my mother and my brothers!",
- "Whoever does God's will is my brother and sister and mother.\""
+ "Again Jesus began to teach by the lake. The crowd that gathered around him was so large that he got into a boat and sat in it out on the lake, while all the people were along the shore at the water’s edge.",
+ "He taught them many things by parables, and in his teaching said:",
+ "“Listen! A farmer went out to sow his seed.",
+ "As he was scattering the seed, some fell along the path, and the birds came and ate it up.",
+ "Some fell on rocky places, where it did not have much soil. It sprang up quickly, because the soil was shallow.",
+ "But when the sun came up, the plants were scorched, and they withered because they had no root.",
+ "Other seed fell among thorns, which grew up and choked the plants, so that they did not bear grain.",
+ "Still other seed fell on good soil. It came up, grew and produced a crop, some multiplying thirty, some sixty, some a hundred times.”",
+ "Then Jesus said, “Whoever has ears to hear, let them hear.”",
+ "When he was alone, the Twelve and the others around him asked him about the parables.",
+ "He told them, “The secret of the kingdom of God has been given to you. But to those on the outside everything is said in parables",
+ "so that, ‘they may be ever seeing but never perceiving, and ever hearing but never understanding; otherwise they might turn and be forgiven!’”",
+ "Then Jesus said to them, “Don Don’t you understand this parable? How then will you understand any parable?",
+ "The farmer sows the word.",
+ "Some people are like seed along the path, where the word is sown. As soon as they hear it, Satan comes and takes away the word that was sown in them.",
+ "Others, like seed sown on rocky places, hear the word and at once receive it with joy.",
+ "But since they have no root, they last only a short time. When trouble or persecution comes because of the word, they quickly fall away.",
+ "Still others, like seed sown among thorns, hear the word;",
+ "but the worries of this life, the deceitfulness of wealth and the desires for other things come in and choke the word, making it unfruitful.",
+ "Others, like seed sown on good soil, hear the word, accept it, and produce a crop—some thirty, some sixty, some a hundred times what was sown.”",
+ "He said to them, “Do you bring in a lamp to put it under a bowl or a bed? Instead, don’t you put it on its stand?",
+ "For whatever is hidden is meant to be disclosed, and whatever is concealed is meant to be brought out into the open.",
+ "If anyone has ears to hear, let them hear.”",
+ "“Consider carefully what you hear,” he continued. “With the measure you use, it will be measured to you—and even more.",
+ "Whoever has will be given more; whoever does not have, even what they have will be taken from them.”",
+ "He also said, “This is what the kingdom of God is like. A man scatters seed on the ground.",
+ "Night and day, whether he sleeps or gets up, the seed sprouts and grows, though he does not know how.",
+ "All by itself the soil produces grain—first the stalk, then the head, then the full kernel in the head.",
+ "As soon as the grain is ripe, he puts the sickle to it, because the harvest has come.”",
+ "Again he said, “What shall we say the kingdom of God is like, or what parable shall we use to describe it?",
+ "It is like a mustard seed, which is the smallest of all seeds on earth.",
+ "Yet when planted, it grows and becomes the largest of all garden plants, with such big branches that the birds can perch in its shade.”",
+ "With many similar parables Jesus spoke the word to them, as much as they could understand.",
+ "He did not say anything to them without using a parable. But when he was alone with his own disciples, he explained everything.",
+ "That day when evening came, he said to his disciples, “Let us go over to the other side.”",
+ "Leaving the crowd behind, they took him along, just as he was, in the boat. There were also other boats with him.",
+ "A furious squall came up, and the waves broke over the boat, so that it was nearly swamped.",
+ "Jesus was in the stern, sleeping on a cushion. The disciples woke him and said to him, “Teacher, don’t you care if we drown?”",
+ "He got up, rebuked the wind and said to the waves, “Quiet! Be still!” Then the wind died down and it was completely calm.",
+ "He said to his disciples, “Why are you so afraid? Do you still have no faith?”",
+ "They were terrified and asked each other, “Who is this? Even the wind and the waves obey him!”"
 ];
 
 const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2, charFontLevel:2 };
@@ -1836,7 +1953,7 @@ function kw(lines, extraClass){
   return `<div class="hero-title${extraClass ? ' '+extraClass : ''}">${body}</div>`;
 }
 
-const paragraphEnds = [6, 12, 19, 30, 35];
+const paragraphEnds = [9, 20, 25, 29, 34, 41];
 const PASSAGE_LAST_VERSE = PASSAGE_START_VERSE + passage.length - 1;
 
 function passageWordsHTML(){
@@ -1875,20 +1992,17 @@ function versePickHTML(){
 }
 
 const BOOK_MAP_SECTIONS = [
-  // OLD TESTAMENT
   { title:'Torah (Law)', testament:'Old', color:'#D8B4FE', darkText:true, desc:"The foundation of Israel's story and God's covenant", books:[['Genesis',50,38262],['Exodus',40,32685],['Leviticus',27,24541],['Numbers',36,32896],['Deuteronomy',34,28352]] },
   { title:'History', testament:'Old', color:'#C084FC', darkText:true, desc:"Israel's journey from conquest to exile", books:[['Joshua',24,18854],['Judges',21,18966],['Ruth',4,2574],['1 Samuel',31,25048],['2 Samuel',24,20600],['1 Kings',22,24513],['2 Kings',25,23517],['1 Chronicles',29,20365],['2 Chronicles',36,26069],['Ezra',10,7440],['Nehemiah',13,10480],['Esther',10,5633]] },
   { title:'Wisdom & Poetry', testament:'Old', color:'#A855F7', darkText:false, desc:'Songs, proverbs, and honest reflections on life', books:[['Job',42,18098],['Psalms',150,42704],['Proverbs',31,15038],['Ecclesiastes',12,5579],['Song of Solomon',8,2658]] },
   { title:'Prophets', testament:'Old', color:'#7E22CE', darkText:false, desc:"God's messengers calling His people back", books:[['Isaiah',66,37036],['Jeremiah',52,42654],['Lamentations',5,3411],['Ezekiel',48,39401],['Daniel',12,11602],['Hosea',14,5174],['Joel',3,2033],['Amos',9,4216],['Obadiah',1,669],['Jonah',4,1320],['Micah',7,3152],['Nahum',3,1284],['Habakkuk',3,1475],['Zephaniah',3,1616],['Haggai',2,1130],['Zechariah',14,6443],['Malachi',4,1781]] },
-  
-  // NEW TESTAMENT
   { title:'Gospels', testament:'New', color:'#38BDF8', darkText:true, desc:"Jesus's life, death & resurrection", books:[['Matthew',28,23343],['Mark',16,14949],['Luke',24,25640],['John',21,18658]] },
   { title:'Church History', testament:'New', color:'#0284C7', darkText:false, desc:"The Holy Spirit's arrival and church growth", books:[['Acts',28,24229]] },
   { title:'Epistles (Letters)', testament:'New', color:'#1D4ED8', darkText:false, desc:'Letters guiding and strengthening early believers', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430],['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
   { title:'Prophecy', testament:'New', color:'#1E1B4B', darkText:false, desc:'A visionary look at how it all ends', books:[['Revelation',22,11952]] }
 ];
 
-const BOOK_FIND_SEQUENCE = ['Genesis', 'Revelation', 'Psalms', 'Mark'];
+const BOOK_FIND_SEQUENCE = ['Genesis', 'Revelation', 'Isaiah', 'Mark'];
 const bookMapState = { phase: 'testament', foundIndex: 0 };
 
 function partitionIntoRows(items, n){
@@ -2283,10 +2397,10 @@ function tapSectionTile(e, el){
 // ==================== STREAMLINED BEATS ====================
 const beats = [
   { id:'intro', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
-    html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
+    html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">🌾</div>
           <div class="hero-wrap">
             <div class="intro-top-title">MS HANG GUIDE</div>
-            ${kw([["MARK", "&nbsp;3"]],'xl')}
+            ${kw([["MARK", "&nbsp;4"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
@@ -2295,13 +2409,6 @@ const beats = [
 
   { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-discover)', text:'dark', align:'start',
     html:`<div class="recap-context-grid">
-            <div class="circle-hero-container">
-              <div class="circle-hero">
-                <div class="arc-stem-text">Last Week's God Shot</div>
-                <div class="label-god-is">GOD IS...</div>
-                <div class="static-trait">Healer</div>
-              </div>
-            </div>
             <div class="recap-free-flow">
               <div class="recap-item-block">
                 <span class="recap-tag">The Book of Mark</span>
@@ -2312,15 +2419,16 @@ const beats = [
                 </div>
               </div>
               <div class="recap-item-block">
-                <span class="recap-tag">Last Week</span>
-                <div>Jesus forgives the paralyzed man, calls tax collectors and outcasts to dinner, and declares He is Lord of the Sabbath.</div>
-              </div>
-              <div class="recap-item-block recap-item-thisweek">
-                <span class="recap-tag">This Week</span>
-                <div>Jesus heals a shriveled hand on the Sabbath, appoints the Twelve disciples, refutes religious leaders, and redefines true family.</div>
+                <span class="recap-tag">Mark 1&ndash;3</span>
+                <ul class="recap-bullet-list">
+                  <li>Jesus launches his ministry, calling ordinary fishermen to be his first disciples.</li>
+                  <li>He heals the sick and casts out demons, and crowds start following him everywhere he goes.</li>
+                  <li>He appoints the Twelve and repeatedly clashes with the Pharisees over his authority.</li>
+                  <li>Even his own family thinks he's out of his mind &mdash; disciples, family, and Pharisees have all now seen his power firsthand.</li>
+                </ul>
               </div>
             </div>
-          </div>` },
+          ` },
 
   { id:'breath-prayer', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'center',
     html:`<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; gap:44px;">
@@ -2328,68 +2436,36 @@ const beats = [
               <div class="breath-circle"></div>
             </div>
             <div class="prayer-subtext">Pause and pray before moving into reading.</div>
-          </div>` },
+          ` },
 
   { id:'vocab-scan', type:'input', blockTap:true, isInteractive:true, clue:'Highlight key words & scroll to bottom', bgGrad:'var(--bg-cream)', text:'dark',
     html:`<div class="full-page">
             <div class="passage-scroll-wrap">
               <div class="passage-scroll" id="passageScrollEl">${passageWordsHTML()}</div>
             </div>
-          </div>` },
+          ` },
 
   { id:'tri-focal-synthesis', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-expand)', text:'dark', align:'start',
     html:`<div class="synthesis-stage">
             <div class="mobile-glossary-card" id="mobileGlossaryCard"></div>
-            <div class="synthesis-split-grid desktop-only-grid">
-              <div class="synthesis-panel">
-                <div class="synthesis-panel-header">
-                  What context is important to understand this Scripture? (author, time, purpose)
-                </div>
-                <div class="synthesis-panel-body">
-                  <div class="synthesis-stacked-list">
-                    <div class="synthesis-stat-row">
-                      <span class="s-label">Author:</span>
-                      <span class="s-val">Mark</span>
-                    </div>
-                    <div class="synthesis-stat-row">
-                      <span class="s-label">Time:</span>
-                      <span class="s-val">50–70 AD</span>
-                    </div>
-                    <div class="synthesis-stat-row">
-                      <span class="s-label">Purpose:</span>
-                      <span class="s-val">Jesus as King &amp; Servant</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="synthesis-panel">
-                <div class="synthesis-panel-header">
-                  What am I observing as I read the text? (repetition, confusing terms, hyperlinks)
-                </div>
-                <div class="synthesis-panel-body">
-                  <div class="synthesis-obs-kicker"><i class="fa-solid fa-pen-nib"></i> You should have defined:</div>
-                  <div id="synthesisHighlightCloud" class="pill-cloud"></div>
-                </div>
-              </div>
+            <div class="seed-image-row desktop-only-grid">
+              <img class="seed-image" src="seed1.png" alt="">
+              <img class="seed-image" src="seed2.png" alt="">
+              <img class="seed-image" src="seed3.png" alt="">
+              <img class="seed-image" src="seed4.png" alt="">
             </div>
-
-            <div class="synthesis-bottom-anchor desktop-only-grid">
-              <div class="anchor-arc-kicker">NEXT UP</div>
-              <div class="anchor-title">GOD IS...</div>
-            </div>
-          </div>` },
+          ` },
 
   { id:'char-verse-pick', type:'input', blockTap:true, isInteractive:true, clue:'Select a verse to continue', bgGrad:'var(--bg-cream)', text:'dark',
     html:`<div class="full-page">
             <div class="passage-scroll-wrap">
               <div class="verse-pick-list">${versePickHTML()}</div>
             </div>
-          </div>` },
+          ` },
 
   { id:'char-coaching', type:'input', blockTap:true, isInteractive:true, clue:'Fill in the blank to continue', bgGrad:'var(--bg-learn)', text:'dark',
-    html:`<div class="coaching-scene">
-            <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
+    html:`<div class="coaching-scene" id="coachingScene">
+            <div style="display:flex; flex-direction:column; gap:10px; width:100%;" id="coachingCardWrap">
               <div class="dark-scripture-card coaching-card">
                 <div class="ref" id="charRef"></div>
                 <div class="vt" id="charText"></div>
@@ -2402,28 +2478,37 @@ const beats = [
                 <input class="blank-input" id="customTraitInput" placeholder="" oninput="handleCustomTrait(this.value)" onclick="event.stopPropagation();" />
               </div>
             </div>
-          </div>` },
+          ` },
 
   { id:'final', type:'input', blockTap:true, isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
     html:`<div class="final-live-wrap">
-            <div class="final-live-prompt">
-              If God is <span class="final-trait-badge" id="finalGodIsTrait">Healer</span>, what should our response be?
-            </div>
-            <div class="final-desktop-timer">
-              <button class="final-timer-btn" id="timerCard" onclick="event.stopPropagation(); toggleTimer();" title="Start Reflection Timer" aria-label="Start Reflection Timer">
-                <i class="fa-solid fa-play timer-icon" id="timerIcon"></i>
-                <span class="timer-digits" id="timerDigits">02:00</span>
-              </button>
+            <div class="final-questions-stack">
+              <div class="final-question-card">
+                <div class="final-q-num">1</div>
+                <div class="final-q-content">
+                  <div class="final-q-text">What is the central truth?</div>
+                  <div class="final-q-subprompt" id="finalQ1Subprompt">God is <span id="finalTraitDynamic">...</span>. Therefore, I...</div>
+                </div>
+              </div>
+              <div class="final-question-card">
+                <div class="final-q-num">2</div>
+                <div class="final-q-content">
+                  <div class="final-q-text">How is this truth different from what the world says?</div>
+                </div>
+              </div>
+              <div class="final-question-card">
+                <div class="final-q-num">3</div>
+                <div class="final-q-content">
+                  <div class="final-q-text">How can I live this out this week?</div>
+                </div>
+              </div>
             </div>
             <div class="final-bottom-group">
               <div class="final-mobile-subtext">
-                Take a few quiet minutes to journal and pray through this on your own.
+                Take a few quiet minutes to journal and pray through these questions on your own.
               </div>
-              <button class="share-trigger-btn" id="shareTruthBtn" onclick="event.stopPropagation(); shareCentralTruthDirect();" style="margin-top:14px;">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i> Share Your Central Truth
-              </button>
             </div>
-          </div>` }
+          ` }
 ];
 
 const sectionLabels = [
@@ -2486,13 +2571,11 @@ function updateHeaderMeta(){
   if (!labelEl || !scriptureEl) return;
 
   if (devMode) {
-    const hidden = loadHiddenBeats();
-    const isHidden = hidden.has(beats[state.index].id);
-    labelEl.innerHTML = `<span style="display:inline-flex; gap:12px;"><button class="meta-link-btn" onclick="event.stopPropagation(); openDevNotesPanel();">Notes</button><button class="meta-link-btn" onclick="event.stopPropagation(); clearAllDevNotes();">Clear</button><button class="meta-link-btn" id="devHideBtn" onclick="event.stopPropagation(); toggleBeatHidden(state.index); updateHeaderMeta();">${isHidden ? 'Unhide Slide' : 'Hide Slide'}</button></span>`;
+    labelEl.innerHTML = `<span style="display:inline-flex; gap:12px;"><button class="meta-link-btn" onclick="event.stopPropagation(); openDevNotesPanel();">Notes</button><button class="meta-link-btn" onclick="event.stopPropagation(); clearAllDevNotes();">Clear</button></span>`;
     scriptureEl.innerHTML = `<button class="meta-link-btn" onclick="event.stopPropagation(); exitDevMode();">Close</button>`;
   } else {
     labelEl.textContent = sectionLabels[state.index] || '';
-    scriptureEl.textContent = 'Mark 3';
+    scriptureEl.textContent = 'Mark 4';
   }
 }
 
@@ -2500,14 +2583,27 @@ function isVocabComplete(){
   return state.wordTaps.length > 0 && state.scrolledToEnd;
 }
 
+function getNextVisibleSlideIndex(startIndex, direction = 1) {
+  let curr = startIndex + direction;
+  while (curr >= 0 && curr < beats.length) {
+    if (!hiddenSlides.has(curr)) {
+      return curr;
+    }
+    curr += direction;
+  }
+  return -1;
+}
+
 function updateNavShell(){
   const prevBtn = document.getElementById('shellPrevBtn');
   const nextBtn = document.getElementById('shellNextBtn');
   const island = document.getElementById('floatingContextIsland');
   const b = beats[state.index];
-  const isFinalSlide = state.index === beats.length - 1 || !hasVisibleAfter(state.index);
 
-  prevBtn.classList.toggle('disabled', state.index === 0 || !hasVisibleBefore(state.index));
+  const hasPrev = getNextVisibleSlideIndex(state.index, -1) !== -1;
+  const hasNext = getNextVisibleSlideIndex(state.index, 1) !== -1;
+
+  prevBtn.classList.toggle('disabled', !hasPrev);
 
   let ready = false;
   if (b.id === 'book-map') ready = bookMapState.phase === 'done';
@@ -2518,7 +2614,7 @@ function updateNavShell(){
   nextBtn.classList.toggle('ready', ready);
 
   prevBtn.style.display = '';
-  nextBtn.style.display = isFinalSlide ? 'none' : '';
+  nextBtn.style.display = !hasNext ? 'none' : '';
 
   if (b.id === 'book-map') {
     island.style.display = 'flex';
@@ -2590,7 +2686,7 @@ function renderSynthesisPanel(){
   if (cloud) {
     let uniqueWords = Array.from(new Set(state.wordTaps.map(w => w.word.charAt(0).toUpperCase() + w.word.slice(1))));
     if (uniqueWords.length === 0) {
-      uniqueWords = ['Synagogue', 'Sabbath', 'Herodians', 'Beelzebul', 'Parables'];
+      uniqueWords = ['Parables', 'Sower', 'Good Soil', 'Mustard Seed', 'Squall'];
     }
     cloud.innerHTML = uniqueWords.map(w => `<span class="research-pill">${w}</span>`).join('');
   }
@@ -2673,30 +2769,56 @@ function renderBeat(i){
   }
 
   if (b.id === 'char-coaching') {
-    const scene = document.querySelector('#beat-'+i+' .coaching-scene');
-    const hasVerse = state.charVerse !== null;
-    if (scene) scene.classList.toggle('no-verse-selected', !hasVerse);
+    const isVersePickHidden = hiddenSlides.has(6);
+    const cardWrap = document.getElementById('coachingCardWrap');
+    const coachingScene = document.getElementById('coachingScene');
     const arcStem = document.getElementById('arcStemText');
-    if (hasVerse) {
-      const activeVerse = state.charVerse;
-      document.getElementById('charRef').textContent = 'Mark 3:' + activeVerse;
+
+    if (isVersePickHidden) {
+      if (cardWrap) cardWrap.style.display = 'none';
+      if (coachingScene) {
+        coachingScene.style.display = 'flex';
+        coachingScene.style.flexDirection = 'column';
+        coachingScene.style.alignItems = 'center';
+        coachingScene.style.justifyContent = 'center';
+      }
+      if (arcStem) arcStem.textContent = 'MARK 4:';
+    } else {
+      if (cardWrap) cardWrap.style.display = '';
+      if (coachingScene) {
+        coachingScene.style.display = '';
+        coachingScene.style.flexDirection = '';
+        coachingScene.style.alignItems = '';
+        coachingScene.style.justifyContent = '';
+      }
+      const activeVerse = state.charVerse || PASSAGE_START_VERSE;
+      document.getElementById('charRef').textContent = 'Mark 4:' + activeVerse;
       document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
-      if (arcStem) { arcStem.style.display = ''; arcStem.textContent = `BASED ON VERSE ${activeVerse}:`; }
-    } else if (arcStem) {
-      arcStem.style.display = 'none';
+      if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
+      requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
     }
+
     const inp = document.getElementById('customTraitInput');
-    if (inp) inp.value = state.trait || '';
-    requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
+    if (inp) {
+      inp.value = state.trait || '';
+      inp.style.width = Math.max(180, inp.value.length * 16) + 'px';
+    }
+  } else if (b.id === 'final') {
+    const dynamicSpan = document.getElementById('finalTraitDynamic');
+    if (dynamicSpan) {
+      const traitWord = (state.trait && state.trait.trim()) ? state.trait.trim() : '...';
+      dynamicSpan.textContent = traitWord;
+    }
   } else if (b.id === 'char-verse-pick') {
     document.querySelectorAll('#beat-'+i+' .verse-tile').forEach(t=>t.classList.toggle('selected', state.charVerse !== null && Number(t.dataset.v)===state.charVerse));
   } else if (b.id === 'vocab-scan') {
     checkPassageScroll();
   }
 
+  /* Glossary Tab strictly visible on slide 4 (vocab-scan) and slide 5 (tri-focal-synthesis) */
   const glossaryDrawerEl = document.getElementById('glossaryDrawer');
   if (glossaryDrawerEl) {
-    if (devMode || b.id === 'vocab-scan' || b.id === 'tri-focal-synthesis') {
+    if (b.id === 'vocab-scan' || b.id === 'tri-focal-synthesis') {
       glossaryDrawerEl.classList.add('gd-visible');
       renderGlossaryDrawer();
     } else {
@@ -2705,6 +2827,7 @@ function renderBeat(i){
     }
   }
 
+  /* Video Tab strictly visible on slide 2 (reveal-context) */
   const videoDrawerEl = document.getElementById('videoDrawer');
   if (videoDrawerEl) {
     if (b.id === 'reveal-context') {
@@ -2715,7 +2838,17 @@ function renderBeat(i){
     }
   }
 
-  if (b.id === 'final') renderFinalReflection();
+  /* Timer Tab strictly visible on char-coaching and final */
+  const timerDrawerEl = document.getElementById('timerDrawer');
+  if (timerDrawerEl) {
+    if (b.id === 'char-coaching' || b.id === 'final') {
+      timerDrawerEl.classList.add('td-visible');
+    } else {
+      timerDrawerEl.classList.remove('td-visible');
+      closeTimerDrawer();
+    }
+  }
+
   updateProgressBar();
   if (devMode) renderDevBubbles();
 }
@@ -2901,15 +3034,22 @@ function toggleVideoDrawer(force){
   }
 }
 
+function toggleTimerDrawer(force){
+  const d = document.getElementById('timerDrawer');
+  if (!d) return;
+  const willOpen = typeof force === 'boolean' ? force : !d.classList.contains('open');
+  d.classList.toggle('open', willOpen);
+}
+function openTimerDrawer(){ toggleTimerDrawer(true); }
+function closeTimerDrawer(){ toggleTimerDrawer(false); }
+
 function handleCustomTrait(val){ 
   state.trait = val; 
+  const inp = document.getElementById('customTraitInput');
+  if (inp) {
+    inp.style.width = Math.max(180, val.length * 16) + 'px';
+  }
   updateNavShell();
-}
-
-function renderFinalReflection(){
-  const trait = state.trait && state.trait.trim() ? state.trait.trim() : 'Healer';
-  const traitEl = document.getElementById('finalGodIsTrait');
-  if (traitEl) traitEl.textContent = trait;
 }
 
 let timerSeconds = 120;
@@ -3030,21 +3170,19 @@ function fitCharVerseText(elementId = 'charText'){
 }
 
 function goNext(){
-  const hidden = loadHiddenBeats();
-  let i = state.index;
-  while (i < beats.length - 1) {
-    i++;
-    if (!hidden.has(beats[i].id)) { state.index = i; renderBeat(state.index); return; }
+  const nextIdx = getNextVisibleSlideIndex(state.index, 1);
+  if (nextIdx !== -1) {
+    state.index = nextIdx; 
+    renderBeat(state.index);
   }
 }
 
-function goPrev(){
-  const hidden = loadHiddenBeats();
-  let i = state.index;
-  while (i > 0) {
-    i--;
-    if (!hidden.has(beats[i].id)) { state.index = i; renderBeat(state.index); return; }
-  }
+function goPrev(){ 
+  const prevIdx = getNextVisibleSlideIndex(state.index, -1);
+  if (prevIdx !== -1) { 
+    state.index = prevIdx; 
+    renderBeat(state.index); 
+  } 
 }
 
 function toggleFullScreen() {
@@ -3127,8 +3265,17 @@ if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPas
 let devMode = false;
 let devTapCount = 0;
 let devLastTapTime = 0;
-const DEV_NOTES_KEY = 'msHangDevNotes_3_1_35';
-const DEV_HIDDEN_KEY = 'msHangDevHidden_3_1_35';
+const DEV_NOTES_KEY = 'msHangDevNotes_4_1_41';
+const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_4_1_41';
+
+function loadHiddenSlides(){
+  try { return new Set(JSON.parse(localStorage.getItem(DEV_HIDDEN_SLIDES_KEY) || '[]')); }
+  catch(e){ return new Set(); }
+}
+function saveHiddenSlides(setObj){
+  try { localStorage.setItem(DEV_HIDDEN_SLIDES_KEY, JSON.stringify(Array.from(setObj))); } catch(e){}
+}
+const hiddenSlides = loadHiddenSlides();
 
 function loadDevNotes(){
   try { return JSON.parse(localStorage.getItem(DEV_NOTES_KEY) || '{}'); }
@@ -3136,34 +3283,6 @@ function loadDevNotes(){
 }
 function saveDevNotes(obj){
   try { localStorage.setItem(DEV_NOTES_KEY, JSON.stringify(obj)); } catch(e){}
-}
-
-function loadHiddenBeats(){
-  try { return new Set(JSON.parse(localStorage.getItem(DEV_HIDDEN_KEY) || '[]')); }
-  catch(e){ return new Set(); }
-}
-function saveHiddenBeats(set){
-  try { localStorage.setItem(DEV_HIDDEN_KEY, JSON.stringify(Array.from(set))); } catch(e){}
-}
-function isBeatHidden(i){
-  return loadHiddenBeats().has(beats[i].id);
-}
-function hasVisibleAfter(i){
-  const hidden = loadHiddenBeats();
-  for (let j = i + 1; j < beats.length; j++) if (!hidden.has(beats[j].id)) return true;
-  return false;
-}
-function hasVisibleBefore(i){
-  const hidden = loadHiddenBeats();
-  for (let j = i - 1; j >= 0; j--) if (!hidden.has(beats[j].id)) return true;
-  return false;
-}
-function toggleBeatHidden(i){
-  const hidden = loadHiddenBeats();
-  const id = beats[i].id;
-  if (hidden.has(id)) hidden.delete(id); else hidden.add(id);
-  saveHiddenBeats(hidden);
-  renderDevBubbles();
 }
 
 function handleEmojiTap(){
@@ -3184,6 +3303,7 @@ function enterDevMode(){
   updateHeaderMeta();
   renderDevBubbles();
   renderGlossaryDrawer();
+  openDevNotesPanel();
 }
 
 function exitDevMode(){
@@ -3193,21 +3313,25 @@ function exitDevMode(){
   updateHeaderMeta();
   closeDevNotesPanel();
   renderGlossaryDrawer();
+  if (hiddenSlides.has(state.index)) {
+    const nextVis = getNextVisibleSlideIndex(state.index, 1);
+    const prevVis = getNextVisibleSlideIndex(state.index, -1);
+    if (nextVis !== -1) renderBeat(nextVis);
+    else if (prevVis !== -1) renderBeat(prevVis);
+  }
 }
 
 function renderDevBubbles(){
   const bar = document.getElementById('devBubblesBar');
   const notes = loadDevNotes();
-  const hidden = loadHiddenBeats();
   bar.innerHTML = '';
   beats.forEach((b, i) => {
-    const isHidden = hidden.has(b.id);
     const bub = document.createElement('div');
-    bub.className = 'dev-bubble' + (i === state.index ? ' active' : '') + (isHidden ? ' beat-hidden' : '');
+    bub.className = 'dev-bubble' + (i === state.index ? ' active' : '') + (hiddenSlides.has(i) ? ' is-hidden' : '');
     bub.style.background = b.bgGrad;
     bub.style.color = b.text === 'light' ? '#FFF' : 'var(--ink)';
     bub.textContent = i + 1;
-    bub.title = b.id + (isHidden ? ' (hidden)' : '');
+    bub.title = b.id + (hiddenSlides.has(i) ? ' (Hidden)' : '');
     if (notes[i + '_' + b.id] && notes[i + '_' + b.id].trim()) {
       const dot = document.createElement('div');
       dot.className = 'note-dot';
@@ -3276,7 +3400,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 
   ctx.fillStyle = 'rgba(13,13,13,0.65)';
   ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
-  ctx.fillText(`MARK 3:${verseNum}`, cx, cy - circleR * 0.42);
+  ctx.fillText(`MARK 4:${verseNum}`, cx, cy - circleR * 0.42);
 
   ctx.fillStyle = '#0D0D0D';
   ctx.font = `800 ${Math.round(size * 0.05)}px 'Space Grotesk', sans-serif`;
@@ -3312,7 +3436,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 async function shareCentralTruthDirect(){
   try {
     const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-    const traitText = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
+    const traitText = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Sovereign Lord';
     const colorKey = SHARE_COLOR_KEYS[Math.floor(Math.random() * SHARE_COLOR_KEYS.length)];
     const canvas = drawCentralTruthCanvas(colorKey, activeVerse, traitText);
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
@@ -3360,8 +3484,8 @@ function selectShareColor(key){
 
 function openShareOverlay(){
   const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-  document.getElementById('shareArcStem').textContent = `MARK 3:${activeVerse}`;
-  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
+  document.getElementById('shareArcStem').textContent = `MARK 4:${activeVerse}`;
+  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Sovereign Lord';
   initShareSwatches();
   selectShareColor(state.shareColor || 'discover');
   document.getElementById('shareOverlay').style.display = 'flex';
@@ -3407,14 +3531,41 @@ function openDevNotesPanel(){
   document.getElementById('dnpTitle').textContent = `Slide ${state.index + 1}: ${b.id}`;
   const notes = loadDevNotes();
   document.getElementById('devNoteInput').value = notes[state.index + '_' + b.id] || '';
+  updateDevHideBtnState();
   document.getElementById('devAllNotesSection').style.display = 'none';
   document.getElementById('dnpStatus').textContent = '';
   document.getElementById('dnpRetryBtn').style.display = 'none';
   document.getElementById('devNotesOverlay').style.display = 'flex';
 }
+
+function updateDevHideBtnState(){
+  const btn = document.getElementById('devHideBtn');
+  if (!btn) return;
+  const isHidden = hiddenSlides.has(state.index);
+  btn.classList.toggle('is-hidden', isHidden);
+  if (isHidden) {
+    btn.innerHTML = `<i class="fa-solid fa-eye"></i> <span>Hidden</span>`;
+  } else {
+    btn.innerHTML = `<i class="fa-solid fa-eye-slash"></i> <span>Visible</span>`;
+  }
+}
+
+function toggleCurrentSlideHidden(){
+  if (hiddenSlides.has(state.index)) {
+    hiddenSlides.delete(state.index);
+  } else {
+    hiddenSlides.add(state.index);
+  }
+  saveHiddenSlides(hiddenSlides);
+  updateDevHideBtnState();
+  renderDevBubbles();
+  updateNavShell();
+}
+
 function closeDevNotesPanel(){
   document.getElementById('devNotesOverlay').style.display = 'none';
 }
+
 function saveCurrentDevNote(val){
   const b = beats[state.index];
   const notes = loadDevNotes();
