@@ -792,22 +792,18 @@
   }
   .seed-image-row {
     display: flex;
-    gap: clamp(10px, 1.6vw, 22px);
+    justify-content: center;
+    align-items: center;
     flex: 1;
     min-height: 0;
     width: 100%;
-    align-items: stretch;
   }
-  .seed-image-row .seed-image {
-    flex: 1 1 0;
-    width: 100%;
-    height: 100%;
-    min-width: 0;
-    object-fit: cover;
-    border: 5px solid var(--ink);
-    border-radius: 22px;
-    box-shadow: 5px 5px 0 var(--ink);
-    background: #FFF;
+  .seed-image-row .seed-image-single {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   .synthesis-panel {
     background: #FFF;
@@ -2449,10 +2445,7 @@ const beats = [
     html:`<div class="synthesis-stage">
             <div class="mobile-glossary-card" id="mobileGlossaryCard"></div>
             <div class="seed-image-row desktop-only-grid">
-              <img class="seed-image" src="seed1.png" alt="">
-              <img class="seed-image" src="seed2.png" alt="">
-              <img class="seed-image" src="seed3.png" alt="">
-              <img class="seed-image" src="seed4.png" alt="">
+              <img class="seed-image-single" src="seeds.png" alt="">
             </div>
           ` },
 
