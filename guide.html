@@ -636,8 +636,8 @@
     width: 100%;
     overflow-y: auto;
   }
-  @media (max-height: 500px){
-    .recap-context-grid{ gap: clamp(12px, 2.5vw, 28px); }
+  @media (min-width: 1024px) {
+    .recap-context-grid { max-width: 860px; }
   }
 
   .recap-free-flow {
@@ -651,29 +651,29 @@
     flex-direction: column;
     gap: 4px;
     font-family: 'Inter', sans-serif;
-    font-size: clamp(13.5px, 1.8vh, 16px);
+    font-size: clamp(16px, 2.3vh, 19px);
     font-weight: 700;
-    line-height: 1.45;
+    line-height: 1.5;
     color: var(--ink);
   }
   .recap-tag {
     align-self: flex-start;
     display: inline-block;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 800;
     letter-spacing: 0.6px;
     text-transform: uppercase;
     background: var(--ink);
     color: #FFF;
     border-radius: 6px;
-    padding: 3px 10px;
+    padding: 4px 12px;
     margin-bottom: 2px;
   }
   @media (min-width: 1024px) {
     .recap-free-flow { gap: 26px; }
-    .recap-item-block { font-size: 20px; line-height: 1.5; }
-    .recap-tag { font-size: 13px; padding: 5px 12px; }
+    .recap-item-block { font-size: 25px; line-height: 1.5; }
+    .recap-tag { font-size: 16px; padding: 6px 14px; }
   }
 
   .recap-bullet-list {
@@ -682,24 +682,26 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
   .recap-bullet-list li {
     position: relative;
-    padding-left: 16px;
+    padding-left: 20px;
   }
   .recap-bullet-list li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.58em;
-    width: 6px;
-    height: 6px;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: var(--ink);
   }
   @media (min-width: 1024px) {
-    .recap-bullet-list { gap: 10px; }
+    .recap-bullet-list { gap: 14px; }
+    .recap-bullet-list li { padding-left: 24px; }
+    .recap-bullet-list li::before { width: 9px; height: 9px; }
   }
 
   .book-meta-row {
@@ -721,7 +723,7 @@
   }
   .book-meta-item .bm-label {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 10.5px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.6px;
     text-transform: uppercase;
@@ -729,14 +731,26 @@
   }
   .book-meta-item .bm-value {
     font-family: 'Inter', sans-serif;
-    font-size: clamp(13.5px, 1.8vh, 16px);
+    font-size: clamp(16px, 2.3vh, 19px);
     font-weight: 700;
     line-height: 1.35;
     color: var(--ink);
   }
   @media (min-width: 1024px) {
     .book-meta-row { gap: 24px; }
-    .book-meta-item .bm-value { font-size: 19px; }
+    .book-meta-item .bm-label { font-size: 14px; }
+    .book-meta-item .bm-value { font-size: 24px; }
+  }
+  @media (max-height: 500px){
+    .recap-context-grid{ gap: clamp(12px, 2.5vw, 28px); }
+    .recap-free-flow { gap: 8px; }
+    .recap-item-block { font-size: 14px; line-height: 1.35; gap: 3px; }
+    .recap-tag { font-size: 10px; padding: 2px 8px; margin-bottom: 1px; }
+    .recap-bullet-list { gap: 4px; }
+    .recap-bullet-list li { padding-left: 14px; }
+    .recap-bullet-list li::before { width: 5px; height: 5px; }
+    .book-meta-row { gap: 12px; }
+    .book-meta-item .bm-value { font-size: 14px; }
   }
 
   #beat-5 {
@@ -1010,10 +1024,10 @@
   .blank-input{ min-width:180px; max-width:95%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 4px; transition:width 0.1s ease; }
 
   @media (max-width: 767px) {
-    .circle-hero.coaching-circle{ width:clamp(190px, 32vh, 240px); height:clamp(190px, 32vh, 240px); padding:16px; }
-    .circle-hero.coaching-circle .arc-stem-text{ font-size:10px; margin-bottom:5px; }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(19px, 3vh, 25px); margin-bottom:8px; }
-    .circle-hero.coaching-circle .blank-input{ font-size:clamp(17px, 2.6vh, 21px); }
+    .circle-hero.coaching-circle{ width:clamp(220px, 36vh, 280px); height:clamp(220px, 36vh, 280px); padding:18px; }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:11px; margin-bottom:6px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(21px, 3.4vh, 28px); margin-bottom:9px; }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(19px, 2.9vh, 23px); }
   }
   
   @media (min-width: 768px) {
@@ -1021,6 +1035,11 @@
     .circle-hero .arc-stem-text{ font-size:11px; margin-bottom:6px; }
     .circle-hero .label-god-is{ font-size:clamp(22px, 3vh, 28px); margin-bottom:8px; }
     .circle-hero .static-trait{ font-size:clamp(20px, 2.6vh, 26px); padding:2px 14px; margin-bottom:6px; }
+
+    .circle-hero.coaching-circle{ width:clamp(280px, 40vh, 360px); height:clamp(280px, 40vh, 360px); padding:26px; border-width:4.5px; box-shadow:7px 7px 0 var(--ink); }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:13px; margin-bottom:8px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(28px, 3.8vh, 34px); margin-bottom:10px; }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(22px, 3vh, 26px); }
   }
   @media (min-width: 1024px) {
     .circle-hero{ width: clamp(340px, 46vh, 460px); height: clamp(340px, 46vh, 460px); padding:36px; border-width:5px; box-shadow:8px 8px 0 var(--ink); }
@@ -1457,18 +1476,18 @@
     .dark-scripture-card{ padding:44px 48px; border-radius:28px; border-width:4.5px; }
     .dark-scripture-card .ref{ font-size:22px; margin-bottom:14px; }
     .dark-scripture-card .vt{ font-size:30px; line-height:1.6; }
-    .circle-hero.coaching-circle{ width:clamp(380px, 48vh, 480px); height:clamp(380px, 48vh, 480px); padding:40px; border-width:6px; box-shadow:9px 9px 0 var(--ink); }
-    .circle-hero.coaching-circle .arc-stem-text{ font-size:16px; letter-spacing:1.5px; margin-bottom:12px; }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(36px, 4.6vh, 46px); margin-bottom:14px; }
-    .circle-hero.coaching-circle .blank-input{ font-size:clamp(26px, 3.4vh, 34px); border-bottom-width:4.5px; }
+    .circle-hero.coaching-circle{ width:clamp(430px, 54vh, 540px); height:clamp(430px, 54vh, 540px); padding:44px; border-width:6.5px; box-shadow:10px 10px 0 var(--ink); }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:17px; letter-spacing:1.5px; margin-bottom:13px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(40px, 5.2vh, 52px); margin-bottom:15px; }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(29px, 3.8vh, 38px); border-bottom-width:5px; }
   }
   @media (min-width: 1400px) {
     .dark-scripture-card{ padding:54px 58px; }
     .dark-scripture-card .ref{ font-size:24px; }
     .dark-scripture-card .vt{ font-size:34px; }
-    .circle-hero.coaching-circle{ width:clamp(440px, 54vh, 540px); height:clamp(440px, 54vh, 540px); }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(42px, 5.2vh, 52px); }
-    .circle-hero.coaching-circle .blank-input{ font-size:clamp(30px, 3.8vh, 38px); }
+    .circle-hero.coaching-circle{ width:clamp(500px, 60vh, 620px); height:clamp(500px, 60vh, 620px); }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(48px, 5.8vh, 58px); }
+    .circle-hero.coaching-circle .blank-input{ font-size:clamp(33px, 4.2vh, 42px); }
   }
 
   /* ==================== FINAL SLIDE UN-CARDED & LARGER ==================== */
