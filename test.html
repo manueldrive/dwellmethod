@@ -1036,12 +1036,12 @@
   .circle-hero .arc-stem-text{ font-family:'Space Grotesk', sans-serif; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:1px; opacity:.65; margin-bottom:4px; }
   .circle-hero .label-god-is{ font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(17px, 2.4vh, 22px); letter-spacing:-.5px; text-transform:uppercase; line-height:1; margin-bottom:6px; }
   .circle-hero .static-trait{ font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 22px); font-weight:900; color:var(--purple); text-transform:capitalize; border-bottom:3px solid var(--ink); padding:2px 12px; margin-bottom:4px; }
-  .blank-input{ min-width:180px; max-width:95%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 4px; transition:width 0.1s ease; }
+  .blank-input{ min-width:180px; width:82%; max-width:92%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 4px; resize:none; overflow:hidden; white-space:normal; word-wrap:break-word; line-height:1.3; display:block; margin:0 auto; transition:height 0.1s ease; }
 
   @media (max-width: 767px) {
     .circle-hero.coaching-circle{ width:clamp(220px, 36vh, 280px); height:clamp(220px, 36vh, 280px); padding:18px; }
-    .circle-hero.coaching-circle .arc-stem-text{ font-size:11px; margin-bottom:6px; }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(21px, 3.4vh, 28px); margin-bottom:9px; }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:11px; margin-bottom:4px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(21px, 3.4vh, 28px); margin-bottom:5px; }
     .circle-hero.coaching-circle .blank-input{ font-size:clamp(19px, 2.9vh, 23px); }
   }
   
@@ -1052,8 +1052,8 @@
     .circle-hero .static-trait{ font-size:clamp(20px, 2.6vh, 26px); padding:2px 14px; margin-bottom:6px; }
 
     .circle-hero.coaching-circle{ width:clamp(280px, 40vh, 360px); height:clamp(280px, 40vh, 360px); padding:26px; border-width:4.5px; box-shadow:7px 7px 0 var(--ink); }
-    .circle-hero.coaching-circle .arc-stem-text{ font-size:13px; margin-bottom:8px; }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(28px, 3.8vh, 34px); margin-bottom:10px; }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:13px; margin-bottom:5px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(28px, 3.8vh, 34px); margin-bottom:6px; }
     .circle-hero.coaching-circle .blank-input{ font-size:clamp(22px, 3vh, 26px); }
   }
   @media (min-width: 1024px) {
@@ -1492,8 +1492,8 @@
     .dark-scripture-card .ref{ font-size:22px; margin-bottom:14px; }
     .dark-scripture-card .vt{ font-size:30px; line-height:1.6; }
     .circle-hero.coaching-circle{ width:clamp(430px, 54vh, 540px); height:clamp(430px, 54vh, 540px); padding:44px; border-width:6.5px; box-shadow:10px 10px 0 var(--ink); }
-    .circle-hero.coaching-circle .arc-stem-text{ font-size:17px; letter-spacing:1.5px; margin-bottom:13px; }
-    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(40px, 5.2vh, 52px); margin-bottom:15px; }
+    .circle-hero.coaching-circle .arc-stem-text{ font-size:17px; letter-spacing:1.5px; margin-bottom:8px; }
+    .circle-hero.coaching-circle .label-god-is{ font-size:clamp(40px, 5.2vh, 52px); margin-bottom:9px; }
     .circle-hero.coaching-circle .blank-input{ font-size:clamp(29px, 3.8vh, 38px); border-bottom-width:5px; }
   }
   @media (min-width: 1400px) {
@@ -2468,7 +2468,7 @@ const beats = [
               <div class="circle-hero coaching-circle">
                 <div class="arc-stem-text" id="arcStemText">GOD IS...</div>
                 <div class="label-god-is">GOD IS...</div>
-                <input class="blank-input" id="customTraitInput" placeholder="" oninput="handleCustomTrait(this.value)" onclick="event.stopPropagation();" />
+                <textarea class="blank-input" id="customTraitInput" placeholder="" rows="1" oninput="handleCustomTrait(this.value)" onclick="event.stopPropagation();"></textarea>
               </div>
             </div>
           ` },
@@ -2794,7 +2794,8 @@ function renderBeat(i){
     const inp = document.getElementById('customTraitInput');
     if (inp) {
       inp.value = state.trait || '';
-      inp.style.width = Math.max(180, inp.value.length * 16) + 'px';
+      inp.style.height = 'auto';
+      inp.style.height = inp.scrollHeight + 'px';
     }
   } else if (b.id === 'final') {
     const dynamicSpan = document.getElementById('finalTraitDynamic');
@@ -3040,7 +3041,8 @@ function handleCustomTrait(val){
   state.trait = val; 
   const inp = document.getElementById('customTraitInput');
   if (inp) {
-    inp.style.width = Math.max(180, val.length * 16) + 'px';
+    inp.style.height = 'auto';
+    inp.style.height = inp.scrollHeight + 'px';
   }
   updateNavShell();
 }
