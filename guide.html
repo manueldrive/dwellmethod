@@ -2491,7 +2491,7 @@ const beats = [
             </div>
           ` },
 
-  { id:'char-verse-pick', type:'input', blockTap:true, isInteractive:true, clue:'Select a verse to continue', bgGrad:'var(--bg-cream)', text:'dark',
+  { id:'char-verse-pick', type:'input', blockTap:true, isInteractive:true, clue:'Tap a verse to spot God\'s character', bgGrad:'var(--bg-cream)', text:'dark',
     html:`<div class="full-page">
             <div class="passage-scroll-wrap">
               <div class="verse-pick-list">${versePickHTML()}</div>
@@ -2701,7 +2701,7 @@ function updateNavShell(){
     const isPicked = state.charVerse !== null;
     island.innerHTML = `
       <button class="action-gate-pill ${isPicked ? 'ready' : ''}" id="verseActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-        ${isPicked ? '<i class="fa-solid fa-check"></i> Continue' : '<i class="fa-solid fa-hand-pointer"></i> Select a Verse'}
+        ${isPicked ? '<i class="fa-solid fa-check"></i> Continue' : '<i class="fa-solid fa-hand-pointer"></i> Spot God\'s Character'}
       </button>
     `;
   } else {
@@ -3080,7 +3080,7 @@ function toggleGlossaryDrawer(force){
 function openGlossaryDrawer(){ toggleGlossaryDrawer(true); }
 function closeGlossaryDrawer(){ toggleGlossaryDrawer(false); }
 
-const MARK_VIDEO_ID = 'YWoTGzlefq8';
+const MARK_VIDEO_ID = 'XX-aAg4_U2Q';
 function toggleVideoDrawer(force){
   const d = document.getElementById('videoDrawer');
   if (!d) return;
