@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dwell Guide — Mark 4</title>
+<title>Dwell Guide — Mark 5</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -789,21 +789,6 @@
       gap: 12px;
       margin-bottom: calc(var(--card-clear-peek) * 0.85);
     }
-  }
-  .seed-image-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    min-height: 0;
-    width: 100%;
-  }
-  .seed-image-row .seed-image-single {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
   }
   .synthesis-panel {
     background: #FFF;
@@ -1742,7 +1727,7 @@
     <div class="dev-bubbles-bar" id="devBubblesBar" style="display:none;"></div>
     <div class="story-meta" id="storyMetaRow" style="justify-content: space-between;">
       <span id="sectionLabel">Dwell</span>
-      <span id="scriptureMeta">Mark 4</span>
+      <span id="scriptureMeta">Mark 5</span>
     </div>
   </div>
 
@@ -1799,9 +1784,9 @@
       </div>
       <div class="video-drawer-body">
         <div class="video-embed-wrap">
-          <iframe id="markVideoFrame" src="" title="The Parable of the Sower (The Chosen Scene)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe id="markVideoFrame" src="" title="Raising Jairus' Daughter (The Chosen Scene)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <a class="video-drawer-link" href="https://www.youtube.com/watch?v=XX-aAg4_U2Q" target="_blank" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <a class="video-drawer-link" href="https://www.youtube.com/watch?v=pLbIaA5u3gY" target="_blank" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       </div>
     </div>
   </div>
@@ -1831,9 +1816,9 @@
       <h3>Share Your Central Truth</h3>
       <div class="share-card-stage" id="shareCardStage">
         <div class="circle-hero" id="shareCircleHero">
-          <div class="arc-stem-text" id="shareArcStem">MARK 4</div>
+          <div class="arc-stem-text" id="shareArcStem">MARK 5</div>
           <div class="label-god-is">GOD IS...</div>
-          <div class="static-trait" id="shareTraitText">Sovereign Lord</div>
+          <div class="static-trait" id="shareTraitText">Healer</div>
         </div>
       </div>
       <div class="share-swatch-row" id="shareSwatchRow"></div>
@@ -1872,36 +1857,42 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
-// ==================== IN CONTEXT (MARK 4 SYNTHESIS MAP) ====================
+// ==================== IN CONTEXT (MARK 5 SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
-  parables: { title: "In Context", insight: "Parables are short, imaginative stories that Jesus used to provoke the mind, challenge listeners' expectations, and reveal the upside-down nature of God’s arriving Kingdom." },
-  sow: { title: "In Context", insight: "Scattering seed by hand across a field—a standard farming method in ancient Israel." },
-  sower: { title: "In Context", insight: "A farmer or worker spreading seed across the ground to cultivate a harvest." },
-  path: { title: "In Context", insight: "Hard-packed soil along a walkway where seed cannot penetrate, leaving it exposed to birds." },
-  rocky_places: { title: "In Context", insight: "Shallow soil lying over solid limestone bedrock; plants sprout quickly but wither in heat without deep roots." },
-  thorns: { title: "In Context", insight: "Aggressive weeds and brambles that choke out developing crops and drain their resources." },
-  good_soil: { title: "In Context", insight: "Fertile, well-prepared ground where the word is received and yields a rich harvest." },
-  satan: { title: "In Context", insight: "The spiritual enemy who immediately tries to snatch away God's word from receptive minds." },
-  kingdom_of_god: { title: "In Context", insight: "The active rule and royal reign of God, breaking into human history through Jesus Christ." },
-  lamp: { title: "In Context", insight: "A small terracotta oil lamp meant to illuminate a home when elevated on a stand." },
-  mustard_seed: { title: "In Context", insight: "One of the smallest agricultural seeds in Galilee that grows into a large, branch-filled shrub." },
-  squall: { title: "In Context", insight: "A sudden, violent windstorm rushing down through the cliffs surrounding the Sea of Galilee." },
-  stern: { title: "In Context", insight: "The rear section of a fishing boat, often equipped with a wooden seat or cushion." },
-  faith: { title: "In Context", insight: "Trusting who Jesus is and relying on His authority even during terrifying trials." },
-  disciples: { title: "In Context", insight: "Followers who travel with Jesus to learn His teachings and imitate His way of life." },
-  persecution: { title: "In Context", insight: "Facing opposition, hostility, or suffering specifically because of following God's truth." }
+  jairus: { title: "In Context", insight: "A respected leader of the local synagogue who humbled himself publicly before Jesus to save his dying daughter." },
+  synagogue_leader: { title: "In Context", insight: "An official responsible for managing the synagogue's worship services, buildings, and community affairs." },
+  pleaded: { title: "In Context", insight: "Begging with urgency, humility, and deep earnestness for desperately needed help." },
+  healed: { title: "In Context", insight: "Restored to full health and wholeness through God's miraculous power." },
+  bleeding: { title: "In Context", insight: "A chronic, painful medical condition lasting twelve years that left the woman physically weak and ceremonially unclean." },
+  twelve_years: { title: "In Context", insight: "A long, agonizing period representing complete human helplessness before Jesus stepped in." },
+  suffered: { title: "In Context", insight: "Experiencing prolonged physical pain, emotional sorrow, and social isolation." },
+  cloak: { title: "In Context", insight: "An outer garment or robe worn in ancient times." },
+  faith: { title: "In Context", insight: "Complete trust and active confidence in Jesus' authority and ability to save and heal." },
+  freed: { title: "In Context", insight: "Liberated instantly from a heavy burden, sickness, or suffering." },
+  power: { title: "In Context", insight: "Divine authority and life-giving force flowing directly from Jesus to bring restoration." },
+  trembling: { title: "In Context", insight: "Shaking with awe, reverence, and fear when realizing Jesus' divine power and holy presence." },
+  daughter: { title: "In Context", insight: "A term of deep affection and spiritual adoption used by Jesus to comfort the restored woman." },
+  peace: { title: "In Context", insight: "Shalom—complete spiritual, emotional, and physical rest and harmony with God." },
+  bother: { title: "In Context", insight: "To trouble or disrupt someone, reflecting the crowd's belief that death was beyond Jesus' control." },
+  believe: { title: "In Context", insight: "Placing unshakeable trust in Jesus' word and power regardless of terrifying circumstances." },
+  peter_james_john: { title: "In Context", insight: "Jesus' inner circle of three core disciples who witnessed His greatest miracles and transfiguration." },
+  commotion: { title: "In Context", insight: "A noisy, chaotic gathering of mourners expressing dramatic grief over a death." },
+  asleep: { title: "In Context", insight: "A term Jesus used for death to show that it is temporary and easily awakened by His divine voice." },
+  laughed: { title: "In Context", insight: "Mocking Jesus in disbelief because they relied on human sight rather than divine power." },
+  talitha_koum: { title: "In Context", insight: "An Aramaic phrase meaning \"Little girl, I say to you, get up!\" demonstrating Jesus' gentle command over death." },
+  astonished: { title: "In Context", insight: "Overwhelmed with utter wonder and amazement at Jesus' power to raise the dead." }
 };
 
-NOTEBOOK_SYNTHESIS['rocky places'] = NOTEBOOK_SYNTHESIS['rocky_places'];
-NOTEBOOK_SYNTHESIS['good soil'] = NOTEBOOK_SYNTHESIS['good_soil'];
-NOTEBOOK_SYNTHESIS['kingdom of god'] = NOTEBOOK_SYNTHESIS['kingdom_of_god'];
-NOTEBOOK_SYNTHESIS['mustard seed'] = NOTEBOOK_SYNTHESIS['mustard_seed'];
+NOTEBOOK_SYNTHESIS['synagogue leader'] = NOTEBOOK_SYNTHESIS['synagogue_leader'];
+NOTEBOOK_SYNTHESIS['twelve years'] = NOTEBOOK_SYNTHESIS['twelve_years'];
+NOTEBOOK_SYNTHESIS['peter james and john'] = NOTEBOOK_SYNTHESIS['peter_james_john'];
+NOTEBOOK_SYNTHESIS['talitha koum'] = NOTEBOOK_SYNTHESIS['talitha_koum'];
 
 const PHRASE_TERMS = [
-  { norm: ['kingdom','of','god'], key: 'kingdom_of_god' },
-  { norm: ['mustard','seed'], key: 'mustard_seed' },
-  { norm: ['good','soil'], key: 'good_soil' },
-  { norm: ['rocky','places'], key: 'rocky_places' }
+  { norm: ['synagogue','leader'], key: 'synagogue_leader' },
+  { norm: ['twelve','years'], key: 'twelve_years' },
+  { norm: ['peter', 'james', 'and', 'john'], key: 'peter_james_john' },
+  { norm: ['talitha','koum'], key: 'talitha_koum' }
 ].sort((a,b) => b.norm.length - a.norm.length);
 
 const PHRASE_KEYS = new Set(PHRASE_TERMS.map(p => p.key));
@@ -1919,50 +1910,32 @@ function matchPhraseAt(normedWords, wi){
   return null;
 }
 
-const PASSAGE_START_VERSE = 1;
+const PASSAGE_START_VERSE = 21;
 
 const passage = [
- "Again Jesus began to teach by the lake. The crowd that gathered around him was so large that he got into a boat and sat in it out on the lake, while all the people were along the shore at the water’s edge.",
- "He taught them many things by parables, and in his teaching said:",
- "“Listen! A farmer went out to sow his seed.",
- "As he was scattering the seed, some fell along the path, and the birds came and ate it up.",
- "Some fell on rocky places, where it did not have much soil. It sprang up quickly, because the soil was shallow.",
- "But when the sun came up, the plants were scorched, and they withered because they had no root.",
- "Other seed fell among thorns, which grew up and choked the plants, so that they did not bear grain.",
- "Still other seed fell on good soil. It came up, grew and produced a crop, some multiplying thirty, some sixty, some a hundred times.”",
- "Then Jesus said, “Whoever has ears to hear, let them hear.”",
- "When he was alone, the Twelve and the others around him asked him about the parables.",
- "He told them, “The secret of the kingdom of God has been given to you. But to those on the outside everything is said in parables",
- "so that, ‘they may be ever seeing but never perceiving, and ever hearing but never understanding; otherwise they might turn and be forgiven!’”",
- "Then Jesus said to them, “Don Don’t you understand this parable? How then will you understand any parable?",
- "The farmer sows the word.",
- "Some people are like seed along the path, where the word is sown. As soon as they hear it, Satan comes and takes away the word that was sown in them.",
- "Others, like seed sown on rocky places, hear the word and at once receive it with joy.",
- "But since they have no root, they last only a short time. When trouble or persecution comes because of the word, they quickly fall away.",
- "Still others, like seed sown among thorns, hear the word;",
- "but the worries of this life, the deceitfulness of wealth and the desires for other things come in and choke the word, making it unfruitful.",
- "Others, like seed sown on good soil, hear the word, accept it, and produce a crop—some thirty, some sixty, some a hundred times what was sown.”",
- "He said to them, “Do you bring in a lamp to put it under a bowl or a bed? Instead, don’t you put it on its stand?",
- "For whatever is hidden is meant to be disclosed, and whatever is concealed is meant to be brought out into the open.",
- "If anyone has ears to hear, let them hear.”",
- "“Consider carefully what you hear,” he continued. “With the measure you use, it will be measured to you—and even more.",
- "Whoever has will be given more; whoever does not have, even what they have will be taken from them.”",
- "He also said, “This is what the kingdom of God is like. A man scatters seed on the ground.",
- "Night and day, whether he sleeps or gets up, the seed sprouts and grows, though he does not know how.",
- "All by itself the soil produces grain—first the stalk, then the head, then the full kernel in the head.",
- "As soon as the grain is ripe, he puts the sickle to it, because the harvest has come.”",
- "Again he said, “What shall we say the kingdom of God is like, or what parable shall we use to describe it?",
- "It is like a mustard seed, which is the smallest of all seeds on earth.",
- "Yet when planted, it grows and becomes the largest of all garden plants, with such big branches that the birds can perch in its shade.”",
- "With many similar parables Jesus spoke the word to them, as much as they could understand.",
- "He did not say anything to them without using a parable. But when he was alone with his own disciples, he explained everything.",
- "That day when evening came, he said to his disciples, “Let us go over to the other side.”",
- "Leaving the crowd behind, they took him along, just as he was, in the boat. There were also other boats with him.",
- "A furious squall came up, and the waves broke over the boat, so that it was nearly swamped.",
- "Jesus was in the stern, sleeping on a cushion. The disciples woke him and said to him, “Teacher, don’t you care if we drown?”",
- "He got up, rebuked the wind and said to the waves, “Quiet! Be still!” Then the wind died down and it was completely calm.",
- "He said to his disciples, “Why are you so afraid? Do you still have no faith?”",
- "They were terrified and asked each other, “Who is this? Even the wind and the waves obey him!”"
+ "When Jesus had again crossed over by boat to the other side of the lake, a large crowd gathered around him while he was by the lake.",
+ "Then one of the synagogue leaders, named Jairus, came, and when he saw Jesus, he fell at his feet.",
+ "He pleaded earnestly with him, \"My little daughter is dying. Please come and put your hands on her so that she will be healed and live.\"",
+ "So Jesus went with him. A large crowd followed and pressed around him.",
+ "And a woman was there who had been subject to bleeding for twelve years.",
+ "She had suffered a great deal under the care of many doctors and had spent all she had, yet instead of getting better she grew worse.",
+ "When she heard about Jesus, she came up behind him in the crowd and touched his cloak,",
+ "because she thought, \"If I just touch his clothes, I will be healed.\"",
+ "Immediately her bleeding stopped and she felt in her body that she was freed from her suffering.",
+ "At once Jesus realized that power had gone out from him. He turned around in the crowd and asked, \"Who touched my clothes?\"",
+ "\"You see the people crowding against you,\" his disciples answered, \"and yet you can ask, 'Who touched me?' \"",
+ "But Jesus kept looking around to see who had done it.",
+ "Then the woman, knowing what had happened to her, came and fell at his feet and, trembling with fear, told him the whole truth.",
+ "He said to her, \"Daughter, your faith has healed you. Go in peace and be freed from your suffering.\"",
+ "While Jesus was still speaking, some people came from the house of Jairus, the synagogue leader. \"Your daughter is dead,\" they said. \"Why bother the teacher anymore?\"",
+ "Overhearing what they said, Jesus told him, \"Don't be afraid; just believe.\"",
+ "He did not let anyone follow him except Peter, James and John the brother of James.",
+ "When they came to the home of the synagogue leader, Jesus saw a commotion, with people crying and wailing loudly.",
+ "He went in and said to them, \"Why all this commotion and wailing? The child is not dead but asleep.\"",
+ "But they laughed at him. After he put them all out, he took the child's father and mother and the disciples who were with him, and went in where the child was.",
+ "He took her by the hand and said to her, \"Talitha koum!\" (which means \"Little girl, I say to you, get up!\").",
+ "Immediately the girl stood up and began to walk around (she was twelve years old). At this they were completely astonished.",
+ "He gave strict orders not to let anyone know about this, and told them to give her something to eat."
 ];
 
 const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2, charFontLevel:2 };
@@ -1991,7 +1964,7 @@ function kw(lines, extraClass){
   return `<div class="hero-title${extraClass ? ' '+extraClass : ''}">${body}</div>`;
 }
 
-const paragraphEnds = [9, 20, 25, 29, 34, 41];
+const paragraphEnds = [24, 29, 34, 36, 40, 43];
 const PASSAGE_LAST_VERSE = PASSAGE_START_VERSE + passage.length - 1;
 
 function passageWordsHTML(){
@@ -2040,7 +2013,7 @@ const BOOK_MAP_SECTIONS = [
   { title:'Prophecy', testament:'New', color:'#1E1B4B', darkText:false, desc:'A visionary look at how it all ends', books:[['Revelation',22,11952]] }
 ];
 
-const BOOK_FIND_SEQUENCE = ['Genesis', 'Revelation', 'Isaiah', 'Mark'];
+const BOOK_FIND_SEQUENCE = ['Leviticus', 'Hebrews', 'Mark'];
 const bookMapState = { phase: 'testament', foundIndex: 0 };
 
 function partitionIntoRows(items, n){
@@ -2418,7 +2391,7 @@ function tapSectionTile(e, el){
     } else {
       bookMapState.phase = 'done';
       const promptEl = document.getElementById('bookmapPrompt');
-      if (promptEl) promptEl.innerHTML = 'All four found! Nice work.';
+      if (promptEl) promptEl.innerHTML = 'All found! Nice work.';
       setTimeout(() => {
         revealAllBooksInSections();
         const p = document.getElementById('bookmapPrompt');
@@ -2435,10 +2408,10 @@ function tapSectionTile(e, el){
 // ==================== STREAMLINED BEATS ====================
 const beats = [
   { id:'intro', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
-    html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">🌾</div>
+    html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
             <div class="intro-top-title">MS HANG GUIDE</div>
-            ${kw([["MARK", "&nbsp;4"]],'xl')}
+            ${kw([["MARK", "&nbsp;5"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
@@ -2457,12 +2430,11 @@ const beats = [
                 </div>
               </div>
               <div class="recap-item-block">
-                <span class="recap-tag">Mark 1&ndash;3</span>
+                <span class="recap-tag">Context Progress</span>
                 <ul class="recap-bullet-list">
-                  <li>Jesus launches his ministry, calling ordinary fishermen to be his first disciples.</li>
-                  <li>He heals the sick and casts out demons, and crowds start following him everywhere he goes.</li>
-                  <li>He appoints the Twelve and repeatedly clashes with the Pharisees over his authority.</li>
-                  <li>Even his own family thinks he's out of his mind &mdash; disciples, family, and Pharisees have all now seen his power firsthand.</li>
+                  <li>Mark 4:1&ndash;34: Jesus teaches how different heart conditions receive God's word.</li>
+                  <li>Mark 4:35&ndash;41: Jesus calms the storm, prompting the disciples to ask who He is as their faith struggles.</li>
+                  <li>Mark 5:1&ndash;20: Jesus heals a Gerasene man filled with impure spirits, demonstrating His authority over spiritual forces.</li>
                 </ul>
               </div>
             </div>
@@ -2486,8 +2458,43 @@ const beats = [
   { id:'tri-focal-synthesis', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-expand)', text:'dark', align:'start',
     html:`<div class="synthesis-stage">
             <div class="mobile-glossary-card" id="mobileGlossaryCard"></div>
-            <div class="seed-image-row desktop-only-grid">
-              <img class="seed-image-single" src="seeds.png" alt="">
+            <div class="synthesis-split-grid desktop-only-grid">
+              <div class="synthesis-panel">
+                <div class="synthesis-panel-header">
+                  What context is important to understand this Scripture? (author, time, purpose)
+                </div>
+                <div class="synthesis-panel-body">
+                  <div class="synthesis-stacked-list">
+                    <div class="synthesis-stat-row">
+                      <span class="s-label">Author:</span>
+                      <span class="s-val">Mark</span>
+                    </div>
+                    <div class="synthesis-stat-row">
+                      <span class="s-label">Time:</span>
+                      <span class="s-val">50–70 AD</span>
+                    </div>
+                    <div class="synthesis-stat-row">
+                      <span class="s-label">Purpose:</span>
+                      <span class="s-val">Jesus as King and Servant</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="synthesis-panel">
+                <div class="synthesis-panel-header">
+                  What am I observing as I read the text? (repetition, confusing terms, hyperlinks)
+                </div>
+                <div class="synthesis-panel-body">
+                  <div class="synthesis-obs-kicker"><i class="fa-solid fa-pen-nib"></i> You should have defined:</div>
+                  <div id="synthesisHighlightCloud" class="pill-cloud"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="synthesis-bottom-anchor desktop-only-grid">
+              <div class="anchor-arc-kicker">NEXT UP</div>
+              <div class="anchor-title">GOD IS...</div>
             </div>
           ` },
 
@@ -2632,7 +2639,7 @@ function updateHeaderMeta(){
     scriptureEl.innerHTML = `<button class="meta-link-btn" onclick="event.stopPropagation(); exitDevMode();">Close</button>`;
   } else {
     labelEl.textContent = sectionLabels[state.index] || '';
-    scriptureEl.textContent = 'Mark 4';
+    scriptureEl.textContent = 'Mark 5';
   }
 }
 
@@ -2743,7 +2750,7 @@ function renderSynthesisPanel(){
   if (cloud) {
     let uniqueWords = Array.from(new Set(state.wordTaps.map(w => w.word.charAt(0).toUpperCase() + w.word.slice(1))));
     if (uniqueWords.length === 0) {
-      uniqueWords = ['Parables', 'Sower', 'Good Soil', 'Mustard Seed', 'Squall'];
+      uniqueWords = ['Jairus', 'Bleeding', 'Faith', 'Talitha Koum', 'Astonished'];
     }
     cloud.innerHTML = uniqueWords.map(w => `<span class="research-pill">${w}</span>`).join('');
   }
@@ -2839,7 +2846,7 @@ function renderBeat(i){
         coachingScene.style.alignItems = 'center';
         coachingScene.style.justifyContent = 'center';
       }
-      if (arcStem) arcStem.textContent = 'MARK 4:';
+      if (arcStem) arcStem.textContent = 'MARK 5:';
     } else {
       if (cardWrap) cardWrap.style.display = '';
       if (coachingScene) {
@@ -2849,7 +2856,7 @@ function renderBeat(i){
         coachingScene.style.justifyContent = '';
       }
       const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-      document.getElementById('charRef').textContent = 'Mark 4:' + activeVerse;
+      document.getElementById('charRef').textContent = 'Mark 5:' + activeVerse;
       document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
       if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
       requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
@@ -2864,7 +2871,7 @@ function renderBeat(i){
   } else if (b.id === 'final') {
     const dynamicSpan = document.getElementById('finalTraitDynamic');
     if (dynamicSpan) {
-      const traitWord = (state.trait && state.trait.trim()) ? state.trait.trim() : '...';
+      const traitWord = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
       dynamicSpan.textContent = traitWord;
     }
   } else if (b.id === 'char-verse-pick') {
@@ -2873,7 +2880,6 @@ function renderBeat(i){
     checkPassageScroll();
   }
 
-  /* Glossary Tab strictly visible on slide 4 (vocab-scan) and slide 5 (tri-focal-synthesis) */
   const glossaryDrawerEl = document.getElementById('glossaryDrawer');
   if (glossaryDrawerEl) {
     if (b.id === 'vocab-scan' || b.id === 'tri-focal-synthesis') {
@@ -2885,7 +2891,6 @@ function renderBeat(i){
     }
   }
 
-  /* Video Tab strictly visible on slide 2 (reveal-context) */
   const videoDrawerEl = document.getElementById('videoDrawer');
   if (videoDrawerEl) {
     if (b.id === 'reveal-context') {
@@ -2896,7 +2901,6 @@ function renderBeat(i){
     }
   }
 
-  /* Timer Tab strictly visible on char-coaching and final */
   const timerDrawerEl = document.getElementById('timerDrawer');
   if (timerDrawerEl) {
     if (b.id === 'char-coaching' || b.id === 'final') {
@@ -3080,7 +3084,7 @@ function toggleGlossaryDrawer(force){
 function openGlossaryDrawer(){ toggleGlossaryDrawer(true); }
 function closeGlossaryDrawer(){ toggleGlossaryDrawer(false); }
 
-const MARK_VIDEO_ID = 'XX-aAg4_U2Q';
+const MARK_VIDEO_ID = 'pLbIaA5u3gY';
 function toggleVideoDrawer(force){
   const d = document.getElementById('videoDrawer');
   if (!d) return;
@@ -3324,8 +3328,8 @@ if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPas
 let devMode = false;
 let devTapCount = 0;
 let devLastTapTime = 0;
-const DEV_NOTES_KEY = 'msHangDevNotes_4_1_41';
-const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_4_1_41';
+const DEV_NOTES_KEY = 'msHangDevNotes_5_1_00';
+const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_5_1_00';
 
 function loadHiddenSlides(){
   try { return new Set(JSON.parse(localStorage.getItem(DEV_HIDDEN_SLIDES_KEY) || '[]')); }
@@ -3459,7 +3463,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 
   ctx.fillStyle = 'rgba(13,13,13,0.65)';
   ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
-  ctx.fillText(`MARK 4:${verseNum}`, cx, cy - circleR * 0.42);
+  ctx.fillText(`MARK 5:${verseNum}`, cx, cy - circleR * 0.42);
 
   ctx.fillStyle = '#0D0D0D';
   ctx.font = `800 ${Math.round(size * 0.05)}px 'Space Grotesk', sans-serif`;
@@ -3495,7 +3499,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 async function shareCentralTruthDirect(){
   try {
     const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-    const traitText = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Sovereign Lord';
+    const traitText = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
     const colorKey = SHARE_COLOR_KEYS[Math.floor(Math.random() * SHARE_COLOR_KEYS.length)];
     const canvas = drawCentralTruthCanvas(colorKey, activeVerse, traitText);
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
@@ -3543,8 +3547,8 @@ function selectShareColor(key){
 
 function openShareOverlay(){
   const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-  document.getElementById('shareArcStem').textContent = `MARK 4:${activeVerse}`;
-  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Sovereign Lord';
+  document.getElementById('shareArcStem').textContent = `MARK 5:${activeVerse}`;
+  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
   initShareSwatches();
   selectShareColor(state.shareColor || 'discover');
   document.getElementById('shareOverlay').style.display = 'flex';
@@ -3572,7 +3576,7 @@ async function confirmShareImage(){
       closeShareOverlay();
     } else {
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.getElementById('a');
       a.href = url; a.download = 'central-truth.png';
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       URL.revokeObjectURL(url);
