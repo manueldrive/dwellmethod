@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dwell Guide — Mark 5</title>
+<title>Dwell Guide — Mark 6</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -383,225 +383,6 @@
   .tx-dark{ color:var(--ink); }
   .tx-light{ color:#FFF; }
 
-  .sketch-lead-title {
-    font-family:'Space Grotesk', sans-serif;
-    font-size: clamp(24px, 3.8vw, 42px);
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    text-transform: uppercase;
-    margin-bottom: clamp(10px, 1.8vh, 24px);
-    text-align: left;
-    width: 100%;
-  }
-
-  .locator-emphasis{
-    display: inline-block;
-    background: var(--ink);
-    color: #FFF;
-    padding: 0 10px;
-    border-radius: 8px;
-    transform: rotate(-2deg);
-  }
-  .tx-light .locator-emphasis{ background: #FFF; color: var(--ink); }
-
-  /* ==================== NEO-BRUTALIST QUEST GAME STYLES ==================== */
-  .bookmap-wrap { gap:clamp(8px, 1.5vh, 14px); }
-  
-  .bookmap-prompt { 
-    font-family:'Space Grotesk', sans-serif; 
-    font-weight:800; 
-    font-size: clamp(16px, 4.5vw, 32px); 
-    text-align:center; 
-    flex-shrink:0; 
-    line-height: 1.25;
-  }
-  .bookmap-prompt .locator-emphasis { display:inline-block; }
-
-  .tp-card { 
-    position:absolute; 
-    box-sizing:border-box; 
-    overflow:hidden; 
-    background:var(--tp-color); 
-    color: var(--tp-text, #FFF);
-    border: 3.5px solid var(--ink); 
-    border-radius: 16px; 
-    box-shadow: 4px 4px 0 var(--ink);
-    display:flex; 
-    flex-direction:column; 
-    align-items:center; 
-    justify-content:center; 
-    gap:calc(8px * var(--fit-scale, 1)); 
-    padding:calc(20px * var(--fit-scale, 1)); 
-    cursor:pointer; 
-    -webkit-tap-highlight-color:transparent; 
-    transition: transform 0.12s ease, opacity 0.5s ease, filter 0.5s ease, box-shadow 0.2s ease; 
-  }
-  .tp-card[data-testament="Old"] { --tp-color: #A855F7; --tp-text: #FFFFFF; }
-  .tp-card[data-testament="New"] { --tp-color: #0284C7; --tp-text: #FFFFFF; }
-
-  .tp-card:active { 
-    transform: translate(2px, 2px) scale(0.99); 
-    box-shadow: 2px 2px 0 var(--ink);
-  }
-  .tp-card.shake { animation: shakeX .45s; }
-  .tp-card.found { 
-    border-color: var(--ink); 
-    box-shadow: 0 0 0 4px var(--lime), 4px 4px 0 var(--ink); 
-  }
-  .tp-card.dimmed { opacity:.4; pointer-events:none; filter:grayscale(.3); }
-  .tp-check { position:absolute; top:14px; right:14px; width:30px; height:30px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:15px; border:2.5px solid var(--ink); }
-  .tp-card.found .tp-check { display:flex; }
-  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:inherit; background:rgba(0,0,0,.15); padding:calc(5px * var(--fit-scale, 1)) calc(12px * var(--fit-scale, 1)); border-radius:100px; font-size:calc(clamp(11px, 1.4vw, 14px) * var(--fit-scale, 1)); white-space:nowrap; margin-top:2px; }
-  .tp-card[data-testament="New"] .tp-badge { background:rgba(0,0,0,.25); color:#FFF; }
-  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:inherit; font-size:calc(clamp(24px, 4vw, 38px) * var(--fit-scale, 1)); text-align:center; line-height:1; }
-  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:inherit; font-size:calc(clamp(13px, 1.6vw, 16px) * var(--fit-scale, 1)); text-align:center; opacity:.92; max-width:80%; line-height:1.4; margin-top:4px; }
-
-  .sec-tile { 
-    position:absolute; 
-    box-sizing:border-box; 
-    overflow:hidden; 
-    cursor:pointer; 
-    background:var(--sec-color); 
-    color: var(--sec-text, #FFF);
-    border: 3.5px solid var(--ink); 
-    border-radius: 14px; 
-    box-shadow: 4px 4px 0 var(--ink);
-    display:flex; 
-    flex-direction:column; 
-    align-items:center; 
-    justify-content:center; 
-    padding:calc(10px * var(--fit-scale, 1)); 
-    -webkit-tap-highlight-color:transparent; 
-    transition: transform 0.12s ease, box-shadow 0.2s ease; 
-  }
-  .sec-tile.unveil-in { opacity:0; transform:scale(.82); }
-  .sec-tile.unveil-in.show { opacity:1; transform:scale(1); transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
-  .sec-tile.collapsing { opacity:0; transform:scale(.8); transition:opacity .35s ease, transform .35s ease; pointer-events:none; }
-  .sec-tile:active { 
-    transform: translate(2px, 2px) scale(0.98); 
-    box-shadow: 2px 2px 0 var(--ink);
-  }
-  .sec-tile.shake { animation: shakeX .45s; }
-  .sec-tile.found { 
-    border-color: var(--ink); 
-    box-shadow: 0 0 0 4px var(--lime), 4px 4px 0 var(--ink); 
-  }
-  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:inherit; font-size:calc(clamp(16px, 2.4vw, 27px) * var(--fit-scale, 1)); text-align:center; line-height:1.15; display:flex; flex-direction:column; align-items:center; gap:4px; }
-  .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:inherit; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--fit-scale, 1)); text-align:center; opacity:.92; margin-top:calc(6px * var(--fit-scale, 1)); line-height:1.35; max-width:92%; }
-  
-  @media (max-width: 767px) {
-    .tp-card .tp-desc,
-    .sec-tile .sec-desc {
-      display: none !important;
-    }
-  }
-
-  .testament-side-label { position:absolute; left:0; display:flex; align-items:center; justify-content:center; overflow:hidden; pointer-events:none; }
-  .testament-side-label span { writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:calc(clamp(9px, 1.1vw, 12px) * var(--fit-scale, 1)); text-transform:uppercase; letter-spacing:calc(1px * var(--fit-scale, 1)); color:var(--ink); opacity:.65; white-space:nowrap; }
-
-  .sec-tile.celebrate { animation: tileBounceFlat .55s cubic-bezier(.34,1.56,.64,1), glowPulse .7s ease-out; }
-  @keyframes tileBounceFlat {
-    0% { transform: scale(1); }
-    35% { transform: scale(1.06); }
-    60% { transform: scale(0.97); }
-    100% { transform: scale(1); }
-  }
-  @keyframes glowPulse {
-    0% { box-shadow: 0 0 0 0 rgba(195,245,60,.95), 4px 4px 0 var(--ink); }
-    45% { box-shadow: 0 0 0 12px rgba(195,245,60,.4), 4px 4px 0 var(--ink); }
-    100% { box-shadow: 0 0 0 26px rgba(195,245,60,0), 4px 4px 0 var(--ink); }
-  }
-  .confetti-bit { position:fixed; width:8px; height:8px; border-radius:2px; pointer-events:none; z-index:9999; top:0; left:0; transform:translate(-50%,-50%); animation: confettiPop .7s ease-out forwards; }
-  @keyframes confettiPop {
-    0% { transform:translate(-50%,-50%) rotate(0deg) scale(1); opacity:1; }
-    100% { transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(.4); opacity:0; }
-  }
-
-  .all-books-unified-grid {
-    --grid-gap: clamp(6px, 1vh, 12px);
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: var(--grid-gap);
-    width: 100%;
-    height: 100%;
-    padding: clamp(4px, 1vh, 8px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    box-sizing: border-box;
-  }
-  .book-pill { 
-    flex: 0 0 calc(14.285% - (var(--grid-gap) * 6 / 7)); 
-    box-sizing: border-box;
-    background: var(--sec-color); 
-    border: 2.5px solid var(--ink); 
-    border-radius: 100px; 
-    box-shadow: 2.5px 2.5px 0 var(--ink);
-    padding: clamp(6px, 1.2vh, 12px) clamp(8px, 1.2vw, 16px); 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    gap: 6px; 
-    font-family: 'Space Grotesk', sans-serif; 
-    font-weight: 800; 
-    color: var(--pill-text, #FFF); 
-    font-size: clamp(11px, 1.4vw, 17px); 
-    white-space: nowrap; 
-    opacity: 0; 
-    transform: scale(.65); 
-    transition: opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1); 
-  }
-  .book-pill.show { opacity: 1; transform: scale(1); }
-  .book-pill.quest-found { 
-    border-color: var(--ink); 
-    font-weight: 900; 
-    animation: foundNeoPulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
-  }
-  @keyframes foundNeoPulse {
-    0%, 100% {
-      box-shadow: 0 0 0 3.5px var(--lime), 2.5px 2.5px 0 var(--ink);
-      transform: scale(1);
-    }
-    50% {
-      box-shadow: 0 0 0 6px var(--lime), 3px 3px 0 var(--ink);
-      transform: scale(1.03);
-    }
-  }
-
-  @media (max-width: 767px) {
-    .all-books-unified-grid {
-      --grid-gap: 6px;
-      padding: 4px;
-    }
-    .book-pill {
-      flex: 0 0 calc(20% - 4.8px);
-      padding: 5px 6px;
-      font-size: 10px;
-    }
-  }
-
-  .mosaic-frame { 
-    flex:1; 
-    min-height:0; 
-    width:100%; 
-    display:flex; 
-    align-items:center; 
-    justify-content:center; 
-    overflow:hidden; 
-    box-sizing:border-box; 
-    padding: 8px 12px 14px 8px;
-  }
-  .mosaic-canvas { 
-    position:relative; 
-    margin:0 auto; 
-    box-sizing:border-box; 
-    width: 100%;
-    height: 100%;
-  }
-
   .intro-top-title{ font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase; opacity:.85; margin-bottom:12px; }
   .intro-duration{ font-family:'Space Grotesk', sans-serif; font-size:13.5px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; opacity:.6; margin-top:16px; display:flex; align-items:center; gap:8px; }
   @media (min-width: 768px) {
@@ -753,7 +534,7 @@
     .book-meta-item .bm-value { font-size: 14px; }
   }
 
-  #beat-5 {
+  #beat-4 {
     padding-bottom: 0 !important;
     overflow: hidden !important;
   }
@@ -1300,84 +1081,6 @@
     margin: 0;
   }
 
-  .video-drawer{ display: none; }
-  @media (min-width: 768px) {
-    .video-drawer.vd-visible{ display: block; }
-  }
-  .video-tab{
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 130;
-    background: var(--purple);
-    color: #FFF;
-    border: 3px solid var(--ink);
-    border-left: none;
-    border-radius: 0 14px 14px 0;
-    padding: 16px 9px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    box-shadow: 4px 4px 0 var(--ink);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: left .3s ease, transform .15s ease;
-  }
-  .video-tab span{ writing-mode: vertical-rl; transform: rotate(180deg); }
-  .video-tab i{ font-size: 15px; }
-  .video-tab:active{ transform: translateY(-50%) scale(0.96); }
-  .video-drawer.open .video-tab{ left: min(360px, 84vw); }
-  .video-drawer-scrim{
-    position: fixed; inset: 0; z-index: 105;
-    background: rgba(13,13,29,0.28);
-    opacity: 0; pointer-events: none;
-    transition: opacity .25s ease;
-  }
-  .video-drawer.open .video-drawer-scrim{ opacity: 1; pointer-events: auto; }
-  .video-drawer-panel{
-    position: fixed;
-    left: 0; top: 0; bottom: 0;
-    width: min(360px, 84vw);
-    background: #FFF;
-    border-right: 4px solid var(--ink);
-    box-shadow: 8px 0 0 rgba(0,0,0,0.12);
-    transform: translateX(-100%);
-    transition: transform .3s ease;
-    z-index: 110;
-    display: flex;
-    flex-direction: column;
-    padding: 22px 20px;
-    gap: 14px;
-  }
-  .video-drawer.open .video-drawer-panel{ transform: translateX(0); }
-  .video-drawer-header{
-    display: flex; align-items: center; justify-content: space-between;
-    font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase;
-    flex-shrink: 0;
-  }
-  .video-drawer-close{ background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); padding:4px; line-height:1; }
-  .video-drawer-body{ flex: 1; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
-  .video-embed-wrap{ position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 2.5px solid var(--ink); background: #000; flex-shrink: 0; }
-  .video-embed-wrap iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .video-drawer-link{
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: .4px;
-    color: var(--ink); text-decoration: none;
-    border: 2.5px solid var(--ink); border-radius: 100px; padding: 11px 16px;
-    transition: background .15s ease;
-  }
-  .video-drawer-link:active{ background: rgba(0,0,0,0.06); }
-  @media (min-width: 768px) {
-    .video-drawer-panel{ padding: 26px; }
-    .video-drawer-header{ font-size: 19px; }
-  }
-
   .timer-drawer{ display: none; }
   @media (min-width: 768px) {
     .timer-drawer.td-visible{ display: block; }
@@ -1490,7 +1193,6 @@
     .circle-hero.coaching-circle .blank-input{ font-size:clamp(33px, 4.2vh, 42px); }
   }
 
-  /* ==================== FINAL SLIDE UN-CARDED & LARGER ==================== */
   .final-live-wrap {
     flex: 1;
     display: flex;
@@ -1727,7 +1429,7 @@
     <div class="dev-bubbles-bar" id="devBubblesBar" style="display:none;"></div>
     <div class="story-meta" id="storyMetaRow" style="justify-content: space-between;">
       <span id="sectionLabel">Dwell</span>
-      <span id="scriptureMeta">Mark 5</span>
+      <span id="scriptureMeta">Mark 6</span>
     </div>
   </div>
 
@@ -1740,11 +1442,6 @@
     <button class="minimal-arrow-btn" id="shellNextBtn" onclick="handleForwardAttempt()" aria-label="Next">
       <i class="fa-solid fa-chevron-right"></i>
     </button>
-  </div>
-
-  <div class="gate-nav-hint light" id="questNavHint">
-    <i class="fa-solid fa-hand-point-up"></i>
-    <span id="questNavHintText">Make a selection</span>
   </div>
 
   <div class="gate-nav-hint dark" id="charNavHint">
@@ -1768,26 +1465,6 @@
         <button class="glossary-drawer-close" onclick="event.stopPropagation(); closeGlossaryDrawer();" aria-label="Close glossary panel"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="glossary-drawer-body" id="glossaryDrawerBody"></div>
-    </div>
-  </div>
-
-  <div class="video-drawer" id="videoDrawer">
-    <button class="video-tab" id="videoTabBtn" onclick="event.stopPropagation(); toggleVideoDrawer();" aria-label="Toggle video panel">
-      <i class="fa-brands fa-youtube"></i>
-      <span>Video</span>
-    </button>
-    <div class="video-drawer-scrim" onclick="closeVideoDrawer();"></div>
-    <div class="video-drawer-panel">
-      <div class="video-drawer-header">
-        <span>The Book of Mark</span>
-        <button class="video-drawer-close" onclick="event.stopPropagation(); closeVideoDrawer();" aria-label="Close video panel"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="video-drawer-body">
-        <div class="video-embed-wrap">
-          <iframe id="markVideoFrame" src="" title="Raising Jairus' Daughter (The Chosen Scene)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <a class="video-drawer-link" href="https://www.youtube.com/watch?v=pLbIaA5u3gY" target="_blank" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      </div>
     </div>
   </div>
 
@@ -1816,7 +1493,7 @@
       <h3>Share Your Central Truth</h3>
       <div class="share-card-stage" id="shareCardStage">
         <div class="circle-hero" id="shareCircleHero">
-          <div class="arc-stem-text" id="shareArcStem">MARK 5</div>
+          <div class="arc-stem-text" id="shareArcStem">MARK 6</div>
           <div class="label-god-is">GOD IS...</div>
           <div class="static-trait" id="shareTraitText">Healer</div>
         </div>
@@ -1857,42 +1534,29 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
-// ==================== IN CONTEXT (MARK 5 SYNTHESIS MAP) ====================
+// ==================== IN CONTEXT (MARK 6 SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
-  jairus: { title: "In Context", insight: "A respected leader of the local synagogue who humbled himself publicly before Jesus to save his dying daughter." },
-  synagogue_leader: { title: "In Context", insight: "An official responsible for managing the synagogue's worship services, buildings, and community affairs." },
-  pleaded: { title: "In Context", insight: "Begging with urgency, humility, and deep earnestness for desperately needed help." },
-  healed: { title: "In Context", insight: "Restored to full health and wholeness through God's miraculous power." },
-  bleeding: { title: "In Context", insight: "A chronic, painful medical condition lasting twelve years that left the woman physically weak and ceremonially unclean." },
-  twelve_years: { title: "In Context", insight: "A long, agonizing period representing complete human helplessness before Jesus stepped in." },
-  suffered: { title: "In Context", insight: "Experiencing prolonged physical pain, emotional sorrow, and social isolation." },
-  cloak: { title: "In Context", insight: "An outer garment or robe worn in ancient times." },
-  faith: { title: "In Context", insight: "Active trust in God's character, moving towards Jesus, regardless of how you feel." },
-  freed: { title: "In Context", insight: "Liberated instantly from a heavy burden, sickness, or suffering." },
-  power: { title: "In Context", insight: "Divine authority and life-giving force flowing directly from Jesus to bring restoration." },
-  trembling: { title: "In Context", insight: "Shaking with awe, reverence, and fear when realizing Jesus' divine power and holy presence." },
-  daughter: { title: "In Context", insight: "A term of deep affection and spiritual adoption used by Jesus to comfort the restored woman." },
-  peace: { title: "In Context", insight: "Shalom—complete spiritual, emotional, and physical rest and harmony with God." },
-  bother: { title: "In Context", insight: "To trouble or disrupt someone, reflecting the crowd's belief that death was beyond Jesus' control." },
-  believe: { title: "In Context", insight: "Placing unshakeable trust in Jesus' word and power regardless of terrifying circumstances." },
-  peter_james_john: { title: "In Context", insight: "Jesus' inner circle of three core disciples who witnessed His greatest miracles and transfiguration." },
-  commotion: { title: "In Context", insight: "A noisy, chaotic gathering of mourners expressing dramatic grief over a death." },
-  asleep: { title: "In Context", insight: "A term Jesus used for death to show that it is temporary and easily awakened by His divine voice." },
-  laughed: { title: "In Context", insight: "Mocking Jesus in disbelief because they relied on human sight rather than divine power." },
-  talitha_koum: { title: "In Context", insight: "An Aramaic phrase meaning \"Little girl, I say to you, get up!\" demonstrating Jesus' gentle command over death." },
-  astonished: { title: "In Context", insight: "Overwhelmed with utter wonder and amazement at Jesus' power to raise the dead." }
+  hometown: { title: "In Context", insight: "Nazareth, the small village where Jesus grew up and worked as a carpenter." },
+  synagogue: { title: "In Context", insight: "The local Jewish place of worship, community gathering, and Scripture teaching." },
+  carpenter: { title: "In Context", insight: "A builder or craftsman working in wood and stone, reflecting Jesus' humble physical vocation." },
+  prophet: { title: "In Context", insight: "A messenger sent by God to speak truth, often rejected by those closest to them." },
+  faith: { title: "In Context", insight: "Active trust in God's authority and character; its lack in Nazareth amazed Jesus." },
+  twelve: { title: "In Context", insight: "Jesus' core group of twelve disciples commissioned to share His ministry authority." },
+  authority: { title: "In Context", insight: "Divine right and power over spiritual forces granted by Jesus to His disciples." },
+  repent: { title: "In Context", insight: "To turn away from sin and change one's mind toward God's kingdom." },
+  anointed: { title: "In Context", insight: "Applying oil as an act of prayer, consecration, and healing." },
+  herod: { title: "In Context", insight: "Herod Antipas, ruler of Galilee, who was conflicted, fearful, and morally weak." },
+  john_the_baptist: { title: "In Context", insight: "The prophet who prepared the way for Jesus and was martyred for preaching truth." },
+  elijah: { title: "In Context", insight: "The Old Testament prophet expected to return before the day of the Lord." },
+  herodias: { title: "In Context", insight: "The wife of Philip who married Herod Antipas, prompting John the Baptist's public rebuke." },
+  oath: { title: "In Context", insight: "A solemn promise that Herod foolishly swore before his guests, leading to John's execution." },
+  platter: { title: "In Context", insight: "A large serving dish, highlighting the grotesque nature of Herodias' demand." }
 };
 
-NOTEBOOK_SYNTHESIS['synagogue leader'] = NOTEBOOK_SYNTHESIS['synagogue_leader'];
-NOTEBOOK_SYNTHESIS['twelve years'] = NOTEBOOK_SYNTHESIS['twelve_years'];
-NOTEBOOK_SYNTHESIS['peter james and john'] = NOTEBOOK_SYNTHESIS['peter_james_john'];
-NOTEBOOK_SYNTHESIS['talitha koum'] = NOTEBOOK_SYNTHESIS['talitha_koum'];
+NOTEBOOK_SYNTHESIS['john the baptist'] = NOTEBOOK_SYNTHESIS['john_the_baptist'];
 
 const PHRASE_TERMS = [
-  { norm: ['synagogue','leader'], key: 'synagogue_leader' },
-  { norm: ['twelve','years'], key: 'twelve_years' },
-  { norm: ['peter', 'james', 'and', 'john'], key: 'peter_james_john' },
-  { norm: ['talitha','koum'], key: 'talitha_koum' }
+  { norm: ['john', 'the', 'baptist'], key: 'john_the_baptist' }
 ].sort((a,b) => b.norm.length - a.norm.length);
 
 const PHRASE_KEYS = new Set(PHRASE_TERMS.map(p => p.key));
@@ -1910,32 +1574,39 @@ function matchPhraseAt(normedWords, wi){
   return null;
 }
 
-const PASSAGE_START_VERSE = 21;
+const PASSAGE_START_VERSE = 1;
+const paragraphEnds = [6, 13, 29];
 
 const passage = [
- "When Jesus had again crossed over by boat to the other side of the lake, a large crowd gathered around him while he was by the lake.",
- "Then one of the synagogue leaders, named Jairus, came, and when he saw Jesus, he fell at his feet.",
- "He pleaded earnestly with him, \"My little daughter is dying. Please come and put your hands on her so that she will be healed and live.\"",
- "So Jesus went with him. A large crowd followed and pressed around him.",
- "And a woman was there who had been subject to bleeding for twelve years.",
- "She had suffered a great deal under the care of many doctors and had spent all she had, yet instead of getting better she grew worse.",
- "When she heard about Jesus, she came up behind him in the crowd and touched his cloak,",
- "because she thought, \"If I just touch his clothes, I will be healed.\"",
- "Immediately her bleeding stopped and she felt in her body that she was freed from her suffering.",
- "At once Jesus realized that power had gone out from him. He turned around in the crowd and asked, \"Who touched my clothes?\"",
- "\"You see the people crowding against you,\" his disciples answered, \"and yet you can ask, 'Who touched me?' \"",
- "But Jesus kept looking around to see who had done it.",
- "Then the woman, knowing what had happened to her, came and fell at his feet and, trembling with fear, told him the whole truth.",
- "He said to her, \"Daughter, your faith has healed you. Go in peace and be freed from your suffering.\"",
- "While Jesus was still speaking, some people came from the house of Jairus, the synagogue leader. \"Your daughter is dead,\" they said. \"Why bother the teacher anymore?\"",
- "Overhearing what they said, Jesus told him, \"Don't be afraid; just believe.\"",
- "He did not let anyone follow him except Peter, James and John the brother of James.",
- "When they came to the home of the synagogue leader, Jesus saw a commotion, with people crying and wailing loudly.",
- "He went in and said to them, \"Why all this commotion and wailing? The child is not dead but asleep.\"",
- "But they laughed at him. After he put them all out, he took the child's father and mother and the disciples who were with him, and went in where the child was.",
- "He took her by the hand and said to her, \"Talitha koum!\" (which means \"Little girl, I say to you, get up!\").",
- "Immediately the girl stood up and began to walk around (she was twelve years old). At this they were completely astonished.",
- "He gave strict orders not to let anyone know about this, and told them to give her something to eat."
+  "Jesus left there and went to his hometown, accompanied by his disciples.",
+  "When the Sabbath came, he began to teach in the synagogue, and many who heard him were amazed. \"Where did this man get these things?\" they asked. \"What's this wisdom that has been given him? What are these remarkable miracles he is performing?",
+  "Isn't this the carpenter? Isn't this Mary's son and the brother of James, Joseph, Judas and Simon? Aren't his sisters here with us?\" And they took offense at him.",
+  "Jesus said to them, \"A prophet is not without honor except in his own town, among his relatives and in his own home.\"",
+  "He could not do any miracles there, except lay his hands on a few sick people and heal them.",
+  "He was amazed at their lack of faith. Then Jesus went around teaching from village to village.",
+  "Calling the Twelve to him, he began to send them out two by two and gave them authority over impure spirits.",
+  "These were his instructions: \"Take nothing for the journey except a staff—no bread, no bag, no money in your belts.",
+  "Wear sandals but not an extra shirt.",
+  "Whenever you enter a house, stay there until you leave that town.",
+  "And if any place will not welcome you or listen to you, leave that place and shake the dust off your feet as a testimony against them.\"",
+  "They went out and preached that people should repent.",
+  "They drove out many demons and anointed many sick people with oil and healed them.",
+  "King Herod heard about this, for Jesus' name had become well known. Some were saying, \"John the Baptist has been raised from the dead, and that is why miraculous powers are at work in him.\"",
+  "Others said, \"He is Elijah.\" And still others claimed, \"He is a prophet, like one of the prophets of long ago.\"",
+  "But when Herod heard this, he said, \"John, whom I beheaded, has been raised from the dead!\"",
+  "For Herod himself had given orders to have John arrested, and he had him bound and put in prison. He did this because of Herodias, his brother Philip's wife, whom he had married.",
+  "For John had been saying to Herod, \"It is not lawful for you to have your brother's wife.\"",
+  "So Herodias nursed a grudge against John and wanted to kill him. But she was not able to,",
+  "because Herod feared John and protected him, knowing him to be a righteous and holy man. When Herod heard John, he was greatly puzzled; yet he liked to listen to him.",
+  "Finally the opportune time came. On his birthday Herod gave a banquet for his high officials and military commanders and the leading men of Galilee.",
+  "When the daughter of Herodias came in and danced, she pleased Herod and his dinner guests. The king said to the girl, \"Ask me for anything you want, and I'll give it to you.\"",
+  "And he promised her with an oath, \"Whatever you ask I will give you, up to half my kingdom.\"",
+  "She went out and said to her mother, \"What shall I ask for?\" \"The head of John the Baptist,\" she answered.",
+  "At once the girl hurried in to the king with the request: \"I want you to give me right now the head of John the Baptist on a platter.\"",
+  "The king was greatly distressed, but because of his oaths and his dinner guests, he did not want to refuse her.",
+  "So he immediately sent an executioner with orders to bring John's head. The man went, beheaded John in the prison,",
+  "and brought back his head on a platter. He presented it to the girl, and she gave it to her mother.",
+  "On hearing of this, John's disciples came and took his body and laid it in a tomb."
 ];
 
 const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2, charFontLevel:2 };
@@ -1964,7 +1635,6 @@ function kw(lines, extraClass){
   return `<div class="hero-title${extraClass ? ' '+extraClass : ''}">${body}</div>`;
 }
 
-const paragraphEnds = [24, 29, 34, 36, 40, 43];
 const PASSAGE_LAST_VERSE = PASSAGE_START_VERSE + passage.length - 1;
 
 function passageWordsHTML(){
@@ -2002,421 +1672,15 @@ function versePickHTML(){
     </div>`).join('');
 }
 
-const BOOK_MAP_SECTIONS = [
-  { title:'Torah (Law)', testament:'Old', color:'#D8B4FE', darkText:true, desc:"The foundation of Israel's story and God's covenant", books:[['Genesis',50,38262],['Exodus',40,32685],['Leviticus',27,24541],['Numbers',36,32896],['Deuteronomy',34,28352]] },
-  { title:'History', testament:'Old', color:'#C084FC', darkText:true, desc:"Israel's journey from conquest to exile", books:[['Joshua',24,18854],['Judges',21,18966],['Ruth',4,2574],['1 Samuel',31,25048],['2 Samuel',24,20600],['1 Kings',22,24513],['2 Kings',25,23517],['1 Chronicles',29,20365],['2 Chronicles',36,26069],['Ezra',10,7440],['Nehemiah',13,10480],['Esther',10,5633]] },
-  { title:'Wisdom & Poetry', testament:'Old', color:'#A855F7', darkText:false, desc:'Songs, proverbs, and honest reflections on life', books:[['Job',42,18098],['Psalms',150,42704],['Proverbs',31,15038],['Ecclesiastes',12,5579],['Song of Solomon',8,2658]] },
-  { title:'Prophets', testament:'Old', color:'#7E22CE', darkText:false, desc:"God's messengers calling His people back", books:[['Isaiah',66,37036],['Jeremiah',52,42654],['Lamentations',5,3411],['Ezekiel',48,39401],['Daniel',12,11602],['Hosea',14,5174],['Joel',3,2033],['Amos',9,4216],['Obadiah',1,669],['Jonah',4,1320],['Micah',7,3152],['Nahum',3,1284],['Habakkuk',3,1475],['Zephaniah',3,1616],['Haggai',2,1130],['Zechariah',14,6443],['Malachi',4,1781]] },
-  { title:'Gospels', testament:'New', color:'#38BDF8', darkText:true, desc:"Jesus's life, death & resurrection", books:[['Matthew',28,23343],['Mark',16,14949],['Luke',24,25640],['John',21,18658]] },
-  { title:'Church History', testament:'New', color:'#0284C7', darkText:false, desc:"The Holy Spirit's arrival and church growth", books:[['Acts',28,24229]] },
-  { title:'Epistles (Letters)', testament:'New', color:'#1D4ED8', darkText:false, desc:'Letters guiding and strengthening early believers', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430],['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
-  { title:'Prophecy', testament:'New', color:'#1E1B4B', darkText:false, desc:'A visionary look at how it all ends', books:[['Revelation',22,11952]] }
-];
-
-const BOOK_FIND_SEQUENCE = ['Leviticus', 'Hebrews', 'Mark'];
-const bookMapState = { phase: 'testament', foundIndex: 0 };
-
-function partitionIntoRows(items, n){
-  if (isMobileViewport()) {
-    const rows = [];
-    for (let i = 0; i < items.length; i += n) {
-      rows.push(items.slice(i, i + n));
-    }
-    return rows;
-  }
-
-  const weights = items.map(it => it.aspect);
-  const totalWeight = weights.reduce((a, b) => a + b, 0);
-  const maxSingle = Math.max(...weights);
-
-  function countGroups(maxSum){
-    let groups = 1, cur = 0;
-    for (const w of weights){
-      if (cur > 0 && cur + w > maxSum) { groups++; cur = w; }
-      else { cur += w; }
-    }
-    return groups;
-  }
-
-  let lo = maxSingle, hi = totalWeight;
-  for (let i = 0; i < 60; i++){
-    const mid = (lo + hi) / 2;
-    if (countGroups(mid) <= n) hi = mid; else lo = mid;
-  }
-
-  const threshold = hi;
-  const rows = [];
-  let curRow = [];
-  let curSum = 0;
-  items.forEach(item => {
-    if (curRow.length > 0 && curSum + item.aspect > threshold) { rows.push(curRow); curRow = [item]; curSum = item.aspect; }
-    else { curRow.push(item); curSum += item.aspect; }
-  });
-  if (curRow.length) rows.push(curRow);
-  return rows;
-}
-
-function layoutRowsFullWidth(rows, containerW, gap){
-  const rects = [];
-  let y = 0;
-  rows.forEach(rowItems => {
-    const isMobile = isMobileViewport();
-    const rowSum = isMobile ? rowItems.length : rowItems.reduce((a, b) => a + b.aspect, 0);
-    const availW = containerW - (rowItems.length - 1) * gap;
-    const rowHeight = isMobile ? (availW / rowItems.length) : (availW / rowSum);
-    let x = 0;
-    rowItems.forEach(item => {
-      const w = isMobile ? (availW / rowItems.length) : (item.aspect * rowHeight);
-      rects.push({ ...item, rx: x, ry: y, rw: w, rh: rowHeight });
-      x += w + gap;
-    });
-    y += rowHeight + gap;
-  });
-  return { rects, totalHeight: Math.max(0, y - gap) };
-}
-
-const BOOK_ABBREV = {
-  'Genesis':'Gen', 'Exodus':'Exod', 'Leviticus':'Lev', 'Numbers':'Num', 'Deuteronomy':'Deut',
-  'Joshua':'Josh', 'Judges':'Judg', 'Ruth':'Ruth', '1 Samuel':'1 Sam', '2 Samuel':'2 Sam', '1 Kings':'1 Kgs', '2 Kings':'2 Kgs', '1 Chronicles':'1 Chr', '2 Chronicles':'2 Chr', 'Ezra':'Ezra', 'Nehemiah':'Neh', 'Esther':'Esth',
-  'Job':'Job', 'Psalms':'Ps', 'Proverbs':'Prov', 'Ecclesiastes':'Eccl', 'Song of Solomon':'Song',
-  'Isaiah':'Isa', 'Jeremiah':'Jer', 'Lamentations':'Lam', 'Ezekiel':'Ezek', 'Daniel':'Dan',
-  'Hosea':'Hos', 'Joel':'Joel', 'Amos':'Amos', 'Obadiah':'Obad', 'Jonah':'Jonah', 'Micah':'Mic', 'Nahum':'Nah', 'Habakkuk':'Hab', 'Zephaniah':'Zeph', 'Haggai':'Hag', 'Zechariah':'Zech', 'Malachi':'Mal',
-  'Matthew':'Matt', 'Mark':'Mark', 'Luke':'Luke', 'John':'John', 'Acts':'Acts',
-  'Romans':'Rom', '1 Corinthians':'1 Cor', '2 Corinthians':'2 Cor', 'Galatians':'Gal', 'Ephesians':'Eph', 'Philippians':'Phil', 'Colossians':'Col', '1 Thessalonians':'1 Thess', '2 Thessalonians':'2 Thess', '1 Timothy':'1 Tim', '2 Timothy':'2 Tim', 'Titus':'Titus', 'Philemon':'Phlm',
-  'Hebrews':'Heb', 'James':'Jas', '1 Peter':'1 Pet', '2 Peter':'2 Pet', '1 John':'1 John', '2 John':'2 John', '3 John':'3 John', 'Jude':'Jude', 'Revelation':'Rev'
-};
-
-function isMobileViewport(){ return window.innerWidth < 768 || window.innerHeight < 500; }
-
-function getSectionForBook(name){
-  return BOOK_MAP_SECTIONS.find(s => s.books.some(b => b[0] === name));
-}
-const SECTION_FIND_SEQUENCE = BOOK_FIND_SEQUENCE.map(name => getSectionForBook(name).title);
-const SECTION_SIZE_MIN_RATIO = 0.55;
-
-function getSectionItemsFor(sectionsSubset){
-  const items = sectionsSubset.map(s => ({
-    raw: Math.sqrt(s.books.reduce((sum, b) => sum + b[1], 0)),
-    name: s.title,
-    testament: s.testament,
-    color: s.color,
-    darkText: s.darkText,
-    desc: s.desc,
-    bookCount: s.books.length
-  }));
-  const rawAvg = items.reduce((a, b) => a + b.raw, 0) / items.length;
-  const minRaw = rawAvg * SECTION_SIZE_MIN_RATIO;
-  items.forEach(b => { b.raw = Math.max(b.raw, minRaw); });
-  const avgWeight = items.reduce((a, b) => a + b.raw, 0) / items.length;
-  items.forEach(b => { b.aspect = b.raw / avgWeight; });
-  return items;
-}
-
-function computeSectionBandLayout(containerW, containerH, gap, rowsPerTestament, labelWidth){
-  const oldSections = BOOK_MAP_SECTIONS.filter(s => s.testament === 'Old');
-  const newSections = BOOK_MAP_SECTIONS.filter(s => s.testament === 'New');
-  const otItems = getSectionItemsFor(oldSections);
-  const ntItems = getSectionItemsFor(newSections);
-  const cardsW = Math.max(60, containerW - labelWidth - gap);
-
-  const otRows = partitionIntoRows(otItems, rowsPerTestament);
-  const ntRows = partitionIntoRows(ntItems, rowsPerTestament);
-
-  const otLayout = layoutRowsFullWidth(otRows, cardsW, gap);
-  const ntLayoutRaw = layoutRowsFullWidth(ntRows, cardsW, gap);
-  const ntRects = ntLayoutRaw.rects.map(r => ({ ...r, ry: r.ry + otLayout.totalHeight + gap }));
-  const naturalTotal = otLayout.totalHeight + gap + ntLayoutRaw.totalHeight;
-
-  const scaleY = naturalTotal > 0 ? containerH / naturalTotal : 1;
-  const offsetX = labelWidth + gap;
-  const rects = [...otLayout.rects, ...ntRects].map(r => ({ ...r, rx: r.rx + offsetX, ry: r.ry * scaleY, rh: r.rh * scaleY }));
-
-  const bands = [
-    { testament: 'Old', y: 0, h: otLayout.totalHeight * scaleY, bookCount: oldSections.reduce((s, x) => s + x.books.length, 0) },
-    { testament: 'New', y: (otLayout.totalHeight + gap) * scaleY, h: ntLayoutRaw.totalHeight * scaleY, bookCount: newSections.reduce((s, x) => s + x.books.length, 0) }
-  ];
-
-  return { rects, bands };
-}
-
-function sectionTileHTML(r){
-  const textStyle = r.darkText ? '--sec-text:var(--ink)' : '--sec-text:#FFF';
-  return `<div class="sec-tile" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color}; ${textStyle};" onclick="tapSectionTile(event, this)">
-            <div class="sec-name">
-              <span>${r.name}</span>
-              <div class="tp-badge">${r.bookCount} ${r.bookCount === 1 ? 'Book' : 'Books'}</div>
-            </div>
-            <div class="sec-desc">${r.desc}</div>
-          </div>`;
-}
-
-function bookPillHTML(name, sectionColor, darkText){
-  const abbrev = BOOK_ABBREV[name] || name;
-  const isQuestBook = BOOK_FIND_SEQUENCE.includes(name);
-  const textStyle = darkText ? '--pill-text:var(--ink)' : '--pill-text:#FFF';
-  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}" style="--sec-color:${sectionColor}; ${textStyle};">${abbrev}</div>`;
-}
-
-function renderTestamentGateIntoCanvas(){
-  const canvas = document.getElementById('bookmapCanvas');
-  if (!canvas) return;
-  const frame = canvas.closest('.mosaic-frame');
-  if (!frame) return;
-
-  const w = frame.clientWidth - 16;
-  const h = frame.clientHeight - 16;
-  if (!w || !h) return;
-  const gap = 12;
-  const bandH = (h - gap) / 2;
-  canvas.style.width = w + 'px';
-  canvas.style.height = h + 'px';
-
-  canvas.innerHTML = `
-    <div class="tp-card" data-testament="Old" style="left:0px; top:0px; width:${w}px; height:${bandH.toFixed(1)}px;" onclick="tapTestamentGate(event, this)">
-      <div class="tp-check"><i class="fa-solid fa-check"></i></div>
-      <div class="tp-name">Old Testament</div>
-      <div class="tp-badge">39 Books &middot; 1000+ yrs in the making</div>
-      <div class="tp-desc">The Hebrew scriptures pointing toward the coming Messiah</div>
-    </div>
-    <div class="tp-card" data-testament="New" style="left:0px; top:${(bandH + gap).toFixed(1)}px; width:${w}px; height:${bandH.toFixed(1)}px;" onclick="tapTestamentGate(event, this)">
-      <div class="tp-check"><i class="fa-solid fa-check"></i></div>
-      <div class="tp-name">New Testament</div>
-      <div class="tp-badge">27 Books &middot; ~40 yrs in the making</div>
-      <div class="tp-desc">Jesus's life, teaching, resurrection, and the birth of the church</div>
-    </div>
-  `;
-  fitCardsToContainer(canvas.querySelectorAll('.tp-card'), { hideSelector: '.tp-desc' });
-}
-
-function computeSingleTestamentLayout(testament, containerW, containerH, gap, rows){
-  const sections = BOOK_MAP_SECTIONS.filter(s => s.testament === testament);
-  const items = getSectionItemsFor(sections);
-  const rowGroups = partitionIntoRows(items, rows);
-  const { rects, totalHeight } = layoutRowsFullWidth(rowGroups, containerW, gap);
-  const scaleY = totalHeight > 0 ? containerH / totalHeight : 1;
-  return rects.map(r => ({ ...r, ry: r.ry * scaleY, rh: r.rh * scaleY }));
-}
-
-function unveilBandIntoSections(bandEl, testament){
-  const canvas = document.getElementById('bookmapCanvas');
-  if (!canvas || !bandEl) return;
-  const bandRect = {
-    rx: parseFloat(bandEl.style.left),
-    ry: parseFloat(bandEl.style.top),
-    rw: parseFloat(bandEl.style.width),
-    rh: parseFloat(bandEl.style.height)
-  };
-  const rows = isMobileViewport() ? 2 : 1;
-  const rects = computeSingleTestamentLayout(testament, bandRect.rw, bandRect.rh, 8, rows)
-    .map(r => ({ ...r, rx: r.rx + bandRect.rx, ry: r.ry + bandRect.ry }));
-
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = rects.map(r => sectionTileHTML(r)).join('');
-  const newTiles = Array.from(wrapper.children);
-  newTiles.forEach(t => {
-    t.classList.add('unveil-in');
-    t.style.transformOrigin = 'center';
-    canvas.appendChild(t);
-  });
-  bandEl.remove();
-
-  fitCardsToContainer(newTiles, { hideSelector: '.sec-desc' });
-
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    newTiles.forEach((t, i) => setTimeout(() => t.classList.add('show'), i * 40));
-  }));
-}
-
-function currentTargetBook(){
-  return BOOK_FIND_SEQUENCE[bookMapState.foundIndex];
-}
-
-function showSectionPhaseForCurrentBook(){
-  const book = currentTargetBook();
-  if (!book) return;
-  const testament = getSectionForBook(book).testament;
-  renderTestamentGateIntoCanvas();
-  const canvas = document.getElementById('bookmapCanvas');
-  if (!canvas) return;
-  const otherTestament = testament === 'Old' ? 'New' : 'Old';
-  const correctBand = canvas.querySelector(`.tp-card[data-testament="${testament}"]`);
-  const otherBand = canvas.querySelector(`.tp-card[data-testament="${otherTestament}"]`);
-  if (otherBand) otherBand.classList.add('dimmed');
-  if (correctBand) {
-    correctBand.classList.add('found');
-    unveilBandIntoSections(correctBand, testament);
-  }
-}
-
-function tapTestamentGate(e, el){
-  e.stopPropagation();
-  const book = currentTargetBook();
-  const correctTestament = getSectionForBook(book).testament;
-  if (el.dataset.testament === correctTestament) {
-    el.classList.add('found');
-    celebrateFind(el);
-    bookMapState.phase = 'section';
-
-    const canvas = document.getElementById('bookmapCanvas');
-    const otherBand = canvas ? Array.from(canvas.querySelectorAll('.tp-card')).find(c => c !== el) : null;
-    if (otherBand) otherBand.classList.add('dimmed');
-
-    setTimeout(() => {
-      unveilBandIntoSections(el, correctTestament);
-      const promptEl = document.getElementById('bookmapPrompt');
-      if (promptEl) promptEl.innerHTML = `Which section is <span class="locator-emphasis" id="bookmapPromptTarget">${book}</span> in?`;
-    }, 700);
-
-    updateNavShell();
-  } else {
-    el.classList.add('shake');
-    setTimeout(() => el.classList.remove('shake'), 450);
-  }
-}
-
-function renderBookMapHTML(){
-  return `<div class="full-page bookmap-wrap">
-            <div class="bookmap-prompt" id="bookmapPrompt">What testament is <span class="locator-emphasis" id="bookmapPromptTarget">${BOOK_FIND_SEQUENCE[0]}</span> in?</div>
-            <div class="mosaic-frame"><div class="mosaic-canvas" id="bookmapCanvas"></div></div>
-          </div>`;
-}
-
-function spawnConfetti(cx, cy, count, spread){
-  const colors = ['#C3F53C', '#FFFFFF', '#FFD166', '#38BDF8', '#F43F5E', '#A855F7'];
-  for (let i = 0; i < count; i++){
-    const p = document.createElement('div');
-    p.className = 'confetti-bit';
-    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
-    const dist = spread.min + Math.random() * (spread.max - spread.min);
-    const dx = Math.cos(angle) * dist;
-    const dy = Math.sin(angle) * dist;
-    p.style.left = cx + 'px';
-    p.style.top = cy + 'px';
-    p.style.background = colors[i % colors.length];
-    p.style.setProperty('--dx', dx + 'px');
-    p.style.setProperty('--dy', dy + 'px');
-    p.style.setProperty('--rot', (Math.random() * 360) + 'deg');
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 750);
-  }
-}
-
-function playChime(freqs){
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const now = ctx.currentTime;
-    freqs.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0, now + i * 0.09);
-      gain.gain.linearRampToValueAtTime(0.18, now + i * 0.09 + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.09 + 0.35);
-      osc.connect(gain).connect(ctx.destination);
-      osc.start(now + i * 0.09);
-      osc.stop(now + i * 0.09 + 0.4);
-    });
-  } catch (err) { }
-}
-
-function celebrateFind(el){
-  el.classList.add('celebrate');
-  setTimeout(() => el.classList.remove('celebrate'), 700);
-  const rect = el.getBoundingClientRect();
-  spawnConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 16, { min: 65, max: 140 });
-  playChime([523.25, 783.99]);
-}
-
-function revealAllBooksInSections(){
-  const canvas = document.getElementById('bookmapCanvas');
-  const frame = canvas ? canvas.closest('.mosaic-frame') : null;
-  if (!canvas || !frame) return;
-  const w = frame.clientWidth - 16;
-  const h = frame.clientHeight - 16;
-  if (!w || !h) return;
-  canvas.style.width = w + 'px';
-  canvas.style.height = h + 'px';
-
-  const canvasRect = canvas.getBoundingClientRect();
-  spawnConfetti(canvasRect.left + canvasRect.width / 2, canvasRect.top + canvasRect.height / 2, 44, { min: 120, max: 340 });
-  playChime([523.25, 659.25, 783.99, 1046.5]);
-
-  let allPillsHtml = '';
-  BOOK_MAP_SECTIONS.forEach(section => {
-    section.books.forEach(([bookName]) => {
-      allPillsHtml += bookPillHTML(bookName, section.color, section.darkText);
-    });
-  });
-
-  canvas.innerHTML = `<div class="all-books-unified-grid">${allPillsHtml}</div>`;
-
-  const pills = Array.from(canvas.querySelectorAll('.book-pill'));
-  pills.forEach((pill, i) => {
-    setTimeout(() => { pill.classList.add('show'); }, i * 12);
-  });
-}
-
-function fitCardsToContainer(elements, { minScale = 0.55, step = 0.05, hideSelector = null } = {}){
-  elements.forEach(el => {
-    let scale = 1;
-    el.style.setProperty('--fit-scale', scale);
-    while (el.scrollHeight > el.clientHeight + 1 && scale > minScale) {
-      scale = Math.max(minScale, scale - step);
-      el.style.setProperty('--fit-scale', scale);
-    }
-    if (hideSelector && el.scrollHeight > el.clientHeight + 1) {
-      const hideEl = el.querySelector(hideSelector);
-      if (hideEl) hideEl.style.display = 'none';
-    }
-  });
-}
-
-function tapSectionTile(e, el){
-  e.stopPropagation();
-  if (bookMapState.foundIndex >= BOOK_FIND_SEQUENCE.length) return;
-  const targetSection = SECTION_FIND_SEQUENCE[bookMapState.foundIndex];
-  if (el.dataset.section === targetSection) {
-    el.classList.add('found');
-    celebrateFind(el);
-    bookMapState.foundIndex++;
-    if (bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
-      bookMapState.phase = 'testament';
-      const nextBook = BOOK_FIND_SEQUENCE[bookMapState.foundIndex];
-      setTimeout(() => {
-        renderTestamentGateIntoCanvas();
-        const promptEl = document.getElementById('bookmapPrompt');
-        if (promptEl) promptEl.innerHTML = `What testament is <span class="locator-emphasis" id="bookmapPromptTarget">${nextBook}</span> in?`;
-      }, 900);
-    } else {
-      bookMapState.phase = 'done';
-      const promptEl = document.getElementById('bookmapPrompt');
-      if (promptEl) promptEl.innerHTML = 'All found! Nice work.';
-      setTimeout(() => {
-        revealAllBooksInSections();
-        const p = document.getElementById('bookmapPrompt');
-        if (p) p.innerHTML = '66 Books. One Unified Story.';
-      }, 900);
-    }
-    updateNavShell();
-  } else {
-    el.classList.add('shake');
-    setTimeout(() => el.classList.remove('shake'), 450);
-  }
-}
-
 // ==================== STREAMLINED BEATS ====================
 const beats = [
   { id:'intro', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
     html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
             <div class="intro-top-title">MS HANG GUIDE</div>
-            ${kw([["MARK", "&nbsp;5"]],'xl')}
+            ${kw([["MARK", "&nbsp;6"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
-
-  { id:'book-map', type:'input', blockTap:true, isInteractive:true, clue:'Tap the highlighted book to continue', bgGrad:'var(--bg-cream)', text:'dark',
-    html: renderBookMapHTML() },
 
   { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-discover)', text:'dark', align:'start',
     html:`<div class="recap-context-grid">
@@ -2432,9 +1696,9 @@ const beats = [
               <div class="recap-item-block">
                 <span class="recap-tag">Context</span>
                 <ul class="recap-bullet-list">
-                  <li>Mark 4:1&ndash;34- Jesus teaches how different heart conditions receive God's word.</li>
-                  <li>Mark 4:35&ndash;41- Jesus calms the storm, prompting the disciples to ask who He is as their faith struggles.</li>
-                  <li>Mark 5:1&ndash;20- Jesus heals a Gerasene man filled with impure spirits, demonstrating His authority over spiritual forces.</li>
+                  <li>Mark 5:1&ndash;20 — Jesus heals the Gerasene man, demonstrating power over spiritual forces.</li>
+                  <li>Mark 5:21&ndash;34 — Jesus heals the woman with the discharge of blood who touched His cloak in faith.</li>
+                  <li>Mark 5:35&ndash;43 — Jesus raises Jairus's daughter from the dead, demonstrating authority over death itself.</li>
                 </ul>
               </div>
             </div>
@@ -2576,12 +1840,12 @@ const beats = [
 ];
 
 const sectionLabels = [
-  'Guide', 'Discover', 'Discover',
+  'Guide', 'Discover',
   'Prayer', 'Word Work',
   'Word Work', 'Learn', 'Learn', 'Live'
 ];
 
-const sectionColorKeys = ['', 'discover', 'discover', '', 'wordwork', 'wordwork', 'learn', 'learn', 'live'];
+const sectionColorKeys = ['', 'discover', '', 'wordwork', 'wordwork', 'learn', 'learn', 'live'];
 
 function initNotches(){
   const layer = document.getElementById('notchesLayer');
@@ -2639,7 +1903,7 @@ function updateHeaderMeta(){
     scriptureEl.innerHTML = `<button class="meta-link-btn" onclick="event.stopPropagation(); exitDevMode();">Close</button>`;
   } else {
     labelEl.textContent = sectionLabels[state.index] || '';
-    scriptureEl.textContent = 'Mark 5';
+    scriptureEl.textContent = 'Mark 6';
   }
 }
 
@@ -2670,8 +1934,7 @@ function updateNavShell(){
   prevBtn.classList.toggle('disabled', !hasPrev);
 
   let ready = false;
-  if (b.id === 'book-map') ready = bookMapState.phase === 'done';
-  else if (b.id === 'vocab-scan') ready = isVocabComplete();
+  if (b.id === 'vocab-scan') ready = isVocabComplete();
   else if (b.id === 'char-verse-pick') ready = state.charVerse !== null;
   else if (b.id === 'char-coaching') ready = Boolean(state.trait && state.trait.trim());
   else ready = !b.blockTap;
@@ -2680,17 +1943,7 @@ function updateNavShell(){
   prevBtn.style.display = '';
   nextBtn.style.display = !hasNext ? 'none' : '';
 
-  if (b.id === 'book-map') {
-    island.style.display = 'flex';
-    const isDone = bookMapState.phase === 'done';
-    const targetBook = BOOK_FIND_SEQUENCE[bookMapState.foundIndex] || 'Book';
-    
-    island.innerHTML = `
-      <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-        ${isDone ? '<i class="fa-solid fa-check"></i> Continue' : `<i class="fa-solid fa-magnifying-glass"></i> Find ${targetBook}`}
-      </button>
-    `;
-  } else if (b.id === 'vocab-scan') {
+  if (b.id === 'vocab-scan') {
     island.style.display = 'flex';
     const isDone = isVocabComplete();
     const hasWords = state.wordTaps.length > 0;
@@ -2750,7 +2003,7 @@ function renderSynthesisPanel(){
   if (cloud) {
     let uniqueWords = Array.from(new Set(state.wordTaps.map(w => w.word.charAt(0).toUpperCase() + w.word.slice(1))));
     if (uniqueWords.length === 0) {
-      uniqueWords = ['Jairus', 'Bleeding', 'Faith', 'Talitha Koum', 'Astonished'];
+      uniqueWords = ['Hometown', 'Carpenter', 'Prophet', 'Twelve', 'John the Baptist', 'Herod'];
     }
     cloud.innerHTML = uniqueWords.map(w => `<span class="research-pill">${w}</span>`).join('');
   }
@@ -2816,24 +2069,12 @@ function renderBeat(i){
   updateHeaderMeta();
   updateNavShell();
 
-  if (b.id === 'book-map') {
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      if (bookMapState.phase === 'section') {
-        showSectionPhaseForCurrentBook();
-      } else if (bookMapState.phase === 'done') {
-        revealAllBooksInSections();
-      } else {
-        renderTestamentGateIntoCanvas();
-      }
-    }));
-  }
-
   if (b.id === 'tri-focal-synthesis') {
     renderSynthesisPanel();
   }
 
   if (b.id === 'char-coaching') {
-    const isVersePickHidden = hiddenSlides.has(6);
+    const isVersePickHidden = hiddenSlides.has(5);
     const cardWrap = document.getElementById('coachingCardWrap');
     const coachingScene = document.getElementById('coachingScene');
     const arcStem = document.getElementById('arcStemText');
@@ -2846,7 +2087,7 @@ function renderBeat(i){
         coachingScene.style.alignItems = 'center';
         coachingScene.style.justifyContent = 'center';
       }
-      if (arcStem) arcStem.textContent = 'MARK 5:';
+      if (arcStem) arcStem.textContent = 'MARK 6:';
     } else {
       if (cardWrap) cardWrap.style.display = '';
       if (coachingScene) {
@@ -2856,7 +2097,7 @@ function renderBeat(i){
         coachingScene.style.justifyContent = '';
       }
       const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-      document.getElementById('charRef').textContent = 'Mark 5:' + activeVerse;
+      document.getElementById('charRef').textContent = 'Mark 6:' + activeVerse;
       document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
       if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
       requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
@@ -2888,16 +2129,6 @@ function renderBeat(i){
     } else {
       glossaryDrawerEl.classList.remove('gd-visible');
       glossaryDrawerEl.classList.remove('open');
-    }
-  }
-
-  const videoDrawerEl = document.getElementById('videoDrawer');
-  if (videoDrawerEl) {
-    if (b.id === 'reveal-context') {
-      videoDrawerEl.classList.add('vd-visible');
-    } else {
-      videoDrawerEl.classList.remove('vd-visible');
-      toggleVideoDrawer(false);
     }
   }
 
@@ -3084,18 +2315,6 @@ function toggleGlossaryDrawer(force){
 function openGlossaryDrawer(){ toggleGlossaryDrawer(true); }
 function closeGlossaryDrawer(){ toggleGlossaryDrawer(false); }
 
-const MARK_VIDEO_ID = 'pLbIaA5u3gY';
-function toggleVideoDrawer(force){
-  const d = document.getElementById('videoDrawer');
-  if (!d) return;
-  const willOpen = typeof force === 'boolean' ? force : !d.classList.contains('open');
-  d.classList.toggle('open', willOpen);
-  const frame = document.getElementById('markVideoFrame');
-  if (frame) {
-    frame.src = willOpen ? `https://www.youtube.com/embed/${MARK_VIDEO_ID}` : '';
-  }
-}
-
 function toggleTimerDrawer(force){
   const d = document.getElementById('timerDrawer');
   if (!d) return;
@@ -3190,10 +2409,6 @@ function triggerGateNavHint(hintId){
 function handleForwardAttempt(){
   const b = beats[state.index];
   if (b.blockTap) {
-    if (b.id === 'book-map' && bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
-      triggerPillMessage('bookmapActionPill', `Tap ${BOOK_FIND_SEQUENCE[bookMapState.foundIndex]}`);
-      return;
-    }
     if (b.id === 'vocab-scan') {
       if (!state.wordTaps.length) {
         triggerPillMessage('vocabActionPill', 'Tap & Highlight Words');
@@ -3328,8 +2543,8 @@ if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPas
 let devMode = false;
 let devTapCount = 0;
 let devLastTapTime = 0;
-const DEV_NOTES_KEY = 'msHangDevNotes_5_1_00';
-const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_5_1_00';
+const DEV_NOTES_KEY = 'msHangDevNotes_6_1_00';
+const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_6_1_00';
 
 function loadHiddenSlides(){
   try { return new Set(JSON.parse(localStorage.getItem(DEV_HIDDEN_SLIDES_KEY) || '[]')); }
@@ -3463,7 +2678,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 
   ctx.fillStyle = 'rgba(13,13,13,0.65)';
   ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
-  ctx.fillText(`MARK 5:${verseNum}`, cx, cy - circleR * 0.42);
+  ctx.fillText(`MARK 6:${verseNum}`, cx, cy - circleR * 0.42);
 
   ctx.fillStyle = '#0D0D0D';
   ctx.font = `800 ${Math.round(size * 0.05)}px 'Space Grotesk', sans-serif`;
@@ -3496,32 +2711,6 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
   return canvas;
 }
 
-async function shareCentralTruthDirect(){
-  try {
-    const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-    const traitText = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
-    const colorKey = SHARE_COLOR_KEYS[Math.floor(Math.random() * SHARE_COLOR_KEYS.length)];
-    const canvas = drawCentralTruthCanvas(colorKey, activeVerse, traitText);
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-    if (!blob) throw new Error('canvas produced no image data');
-
-    const file = new File([blob], 'central-truth.png', { type: 'image/png' });
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({ files: [file] });
-    } else {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'central-truth.png';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-  } catch(err){
-    if (err && err.name === 'AbortError') return;
-    console.error('Direct share failed, falling back to the picker', err);
-    openShareOverlay();
-  }
-}
-
 const SHARE_COLORS = [
   { key:'discover', dot:'var(--lime)' },
   { key:'wordwork', dot:'var(--pink)' },
@@ -3547,7 +2736,7 @@ function selectShareColor(key){
 
 function openShareOverlay(){
   const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-  document.getElementById('shareArcStem').textContent = `MARK 5:${activeVerse}`;
+  document.getElementById('shareArcStem').textContent = `MARK 6:${activeVerse}`;
   document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
   initShareSwatches();
   selectShareColor(state.shareColor || 'discover');
@@ -3576,7 +2765,7 @@ async function confirmShareImage(){
       closeShareOverlay();
     } else {
       const url = URL.createObjectURL(blob);
-      const a = document.getElementById('a');
+      const a = document.createElement('a');
       a.href = url; a.download = 'central-truth.png';
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       URL.revokeObjectURL(url);
@@ -3695,15 +2884,7 @@ applyCharFontScale();
 renderBeat(0);
 
 window.addEventListener('resize', () => {
-  if (beats[state.index].id === 'book-map') {
-    if (bookMapState.phase === 'section') {
-      showSectionPhaseForCurrentBook();
-    } else if (bookMapState.phase === 'done') {
-      revealAllBooksInSections();
-    } else {
-      renderTestamentGateIntoCanvas();
-    }
-  } else if (beats[state.index].id === 'char-coaching') {
+  if (beats[state.index].id === 'char-coaching') {
     fitCharVerseText('charText');
   }
 });
