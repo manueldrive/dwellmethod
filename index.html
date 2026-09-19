@@ -12,16 +12,16 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ink:            #1a141e;
-  --paper:          #f2ece6;
-  --paper-dim:      #e8e0d7;
+  --ink:            #182326;
+  --paper:          #f7faf9;
+  --paper-dim:      #e8eeeb;
   
-  /* Baseline: Golden Hour Horizon */
-  --d-discover:     #e28a5c;
-  --d-wordwork:     #d76b65;
-  --d-expand:       #9e6488;
-  --d-learn:        #5d587e;
-  --d-live:         #2d324f;
+  /* Coastal Amber to Teal */
+  --d-discover:     #e08d53;
+  --d-wordwork:     #c27471;
+  --d-expand:       #7d6e87;
+  --d-learn:        #4c6674;
+  --d-live:         #223942;
 
   /* Text colors */
   --d-intro-text:    var(--ink);
@@ -96,7 +96,7 @@ html, body {
 
 .col-headline, .col-nav-cue { color: inherit; }
 .col-subtext, .col-prompt-list li { color: inherit; opacity: 0.95; }
-.col-step-tag, .col-nav-cue { opacity: 0.85; }
+.col-nav-cue { opacity: 0.85; }
 
 /* Header */
 .col-header {
@@ -201,7 +201,17 @@ html, body {
 }
 
 .dwell-column.is-expanded .col-vertical-title {
-  opacity: 0;
+  position: static;
+  left: auto;
+  bottom: auto;
+  transform: none;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.7;
 }
 
 .col-discover:not(.is-expanded) .col-vertical-title,
@@ -233,19 +243,19 @@ html, body {
   pointer-events: auto;
 }
 
-.col-step-tag {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-}
-
 .col-headline {
   font-family: var(--font-display);
   font-size: clamp(22px, 2.8vw, 38px);
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -0.03em;
+}
+
+.col-headline .accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .col-subtext {
@@ -397,7 +407,8 @@ html, body {
   }
 
   .dwell-column.is-expanded .col-vertical-title {
-    display: none;
+    display: inline-block;
+    font-size: 12px;
   }
 
   .dwell-column.is-expanded .col-letter-target {
@@ -478,118 +489,6 @@ html, body {
   }
 }
 
-/* ── UI Style Tester Widget (Icon Only) ── */
-.tester-wrap {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  z-index: 999999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  font-family: var(--font-sans);
-}
-
-.tester-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--ink);
-  color: var(--paper);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-  opacity: 0.95;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-.tester-toggle-btn:hover { transform: translateY(-2px); opacity: 1; }
-.tester-toggle-btn svg { width: 20px; height: 20px; }
-
-.tester-panel {
-  display: none;
-  background: #ffffff;
-  color: #16252d;
-  border-radius: 18px;
-  padding: 16px;
-  margin-bottom: 10px;
-  box-shadow: 0 24px 50px rgba(0,0,0,0.25);
-  border: 1px solid rgba(0,0,0,0.12);
-  width: 320px;
-  max-height: 480px;
-  overflow-y: auto;
-}
-.tester-panel.open { display: block; }
-
-.tester-panel-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-}
-.tester-title {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #16252d;
-}
-
-.tester-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.tester-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px 10px;
-  background: #fbfbfb;
-  border: 1.5px solid rgba(0,0,0,0.06);
-  border-radius: 9px;
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
-}
-.tester-card:hover {
-  background: #f4f7f8;
-  border-color: #16252d;
-}
-.tester-card.active {
-  border-color: #16252d;
-  background: #edf3f5;
-}
-
-.tester-card-name {
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.tester-card-name span.tag {
-  font-size: 9px;
-  text-transform: uppercase;
-  font-weight: 800;
-  padding: 2px 5px;
-  background: rgba(0,0,0,0.06);
-  border-radius: 4px;
-}
-
-.tester-swatches {
-  display: flex;
-  gap: 3px;
-  height: 12px;
-  border-radius: 3px;
-  overflow: hidden;
-}
-.tester-swatches span { flex: 1; }
 </style>
 </head>
 <body>
@@ -612,10 +511,9 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <span class="col-step-tag"></span>
-        <h2 class="col-headline">Building Blocks for Biblical Literacy</h2>
+        <h2 class="col-headline">Building blocks for <span class="accent">Biblical literacy</span>.</h2>
         <p class="col-subtext">
-          True transformation comes from the Holy Spirit. Dwell is simply a rhythm to slow down across five readings so Scripture can dwell in you richly.
+          True transformation comes from the Holy Spirit. Dwell is a rhythm to slow down across five readings so Scripture can dwell in you richly.
         </p>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-discover')">
           <span class="cue-label">Begin with Discover</span>
@@ -635,14 +533,13 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <span class="col-step-tag">Step One &bull; Discover</span>
-        <h2 class="col-headline">Find the historical background.</h2>
+        <h2 class="col-headline">Get <span class="accent">the lay of the land</span>.</h2>
         <ul class="col-prompt-list">
           <li>
             Use a study Bible or trusted resource to set the scene:
             <div class="col-meta-strip">Author &bull; Audience &bull; Time &bull; Purpose</div>
           </li>
-          <li>Set aside outside resources to let the passage speak for itself. Read slowly and record what stands out to you.</li>
+          <li>Now put the resource away. Read slowly and note anything that stands out or raises a question for you.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-wordwork')">
           <span class="cue-label">Advance to Word Work</span>
@@ -662,12 +559,11 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <span class="col-step-tag">Step Two &bull; Word Work</span>
-        <h2 class="col-headline">Inspect the text up close.</h2>
+        <h2 class="col-headline">Inspect the text <span class="accent">up close</span>.</h2>
         <ul class="col-prompt-list">
-          <li>Underline repeated words, lists, comparisons, and key connecting words.</li>
-          <li>Look up simple definitions for any words that seem unfamiliar or confusing.</li>
-          <li>Write out the main point of the passage in one clear sentence.</li>
+          <li>Highlight repeated words and anything confusing.</li>
+          <li>Look up definitions or compare translations for those words.</li>
+          <li>Sum up the passage in one sentence.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-expand')">
           <span class="cue-label">Advance to Expand</span>
@@ -687,12 +583,10 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <span class="col-step-tag">Step Three &bull; Expand</span>
-        <h2 class="col-headline">Connect to the bigger picture.</h2>
+        <h2 class="col-headline">Step back for <span class="accent">the bigger picture</span>.</h2>
         <ul class="col-prompt-list">
-          <li>Read the surrounding chapters to see how this passage fits into the whole book.</li>
-          <li>Compare two different translations to clear up tricky phrasing.</li>
-          <li>Follow cross-references in the margins to see where else this idea appears throughout Scripture.</li>
+          <li>Read the surrounding chapters to see how this fits the whole book.</li>
+          <li>Follow cross-references to see where else this idea appears.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-learn')">
           <span class="cue-label">Advance to Learn</span>
@@ -712,12 +606,11 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <span class="col-step-tag">Step Four &bull; Learn</span>
-        <h2 class="col-headline">Uncover the timeless truth.</h2>
+        <h2 class="col-headline">Uncover the <span class="accent">timeless truth</span>.</h2>
         <ul class="col-prompt-list">
-          <li>What was the main takeaway for the very first people who read this?</li>
-          <li>What does this passage teach us about who God is and how He works?</li>
-          <li>Check your findings in community, study notes, or commentaries to verify what you learned.</li>
+          <li>What was the takeaway for the first people who read this?</li>
+          <li>What does this teach us about who God is and how He works?</li>
+          <li>Check your findings in community, notes, or commentaries.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-live')">
           <span class="cue-label">Advance to Live</span>
@@ -737,36 +630,19 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <span class="col-step-tag">Step Five &bull; Live</span>
-        <h2 class="col-headline">Put the truth into practice.</h2>
+        <h2 class="col-headline">Put the truth <span class="accent">into practice</span>.</h2>
         <ul class="col-prompt-list">
           <li>What cultural or personal lies does this truth expose?</li>
-          <li>How will this truth shape your prayers, thoughts, words, or actions today?</li>
+          <li>How will this shape your prayers, thoughts, words, or actions today?</li>
         </ul>
       </div>
     </section>
 
   </main>
 
-  <!-- Style Tester Floating Widget -->
-  <div class="tester-wrap" onclick="event.stopPropagation()">
-    <div class="tester-panel" id="testerPanel">
-      <div class="tester-panel-head">
-        <span class="tester-title">Favorite Palettes (3)</span>
-      </div>
-      <div class="tester-list" id="paletteList"></div>
-    </div>
-
-    <button type="button" class="tester-toggle-btn" onclick="toggleTester(event)" aria-label="Toggle Palettes">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-    </button>
-  </div>
-
 <script>
 /* ── Navigation Accordion ── */
 function handleColumnClick(selectedCol, event) {
-  if (event && event.target.closest('.tester-wrap')) return;
-  
   const isPortraitMobile = window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches;
   const isAlreadyExpanded = selectedCol.classList.contains('is-expanded');
   const allCols = document.querySelectorAll('.dwell-column');
@@ -788,118 +664,6 @@ function goToNextStep(event, selector) {
   }
 }
 
-/* ── Top 3 Favorite Palettes ── */
-const palettes = [
-  {
-    id: "golden-hour-horizon",
-    name: "1. Golden Hour Horizon",
-    tag: "Contrast-Corrected",
-    tokens: {
-      "--ink": "#211a24",
-      "--paper": "#f2ece6",
-      "--paper-dim": "#e8e0d7",
-      "--d-discover": "#e28a5c",
-      "--d-wordwork": "#d76b65",
-      "--d-expand": "#9e6488",
-      "--d-learn": "#5d587e",
-      "--d-live": "#2d324f",
-      "--d-intro-text": "var(--ink)",
-      "--d-discover-text": "#ffffff",
-      "--d-wordwork-text": "#ffffff",
-      "--d-expand-text": "#ffffff",
-      "--d-learn-text": "#ffffff",
-      "--d-live-text": "#ffffff"
-    }
-  },
-  {
-    id: "northern-depths",
-    name: "2. Northern Depths",
-    tag: "Contrast-Corrected",
-    tokens: {
-      "--ink": "#142129",
-      "--paper": "#f5f9fb",
-      "--paper-dim": "#e2edf2",
-      "--d-discover": "#38b2a3",
-      "--d-wordwork": "#1d788a",
-      "--d-expand": "#295b87",
-      "--d-learn": "#2d3766",
-      "--d-live": "#141933",
-      "--d-intro-text": "var(--ink)",
-      "--d-discover-text": "#ffffff",
-      "--d-wordwork-text": "#ffffff",
-      "--d-expand-text": "#ffffff",
-      "--d-learn-text": "#ffffff",
-      "--d-live-text": "#ffffff"
-    }
-  },
-  {
-    id: "coastal-dusk-amber",
-    name: "3. Coastal Amber to Teal",
-    tag: "Original (WebAIM Compliant)",
-    tokens: {
-      "--ink": "#182326",
-      "--paper": "#f7faf9",
-      "--paper-dim": "#e8eeeb",
-      "--d-discover": "#e08d53",
-      "--d-wordwork": "#c27471",
-      "--d-expand": "#7d6e87",
-      "--d-learn": "#4c6674",
-      "--d-live": "#223942",
-      "--d-intro-text": "var(--ink)",
-      "--d-discover-text": "#ffffff",
-      "--d-wordwork-text": "#ffffff",
-      "--d-expand-text": "#ffffff",
-      "--d-learn-text": "#ffffff",
-      "--d-live-text": "#ffffff"
-    }
-  }
-];
-
-let activePaletteId = "golden-hour-horizon";
-
-function renderTester() {
-  const palList = document.getElementById("paletteList");
-  if (palList) {
-    palList.innerHTML = "";
-    palettes.forEach(pal => {
-      const card = document.createElement("div");
-      card.className = `tester-card ${pal.id === activePaletteId ? 'active' : ''}`;
-      card.onclick = (e) => { e.stopPropagation(); applyPalette(pal.id); };
-      card.innerHTML = `
-        <div class="tester-card-name"><span>${pal.name}</span><span class="tag">${pal.tag}</span></div>
-        <div class="tester-swatches">
-          <span style="background:${pal.tokens['--d-discover']}"></span>
-          <span style="background:${pal.tokens['--d-wordwork']}"></span>
-          <span style="background:${pal.tokens['--d-expand']}"></span>
-          <span style="background:${pal.tokens['--d-learn']}"></span>
-          <span style="background:${pal.tokens['--d-live']}"></span>
-        </div>
-      `;
-      palList.appendChild(card);
-    });
-  }
-}
-
-function applyPalette(id) {
-  const selected = palettes.find(c => c.id === id);
-  if (!selected) return;
-  activePaletteId = id;
-  const root = document.documentElement;
-  for (const [prop, val] of Object.entries(selected.tokens)) {
-    root.style.setProperty(prop, val);
-  }
-  renderTester();
-}
-
-function toggleTester(event) {
-  if (event) event.stopPropagation();
-  document.getElementById("testerPanel").classList.toggle("open");
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  renderTester();
-  applyPalette("golden-hour-horizon");
-});
 </script>
 
 </body>
