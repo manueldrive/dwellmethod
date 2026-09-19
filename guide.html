@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dwell Guide — Mark 6</title>
+<title>Dwell Guide — Mark 6:1-29</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1429,7 +1429,7 @@
     <div class="dev-bubbles-bar" id="devBubblesBar" style="display:none;"></div>
     <div class="story-meta" id="storyMetaRow" style="justify-content: space-between;">
       <span id="sectionLabel">Dwell</span>
-      <span id="scriptureMeta">Mark 6</span>
+      <span id="scriptureMeta">Mark 6:1-29</span>
     </div>
   </div>
 
@@ -1493,7 +1493,7 @@
       <h3>Share Your Central Truth</h3>
       <div class="share-card-stage" id="shareCardStage">
         <div class="circle-hero" id="shareCircleHero">
-          <div class="arc-stem-text" id="shareArcStem">MARK 6</div>
+          <div class="arc-stem-text" id="shareArcStem">Mark 6:1-29</div>
           <div class="label-god-is">GOD IS...</div>
           <div class="static-trait" id="shareTraitText">Healer</div>
         </div>
@@ -1534,7 +1534,7 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
-// ==================== IN CONTEXT (MARK 6 SYNTHESIS MAP) ====================
+// ==================== IN CONTEXT (Mark 6:1-29 SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
   hometown: { title: "In Context", insight: "Nazareth, the small village where Jesus grew up and worked as a carpenter." },
   synagogue: { title: "In Context", insight: "The local Jewish place of worship, community gathering, and Scripture teaching." },
@@ -1903,7 +1903,7 @@ function updateHeaderMeta(){
     scriptureEl.innerHTML = `<button class="meta-link-btn" onclick="event.stopPropagation(); exitDevMode();">Close</button>`;
   } else {
     labelEl.textContent = sectionLabels[state.index] || '';
-    scriptureEl.textContent = 'Mark 6';
+    scriptureEl.textContent = 'Mark 6:1-29';
   }
 }
 
@@ -2087,7 +2087,7 @@ function renderBeat(i){
         coachingScene.style.alignItems = 'center';
         coachingScene.style.justifyContent = 'center';
       }
-      if (arcStem) arcStem.textContent = 'MARK 6:';
+      if (arcStem) arcStem.textContent = 'Mark 6:1-29:';
     } else {
       if (cardWrap) cardWrap.style.display = '';
       if (coachingScene) {
@@ -2097,7 +2097,7 @@ function renderBeat(i){
         coachingScene.style.justifyContent = '';
       }
       const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-      document.getElementById('charRef').textContent = 'Mark 6:' + activeVerse;
+      document.getElementById('charRef').textContent = 'Mark 6:1-29:' + activeVerse;
       document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
       if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
       requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
@@ -2678,7 +2678,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 
   ctx.fillStyle = 'rgba(13,13,13,0.65)';
   ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
-  ctx.fillText(`MARK 6:${verseNum}`, cx, cy - circleR * 0.42);
+  ctx.fillText(`Mark 6:1-29:${verseNum}`, cx, cy - circleR * 0.42);
 
   ctx.fillStyle = '#0D0D0D';
   ctx.font = `800 ${Math.round(size * 0.05)}px 'Space Grotesk', sans-serif`;
@@ -2736,7 +2736,7 @@ function selectShareColor(key){
 
 function openShareOverlay(){
   const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-  document.getElementById('shareArcStem').textContent = `MARK 6:${activeVerse}`;
+  document.getElementById('shareArcStem').textContent = `Mark 6:1-29:${activeVerse}`;
   document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
   initShareSwatches();
   selectShareColor(state.shareColor || 'discover');
