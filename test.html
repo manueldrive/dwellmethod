@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dwell Guide — Mark 4</title>
+<title>Dwell Guide — Mark 6:1-29</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,22 +11,23 @@
 <style>
   :root{
     --ink:#0D0D0D;
-    --paper:#FFFFFF;
-    --cream:#EAE6DF;
-    --lime:#C3F53C;
-    --pink:#F43F5E;
-    --blue:#38BDF8;
-    --yellow:#FFC72C;
-    --purple:#A855F7;
-    --green:#22C55E;
+    --paper:#F7FAF9;
+    --cream:#F7FAF9;
+    
+    /* Custom Palette Variables */
+    --discover:#E08D53;
+    --wordwork:#C27471;
+    --expand:#7D6E87;
+    --learn:#4C6674;
+    --live:#223942;
 
-    --bg-cream: linear-gradient(145deg, #f4f0e8 0%, #d8d2c7 100%);
+    --bg-cream: linear-gradient(145deg, #F7FAF9 0%, #E8ECEB 100%);
 
-    --bg-discover:  linear-gradient(145deg, #d2f860 0%, #a2e014 100%);
-    --bg-wordwork:  linear-gradient(145deg, #fb5672 0%, #be123c 100%);
-    --bg-expand:    linear-gradient(145deg, #e0f2fe 0%, #bae6fd 100%);
-    --bg-learn:     linear-gradient(145deg, #ffd452 0%, #eab308 100%);
-    --bg-live:      linear-gradient(145deg, #262626 0%, #050505 100%);
+    --bg-discover:  linear-gradient(145deg, #E08D53 0%, #C47238 100%);
+    --bg-wordwork:  linear-gradient(145deg, #C27471 0%, #A35451 100%);
+    --bg-expand:    linear-gradient(145deg, #7D6E87 0%, #5E5067 100%);
+    --bg-learn:     linear-gradient(145deg, #4C6674 0%, #324B58 100%);
+    --bg-live:      linear-gradient(145deg, #223942 0%, #112026 100%);
   }
 
   *{box-sizing:border-box;}
@@ -212,20 +213,20 @@
     -webkit-tap-highlight-color: transparent;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .rail-swatch-btn[data-color="lime"]{ background: var(--lime); }
-  .rail-swatch-btn[data-color="purple"]{ background: var(--purple); }
-  .rail-swatch-btn[data-color="yellow"]{ background: var(--yellow); }
-  .rail-swatch-btn[data-color="pink"]{ background: var(--pink); }
+  .rail-swatch-btn[data-color="wordwork"]{ background: var(--wordwork); }
+  .rail-swatch-btn[data-color="learn"]{ background: var(--learn); }
+  .rail-swatch-btn[data-color="expand"]{ background: var(--expand); }
+  .rail-swatch-btn[data-color="discover"]{ background: var(--discover); }
   .rail-swatch-btn:focus-visible,
   .rail-swatch-btn.active{ transform: scale(1.18); }
-  .rail-swatch-btn[data-color="lime"]:focus-visible,
-  .rail-swatch-btn[data-color="lime"].active{ box-shadow: 0 0 0 4px rgba(195,245,60,0.45); }
-  .rail-swatch-btn[data-color="purple"]:focus-visible,
-  .rail-swatch-btn[data-color="purple"].active{ box-shadow: 0 0 0 4px rgba(168,85,247,0.4); }
-  .rail-swatch-btn[data-color="yellow"]:focus-visible,
-  .rail-swatch-btn[data-color="yellow"].active{ box-shadow: 0 0 0 4px rgba(255,199,44,0.45); }
-  .rail-swatch-btn[data-color="pink"]:focus-visible,
-  .rail-swatch-btn[data-color="pink"].active{ box-shadow: 0 0 0 4px rgba(244,63,94,0.4); }
+  .rail-swatch-btn[data-color="wordwork"]:focus-visible,
+  .rail-swatch-btn[data-color="wordwork"].active{ box-shadow: 0 0 0 4px rgba(194,116,113,0.45); }
+  .rail-swatch-btn[data-color="learn"]:focus-visible,
+  .rail-swatch-btn[data-color="learn"].active{ box-shadow: 0 0 0 4px rgba(76,102,116,0.4); }
+  .rail-swatch-btn[data-color="expand"]:focus-visible,
+  .rail-swatch-btn[data-color="expand"].active{ box-shadow: 0 0 0 4px rgba(125,110,135,0.45); }
+  .rail-swatch-btn[data-color="discover"]:focus-visible,
+  .rail-swatch-btn[data-color="discover"].active{ box-shadow: 0 0 0 4px rgba(224,141,83,0.4); }
 
   .rail-font-btn{
     width: auto;
@@ -277,14 +278,14 @@
   }
   .action-gate-pill:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
   .action-gate-pill.ready {
-    background: var(--yellow) !important;
-    color: var(--ink) !important;
+    background: var(--wordwork) !important;
+    color: #FFF !important;
     animation: gentlePulse 2s infinite ease-in-out;
   }
   .action-gate-pill.shake-warn {
     animation: shakeX 0.45s !important;
-    background: var(--yellow) !important;
-    color: var(--ink) !important;
+    background: var(--wordwork) !important;
+    color: #FFF !important;
   }
 
   @keyframes gentlePulse {
@@ -318,18 +319,18 @@
   .tx-light .prog-notch{ background:rgba(255,255,255,0.4); border-color:rgba(0,0,0,0.3); }
   .prog-notch.passed{
     width:9px; height:9px;
-    background: var(--lime);
+    background: var(--discover);
     border-color: var(--ink);
   }
-  .tx-light .prog-notch.passed{ background:var(--lime); border-color:var(--ink); }
-  .prog-notch.active{ width:13px; height:13px; border-radius:50%; background:var(--yellow); border-color:var(--ink); box-shadow:0 0 8px rgba(0,0,0,0.3); animation:notchPulse 1.2s infinite ease-in-out; }
+  .tx-light .prog-notch.passed{ background:var(--discover); border-color:var(--ink); }
+  .prog-notch.active{ width:13px; height:13px; border-radius:50%; background:var(--wordwork); border-color:var(--ink); box-shadow:0 0 8px rgba(0,0,0,0.3); animation:notchPulse 1.2s infinite ease-in-out; }
   @keyframes notchPulse{ 0%,100%{ transform:translate(-50%, -50%) scale(1); } 50%{ transform:translate(-50%, -50%) scale(1.25); } }
 
   .story-meta{ 
     display:flex; 
     flex-direction:row;
     align-items:center; 
-    justify-content:space-between; 
+    justify-style:space-between; 
     width:100%;
     font-family:'Space Grotesk', sans-serif; 
     font-size:12px; 
@@ -382,225 +383,6 @@
   .beat.active{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; z-index:2; }
   .tx-dark{ color:var(--ink); }
   .tx-light{ color:#FFF; }
-
-  .sketch-lead-title {
-    font-family:'Space Grotesk', sans-serif;
-    font-size: clamp(24px, 3.8vw, 42px);
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    text-transform: uppercase;
-    margin-bottom: clamp(10px, 1.8vh, 24px);
-    text-align: left;
-    width: 100%;
-  }
-
-  .locator-emphasis{
-    display: inline-block;
-    background: var(--ink);
-    color: #FFF;
-    padding: 0 10px;
-    border-radius: 8px;
-    transform: rotate(-2deg);
-  }
-  .tx-light .locator-emphasis{ background: #FFF; color: var(--ink); }
-
-  /* ==================== NEO-BRUTALIST QUEST GAME STYLES ==================== */
-  .bookmap-wrap { gap:clamp(8px, 1.5vh, 14px); }
-  
-  .bookmap-prompt { 
-    font-family:'Space Grotesk', sans-serif; 
-    font-weight:800; 
-    font-size: clamp(16px, 4.5vw, 32px); 
-    text-align:center; 
-    flex-shrink:0; 
-    line-height: 1.25;
-  }
-  .bookmap-prompt .locator-emphasis { display:inline-block; }
-
-  .tp-card { 
-    position:absolute; 
-    box-sizing:border-box; 
-    overflow:hidden; 
-    background:var(--tp-color); 
-    color: var(--tp-text, #FFF);
-    border: 3.5px solid var(--ink); 
-    border-radius: 16px; 
-    box-shadow: 4px 4px 0 var(--ink);
-    display:flex; 
-    flex-direction:column; 
-    align-items:center; 
-    justify-content:center; 
-    gap:calc(8px * var(--fit-scale, 1)); 
-    padding:calc(20px * var(--fit-scale, 1)); 
-    cursor:pointer; 
-    -webkit-tap-highlight-color:transparent; 
-    transition: transform 0.12s ease, opacity 0.5s ease, filter 0.5s ease, box-shadow 0.2s ease; 
-  }
-  .tp-card[data-testament="Old"] { --tp-color: #A855F7; --tp-text: #FFFFFF; }
-  .tp-card[data-testament="New"] { --tp-color: #0284C7; --tp-text: #FFFFFF; }
-
-  .tp-card:active { 
-    transform: translate(2px, 2px) scale(0.99); 
-    box-shadow: 2px 2px 0 var(--ink);
-  }
-  .tp-card.shake { animation: shakeX .45s; }
-  .tp-card.found { 
-    border-color: var(--ink); 
-    box-shadow: 0 0 0 4px var(--lime), 4px 4px 0 var(--ink); 
-  }
-  .tp-card.dimmed { opacity:.4; pointer-events:none; filter:grayscale(.3); }
-  .tp-check { position:absolute; top:14px; right:14px; width:30px; height:30px; border-radius:50%; background:#FFF; color:var(--ink); display:none; align-items:center; justify-content:center; font-size:15px; border:2.5px solid var(--ink); }
-  .tp-card.found .tp-check { display:flex; }
-  .tp-badge { font-family:'Inter', sans-serif; font-weight:700; color:inherit; background:rgba(0,0,0,.15); padding:calc(5px * var(--fit-scale, 1)) calc(12px * var(--fit-scale, 1)); border-radius:100px; font-size:calc(clamp(11px, 1.4vw, 14px) * var(--fit-scale, 1)); white-space:nowrap; margin-top:2px; }
-  .tp-card[data-testament="New"] .tp-badge { background:rgba(0,0,0,.25); color:#FFF; }
-  .tp-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:inherit; font-size:calc(clamp(24px, 4vw, 38px) * var(--fit-scale, 1)); text-align:center; line-height:1; }
-  .tp-desc { font-family:'Inter', sans-serif; font-weight:600; color:inherit; font-size:calc(clamp(13px, 1.6vw, 16px) * var(--fit-scale, 1)); text-align:center; opacity:.92; max-width:80%; line-height:1.4; margin-top:4px; }
-
-  .sec-tile { 
-    position:absolute; 
-    box-sizing:border-box; 
-    overflow:hidden; 
-    cursor:pointer; 
-    background:var(--sec-color); 
-    color: var(--sec-text, #FFF);
-    border: 3.5px solid var(--ink); 
-    border-radius: 14px; 
-    box-shadow: 4px 4px 0 var(--ink);
-    display:flex; 
-    flex-direction:column; 
-    align-items:center; 
-    justify-content:center; 
-    padding:calc(10px * var(--fit-scale, 1)); 
-    -webkit-tap-highlight-color:transparent; 
-    transition: transform 0.12s ease, box-shadow 0.2s ease; 
-  }
-  .sec-tile.unveil-in { opacity:0; transform:scale(.82); }
-  .sec-tile.unveil-in.show { opacity:1; transform:scale(1); transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
-  .sec-tile.collapsing { opacity:0; transform:scale(.8); transition:opacity .35s ease, transform .35s ease; pointer-events:none; }
-  .sec-tile:active { 
-    transform: translate(2px, 2px) scale(0.98); 
-    box-shadow: 2px 2px 0 var(--ink);
-  }
-  .sec-tile.shake { animation: shakeX .45s; }
-  .sec-tile.found { 
-    border-color: var(--ink); 
-    box-shadow: 0 0 0 4px var(--lime), 4px 4px 0 var(--ink); 
-  }
-  .sec-name { font-family:'Space Grotesk', sans-serif; font-weight:800; color:inherit; font-size:calc(clamp(16px, 2.4vw, 27px) * var(--fit-scale, 1)); text-align:center; line-height:1.15; display:flex; flex-direction:column; align-items:center; gap:4px; }
-  .sec-desc { font-family:'Inter', sans-serif; font-weight:600; color:inherit; font-size:calc(clamp(10px, 1.3vw, 14px) * var(--fit-scale, 1)); text-align:center; opacity:.92; margin-top:calc(6px * var(--fit-scale, 1)); line-height:1.35; max-width:92%; }
-  
-  @media (max-width: 767px) {
-    .tp-card .tp-desc,
-    .sec-tile .sec-desc {
-      display: none !important;
-    }
-  }
-
-  .testament-side-label { position:absolute; left:0; display:flex; align-items:center; justify-content:center; overflow:hidden; pointer-events:none; }
-  .testament-side-label span { writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:calc(clamp(9px, 1.1vw, 12px) * var(--fit-scale, 1)); text-transform:uppercase; letter-spacing:calc(1px * var(--fit-scale, 1)); color:var(--ink); opacity:.65; white-space:nowrap; }
-
-  .sec-tile.celebrate { animation: tileBounceFlat .55s cubic-bezier(.34,1.56,.64,1), glowPulse .7s ease-out; }
-  @keyframes tileBounceFlat {
-    0% { transform: scale(1); }
-    35% { transform: scale(1.06); }
-    60% { transform: scale(0.97); }
-    100% { transform: scale(1); }
-  }
-  @keyframes glowPulse {
-    0% { box-shadow: 0 0 0 0 rgba(195,245,60,.95), 4px 4px 0 var(--ink); }
-    45% { box-shadow: 0 0 0 12px rgba(195,245,60,.4), 4px 4px 0 var(--ink); }
-    100% { box-shadow: 0 0 0 26px rgba(195,245,60,0), 4px 4px 0 var(--ink); }
-  }
-  .confetti-bit { position:fixed; width:8px; height:8px; border-radius:2px; pointer-events:none; z-index:9999; top:0; left:0; transform:translate(-50%,-50%); animation: confettiPop .7s ease-out forwards; }
-  @keyframes confettiPop {
-    0% { transform:translate(-50%,-50%) rotate(0deg) scale(1); opacity:1; }
-    100% { transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(.4); opacity:0; }
-  }
-
-  .all-books-unified-grid {
-    --grid-gap: clamp(6px, 1vh, 12px);
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: var(--grid-gap);
-    width: 100%;
-    height: 100%;
-    padding: clamp(4px, 1vh, 8px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    box-sizing: border-box;
-  }
-  .book-pill { 
-    flex: 0 0 calc(14.285% - (var(--grid-gap) * 6 / 7)); 
-    box-sizing: border-box;
-    background: var(--sec-color); 
-    border: 2.5px solid var(--ink); 
-    border-radius: 100px; 
-    box-shadow: 2.5px 2.5px 0 var(--ink);
-    padding: clamp(6px, 1.2vh, 12px) clamp(8px, 1.2vw, 16px); 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    gap: 6px; 
-    font-family: 'Space Grotesk', sans-serif; 
-    font-weight: 800; 
-    color: var(--pill-text, #FFF); 
-    font-size: clamp(11px, 1.4vw, 17px); 
-    white-space: nowrap; 
-    opacity: 0; 
-    transform: scale(.65); 
-    transition: opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1); 
-  }
-  .book-pill.show { opacity: 1; transform: scale(1); }
-  .book-pill.quest-found { 
-    border-color: var(--ink); 
-    font-weight: 900; 
-    animation: foundNeoPulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
-  }
-  @keyframes foundNeoPulse {
-    0%, 100% {
-      box-shadow: 0 0 0 3.5px var(--lime), 2.5px 2.5px 0 var(--ink);
-      transform: scale(1);
-    }
-    50% {
-      box-shadow: 0 0 0 6px var(--lime), 3px 3px 0 var(--ink);
-      transform: scale(1.03);
-    }
-  }
-
-  @media (max-width: 767px) {
-    .all-books-unified-grid {
-      --grid-gap: 6px;
-      padding: 4px;
-    }
-    .book-pill {
-      flex: 0 0 calc(20% - 4.8px);
-      padding: 5px 6px;
-      font-size: 10px;
-    }
-  }
-
-  .mosaic-frame { 
-    flex:1; 
-    min-height:0; 
-    width:100%; 
-    display:flex; 
-    align-items:center; 
-    justify-content:center; 
-    overflow:hidden; 
-    box-sizing:border-box; 
-    padding: 8px 12px 14px 8px;
-  }
-  .mosaic-canvas { 
-    position:relative; 
-    margin:0 auto; 
-    box-sizing:border-box; 
-    width: 100%;
-    height: 100%;
-  }
 
   .intro-top-title{ font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase; opacity:.85; margin-bottom:12px; }
   .intro-duration{ font-family:'Space Grotesk', sans-serif; font-size:13.5px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; opacity:.6; margin-top:16px; display:flex; align-items:center; gap:8px; }
@@ -753,7 +535,7 @@
     .book-meta-item .bm-value { font-size: 14px; }
   }
 
-  #beat-5 {
+  #beat-4 {
     padding-bottom: 0 !important;
     overflow: hidden !important;
   }
@@ -789,21 +571,6 @@
       gap: 12px;
       margin-bottom: calc(var(--card-clear-peek) * 0.85);
     }
-  }
-  .seed-image-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    min-height: 0;
-    width: 100%;
-  }
-  .seed-image-row .seed-image-single {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
   }
   .synthesis-panel {
     background: #FFF;
@@ -851,7 +618,7 @@
     gap: 14px;
   }
   .synthesis-stat-row .s-label {
-    color: var(--purple);
+    color: var(--wordwork);
     text-transform: uppercase;
     letter-spacing: 1.2px;
     font-size: 0.8em;
@@ -868,7 +635,7 @@
     font-weight: 800;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--purple);
+    color: var(--wordwork);
     margin-bottom: 12px;
     display: inline-flex;
     align-items: center;
@@ -912,7 +679,7 @@
     text-transform: uppercase;
     letter-spacing: 1.8px;
     color: #FFF;
-    background: var(--purple);
+    background: var(--wordwork);
     padding: 3px 12px;
     border-radius: 100px;
     border: 2px solid var(--ink);
@@ -920,8 +687,8 @@
     animation: nextUpPillPulse 1.8s infinite ease-in-out;
   }
   @keyframes nextUpPillPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.55); }
-    50% { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(168, 85, 247, 0); }
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(194, 116, 113, 0.55); }
+    50% { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(194, 116, 113, 0); }
   }
   .synthesis-bottom-anchor .anchor-title {
     font-family: 'Space Grotesk', sans-serif;
@@ -990,7 +757,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: var(--purple);
+    background: var(--wordwork);
     color: #FFFFFF;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 10px;
@@ -1035,8 +802,8 @@
   .circle-hero{ width: clamp(160px, 22vh, 220px); height: clamp(160px, 22vh, 220px); border-radius:50%; background:#FFF; color:var(--ink); border:3.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:12px; flex-shrink:0; }
   .circle-hero .arc-stem-text{ font-family:'Space Grotesk', sans-serif; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:1px; opacity:.65; margin-bottom:4px; }
   .circle-hero .label-god-is{ font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:clamp(17px, 2.4vh, 22px); letter-spacing:-.5px; text-transform:uppercase; line-height:1; margin-bottom:6px; }
-  .circle-hero .static-trait{ font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 22px); font-weight:900; color:var(--purple); text-transform:capitalize; border-bottom:3px solid var(--ink); padding:2px 12px; margin-bottom:4px; }
-  .blank-input{ min-width:180px; width:82%; max-width:92%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--purple); padding:2px 4px; resize:none; overflow:hidden; white-space:normal; word-wrap:break-word; line-height:1.3; display:block; margin:0 auto; transition:height 0.1s ease; }
+  .circle-hero .static-trait{ font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 22px); font-weight:900; color:var(--learn); text-transform:capitalize; border-bottom:3px solid var(--ink); padding:2px 12px; margin-bottom:4px; }
+  .blank-input{ min-width:180px; width:82%; max-width:92%; border:none; border-bottom:3.5px solid var(--ink); background:transparent; font-family:'Inter', sans-serif; font-size:clamp(16px, 2.2vh, 20px); font-weight:800; text-align:center; outline:none; color:var(--learn); padding:2px 4px; resize:none; overflow:hidden; white-space:normal; word-wrap:break-word; line-height:1.3; display:block; margin:0 auto; transition:height 0.1s ease; }
 
   @media (max-width: 767px) {
     .circle-hero.coaching-circle{ width:clamp(220px, 36vh, 280px); height:clamp(220px, 36vh, 280px); padding:18px; }
@@ -1065,9 +832,9 @@
   }
 
   .breath-visual{ position:relative; width: clamp(200px, 30vh, 300px); height: clamp(200px, 30vh, 300px); margin: 0 auto; flex-shrink:0; }
-  .breath-circle{ position:absolute; inset:0; border-radius:50%; background:#C9B8E8; border:4px solid var(--ink); box-shadow:0 0 26px rgba(168,85,247,0.25); transform:scale(0.8); z-index:2; }
+  .breath-circle{ position:absolute; inset:0; border-radius:50%; background:#C27471; border:4px solid var(--ink); box-shadow:0 0 26px rgba(194,116,113,0.25); transform:scale(0.8); z-index:2; }
   .beat.active .breath-circle{ animation:breathe 9s ease-in-out infinite; }
-  @keyframes breathe{ 0%,100%{ transform:scale(0.8); background:#C9B8E8; } 50%{ transform:scale(1.2); background:#DCEFA0; } }
+  @keyframes breathe{ 0%,100%{ transform:scale(0.8); background:#C27471; } 50%{ transform:scale(1.2); background:#E08D53; } }
   .prayer-subtext{ font-family:'Inter', sans-serif; font-weight:700; font-size:clamp(14px, 1.9vh, 17px); line-height:1.4; opacity:.75; color:var(--ink); text-align:center; max-width:280px; }
   @media (min-width: 768px) {
     .breath-visual{ width: clamp(260px, 34vh, 360px); height: clamp(260px, 34vh, 360px); }
@@ -1120,7 +887,7 @@
   @media (min-height: 900px) {
     .flow-para{ font-size:calc(clamp(25px, 2vw, 32px) * var(--passage-font-scale, 1)); line-height:1.85; }
   }
-  .verse-num-inline{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--purple); font-size:.65em; vertical-align:super; margin:0 2px 0 6px; }
+  .verse-num-inline{ font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--learn); font-size:.65em; vertical-align:super; margin:0 2px 0 6px; }
   
   .w{ 
     cursor:pointer; 
@@ -1130,10 +897,10 @@
   }
 
   .w.flagged,
-  .w.hl-yellow{ background: rgba(255, 199, 44, 0.55); font-weight: 700; }
-  .w.hl-lime{ background: rgba(195, 245, 60, 0.5); font-weight: 700; }
-  .w.hl-purple{ background: rgba(168, 85, 247, 0.35); font-weight: 700; }
-  .w.hl-pink{ background: rgba(244, 63, 94, 0.40); font-weight: 700; }
+  .w.hl-wordwork{ background: rgba(194, 116, 113, 0.45); font-weight: 700; }
+  .w.hl-learn{ background: rgba(76, 102, 116, 0.45); font-weight: 700; color: #FFF; }
+  .w.hl-expand{ background: rgba(125, 110, 135, 0.40); font-weight: 700; color: #FFF; }
+  .w.hl-discover{ background: rgba(224, 141, 83, 0.45); font-weight: 700; }
 
   .w.phrase-term{
     white-space: nowrap;
@@ -1153,8 +920,9 @@
     margin:0 auto; 
   }
   .verse-tile{ display:flex; gap:16px; align-items:flex-start; padding:14px 16px; cursor:pointer; transition:background .13s ease; color:var(--ink); border-radius:16px; width:100%; }
-  .verse-tile.selected{ background:var(--lime); }
-  .verse-tile .vnum{ font-family:'Space Grotesk', sans-serif; font-weight:800; color:var(--purple); flex-shrink:0; width:34px; font-size:calc(clamp(18px, 2.2vh, 22px) * var(--char-font-scale, 1)); }
+  .verse-tile.selected{ background:var(--learn); color:#FFF; }
+  .verse-tile.selected .vnum{ color:#FFF; }
+  .verse-tile .vnum{ font-family:'Space Grotesk', sans-serif; font-weight:800; color:var(--learn); flex-shrink:0; width:34px; font-size:calc(clamp(18px, 2.2vh, 22px) * var(--char-font-scale, 1)); }
   .verse-tile .vtext{ font-size:calc(clamp(18px, 2.3vh, 22px) * var(--char-font-scale, 1)); line-height:1.75; font-family:'Inter',sans-serif; font-weight:400; }
   @media (min-width: 768px) {
     .verse-pick-list{ max-width:960px; }
@@ -1196,8 +964,8 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 130;
-    background: var(--yellow);
-    color: var(--ink);
+    background: var(--wordwork);
+    color: #FFF;
     border: 3px solid var(--ink);
     border-left: none;
     border-radius: 0 14px 14px 0;
@@ -1302,7 +1070,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #FFF;
-    background: var(--purple);
+    background: var(--wordwork);
     padding: 2px 8px;
     border-radius: 100px;
     margin-bottom: 6px;
@@ -1315,84 +1083,6 @@
     margin: 0;
   }
 
-  .video-drawer{ display: none; }
-  @media (min-width: 768px) {
-    .video-drawer.vd-visible{ display: block; }
-  }
-  .video-tab{
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 130;
-    background: var(--purple);
-    color: #FFF;
-    border: 3px solid var(--ink);
-    border-left: none;
-    border-radius: 0 14px 14px 0;
-    padding: 16px 9px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    box-shadow: 4px 4px 0 var(--ink);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: left .3s ease, transform .15s ease;
-  }
-  .video-tab span{ writing-mode: vertical-rl; transform: rotate(180deg); }
-  .video-tab i{ font-size: 15px; }
-  .video-tab:active{ transform: translateY(-50%) scale(0.96); }
-  .video-drawer.open .video-tab{ left: min(360px, 84vw); }
-  .video-drawer-scrim{
-    position: fixed; inset: 0; z-index: 105;
-    background: rgba(13,13,29,0.28);
-    opacity: 0; pointer-events: none;
-    transition: opacity .25s ease;
-  }
-  .video-drawer.open .video-drawer-scrim{ opacity: 1; pointer-events: auto; }
-  .video-drawer-panel{
-    position: fixed;
-    left: 0; top: 0; bottom: 0;
-    width: min(360px, 84vw);
-    background: #FFF;
-    border-right: 4px solid var(--ink);
-    box-shadow: 8px 0 0 rgba(0,0,0,0.12);
-    transform: translateX(-100%);
-    transition: transform .3s ease;
-    z-index: 110;
-    display: flex;
-    flex-direction: column;
-    padding: 22px 20px;
-    gap: 14px;
-  }
-  .video-drawer.open .video-drawer-panel{ transform: translateX(0); }
-  .video-drawer-header{
-    display: flex; align-items: center; justify-content: space-between;
-    font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase;
-    flex-shrink: 0;
-  }
-  .video-drawer-close{ background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); padding:4px; line-height:1; }
-  .video-drawer-body{ flex: 1; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
-  .video-embed-wrap{ position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 2.5px solid var(--ink); background: #000; flex-shrink: 0; }
-  .video-embed-wrap iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .video-drawer-link{
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: .4px;
-    color: var(--ink); text-decoration: none;
-    border: 2.5px solid var(--ink); border-radius: 100px; padding: 11px 16px;
-    transition: background .15s ease;
-  }
-  .video-drawer-link:active{ background: rgba(0,0,0,0.06); }
-  @media (min-width: 768px) {
-    .video-drawer-panel{ padding: 26px; }
-    .video-drawer-header{ font-size: 19px; }
-  }
-
   .timer-drawer{ display: none; }
   @media (min-width: 768px) {
     .timer-drawer.td-visible{ display: block; }
@@ -1403,8 +1093,8 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 130;
-    background: var(--green);
-    color: #FFF;
+    background: var(--ink);
+    color: #FFFFFF;
     border: 3px solid var(--ink);
     border-left: none;
     border-radius: 0 14px 14px 0;
@@ -1414,7 +1104,7 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    box-shadow: 4px 4px 0 var(--ink);
+    box-shadow: 4px 4px 0 rgba(255,255,255,0.2);
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     font-size: 11px;
@@ -1485,7 +1175,7 @@
   }
 
   .dark-scripture-card{ background:var(--ink); color:#FFF; border:3.5px solid var(--ink); border-radius:20px; padding:clamp(16px, 2.4vh, 28px) clamp(18px, 2.5vw, 32px); box-shadow:4px 4px 0 rgba(0,0,0,0.25); position:relative; z-index:2; width:100%; }
-  .dark-scripture-card .ref{ font-family:'Space Grotesk', sans-serif; font-size:clamp(12px, 1.6vh, 16px); font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--lime); margin-bottom:6px; }
+  .dark-scripture-card .ref{ font-family:'Space Grotesk', sans-serif; font-size:clamp(12px, 1.6vh, 16px); font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--discover); margin-bottom:6px; }
   .dark-scripture-card .vt{ font-style:normal; font-family:'Inter',sans-serif; font-weight:700; font-size:clamp(14px, 2vh, 20px); line-height:1.5; opacity:.95; }
   @media (min-width: 1024px) {
     .dark-scripture-card{ padding:44px 48px; border-radius:28px; border-width:4.5px; }
@@ -1505,7 +1195,7 @@
     .circle-hero.coaching-circle .blank-input{ font-size:clamp(33px, 4.2vh, 42px); }
   }
 
-  /* ==================== FINAL SLIDE UN-CARDED & LARGER ==================== */
+  /* High-Contrast Live Slide Styling */
   .final-live-wrap {
     flex: 1;
     display: flex;
@@ -1538,19 +1228,15 @@
   }
   .final-q-num {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(20px, 3.2vh, 32px);
+    font-size: clamp(36px, 6vh, 64px);
     font-weight: 900;
-    color: #FFF;
-    background: var(--ink);
-    width: clamp(42px, 5vh, 58px);
-    height: clamp(42px, 5vh, 58px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: var(--discover);
+    line-height: 1;
     flex-shrink: 0;
-    border: 3px solid var(--ink);
-    margin-top: 2px;
+    margin-top: 0;
+  }
+  @media (min-width: 1024px) {
+    .final-q-num { font-size: clamp(56px, 8vh, 96px); }
   }
   .final-q-content {
     display: flex;
@@ -1562,28 +1248,74 @@
     font-size: clamp(22px, 3.8vw, 42px);
     font-weight: 800;
     line-height: 1.18;
-    color: var(--ink);
+    color: #FFFFFF;
     letter-spacing: -0.5px;
   }
   .final-q-subprompt {
     font-family: 'Inter', sans-serif;
     font-size: clamp(14px, 1.8vh, 20px);
     font-weight: 600;
-    color: var(--ink);
-    opacity: 0.85;
+    color: #F7FAF9;
+    opacity: 0.9;
     line-height: 1.35;
   }
   .final-q-subprompt span {
     font-weight: 800;
-    color: var(--purple);
+    color: var(--discover);
+  }
+  .final-q3-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(14px, 2.4vw, 22px);
+    margin-top: clamp(6px, 1vh, 10px);
+  }
+  .final-q3-cat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .final-q3-cat-icon {
+    width: clamp(44px, 6.5vh, 60px);
+    height: clamp(44px, 6.5vh, 60px);
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: var(--live);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(18px, 2.6vh, 24px);
+    border: 2.5px solid var(--ink);
+    box-shadow: 2.5px 2.5px 0 rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+  .final-q3-cat-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(10.5px, 1.4vh, 13px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #FFFFFF;
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+  @media (min-width: 768px) {
+    .final-q3-categories { gap: clamp(18px, 2.6vw, 28px); }
+    .final-q3-cat-icon { width: clamp(58px, 7.5vh, 78px); height: clamp(58px, 7.5vh, 78px); font-size: clamp(24px, 3.2vh, 32px); }
+    .final-q3-cat-label { font-size: clamp(12.5px, 1.6vh, 15px); }
+  }
+  @media (min-width: 1024px) {
+    .final-q3-categories { gap: clamp(22px, 2.8vw, 34px); margin-top: clamp(10px, 1.4vh, 16px); }
+    .final-q3-cat-icon { width: clamp(74px, 9vh, 98px); height: clamp(74px, 9vh, 98px); font-size: clamp(30px, 3.8vh, 40px); border-width: 3.5px; box-shadow: 4px 4px 0 rgba(0,0,0,0.3); }
+    .final-q3-cat-label { font-size: clamp(14px, 1.8vh, 17px); }
   }
   .final-mobile-subtext {
     font-family: 'Inter', sans-serif;
     font-size: clamp(13px, 1.7vh, 16px);
     font-weight: 700;
     line-height: 1.4;
-    opacity: 0.8;
-    color: var(--ink);
+    opacity: 0.85;
+    color: #FFFFFF;
     display: block;
     max-width: 380px;
     margin-top: 0;
@@ -1603,7 +1335,7 @@
   }
 
   .final-timer-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
-  .final-timer-btn.running { background: var(--lime); }
+  .final-timer-btn.running { background: var(--discover); color: #FFF; }
   .final-timer-btn .timer-icon { font-size: 18px; }
   .final-timer-btn .timer-digits { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800; line-height: 1; }
 
@@ -1628,18 +1360,18 @@
 
   .dev-bubble.active{ border:3px solid var(--ink); box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
   .dev-bubble.is-hidden{ opacity:0.4; text-decoration:line-through; }
-  .dev-bubble .note-dot{ position:absolute; top:-3px; right:-3px; width:9px; height:9px; border-radius:50%; background:var(--yellow); border:1.5px solid var(--ink); }
+  .dev-bubble .note-dot{ position:absolute; top:-3px; right:-3px; width:9px; height:9px; border-radius:50%; background:var(--discover); border:1.5px solid var(--ink); }
 
   .dev-notes-overlay{ position:absolute; inset:0; z-index:200; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; padding:24px; }
   .dev-notes-panel{ background:#fff; color:var(--ink); border:4px solid var(--ink); border-radius:20px; padding:20px; width:100%; max-width:520px; max-height:85vh; overflow-y:auto; box-shadow:6px 6px 0 var(--ink); display:flex; flex-direction:column; gap:12px; font-family:'Inter',sans-serif; }
   .dev-notes-panel-header{ display:flex; align-items:center; justify-content:space-between; }
   .dev-notes-panel h3{ font-family:'Space Grotesk',sans-serif; margin:0; font-size:16px; text-transform:uppercase; }
   .dev-hide-btn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:12px; text-transform:uppercase; border:2px solid var(--ink); border-radius:100px; padding:6px 12px; cursor:pointer; background:#fff; color:var(--ink); display:inline-flex; align-items:center; gap:6px; }
-  .dev-hide-btn.is-hidden{ background:var(--pink); color:#fff; }
+  .dev-hide-btn.is-hidden{ background:var(--wordwork); color:#fff; }
   .dev-notes-panel textarea{ width:100%; min-height:90px; border:2.5px solid var(--ink); border-radius:12px; padding:10px; font-family:'Inter',sans-serif; font-size:14px; resize:vertical; }
   .dev-notes-panel .dnp-row{ display:flex; gap:10px; }
-  .dev-notes-panel button.dnp-btn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:13px; text-transform:uppercase; background:var(--lime); border:2.5px solid var(--ink); border-radius:100px; padding:10px 16px; cursor:pointer; }
-  .dev-notes-panel button.dnp-close{ background:#eee; }
+  .dev-notes-panel button.dnp-btn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:13px; text-transform:uppercase; background:var(--discover); color:#FFF; border:2.5px solid var(--ink); border-radius:100px; padding:10px 16px; cursor:pointer; }
+  .dev-notes-panel button.dnp-close{ background:#eee; color:var(--ink); }
   .dnp-status{ font-size:12px; font-weight:700; font-family:'Inter',sans-serif; }
 
   .share-trigger-btn{
@@ -1662,7 +1394,7 @@
   .share-swatch-btn.active{ box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--ink); }
   .share-action-row{ display:flex; gap:10px; width:100%; }
   .share-action-btn{ flex:1; font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:12.5px; text-transform:uppercase; border:2.5px solid var(--ink); border-radius:100px; padding:12px 14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
-  .share-action-btn.primary{ background:var(--lime); }
+  .share-action-btn.primary{ background:var(--discover); color:#FFF; }
   .share-action-btn.secondary{ background:#eee; }
   .share-action-btn:disabled{ opacity:.6; cursor:default; }
   @media (min-width:768px){
@@ -1676,10 +1408,10 @@
     .fs-toggle-btn:hover { transform: scale(1.08); }
     .minimal-arrow-btn:hover { opacity: 1; transform: scale(1.15); }
     .rail-swatch-btn:hover { transform: scale(1.18); }
-    .rail-swatch-btn[data-color="lime"]:hover{ box-shadow: 0 0 0 4px rgba(195,245,60,0.45); }
-    .rail-swatch-btn[data-color="purple"]:hover{ box-shadow: 0 0 0 4px rgba(168,85,247,0.4); }
-    .rail-swatch-btn[data-color="yellow"]:hover{ box-shadow: 0 0 0 4px rgba(255,199,44,0.45); }
-    .rail-swatch-btn[data-color="pink"]:hover{ box-shadow: 0 0 0 4px rgba(244,63,94,0.4); }
+    .rail-swatch-btn[data-color="wordwork"]:hover{ box-shadow: 0 0 0 4px rgba(194,116,113,0.45); }
+    .rail-swatch-btn[data-color="learn"]:hover{ box-shadow: 0 0 0 4px rgba(76,102,116,0.4); }
+    .rail-swatch-btn[data-color="expand"]:hover{ box-shadow: 0 0 0 4px rgba(125,110,135,0.45); }
+    .rail-swatch-btn[data-color="discover"]:hover{ box-shadow: 0 0 0 4px rgba(224,141,83,0.4); }
     .final-timer-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
     .dev-bubble:hover{ transform:scale(1.12); }
   }
@@ -1700,7 +1432,7 @@
     <div class="dev-bubbles-bar" id="devBubblesBar" style="display:none;"></div>
     <div class="story-meta" id="storyMetaRow" style="justify-content: space-between;">
       <span id="sectionLabel">Dwell</span>
-      <span id="scriptureMeta">Mark 4</span>
+      <span id="scriptureMeta">Mark 6:1-29</span>
     </div>
   </div>
 
@@ -1713,11 +1445,6 @@
     <button class="minimal-arrow-btn" id="shellNextBtn" onclick="handleForwardAttempt()" aria-label="Next">
       <i class="fa-solid fa-chevron-right"></i>
     </button>
-  </div>
-
-  <div class="gate-nav-hint light" id="questNavHint">
-    <i class="fa-solid fa-hand-point-up"></i>
-    <span id="questNavHintText">Make a selection</span>
   </div>
 
   <div class="gate-nav-hint dark" id="charNavHint">
@@ -1741,26 +1468,6 @@
         <button class="glossary-drawer-close" onclick="event.stopPropagation(); closeGlossaryDrawer();" aria-label="Close glossary panel"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="glossary-drawer-body" id="glossaryDrawerBody"></div>
-    </div>
-  </div>
-
-  <div class="video-drawer" id="videoDrawer">
-    <button class="video-tab" id="videoTabBtn" onclick="event.stopPropagation(); toggleVideoDrawer();" aria-label="Toggle video panel">
-      <i class="fa-brands fa-youtube"></i>
-      <span>Video</span>
-    </button>
-    <div class="video-drawer-scrim" onclick="closeVideoDrawer();"></div>
-    <div class="video-drawer-panel">
-      <div class="video-drawer-header">
-        <span>The Book of Mark</span>
-        <button class="video-drawer-close" onclick="event.stopPropagation(); closeVideoDrawer();" aria-label="Close video panel"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="video-drawer-body">
-        <div class="video-embed-wrap">
-          <iframe id="markVideoFrame" src="" title="The Parable of the Sower (The Chosen Scene)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <a class="video-drawer-link" href="https://www.youtube.com/watch?v=XX-aAg4_U2Q" target="_blank" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      </div>
     </div>
   </div>
 
@@ -1789,9 +1496,9 @@
       <h3>Share Your Central Truth</h3>
       <div class="share-card-stage" id="shareCardStage">
         <div class="circle-hero" id="shareCircleHero">
-          <div class="arc-stem-text" id="shareArcStem">MARK 4</div>
+          <div class="arc-stem-text" id="shareArcStem">MARK 6:1-29</div>
           <div class="label-god-is">GOD IS...</div>
-          <div class="static-trait" id="shareTraitText">Sovereign Lord</div>
+          <div class="static-trait" id="shareTraitText">Healer</div>
         </div>
       </div>
       <div class="share-swatch-row" id="shareSwatchRow"></div>
@@ -1830,36 +1537,36 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
-// ==================== IN CONTEXT (MARK 4 SYNTHESIS MAP) ====================
+// ==================== IN CONTEXT (MARK 6 SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
-  parables: { title: "In Context", insight: "Parables are short, imaginative stories that Jesus used to provoke the mind, challenge listeners' expectations, and reveal the upside-down nature of God’s arriving Kingdom." },
-  sow: { title: "In Context", insight: "Scattering seed by hand across a field—a standard farming method in ancient Israel." },
-  sower: { title: "In Context", insight: "A farmer or worker spreading seed across the ground to cultivate a harvest." },
-  path: { title: "In Context", insight: "Hard-packed soil along a walkway where seed cannot penetrate, leaving it exposed to birds." },
-  rocky_places: { title: "In Context", insight: "Shallow soil lying over solid limestone bedrock; plants sprout quickly but wither in heat without deep roots." },
-  thorns: { title: "In Context", insight: "Aggressive weeds and brambles that choke out developing crops and drain their resources." },
-  good_soil: { title: "In Context", insight: "Fertile, well-prepared ground where the word is received and yields a rich harvest." },
-  satan: { title: "In Context", insight: "The spiritual enemy who immediately tries to snatch away God's word from receptive minds." },
-  kingdom_of_god: { title: "In Context", insight: "The active rule and royal reign of God, breaking into human history through Jesus Christ." },
-  lamp: { title: "In Context", insight: "A small terracotta oil lamp meant to illuminate a home when elevated on a stand." },
-  mustard_seed: { title: "In Context", insight: "One of the smallest agricultural seeds in Galilee that grows into a large, branch-filled shrub." },
-  squall: { title: "In Context", insight: "A sudden, violent windstorm rushing down through the cliffs surrounding the Sea of Galilee." },
-  stern: { title: "In Context", insight: "The rear section of a fishing boat, often equipped with a wooden seat or cushion." },
-  faith: { title: "In Context", insight: "Trusting who Jesus is and relying on His authority even during terrifying trials." },
-  disciples: { title: "In Context", insight: "Followers who travel with Jesus to learn His teachings and imitate His way of life." },
-  persecution: { title: "In Context", insight: "Facing opposition, hostility, or suffering specifically because of following God's truth." }
+  hometown: { title: "In Context", insight: "Nazareth, the small village where Jesus grew up and worked as a carpenter." },
+  synagogue: { title: "In Context", insight: "The local Jewish place of worship, community gathering, and Scripture teaching." },
+  carpenter: { title: "In Context", insight: "A builder or craftsman working in wood and stone, reflecting Jesus' humble physical vocation." },
+  prophet: { title: "In Context", insight: "A messenger sent by God to speak truth, often rejected by those closest to them." },
+  faith: { title: "In Context", insight: "Active trust in God's authority and character; its lack in Nazareth amazed Jesus." },
+  twelve: { title: "In Context", insight: "Jesus' core group of twelve disciples commissioned to share His ministry authority." },
+  authority: { title: "In Context", insight: "Divine right and power over spiritual forces granted by Jesus to His disciples." },
+  impure_spirit: { title: "In Context", insight: "Evil or demonic spirits that oppose God's kingdom and afflict people physically, mentally, or spiritually." },
+  demons: { title: "In Context", insight: "Evil or demonic spirits that oppose God's kingdom and afflict people physically, mentally, or spiritually." },
+  repent: { title: "In Context", insight: "To turn away from sin and change one's mind toward God's kingdom." },
+  anointed: { title: "In Context", insight: "Applying oil as an act of prayer, consecration, and healing." },
+  herod: { title: "In Context", insight: "Herod Antipas, ruler of Galilee, who was conflicted, fearful, and morally weak." },
+  john_the_baptist: { title: "In Context", insight: "The prophet who prepared the way for Jesus and was martyred for preaching truth." },
+  elijah: { title: "In Context", insight: "The Old Testament prophet expected to return before the day of the Lord." },
+  herodias: { title: "In Context", insight: "The wife of Philip who married Herod Antipas, prompting John the Baptist's public rebuke." },
+  righteous_and_holy: { title: "In Context", insight: "A description of John the Baptist reflecting moral integrity before people and devotion to God." },
+  oath: { title: "In Context", insight: "A solemn promise that Herod foolishly swore before his guests, leading to John's execution." },
+  platter: { title: "In Context", insight: "A large serving dish, highlighting the grotesque nature of Herodias' demand." }
 };
 
-NOTEBOOK_SYNTHESIS['rocky places'] = NOTEBOOK_SYNTHESIS['rocky_places'];
-NOTEBOOK_SYNTHESIS['good soil'] = NOTEBOOK_SYNTHESIS['good_soil'];
-NOTEBOOK_SYNTHESIS['kingdom of god'] = NOTEBOOK_SYNTHESIS['kingdom_of_god'];
-NOTEBOOK_SYNTHESIS['mustard seed'] = NOTEBOOK_SYNTHESIS['mustard_seed'];
+NOTEBOOK_SYNTHESIS['john the baptist'] = NOTEBOOK_SYNTHESIS['john_the_baptist'];
+NOTEBOOK_SYNTHESIS['impure spirits'] = NOTEBOOK_SYNTHESIS['impure_spirit'];
+NOTEBOOK_SYNTHESIS['righteous and holy'] = NOTEBOOK_SYNTHESIS['righteous_and_holy'];
 
 const PHRASE_TERMS = [
-  { norm: ['kingdom','of','god'], key: 'kingdom_of_god' },
-  { norm: ['mustard','seed'], key: 'mustard_seed' },
-  { norm: ['good','soil'], key: 'good_soil' },
-  { norm: ['rocky','places'], key: 'rocky_places' }
+  { norm: ['john', 'the', 'baptist'], key: 'john_the_baptist' },
+  { norm: ['impure', 'spirits'], key: 'impure_spirit' },
+  { norm: ['righteous', 'and', 'holy'], key: 'righteous_and_holy' }
 ].sort((a,b) => b.norm.length - a.norm.length);
 
 const PHRASE_KEYS = new Set(PHRASE_TERMS.map(p => p.key));
@@ -1878,49 +1585,38 @@ function matchPhraseAt(normedWords, wi){
 }
 
 const PASSAGE_START_VERSE = 1;
+const paragraphEnds = [6, 13, 29];
 
 const passage = [
- "Again Jesus began to teach by the lake. The crowd that gathered around him was so large that he got into a boat and sat in it out on the lake, while all the people were along the shore at the water’s edge.",
- "He taught them many things by parables, and in his teaching said:",
- "“Listen! A farmer went out to sow his seed.",
- "As he was scattering the seed, some fell along the path, and the birds came and ate it up.",
- "Some fell on rocky places, where it did not have much soil. It sprang up quickly, because the soil was shallow.",
- "But when the sun came up, the plants were scorched, and they withered because they had no root.",
- "Other seed fell among thorns, which grew up and choked the plants, so that they did not bear grain.",
- "Still other seed fell on good soil. It came up, grew and produced a crop, some multiplying thirty, some sixty, some a hundred times.”",
- "Then Jesus said, “Whoever has ears to hear, let them hear.”",
- "When he was alone, the Twelve and the others around him asked him about the parables.",
- "He told them, “The secret of the kingdom of God has been given to you. But to those on the outside everything is said in parables",
- "so that, ‘they may be ever seeing but never perceiving, and ever hearing but never understanding; otherwise they might turn and be forgiven!’”",
- "Then Jesus said to them, “Don Don’t you understand this parable? How then will you understand any parable?",
- "The farmer sows the word.",
- "Some people are like seed along the path, where the word is sown. As soon as they hear it, Satan comes and takes away the word that was sown in them.",
- "Others, like seed sown on rocky places, hear the word and at once receive it with joy.",
- "But since they have no root, they last only a short time. When trouble or persecution comes because of the word, they quickly fall away.",
- "Still others, like seed sown among thorns, hear the word;",
- "but the worries of this life, the deceitfulness of wealth and the desires for other things come in and choke the word, making it unfruitful.",
- "Others, like seed sown on good soil, hear the word, accept it, and produce a crop—some thirty, some sixty, some a hundred times what was sown.”",
- "He said to them, “Do you bring in a lamp to put it under a bowl or a bed? Instead, don’t you put it on its stand?",
- "For whatever is hidden is meant to be disclosed, and whatever is concealed is meant to be brought out into the open.",
- "If anyone has ears to hear, let them hear.”",
- "“Consider carefully what you hear,” he continued. “With the measure you use, it will be measured to you—and even more.",
- "Whoever has will be given more; whoever does not have, even what they have will be taken from them.”",
- "He also said, “This is what the kingdom of God is like. A man scatters seed on the ground.",
- "Night and day, whether he sleeps or gets up, the seed sprouts and grows, though he does not know how.",
- "All by itself the soil produces grain—first the stalk, then the head, then the full kernel in the head.",
- "As soon as the grain is ripe, he puts the sickle to it, because the harvest has come.”",
- "Again he said, “What shall we say the kingdom of God is like, or what parable shall we use to describe it?",
- "It is like a mustard seed, which is the smallest of all seeds on earth.",
- "Yet when planted, it grows and becomes the largest of all garden plants, with such big branches that the birds can perch in its shade.”",
- "With many similar parables Jesus spoke the word to them, as much as they could understand.",
- "He did not say anything to them without using a parable. But when he was alone with his own disciples, he explained everything.",
- "That day when evening came, he said to his disciples, “Let us go over to the other side.”",
- "Leaving the crowd behind, they took him along, just as he was, in the boat. There were also other boats with him.",
- "A furious squall came up, and the waves broke over the boat, so that it was nearly swamped.",
- "Jesus was in the stern, sleeping on a cushion. The disciples woke him and said to him, “Teacher, don’t you care if we drown?”",
- "He got up, rebuked the wind and said to the waves, “Quiet! Be still!” Then the wind died down and it was completely calm.",
- "He said to his disciples, “Why are you so afraid? Do you still have no faith?”",
- "They were terrified and asked each other, “Who is this? Even the wind and the waves obey him!”"
+  "Jesus left there and went to his hometown, accompanied by his disciples.",
+  "When the Sabbath came, he began to teach in the synagogue, and many who heard him were amazed. \"Where did this man get these things?\" they asked. \"What's this wisdom that has been given him? What are these remarkable miracles he is performing?",
+  "Isn't this the carpenter? Isn't this Mary's son and the brother of James, Joseph, Judas and Simon? Aren't his sisters here with us?\" And they took offense at him.",
+  "Jesus said to them, \"A prophet is not without honor except in his own town, among his relatives and in his own home.\"",
+  "He could not do any miracles there, except lay his hands on a few sick people and heal them.",
+  "He was amazed at their lack of faith. Then Jesus went around teaching from village to village.",
+  "Calling the Twelve to him, he began to send them out two by two and gave them authority over impure spirits.",
+  "These were his instructions: \"Take nothing for the journey except a staff—no bread, no bag, no money in your belts.",
+  "Wear sandals but not an extra shirt.",
+  "Whenever you enter a house, stay there until you leave that town.",
+  "And if any place will not welcome you or listen to you, leave that place and shake the dust off your feet as a testimony against them.\"",
+  "They went out and preached that people should repent.",
+  "They drove out many demons and anointed many sick people with oil and healed them.",
+  "King Herod heard about this, for Jesus' name had become well known. Some were saying, \"John the Baptist has been raised from the dead, and that is why miraculous powers are at work in him.\"",
+  "Others said, \"He is Elijah.\" And still others claimed, \"He is a prophet, like one of the prophets of long ago.\"",
+  "But when Herod heard this, he said, \"John, whom I beheaded, has been raised from the dead!\"",
+  "For Herod himself had given orders to have John arrested, and he had him bound and put in prison. He did this because of Herodias, his brother Philip's wife, whom he had married.",
+  "For John had been saying to Herod, \"It is not lawful for you to have your brother's wife.\"",
+  "So Herodias nursed a grudge against John and wanted to kill him. But she was not able to,",
+  "because Herod feared John and protected him, knowing him to be a righteous and holy man. When Herod heard John, he was greatly puzzled; yet he liked to listen to him.",
+  "Finally the opportune time came. On his birthday Herod gave a banquet for his high officials and military commanders and the leading men of Galilee.",
+  "When the daughter of Herodias came in and danced, she pleased Herod and his dinner guests. The king said to the girl, \"Ask me for anything you want, and I'll give it to you.\"",
+  "And he promised her with an oath, \"Whatever you ask I will give you, up to half my kingdom.\"",
+  "She went out and said to her mother, \"What shall I ask for?\" \"The head of John the Baptist,\" she answered.",
+  "At once the girl hurried in to the king with the request: \"I want you to give me right now the head of John the Baptist on a platter.\"",
+  "The king was greatly distressed, but because of his oaths and his dinner guests, he did not want to refuse her.",
+  "So he immediately sent an executioner with orders to bring John's head. The man went, beheaded John in the prison,",
+  "and brought back his head on a platter. He presented it to the girl, and she gave it to her mother.",
+  "On hearing of this, John's disciples came and took his body and laid it in a tomb."
 ];
 
 const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2, charFontLevel:2 };
@@ -1949,7 +1645,6 @@ function kw(lines, extraClass){
   return `<div class="hero-title${extraClass ? ' '+extraClass : ''}">${body}</div>`;
 }
 
-const paragraphEnds = [9, 20, 25, 29, 34, 41];
 const PASSAGE_LAST_VERSE = PASSAGE_START_VERSE + passage.length - 1;
 
 function passageWordsHTML(){
@@ -1987,440 +1682,33 @@ function versePickHTML(){
     </div>`).join('');
 }
 
-const BOOK_MAP_SECTIONS = [
-  { title:'Torah (Law)', testament:'Old', color:'#D8B4FE', darkText:true, desc:"The foundation of Israel's story and God's covenant", books:[['Genesis',50,38262],['Exodus',40,32685],['Leviticus',27,24541],['Numbers',36,32896],['Deuteronomy',34,28352]] },
-  { title:'History', testament:'Old', color:'#C084FC', darkText:true, desc:"Israel's journey from conquest to exile", books:[['Joshua',24,18854],['Judges',21,18966],['Ruth',4,2574],['1 Samuel',31,25048],['2 Samuel',24,20600],['1 Kings',22,24513],['2 Kings',25,23517],['1 Chronicles',29,20365],['2 Chronicles',36,26069],['Ezra',10,7440],['Nehemiah',13,10480],['Esther',10,5633]] },
-  { title:'Wisdom & Poetry', testament:'Old', color:'#A855F7', darkText:false, desc:'Songs, proverbs, and honest reflections on life', books:[['Job',42,18098],['Psalms',150,42704],['Proverbs',31,15038],['Ecclesiastes',12,5579],['Song of Solomon',8,2658]] },
-  { title:'Prophets', testament:'Old', color:'#7E22CE', darkText:false, desc:"God's messengers calling His people back", books:[['Isaiah',66,37036],['Jeremiah',52,42654],['Lamentations',5,3411],['Ezekiel',48,39401],['Daniel',12,11602],['Hosea',14,5174],['Joel',3,2033],['Amos',9,4216],['Obadiah',1,669],['Jonah',4,1320],['Micah',7,3152],['Nahum',3,1284],['Habakkuk',3,1475],['Zephaniah',3,1616],['Haggai',2,1130],['Zechariah',14,6443],['Malachi',4,1781]] },
-  { title:'Gospels', testament:'New', color:'#38BDF8', darkText:true, desc:"Jesus's life, death & resurrection", books:[['Matthew',28,23343],['Mark',16,14949],['Luke',24,25640],['John',21,18658]] },
-  { title:'Church History', testament:'New', color:'#0284C7', darkText:false, desc:"The Holy Spirit's arrival and church growth", books:[['Acts',28,24229]] },
-  { title:'Epistles (Letters)', testament:'New', color:'#1D4ED8', darkText:false, desc:'Letters guiding and strengthening early believers', books:[['Romans',16,9422],['1 Corinthians',16,9462],['2 Corinthians',13,6046],['Galatians',6,3084],['Ephesians',6,3022],['Philippians',4,2183],['Colossians',4,1979],['1 Thessalonians',5,1837],['2 Thessalonians',3,1022],['1 Timothy',6,2244],['2 Timothy',4,1666],['Titus',3,896],['Philemon',1,430],['Hebrews',13,6897],['James',5,2304],['1 Peter',5,2476],['2 Peter',3,1553],['1 John',5,2517],['2 John',1,298],['3 John',1,294],['Jude',1,608]] },
-  { title:'Prophecy', testament:'New', color:'#1E1B4B', darkText:false, desc:'A visionary look at how it all ends', books:[['Revelation',22,11952]] }
-];
-
-const BOOK_FIND_SEQUENCE = ['Genesis', 'Revelation', 'Isaiah', 'Mark'];
-const bookMapState = { phase: 'testament', foundIndex: 0 };
-
-function partitionIntoRows(items, n){
-  if (isMobileViewport()) {
-    const rows = [];
-    for (let i = 0; i < items.length; i += n) {
-      rows.push(items.slice(i, i + n));
-    }
-    return rows;
-  }
-
-  const weights = items.map(it => it.aspect);
-  const totalWeight = weights.reduce((a, b) => a + b, 0);
-  const maxSingle = Math.max(...weights);
-
-  function countGroups(maxSum){
-    let groups = 1, cur = 0;
-    for (const w of weights){
-      if (cur > 0 && cur + w > maxSum) { groups++; cur = w; }
-      else { cur += w; }
-    }
-    return groups;
-  }
-
-  let lo = maxSingle, hi = totalWeight;
-  for (let i = 0; i < 60; i++){
-    const mid = (lo + hi) / 2;
-    if (countGroups(mid) <= n) hi = mid; else lo = mid;
-  }
-
-  const threshold = hi;
-  const rows = [];
-  let curRow = [];
-  let curSum = 0;
-  items.forEach(item => {
-    if (curRow.length > 0 && curSum + item.aspect > threshold) { rows.push(curRow); curRow = [item]; curSum = item.aspect; }
-    else { curRow.push(item); curSum += item.aspect; }
-  });
-  if (curRow.length) rows.push(curRow);
-  return rows;
-}
-
-function layoutRowsFullWidth(rows, containerW, gap){
-  const rects = [];
-  let y = 0;
-  rows.forEach(rowItems => {
-    const isMobile = isMobileViewport();
-    const rowSum = isMobile ? rowItems.length : rowItems.reduce((a, b) => a + b.aspect, 0);
-    const availW = containerW - (rowItems.length - 1) * gap;
-    const rowHeight = isMobile ? (availW / rowItems.length) : (availW / rowSum);
-    let x = 0;
-    rowItems.forEach(item => {
-      const w = isMobile ? (availW / rowItems.length) : (item.aspect * rowHeight);
-      rects.push({ ...item, rx: x, ry: y, rw: w, rh: rowHeight });
-      x += w + gap;
-    });
-    y += rowHeight + gap;
-  });
-  return { rects, totalHeight: Math.max(0, y - gap) };
-}
-
-const BOOK_ABBREV = {
-  'Genesis':'Gen', 'Exodus':'Exod', 'Leviticus':'Lev', 'Numbers':'Num', 'Deuteronomy':'Deut',
-  'Joshua':'Josh', 'Judges':'Judg', 'Ruth':'Ruth', '1 Samuel':'1 Sam', '2 Samuel':'2 Sam', '1 Kings':'1 Kgs', '2 Kings':'2 Kgs', '1 Chronicles':'1 Chr', '2 Chronicles':'2 Chr', 'Ezra':'Ezra', 'Nehemiah':'Neh', 'Esther':'Esth',
-  'Job':'Job', 'Psalms':'Ps', 'Proverbs':'Prov', 'Ecclesiastes':'Eccl', 'Song of Solomon':'Song',
-  'Isaiah':'Isa', 'Jeremiah':'Jer', 'Lamentations':'Lam', 'Ezekiel':'Ezek', 'Daniel':'Dan',
-  'Hosea':'Hos', 'Joel':'Joel', 'Amos':'Amos', 'Obadiah':'Obad', 'Jonah':'Jonah', 'Micah':'Mic', 'Nahum':'Nah', 'Habakkuk':'Hab', 'Zephaniah':'Zeph', 'Haggai':'Hag', 'Zechariah':'Zech', 'Malachi':'Mal',
-  'Matthew':'Matt', 'Mark':'Mark', 'Luke':'Luke', 'John':'John', 'Acts':'Acts',
-  'Romans':'Rom', '1 Corinthians':'1 Cor', '2 Corinthians':'2 Cor', 'Galatians':'Gal', 'Ephesians':'Eph', 'Philippians':'Phil', 'Colossians':'Col', '1 Thessalonians':'1 Thess', '2 Thessalonians':'2 Thess', '1 Timothy':'1 Tim', '2 Timothy':'2 Tim', 'Titus':'Titus', 'Philemon':'Phlm',
-  'Hebrews':'Heb', 'James':'Jas', '1 Peter':'1 Pet', '2 Peter':'2 Pet', '1 John':'1 John', '2 John':'2 John', '3 John':'3 John', 'Jude':'Jude', 'Revelation':'Rev'
-};
-
-function isMobileViewport(){ return window.innerWidth < 768 || window.innerHeight < 500; }
-
-function getSectionForBook(name){
-  return BOOK_MAP_SECTIONS.find(s => s.books.some(b => b[0] === name));
-}
-const SECTION_FIND_SEQUENCE = BOOK_FIND_SEQUENCE.map(name => getSectionForBook(name).title);
-const SECTION_SIZE_MIN_RATIO = 0.55;
-
-function getSectionItemsFor(sectionsSubset){
-  const items = sectionsSubset.map(s => ({
-    raw: Math.sqrt(s.books.reduce((sum, b) => sum + b[1], 0)),
-    name: s.title,
-    testament: s.testament,
-    color: s.color,
-    darkText: s.darkText,
-    desc: s.desc,
-    bookCount: s.books.length
-  }));
-  const rawAvg = items.reduce((a, b) => a + b.raw, 0) / items.length;
-  const minRaw = rawAvg * SECTION_SIZE_MIN_RATIO;
-  items.forEach(b => { b.raw = Math.max(b.raw, minRaw); });
-  const avgWeight = items.reduce((a, b) => a + b.raw, 0) / items.length;
-  items.forEach(b => { b.aspect = b.raw / avgWeight; });
-  return items;
-}
-
-function computeSectionBandLayout(containerW, containerH, gap, rowsPerTestament, labelWidth){
-  const oldSections = BOOK_MAP_SECTIONS.filter(s => s.testament === 'Old');
-  const newSections = BOOK_MAP_SECTIONS.filter(s => s.testament === 'New');
-  const otItems = getSectionItemsFor(oldSections);
-  const ntItems = getSectionItemsFor(newSections);
-  const cardsW = Math.max(60, containerW - labelWidth - gap);
-
-  const otRows = partitionIntoRows(otItems, rowsPerTestament);
-  const ntRows = partitionIntoRows(ntItems, rowsPerTestament);
-
-  const otLayout = layoutRowsFullWidth(otRows, cardsW, gap);
-  const ntLayoutRaw = layoutRowsFullWidth(ntRows, cardsW, gap);
-  const ntRects = ntLayoutRaw.rects.map(r => ({ ...r, ry: r.ry + otLayout.totalHeight + gap }));
-  const naturalTotal = otLayout.totalHeight + gap + ntLayoutRaw.totalHeight;
-
-  const scaleY = naturalTotal > 0 ? containerH / naturalTotal : 1;
-  const offsetX = labelWidth + gap;
-  const rects = [...otLayout.rects, ...ntRects].map(r => ({ ...r, rx: r.rx + offsetX, ry: r.ry * scaleY, rh: r.rh * scaleY }));
-
-  const bands = [
-    { testament: 'Old', y: 0, h: otLayout.totalHeight * scaleY, bookCount: oldSections.reduce((s, x) => s + x.books.length, 0) },
-    { testament: 'New', y: (otLayout.totalHeight + gap) * scaleY, h: ntLayoutRaw.totalHeight * scaleY, bookCount: newSections.reduce((s, x) => s + x.books.length, 0) }
-  ];
-
-  return { rects, bands };
-}
-
-function sectionTileHTML(r){
-  const textStyle = r.darkText ? '--sec-text:var(--ink)' : '--sec-text:#FFF';
-  return `<div class="sec-tile" data-section="${r.name}" style="left:${r.rx.toFixed(1)}px; top:${r.ry.toFixed(1)}px; width:${r.rw.toFixed(1)}px; height:${r.rh.toFixed(1)}px; --sec-color:${r.color}; ${textStyle};" onclick="tapSectionTile(event, this)">
-            <div class="sec-name">
-              <span>${r.name}</span>
-              <div class="tp-badge">${r.bookCount} ${r.bookCount === 1 ? 'Book' : 'Books'}</div>
-            </div>
-            <div class="sec-desc">${r.desc}</div>
-          </div>`;
-}
-
-function bookPillHTML(name, sectionColor, darkText){
-  const abbrev = BOOK_ABBREV[name] || name;
-  const isQuestBook = BOOK_FIND_SEQUENCE.includes(name);
-  const textStyle = darkText ? '--pill-text:var(--ink)' : '--pill-text:#FFF';
-  return `<div class="book-pill${isQuestBook ? ' quest-found' : ''}" style="--sec-color:${sectionColor}; ${textStyle};">${abbrev}</div>`;
-}
-
-function renderTestamentGateIntoCanvas(){
-  const canvas = document.getElementById('bookmapCanvas');
-  if (!canvas) return;
-  const frame = canvas.closest('.mosaic-frame');
-  if (!frame) return;
-
-  const w = frame.clientWidth - 16;
-  const h = frame.clientHeight - 16;
-  if (!w || !h) return;
-  const gap = 12;
-  const bandH = (h - gap) / 2;
-  canvas.style.width = w + 'px';
-  canvas.style.height = h + 'px';
-
-  canvas.innerHTML = `
-    <div class="tp-card" data-testament="Old" style="left:0px; top:0px; width:${w}px; height:${bandH.toFixed(1)}px;" onclick="tapTestamentGate(event, this)">
-      <div class="tp-check"><i class="fa-solid fa-check"></i></div>
-      <div class="tp-name">Old Testament</div>
-      <div class="tp-badge">39 Books &middot; 1000+ yrs in the making</div>
-      <div class="tp-desc">The Hebrew scriptures pointing toward the coming Messiah</div>
-    </div>
-    <div class="tp-card" data-testament="New" style="left:0px; top:${(bandH + gap).toFixed(1)}px; width:${w}px; height:${bandH.toFixed(1)}px;" onclick="tapTestamentGate(event, this)">
-      <div class="tp-check"><i class="fa-solid fa-check"></i></div>
-      <div class="tp-name">New Testament</div>
-      <div class="tp-badge">27 Books &middot; ~40 yrs in the making</div>
-      <div class="tp-desc">Jesus's life, teaching, resurrection, and the birth of the church</div>
-    </div>
-  `;
-  fitCardsToContainer(canvas.querySelectorAll('.tp-card'), { hideSelector: '.tp-desc' });
-}
-
-function computeSingleTestamentLayout(testament, containerW, containerH, gap, rows){
-  const sections = BOOK_MAP_SECTIONS.filter(s => s.testament === testament);
-  const items = getSectionItemsFor(sections);
-  const rowGroups = partitionIntoRows(items, rows);
-  const { rects, totalHeight } = layoutRowsFullWidth(rowGroups, containerW, gap);
-  const scaleY = totalHeight > 0 ? containerH / totalHeight : 1;
-  return rects.map(r => ({ ...r, ry: r.ry * scaleY, rh: r.rh * scaleY }));
-}
-
-function unveilBandIntoSections(bandEl, testament){
-  const canvas = document.getElementById('bookmapCanvas');
-  if (!canvas || !bandEl) return;
-  const bandRect = {
-    rx: parseFloat(bandEl.style.left),
-    ry: parseFloat(bandEl.style.top),
-    rw: parseFloat(bandEl.style.width),
-    rh: parseFloat(bandEl.style.height)
-  };
-  const rows = isMobileViewport() ? 2 : 1;
-  const rects = computeSingleTestamentLayout(testament, bandRect.rw, bandRect.rh, 8, rows)
-    .map(r => ({ ...r, rx: r.rx + bandRect.rx, ry: r.ry + bandRect.ry }));
-
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = rects.map(r => sectionTileHTML(r)).join('');
-  const newTiles = Array.from(wrapper.children);
-  newTiles.forEach(t => {
-    t.classList.add('unveil-in');
-    t.style.transformOrigin = 'center';
-    canvas.appendChild(t);
-  });
-  bandEl.remove();
-
-  fitCardsToContainer(newTiles, { hideSelector: '.sec-desc' });
-
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    newTiles.forEach((t, i) => setTimeout(() => t.classList.add('show'), i * 40));
-  }));
-}
-
-function currentTargetBook(){
-  return BOOK_FIND_SEQUENCE[bookMapState.foundIndex];
-}
-
-function showSectionPhaseForCurrentBook(){
-  const book = currentTargetBook();
-  if (!book) return;
-  const testament = getSectionForBook(book).testament;
-  renderTestamentGateIntoCanvas();
-  const canvas = document.getElementById('bookmapCanvas');
-  if (!canvas) return;
-  const otherTestament = testament === 'Old' ? 'New' : 'Old';
-  const correctBand = canvas.querySelector(`.tp-card[data-testament="${testament}"]`);
-  const otherBand = canvas.querySelector(`.tp-card[data-testament="${otherTestament}"]`);
-  if (otherBand) otherBand.classList.add('dimmed');
-  if (correctBand) {
-    correctBand.classList.add('found');
-    unveilBandIntoSections(correctBand, testament);
-  }
-}
-
-function tapTestamentGate(e, el){
-  e.stopPropagation();
-  const book = currentTargetBook();
-  const correctTestament = getSectionForBook(book).testament;
-  if (el.dataset.testament === correctTestament) {
-    el.classList.add('found');
-    celebrateFind(el);
-    bookMapState.phase = 'section';
-
-    const canvas = document.getElementById('bookmapCanvas');
-    const otherBand = canvas ? Array.from(canvas.querySelectorAll('.tp-card')).find(c => c !== el) : null;
-    if (otherBand) otherBand.classList.add('dimmed');
-
-    setTimeout(() => {
-      unveilBandIntoSections(el, correctTestament);
-      const promptEl = document.getElementById('bookmapPrompt');
-      if (promptEl) promptEl.innerHTML = `Which section is <span class="locator-emphasis" id="bookmapPromptTarget">${book}</span> in?`;
-    }, 700);
-
-    updateNavShell();
-  } else {
-    el.classList.add('shake');
-    setTimeout(() => el.classList.remove('shake'), 450);
-  }
-}
-
-function renderBookMapHTML(){
-  return `<div class="full-page bookmap-wrap">
-            <div class="bookmap-prompt" id="bookmapPrompt">What testament is <span class="locator-emphasis" id="bookmapPromptTarget">${BOOK_FIND_SEQUENCE[0]}</span> in?</div>
-            <div class="mosaic-frame"><div class="mosaic-canvas" id="bookmapCanvas"></div></div>
-          </div>`;
-}
-
-function spawnConfetti(cx, cy, count, spread){
-  const colors = ['#C3F53C', '#FFFFFF', '#FFD166', '#38BDF8', '#F43F5E', '#A855F7'];
-  for (let i = 0; i < count; i++){
-    const p = document.createElement('div');
-    p.className = 'confetti-bit';
-    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
-    const dist = spread.min + Math.random() * (spread.max - spread.min);
-    const dx = Math.cos(angle) * dist;
-    const dy = Math.sin(angle) * dist;
-    p.style.left = cx + 'px';
-    p.style.top = cy + 'px';
-    p.style.background = colors[i % colors.length];
-    p.style.setProperty('--dx', dx + 'px');
-    p.style.setProperty('--dy', dy + 'px');
-    p.style.setProperty('--rot', (Math.random() * 360) + 'deg');
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 750);
-  }
-}
-
-function playChime(freqs){
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const now = ctx.currentTime;
-    freqs.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0, now + i * 0.09);
-      gain.gain.linearRampToValueAtTime(0.18, now + i * 0.09 + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.09 + 0.35);
-      osc.connect(gain).connect(ctx.destination);
-      osc.start(now + i * 0.09);
-      osc.stop(now + i * 0.09 + 0.4);
-    });
-  } catch (err) { }
-}
-
-function celebrateFind(el){
-  el.classList.add('celebrate');
-  setTimeout(() => el.classList.remove('celebrate'), 700);
-  const rect = el.getBoundingClientRect();
-  spawnConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 16, { min: 65, max: 140 });
-  playChime([523.25, 783.99]);
-}
-
-function revealAllBooksInSections(){
-  const canvas = document.getElementById('bookmapCanvas');
-  const frame = canvas ? canvas.closest('.mosaic-frame') : null;
-  if (!canvas || !frame) return;
-  const w = frame.clientWidth - 16;
-  const h = frame.clientHeight - 16;
-  if (!w || !h) return;
-  canvas.style.width = w + 'px';
-  canvas.style.height = h + 'px';
-
-  const canvasRect = canvas.getBoundingClientRect();
-  spawnConfetti(canvasRect.left + canvasRect.width / 2, canvasRect.top + canvasRect.height / 2, 44, { min: 120, max: 340 });
-  playChime([523.25, 659.25, 783.99, 1046.5]);
-
-  let allPillsHtml = '';
-  BOOK_MAP_SECTIONS.forEach(section => {
-    section.books.forEach(([bookName]) => {
-      allPillsHtml += bookPillHTML(bookName, section.color, section.darkText);
-    });
-  });
-
-  canvas.innerHTML = `<div class="all-books-unified-grid">${allPillsHtml}</div>`;
-
-  const pills = Array.from(canvas.querySelectorAll('.book-pill'));
-  pills.forEach((pill, i) => {
-    setTimeout(() => { pill.classList.add('show'); }, i * 12);
-  });
-}
-
-function fitCardsToContainer(elements, { minScale = 0.55, step = 0.05, hideSelector = null } = {}){
-  elements.forEach(el => {
-    let scale = 1;
-    el.style.setProperty('--fit-scale', scale);
-    while (el.scrollHeight > el.clientHeight + 1 && scale > minScale) {
-      scale = Math.max(minScale, scale - step);
-      el.style.setProperty('--fit-scale', scale);
-    }
-    if (hideSelector && el.scrollHeight > el.clientHeight + 1) {
-      const hideEl = el.querySelector(hideSelector);
-      if (hideEl) hideEl.style.display = 'none';
-    }
-  });
-}
-
-function tapSectionTile(e, el){
-  e.stopPropagation();
-  if (bookMapState.foundIndex >= BOOK_FIND_SEQUENCE.length) return;
-  const targetSection = SECTION_FIND_SEQUENCE[bookMapState.foundIndex];
-  if (el.dataset.section === targetSection) {
-    el.classList.add('found');
-    celebrateFind(el);
-    bookMapState.foundIndex++;
-    if (bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
-      bookMapState.phase = 'testament';
-      const nextBook = BOOK_FIND_SEQUENCE[bookMapState.foundIndex];
-      setTimeout(() => {
-        renderTestamentGateIntoCanvas();
-        const promptEl = document.getElementById('bookmapPrompt');
-        if (promptEl) promptEl.innerHTML = `What testament is <span class="locator-emphasis" id="bookmapPromptTarget">${nextBook}</span> in?`;
-      }, 900);
-    } else {
-      bookMapState.phase = 'done';
-      const promptEl = document.getElementById('bookmapPrompt');
-      if (promptEl) promptEl.innerHTML = 'All four found! Nice work.';
-      setTimeout(() => {
-        revealAllBooksInSections();
-        const p = document.getElementById('bookmapPrompt');
-        if (p) p.innerHTML = '66 Books. One Unified Story.';
-      }, 900);
-    }
-    updateNavShell();
-  } else {
-    el.classList.add('shake');
-    setTimeout(() => el.classList.remove('shake'), 450);
-  }
-}
-
 // ==================== STREAMLINED BEATS ====================
 const beats = [
   { id:'intro', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
-    html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">🌾</div>
+    html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
             <div class="intro-top-title">MS HANG GUIDE</div>
-            ${kw([["MARK", "&nbsp;4"]],'xl')}
+            ${kw([["MARK", "&nbsp;6:1-29"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
-  { id:'book-map', type:'input', blockTap:true, isInteractive:true, clue:'Tap the highlighted book to continue', bgGrad:'var(--bg-cream)', text:'dark',
-    html: renderBookMapHTML() },
-
-  { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-discover)', text:'dark', align:'start',
+  { id:'reveal-context', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-discover)', text:'light', align:'start',
     html:`<div class="recap-context-grid">
             <div class="recap-free-flow">
               <div class="recap-item-block">
-                <span class="recap-tag">The Book of Mark</span>
+                <span class="recap-tag" style="background:#FFF; color:var(--ink);">The Book of Mark</span>
                 <div class="book-meta-row">
-                  <div class="book-meta-item"><span class="bm-label">Author</span><span class="bm-value">Mark</span></div>
-                  <div class="book-meta-item"><span class="bm-label">Time</span><span class="bm-value">50&ndash;70 AD</span></div>
-                  <div class="book-meta-item"><span class="bm-label">Purpose</span><span class="bm-value">Jesus as King and Servant</span></div>
+                  <div class="book-meta-item"><span class="bm-label" style="color:rgba(255,255,255,0.8);">Author</span><span class="bm-value" style="color:#FFF;">Mark</span></div>
+                  <div class="book-meta-item"><span class="bm-label" style="color:rgba(255,255,255,0.8);">Time</span><span class="bm-value" style="color:#FFF;">50&ndash;70 AD</span></div>
+                  <div class="book-meta-item"><span class="bm-label" style="color:rgba(255,255,255,0.8);">Purpose</span><span class="bm-value" style="color:#FFF;">Jesus as the Son of God, King and Servant</span></div>
                 </div>
               </div>
               <div class="recap-item-block">
-                <span class="recap-tag">Mark 1&ndash;3</span>
-                <ul class="recap-bullet-list">
-                  <li>Jesus launches his ministry, calling ordinary fishermen to be his first disciples.</li>
-                  <li>He heals the sick and casts out demons, and crowds start following him everywhere he goes.</li>
-                  <li>He appoints the Twelve and repeatedly clashes with the Pharisees over his authority.</li>
-                  <li>Even his own family thinks he's out of his mind &mdash; disciples, family, and Pharisees have all now seen his power firsthand.</li>
+                <span class="recap-tag" style="background:#FFF; color:var(--ink);">Context</span>
+                <ul class="recap-bullet-list" style="color:#FFF;">
+                  <li>Mark 5:1&ndash;20 — Jesus heals the Gerasene man, demonstrating power over spiritual forces.</li>
+                  <li>Mark 5:21&ndash;34 — Jesus heals the woman with the discharge of blood who touched His cloak in faith.</li>
+                  <li>Mark 5:35&ndash;43 — Jesus raises Jairus's daughter from the dead, demonstrating authority over death itself.</li>
                 </ul>
               </div>
             </div>
@@ -2441,22 +1729,57 @@ const beats = [
             </div>
           ` },
 
-  { id:'tri-focal-synthesis', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-expand)', text:'dark', align:'start',
+  { id:'tri-focal-synthesis', type:'tapAuto', isInteractive:false, bgGrad:'var(--bg-wordwork)', text:'light', align:'start',
     html:`<div class="synthesis-stage">
             <div class="mobile-glossary-card" id="mobileGlossaryCard"></div>
-            <div class="seed-image-row desktop-only-grid">
-              <img class="seed-image-single" src="seeds.png" alt="">
+            <div class="synthesis-split-grid desktop-only-grid">
+              <div class="synthesis-panel">
+                <div class="synthesis-panel-header">
+                  What context is important to understand this Scripture? (author, time, purpose)
+                </div>
+                <div class="synthesis-panel-body">
+                  <div class="synthesis-stacked-list">
+                    <div class="synthesis-stat-row">
+                      <span class="s-label">Author:</span>
+                      <span class="s-val">Mark</span>
+                    </div>
+                    <div class="synthesis-stat-row">
+                      <span class="s-label">Time:</span>
+                      <span class="s-val">50–70 AD</span>
+                    </div>
+                    <div class="synthesis-stat-row">
+                      <span class="s-label">Purpose:</span>
+                      <span class="s-val">Jesus as the Son of God, King and Servant</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="synthesis-panel">
+                <div class="synthesis-panel-header">
+                  What am I observing as I read the text? (repetition, confusing terms, hyperlinks)
+                </div>
+                <div class="synthesis-panel-body">
+                  <div class="synthesis-obs-kicker"><i class="fa-solid fa-pen-nib"></i> You should have defined:</div>
+                  <div id="synthesisHighlightCloud" class="pill-cloud"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="synthesis-bottom-anchor desktop-only-grid">
+              <div class="anchor-arc-kicker">NEXT UP</div>
+              <div class="anchor-title">GOD IS...</div>
             </div>
           ` },
 
-  { id:'char-verse-pick', type:'input', blockTap:true, isInteractive:true, clue:'Select a verse to continue', bgGrad:'var(--bg-cream)', text:'dark',
+  { id:'char-verse-pick', type:'input', blockTap:true, isInteractive:true, clue:'Tap a verse to spot God\'s character', bgGrad:'var(--bg-cream)', text:'dark',
     html:`<div class="full-page">
             <div class="passage-scroll-wrap">
               <div class="verse-pick-list">${versePickHTML()}</div>
             </div>
           ` },
 
-  { id:'char-coaching', type:'input', blockTap:true, isInteractive:true, clue:'Fill in the blank to continue', bgGrad:'var(--bg-learn)', text:'dark',
+  { id:'char-coaching', type:'input', blockTap:true, isInteractive:true, clue:'Fill in the blank to continue', bgGrad:'var(--bg-learn)', text:'light',
     html:`<div class="coaching-scene" id="coachingScene">
             <div style="display:flex; flex-direction:column; gap:10px; width:100%;" id="coachingCardWrap">
               <div class="dark-scripture-card coaching-card">
@@ -2473,7 +1796,7 @@ const beats = [
             </div>
           ` },
 
-  { id:'final', type:'input', blockTap:true, isInteractive:false, bgGrad:'var(--bg-cream)', text:'dark', align:'start',
+  { id:'final', type:'input', blockTap:true, isInteractive:false, bgGrad:'var(--bg-live)', text:'light', align:'start',
     html:`<div class="final-live-wrap">
             <div class="final-questions-stack">
               <div class="final-question-card">
@@ -2493,6 +1816,28 @@ const beats = [
                 <div class="final-q-num">3</div>
                 <div class="final-q-content">
                   <div class="final-q-text">How can I live this out this week?</div>
+                  <div class="final-q3-categories">
+                    <div class="final-q3-cat">
+                      <div class="final-q3-cat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                      <span class="final-q3-cat-label">School</span>
+                    </div>
+                    <div class="final-q3-cat">
+                      <div class="final-q3-cat-icon"><i class="fa-solid fa-basketball"></i></div>
+                      <span class="final-q3-cat-label">Sports</span>
+                    </div>
+                    <div class="final-q3-cat">
+                      <div class="final-q3-cat-icon"><i class="fa-solid fa-people-roof"></i></div>
+                      <span class="final-q3-cat-label">Family</span>
+                    </div>
+                    <div class="final-q3-cat">
+                      <div class="final-q3-cat-icon"><i class="fa-solid fa-user-group"></i></div>
+                      <span class="final-q3-cat-label">Friends</span>
+                    </div>
+                    <div class="final-q3-cat">
+                      <div class="final-q3-cat-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                      <span class="final-q3-cat-label">Online</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2505,12 +1850,12 @@ const beats = [
 ];
 
 const sectionLabels = [
-  'Guide', 'Discover', 'Discover',
+  'Guide', 'Discover',
   'Prayer', 'Word Work',
   'Word Work', 'Learn', 'Learn', 'Live'
 ];
 
-const sectionColorKeys = ['', 'discover', 'discover', '', 'wordwork', 'wordwork', 'learn', 'learn', 'live'];
+const sectionColorKeys = ['', 'discover', '', 'wordwork', 'wordwork', 'learn', 'learn', 'live'];
 
 function initNotches(){
   const layer = document.getElementById('notchesLayer');
@@ -2568,7 +1913,7 @@ function updateHeaderMeta(){
     scriptureEl.innerHTML = `<button class="meta-link-btn" onclick="event.stopPropagation(); exitDevMode();">Close</button>`;
   } else {
     labelEl.textContent = sectionLabels[state.index] || '';
-    scriptureEl.textContent = 'Mark 4';
+    scriptureEl.textContent = 'Mark 6:1-29';
   }
 }
 
@@ -2599,8 +1944,7 @@ function updateNavShell(){
   prevBtn.classList.toggle('disabled', !hasPrev);
 
   let ready = false;
-  if (b.id === 'book-map') ready = bookMapState.phase === 'done';
-  else if (b.id === 'vocab-scan') ready = isVocabComplete();
+  if (b.id === 'vocab-scan') ready = isVocabComplete();
   else if (b.id === 'char-verse-pick') ready = state.charVerse !== null;
   else if (b.id === 'char-coaching') ready = Boolean(state.trait && state.trait.trim());
   else ready = !b.blockTap;
@@ -2609,17 +1953,7 @@ function updateNavShell(){
   prevBtn.style.display = '';
   nextBtn.style.display = !hasNext ? 'none' : '';
 
-  if (b.id === 'book-map') {
-    island.style.display = 'flex';
-    const isDone = bookMapState.phase === 'done';
-    const targetBook = BOOK_FIND_SEQUENCE[bookMapState.foundIndex] || 'Book';
-    
-    island.innerHTML = `
-      <button class="action-gate-pill ${isDone ? 'ready' : ''}" id="bookmapActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-        ${isDone ? '<i class="fa-solid fa-check"></i> Continue' : `<i class="fa-solid fa-magnifying-glass"></i> Find ${targetBook}`}
-      </button>
-    `;
-  } else if (b.id === 'vocab-scan') {
+  if (b.id === 'vocab-scan') {
     island.style.display = 'flex';
     const isDone = isVocabComplete();
     const hasWords = state.wordTaps.length > 0;
@@ -2637,7 +1971,7 @@ function updateNavShell(){
     const isPicked = state.charVerse !== null;
     island.innerHTML = `
       <button class="action-gate-pill ${isPicked ? 'ready' : ''}" id="verseActionPill" onclick="event.stopPropagation(); handleForwardAttempt();">
-        ${isPicked ? '<i class="fa-solid fa-check"></i> Continue' : '<i class="fa-solid fa-hand-pointer"></i> Select a Verse'}
+        ${isPicked ? '<i class="fa-solid fa-check"></i> Continue' : '<i class="fa-solid fa-hand-pointer"></i> Spot God\'s Character'}
       </button>
     `;
   } else {
@@ -2648,8 +1982,8 @@ function updateNavShell(){
   if (b.id === 'vocab-scan') {
     rail.style.display = 'flex';
     const colors = [
-      ['lime', 'Characters'], ['purple', 'Setting'],
-      ['yellow', 'Confusing'], ['pink', 'Repeated']
+      ['wordwork', 'Repeated'], ['learn', 'Confusing'],
+      ['expand', 'Setting'], ['discover', 'Characters']
     ];
     const swatchHtml = colors.map(([c, label]) => `
       <button class="rail-swatch-btn ${state.activeTool.vocab === c ? 'active' : ''}" data-color="${c}" title="${label}" aria-label="${label}" onclick="event.stopPropagation(); setPassageHighlighter('${c}', this);"></button>
@@ -2679,7 +2013,7 @@ function renderSynthesisPanel(){
   if (cloud) {
     let uniqueWords = Array.from(new Set(state.wordTaps.map(w => w.word.charAt(0).toUpperCase() + w.word.slice(1))));
     if (uniqueWords.length === 0) {
-      uniqueWords = ['Parables', 'Sower', 'Good Soil', 'Mustard Seed', 'Squall'];
+      uniqueWords = ['Hometown', 'Carpenter', 'Prophet', 'Twelve', 'John the Baptist', 'Herod', 'Impure Spirits', 'Righteous and Holy'];
     }
     cloud.innerHTML = uniqueWords.map(w => `<span class="research-pill">${w}</span>`).join('');
   }
@@ -2745,24 +2079,12 @@ function renderBeat(i){
   updateHeaderMeta();
   updateNavShell();
 
-  if (b.id === 'book-map') {
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      if (bookMapState.phase === 'section') {
-        showSectionPhaseForCurrentBook();
-      } else if (bookMapState.phase === 'done') {
-        revealAllBooksInSections();
-      } else {
-        renderTestamentGateIntoCanvas();
-      }
-    }));
-  }
-
   if (b.id === 'tri-focal-synthesis') {
     renderSynthesisPanel();
   }
 
   if (b.id === 'char-coaching') {
-    const isVersePickHidden = hiddenSlides.has(6);
+    const isVersePickHidden = hiddenSlides.has(5);
     const cardWrap = document.getElementById('coachingCardWrap');
     const coachingScene = document.getElementById('coachingScene');
     const arcStem = document.getElementById('arcStemText');
@@ -2775,7 +2097,7 @@ function renderBeat(i){
         coachingScene.style.alignItems = 'center';
         coachingScene.style.justifyContent = 'center';
       }
-      if (arcStem) arcStem.textContent = 'MARK 4:';
+      if (arcStem) arcStem.textContent = 'MARK 6:1-29:';
     } else {
       if (cardWrap) cardWrap.style.display = '';
       if (coachingScene) {
@@ -2785,7 +2107,7 @@ function renderBeat(i){
         coachingScene.style.justifyContent = '';
       }
       const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-      document.getElementById('charRef').textContent = 'Mark 4:' + activeVerse;
+      document.getElementById('charRef').textContent = 'Mark 6:' + activeVerse;
       document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
       if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
       requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
@@ -2800,7 +2122,7 @@ function renderBeat(i){
   } else if (b.id === 'final') {
     const dynamicSpan = document.getElementById('finalTraitDynamic');
     if (dynamicSpan) {
-      const traitWord = (state.trait && state.trait.trim()) ? state.trait.trim() : '...';
+      const traitWord = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
       dynamicSpan.textContent = traitWord;
     }
   } else if (b.id === 'char-verse-pick') {
@@ -2809,7 +2131,6 @@ function renderBeat(i){
     checkPassageScroll();
   }
 
-  /* Glossary Tab strictly visible on slide 4 (vocab-scan) and slide 5 (tri-focal-synthesis) */
   const glossaryDrawerEl = document.getElementById('glossaryDrawer');
   if (glossaryDrawerEl) {
     if (b.id === 'vocab-scan' || b.id === 'tri-focal-synthesis') {
@@ -2821,18 +2142,6 @@ function renderBeat(i){
     }
   }
 
-  /* Video Tab strictly visible on slide 2 (reveal-context) */
-  const videoDrawerEl = document.getElementById('videoDrawer');
-  if (videoDrawerEl) {
-    if (b.id === 'reveal-context') {
-      videoDrawerEl.classList.add('vd-visible');
-    } else {
-      videoDrawerEl.classList.remove('vd-visible');
-      toggleVideoDrawer(false);
-    }
-  }
-
-  /* Timer Tab strictly visible on char-coaching and final */
   const timerDrawerEl = document.getElementById('timerDrawer');
   if (timerDrawerEl) {
     if (b.id === 'char-coaching' || b.id === 'final') {
@@ -2890,7 +2199,7 @@ function tapWord(e, el){
   if (state.activeTool.vocab) {
     const cls = 'hl-' + state.activeTool.vocab;
     const alreadyThisColor = el.classList.contains(cls);
-    ['hl-lime','hl-purple','hl-yellow','hl-pink','flagged'].forEach(c => el.classList.remove(c));
+    ['hl-wordwork','hl-learn','hl-expand','hl-discover','flagged'].forEach(c => el.classList.remove(c));
     
     if (!alreadyThisColor) {
       el.classList.add(cls);
@@ -2900,9 +2209,9 @@ function tapWord(e, el){
       state.wordTaps = state.wordTaps.filter(w => w.el !== el);
     }
   } else {
-    const isColored = ['hl-lime','hl-purple','hl-yellow','hl-pink'].some(c=>el.classList.contains(c));
+    const isColored = ['hl-wordwork','hl-learn','hl-expand','hl-discover'].some(c=>el.classList.contains(c));
     if (isColored) {
-      ['hl-lime','hl-purple','hl-yellow','hl-pink'].forEach(c => el.classList.remove(c));
+      ['hl-wordwork','hl-learn','hl-expand','hl-discover'].forEach(c => el.classList.remove(c));
       state.wordTaps = state.wordTaps.filter(w => w.el !== el);
     } else if (el.classList.contains('flagged')) {
       el.classList.remove('flagged');
@@ -3016,18 +2325,6 @@ function toggleGlossaryDrawer(force){
 function openGlossaryDrawer(){ toggleGlossaryDrawer(true); }
 function closeGlossaryDrawer(){ toggleGlossaryDrawer(false); }
 
-const MARK_VIDEO_ID = 'YWoTGzlefq8';
-function toggleVideoDrawer(force){
-  const d = document.getElementById('videoDrawer');
-  if (!d) return;
-  const willOpen = typeof force === 'boolean' ? force : !d.classList.contains('open');
-  d.classList.toggle('open', willOpen);
-  const frame = document.getElementById('markVideoFrame');
-  if (frame) {
-    frame.src = willOpen ? `https://www.youtube.com/embed/${MARK_VIDEO_ID}` : '';
-  }
-}
-
 function toggleTimerDrawer(force){
   const d = document.getElementById('timerDrawer');
   if (!d) return;
@@ -3122,10 +2419,6 @@ function triggerGateNavHint(hintId){
 function handleForwardAttempt(){
   const b = beats[state.index];
   if (b.blockTap) {
-    if (b.id === 'book-map' && bookMapState.foundIndex < BOOK_FIND_SEQUENCE.length) {
-      triggerPillMessage('bookmapActionPill', `Tap ${BOOK_FIND_SEQUENCE[bookMapState.foundIndex]}`);
-      return;
-    }
     if (b.id === 'vocab-scan') {
       if (!state.wordTaps.length) {
         triggerPillMessage('vocabActionPill', 'Tap & Highlight Words');
@@ -3260,8 +2553,8 @@ if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPas
 let devMode = false;
 let devTapCount = 0;
 let devLastTapTime = 0;
-const DEV_NOTES_KEY = 'msHangDevNotes_4_1_41';
-const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_4_1_41';
+const DEV_NOTES_KEY = 'msHangDevNotes_6_1_29_00';
+const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_6_1_29_00';
 
 function loadHiddenSlides(){
   try { return new Set(JSON.parse(localStorage.getItem(DEV_HIDDEN_SLIDES_KEY) || '[]')); }
@@ -3340,126 +2633,20 @@ function renderDevBubbles(){
 }
 
 const SHARE_BG_COLORS = {
-  discover: ['#d2f860', '#a2e014'],
-  wordwork: ['#fb5672', '#be123c'],
-  expand:   ['#bae6fd', '#38bdf8'],
-  learn:    ['#ffd452', '#eab308'],
-  live:     ['#262626', '#050505'],
-  cream:    ['#f4f0e8', '#d8d2c7']
+  discover: ['#E08D53', '#C47238'],
+  wordwork: ['#C27471', '#A35451'],
+  expand:   ['#7D6E87', '#5E5067'],
+  learn:    ['#4C6674', '#324B58'],
+  live:     ['#223942', '#112026'],
+  cream:    ['#F7FAF9', '#E8ECEB']
 };
-const SHARE_COLOR_KEYS = Object.keys(SHARE_BG_COLORS);
-
-function roundRectPath(ctx, x, y, w, h, r){
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + r, y, r);
-  ctx.closePath();
-}
-
-function drawCentralTruthCanvas(colorKey, verseNum, traitText){
-  const size = 1000;
-  const canvas = document.createElement('canvas');
-  canvas.width = size; canvas.height = size;
-  const ctx = canvas.getContext('2d');
-
-  const [c1, c2] = SHARE_BG_COLORS[colorKey] || SHARE_BG_COLORS.discover;
-  const grad = ctx.createLinearGradient(0, 0, size, size);
-  grad.addColorStop(0, c1);
-  grad.addColorStop(1, c2);
-  roundRectPath(ctx, 0, 0, size, size, 56);
-  ctx.fillStyle = grad;
-  ctx.fill();
-
-  const cx = size / 2, cy = size / 2;
-  const circleR = size * 0.335;
-  const shadowOffset = size * 0.02;
-
-  ctx.beginPath();
-  ctx.arc(cx + shadowOffset, cy + shadowOffset, circleR, 0, Math.PI * 2);
-  ctx.fillStyle = '#0D0D0D';
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, circleR, 0, Math.PI * 2);
-  ctx.fillStyle = '#FFFFFF';
-  ctx.fill();
-  ctx.lineWidth = size * 0.008;
-  ctx.strokeStyle = '#0D0D0D';
-  ctx.stroke();
-
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-
-  ctx.fillStyle = 'rgba(13,13,13,0.65)';
-  ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
-  ctx.fillText(`MARK 4:${verseNum}`, cx, cy - circleR * 0.42);
-
-  ctx.fillStyle = '#0D0D0D';
-  ctx.font = `800 ${Math.round(size * 0.05)}px 'Space Grotesk', sans-serif`;
-  ctx.fillText('GOD IS...', cx, cy - circleR * 0.12);
-
-  const traitDisplay = traitText.charAt(0).toUpperCase() + traitText.slice(1);
-  const traitY = cy + circleR * 0.26;
-  const dy = traitY - cy;
-  const halfChord = Math.sqrt(Math.max(circleR * circleR - dy * dy, 0));
-  const maxTraitWidth = halfChord * 2 - size * 0.09;
-
-  let traitFontSize = Math.round(size * 0.05);
-  const minTraitFontSize = Math.round(size * 0.022);
-  ctx.fillStyle = '#A855F7';
-  ctx.font = `900 ${traitFontSize}px 'Inter', sans-serif`;
-  let traitWidth = ctx.measureText(traitDisplay).width;
-  while (traitWidth > maxTraitWidth && traitFontSize > minTraitFontSize) {
-    traitFontSize -= 2;
-    ctx.font = `900 ${traitFontSize}px 'Inter', sans-serif`;
-    traitWidth = ctx.measureText(traitDisplay).width;
-  }
-  ctx.fillText(traitDisplay, cx, traitY);
-  ctx.strokeStyle = '#0D0D0D';
-  ctx.lineWidth = size * 0.007;
-  ctx.beginPath();
-  ctx.moveTo(cx - traitWidth / 2 - 16, traitY + size * 0.032);
-  ctx.lineTo(cx + traitWidth / 2 + 16, traitY + size * 0.032);
-  ctx.stroke();
-
-  return canvas;
-}
-
-async function shareCentralTruthDirect(){
-  try {
-    const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-    const traitText = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Sovereign Lord';
-    const colorKey = SHARE_COLOR_KEYS[Math.floor(Math.random() * SHARE_COLOR_KEYS.length)];
-    const canvas = drawCentralTruthCanvas(colorKey, activeVerse, traitText);
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-    if (!blob) throw new Error('canvas produced no image data');
-
-    const file = new File([blob], 'central-truth.png', { type: 'image/png' });
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({ files: [file] });
-    } else {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'central-truth.png';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-  } catch(err){
-    if (err && err.name === 'AbortError') return;
-    console.error('Direct share failed, falling back to the picker', err);
-    openShareOverlay();
-  }
-}
 
 const SHARE_COLORS = [
-  { key:'discover', dot:'var(--lime)' },
-  { key:'wordwork', dot:'var(--pink)' },
-  { key:'expand',   dot:'var(--purple)' },
-  { key:'learn',    dot:'var(--yellow)' },
-  { key:'live',     dot:'#262626' },
+  { key:'discover', dot:'var(--discover)' },
+  { key:'wordwork', dot:'var(--wordwork)' },
+  { key:'expand',   dot:'var(--expand)' },
+  { key:'learn',    dot:'var(--learn)' },
+  { key:'live',     dot:'var(--live)' },
   { key:'cream',    dot:'var(--cream)' }
 ];
 
@@ -3479,8 +2666,8 @@ function selectShareColor(key){
 
 function openShareOverlay(){
   const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-  document.getElementById('shareArcStem').textContent = `MARK 4:${activeVerse}`;
-  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Sovereign Lord';
+  document.getElementById('shareArcStem').textContent = `MARK 6:${activeVerse}`;
+  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
   initShareSwatches();
   selectShareColor(state.shareColor || 'discover');
   document.getElementById('shareOverlay').style.display = 'flex';
@@ -3627,15 +2814,7 @@ applyCharFontScale();
 renderBeat(0);
 
 window.addEventListener('resize', () => {
-  if (beats[state.index].id === 'book-map') {
-    if (bookMapState.phase === 'section') {
-      showSectionPhaseForCurrentBook();
-    } else if (bookMapState.phase === 'done') {
-      revealAllBooksInSections();
-    } else {
-      renderTestamentGateIntoCanvas();
-    }
-  } else if (beats[state.index].id === 'char-coaching') {
+  if (beats[state.index].id === 'char-coaching') {
     fitCharVerseText('charText');
   }
 });
