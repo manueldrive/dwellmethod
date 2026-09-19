@@ -329,7 +329,7 @@
     display:flex; 
     flex-direction:row;
     align-items:center; 
-    justify-content:space-between; 
+    justify-style:space-between; 
     width:100%;
     font-family:'Space Grotesk', sans-serif; 
     font-size:12px; 
@@ -1493,7 +1493,7 @@
       <h3>Share Your Central Truth</h3>
       <div class="share-card-stage" id="shareCardStage">
         <div class="circle-hero" id="shareCircleHero">
-          <div class="arc-stem-text" id="shareArcStem">Mark 6:1-29</div>
+          <div class="arc-stem-text" id="shareArcStem">MARK 6:1-29</div>
           <div class="label-god-is">GOD IS...</div>
           <div class="static-trait" id="shareTraitText">Healer</div>
         </div>
@@ -1534,7 +1534,7 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
-// ==================== IN CONTEXT (Mark 6:1-29 SYNTHESIS MAP) ====================
+// ==================== IN CONTEXT (MARK 6 SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
   hometown: { title: "In Context", insight: "Nazareth, the small village where Jesus grew up and worked as a carpenter." },
   synagogue: { title: "In Context", insight: "The local Jewish place of worship, community gathering, and Scripture teaching." },
@@ -1543,20 +1543,27 @@ const NOTEBOOK_SYNTHESIS = {
   faith: { title: "In Context", insight: "Active trust in God's authority and character; its lack in Nazareth amazed Jesus." },
   twelve: { title: "In Context", insight: "Jesus' core group of twelve disciples commissioned to share His ministry authority." },
   authority: { title: "In Context", insight: "Divine right and power over spiritual forces granted by Jesus to His disciples." },
+  impure_spirit: { title: "In Context", insight: "Evil or demonic spirits that oppose God's kingdom and afflict people physically, mentally, or spiritually." },
+  demons: { title: "In Context", insight: "Evil or demonic spirits that oppose God's kingdom and afflict people physically, mentally, or spiritually." },
   repent: { title: "In Context", insight: "To turn away from sin and change one's mind toward God's kingdom." },
   anointed: { title: "In Context", insight: "Applying oil as an act of prayer, consecration, and healing." },
   herod: { title: "In Context", insight: "Herod Antipas, ruler of Galilee, who was conflicted, fearful, and morally weak." },
   john_the_baptist: { title: "In Context", insight: "The prophet who prepared the way for Jesus and was martyred for preaching truth." },
   elijah: { title: "In Context", insight: "The Old Testament prophet expected to return before the day of the Lord." },
   herodias: { title: "In Context", insight: "The wife of Philip who married Herod Antipas, prompting John the Baptist's public rebuke." },
+  righteous_and_holy: { title: "In Context", insight: "A description of John the Baptist reflecting moral integrity before people and devotion to God." },
   oath: { title: "In Context", insight: "A solemn promise that Herod foolishly swore before his guests, leading to John's execution." },
   platter: { title: "In Context", insight: "A large serving dish, highlighting the grotesque nature of Herodias' demand." }
 };
 
 NOTEBOOK_SYNTHESIS['john the baptist'] = NOTEBOOK_SYNTHESIS['john_the_baptist'];
+NOTEBOOK_SYNTHESIS['impure spirits'] = NOTEBOOK_SYNTHESIS['impure_spirit'];
+NOTEBOOK_SYNTHESIS['righteous and holy'] = NOTEBOOK_SYNTHESIS['righteous_and_holy'];
 
 const PHRASE_TERMS = [
-  { norm: ['john', 'the', 'baptist'], key: 'john_the_baptist' }
+  { norm: ['john', 'the', 'baptist'], key: 'john_the_baptist' },
+  { norm: ['impure', 'spirits'], key: 'impure_spirit' },
+  { norm: ['righteous', 'and', 'holy'], key: 'righteous_and_holy' }
 ].sort((a,b) => b.norm.length - a.norm.length);
 
 const PHRASE_KEYS = new Set(PHRASE_TERMS.map(p => p.key));
@@ -1678,7 +1685,7 @@ const beats = [
     html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
             <div class="intro-top-title">MS HANG GUIDE</div>
-            ${kw([["MARK", "&nbsp;6"]],'xl')}
+            ${kw([["MARK", "&nbsp;6:1-29"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
@@ -2003,7 +2010,7 @@ function renderSynthesisPanel(){
   if (cloud) {
     let uniqueWords = Array.from(new Set(state.wordTaps.map(w => w.word.charAt(0).toUpperCase() + w.word.slice(1))));
     if (uniqueWords.length === 0) {
-      uniqueWords = ['Hometown', 'Carpenter', 'Prophet', 'Twelve', 'John the Baptist', 'Herod'];
+      uniqueWords = ['Hometown', 'Carpenter', 'Prophet', 'Twelve', 'John the Baptist', 'Herod', 'Impure Spirits', 'Righteous and Holy'];
     }
     cloud.innerHTML = uniqueWords.map(w => `<span class="research-pill">${w}</span>`).join('');
   }
@@ -2087,7 +2094,7 @@ function renderBeat(i){
         coachingScene.style.alignItems = 'center';
         coachingScene.style.justifyContent = 'center';
       }
-      if (arcStem) arcStem.textContent = 'Mark 6:1-29:';
+      if (arcStem) arcStem.textContent = 'MARK 6:1-29:';
     } else {
       if (cardWrap) cardWrap.style.display = '';
       if (coachingScene) {
@@ -2097,7 +2104,7 @@ function renderBeat(i){
         coachingScene.style.justifyContent = '';
       }
       const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-      document.getElementById('charRef').textContent = 'Mark 6:1-29:' + activeVerse;
+      document.getElementById('charRef').textContent = 'Mark 6:' + activeVerse;
       document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
       if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
       requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
@@ -2543,8 +2550,8 @@ if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPas
 let devMode = false;
 let devTapCount = 0;
 let devLastTapTime = 0;
-const DEV_NOTES_KEY = 'msHangDevNotes_6_1_00';
-const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_6_1_00';
+const DEV_NOTES_KEY = 'msHangDevNotes_6_1_29_00';
+const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_6_1_29_00';
 
 function loadHiddenSlides(){
   try { return new Set(JSON.parse(localStorage.getItem(DEV_HIDDEN_SLIDES_KEY) || '[]')); }
@@ -2678,7 +2685,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 
   ctx.fillStyle = 'rgba(13,13,13,0.65)';
   ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
-  ctx.fillText(`Mark 6:1-29:${verseNum}`, cx, cy - circleR * 0.42);
+  ctx.fillText(`MARK 6:${verseNum}`, cx, cy - circleR * 0.42);
 
   ctx.fillStyle = '#0D0D0D';
   ctx.font = `800 ${Math.round(size * 0.05)}px 'Space Grotesk', sans-serif`;
@@ -2736,7 +2743,7 @@ function selectShareColor(key){
 
 function openShareOverlay(){
   const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-  document.getElementById('shareArcStem').textContent = `Mark 6:1-29:${activeVerse}`;
+  document.getElementById('shareArcStem').textContent = `MARK 6:${activeVerse}`;
   document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
   initShareSwatches();
   selectShareColor(state.shareColor || 'discover');
