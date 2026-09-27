@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Raleway:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -180,6 +181,16 @@ html, body {
 .dm-center { grid-column: 2; grid-row: 2; background: var(--d-learn); }
 .dm-right  { grid-column: 3; grid-row: 2; background: var(--d-expand); }
 .dm-bottom { grid-column: 2; grid-row: 3; background: var(--d-live); }
+
+/* Category Icon */
+.col-icon {
+  display: inline-block;
+  font-size: 0.72em;
+  margin-right: 0.32em;
+  opacity: 0.9;
+  color: inherit;
+  vertical-align: middle;
+}
 
 /* Rotated Vertical Title */
 .col-vertical-title {
@@ -533,7 +544,7 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <h2 class="col-headline">Get <span class="accent">the lay of the land</span>.</h2>
+        <h2 class="col-headline"><i class="fa-solid fa-magnifying-glass col-icon"></i>Get <span class="accent">the lay of the land</span>.</h2>
         <ul class="col-prompt-list">
           <li>
             Use a study Bible or trusted resource to set the scene:
@@ -559,11 +570,10 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <h2 class="col-headline">Inspect the text <span class="accent">up close</span>.</h2>
+        <h2 class="col-headline"><i class="fa-solid fa-highlighter col-icon"></i>Inspect the text <span class="accent">up close</span>.</h2>
         <ul class="col-prompt-list">
-          <li>Highlight repeated words and anything confusing.</li>
-          <li>Look up definitions or compare translations for those words.</li>
-          <li>Sum up the passage in one sentence.</li>
+          <li>Highlight words that repeat, feel unfamiliar, or leave you confused.</li>
+          <li>Look up definitions or compare translations to gain clarity around them.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-expand')">
           <span class="cue-label">Advance to Expand</span>
@@ -583,10 +593,10 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <h2 class="col-headline">Step back for <span class="accent">the bigger picture</span>.</h2>
+        <h2 class="col-headline"><i class="fa-solid fa-image col-icon"></i>Step back for <span class="accent">the bigger picture</span>.</h2>
         <ul class="col-prompt-list">
           <li>Read the surrounding chapters to see how this fits the whole book.</li>
-          <li>Follow cross-references to see where else this idea appears.</li>
+          <li>Follow cross-references to see where similar themes appear elsewhere in Scripture.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-learn')">
           <span class="cue-label">Advance to Learn</span>
@@ -606,11 +616,10 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <h2 class="col-headline">Uncover the <span class="accent">timeless truth</span>.</h2>
+        <h2 class="col-headline"><i class="fa-solid fa-lightbulb col-icon"></i>Uncover the <span class="accent">timeless truth</span>.</h2>
         <ul class="col-prompt-list">
           <li>What was the takeaway for the first people who read this?</li>
-          <li>What does this teach us about who God is and how He works?</li>
-          <li>Check your findings in community, notes, or commentaries.</li>
+          <li>What does this teach us about who God is and how He works? Check your findings in community, notes, or commentaries.</li>
         </ul>
         <div class="col-nav-cue" onclick="goToNextStep(event, '.col-live')">
           <span class="cue-label">Advance to Live</span>
@@ -630,7 +639,7 @@ html, body {
         </div>
       </div>
       <div class="col-expanded-body">
-        <h2 class="col-headline">Put the truth <span class="accent">into practice</span>.</h2>
+        <h2 class="col-headline"><i class="fa-solid fa-heart col-icon"></i>Put the truth <span class="accent">into practice</span>.</h2>
         <ul class="col-prompt-list">
           <li>What cultural or personal lies does this truth expose?</li>
           <li>How will this shape your prayers, thoughts, words, or actions today?</li>
