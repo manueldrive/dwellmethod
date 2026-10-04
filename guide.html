@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dwell Guide — Mark 6:30-56</title>
+<title>Dwell Guide — Mark 7</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -418,7 +418,13 @@
     overflow-y: auto;
   }
   @media (min-width: 1024px) {
-    .recap-context-grid { max-width: 860px; }
+    .recap-context-grid { max-width: 1100px; }
+  }
+  @media (min-width: 1400px) {
+    .recap-context-grid { max-width: 1400px; }
+  }
+  @media (min-width: 1800px) {
+    .recap-context-grid { max-width: 1680px; }
   }
 
   .recap-free-flow {
@@ -452,9 +458,14 @@
     margin-bottom: 2px;
   }
   @media (min-width: 1024px) {
-    .recap-free-flow { gap: 26px; }
-    .recap-item-block { font-size: 25px; line-height: 1.5; }
-    .recap-tag { font-size: 16px; padding: 6px 14px; }
+    .recap-free-flow { gap: 30px; }
+    .recap-item-block { font-size: 32px; line-height: 1.5; }
+    .recap-tag { font-size: 19px; padding: 7px 16px; }
+  }
+  @media (min-width: 1400px) {
+    .recap-free-flow { gap: 34px; }
+    .recap-item-block { font-size: 38px; }
+    .recap-tag { font-size: 21px; padding: 8px 18px; }
   }
 
   .recap-bullet-list {
@@ -519,8 +530,12 @@
   }
   @media (min-width: 1024px) {
     .book-meta-row { gap: 24px; }
-    .book-meta-item .bm-label { font-size: 14px; }
-    .book-meta-item .bm-value { font-size: 24px; }
+    .book-meta-item .bm-label { font-size: 16px; }
+    .book-meta-item .bm-value { font-size: 30px; }
+  }
+  @media (min-width: 1400px) {
+    .book-meta-item .bm-label { font-size: 18px; }
+    .book-meta-item .bm-value { font-size: 36px; }
   }
   @media (max-height: 500px){
     .recap-context-grid{ gap: clamp(12px, 2.5vw, 28px); }
@@ -1429,7 +1444,7 @@
     <div class="dev-bubbles-bar" id="devBubblesBar" style="display:none;"></div>
     <div class="story-meta" id="storyMetaRow" style="justify-content: space-between;">
       <span id="sectionLabel">Dwell</span>
-      <span id="scriptureMeta">Mark 6:30-56</span>
+      <span id="scriptureMeta">Mark 7</span>
     </div>
   </div>
 
@@ -1493,9 +1508,9 @@
       <h3>Share Your Central Truth</h3>
       <div class="share-card-stage" id="shareCardStage">
         <div class="circle-hero" id="shareCircleHero">
-          <div class="arc-stem-text" id="shareArcStem">MARK 6:30-56</div>
+          <div class="arc-stem-text" id="shareArcStem">MARK 7:1-37</div>
           <div class="label-god-is">GOD IS...</div>
-          <div class="static-trait" id="shareTraitText">Healer</div>
+          <div class="static-trait" id="shareTraitText">Compassionate</div>
         </div>
       </div>
       <div class="share-swatch-row" id="shareSwatchRow"></div>
@@ -1534,23 +1549,21 @@
 <div id="exportTarget" style="position:fixed; left:-9999px; top:0; width:420px;"></div>
 
 <script>
-// ==================== IN CONTEXT (MARK 6 SYNTHESIS MAP) ====================
+// ==================== IN CONTEXT (MARK 7 SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
-  apostles: { title: "In Context", insight: "The Twelve, just returned from being sent out two by two (Mark 6:7-13), now reporting back to Jesus." },
-  compassion: { title: "In Context", insight: "A deep, visceral pity that moves to action — the same word Mark uses elsewhere of Jesus' healings." },
-  shepherd: { title: "In Context", insight: "The Old Testament image for a king who guides and protects God's people (Ezekiel 34, Psalm 23); its absence is the crowd's core problem." },
-  loaves: { title: "In Context", insight: "Flat barley or wheat bread, the basic staple food of a first-century Galilean meal." },
-  green_grass: { title: "In Context", insight: "An echo of Psalm 23:2 — 'he makes me lie down in green pastures' — cast as the Shepherd feeding his flock." },
-  bethsaida: { title: "In Context", insight: "A fishing village on the north shore of the Sea of Galilee, home to several of the disciples." },
-  gennesaret: { title: "In Context", insight: "A fertile plain on the northwest shore of the Sea of Galilee — another name for the lake region." },
-  hardened: { title: "In Context", insight: "A state of spiritual dullness that resists understanding — the same language used elsewhere of Pharaoh's heart." }
+  pharisees: { title: "In Context", insight: "A strict Jewish sect devoted to rigorous observance of the Law and the oral traditions built up around it — frequent sparring partners with Jesus in Mark." },
+  tradition: { title: "In Context", insight: "The 'tradition of the elders' — centuries of oral interpretation added to the Law of Moses, which some treated as equal in authority to Scripture itself." },
+  corban: { title: "In Context", insight: "A vow declaring money or property 'devoted to God' — a loophole some used to withhold support from aging parents while still keeping the letter of the Law." },
+  defiled: { title: "In Context", insight: "Ceremonial or moral uncleanness. Jesus relocates its source — not from unwashed hands, but from what comes out of the heart." },
+  isaiah: { title: "In Context", insight: "The prophet Isaiah, quoted here from Isaiah 29:13 — written centuries earlier, already describing worship that is all lips and no heart." },
+  phoenicia: { title: "In Context", insight: "A Gentile coastal region northwest of Galilee; the woman's background places her entirely outside Israel's covenant people." },
+  decapolis: { title: "In Context", insight: "A league of ten Gentile cities east of the Sea of Galilee — the same region where, in Mark 5, a healed man began telling everyone what Jesus had done for him." },
+  ephphatha: { title: "In Context", insight: "An Aramaic word meaning 'Be opened!' — Mark preserves Jesus' actual spoken word before translating it for his Greek readers." }
 };
 
-NOTEBOOK_SYNTHESIS['green grass'] = NOTEBOOK_SYNTHESIS['green_grass'];
+NOTEBOOK_SYNTHESIS['traditions'] = NOTEBOOK_SYNTHESIS['tradition'];
 
-const PHRASE_TERMS = [
-  { norm: ['green', 'grass'], key: 'green_grass' }
-].sort((a,b) => b.norm.length - a.norm.length);
+const PHRASE_TERMS = [];
 
 const PHRASE_KEYS = new Set(PHRASE_TERMS.map(p => p.key));
 
@@ -1567,37 +1580,48 @@ function matchPhraseAt(normedWords, wi){
   return null;
 }
 
-const PASSAGE_START_VERSE = 30;
-const paragraphEnds = [44, 52, 56];
+const verseNumbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37];
+const verseIndexByNum = {};
+verseNumbers.forEach((vn, idx) => { verseIndexByNum[vn] = idx; });
+const paragraphEnds = [4, 8, 13, 15, 19, 23, 26, 30, 32];
 
 const passage = [
-  "The apostles gathered around Jesus and reported to him all they had done and taught.",
-  "Then, because so many people were coming and going that they did not even have a chance to eat, he said to them, \"Come with me by yourselves to a quiet place and get some rest.\"",
-  "So they went away by themselves in a boat to a solitary place.",
-  "But many who saw them leaving recognized them and ran on foot from all the towns and got there ahead of them.",
-  "When Jesus landed and saw a large crowd, he had compassion on them, because they were like sheep without a shepherd. So he began teaching them many things.",
-  "By this time it was late in the day, so his disciples came to him. \"This is a remote place,\" they said, \"and it's already very late.",
-  "Send the people away so that they can go to the surrounding countryside and villages and buy themselves something to eat.\"",
-  "But he answered, \"You give them something to eat.\" They said to him, \"That would take more than half a year's wages! Are we to go and spend that much on bread and give it to them to eat?\"",
-  "\"How many loaves do you have?\" he asked. \"Go and see.\" When they found out, they said, \"Five—and two fish.\"",
-  "Then Jesus directed them to have all the people sit down in groups on the green grass.",
-  "So they sat down in groups of hundreds and fifties.",
-  "Taking the five loaves and the two fish and looking up to heaven, he gave thanks and broke the loaves. Then he gave them to his disciples to distribute to the people. He also divided the two fish among them all.",
-  "They all ate and were satisfied,",
-  "and the disciples picked up twelve basketfuls of broken pieces of bread and fish.",
-  "The number of the men who had eaten was five thousand.",
-  "Immediately Jesus made his disciples get into the boat and go on ahead of him to Bethsaida, while he dismissed the crowd.",
-  "After leaving them, he went up on a mountainside to pray.",
-  "Later that night, the boat was in the middle of the lake, and he was alone on land.",
-  "He saw the disciples straining at the oars, because the wind was against them. Shortly before dawn he went out to them, walking on the lake. He was about to pass by them,",
-  "but when they saw him walking on the lake, they thought he was a ghost. They cried out,",
-  "because they all saw him and were terrified. Immediately he spoke to them and said, \"Take courage! It is I. Don't be afraid.\"",
-  "Then he climbed into the boat with them, and the wind died down. They were completely amazed,",
-  "for they had not understood about the loaves; their hearts were hardened.",
-  "When they had crossed over, they landed at Gennesaret and anchored there.",
-  "As soon as they got out of the boat, people recognized Jesus.",
-  "They ran throughout that whole region and carried the sick on mats to wherever they heard he was.",
-  "And wherever he went—into villages, towns or countryside—they placed the sick in the marketplaces. They begged him to let them touch even the edge of his cloak, and all who touched it were healed."
+  "The Pharisees and some of the teachers of the law who had come from Jerusalem gathered around Jesus",
+  "and saw some of his disciples eating food with hands that were defiled, that is, unwashed.",
+  "(The Pharisees and all the Jews do not eat unless they give their hands a ceremonial washing, holding to the tradition of the elders.",
+  "When they come from the marketplace they do not eat unless they wash. And they observe many other traditions, such as the washing of cups, pitchers and kettles.)",
+  "So the Pharisees and teachers of the law asked Jesus, \"Why don't your disciples live according to the tradition of the elders instead of eating their food with defiled hands?\"",
+  "He replied, \"Isaiah was right when he prophesied about you hypocrites; as it is written: \"'These people honor me with their lips, but their hearts are far from me.",
+  "They worship me in vain; their teachings are merely human rules.'",
+  "You have let go of the commands of God and are holding on to human traditions.\"",
+  "And he continued, \"You have a fine way of setting aside the commands of God in order to observe your own traditions!",
+  "For Moses said, 'Honor your father and mother,' and, 'Anyone who curses their father or mother is to be put to death.'",
+  "But you say that if anyone declares that what might have been used to help their father or mother is Corban (that is, devoted to God)—",
+  "then you no longer let them do anything for their father or mother.",
+  "Thus you nullify the word of God by your tradition that you have handed down. And you do many things like that.\"",
+  "Again Jesus called the crowd to him and said, \"Listen to me, everyone, and understand this.",
+  "Nothing outside a person can defile them by going into them. Rather, it is what comes out of a person that defiles them.\"",
+  "After he had left the crowd and entered the house, his disciples asked him about this parable.",
+  "\"Are you so dull?\" he asked. \"Don't you see that nothing that enters a person from the outside can defile them?",
+  "For it doesn't go into their heart but into their stomach, and then out of the body.\" (In saying this, Jesus declared all foods clean.)",
+  "He went on: \"What comes out of a person is what defiles them.",
+  "For it is from within, out of a person's heart, that evil thoughts come—sexual immorality, theft, murder,",
+  "adultery, greed, malice, deceit, lewdness, envy, slander, arrogance and folly.",
+  "All these evils come from inside and defile a person.\"",
+  "Jesus left that place and went to the vicinity of Tyre. He entered a house and did not want anyone to know it; yet he could not keep his presence secret.",
+  "In fact, as soon as she heard about him, a woman whose little daughter was possessed by an impure spirit came and fell at his feet.",
+  "The woman was a Greek, born in Syrian Phoenicia. She begged Jesus to drive the demon out of her daughter.",
+  "\"First let the children eat all they want,\" he told her, \"for it is not right to take the children's bread and toss it to the dogs.\"",
+  "\"Lord,\" she replied, \"even the dogs under the table eat the children's crumbs.\"",
+  "Then he told her, \"For such a reply, you may go; the demon has left your daughter.\"",
+  "She went home and found her child lying on the bed, and the demon gone.",
+  "Then Jesus left the vicinity of Tyre and went through Sidon, down to the Sea of Galilee and into the region of the Decapolis.",
+  "There some people brought to him a man who was deaf and could hardly talk, and they begged Jesus to place his hand on him.",
+  "After he took him aside, away from the crowd, Jesus put his fingers into the man's ears. Then he spit and touched the man's tongue.",
+  "He looked up to heaven and with a deep sigh said to him, \"Ephphatha!\" (which means \"Be opened!\").",
+  "At this, the man's ears were opened, his tongue was loosened and he began to speak plainly.",
+  "Jesus commanded them not to tell anyone. But the more he did so, the more they kept talking about it.",
+  "People were overwhelmed with amazement. \"He has done everything well,\" they said. \"He even makes the deaf hear and the mute speak.\""
 ];
 
 const state = { index:0, wordTaps:[], charVerse:null, trait:'', scrolledToEnd:false, activeTool:{ vocab:null, char:null }, passageFontLevel:2, charFontLevel:2 };
@@ -1626,12 +1650,12 @@ function kw(lines, extraClass){
   return `<div class="hero-title${extraClass ? ' '+extraClass : ''}">${body}</div>`;
 }
 
-const PASSAGE_LAST_VERSE = PASSAGE_START_VERSE + passage.length - 1;
+const PASSAGE_LAST_VERSE = verseNumbers[verseNumbers.length - 1];
 
 function passageWordsHTML(){
   let out = '<p class="flow-para">';
   passage.forEach((v,i)=>{
-    const verseNum = i + PASSAGE_START_VERSE;
+    const verseNum = verseNumbers[i];
     const words = v.replace(/—(?=\S)/g, '— ').split(/\s+/);
     const normed = words.map(normWord);
     const pieces = [];
@@ -1658,8 +1682,8 @@ function passageWordsHTML(){
 
 function versePickHTML(){
   return passage.map((v,i)=>`
-    <div class="verse-tile" data-v="${i+PASSAGE_START_VERSE}" onclick="tapVerseTile(event, ${i+PASSAGE_START_VERSE})">
-      <div class="vnum">${i+PASSAGE_START_VERSE}</div><div class="vtext">${v}</div>
+    <div class="verse-tile" data-v="${verseNumbers[i]}" onclick="tapVerseTile(event, ${verseNumbers[i]})">
+      <div class="vnum">${verseNumbers[i]}</div><div class="vtext">${v}</div>
     </div>`).join('');
 }
 
@@ -1669,7 +1693,7 @@ const beats = [
     html:`<div class="emoji" onclick="event.stopPropagation(); handleEmojiTap();">👋</div>
           <div class="hero-wrap">
             <div class="intro-top-title">MS HANG GUIDE</div>
-            ${kw([["MARK", "&nbsp;6:30-56"]],'xl')}
+            ${kw([["MARK", "&nbsp;7"]],'xl')}
             <div class="intro-duration"><i class="fa-regular fa-clock"></i> Prep Duration: 5 min</div>
           ` },
 
@@ -1687,9 +1711,9 @@ const beats = [
               <div class="recap-item-block">
                 <span class="recap-tag">Context</span>
                 <ul class="recap-bullet-list">
-                  <li>Mark 6:1&ndash;6 — Jesus is rejected in his hometown of Nazareth, amazed at their lack of faith.</li>
-                  <li>Mark 6:7&ndash;13 — Jesus sends out the Twelve two by two with authority over impure spirits.</li>
-                  <li>Mark 6:14&ndash;29 — Herod beheads John the Baptist at his daughter's request, haunted by guilt over Jesus.</li>
+                  <li>Mark 6:30&ndash;44 — Jesus feeds the five thousand with five loaves and two fish, the shepherd who provides.</li>
+                  <li>Mark 6:45&ndash;52 — Jesus walks on the water to his disciples; their hearts remain hardened even after the miracle.</li>
+                  <li>Mark 6:53&ndash;56 — Crowds at Gennesaret rush to touch Jesus, and all who do are healed.</li>
                 </ul>
               </div>
             </div>
@@ -1894,7 +1918,7 @@ function updateHeaderMeta(){
     scriptureEl.innerHTML = `<button class="meta-link-btn" onclick="event.stopPropagation(); exitDevMode();">Close</button>`;
   } else {
     labelEl.textContent = sectionLabels[state.index] || '';
-    scriptureEl.textContent = 'Mark 6:30-56';
+    scriptureEl.textContent = 'Mark 7';
   }
 }
 
@@ -1994,7 +2018,7 @@ function renderSynthesisPanel(){
   if (cloud) {
     let uniqueWords = Array.from(new Set(state.wordTaps.map(w => w.word.charAt(0).toUpperCase() + w.word.slice(1))));
     if (uniqueWords.length === 0) {
-      uniqueWords = ['Hometown', 'Carpenter', 'Prophet', 'Twelve', 'John the Baptist', 'Herod', 'Impure Spirits', 'Righteous and Holy'];
+      uniqueWords = ['Pharisees', 'Tradition', 'Corban', 'Defiled', 'Isaiah', 'Phoenicia', 'Decapolis', 'Ephphatha'];
     }
     cloud.innerHTML = uniqueWords.map(w => `<span class="research-pill">${w}</span>`).join('');
   }
@@ -2078,7 +2102,7 @@ function renderBeat(i){
         coachingScene.style.alignItems = 'center';
         coachingScene.style.justifyContent = 'center';
       }
-      if (arcStem) arcStem.textContent = 'MARK 6:30-56:';
+      if (arcStem) arcStem.textContent = 'MARK 7:1-37:';
     } else {
       if (cardWrap) cardWrap.style.display = '';
       if (coachingScene) {
@@ -2087,9 +2111,9 @@ function renderBeat(i){
         coachingScene.style.alignItems = '';
         coachingScene.style.justifyContent = '';
       }
-      const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-      document.getElementById('charRef').textContent = 'Mark 6:' + activeVerse;
-      document.getElementById('charText').textContent = quoteVerse(passage[activeVerse - PASSAGE_START_VERSE]);
+      const activeVerse = state.charVerse || verseNumbers[0];
+      document.getElementById('charRef').textContent = 'Mark 7:' + activeVerse;
+      document.getElementById('charText').textContent = quoteVerse(passage[verseIndexByNum[activeVerse]]);
       if (arcStem) arcStem.textContent = `BASED ON VERSE ${activeVerse}:`;
       requestAnimationFrame(() => requestAnimationFrame(() => fitCharVerseText('charText')));
     }
@@ -2103,7 +2127,7 @@ function renderBeat(i){
   } else if (b.id === 'final') {
     const dynamicSpan = document.getElementById('finalTraitDynamic');
     if (dynamicSpan) {
-      const traitWord = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
+      const traitWord = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Compassionate';
       dynamicSpan.textContent = traitWord;
     }
   } else if (b.id === 'char-verse-pick') {
@@ -2534,8 +2558,8 @@ if (passageScrollElInit) passageScrollElInit.addEventListener('scroll', checkPas
 let devMode = false;
 let devTapCount = 0;
 let devLastTapTime = 0;
-const DEV_NOTES_KEY = 'msHangDevNotes_6_30_56_00';
-const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_6_30_56_00';
+const DEV_NOTES_KEY = 'msHangDevNotes_7_1_37_00';
+const DEV_HIDDEN_SLIDES_KEY = 'msHangDevHiddenSlides_7_1_37_00';
 
 function loadHiddenSlides(){
   try { return new Set(JSON.parse(localStorage.getItem(DEV_HIDDEN_SLIDES_KEY) || '[]')); }
@@ -2669,7 +2693,7 @@ function drawCentralTruthCanvas(colorKey, verseNum, traitText){
 
   ctx.fillStyle = 'rgba(13,13,13,0.65)';
   ctx.font = `800 ${Math.round(size * 0.024)}px 'Space Grotesk', sans-serif`;
-  ctx.fillText(`MARK 6:${verseNum}`, cx, cy - circleR * 0.42);
+  ctx.fillText(`MARK 7:${verseNum}`, cx, cy - circleR * 0.42);
 
   ctx.fillStyle = '#0D0D0D';
   ctx.font = `800 ${Math.round(size * 0.05)}px 'Space Grotesk', sans-serif`;
@@ -2726,9 +2750,9 @@ function selectShareColor(key){
 }
 
 function openShareOverlay(){
-  const activeVerse = state.charVerse || PASSAGE_START_VERSE;
-  document.getElementById('shareArcStem').textContent = `MARK 6:${activeVerse}`;
-  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Healer';
+  const activeVerse = state.charVerse || verseNumbers[0];
+  document.getElementById('shareArcStem').textContent = `MARK 7:${activeVerse}`;
+  document.getElementById('shareTraitText').textContent = (state.trait && state.trait.trim()) ? state.trait.trim() : 'Compassionate';
   initShareSwatches();
   selectShareColor(state.shareColor || 'discover');
   document.getElementById('shareOverlay').style.display = 'flex';
