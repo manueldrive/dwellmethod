@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dwell Guide — Mark 7</title>
+<title>Dwell Guide — Mark 7:1-37</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1552,18 +1552,25 @@
 // ==================== IN CONTEXT (MARK 7 SYNTHESIS MAP) ====================
 const NOTEBOOK_SYNTHESIS = {
   pharisees: { title: "In Context", insight: "A strict Jewish sect devoted to rigorous observance of the Law and the oral traditions built up around it — frequent sparring partners with Jesus in Mark." },
-  tradition: { title: "In Context", insight: "The 'tradition of the elders' — centuries of oral interpretation added to the Law of Moses, which some treated as equal in authority to Scripture itself." },
+  tradition: { title: "In Context", insight: "Merely human rules, passed down and — in Jesus' critique — elevated above the actual command of God (v13)." },
   corban: { title: "In Context", insight: "A vow declaring money or property 'devoted to God' — a loophole some used to withhold support from aging parents while still keeping the letter of the Law." },
   defiled: { title: "In Context", insight: "Ceremonial or moral uncleanness. Jesus relocates its source — not from unwashed hands, but from what comes out of the heart." },
   isaiah: { title: "In Context", insight: "The prophet Isaiah, quoted here from Isaiah 29:13 — written centuries earlier, already describing worship that is all lips and no heart." },
   phoenicia: { title: "In Context", insight: "A Gentile coastal region northwest of Galilee; the woman's background places her entirely outside Israel's covenant people." },
   decapolis: { title: "In Context", insight: "A league of ten Gentile cities east of the Sea of Galilee — the same region where, in Mark 5, a healed man began telling everyone what Jesus had done for him." },
-  ephphatha: { title: "In Context", insight: "An Aramaic word meaning 'Be opened!' — Mark preserves Jesus' actual spoken word before translating it for his Greek readers." }
+  ephphatha: { title: "In Context", insight: "An Aramaic word meaning 'Be opened!' — Mark preserves Jesus' actual spoken word before translating it for his Greek readers." },
+  ceremonial_washing: { title: "In Context", insight: "A ritual hand-washing rooted in priestly purity laws, extended by the Pharisees to everyday meals — not about hygiene, but about guarding ritual purity." },
+  tradition_of_the_elders: { title: "In Context", insight: "The specific body of oral law handed down by generations of rabbis, built up around the Law of Moses — what the Pharisees treated as carrying its own binding authority, equal to Scripture." }
 };
 
 NOTEBOOK_SYNTHESIS['traditions'] = NOTEBOOK_SYNTHESIS['tradition'];
+NOTEBOOK_SYNTHESIS['ceremonial washing'] = NOTEBOOK_SYNTHESIS['ceremonial_washing'];
+NOTEBOOK_SYNTHESIS['tradition of the elders'] = NOTEBOOK_SYNTHESIS['tradition_of_the_elders'];
 
-const PHRASE_TERMS = [];
+const PHRASE_TERMS = [
+  { norm: ['ceremonial', 'washing'], key: 'ceremonial_washing' },
+  { norm: ['tradition', 'of', 'the', 'elders'], key: 'tradition_of_the_elders' }
+].sort((a,b) => b.norm.length - a.norm.length);
 
 const PHRASE_KEYS = new Set(PHRASE_TERMS.map(p => p.key));
 
