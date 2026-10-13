@@ -44,6 +44,24 @@
          display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; }
   footer { text-align: center; font-size: 13px; color: var(--dim); }
   footer a { color: var(--text); }
+  button.card { width: 100%; font: inherit; text-align: left; cursor: pointer; }
+
+  /* one-sheet preview */
+  dialog.sheet { border: 0; padding: 0; background: transparent; color: var(--text); max-width: min(440px, calc(100vw - 32px)); width: 100%; max-height: calc(100dvh - 32px); overflow: visible; }
+  dialog.sheet::backdrop { background: rgba(10, 10, 12, .78); backdrop-filter: blur(3px); }
+  dialog.sheet[open] { animation: rise .22s ease-out; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+  .sheet-in { display: flex; flex-direction: column; gap: 14px; max-height: calc(100dvh - 32px); }
+  .sheet-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .sheet-t { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 22px; }
+  .x { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--text); font-size: 22px; line-height: 1; cursor: pointer; }
+  .x:hover { background: var(--card-hover); }
+  .paper { flex: 1 1 auto; min-height: 0; display: flex; justify-content: center; }
+  .paper img { display: block; max-width: 100%; max-height: 100%; height: auto; object-fit: contain; background: #fff; border-radius: 6px; box-shadow: 0 18px 50px rgba(0,0,0,.5); }
+  .dl { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 18px; border-radius: 14px; background: var(--text); color: var(--ground);
+        font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 18px; text-decoration: none; }
+  .dl:hover { background: #fff; }
+  .dl-note { text-align: center; font-size: 13px; color: var(--dim); margin-top: -6px; }
 </style>
 </head>
 <body>
@@ -55,12 +73,46 @@
     <p class="lede">A simple way to read Scripture with <b>God&rsquo;s character at the center</b>. Read it, look closer, see who He is, and live it out.</p>
 
     <h2>Templates</h2>
-    <div class="list"><a class="card" href="https://manueldrive.github.io/soar/#blank"><div><div class="ct">Blank Template</div><p>Two printable half-sheet cards for your own study.</p></div><span class="go" aria-hidden="true">&rarr;</span></a><a class="card" href="https://manueldrive.github.io/soar/#leader"><div><div class="ct">Leader Guide</div><p>The same card with prompts for every section, to help you prep.</p></div><span class="go" aria-hidden="true">&rarr;</span></a><a class="card" href="https://manueldrive.github.io/soar/#digital"><div><div class="ct">Digital Template</div><p>Type right into the card on your phone or laptop, then download it.</p></div><span class="go" aria-hidden="true">&rarr;</span></a></div>
+    <div class="list"><button class="card" type="button" data-sheet="blank"><div><div class="ct">Blank Template</div><p>Two printable half-sheet cards for your own study.</p></div><span class="go" aria-hidden="true">&rarr;</span></button><button class="card" type="button" data-sheet="leader"><div><div class="ct">Leader Guide</div><p>The same card with prompts for every section, to help you prep.</p></div><span class="go" aria-hidden="true">&rarr;</span></button><a class="card" href="https://manueldrive.github.io/soar/#digital"><div><div class="ct">Digital Template</div><p>Type right into the card on your phone or laptop, then download it.</p></div><span class="go" aria-hidden="true">&rarr;</span></a></div>
 
     <h2>Resources</h2>
     <div class="list"><a class="card" href="https://www.youtube.com/playlist?list=PLH0Szn1yYNedn4FbBMMtOlGN-BPLQ54IH" target="_blank" rel="noopener"><div><div class="ct">How to Read the Bible</div><p>BibleProject video series on reading the Bible well: genre, story, poetry, and more.</p><span class="tag">YouTube &middot; BibleProject</span></div><span class="go" aria-hidden="true">&rarr;</span></a><a class="card" href="https://www.youtube.com/playlist?list=PLH0Szn1yYNeeVFodkI9J_WEATHQCwRZ0u" target="_blank" rel="noopener"><div><div class="ct">Old Testament Overviews</div><p>A short video for every Old Testament book: its big ideas, structure, and flow.</p><span class="tag">YouTube &middot; BibleProject</span></div><span class="go" aria-hidden="true">&rarr;</span></a><a class="card" href="https://www.youtube.com/playlist?list=PLH0Szn1yYNecanpQqdixWAm3zHdhY2kPR" target="_blank" rel="noopener"><div><div class="ct">New Testament Overviews</div><p>A short video for every New Testament book: who wrote it, why, and how it fits.</p><span class="tag">YouTube &middot; BibleProject</span></div><span class="go" aria-hidden="true">&rarr;</span></a><a class="card" href="https://biblehub.com" target="_blank" rel="noopener"><div><div class="ct">Bible Hub</div><p>Free commentaries, cross-references, and original-language word studies for any verse.</p><span class="tag">biblehub.com</span></div><span class="go" aria-hidden="true">&rarr;</span></a></div>
 
     <footer>Part of <a href="/">Dwell</a></footer>
   </main>
+
+  <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+    <div class="sheet-in">
+      <div class="sheet-top"><div class="sheet-t" id="sheetTitle"></div><button class="x" type="button" id="sheetClose" aria-label="Close">&times;</button></div>
+      <div class="paper"><img id="sheetImg" alt=""></div>
+      <a class="dl" id="sheetDl" download>Download PDF <span aria-hidden="true">&darr;</span></a>
+      <div class="dl-note">Prints two to a page. Cut down the middle.</div>
+    </div>
+  </dialog>
+  <script>
+    (function () {
+      var sheets = {
+        blank:  { title: 'Blank Template', img: 'guidedsoar/blank-card.png',  pdf: 'guidedsoar/SOAR%20Blank%20Template.pdf', file: 'SOAR Blank Template.pdf' },
+        leader: { title: 'Leader Guide',   img: 'guidedsoar/leader-card.png', pdf: 'guidedsoar/SOAR%20Leader%20Guide.pdf',   file: 'SOAR Leader Guide.pdf' }
+      };
+      var dlg = document.getElementById('sheet'), img = document.getElementById('sheetImg'),
+          title = document.getElementById('sheetTitle'), dl = document.getElementById('sheetDl');
+      function open(key) {
+        var s = sheets[key]; if (!s) return;
+        title.textContent = s.title; img.src = s.img; img.alt = s.title + ' card';
+        dl.href = s.pdf; dl.setAttribute('download', s.file);
+        if (dlg.showModal) dlg.showModal(); else window.location.href = s.pdf;
+        if (location.hash !== '#' + key) history.replaceState(null, '', '#' + key);
+      }
+      function close() { dlg.close(); }
+      dlg.addEventListener('close', function () { history.replaceState(null, '', location.pathname); });
+      document.querySelectorAll('[data-sheet]').forEach(function (b) {
+        b.addEventListener('click', function () { open(b.getAttribute('data-sheet')); });
+      });
+      document.getElementById('sheetClose').addEventListener('click', close);
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });   // tap outside the sheet
+      if (sheets[location.hash.slice(1)]) open(location.hash.slice(1));                    // shareable #blank / #leader
+    })();
+  </script>
 </body>
 </html>
