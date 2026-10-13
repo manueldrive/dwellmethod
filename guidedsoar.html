@@ -171,11 +171,13 @@
       function size() { H = hero.offsetHeight; RUN = Math.round(H * 0.7); scene.style.height = (H + RUN) + 'px'; main.style.marginTop = (-RUN) + 'px'; }
       function frame() {
         ticking = false;
-        var p = Math.min(1, Math.max(0, window.scrollY / RUN));
-        var e = p * p * (3 - 2 * p);                                     // ease in and out
-        far.style.transform  = 'translateY(' + (-e * H * 0.56) + 'px)';
-        near.style.transform = 'translateY(' + (-e * H * 0.86) + 'px)';   // front ridge ends up filling the hero
-        sun.style.transform  = 'translateY(' + (e * H * 0.10) + 'px)';    // the sun sinks a little as the hills rise
+        var y = Math.max(0, window.scrollY), p = Math.min(1, y / RUN);
+        function ease(t) { t = Math.min(1, Math.max(0, t)); return t * t * (3 - 2 * t); }
+        var e1 = ease(p / 0.55), e2 = ease((p - 0.35) / 0.65);           // back ridge first, then the front ridge
+        far.style.transform  = 'translateY(' + (-e1 * H * 0.56) + 'px)';
+        near.style.transform = 'translateY(' + (-e2 * H * 0.86) + 'px)';
+        sun.style.transform  = 'translateY(' + (e1 * H * 0.10) + 'px)';  // the sun sinks as the first ridge rises
+        main.style.transform = 'translateY(' + Math.min(y, RUN) + 'px)';  // text waits under the cover until the hills are up
       }
       function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
       size();
