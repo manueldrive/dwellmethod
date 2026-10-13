@@ -21,14 +21,12 @@
 
   /* hero: the journal cover. As you scroll, the ridges rise over the sun and fill the screen,
      then the page continues on the same ground color. */
-  .scene { position: relative; }   /* height set in JS: hero height + scroll run */
-  .hero { position: sticky; top: 0; height: min(76svh, 620px); min-height: 460px; overflow: hidden;
+  .hero { position: relative; height: min(76svh, 620px); min-height: 460px; overflow: hidden;
           background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-low) 72%); }
   .sun { position: absolute; left: 50%; top: 50%; width: min(66vw, 300px); aspect-ratio: 1; margin: calc(min(66vw, 300px) / -2) 0 0 calc(min(66vw, 300px) / -2);
          border-radius: 50%; background: var(--sun); display: flex; align-items: center; justify-content: center; will-change: transform; }
   .sun img { width: 58%; height: auto; display: block; margin-top: -4%; }
   /* both ridges share one coordinate space (same top, same scale) so the resting view matches the cover */
-  main { position: relative; z-index: 2; }
   .layer { position: absolute; left: 0; right: 0; top: 52%; height: 200%; will-change: transform; }
   .layer svg { display: block; width: 100%; height: 31.8%; }    /* 48% of the hero per 205 units, 272 units tall */
   .layer .fill { height: 100%; margin-top: -1px; }
@@ -167,17 +165,15 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       var scene = document.getElementById('scene'), hero = scene.querySelector('.hero'), sun = document.getElementById('sun'),
           far = document.querySelector('.layer.far'), near = document.querySelector('.layer.near'),
-          ticking = false, H = 0, RUN = 0, main = document.querySelector('main');
-      function size() { H = hero.offsetHeight; RUN = Math.round(H * 0.7); scene.style.height = (H + RUN) + 'px'; main.style.marginTop = (-RUN) + 'px'; }
+          ticking = false, H = 0;
+      function size() { H = hero.offsetHeight; }
+      // Classic parallax: everything scrolls together, but the sun lags most and the back ridge lags a little,
+      // so the hills rise over the sun in order (back ridge, front ridge, then the text that sits on the ground).
       function frame() {
         ticking = false;
-        var y = Math.max(0, window.scrollY), p = Math.min(1, y / RUN);
-        function ease(t) { t = Math.min(1, Math.max(0, t)); return t * t * (3 - 2 * t); }
-        var e1 = ease(p / 0.55), e2 = ease((p - 0.35) / 0.65);           // back ridge first, then the front ridge
-        far.style.transform  = 'translateY(' + (-e1 * H * 0.56) + 'px)';
-        near.style.transform = 'translateY(' + (-e2 * H * 0.86) + 'px)';
-        sun.style.transform  = 'translateY(' + (e1 * H * 0.10) + 'px)';  // the sun sinks as the first ridge rises
-        main.style.transform = 'translateY(' + Math.min(y, RUN) + 'px)';  // text waits under the cover until the hills are up
+        var y = Math.min(Math.max(0, window.scrollY), H);
+        sun.style.transform = 'translateY(' + (y * 0.6) + 'px)';
+        far.style.transform = 'translateY(' + (y * 0.25) + 'px)';
       }
       function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
       size();
