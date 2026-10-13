@@ -21,21 +21,18 @@
 
   /* hero: the journal cover. As you scroll, the ridges rise over the sun and fill the screen,
      then the page continues on the same ground color. */
-  .scene { position: relative; height: 175svh; }
-  .hero { position: sticky; top: 0; height: 100svh; overflow: hidden;
+  .scene { position: relative; }   /* height set in JS: hero height + scroll run */
+  .hero { position: sticky; top: 0; height: min(76svh, 620px); min-height: 460px; overflow: hidden;
           background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-low) 72%); }
-  .sun { position: absolute; left: 50%; top: 44%; width: min(66vw, 300px); aspect-ratio: 1; margin: calc(min(66vw, 300px) / -2) 0 0 calc(min(66vw, 300px) / -2);
+  .sun { position: absolute; left: 50%; top: 50%; width: min(66vw, 300px); aspect-ratio: 1; margin: calc(min(66vw, 300px) / -2) 0 0 calc(min(66vw, 300px) / -2);
          border-radius: 50%; background: var(--sun); display: flex; align-items: center; justify-content: center; will-change: transform; }
   .sun img { width: 58%; height: auto; display: block; margin-top: -4%; }
-  .layer { position: absolute; left: 0; right: 0; will-change: transform; }
-  .layer svg { display: block; width: 100%; height: 34svh; }
-  .layer .fill { height: 130svh; margin-top: -1px; }
-  .layer.far { top: 50svh; }
-  .layer.near { top: 70svh; }
-  .cue { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); color: var(--dim); font-size: 28px; line-height: 1; animation: bob 2s ease-in-out infinite; }
-  @keyframes bob { 50% { transform: translate(-50%, 6px); } }
-  main { position: relative; z-index: 2; margin-top: -42svh; }
-  @media (prefers-reduced-motion: reduce) { main { margin-top: 0; } .scene { height: auto; } .hero { position: relative; height: min(80svh, 640px); } .cue { display: none; } }
+  /* both ridges share one coordinate space (same top, same scale) so the resting view matches the cover */
+  main { position: relative; z-index: 2; }
+  .layer { position: absolute; left: 0; right: 0; top: 52%; height: 200%; will-change: transform; }
+  .layer svg { display: block; width: 100%; height: 31.8%; }    /* 48% of the hero per 205 units, 272 units tall */
+  .layer .fill { height: 100%; margin-top: -1px; }
+  @media (prefers-reduced-motion: reduce) { .hero { position: relative; } }
 
   main { max-width: 640px; margin-left: auto; margin-right: auto; padding: 0 16px 56px; }
   .lede { font-size: 17px; line-height: 1.55; color: var(--text); text-align: center; margin: 0 auto 36px; max-width: 30em; }
@@ -107,7 +104,6 @@
       <div class="sun" id="sun"><img src="guided-soar-logo-white.png" alt="Guided SOAR"></div>
       <div class="layer far"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10.0 430.4 L-2.3 430.9 L6.4 430.8 L15.0 428.5 L21.4 431.4 L28.6 431.3 L33.2 429.7 L38.4 429.6 L45.3 427.2 L50.4 427.5 L58.9 428.0 L63.7 427.5 L68.4 426.3 L73.1 423.7 L81.4 423.1 L86.5 424.8 L94.9 421.2 L103.7 420.2 L111.1 416.5 L119.8 414.5 L128.6 411.3 L134.1 407.0 L138.9 404.0 L143.2 402.3 L150.3 397.9 L157.7 398.0 L163.2 398.6 L169.6 396.0 L176.0 396.1 L180.3 396.1 L184.4 394.6 L192.6 390.5 L200.6 389.8 L207.5 387.0 L211.7 386.2 L220.5 381.6 L228.3 379.0 L237.0 371.0 L242.7 367.3 L250.6 360.2 L258.4 362.8 L266.7 360.4 L275.4 359.7 L281.1 360.5 L289.7 358.2 L298.3 357.2 L303.9 355.2 L308.7 353.3 L313.5 354.0 L322.5 349.9 L326.7 351.3 L333.4 351.9 L338.6 357.7 L346.7 365.3 L352.8 369.9 L361.4 377.8 L367.9 386.2 L372.5 389.9 L381.3 396.9 L389.2 401.4 L395.4 406.0 L403.6 411.3 L406 612 Z" fill="#28292d"/></svg><div class="fill" style="background:#28292d"></div></div>
       <div class="layer near"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10.0 499.0 L-4.1 497.1 L4.2 495.0 L10.7 495.8 L15.1 494.0 L22.2 491.2 L28.1 491.4 L34.4 490.0 L39.1 487.6 L43.7 487.2 L52.3 485.2 L60.2 482.8 L67.9 484.1 L73.4 486.8 L81.0 488.1 L85.4 488.6 L90.5 489.5 L98.5 490.5 L107.0 493.2 L111.2 492.5 L117.7 492.4 L123.8 495.1 L128.4 494.7 L133.0 495.0 L141.5 494.6 L145.5 494.5 L152.2 494.5 L156.6 495.8 L165.2 495.5 L171.2 495.5 L175.7 494.8 L180.6 494.1 L189.3 491.5 L196.1 491.8 L200.9 490.6 L209.8 493.7 L214.5 493.6 L223.2 492.7 L230.3 492.0 L236.1 493.1 L243.0 492.6 L247.5 491.1 L255.8 490.6 L262.1 489.2 L271.0 488.1 L275.1 487.9 L280.7 485.9 L285.8 484.9 L291.4 482.8 L298.6 481.2 L306.5 479.0 L314.4 478.7 L320.9 476.4 L326.1 474.6 L332.2 471.1 L341.1 468.3 L346.9 468.6 L352.8 470.3 L357.6 472.5 L362.9 472.6 L371.8 476.1 L380.5 481.1 L387.6 481.1 L391.9 483.0 L397.8 486.0 L406 612 Z" fill="#1f2023"/></svg><div class="fill" style="background:#1f2023"></div></div>
-      <div class="cue" id="cue" aria-hidden="true">&#8964;</div>
     </header>
   </div>
   <main>
@@ -169,21 +165,22 @@
   <script>
     (function () {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var scene = document.getElementById('scene'), sun = document.getElementById('sun'), cue = document.getElementById('cue'),
-          far = document.querySelector('.layer.far'), near = document.querySelector('.layer.near'), ticking = false;
+      var scene = document.getElementById('scene'), hero = scene.querySelector('.hero'), sun = document.getElementById('sun'),
+          far = document.querySelector('.layer.far'), near = document.querySelector('.layer.near'),
+          ticking = false, H = 0, RUN = 0, main = document.querySelector('main');
+      function size() { H = hero.offsetHeight; RUN = Math.round(H * 0.7); scene.style.height = (H + RUN) + 'px'; main.style.marginTop = (-RUN) + 'px'; }
       function frame() {
         ticking = false;
-        var vh = window.innerHeight, run = Math.max(1, scene.offsetHeight - vh);
-        var p = Math.min(1, Math.max(0, window.scrollY / run));
-        var e = p * p * (3 - 2 * p);                                   // ease in and out
-        far.style.transform  = 'translateY(' + (-e * vh * 0.62) + 'px)';
-        near.style.transform = 'translateY(' + (-e * vh * 0.98) + 'px)';  // near ridge ends up covering the whole screen
-        sun.style.transform  = 'translateY(' + (e * vh * 0.12) + 'px)';   // the sun sinks a little as the hills rise
-        cue.style.opacity = String(1 - Math.min(1, p * 4));
+        var p = Math.min(1, Math.max(0, window.scrollY / RUN));
+        var e = p * p * (3 - 2 * p);                                     // ease in and out
+        far.style.transform  = 'translateY(' + (-e * H * 0.56) + 'px)';
+        near.style.transform = 'translateY(' + (-e * H * 0.86) + 'px)';   // front ridge ends up filling the hero
+        sun.style.transform  = 'translateY(' + (e * H * 0.10) + 'px)';    // the sun sinks a little as the hills rise
       }
       function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+      size();
       window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll);
+      window.addEventListener('resize', function () { size(); onScroll(); });
       frame();
     })();
   </script>
