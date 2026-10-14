@@ -27,8 +27,8 @@
   /* props sit on the front hill; their bottoms are pinned to the ground line */
   .prop { position: absolute; transform: translate(-50%, -100%); }
   .prop svg { display: block; width: 100%; height: auto; }
-  .tent { left: 66%; top: calc(31.8% * (522 - 340) / 272 + 4px); width: min(36vw, 170px); }
-  .fire { left: 44%; top: calc(31.8% * (522 - 340) / 272 + 6px); width: min(13vw, 58px); }
+  .tent { left: 60%; top: calc(31.8% * (522 - 340) / 272 + 3px); width: min(40vw, 190px); }
+  .fire { left: 34%; top: calc(31.8% * (522 - 340) / 272 + 6px); width: min(13vw, 58px); }
   .p1 { left: 88%; top: calc(31.8% * (521 - 340) / 272 + 6px); width: min(15vw, 70px); }
   .p2 { left: 97%; top: calc(31.8% * (516 - 340) / 272 + 6px); width: min(18vw, 84px); }
   .p3 { left: 80%; top: calc(31.8% * (522 - 340) / 272 + 6px); width: min(11vw, 52px); }
@@ -73,15 +73,16 @@
     <div class="layer" data-speed="0.16"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10 462.0 Q20.0 434.0 90.0 459.8 Q140.0 422.0 220.0 464.1 Q250.0 438.0 310.0 463.6 Q340.0 418.0 406.0 460.5 L406 612 Z" fill="url(#gMid1)"/></svg><div class="fill" style="background:#46606f"></div></div>
     <div class="layer" data-speed="0.08"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10 488.0 Q-5.0 444.0 85.0 490.7 Q150.0 472.0 250.0 490.7 Q290.0 452.0 406.0 485.3 L406 612 Z" fill="url(#gMid2)"/></svg><div class="fill" style="background:#2f4956"></div></div>
     <div class="layer" data-speed="0"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10 527 Q40 520 110 522 L330 522 Q372 520 406 513 L406 612 Z" fill="url(#gFront)"/></svg><div class="fill" style="background:#223942"></div>
-      <div class="prop tent"><svg viewBox="0 0 140 84" aria-hidden="true">
-  <defs><linearGradient id="tentBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb767"/><stop offset=".55" stop-color="#f08a45"/><stop offset="1" stop-color="#d9653a"/></linearGradient></defs>
-  <path d="M8 78 L32 70 M132 78 L110 70" stroke="#e7c9a2" stroke-width=".9" opacity=".7"/>
-  <path d="M12 78 Q16 26 70 12 Q124 26 128 78 Z" fill="url(#tentBody)"/>
-  <path d="M70 12 Q124 26 128 78 L88 78 Q90 42 70 12 Z" fill="#c95a32" opacity=".55"/>
-  <path d="M70 12 Q52 36 46 78 M70 12 Q90 40 92 78" stroke="#ffd29a" stroke-width="1.4" fill="none" opacity=".75"/>
-  <path d="M50 78 Q52 50 66 44 Q80 50 84 78 Z" fill="#4a2318"/>
-  <path d="M66 44 L66 78" stroke="#7a3a24" stroke-width="1"/>
-  <path d="M60 8 Q70 4 80 8 L78 13 Q70 10 62 13 Z" fill="#a8482a"/>
+      <div class="prop tent"><svg viewBox="0 0 160 84" aria-hidden="true">
+  <path d="M52 7 L2 79 M128 13 L158 75" stroke="#f5dcc0" stroke-width=".8" opacity=".75"/>
+  <path d="M52 7 L128 13 L152 79 L90 79 Z" fill="#d95f3f"/>
+  <path d="M52 7 L128 13 L131 21 L57 15 Z" fill="#c24f34" opacity=".6"/>
+  <path d="M52 7 L14 79 L90 79 Z" fill="#f07d4c"/>
+  <path d="M52 13 L37 79 L67 79 Z" fill="#3d1d16"/>
+  <path d="M52 13 L28 79 L39 79 Z" fill="#ffb27a"/>
+  <path d="M52 13 L66 79 L78 79 Z" fill="#f59a62"/>
+  <path d="M52 7 L52 3 M128 13 L128 9" stroke="#5a3424" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M10 79 L156 79" stroke="#5a3424" stroke-width="1.4" stroke-linecap="round" opacity=".55"/>
 </svg></div>
       <div class="prop fire"><svg viewBox="0 0 60 60" aria-hidden="true">
   <defs><radialGradient id="glow"><stop offset="0" stop-color="#ffd27a" stop-opacity=".55"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient></defs>
