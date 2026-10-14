@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dwell | Building blocks for Biblical literacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --sky1: #c27471; --sky2: #e08d53; --sky3: #f3c27c; --sun: #fbe6bd; --ink: #182326;
+           --ground: #223942; --card: #2a4550; --line: #36525e; --text: #f6f1e9; --dim: #b4c3c8; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--ground); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .hero { position: relative; height: min(80svh, 660px); min-height: 480px; overflow: hidden;
+           background: linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 42%, var(--sky3) 70%); }
+  .sun { position: absolute; left: 50%; top: 50%; width: min(66vw, 300px); aspect-ratio: 1; margin: calc(min(66vw, 300px) / -2) 0 0 calc(min(66vw, 300px) / -2);
+          border-radius: 50%; background: var(--sun); display: flex; align-items: center; justify-content: center; will-change: transform; }
+  .lockup { display: inline-flex; align-items: center; gap: 10px; margin-top: -6%; }
+  .lockup b { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(44px, 13vw, 64px); letter-spacing: -0.04em; line-height: 1; color: var(--ink); }
+  .mark { display: inline-grid; grid-template-columns: repeat(3, 7px); grid-template-rows: repeat(3, 7px); gap: 3px; transform: translateY(-4px); }
+  .mark i { width: 7px; height: 7px; border-radius: 2px; }
+  .m1 { grid-area: 1/2; background: #e08d53; } .m2 { grid-area: 2/1; background: #c27471; } .m3 { grid-area: 2/2; background: #4c6674; }
+  .m4 { grid-area: 2/3; background: #7d6e87; } .m5 { grid-area: 3/2; background: #223942; }
+  .layer { position: absolute; left: 0; right: 0; top: 52%; height: 200%; will-change: transform; }
+  .layer > svg { display: block; width: 100%; height: 31.8%; overflow: visible; }
+  .layer .fill { height: 100%; margin-top: -1px; }
+  /* props sit on the front hill; their bottoms are pinned to the ground line */
+  .prop { position: absolute; transform: translate(-50%, -100%); }
+  .prop svg { display: block; width: 100%; height: auto; }
+  .tent { left: 66%; top: calc(31.8% * (517 - 340) / 272); width: min(36vw, 170px); }
+  .fire { left: 44%; top: calc(31.8% * (524 - 340) / 272 + 4px); width: min(13vw, 58px); }
+  .p1 { left: 88%; top: calc(31.8% * (503 - 340) / 272); width: min(15vw, 70px); }
+  .p2 { left: 97%; top: calc(31.8% * (500 - 340) / 272); width: min(18vw, 84px); }
+  .p3 { left: 80%; top: calc(31.8% * (507 - 340) / 272); width: min(11vw, 52px); }
+  .p4 { left: 5%;  top: calc(31.8% * (528 - 340) / 272); width: min(12vw, 56px); }
+  main { max-width: 640px; margin: 0 auto; padding: 4px 16px 56px; }
+  h1 { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(30px, 8vw, 44px); letter-spacing: -0.03em; line-height: 1.05; margin: 0 0 14px; text-align: center; }
+  h1 span { color: #f3c27c; }
+  .lede { font-size: 16.5px; line-height: 1.6; color: var(--dim); text-align: center; margin: 0 auto 34px; max-width: 32em; }
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .acc { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .acc-h { width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+  .tile { flex: none; width: 34px; height: 34px; border-radius: 9px; background: var(--c); color: #fff; display: flex; align-items: center; justify-content: center;
+           font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 17px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+  .acc-t { flex: 1; font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 19px; }
+  .chev { width: 10px; height: 10px; border-right: 2px solid var(--dim); border-bottom: 2px solid var(--dim); transform: rotate(45deg) translateY(-3px); transition: transform .25s; }
+  .acc.open .chev { transform: rotate(225deg) translateY(-2px); }
+  .acc-b { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+  .acc.open .acc-b { grid-template-rows: 1fr; }
+  .acc-in { overflow: hidden; padding: 0 18px; }
+  .acc.open .acc-in { padding-bottom: 18px; }
+  .acc h3 { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 21px; line-height: 1.2; margin: 2px 0 12px; }
+  .acc h3 i { color: var(--c); margin-right: 10px; font-size: .85em; filter: brightness(1.35); }
+  .acc h3 em { font-style: normal; color: #f3c27c; }
+  .acc ul { margin: 0 0 4px; padding-left: 20px; line-height: 1.55; font-size: 15.5px; }
+  .acc li { margin-bottom: 8px; }
+  .meta { margin-top: 8px; display: inline-block; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--line); border-radius: 99px; padding: 5px 12px; }
+  .next { margin-top: 8px; display: inline-flex; gap: 8px; align-items: center; background: var(--text); color: var(--ground); border: 0; border-radius: 99px; padding: 10px 16px; font: 700 14.5px 'DM Sans', sans-serif; cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { .layer, .sun { transform: none !important; } }
+</style></head>
+<body>
+  <header class="hero">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+      <linearGradient id="gFar" gradientUnits="userSpaceOnUse" x1="0" y1="385" x2="0" y2="470"><stop offset="0" stop-color="#8f7d97"/><stop offset="1" stop-color="#6d6280"/></linearGradient>
+      <linearGradient id="gMid1" gradientUnits="userSpaceOnUse" x1="0" y1="420" x2="0" y2="500"><stop offset="0" stop-color="#5b7584"/><stop offset="1" stop-color="#46606f"/></linearGradient>
+      <linearGradient id="gMid2" gradientUnits="userSpaceOnUse" x1="0" y1="455" x2="0" y2="530"><stop offset="0" stop-color="#3b5664"/><stop offset="1" stop-color="#2f4956"/></linearGradient>
+      <linearGradient id="gFront" gradientUnits="userSpaceOnUse" x1="0" y1="495" x2="0" y2="560"><stop offset="0" stop-color="#284450"/><stop offset="1" stop-color="#223942"/></linearGradient>
+    </defs></svg>
+    <div class="sun" id="sun"><span class="lockup"><b>Dwell</b><span class="mark"><i class="m1"></i><i class="m2"></i><i class="m3"></i><i class="m4"></i><i class="m5"></i></span></span></div>
+    <div class="layer" data-speed="0.45"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10.0 452.0 L8.0 440.0 L24.0 430.0 L36.0 419.0 L46.0 425.0 L58.0 411.0 L70.0 398.0 L78.0 405.0 L87.0 391.0 L97.0 399.0 L110.0 413.0 L124.0 421.0 L140.0 414.0 L156.0 401.0 L167.0 406.0 L179.0 395.0 L193.0 407.0 L210.0 419.0 L228.0 412.0 L245.0 399.0 L258.0 389.0 L268.0 394.0 L276.0 385.0 L289.0 399.0 L304.0 410.0 L320.0 403.0 L336.0 393.0 L350.0 401.0 L366.0 412.0 L384.0 405.0 L406.0 416.0 L406 612 Z" fill="url(#gFar)"/><path d="M36.0 419.0 L46.0 425.0 L43.0 451.0 L39.0 449.0 Z" fill="#3e3550" opacity=".22"/><path d="M70.0 398.0 L78.0 405.0 L76.0 431.0 L73.0 428.0 Z" fill="#3e3550" opacity=".22"/><path d="M87.0 391.0 L124.0 421.0 L107.5 447.0 L90.0 421.0 Z" fill="#3e3550" opacity=".22"/><path d="M156.0 401.0 L167.0 406.0 L163.5 432.0 L159.0 431.0 Z" fill="#3e3550" opacity=".22"/><path d="M179.0 395.0 L210.0 419.0 L196.5 445.0 L182.0 425.0 Z" fill="#3e3550" opacity=".22"/><path d="M258.0 389.0 L268.0 394.0 L265.0 420.0 L261.0 419.0 Z" fill="#3e3550" opacity=".22"/><path d="M276.0 385.0 L304.0 410.0 L292.0 436.0 L279.0 415.0 Z" fill="#3e3550" opacity=".22"/><path d="M336.0 393.0 L366.0 412.0 L353.0 438.0 L339.0 423.0 Z" fill="#3e3550" opacity=".22"/><path d="M384.0 405.0 L406.0 416.0 L397.0 442.0 L387.0 435.0 Z" fill="#3e3550" opacity=".22"/></svg><div class="fill" style="background:#6d6280"></div></div>
+    <div class="layer" data-speed="0.32"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10 462.0 Q20.0 434.0 90.0 459.8 Q140.0 422.0 220.0 464.1 Q250.0 438.0 310.0 463.6 Q340.0 418.0 406.0 460.5 L406 612 Z" fill="url(#gMid1)"/></svg><div class="fill" style="background:#46606f"></div></div>
+    <div class="layer" data-speed="0.18"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10 488.0 Q-5.0 444.0 85.0 490.7 Q150.0 472.0 250.0 490.7 Q290.0 452.0 406.0 485.3 L406 612 Z" fill="url(#gMid2)"/></svg><div class="fill" style="background:#2f4956"></div></div>
+    <div class="layer" data-speed="0"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10 528 Q60 514 140 522 Q220 530 280 516 Q340 504 406 498 L406 612 Z" fill="url(#gFront)"/></svg><div class="fill" style="background:#223942"></div>
+      <div class="prop tent"><svg viewBox="0 0 140 84" aria-hidden="true">
+  <defs><linearGradient id="tentBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb767"/><stop offset=".55" stop-color="#f08a45"/><stop offset="1" stop-color="#d9653a"/></linearGradient></defs>
+  <ellipse cx="72" cy="79" rx="66" ry="5" fill="#12232a" opacity=".55"/>
+  <path d="M8 78 L32 70 M132 78 L110 70" stroke="#e7c9a2" stroke-width=".9" opacity=".7"/>
+  <path d="M12 78 Q16 26 70 12 Q124 26 128 78 Z" fill="url(#tentBody)"/>
+  <path d="M70 12 Q124 26 128 78 L88 78 Q90 42 70 12 Z" fill="#c95a32" opacity=".55"/>
+  <path d="M70 12 Q52 36 46 78 M70 12 Q90 40 92 78" stroke="#ffd29a" stroke-width="1.4" fill="none" opacity=".75"/>
+  <path d="M50 78 Q52 50 66 44 Q80 50 84 78 Z" fill="#4a2318"/>
+  <path d="M66 44 L66 78" stroke="#7a3a24" stroke-width="1"/>
+  <path d="M60 8 Q70 4 80 8 L78 13 Q70 10 62 13 Z" fill="#a8482a"/>
+</svg></div>
+      <div class="prop fire"><svg viewBox="0 0 60 60" aria-hidden="true">
+  <defs><radialGradient id="glow"><stop offset="0" stop-color="#ffd27a" stop-opacity=".55"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="30" cy="40" r="28" fill="url(#glow)"/>
+  <path d="M14 54 L46 46 M14 46 L46 54" stroke="#6b4a33" stroke-width="4" stroke-linecap="round"/>
+  <path d="M30 50 C19 44 22 32 30 20 C31 28 37 30 37 38 C39 34 40 32 41 29 C45 39 40 49 30 50 Z" fill="#f39a35"/>
+  <path d="M30 50 C24 46 26 39 30 33 C31 38 34 40 34 44 C34 48 32 50 30 50 Z" fill="#ffdf7e"/>
+</svg></div>
+      <div class="prop pine p1"><svg viewBox="0 0 60 220" aria-hidden="true"><path d="M30.0 0.0 L42.5 28.4 L35.2 20.9 L45.6 47.9 L36.5 40.5 L48.7 67.5 L37.9 60.0 L51.8 87.0 L39.2 79.6 L54.9 106.6 L40.5 99.1 L58.1 126.1 L41.8 118.7 L61.2 145.7 L43.1 138.3 L64.3 165.2 L44.4 157.8 L67.4 184.8 L45.7 177.4 L31.5 189.2 L31.5 220.0 L28.5 220.0 L28.5 189.2 L14.3 177.4 L-7.4 184.8 L15.6 157.8 L-4.3 165.2 L16.9 138.3 L-1.2 145.7 L18.2 118.7 L1.9 126.1 L19.5 99.1 L5.1 106.6 L20.8 79.6 L8.2 87.0 L22.1 60.0 L11.3 67.5 L23.5 40.5 L14.4 47.9 L24.8 20.9 L17.5 28.4Z" fill="#1a2d35"/></svg></div>
+      <div class="prop pine p2"><svg viewBox="0 0 60 300" aria-hidden="true"><path d="M30.0 0.0 L47.0 38.7 L37.1 28.5 L51.2 65.3 L38.9 55.2 L55.5 92.0 L40.7 81.9 L59.8 118.7 L42.5 108.5 L64.0 145.3 L44.3 135.2 L68.2 172.0 L46.1 161.9 L72.5 198.7 L47.9 188.5 L76.8 225.3 L49.6 215.2 L81.0 252.0 L51.4 241.9 L31.5 258.0 L31.5 300.0 L28.5 300.0 L28.5 258.0 L8.6 241.9 L-21.0 252.0 L10.4 215.2 L-16.8 225.3 L12.1 188.5 L-12.5 198.7 L13.9 161.9 L-8.3 172.0 L15.7 135.2 L-4.0 145.3 L17.5 108.5 L0.2 118.7 L19.3 81.9 L4.5 92.0 L21.1 55.2 L8.8 65.3 L22.9 28.5 L13.0 38.7Z" fill="#1a2d35"/></svg></div>
+      <div class="prop pine p3"><svg viewBox="0 0 60 170" aria-hidden="true"><path d="M30.0 0.0 L39.6 21.9 L34.0 16.2 L42.0 37.0 L35.1 31.3 L44.5 52.1 L36.1 46.4 L46.9 67.2 L37.1 61.5 L49.3 82.4 L38.1 76.6 L51.7 97.5 L39.1 91.7 L54.1 112.6 L40.1 106.8 L56.5 127.7 L41.1 121.9 L58.9 142.8 L42.1 137.1 L31.5 146.2 L31.5 170.0 L28.5 170.0 L28.5 146.2 L17.9 137.1 L1.1 142.8 L18.9 121.9 L3.5 127.7 L19.9 106.8 L5.9 112.6 L20.9 91.7 L8.3 97.5 L21.9 76.6 L10.7 82.4 L22.9 61.5 L13.1 67.2 L23.9 46.4 L15.5 52.1 L24.9 31.3 L18.0 37.0 L26.0 16.2 L20.4 21.9Z" fill="#1a2d35"/></svg></div>
+      <div class="prop pine p4"><svg viewBox="0 0 60 190" aria-hidden="true"><path d="M30.0 0.0 L40.8 24.5 L34.5 18.1 L43.5 41.4 L35.7 35.0 L46.2 58.3 L36.8 51.8 L48.8 75.2 L37.9 68.7 L51.5 92.0 L39.0 85.6 L54.2 108.9 L40.2 102.5 L56.9 125.8 L41.3 119.4 L59.6 142.7 L42.4 136.3 L62.3 159.6 L43.6 153.2 L31.5 163.4 L31.5 190.0 L28.5 190.0 L28.5 163.4 L16.4 153.2 L-2.3 159.6 L17.6 136.3 L0.4 142.7 L18.7 119.4 L3.1 125.8 L19.8 102.5 L5.8 108.9 L21.0 85.6 L8.5 92.0 L22.1 68.7 L11.2 75.2 L23.2 51.8 L13.8 58.3 L24.3 35.0 L16.5 41.4 L25.5 18.1 L19.2 24.5Z" fill="#1a2d35"/></svg></div></div>
+  </header>
+  <main>
+    <h1>Building blocks for <span>Biblical literacy</span>.</h1>
+    <p class="lede">Dwell is a Bible study rhythm to help you slow down across five readings. True transformation comes from the Holy Spirit; this guide&rsquo;s only goal is to help you stay focused by giving fresh intention each time you read. Practice one step individually or stack all five.</p>
+    <div class="steps"><section class="acc" id="discover" style="--c:#e08d53"><button class="acc-h" type="button" aria-expanded="false" aria-controls="discover-b"><span class="tile">D</span><span class="acc-t">Discover</span><span class="chev" aria-hidden="true"></span></button><div class="acc-b" id="discover-b" role="region"><div class="acc-in"><h3><i class="fa-solid fa-magnifying-glass"></i>Get <em>the lay of the land</em>.</h3><ul><li>Use a study Bible or trusted resource to set the scene:<div class="meta">Author &bull; Audience &bull; Time &bull; Purpose</div></li><li>Now put the resource away. Read slowly and note anything that stands out or raises a question for you.</li></ul><button class="next" type="button" data-next="wordwork">Advance to Word Work <span aria-hidden="true">&rarr;</span></button></div></div></section><section class="acc" id="wordwork" style="--c:#c27471"><button class="acc-h" type="button" aria-expanded="false" aria-controls="wordwork-b"><span class="tile">W</span><span class="acc-t">Word Work</span><span class="chev" aria-hidden="true"></span></button><div class="acc-b" id="wordwork-b" role="region"><div class="acc-in"><h3><i class="fa-solid fa-highlighter"></i>Inspect the text <em>up close</em>.</h3><ul><li>Highlight words that repeat, feel unfamiliar, or leave you confused.</li><li>Look up definitions or compare translations to gain clarity around them.</li></ul><button class="next" type="button" data-next="expand">Advance to Expand <span aria-hidden="true">&rarr;</span></button></div></div></section><section class="acc" id="expand" style="--c:#7d6e87"><button class="acc-h" type="button" aria-expanded="false" aria-controls="expand-b"><span class="tile">E</span><span class="acc-t">Expand</span><span class="chev" aria-hidden="true"></span></button><div class="acc-b" id="expand-b" role="region"><div class="acc-in"><h3><i class="fa-solid fa-image"></i>Step back for <em>the bigger picture</em>.</h3><ul><li>Read the surrounding chapters to see how this fits the whole book.</li><li>Follow cross-references to see where similar themes appear elsewhere in Scripture.</li></ul><button class="next" type="button" data-next="learn">Advance to Learn <span aria-hidden="true">&rarr;</span></button></div></div></section><section class="acc" id="learn" style="--c:#4c6674"><button class="acc-h" type="button" aria-expanded="false" aria-controls="learn-b"><span class="tile">L</span><span class="acc-t">Learn</span><span class="chev" aria-hidden="true"></span></button><div class="acc-b" id="learn-b" role="region"><div class="acc-in"><h3><i class="fa-solid fa-lightbulb"></i>Uncover the <em>timeless truth</em>.</h3><ul><li>What was the takeaway for the first people who read this?</li><li>What does this teach us about who God is and how He works? Check your findings in community, notes, or commentaries.</li></ul><button class="next" type="button" data-next="live">Advance to Live <span aria-hidden="true">&rarr;</span></button></div></div></section><section class="acc" id="live" style="--c:#223942"><button class="acc-h" type="button" aria-expanded="false" aria-controls="live-b"><span class="tile">L</span><span class="acc-t">Live</span><span class="chev" aria-hidden="true"></span></button><div class="acc-b" id="live-b" role="region"><div class="acc-in"><h3><i class="fa-solid fa-heart"></i>Put the truth <em>into practice</em>.</h3><ul><li>What cultural or personal lies does this truth expose?</li><li>How will this shape your prayers, thoughts, words, or actions today?</li></ul></div></div></section></div>
+  </main>
+  <script>
+    (function () {
+      var accs = Array.prototype.slice.call(document.querySelectorAll('.acc'));
+      function open(sec, scroll) {
+        accs.forEach(function (a) { var on = a === sec && !a.classList.contains('open'); a.classList.toggle('open', on); a.querySelector('.acc-h').setAttribute('aria-expanded', on); });
+        if (scroll && sec.classList.contains('open')) setTimeout(function () { sec.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 320);
+      }
+      accs.forEach(function (a) { a.querySelector('.acc-h').addEventListener('click', function () { open(a, false); }); });
+      document.querySelectorAll('.next').forEach(function (b) { b.addEventListener('click', function () { open(document.getElementById(b.dataset.next), true); }); });
+    })();
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var hero = document.querySelector('.hero'), sun = document.getElementById('sun'),
+          layers = Array.prototype.slice.call(document.querySelectorAll('.layer')), H = 0, ticking = false;
+      function size() { H = hero.offsetHeight; }
+      function frame() {
+        ticking = false;
+        var y = Math.min(Math.max(0, window.scrollY), H);
+        sun.style.transform = 'translateY(' + (y * 0.62) + 'px)';
+        layers.forEach(function (l) { l.style.transform = 'translateY(' + (y * parseFloat(l.dataset.speed)) + 'px)'; });
+      }
+      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+      size(); window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', function () { size(); onScroll(); }); frame();
+    })();
+  </script>
+</body></html>
