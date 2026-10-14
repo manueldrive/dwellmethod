@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sky-top: #2a2b2f; --sky-mid: #2e2f33; --sky-low: #3a3b40;
+    --sky-top: #16171a; --sky-mid: #24252a; --sky-low: #36373c;
     --sun: #47494f; --ridge-far: #28292d; --ground: #1f2023;
     --card: #2a2b30; --card-hover: #33343a; --line: #3d3f45;
     --text: #f3f4f6; --dim: #a3a7af;
@@ -94,14 +94,47 @@
   .row-t { font-size: 16px; font-weight: 700; }
   .row-d { font-size: 13.5px; line-height: 1.4; color: var(--dim); }
   .ext { flex: none; color: var(--dim); font-size: 18px; }
+
+  /* night sky: stars, a lit tent and a small fire on the front ridge */
+  .stars { position: absolute; inset: 0; will-change: transform; }
+  .stars i { position: absolute; width: var(--s); height: var(--s); border-radius: 50%; background: #fff; opacity: var(--o); animation: tw 3.6s ease-in-out infinite; }
+  @keyframes tw { 50% { opacity: .15; } }
+  .prop { position: absolute; transform: translate(-50%, -100%); }
+  .prop svg { display: block; width: 100%; height: auto; }
+  .tent { left: 60%; top: calc(31.8% * (494 - 340) / 272 + 3px); width: min(30vw, 140px); }
+  .fire { left: 45%; top: calc(31.8% * (492 - 340) / 272 + 5px); width: min(10vw, 46px); }
+  .flame { transform-box: fill-box; transform-origin: 50% 100%; }
+  .f1 { animation: flick1 1.6s ease-in-out infinite; } .f2 { animation: flick2 1.1s ease-in-out infinite; } .glow { animation: glowp 2.3s ease-in-out infinite; }
+  @keyframes flick1 { 0%,100% { transform: scale(1,1); } 25% { transform: scale(.94,1.08) skewX(-3deg); } 50% { transform: scale(1.04,.93) skewX(2deg); } 75% { transform: scale(.97,1.05); } }
+  @keyframes flick2 { 0%,100% { transform: scale(1,1); } 30% { transform: scale(1.08,.88); } 60% { transform: scale(.9,1.12) skewX(3deg); } }
+  @keyframes glowp { 0%,100% { opacity: .85; } 40% { opacity: 1; } 70% { opacity: .7; } }
+  @media (prefers-reduced-motion: reduce) { .stars i, .f1, .f2, .glow { animation: none; } }
 </style>
 </head>
 <body>
   <div class="scene" id="scene">
     <header class="hero">
+      <div class="stars" id="stars"><i style="left:24.3%;top:32.5%;--s:1.0px;--o:0.85;animation-delay:2.4s;animation-name:none"></i><i style="left:60.3%;top:52.9%;--s:1.5px;--o:0.49;animation-delay:1.2s"></i><i style="left:47.1%;top:48.8%;--s:1.5px;--o:0.57;animation-delay:4.3s;animation-name:none"></i><i style="left:15.9%;top:53.8%;--s:1.5px;--o:0.76;animation-delay:3.4s;animation-name:none"></i><i style="left:75.3%;top:35.1%;--s:1.0px;--o:0.78;animation-delay:4.1s;animation-name:none"></i><i style="left:59.3%;top:53.5%;--s:1.5px;--o:0.74;animation-delay:4.6s;animation-name:none"></i><i style="left:79.5%;top:26.9%;--s:1.0px;--o:0.83;animation-delay:0.5s;animation-name:none"></i><i style="left:22.3%;top:56.1%;--s:1.5px;--o:0.78;animation-delay:4.3s;animation-name:none"></i><i style="left:82.7%;top:34.1%;--s:1.5px;--o:0.67;animation-delay:2.9s"></i><i style="left:67.8%;top:54.0%;--s:2.5px;--o:0.50;animation-delay:3.0s"></i><i style="left:69.5%;top:20.3%;--s:1.5px;--o:0.85;animation-delay:2.8s"></i><i style="left:21.7%;top:48.6%;--s:1.5px;--o:0.50;animation-delay:0.6s;animation-name:none"></i><i style="left:63.6%;top:29.1%;--s:1.0px;--o:0.79;animation-delay:2.1s;animation-name:none"></i><i style="left:29.8%;top:45.1%;--s:2.5px;--o:0.42;animation-delay:3.0s"></i><i style="left:38.0%;top:34.8%;--s:1.5px;--o:0.83;animation-delay:4.9s;animation-name:none"></i><i style="left:98.9%;top:19.3%;--s:1.0px;--o:0.41;animation-delay:2.7s"></i><i style="left:96.2%;top:18.3%;--s:1.0px;--o:0.44;animation-delay:0.2s"></i><i style="left:31.8%;top:55.7%;--s:2.5px;--o:0.56;animation-delay:2.3s;animation-name:none"></i><i style="left:64.1%;top:35.4%;--s:1.5px;--o:0.41;animation-delay:4.9s"></i><i style="left:27.6%;top:37.5%;--s:2.0px;--o:0.48;animation-delay:1.5s"></i><i style="left:52.1%;top:32.7%;--s:1.0px;--o:0.78;animation-delay:4.9s;animation-name:none"></i><i style="left:37.9%;top:35.0%;--s:1.0px;--o:0.38;animation-delay:3.1s;animation-name:none"></i><i style="left:67.6%;top:21.7%;--s:2.0px;--o:0.50;animation-delay:2.4s;animation-name:none"></i><i style="left:94.6%;top:3.2%;--s:1.0px;--o:0.49;animation-delay:2.3s;animation-name:none"></i><i style="left:32.4%;top:22.4%;--s:1.0px;--o:0.77;animation-delay:4.2s;animation-name:none"></i><i style="left:78.2%;top:7.9%;--s:2.5px;--o:0.36;animation-delay:2.8s"></i><i style="left:31.4%;top:14.5%;--s:2.5px;--o:0.50;animation-delay:1.6s"></i><i style="left:64.7%;top:7.4%;--s:1.5px;--o:0.53;animation-delay:1.7s"></i><i style="left:44.0%;top:49.9%;--s:1.0px;--o:0.39;animation-delay:3.7s;animation-name:none"></i><i style="left:56.7%;top:17.2%;--s:2.5px;--o:0.42;animation-delay:2.6s;animation-name:none"></i><i style="left:80.1%;top:49.0%;--s:1.0px;--o:0.83;animation-delay:1.7s"></i><i style="left:9.4%;top:36.7%;--s:1.5px;--o:0.42;animation-delay:1.5s"></i><i style="left:27.6%;top:21.4%;--s:1.5px;--o:0.51;animation-delay:2.8s;animation-name:none"></i><i style="left:41.5%;top:13.2%;--s:1.5px;--o:0.87;animation-delay:4.4s"></i><i style="left:43.6%;top:55.2%;--s:2.0px;--o:0.47;animation-delay:3.7s"></i><i style="left:66.0%;top:31.1%;--s:1.0px;--o:0.65;animation-delay:4.4s"></i><i style="left:85.1%;top:56.4%;--s:1.0px;--o:0.80;animation-delay:0.2s"></i><i style="left:69.0%;top:53.7%;--s:1.5px;--o:0.67;animation-delay:0.1s"></i><i style="left:17.8%;top:18.8%;--s:2.0px;--o:0.36;animation-delay:2.7s;animation-name:none"></i><i style="left:90.5%;top:8.4%;--s:1.0px;--o:0.49;animation-delay:4.3s;animation-name:none"></i><i style="left:77.7%;top:21.7%;--s:1.0px;--o:0.42;animation-delay:4.4s;animation-name:none"></i><i style="left:24.5%;top:17.3%;--s:2.5px;--o:0.42;animation-delay:4.6s;animation-name:none"></i><i style="left:56.9%;top:24.4%;--s:2.5px;--o:0.50;animation-delay:1.3s;animation-name:none"></i><i style="left:42.5%;top:28.5%;--s:2.5px;--o:0.80;animation-delay:4.3s"></i><i style="left:5.5%;top:4.8%;--s:1.5px;--o:0.89;animation-delay:4.3s;animation-name:none"></i><i style="left:50.2%;top:19.7%;--s:1.0px;--o:0.39;animation-delay:1.9s;animation-name:none"></i><i style="left:30.8%;top:16.8%;--s:1.0px;--o:0.59;animation-delay:0.6s;animation-name:none"></i><i style="left:71.9%;top:46.5%;--s:1.5px;--o:0.45;animation-delay:1.9s"></i><i style="left:77.7%;top:23.3%;--s:2.5px;--o:0.37;animation-delay:4.4s;animation-name:none"></i><i style="left:62.5%;top:44.6%;--s:1.0px;--o:0.58;animation-delay:3.5s;animation-name:none"></i><i style="left:25.0%;top:32.0%;--s:2.0px;--o:0.67;animation-delay:4.0s;animation-name:none"></i><i style="left:13.8%;top:3.6%;--s:1.0px;--o:0.56;animation-delay:4.5s"></i><i style="left:26.7%;top:28.0%;--s:1.0px;--o:0.87;animation-delay:3.7s"></i><i style="left:53.0%;top:23.1%;--s:1.0px;--o:0.75;animation-delay:2.8s;animation-name:none"></i><i style="left:58.6%;top:2.3%;--s:1.0px;--o:0.48;animation-delay:1.9s;animation-name:none"></i><i style="left:56.3%;top:38.9%;--s:1.5px;--o:0.45;animation-delay:0.1s"></i><i style="left:12.9%;top:49.3%;--s:2.0px;--o:0.62;animation-delay:3.5s;animation-name:none"></i><i style="left:30.3%;top:7.0%;--s:2.5px;--o:0.66;animation-delay:2.6s;animation-name:none"></i><i style="left:55.3%;top:7.6%;--s:1.5px;--o:0.38;animation-delay:1.6s;animation-name:none"></i><i style="left:82.1%;top:15.6%;--s:1.0px;--o:0.71;animation-delay:2.3s"></i><i style="left:93.4%;top:16.2%;--s:1.5px;--o:0.57;animation-delay:1.8s;animation-name:none"></i><i style="left:9.2%;top:30.0%;--s:1.5px;--o:0.81;animation-delay:4.8s;animation-name:none"></i><i style="left:56.7%;top:34.5%;--s:1.5px;--o:0.73;animation-delay:0.8s;animation-name:none"></i><i style="left:88.0%;top:11.1%;--s:1.5px;--o:0.76;animation-delay:4.6s;animation-name:none"></i><i style="left:44.4%;top:42.3%;--s:1.0px;--o:0.42;animation-delay:3.8s;animation-name:none"></i><i style="left:51.5%;top:54.3%;--s:2.5px;--o:0.73;animation-delay:4.8s;animation-name:none"></i><i style="left:70.1%;top:25.1%;--s:2.5px;--o:0.67;animation-delay:4.9s"></i><i style="left:31.1%;top:17.0%;--s:2.5px;--o:0.56;animation-delay:0.9s;animation-name:none"></i><i style="left:32.6%;top:45.4%;--s:1.0px;--o:0.58;animation-delay:3.5s"></i><i style="left:21.2%;top:34.5%;--s:2.5px;--o:0.71;animation-delay:0.1s"></i></div>
       <div class="sun" id="sun"><img src="guided-soar-logo-white.png" alt="Guided SOAR"></div>
       <div class="layer far"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10.0 430.4 L-2.3 430.9 L6.4 430.8 L15.0 428.5 L21.4 431.4 L28.6 431.3 L33.2 429.7 L38.4 429.6 L45.3 427.2 L50.4 427.5 L58.9 428.0 L63.7 427.5 L68.4 426.3 L73.1 423.7 L81.4 423.1 L86.5 424.8 L94.9 421.2 L103.7 420.2 L111.1 416.5 L119.8 414.5 L128.6 411.3 L134.1 407.0 L138.9 404.0 L143.2 402.3 L150.3 397.9 L157.7 398.0 L163.2 398.6 L169.6 396.0 L176.0 396.1 L180.3 396.1 L184.4 394.6 L192.6 390.5 L200.6 389.8 L207.5 387.0 L211.7 386.2 L220.5 381.6 L228.3 379.0 L237.0 371.0 L242.7 367.3 L250.6 360.2 L258.4 362.8 L266.7 360.4 L275.4 359.7 L281.1 360.5 L289.7 358.2 L298.3 357.2 L303.9 355.2 L308.7 353.3 L313.5 354.0 L322.5 349.9 L326.7 351.3 L333.4 351.9 L338.6 357.7 L346.7 365.3 L352.8 369.9 L361.4 377.8 L367.9 386.2 L372.5 389.9 L381.3 396.9 L389.2 401.4 L395.4 406.0 L403.6 411.3 L406 612 Z" fill="#28292d"/></svg><div class="fill" style="background:#28292d"></div></div>
-      <div class="layer near"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10.0 499.0 L-4.1 497.1 L4.2 495.0 L10.7 495.8 L15.1 494.0 L22.2 491.2 L28.1 491.4 L34.4 490.0 L39.1 487.6 L43.7 487.2 L52.3 485.2 L60.2 482.8 L67.9 484.1 L73.4 486.8 L81.0 488.1 L85.4 488.6 L90.5 489.5 L98.5 490.5 L107.0 493.2 L111.2 492.5 L117.7 492.4 L123.8 495.1 L128.4 494.7 L133.0 495.0 L141.5 494.6 L145.5 494.5 L152.2 494.5 L156.6 495.8 L165.2 495.5 L171.2 495.5 L175.7 494.8 L180.6 494.1 L189.3 491.5 L196.1 491.8 L200.9 490.6 L209.8 493.7 L214.5 493.6 L223.2 492.7 L230.3 492.0 L236.1 493.1 L243.0 492.6 L247.5 491.1 L255.8 490.6 L262.1 489.2 L271.0 488.1 L275.1 487.9 L280.7 485.9 L285.8 484.9 L291.4 482.8 L298.6 481.2 L306.5 479.0 L314.4 478.7 L320.9 476.4 L326.1 474.6 L332.2 471.1 L341.1 468.3 L346.9 468.6 L352.8 470.3 L357.6 472.5 L362.9 472.6 L371.8 476.1 L380.5 481.1 L387.6 481.1 L391.9 483.0 L397.8 486.0 L406 612 Z" fill="#1f2023"/></svg><div class="fill" style="background:#1f2023"></div></div>
+      <div class="layer near"><svg viewBox="0 340 396 272" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 612 L-10.0 499.0 L-4.1 497.1 L4.2 495.0 L10.7 495.8 L15.1 494.0 L22.2 491.2 L28.1 491.4 L34.4 490.0 L39.1 487.6 L43.7 487.2 L52.3 485.2 L60.2 482.8 L67.9 484.1 L73.4 486.8 L81.0 488.1 L85.4 488.6 L90.5 489.5 L98.5 490.5 L107.0 493.2 L111.2 492.5 L117.7 492.4 L123.8 495.1 L128.4 494.7 L133.0 495.0 L141.5 494.6 L145.5 494.5 L152.2 494.0 L156.6 494.0 L165.2 494.0 L171.2 494.0 L175.7 494.0 L180.6 494.0 L189.3 494.0 L196.1 494.0 L200.9 494.0 L209.8 494.0 L214.5 494.0 L223.2 494.0 L230.3 494.0 L236.1 494.0 L243.0 494.0 L247.5 494.0 L255.8 494.0 L262.1 489.2 L271.0 488.1 L275.1 487.9 L280.7 485.9 L285.8 484.9 L291.4 482.8 L298.6 481.2 L306.5 479.0 L314.4 478.7 L320.9 476.4 L326.1 474.6 L332.2 471.1 L341.1 468.3 L346.9 468.6 L352.8 470.3 L357.6 472.5 L362.9 472.6 L371.8 476.1 L380.5 481.1 L387.6 481.1 L391.9 483.0 L397.8 486.0 L406.0 612.0 Z" fill="#1f2023"/></svg><div class="fill" style="background:#1f2023"></div><div class="prop fire"><svg viewBox="0 0 60 60" aria-hidden="true">
+  <defs><radialGradient id="glow"><stop offset="0" stop-color="#ffcf7a" stop-opacity=".6"/><stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/></radialGradient></defs>
+  <circle class="glow" cx="30" cy="40" r="28" fill="url(#glow)"/>
+  <path d="M14 54 L46 46 M14 46 L46 54" stroke="#5a4636" stroke-width="4" stroke-linecap="round"/>
+  <path class="flame f1" d="M30 50 C19 44 22 32 30 20 C31 28 37 30 37 38 C39 34 40 32 41 29 C45 39 40 49 30 50 Z" fill="#f39a35"/>
+  <path class="flame f2" d="M30 50 C24 46 26 39 30 33 C31 38 34 40 34 44 C34 48 32 50 30 50 Z" fill="#ffdf7e"/>
+</svg></div><div class="prop tent"><svg viewBox="0 0 160 84" aria-hidden="true">
+  <defs><radialGradient id="tg5d6067"><stop offset="0" stop-color="#ffcf7a" stop-opacity=".55"/><stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/></radialGradient></defs>
+  <ellipse cx="52" cy="70" rx="46" ry="22" fill="url(#tg5d6067)"/>
+  <path d="M52 7 L2 79 M128 13 L158 75" stroke="#9a9ca3" stroke-width=".8" opacity=".6"/>
+  <path d="M52 7 L128 13 L152 79 L90 79 Z" fill="#4b4e55"/>
+  <path d="M52 7 L128 13 L131 21 L57 15 Z" fill="#3d4046" opacity=".6"/>
+  <path d="M52 7 L14 79 L90 79 Z" fill="#5d6067"/>
+  <path d="M52 13 L37 79 L67 79 Z" fill="#f2b866"/>
+  <path d="M52 13 L28 79 L39 79 Z" fill="#5d6067" style="filter:brightness(1.25)"/>
+  <path d="M52 13 L66 79 L78 79 Z" fill="#5d6067" style="filter:brightness(1.12)"/>
+  <path d="M52 7 L52 3 M128 13 L128 9" stroke="#1f2023" stroke-width="1.6" stroke-linecap="round"/>
+</svg></div></div>
     </header>
   </div>
   <main>
@@ -165,14 +198,14 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       var scene = document.getElementById('scene'), hero = scene.querySelector('.hero'), sun = document.getElementById('sun'),
           far = document.querySelector('.layer.far'), near = document.querySelector('.layer.near'),
-          ticking = false, H = 0;
+          ticking = false, H = 0, stars = document.getElementById('stars');
       function size() { H = hero.offsetHeight; }
       // Classic parallax: everything scrolls together, but the sun lags most and the back ridge lags a little,
       // so the hills rise over the sun in order (back ridge, front ridge, then the text that sits on the ground).
       function frame() {
         ticking = false;
         var y = Math.min(Math.max(0, window.scrollY), H);
-        sun.style.transform = 'translateY(' + (y * 0.6) + 'px)';
+        sun.style.transform = 'translateY(' + (y * 0.6) + 'px)'; stars.style.transform = 'translateY(' + (y * 0.45) + 'px)';
         far.style.transform = 'translateY(' + (y * 0.25) + 'px)';
       }
       function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
