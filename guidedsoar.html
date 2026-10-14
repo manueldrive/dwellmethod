@@ -109,6 +109,34 @@
   @keyframes flick2 { 0%,100% { transform: scale(1,1); } 30% { transform: scale(1.08,.88); } 60% { transform: scale(.9,1.12) skewX(3deg); } }
   @keyframes glowp { 0%,100% { opacity: .85; } 40% { opacity: 1; } 70% { opacity: .7; } }
   @media (prefers-reduced-motion: reduce) { .stars i, .f1, .f2, .glow { animation: none; } }
+
+  /* leader resource guide: the card's sections, with prep vs student-led made obvious */
+  .guide { margin-bottom: 40px; }
+  .split { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-size: 14px; color: var(--dim); margin: 0 4px 14px; }
+  .split .dot { opacity: .5; }
+  .who { display: inline-block; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; border-radius: 99px; padding: 3px 9px; white-space: nowrap; }
+  .who.prep { background: var(--text); color: var(--ground); }
+  .who.stu { border: 1.5px dashed var(--dim); color: var(--text); }
+  .board { display: flex; flex-direction: column; gap: 10px; }
+  .q { border-radius: 16px; padding: 16px 16px 14px; }
+  .q.prep { background: var(--card); border: 1px solid var(--line); }
+  .q.stu { border: 1.5px dashed var(--line); }
+  .q.mid { border-radius: 26px; }
+  .q-h { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .q-l { flex: none; font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 34px; line-height: .9; width: 30px; text-align: center; }
+  .q-l.ring { font-size: 30px; }
+  .q-n { flex: 1; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 18px; line-height: 1.1; }
+  .q-n small { display: block; font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 12.5px; color: var(--dim); margin-top: 2px; }
+  .q-p { margin: 0 0 10px; font-size: 14.5px; line-height: 1.5; color: var(--text); }
+  .stu .q-p { margin-bottom: 6px; }
+  .rls { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .rl { display: flex; flex-direction: column; gap: 2px; padding: 10px 2px; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
+  .rl:last-child { border-bottom: 0; padding-bottom: 2px; }
+  .rl-t { font-weight: 700; font-size: 15px; } .rl:hover .rl-t { text-decoration: underline; text-underline-offset: 3px; }
+  .rl-d { font-size: 13px; color: var(--dim); }
+  .tips { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.5; color: var(--dim); font-style: italic; }
+  .tips li { margin-bottom: 3px; }
+  @media (min-width: 560px) { .board { display: grid; grid-template-columns: 1fr 1fr; } .q.mid { grid-column: 1 / -1; } }
 </style>
 </head>
 <body>
@@ -143,7 +171,13 @@
     <h2>Templates</h2>
     <div class="list"><button class="card" type="button" data-sheet="blank"><div><div class="ct">Blank Template</div><p>Two printable half-sheet cards for your own study.</p></div><span class="go" aria-hidden="true">&rarr;</span></button><button class="card" type="button" data-sheet="leader"><div><div class="ct">Leader Guide</div><p>The same card with prompts for every section, to help you prep.</p></div><span class="go" aria-hidden="true">&rarr;</span></button></div>
 
-    <h2>Resources</h2>
+<h2 id="guide">Leader Resource Guide</h2>
+    <section class="guide">
+      <div class="split"><span class="who prep">Leader preps</span> Scripture &amp; Observation <span class="dot">&middot;</span> <span class="who stu">Student-led</span> the rest</div>
+      <div class="board"><div class="q prep"><div class="q-h"><span class="q-l">S</span><span class="q-n">Scripture<small>author &middot; time &middot; purpose</small></span><span class="who prep">Leader preps</span></div><p class="q-p">Get the background before group so you can set the scene.</p><div class="rls"><a class="rl" href="https://www.youtube.com/playlist?list=PLH0Szn1yYNeeVFodkI9J_WEATHQCwRZ0u" target="_blank" rel="noopener"><span class="rl-t">BibleProject book overviews <span aria-hidden="true">&#8599;</span></span><span class="rl-d">Old Testament: author, purpose, and flow of every book</span></a><a class="rl" href="https://www.youtube.com/playlist?list=PLH0Szn1yYNecanpQqdixWAm3zHdhY2kPR" target="_blank" rel="noopener"><span class="rl-t">BibleProject New Testament <span aria-hidden="true">&#8599;</span></span><span class="rl-d">The same for every New Testament book</span></a><a class="rl" href="https://enduringword.com/bible-commentary/" target="_blank" rel="noopener"><span class="rl-t">Enduring Word commentary <span aria-hidden="true">&#8599;</span></span><span class="rl-d">Free, readable notes on background and context</span></a></div></div><div class="q prep"><div class="q-h"><span class="q-l">O</span><span class="q-n">Observation<small>words &middot; concepts &middot; connections</small></span><span class="who prep">Leader preps</span></div><p class="q-p">Clear up confusing words and find where else the idea shows up.</p><div class="rls"><a class="rl" href="https://www.biblegateway.com" target="_blank" rel="noopener"><span class="rl-t">Bible Gateway <span aria-hidden="true">&#8599;</span></span><span class="rl-d">Compare translations side by side</span></a><a class="rl" href="https://biblehub.com" target="_blank" rel="noopener"><span class="rl-t">Bible Hub <span aria-hidden="true">&#8599;</span></span><span class="rl-d">Word studies, cross-references, and commentaries</span></a><a class="rl" href="https://www.openbible.info/labs/cross-references/" target="_blank" rel="noopener"><span class="rl-t">OpenBible cross-references <span aria-hidden="true">&#8599;</span></span><span class="rl-d">Search any verse to see related passages</span></a></div></div><div class="q mid stu"><div class="q-h"><span class="q-l ring">&#9675;</span><span class="q-n">Central Truth<small>God is &middot; Therefore, I</small></span><span class="who stu">Student-led</span></div><p class="q-p">Let students name what the passage shows about God. Your job is to ask, wait, and point back to the text.</p><ul class="tips"><li>&ldquo;Where do you see that in the passage?&rdquo;</li><li>&ldquo;What does that tell us about who He is?&rdquo;</li></ul></div><div class="q stu"><div class="q-h"><span class="q-l">A</span><span class="q-n">Application<small>thoughts &middot; words &middot; actions</small></span><span class="who stu">Student-led</span></div><p class="q-p">Students decide what living it out looks like. Help them get specific.</p><ul class="tips"><li>&ldquo;What would that look like this week?&rdquo;</li><li>&ldquo;Who could help you with that?&rdquo;</li></ul></div><div class="q stu"><div class="q-h"><span class="q-l">R</span><span class="q-n">Reflection<small>prayers &middot; questions &middot; insights</small></span><span class="who stu">Student-led</span></div><p class="q-p">Give space to pray and ask. Unanswered questions are welcome here.</p><ul class="tips"><li>&ldquo;What do you still wonder about?&rdquo;</li><li>&ldquo;How can we pray for you?&rdquo;</li></ul></div></div>
+    </section>
+
+        <h2>Resources</h2>
     <section class="res">
       <div class="res-h">Watch &amp; listen</div>
       <div class="pods"><a class="pod" href="https://www.youtube.com/playlist?list=PLH0Szn1yYNedn4FbBMMtOlGN-BPLQ54IH" target="_blank" rel="noopener">
