@@ -57,7 +57,7 @@ window.dwellBookmark = (function () {
             '<div class="bm-face" data-face="back" hidden-mobile><small>Back</small>' + window.dwellBookmark.back + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="bm-acts"><a class="primary" href="/dwell-bookmark.pdf" download="Dwell Bookmark.pdf">Download PDF <span aria-hidden="true">&darr;</span></a><a href="/bookmark">Full page</a></div>' +
+        '<div class="bm-acts"><a class="primary" href="/dwell-bookmark.pdf" download="Dwell Bookmark.pdf">Download PDF <span aria-hidden="true">&darr;</span></a></div>' +
         '<div class="bm-note">Prints three to a page, front and back. Cut along the light lines.</div>' +
       '</div>';
     document.body.appendChild(dlg);
@@ -80,6 +80,6 @@ window.dwellBookmark = (function () {
     if (menu) { menu.classList.remove('open'); if (btn) btn.setAttribute('aria-expanded', false); }
     dlg.showModal();
   }
-  document.querySelectorAll('[data-bm-modal], .menu a[href="/bookmark"]').forEach(function (a) { a.addEventListener('click', open); });
+  document.querySelectorAll('[data-bm-modal]').forEach(function (a) { a.addEventListener('click', open); });
   window.openDwellBookmark = open;
 })();

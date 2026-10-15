@@ -17,8 +17,16 @@
   .band { height: 140px; border-radius: 6px; background: #2c3b3f url(dwell-cover.jpg) center 38% / cover no-repeat; margin-bottom: 30px; }
   .pt { font: 700 clamp(30px, 7vw, 40px)/1.05 'Fraunces', serif; margin: 0 0 8px; }
   .sub { font-size: 16px; color: #5b6878; margin: 0 0 12px; }
-  .print-link { margin: 0 0 34px; }
-  .print-link a { display: inline-block; font: 700 14px/1 'DM Sans', sans-serif; color: #111; border: 1.5px solid #111; border-radius: 99px; padding: 9px 16px; text-decoration: none; }
+  /* the printable bookmark, set right into the page */
+  .bm-card { display: flex; align-items: center; gap: 16px; margin: 6px 0 38px; padding: 14px 16px 14px 14px; border: 1.5px solid #111; border-radius: 6px; color: #111; text-decoration: none; transition: background .15s; }
+  .bm-card:hover { background: #f6f7f8; }
+  .bm-thumb { flex: none; width: 46px; height: 92px; container-type: inline-size; overflow: hidden; border-radius: 3px; box-shadow: 0 0 0 1px #d9dce1, 0 3px 10px rgba(0,0,0,.12); background: #fff; }
+  .bm-thumb .bmf { --u: calc(100cqw / 198); }
+  .bm-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .bm-txt b { font: 700 19px/1.15 'Fraunces', serif; }
+  .bm-txt small { font-size: 14px; line-height: 1.4; color: #5b6878; }
+  .bm-go { flex: none; background: #111; color: #fff; border-radius: 99px; padding: 10px 15px; font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .04em; white-space: nowrap; }
+  @media (max-width: 420px) { .bm-card { flex-wrap: wrap; } .bm-go { width: 100%; text-align: center; padding: 12px; } }
 
   /* prayers, set like the journal's pre-study prayer */
   .prayer { text-align: center; margin: 4px 8px 34px; }
@@ -53,7 +61,11 @@
     <div class="band" aria-hidden="true"></div>
     <h1 class="pt">The Bookmark</h1>
     <p class="sub">Pray, then work through each step with your passage.</p>
-    <p class="print-link"><a href="/dwell-bookmark.pdf" download="Dwell Bookmark.pdf" data-bm-modal>See the printable bookmark</a></p>
+    <a class="bm-card" href="/dwell-bookmark.pdf" download="Dwell Bookmark.pdf" data-bm-modal>
+      <span class="bm-thumb" aria-hidden="true"></span>
+      <span class="bm-txt"><b>Print your own bookmark</b><small>Two-sided, three to a page. Keep it in your Bible.</small></span>
+      <span class="bm-go">View &amp; print</span>
+    </a>
 
     <div class="prayer"><span class="k">Pray</span><p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p></div>
 
@@ -82,5 +94,6 @@
   </main>
 
   <script src="/site.js"></script>
+  <script>document.querySelectorAll('.bm-thumb').forEach(function (t) { t.innerHTML = window.dwellBookmark.front; });</script>
 </body>
 </html>
