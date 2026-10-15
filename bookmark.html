@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dwell | The Bookmark</title>
+<meta name="description" content="Dwell is a Bible study rhythm to help you slow down in an age of speeding things up.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<!-- The original dwellstudy.com content (previous homepage: /home-original), restyled to match the Dwell Study journal. -->
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: #111; }
+  body { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* ---------- header: DWELL | STUDY mark + menu (same on every page) ---------- */
+  .top { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 20px; }
+  .logo { display: flex; align-items: center; gap: 3px; height: 38px; color: #111; text-decoration: none; }
+  .logo .side { position: relative; width: 9px; height: 100%; flex: none; }
+  .logo .side span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap;
+                     font: 700 9px/1 'DM Sans', sans-serif; letter-spacing: 1.4px; padding-left: 1.4px; text-transform: uppercase; }
+  .logo .box { height: 100%; display: flex; align-items: center; background: #111; color: #fff; border-radius: 4px; padding: 2px 10px 0;
+               font: 700 25px/1 'Fraunces', serif; letter-spacing: .5px; }
+  .menu-btn { width: 44px; height: 44px; display: grid; place-content: center; gap: 5px; background: none; border: 0; cursor: pointer; padding: 0; }
+  .menu-btn i { display: block; width: 24px; height: 2px; background: #111; border-radius: 2px; transition: transform .2s, opacity .2s; }
+  .menu-btn[aria-expanded="true"] i:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] i:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded="true"] i:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .menu { position: absolute; top: 62px; right: 20px; width: 240px; background: #fff; border: 1.5px solid #111; border-radius: 6px; padding: 6px; display: none; }
+  .menu.open { display: block; }
+  .menu a { display: block; padding: 12px 14px; border-radius: 4px; color: #111; text-decoration: none; }
+  .menu a:hover, .menu a:focus-visible { background: #f1f2f4; outline: none; }
+  .menu b { display: block; font: 700 19px/1.1 'Fraunces', serif; }
+  .menu small { display: block; margin-top: 3px; font-size: 13px; color: #5b6878; }
+
+  /* ---------- page ---------- */
+  main { max-width: 600px; margin: 0 auto; padding: 8px 20px 64px; }
+  .band { height: 140px; border-radius: 6px; background: #2c3b3f url(dwell-cover.jpg) center 38% / cover no-repeat; margin-bottom: 30px; }
+  h1 { font: 700 clamp(32px, 7.5vw, 44px)/1.05 'Fraunces', serif; letter-spacing: -0.01em; margin: 0 0 14px; }
+  .lede { font-size: 17px; line-height: 1.6; color: #3d4450; margin: 0 0 36px; }
+
+  /* prayers, set like the journal's pre-study prayer */
+  .prayer { text-align: center; margin: 4px 8px 34px; }
+  .prayer .k { display: block; font: 600 11px/1 'Fraunces', serif; letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; color: #5b6878; margin-bottom: 10px; }
+  .prayer p { margin: 0; font-style: italic; font-size: 18px; line-height: 1.55; }
+
+  /* the five steps: thin-lined boxes with the label set into the border */
+  .step { position: relative; border: 1.5px solid #111; border-radius: 6px; padding: 26px 22px 18px; margin: 0 0 34px; }
+  .step h2 { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); margin: 0; background: #111; color: #fff; border-radius: 99px;
+             font: 700 12px/1 'DM Sans', sans-serif; letter-spacing: .18em; padding: 7px 14px 7px 16px; text-transform: uppercase; white-space: nowrap; }
+  .step h2 b { font-family: 'Fraunces', serif; letter-spacing: 0; margin-right: 8px; font-size: 14px; }
+  .step ul { list-style: none; margin: 0; padding: 0; }
+  .step li { position: relative; padding-left: 16px; margin: 0 0 12px; font-size: 16.5px; line-height: 1.55; }
+  .step li::before { content: ''; position: absolute; left: 1px; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: #a3abb6; }
+  .meta { margin-top: 8px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #5b6878; }
+  .foot { text-align: center; font-size: 14px; color: #5b6878; margin-top: 10px; }
+  .foot a { color: #111; }
+</style></head>
+<body>
+  <header class="top">
+    <a class="logo" href="/" aria-label="Dwell Study home"><span class="side"><span>Dwell</span></span><span class="box">STUDY</span></a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    <nav class="menu" id="menu">
+      <a href="/bookmark"><b>Bookmark</b><small>The five steps and prayers</small></a>
+      <a href="/guidedsoar"><b>Guided SOAR</b><small>Templates and leader guide</small></a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="band" aria-hidden="true"></div>
+    <h1>Building blocks for Biblical literacy.</h1>
+    <p class="lede">Dwell is a Bible study rhythm to help you slow down in an age of speeding things up. Read with curiosity, patience, and fresh intention as you let the Holy Spirit do the transforming.</p>
+
+    <div class="prayer"><span class="k">Pray</span><p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p></div>
+
+    <section class="step" id="discover"><h2><b>1</b>Discover</h2><ul>
+      <li>Use a study Bible or trusted resource to set the scene:<div class="meta">Author &bull; Audience &bull; Time &bull; Purpose</div></li>
+      <li>Put the resource away and read slowly. Write down anything that stands out or poses a question.</li></ul></section>
+
+    <section class="step" id="wordwork"><h2><b>2</b>Word Work</h2><ul>
+      <li>Reread the passage. Which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</li>
+      <li>Which words need more clarity? Look them up or compare translations. What do you learn?</li>
+      <li>How would you summarize the passage in 1&ndash;2 sentences?</li></ul></section>
+
+    <div class="prayer"><span class="k">Pray</span><p>Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p></div>
+
+    <section class="step" id="expand"><h2><b>3</b>Expand</h2><ul>
+      <li>Read the surrounding chapters to see how this fits the whole book.</li>
+      <li>Follow cross-references to see where similar themes appear elsewhere in Scripture.</li></ul></section>
+
+    <section class="step" id="learn"><h2><b>4</b>Learn</h2><ul>
+      <li>What was the takeaway for the first people who read this?</li>
+      <li>What does this teach us about who God is and how He works? Check your findings in community, notes, or commentaries.</li></ul></section>
+
+    <section class="step" id="live"><h2><b>5</b>Live</h2><ul>
+      <li>What cultural or personal lies does this truth expose?</li>
+      <li>How will this shape your prayers, thoughts, words, or actions today?</li></ul></section>
+  </main>
+
+  <script>
+    (function () {
+      var btn = document.querySelector('.menu-btn'), menu = document.getElementById('menu');
+      function set(open) { btn.setAttribute('aria-expanded', open); menu.classList.toggle('open', open); }
+      btn.addEventListener('click', function (e) { e.stopPropagation(); set(!menu.classList.contains('open')); });
+      document.addEventListener('click', function (e) { if (!menu.contains(e.target)) set(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    })();
+  </script>
+</body>
+</html>
