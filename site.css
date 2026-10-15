@@ -18,3 +18,53 @@
   .menu b { display: block; font: 700 19px/1.1 'Fraunces', serif; }
   .menu small { display: block; margin-top: 3px; font-size: 13px; color: #5b6878; }
 
+
+/* ---------- The Bookmark: one two-sided card, 2.75 x 8.5 in (198 x 612 pt), drawn in --u units per pt ---------- */
+.bmf { --u: 1pt; position: relative; width: calc(198 * var(--u)); height: calc(612 * var(--u)); background: #fff; color: #111; box-sizing: border-box;
+       padding: calc(18 * var(--u)) calc(14 * var(--u)) calc(16 * var(--u)); display: flex; flex-direction: column; justify-content: space-between; font-family: 'DM Sans', sans-serif; }
+.bmf .bm-mark { display: flex; align-items: center; justify-content: center; gap: calc(2 * var(--u)); height: calc(28 * var(--u)); margin-bottom: 0; flex: none; }
+.bmf .bm-mark .side { position: relative; width: calc(7 * var(--u)); height: 100%; }
+.bmf .bm-mark .side span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap;
+                           font: 700 calc(6.4 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: calc(0.9 * var(--u)); padding-left: calc(0.9 * var(--u)); text-transform: uppercase; }
+.bmf .bm-mark .box { height: 100%; display: flex; align-items: center; background: #111; color: #fff; border-radius: calc(3 * var(--u));
+                     padding: calc(1 * var(--u)) calc(8 * var(--u)) 0; font: 700 calc(19 * var(--u))/1 'Fraunces', serif; }
+.bmf .bm-pray { text-align: center; margin: 0; }
+.bmf .bm-pray b { display: block; font: 600 calc(7.2 * var(--u))/1 'Fraunces', serif; letter-spacing: .24em; padding-left: .24em; text-transform: uppercase; color: #5b6878; margin-bottom: calc(6 * var(--u)); }
+.bmf .bm-pray p { margin: 0; font-style: italic; font-size: calc(10.6 * var(--u)); line-height: 1.42; }
+.bmf .bm-step { position: relative; border: calc(1 * var(--u)) solid #111; border-radius: calc(4 * var(--u)); padding: calc(15 * var(--u)) calc(10 * var(--u)) calc(7 * var(--u)); margin-bottom: 0; }
+.bmf .bm-step h3 { position: absolute; top: calc(-8 * var(--u)); left: 50%; transform: translateX(-50%); margin: 0; background: #111; color: #fff; border-radius: 99px; white-space: nowrap;
+                   font: 700 calc(7.4 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; padding: calc(4 * var(--u)) calc(9 * var(--u)) calc(4 * var(--u)) calc(10 * var(--u)); }
+.bmf .bm-step h3 i { font: normal 700 calc(8.4 * var(--u))/1 'Fraunces', serif; letter-spacing: 0; margin-right: calc(5 * var(--u)); }
+.bmf .bm-step ul { list-style: none; margin: 0; padding: 0; }
+.bmf .bm-step li { position: relative; padding-left: calc(7 * var(--u)); margin-bottom: calc(6 * var(--u)); font-size: calc(9.4 * var(--u)); line-height: 1.36; }
+.bmf .bm-step li::before { content: ''; position: absolute; left: 0; top: .58em; width: calc(2.6 * var(--u)); height: calc(2.6 * var(--u)); border-radius: 50%; background: #a3abb6; }
+.bmf .bm-meta { display: block; margin-top: calc(3 * var(--u)); font-size: calc(6.6 * var(--u)); letter-spacing: .14em; text-transform: uppercase; color: #5b6878; }
+.bmf .bm-foot { text-align: center; font: 600 calc(7.2 * var(--u))/1 'Fraunces', serif; letter-spacing: .24em; padding-left: .24em; text-transform: uppercase; color: #5b6878; }
+.bmf .bm-verse { text-align: center; }
+.bmf .bm-verse p { margin: 0 0 calc(6 * var(--u)); font-style: italic; font-size: calc(10.6 * var(--u)); line-height: 1.35; }
+
+/* ---------- Bookmark pop-up ---------- */
+dialog.bm-dlg { border: 0; padding: 0; background: transparent; width: min(720px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); overflow: visible; color: #111; }
+dialog.bm-dlg::backdrop { background: rgba(17, 17, 17, .6); backdrop-filter: blur(3px); }
+.bm-in { background: #fff; border-radius: 6px; max-height: calc(100dvh - 24px); display: flex; flex-direction: column; overflow: hidden; }
+.bm-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px 12px 20px; border-bottom: 1.5px solid #111; }
+.bm-top h2 { margin: 0; font: 700 22px/1 'Fraunces', serif; }
+.bm-x { width: 40px; height: 40px; border: 0; background: none; cursor: pointer; font-size: 28px; line-height: 1; color: #111; }
+.bm-body { overflow: auto; padding: 18px 16px 6px; background: #eef0f2; }
+.bm-faces { display: flex; gap: 16px; justify-content: center; }
+.bm-face { width: min(300px, calc((100vw - 72px))); container-type: inline-size; }
+.bm-face .bmf { --u: calc(100cqw / 198); box-shadow: 0 6px 22px rgba(0,0,0,.18); border-radius: 4px; }
+.bm-face > small { display: block; text-align: center; margin: 8px 0 10px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #5b6878; }
+.bm-tabs { display: none; }
+@media (max-width: 680px) {
+  .bm-tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; }
+  .bm-tabs button { font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .12em; text-transform: uppercase; border: 1.5px solid #111; background: #fff; color: #111; border-radius: 99px; padding: 8px 16px; cursor: pointer; }
+  .bm-tabs button[aria-pressed="true"] { background: #111; color: #fff; }
+  .bm-face[hidden-mobile] { display: none; }
+  .bm-face > small { display: none; }
+}
+.bm-acts { display: flex; gap: 10px; padding: 14px 16px 16px; border-top: 1.5px solid #111; }
+.bm-acts a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 14px; border-radius: 6px; text-decoration: none;
+             font: 700 15px/1 'DM Sans', sans-serif; border: 1.5px solid #111; color: #111; white-space: nowrap; }
+.bm-acts a.primary { background: #111; color: #fff; }
+.bm-note { padding: 0 16px 14px; margin-top: -6px; font-size: 13px; color: #5b6878; text-align: center; }

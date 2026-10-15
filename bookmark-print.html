@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="robots" content="noindex">
+<title>Dwell Bookmark (print)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<!-- Source for /dwell-bookmark.pdf: letter landscape, three bookmarks across, page 1 fronts, page 2 backs. -->
+<style>
+  @page { size: 11in 8.5in; margin: 0; }
+  html, body { margin: 0; background: #fff; }
+  .sheet { width: 792pt; height: 612pt; display: flex; justify-content: center; page-break-after: always; break-after: page; position: relative; }
+  .sheet:last-child { page-break-after: auto; break-after: auto; }
+  /* light cut lines that don't change the bookmark's size */
+  .sheet .bmf { box-shadow: inset 0.5pt 0 0 #c9ccd2; }
+  .sheet .bmf:last-child { box-shadow: inset 0.5pt 0 0 #c9ccd2, inset -0.5pt 0 0 #c9ccd2; }
+</style></head>
+<body>
+  <div class="sheet" id="fronts"></div>
+  <div class="sheet" id="backs"></div>
+  <script src="/site.js"></script>
+  <script>
+    document.getElementById('fronts').innerHTML = window.dwellBookmark.front.repeat(3);
+    document.getElementById('backs').innerHTML = window.dwellBookmark.back.repeat(3);
+  </script>
+</body>
+</html>
