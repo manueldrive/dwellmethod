@@ -11,7 +11,11 @@
   html, body { margin: 0; background: #fff; color: #111; }
   body { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
   main { max-width: 600px; margin: 0 auto; padding: 8px 20px 64px; }
-  .band { height: 180px; border-radius: 6px; background: #2c3b3f url(dwell-cover.jpg) center 38% / cover no-repeat; margin-bottom: 32px; }
+  /* hero: the homepage's four windows close their gaps and become one photo */
+  .joined { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; margin-bottom: 32px; }
+  .joined i { background: #2c3b3f url(dwell-cover.jpg) no-repeat; background-size: 200% 200%; }
+  .joined .tl { background-position: 0 0; } .joined .tr { background-position: 100% 0; }
+  .joined .bl { background-position: 0 100%; } .joined .br { background-position: 100% 100%; }
   h1 { font: 700 clamp(32px, 7.5vw, 44px)/1.05 'Fraunces', serif; letter-spacing: -0.01em; margin: 0 0 14px; }
   .lede { font-size: 18px; line-height: 1.6; color: #3d4450; margin: 0 0 30px; }
   .verse { border-top: 1.5px solid #111; padding-top: 22px; text-align: center; }
@@ -30,7 +34,10 @@
     </nav>
   </header>
   <main>
-    <div class="band" aria-hidden="true"></div>
+    <div class="joined" aria-hidden="true">
+      <i class="tl" style="view-transition-name: win-tl"></i><i class="tr" style="view-transition-name: win-tr"></i>
+      <i class="bl" style="view-transition-name: win-bl"></i><i class="br" style="view-transition-name: win-br"></i>
+    </div>
     <h1>Building blocks for Biblical literacy.</h1>
     <p class="lede">Dwell is a Bible study rhythm to help you slow down in an age of speeding things up. Read with curiosity, patience, and fresh intention as you let the Holy Spirit do the transforming.</p>
     <div class="verse"><p>Let the word of Christ <b>dwell</b> in you richly.</p><cite>Colossians 3:16</cite></div>

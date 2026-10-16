@@ -68,3 +68,18 @@ dialog.bm-dlg::backdrop { background: rgba(17, 17, 17, .6); backdrop-filter: blu
              font: 700 15px/1 'DM Sans', sans-serif; border: 1.5px solid #111; color: #111; white-space: nowrap; }
 .bm-acts a.primary { background: #111; color: #fff; }
 .bm-note { padding: 0 16px 14px; margin-top: -6px; font-size: 13px; color: #5b6878; text-align: center; }
+
+/* ---------- Page-to-page morph (View Transitions) ----------
+   The homepage's four photo windows and the verse circle are named win-tl, win-tr, win-bl, win-br and truth.
+   Each page gives those names to its own hero pieces, so moving between pages morphs one layout into the next:
+   Bookmark = the left two windows become the bookmark, Guided SOAR = the SOAR template, About = one joined photo.
+   Browsers without support (e.g. Firefox) simply load the page. */
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+.logo { view-transition-name: site-logo; }
+.menu-btn { view-transition-name: site-menu; }
+::view-transition-group(*) { animation-duration: .7s; animation-timing-function: cubic-bezier(.2, .75, .15, 1); }
+::view-transition-old(win-tl), ::view-transition-new(win-tl), ::view-transition-old(win-tr), ::view-transition-new(win-tr),
+::view-transition-old(win-bl), ::view-transition-new(win-bl), ::view-transition-old(win-br), ::view-transition-new(win-br),
+::view-transition-old(truth), ::view-transition-new(truth) { height: 100%; width: 100%; object-fit: cover; overflow: clip; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }
