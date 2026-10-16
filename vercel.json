@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/guideddwell", "destination": "/template", "permanent": true }
+    { "source": "/guideddwell", "destination": "/template", "permanent": true },
+    { "source": "/about", "destination": "/#about", "permanent": false }
   ]
 }
