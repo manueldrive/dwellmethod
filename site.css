@@ -83,3 +83,6 @@ dialog.bm-dlg::backdrop { background: rgba(17, 17, 17, .6); backdrop-filter: blu
 ::view-transition-old(win-bl), ::view-transition-new(win-bl), ::view-transition-old(win-br), ::view-transition-new(win-br),
 ::view-transition-old(truth), ::view-transition-new(truth) { height: 100%; width: 100%; object-fit: cover; overflow: clip; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }
+
+/* keep the page width the same with or without a scrollbar, so the cover and the pages it morphs into line up */
+html { scrollbar-gutter: stable; }

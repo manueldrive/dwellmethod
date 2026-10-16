@@ -12,25 +12,29 @@
   html, body { margin: 0; background: #fff; color: #111; }
   body { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
 
-  /* ---------- hero: the card, on the homepage cover's frame (396 x 561 pt) ---------- */
-  .gd-hero { display: flex; justify-content: center; padding: 6px 20px 8px; }
-  .gd-card { width: min(100%, 400px); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
-  /* each box is a little taller than its frame (8pt above and below) so the labels set into the border stay inside it while it morphs */
-  .gd-box { position: absolute; width: calc(174 * var(--u)); height: calc(272.5 * var(--u)); color: inherit; text-decoration: none; }
-  .gd-box::before { content: ''; position: absolute; inset: calc(8 * var(--u)) 0; border: calc(1.5 * var(--u)) solid #111; border-radius: calc(6 * var(--u)); background: #fff; transition: background .15s; }
-  a.gd-box:hover::before { background: #f6f7f8; }
-  .gd-box.tl { left: calc(20 * var(--u));  top: calc(12 * var(--u)); }
-  .gd-box.tr { left: calc(202 * var(--u)); top: calc(12 * var(--u)); }
-  .gd-box.bl { left: calc(20 * var(--u));  top: calc(276.5 * var(--u)); }
-  .gd-box.br { left: calc(202 * var(--u)); top: calc(276.5 * var(--u)); }
+  /* ---------- hero: the card, sized and placed exactly like the homepage cover (same 396 x 561 frame, same box
+     positions) so the photo windows land on the boxes and the verse circle lands on the center circle ---------- */
+  .gd-hero { height: calc(100svh - 72px); min-height: 300px; display: flex; align-items: center; justify-content: center; padding-bottom: 20px; }
+  .gd-card { width: min(100vw, (100svh - 92px) * 396 / 561); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .gd-box { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border: calc(1.5 * var(--u)) solid #111;
+            border-radius: calc(6 * var(--u)); background: #fff; color: inherit; text-decoration: none; transition: background .15s; }
+  a.gd-box:hover { background: #f6f7f8; }
+  .gd-box.tl { left: calc(20 * var(--u));  top: calc(20 * var(--u)); }
+  .gd-box.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u)); }
+  .gd-box.bl { left: calc(20 * var(--u));  top: calc(284.5 * var(--u)); }
+  .gd-box.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); }
   /* labels set into the border, like the journal */
-  .lbl { position: absolute; left: 50%; transform: translate(-50%, -50%); top: calc(8 * var(--u)); background: #fff; padding: calc(3 * var(--u)) calc(8 * var(--u)) calc(3 * var(--u)) calc(10 * var(--u));
+  .lbl { position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); background: #fff; padding: calc(3 * var(--u)) calc(8 * var(--u)) calc(3 * var(--u)) calc(10 * var(--u));
          font: 700 calc(12.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
-  .bl .lbl, .br .lbl { top: calc(100% - 8 * var(--u)); }
+  .bl .lbl, .br .lbl { top: 100%; }
+  /* as on the card: GOD IS up top and THEREFORE, I just below the middle, each with room to write under it */
   .gd-circle { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u)); border-radius: 50%;
-               border: calc(1.5 * var(--u)) solid #111; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(44 * var(--u));
-               color: inherit; text-decoration: none; }
-  .gd-circle b { font: 700 calc(11.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; }
+               border: calc(1.5 * var(--u)) solid #111; background: #fff; color: inherit; text-decoration: none; }
+  .gd-circle b { position: absolute; left: 0; right: 0; text-align: center; font: 700 calc(11.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; }
+  .gd-circle b:first-child { top: calc(34 * var(--u)); }
+  .gd-circle b:last-child { top: calc(96 * var(--u)); }
+  /* the labels sit half outside their boxes: don't clip them while the boxes morph */
+  ::view-transition-new(win-tl), ::view-transition-new(win-tr), ::view-transition-new(win-bl), ::view-transition-new(win-br) { overflow: visible; }
 
   /* ---------- page ---------- */
   main { max-width: 640px; margin: 0 auto; padding: 18px 20px 64px; }
