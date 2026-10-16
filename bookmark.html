@@ -19,7 +19,7 @@
   /* hero: the homepage cover's frame (396 x 561 pt, same size and place). The left windows become the front of the
      bookmark and the right windows the back: each window turns into one half, and the halves close up into one bookmark. */
   .bm-stage { height: calc(100svh - 72px); min-height: 300px; display: flex; align-items: center; justify-content: center; padding-bottom: 20px; }
-  .bm-frame { display: block; width: min(100vw, (100svh - 92px) * 396 / 561); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); color: inherit; }
+  .bm-frame { display: block; width: var(--cover-w); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); color: inherit; }
   .half { position: absolute; width: calc(174 * var(--u)); height: calc(260.5 * var(--u)); overflow: hidden; background: #fff; border: 0 solid #111; border-width: calc(1.5 * var(--u)); }
   .half.t { top: calc(20 * var(--u)); border-bottom: 0; border-radius: calc(6 * var(--u)) calc(6 * var(--u)) 0 0; }
   .half.b { top: calc(280.5 * var(--u)); border-top: 0; border-radius: 0 0 calc(6 * var(--u)) calc(6 * var(--u)); }

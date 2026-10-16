@@ -86,3 +86,8 @@ dialog.bm-dlg::backdrop { background: rgba(17, 17, 17, .6); backdrop-filter: blu
 
 /* keep the page width the same with or without a scrollbar, so the cover and the pages it morphs into line up */
 html { scrollbar-gutter: stable; }
+
+/* the cover's frame: every card that the cover turns into uses this same size, so they line up exactly.
+   On phones it leaves room above for a line of explanation and below for buttons. */
+:root { --cover-w: min(100vw, (100svh - 92px) * 396 / 561); }
+@media (max-width: 999px), (max-height: 599px) { :root { --cover-w: min(100vw, (100svh - 242px) * 396 / 561); } }

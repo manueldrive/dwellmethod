@@ -15,7 +15,7 @@
   /* ---------- the cover: the book's layout, scaled to fit the screen ---------- */
   .stage { flex: 1; display: flex; align-items: center; justify-content: center; padding-bottom: 20px; }
   /* frame = the four windows + circle with a 20pt margin, measured in the book's points (396 wide) */
-  .cover { width: min(100vw, (100svh - 92px) * 396 / 561); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .cover { width: var(--cover-w); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
   .win { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border-radius: calc(6 * var(--u));
          background: #2c3b3f url(dwell-cover.jpg) no-repeat; background-size: calc(396 * var(--u)) calc(612 * var(--u)); }
   /* each window shows the part of the photo behind it, exactly as on the printed cover */
@@ -89,7 +89,7 @@
   @media (max-width: 999px), (max-height: 599px) {
     body { overflow-x: hidden; }
     .stage { overflow: hidden; }
-    .deck { width: min(100vw, (100svh - 92px) * 396 / 561); touch-action: pan-y; }
+    .deck { width: var(--cover-w); touch-action: pan-y; }
     .slide { display: block !important; width: 100%; transition: transform .45s cubic-bezier(.2, .75, .15, 1), opacity .45s; }
     .slide .cover { width: 100%; }
     .slide.pos-c { position: relative; }
@@ -102,6 +102,21 @@
     .dots { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 12px; justify-content: center; gap: 8px; z-index: 3; }
     .dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #c9ced5; cursor: pointer; transition: background .2s, transform .2s; }
     .dots button[aria-current="true"] { background: #111; transform: scale(1.15); }
+  }
+
+  /* a line of explanation for each card: above the card on phones, bottom left on desktop */
+  .blurb b { display: block; font: 700 17px/1.15 'Fraunces', serif; margin-bottom: 4px; }
+  .blurb p { margin: 0; font-size: 13.5px; line-height: 1.4; color: #5b6878; }
+  @media (max-width: 999px), (max-height: 599px) {
+    .blurb { position: absolute; left: 12px; right: 12px; bottom: 100%; margin-bottom: 16px; text-align: center; }
+    .blurb p { max-width: 21em; margin: 0 auto; }
+  }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .blurb { display: none; }
+    .slide.pos-c .blurb { display: block; position: fixed; left: 28px; bottom: 28px; max-width: 300px; background: #fff; padding: 16px 20px 16px 12px; border-radius: 6px; z-index: 4; animation: blurb-in .5s ease both; }
+    .blurb b { font-size: 22px; margin-bottom: 6px; }
+    .blurb p { font-size: 15px; }
+    @keyframes blurb-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   }
 </style></head>
 <body>
@@ -120,6 +135,7 @@
   <main class="stage">
     <div class="deck">
       <div class="slide s-tpl pos-l" data-name="Template" aria-label="Blank template">
+        <div class="blurb"><b>Blank template</b><p>Print it and study any passage.</p></div>
         <div class="card" aria-hidden="true">
           <div class="gd-box tl vt-tl"><span class="lbl">Perspective</span></div>
           <div class="gd-box tr vt-tr"><span class="lbl">Words</span></div>
@@ -130,6 +146,7 @@
         <div class="cap"><a class="open" href="/template">Blank template &rarr;</a></div>
       </div>
       <div class="slide s-cover pos-c" data-name="Cover">
+        <div class="blurb"><b>Building blocks for Biblical literacy.</b><p>A Bible study rhythm for slowing down.</p></div>
         <div class="cover">
           <div class="win tl vt-tl" aria-hidden="true"></div>
           <div class="win tr vt-tr" aria-hidden="true"></div>
@@ -145,6 +162,7 @@
         <div class="cap"></div>
       </div>
       <div class="slide s-guide pos-r" data-name="Leader guide" aria-label="Leader guide">
+        <div class="blurb"><b>Leader guide</b><p>Questions for each corner, alone or with a group.</p></div>
         <div class="card">
           <div class="gd-box tl vt-tl"><span class="lbl">Perspective</span>
             <ul class="gq"><li>Who wrote this book? Who was it written to?</li><li>When was it written? Why?</li></ul></div>

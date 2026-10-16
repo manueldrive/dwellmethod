@@ -15,7 +15,7 @@
   /* ---------- hero: the card, sized and placed exactly like the homepage cover (same 396 x 561 frame, same box
      positions) so the photo windows land on the boxes and the verse circle lands on the center circle ---------- */
   .gd-hero { height: calc(100svh - 72px); min-height: 300px; display: flex; align-items: center; justify-content: center; padding-bottom: 20px; }
-  .gd-card { width: min(100vw, (100svh - 92px) * 396 / 561); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .gd-card { width: var(--cover-w); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
   .gd-box { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border: calc(1.5 * var(--u)) solid #111;
             border-radius: calc(6 * var(--u)); background: #fff; color: inherit; text-decoration: none; transition: background .15s; }
   a.gd-box:hover { background: #f6f7f8; }
