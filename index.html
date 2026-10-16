@@ -82,6 +82,27 @@
     .nav.prev { left: 28px; } .nav.next { right: 28px; }
     .nav:hover { background: #f4f5f7; }
   }
+
+  /* ---------- phones and narrow windows: the same three cards, one at a time. Swipe (or tap a dot) to move between them.
+     The cards keep the cover's exact size and place, so each still lines up with the page it opens. ---------- */
+  .dots { display: none; }
+  @media (max-width: 999px), (max-height: 599px) {
+    body { overflow-x: hidden; }
+    .stage { overflow: hidden; }
+    .deck { width: min(100vw, (100svh - 92px) * 396 / 561); touch-action: pan-y; }
+    .slide { display: block !important; width: 100%; transition: transform .45s cubic-bezier(.2, .75, .15, 1), opacity .45s; }
+    .slide .cover { width: 100%; }
+    .slide.pos-c { position: relative; }
+    .slide.pos-l, .slide.pos-r { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-l { transform: translateX(calc(-100% - 24px)); }
+    .slide.pos-r { transform: translateX(calc(100% + 24px)); }
+    .cap { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 30px; align-items: center; justify-content: center; gap: 8px; }
+    .cap a.open { background: #111; color: #fff; border-radius: 99px; padding: 10px 16px; font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
+    .cap a.need { border: 1.5px solid #111; color: #111; border-radius: 99px; padding: 8.5px 12px; font: 700 12px/1 'DM Sans', sans-serif; text-decoration: none; }
+    .dots { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 12px; justify-content: center; gap: 8px; z-index: 3; }
+    .dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #c9ced5; cursor: pointer; transition: background .2s, transform .2s; }
+    .dots button[aria-current="true"] { background: #111; transform: scale(1.15); }
+  }
 </style></head>
 <body>
   <header class="top">
@@ -137,6 +158,7 @@
         </div>
         <div class="cap"><a class="open" href="/howto">Leader guide &rarr;</a><a class="need" href="/resources">Need resources?</a></div>
       </div>
+      <div class="dots" role="group" aria-label="Cards"><button type="button" aria-label="Blank template"></button><button type="button" aria-label="Cover"></button><button type="button" aria-label="Leader guide"></button></div>
     </div>
     <button class="nav prev" type="button" aria-label="Previous">&larr;</button>
     <button class="nav next" type="button" aria-label="Next">&rarr;</button>
@@ -147,11 +169,25 @@
     // Desktop slideshow: three positions (left, center, right) that rotate.
     (function () {
       var slides = [].slice.call(document.querySelectorAll('.deck .slide')), order = ['pos-l', 'pos-c', 'pos-r'], at = 1;
-      function paint() { slides.forEach(function (el, i) { el.classList.remove('pos-l', 'pos-c', 'pos-r'); el.classList.add(order[(i - at + 1 + 3) % 3]); }); }
+      var dots = [].slice.call(document.querySelectorAll('.dots button'));
+      function paint() {
+        slides.forEach(function (el, i) { el.classList.remove('pos-l', 'pos-c', 'pos-r'); el.classList.add(order[(i - at + 1 + 3) % 3]); });
+        dots.forEach(function (d, i) { d.setAttribute('aria-current', i === at); });
+      }
+      dots.forEach(function (d, i) { d.addEventListener('click', function () { at = i; paint(); }); });
+      // swipe on touch screens
+      var deck = document.querySelector('.deck'), x0 = null, y0 = 0;
+      deck.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      deck.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+      });
       function go(d) { at = (at + d + 3) % 3; paint(); }
       document.querySelector('.nav.prev').addEventListener('click', function () { go(-1); });
       document.querySelector('.nav.next').addEventListener('click', function () { go(1); });
       slides.forEach(function (el, i) { el.addEventListener('click', function () { if (!el.classList.contains('pos-c')) { at = i; paint(); } }); });
+      paint();
       document.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') go(-1); if (e.key === 'ArrowRight') go(1); });
     })();
   </script>
