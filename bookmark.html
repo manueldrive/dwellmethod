@@ -33,6 +33,12 @@
                         #2c3b3f url(dwell-cover.jpg) no-repeat; background-size: 100% 100%, calc(396 * var(--u)) calc(612 * var(--u)); }
   .half.t.l { background-position: 0 0, calc(-20 * var(--u)) calc(-45.5 * var(--u)); }
   .half.t.r { background-position: 0 0, calc(-202 * var(--u)) calc(-45.5 * var(--u)); }
+  /* on this page: a bigger DWELL | STUDY mark, and white step boxes over the photo */
+  .half .bmf .bm-mark { height: calc(40 * var(--u)); gap: calc(3 * var(--u)); }
+  .half .bmf .bm-mark .side { width: calc(10 * var(--u)); }
+  .half .bmf .bm-mark .side span { font-size: calc(9 * var(--u)); letter-spacing: calc(1.3 * var(--u)); padding-left: calc(1.3 * var(--u)); }
+  .half .bmf .bm-mark .box { font-size: calc(27 * var(--u)); padding: calc(1.5 * var(--u)) calc(11 * var(--u)) 0; border-radius: calc(4 * var(--u)); }
+  .half .bmf .bm-step { background: #fff; }
   .bm-frame:focus-visible { outline: 2px solid #111; outline-offset: 4px; border-radius: 8px; }
 
   .intro { text-align: center; margin: 6px 0 40px; }
