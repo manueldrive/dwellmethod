@@ -28,7 +28,11 @@
   .half .face { position: absolute; left: calc(-1.5 * var(--u)); top: calc(-1.5 * var(--u)); width: calc(174 * var(--u)); height: calc(521 * var(--u)); container-type: inline-size; }
   .half.b .face { top: calc(-260.5 * var(--u)); }
   .half .bmf { --u: calc(100cqw / 198); width: 100%; height: 100%; background: transparent; }
-  .bm-frame:hover .half { background: #fafbfc; }
+  /* the top of each bookmark keeps the photo that was in its window, fading to solid white */
+  .half.t { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.2) 22%, rgba(255,255,255,.68) 42%, rgba(255,255,255,.93) 56%, #fff 68%),
+                        #2c3b3f url(dwell-cover.jpg) no-repeat; background-size: 100% 100%, calc(396 * var(--u)) calc(612 * var(--u)); }
+  .half.t.l { background-position: 0 0, calc(-20 * var(--u)) calc(-45.5 * var(--u)); }
+  .half.t.r { background-position: 0 0, calc(-202 * var(--u)) calc(-45.5 * var(--u)); }
   .bm-frame:focus-visible { outline: 2px solid #111; outline-offset: 4px; border-radius: 8px; }
 
   .intro { text-align: center; margin: 6px 0 40px; }
