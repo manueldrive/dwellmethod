@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dwell | Template</title>
+<meta name="description" content="The Dwell Study template: four corners and one central truth, for studying any passage of Scripture.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<!-- The Dwell Study card (from the journal) as a guided page. The homepage's photo windows and circle morph into this card. -->
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: #111; }
+  body { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* ---------- hero: the card, sized and placed exactly like the homepage cover (same 396 x 561 frame, same box
+     positions) so the photo windows land on the boxes and the verse circle lands on the center circle ---------- */
+  .gd-hero { height: calc(100svh - 72px); min-height: 300px; display: flex; align-items: center; justify-content: center; padding-bottom: 20px; }
+  .gd-card { width: min(100vw, (100svh - 92px) * 396 / 561); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .gd-box { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border: calc(1.5 * var(--u)) solid #111;
+            border-radius: calc(6 * var(--u)); background: #fff; color: inherit; text-decoration: none; transition: background .15s; }
+  a.gd-box:hover { background: #f6f7f8; }
+  .gd-box.tl { left: calc(20 * var(--u));  top: calc(20 * var(--u)); }
+  .gd-box.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u)); }
+  .gd-box.bl { left: calc(20 * var(--u));  top: calc(284.5 * var(--u)); }
+  .gd-box.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); }
+  /* labels set into the border, like the journal */
+  .lbl { position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); background: #fff; padding: calc(3 * var(--u)) calc(8 * var(--u)) calc(3 * var(--u)) calc(10 * var(--u));
+         font: 700 calc(12.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+  .bl .lbl, .br .lbl { top: 100%; }
+  /* as on the card: GOD IS up top and THEREFORE, I just below the middle, each with room to write under it */
+  .gd-circle { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u)); border-radius: 50%;
+               border: calc(1.5 * var(--u)) solid #111; background: #fff; color: inherit; text-decoration: none; }
+  .gd-circle b { position: absolute; left: 0; right: 0; text-align: center; font: 900 calc(11.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; }
+  .gd-circle b:first-child { top: calc(34 * var(--u)); }
+  .gd-circle b:last-child { top: calc(96 * var(--u)); }
+  /* the labels sit half outside their boxes: don't clip them while the boxes morph */
+  ::view-transition-new(win-tl), ::view-transition-new(win-tr), ::view-transition-new(win-bl), ::view-transition-new(win-br) { overflow: visible; }
+
+  /* ---------- page ---------- */
+  main { max-width: 640px; margin: 0 auto; padding: 18px 20px 64px; }
+  .intro { text-align: center; margin-bottom: 34px; }
+  .pt { font: 700 clamp(30px, 7vw, 40px)/1.05 'Fraunces', serif; margin: 0 0 10px; }
+  .sub { font-size: 16.5px; line-height: 1.55; color: #3d4450; margin: 0 auto; max-width: 30em; }
+
+  .prayer { text-align: center; margin: 0 8px 40px; }
+  .k { display: block; font: 600 11px/1 'Fraunces', serif; letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; color: #5b6878; margin-bottom: 10px; }
+  .prayer p { margin: 0; font-style: italic; font-size: 18px; line-height: 1.55; }
+
+  /* the four corners, laid out like the card on wider screens */
+  .corners { display: grid; gap: 34px; margin-bottom: 34px; }
+  @media (min-width: 600px) { .corners { grid-template-columns: 1fr 1fr; gap: 34px 16px; } }
+  .corner { position: relative; border: 1.5px solid #111; border-radius: 6px; padding: 26px 20px 16px; scroll-margin-top: 90px; }
+  .corner h2 { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); margin: 0; background: #fff; padding: 3px 10px 3px 12px;
+               font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+  .goal { font: 600 19px/1.25 'Fraunces', serif; margin: 0 0 12px; }
+  ul.qs { list-style: none; margin: 0; padding: 0; }
+  ul.qs li { position: relative; padding-left: 16px; margin: 0 0 10px; font-size: 16px; line-height: 1.5; }
+  ul.qs li::before { content: ''; position: absolute; left: 1px; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: #a3abb6; }
+
+  /* the central truth */
+  .truth { border: 1.5px solid #111; border-radius: 28px; padding: 26px 22px 20px; margin-bottom: 40px; scroll-margin-top: 90px; text-align: center; }
+  .truth .k { color: #111; margin-bottom: 14px; }
+  .tr-row { display: grid; gap: 18px; }
+  @media (min-width: 600px) { .tr-row { grid-template-columns: 1fr 1fr; } }
+  .tr-row b { display: block; font: 900 13px/1 'DM Sans', sans-serif; letter-spacing: .16em; margin-bottom: 8px; }
+  .tr-row p { margin: 0; font-size: 16px; line-height: 1.5; color: #3d4450; }
+
+  /* reflect */
+  .reflect { margin-bottom: 44px; }
+  .reflect .k { text-align: center; }
+  .rq { display: grid; gap: 10px; }
+  @media (min-width: 600px) { .rq { grid-template-columns: repeat(3, 1fr); } }
+  .rq p { margin: 0; border-top: 1.5px solid #111; padding-top: 12px; font-style: italic; font-size: 16.5px; line-height: 1.45; }
+
+  .acts { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .btn { display: inline-block; background: #111; color: #fff; border: 1.5px solid #111; border-radius: 99px; padding: 12px 20px; font: 700 14px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
+  .btn.ghost { background: #fff; color: #111; }
+  .foot { text-align: center; font-size: 14px; color: #5b6878; border-top: 1px solid #e3e6ea; padding-top: 22px; }
+  .foot a { color: #111; font-weight: 700; }
+</style></head>
+<body>
+  <header class="top">
+    <a class="logo" href="/" aria-label="Dwell Study home"><span class="side"><span>Dwell</span></span><span class="box">STUDY</span></a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    <nav class="menu" id="menu">
+      <a href="/bookmark"><b>Bookmark</b><small>The five steps and prayers</small></a>
+      <a href="/template"><b>Template</b><small>The four-corner study card</small></a>
+      <a href="/howto"><b>Guide</b><small>How to think about each part</small></a>
+      <a href="/resources"><b>Resources</b><small>Videos and study tools</small></a>
+      <a href="/about"><b>About</b><small>What Dwell is and why</small></a>
+    </nav>
+  </header>
+
+  <section class="gd-hero">
+    <div class="gd-card">
+      <a class="gd-box tl" href="/howto#perspective" style="view-transition-name: win-tl"><span class="lbl">Perspective</span></a>
+      <a class="gd-box tr" href="/howto#words" style="view-transition-name: win-tr"><span class="lbl">Words</span></a>
+      <a class="gd-box bl" href="/howto#connections" style="view-transition-name: win-bl"><span class="lbl">Connections</span></a>
+      <a class="gd-box br" href="/howto#questions" style="view-transition-name: win-br"><span class="lbl">Questions</span></a>
+      <a class="gd-circle" href="/howto#truth" style="view-transition-name: truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></a>
+    </div>
+  </section>
+
+  <main>
+    <div class="intro">
+      <h1 class="pt">Template</h1>
+      <p class="sub">Four corners and one central truth. Print a blank study spread and work through any passage. New to it? Start with the guide.</p>
+      <div class="acts"><a class="btn" href="/dwell-template.pdf" download="Dwell Template.pdf">Download template</a><a class="btn ghost" href="/howto">Read the guide</a></div>
+    </div>
+    <p class="foot">Looking for the original card? <a href="/guidedsoar">Guided SOAR &rarr;</a></p>
+  </main>
+
+  <script src="/site.js"></script>
+</body>
+</html>
