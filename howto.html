@@ -36,6 +36,19 @@
   /* the labels sit half outside their boxes: don't clip them while the boxes morph */
   ::view-transition-new(win-tl), ::view-transition-new(win-tr), ::view-transition-new(win-bl), ::view-transition-new(win-br) { overflow: visible; }
 
+  /* the guide laid over the template: the questions sit inside each corner and the circle */
+  .gd-box { display: flex; flex-direction: column; padding: calc(20 * var(--u)) calc(11 * var(--u)) calc(12 * var(--u)); box-sizing: border-box; }
+  .gd-box.bl, .gd-box.br { justify-content: flex-end; padding: calc(12 * var(--u)) calc(11 * var(--u)) calc(20 * var(--u)); }
+  .gq { list-style: none; margin: 0; padding: 0; }
+  .gq li { position: relative; padding-left: calc(8 * var(--u)); margin-bottom: calc(5 * var(--u)); font-size: calc(11 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .gq li::before { content: ''; position: absolute; left: 0; top: .5em; width: calc(2.8 * var(--u)); height: calc(2.8 * var(--u)); border-radius: 50%; background: #a3abb6; }
+  .gtip { margin: calc(4 * var(--u)) 0 0; border-top: calc(.8 * var(--u)) dashed #a3abb6; padding-top: calc(6 * var(--u)); font-size: calc(9.6 * var(--u)); line-height: 1.3; color: #5b6878; }
+  .gtip b { display: block; color: #111; font-size: calc(7.6 * var(--u)); letter-spacing: .14em; text-transform: uppercase; margin-bottom: calc(2 * var(--u)); }
+  .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(22 * var(--u)); box-sizing: border-box; }
+  .gd-circle b { position: static; margin-bottom: calc(4 * var(--u)); }
+  .gd-circle p { margin: 0 0 calc(9 * var(--u)); font-style: italic; font-size: calc(9.8 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .gd-circle p:last-child { margin-bottom: 0; }
+
   /* ---------- page ---------- */
   main { max-width: 640px; margin: 0 auto; padding: 18px 20px 64px; }
   .intro { text-align: center; margin-bottom: 34px; }
@@ -76,10 +89,10 @@
   .btn { display: inline-block; background: #111; color: #fff; border: 1.5px solid #111; border-radius: 99px; padding: 12px 20px; font: 700 14px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
   .btn.ghost { background: #fff; color: #111; }
   /* every section is a thin box with its label set into the border, like the printed guide */
-  .box { position: relative; border: 1.5px solid #111; border-radius: 6px; padding: 26px 20px 14px; margin-bottom: 34px; scroll-margin-top: 90px; }
-  .box h2 { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); margin: 0; background: #fff; padding: 3px 10px 3px 12px;
+  .gsec { position: relative; border: 1.5px solid #111; border-radius: 6px; padding: 26px 20px 14px; margin-bottom: 34px; scroll-margin-top: 90px; }
+  .gsec h2 { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); margin: 0; background: #fff; padding: 3px 10px 3px 12px;
             font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
-  .box.pray p { margin: 0 0 8px; text-align: center; font-style: italic; font-size: 18px; line-height: 1.55; }
+  .gsec.pray p { margin: 0 0 8px; text-align: center; font-style: italic; font-size: 18px; line-height: 1.55; }
   ol.qs { counter-reset: n; list-style: none; margin: 0; padding: 0; } ol.qs li { counter-increment: n; position: relative; padding-left: 24px; margin: 0 0 10px; line-height: 1.5; }
   ol.qs li::before { content: counter(n) '.'; position: absolute; background: none; width: auto; height: auto; top: 0; left: 0; border-radius: 0; color: #5b6878; font-weight: 700; }
   .tip { margin: 6px 0 4px; border-top: 1px dashed #a3abb6; padding-top: 10px; font-size: 15px; line-height: 1.5; color: #5b6878; }
@@ -101,6 +114,21 @@
     </nav>
   </header>
 
+  <section class="gd-hero">
+    <div class="gd-card">
+      <div class="gd-box tl" id="perspective" style="view-transition-name: win-tl"><span class="lbl">Perspective</span>
+        <ul class="gq"><li>Who wrote this book? Who was it written to?</li><li>When was it written? Why?</li></ul>
+        <p class="gtip"><b>New to this book?</b>Read the intro in a study Bible, or watch the BibleProject <i>Read Scripture</i> video.</p></div>
+      <div class="gd-box tr" id="words" style="view-transition-name: win-tr"><span class="lbl">Words</span>
+        <ul class="gq"><li>What words or phrases repeat? What&rsquo;s the point of the repetition?</li><li>What words need clarity? Look them up or compare translations.</li></ul></div>
+      <div class="gd-box bl" id="connections" style="view-transition-name: win-bl"><span class="lbl">Connections</span>
+        <ul class="gq"><li>Read the surrounding chapters. How does this fit the whole book?</li><li>Follow cross-references. Where else does this theme show up?</li><li>How would the first readers have understood this?</li></ul></div>
+      <div class="gd-box br" id="questions" style="view-transition-name: win-br"><span class="lbl">Questions</span>
+        <ul class="gq"><li>Read slowly, expecting to discover something.</li><li>Write down every question. Did anything confuse or bother you?</li><li>Circle the one you most want answered.</li></ul></div>
+      <div class="gd-circle" id="truth" style="view-transition-name: truth"><b>GOD IS&hellip;</b><p>What does this passage teach about who God is and how He works?</p><b>THEREFORE, I&hellip;</b><p>What does this reveal about who He made me to be?</p></div>
+    </div>
+  </section>
+
   <main>
     <div class="intro">
       <h1 class="pt">Guide</h1>
@@ -108,31 +136,12 @@
       <div class="acts"><a class="btn" href="/dwell-guide.pdf" download="Dwell Guide.pdf">Download guide</a><a class="btn ghost" href="/template">Get the template</a></div>
     </div>
 
-    <section class="box pray"><h2>Pray</h2><p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Correct any lies I believe. Let my study increase my love for You and others, not my pride. Amen.</p></section>
+    <section class="gsec pray"><h2>Pray</h2><p>Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Correct any lies I believe. Let my study increase my love for You and others, not my pride. Amen.</p></section>
 
-    <div class="corners">
-      <section class="corner" id="perspective"><h2>Perspective</h2>
-        <ul class="qs"><li>Who wrote this book? Who was it written to?</li><li>When was it written? Why?</li></ul>
-        <p class="tip"><b>New to this book?</b>Read the intro in a study Bible, or watch the BibleProject <i>Read Scripture</i> video.</p></section>
-      <section class="corner" id="words"><h2>Words</h2>
-        <ul class="qs"><li>What words or phrases repeat? What&rsquo;s the point of the repetition?</li><li>What words need clarity? Look them up or compare translations.</li></ul></section>
-      <section class="corner" id="connections"><h2>Connections</h2>
-        <ul class="qs"><li>Read the surrounding chapters. How does this fit the whole book?</li><li>Follow cross-references. Where else does this theme show up?</li><li>How would the first readers have understood this?</li></ul></section>
-      <section class="corner" id="questions"><h2>Questions</h2>
-        <ul class="qs"><li>Read slowly, expecting to discover something.</li><li>Write down every question. Did anything confuse or bother you?</li><li>Circle the one you most want answered.</li></ul></section>
-    </div>
-
-    <section class="truth" id="truth">
-      <div class="tr-row">
-        <div><b>GOD IS&hellip;</b><p>What does this passage teach about who God is and how He works?</p></div>
-        <div><b>THEREFORE, I&hellip;</b><p>What does this reveal about who He made me to be?</p></div>
-      </div>
-    </section>
-
-    <section class="box" id="process"><h2>Process</h2>
+    <section class="gsec" id="process"><h2>Process</h2>
       <ul class="qs"><li>Do you believe the central truth from the passage?</li><li>What lies make it hard for a person to believe this truth?</li><li>How will this truth shape what you think, say, and do?</li><li>Bring any remaining questions to your community.</li></ul></section>
 
-    <section class="box" id="group"><h2>Leading a group?</h2>
+    <section class="gsec" id="group"><h2>Leading a group?</h2>
       <ol class="qs"><li>Do the study yourself first.</li><li>Read the passage together slowly.</li><li>Have everyone share their questions. Pick one together and discuss it.</li><li>Work through the corners, then land on the central truth together.</li><li>Ask: What is God inviting us to as a community?</li></ol></section>
 
     <p class="foot">Looking for the original card? <a href="/guidedsoar">Guided SOAR &rarr;</a></p>
