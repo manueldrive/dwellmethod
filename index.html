@@ -4,23 +4,69 @@
 <title>Dwell</title>
 <meta name="description" content="Let the word of Christ dwell in you richly. Colossians 3:16">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
 <meta name="apple-mobile-web-app-title" content="Dwell"><meta name="theme-color" content="#ffffff">
-<!-- Placeholder homepage while the Dwell ideas are tabled. The previous homepage lives at /home-dwell. -->
+<!-- Homepage while the Dwell ideas are tabled: the verse, plus a card for Guided SOAR and one for the Dwell Bookmark (coming soon).
+     The previous homepage lives at /home-dwell. -->
 <style>
-  html, body { margin: 0; height: 100%; background: #fff; color: #111; }
-  body { display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; text-align: center; font-family: 'Fraunces', Georgia, serif; }
-  blockquote { margin: 0; }
-  p { margin: 0; font-style: italic; font-weight: 400; font-size: clamp(24px, 5vw, 44px); line-height: 1.35; }
-  p b { font-weight: 600; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: #fff; color: #111; }
+  body { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 56px; padding: 48px 20px; font-family: 'DM Sans', sans-serif; }
+
+  blockquote { margin: 0; text-align: center; font-family: 'Fraunces', Georgia, serif; }
+  blockquote p { margin: 0; font-style: italic; font-weight: 400; font-size: clamp(24px, 5vw, 44px); line-height: 1.35; }
+  blockquote p b { font-weight: 600; }
   cite { display: block; margin-top: 18px; font-style: normal; font-weight: 600; font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: #5b6878; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; width: min(100%, 640px); }
+  .card { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 22px 22px 20px; border: 1.5px solid #111; border-radius: 6px; background: #fff; color: #111; text-decoration: none; min-height: 180px; }
+  .card .mark { height: 40px; display: flex; align-items: center; }
+  .card .mark img { height: 40px; width: auto; display: block; }
+  .card h2 { margin: 0; font: 700 22px/1.15 'Fraunces', serif; }
+  .card p { margin: 0; font-size: 14.5px; line-height: 1.45; color: #3d4450; }
+  .card .go { margin-top: auto; font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+  a.card { transition: background .2s, transform .2s; }
+  a.card:hover { background: #f6f7f8; }
+  a.card:hover .go { text-decoration: underline; text-underline-offset: 4px; }
+  a.card:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+
+  /* the bookmark isn't ready yet: same card, dashed and quiet, not a link */
+  .card.soon { border-style: dashed; border-color: #a3abb6; color: #6b7480; cursor: default; }
+  .card.soon h2 { color: #4a5260; }
+  .card.soon p { color: #6b7480; }
+  .card.soon .go { color: #8a929c; }
+  .logo { display: flex; align-items: center; gap: 3px; height: 38px; }
+  .logo .side { position: relative; width: 9px; height: 100%; flex: none; }
+  .logo .side span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; font: 700 8px/1 'DM Sans', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+  .logo .box { height: 100%; display: flex; align-items: center; background: #a3abb6; color: #fff; border-radius: 4px; padding: 2px 10px 0; font: 700 20px/1 'DM Sans', sans-serif; letter-spacing: .02em; }
+
+  @media (max-width: 560px) {
+    body { gap: 40px; }
+    .cards { grid-template-columns: minmax(0, 1fr); }
+    .card { min-height: 0; }
+  }
 </style></head>
 <body>
   <blockquote>
     <p>Let the word of Christ <b>dwell</b><br>in you richly.</p>
     <cite>Colossians 3:16</cite>
   </blockquote>
+
+  <nav class="cards" aria-label="Study tools">
+    <a class="card" href="/guidedsoar">
+      <span class="mark"><img src="/guided-soar-logo.png" alt=""></span>
+      <h2>Guided SOAR</h2>
+      <p>A simple way to read Scripture with God&rsquo;s character at the center. Templates, a leader guide, and an example.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <div class="card soon" aria-disabled="true">
+      <span class="mark"><span class="logo" aria-hidden="true"><span class="side"><span>Dwell</span></span><span class="box">STUDY</span></span></span>
+      <h2>Dwell Bookmark</h2>
+      <p>A five-step study guide that fits in your Bible.</p>
+      <span class="go">Coming soon</span>
+    </div>
+  </nav>
 </body>
 </html>
