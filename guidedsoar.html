@@ -177,6 +177,12 @@
   .truth.verse-m { gap: calc(3 * var(--u)); }
   .truth.verse-m span { font-size: calc(11.6 * var(--u)); line-height: 1.12; }
   .cover-logo { position: absolute; right: calc(32 * var(--u)); bottom: calc(32 * var(--u)); width: calc(104 * var(--u)); height: auto; }
+  .gd-box .tab { position: absolute; writing-mode: vertical-rl; background: #111; color: #fff; font: 700 calc(7.5 * var(--u))/1 'DM Sans', sans-serif;
+                  letter-spacing: .16em; text-transform: uppercase; padding: calc(9 * var(--u)) calc(4 * var(--u)); border-radius: calc(3 * var(--u)); white-space: nowrap; }
+  .gd-box .tab.lt { left: calc(-9 * var(--u)); transform: rotate(180deg); }
+  .gd-box .tab.rt { right: calc(-9 * var(--u)); }
+  .gd-box .tab.t { top: calc(26 * var(--u)); }
+  .gd-box .tab.b { bottom: calc(26 * var(--u)); }
 </style></head>
 <body>
   <header class="top">
@@ -188,10 +194,10 @@
       <div class="slide s-tpl" data-name="Template" aria-label="Blank template">
         <div class="blurb"><b>Blank template</b><p>Print it and study any passage.</p></div>
         <div class="card" aria-hidden="true">
-          <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span><span class="sub">author &middot; time &middot; purpose</span></div>
-          <div class="gd-box tr vt-tr"><span class="lbl">Observation</span><span class="sub">words &middot; concepts &middot; connections</span></div>
-          <div class="gd-box bl vt-bl"><span class="lbl">Application</span><span class="sub">thoughts &middot; words &middot; actions</span></div>
-          <div class="gd-box br vt-br"><span class="lbl">Reflection</span><span class="sub">prayers &middot; questions &middot; insights</span></div>
+          <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span><span class="tab lt t">author &middot; time &middot; purpose</span></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Observation</span><span class="tab rt t">words &middot; concepts &middot; connections</span></div>
+          <div class="gd-box bl vt-bl"><span class="lbl">Application</span><span class="tab lt b">thoughts &middot; words &middot; actions</span></div>
+          <div class="gd-box br vt-br"><span class="lbl">Reflection</span><span class="tab rt b">prayers &middot; questions &middot; insights</span></div>
           <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
         </div>
         <div class="cap"><a class="open" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener">Blank template PDF &darr;</a></div>
