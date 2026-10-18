@@ -14,36 +14,32 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #fff; color: #111; }
   body { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
-  .back { display: inline-block; margin: 20px 20px 0; font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #111; text-decoration: none; }
-  .back:hover { text-decoration: underline; text-underline-offset: 4px; }
-  main { max-width: 860px; margin: 0 auto; padding: 24px 20px 64px; text-align: center; }
-  h1 { font: 700 clamp(30px, 6vw, 42px)/1.05 'Fraunces', serif; margin: 0 0 10px; }
-  .sub { font-size: 16.5px; line-height: 1.5; color: #3d4450; margin: 0 auto 30px; max-width: 30em; }
-  .faces { display: flex; gap: 22px; justify-content: center; align-items: flex-start; margin-bottom: 32px; }
-  figure { margin: 0; flex: 0 1 340px; }
+  .top { display: flex; align-items: center; height: 72px; padding: 0 20px; }
+  .top img { height: 40px; width: auto; display: block; }
+  main { padding: 4px 16px 0; }
+  .faces { display: flex; gap: 24px; justify-content: center; align-items: flex-start; }
+  figure { margin: 0; width: min(44vw, (100svh - 110px) * 264 / 612); }
   .fw { container-type: inline-size; border: 1px solid #d5d9de; border-radius: 4px; overflow: hidden; box-shadow: 0 8px 26px rgba(0,0,0,.10); }
   .fw .dwb { --u: calc(100cqw / 264); text-align: left; }
-  figcaption { margin-top: 10px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #6b7480; }
-  .acts { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .btn { display: inline-block; background: #111; color: #fff; border: 1.5px solid #111; border-radius: 99px; padding: 12px 20px; font: 700 14px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
-  .btn.ghost { background: #fff; color: #111; }
-  .note { margin-top: 14px; font-size: 13.5px; color: #6b7480; }
-  @media (max-width: 600px) { .faces { flex-direction: column; align-items: center; } figure { flex: none; width: min(100%, 340px); } }
+  .dl { max-width: 620px; margin: 0 auto; padding: 36px 20px 72px; }
+  .dl h2 { font: 700 12px/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 16px; }
+  .starts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .starts a { border: 1.5px solid #111; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; color: #111; text-decoration: none; background: #111; color: #fff; }
+  .dl .note { margin: 12px 0 0; font-size: 13.5px; color: #6b7480; }
+  @media (max-width: 600px) { .faces { flex-direction: column; align-items: center; gap: 20px; } figure { width: min(100%, 420px); } }
 </style></head>
 <body>
-  <a class="back" href="/">&larr; Home</a>
+  <header class="top"><a href="/dwell" aria-label="Dwell Bookmark"><img src="/icons/dwell-title.png" alt="Dwell"></a></header>
   <main>
-    <h1>Dwell Bookmark</h1>
-    <p class="sub">A guide for meditating on Scripture daily. Pray, then work through five steps with your passage.</p>
     <div class="faces">
-      <figure><div class="fw"><div class="dwb side-a"><div class="hd"><div class="strip"><i></i><i></i><i></i><i></i><i></i></div><img class="wm" src="/icons/dwell-title.png" alt="Dwell"><div class="tag">a guide for meditating<br>on Scripture daily</div></div><p class="pray">Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p><div class="bar sage"><span class="n">1</span><span class="pipe">|</span>DISCOVER<span class="ic"><img src="/icons/discover.png" alt=""></span></div><p>Use a study Bible or trusted online resource to review historical context:</p><div class="ctx"><span>author</span><span>time frame</span><span>audience</span><span>purpose</span></div><p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p><div class="bar sage"><span class="n">2</span><span class="pipe">|</span>WORD WORK<span class="ic"><img src="/icons/word-work.png" alt=""></span></div><p>Reread the passage&mdash;which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</p><p>Which words need more clarity? Look them up&mdash;what do you learn?</p><p>How would you summarize the passage in <span style="white-space:nowrap">1&ndash;2</span> sentences?</p></div></div><figcaption>Front</figcaption></figure>
-      <figure><div class="fw"><div class="dwb side-b"><p class="pray" style="margin-top:calc(4 * var(--u))">Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p><div class="bar slate"><span class="n">3</span><span class="pipe">|</span>EVALUATE<span class="ic"><img src="/icons/evaluate.png" alt=""></span></div><p>Reread the passage&mdash;what questions come to mind?</p><p>Review other translations, cross references &amp; surrounding passages&mdash;do they shed any light on your questions?</p><p style="margin-bottom:calc(22 * var(--u))">How would the original audience have understood this passage?</p><div class="bar slate"><span class="n">4</span><span class="pipe">|</span>LEARN<span class="ic"><img src="/icons/learn.png" alt=""></span></div><p>What truth does this passage reveal about God&rsquo;s character and purpose?</p><p>What cultural or personal lies does this truth challenge today?</p><p style="margin-bottom:calc(26 * var(--u))"><em>Check your findings in community.</em></p><div class="bar rose"><span class="n">5</span><span class="pipe">|</span>LIVE<span class="ic"><img src="/icons/live.png" alt=""></span></div><p>How will this truth shape your prayers, thoughts, words and/or actions today?</p></div></div><figcaption>Back</figcaption></figure>
+      <figure aria-label="Front"><div class="fw"><div class="dwb side-a"><div class="hd"><div class="strip"><i></i><i></i><i></i><i></i><i></i></div><img class="wm" src="/icons/dwell-title.png" alt="Dwell"><div class="tag">a guide for meditating<br>on Scripture daily</div></div><p class="pray">Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p><div class="bar sage"><span class="n">1</span><span class="pipe">|</span>DISCOVER<span class="ic"><img src="/icons/discover.png" alt=""></span></div><p>Use a study Bible or trusted online resource to review historical context:</p><div class="ctx"><span>author</span><span>time frame</span><span>audience</span><span>purpose</span></div><p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p><div class="bar sage"><span class="n">2</span><span class="pipe">|</span>WORD WORK<span class="ic"><img src="/icons/word-work.png" alt=""></span></div><p>Reread the passage&mdash;which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</p><p>Which words need more clarity? Look them up&mdash;what do you learn?</p><p>How would you summarize the passage in <span style="white-space:nowrap">1&ndash;2</span> sentences?</p></div></div></figure>
+      <figure aria-label="Back"><div class="fw"><div class="dwb side-b"><p class="pray" style="margin-top:calc(4 * var(--u))">Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p><div class="bar slate"><span class="n">3</span><span class="pipe">|</span>EVALUATE<span class="ic"><img src="/icons/evaluate.png" alt=""></span></div><p>Reread the passage&mdash;what questions come to mind?</p><p>Review other translations, cross references &amp; surrounding passages&mdash;do they shed any light on your questions?</p><p style="margin-bottom:calc(22 * var(--u))">How would the original audience have understood this passage?</p><div class="bar slate"><span class="n">4</span><span class="pipe">|</span>LEARN<span class="ic"><img src="/icons/learn.png" alt=""></span></div><p>What truth does this passage reveal about God&rsquo;s character and purpose?</p><p>What cultural or personal lies does this truth challenge today?</p><p style="margin-bottom:calc(26 * var(--u))"><em>Check your findings in community.</em></p><div class="bar rose"><span class="n">5</span><span class="pipe">|</span>LIVE<span class="ic"><img src="/icons/live.png" alt=""></span></div><p>How will this truth shape your prayers, thoughts, words and/or actions today?</p></div></div></figure>
     </div>
-    <div class="acts">
-      <a class="btn" href="/dwell-bookmark-sheet.pdf" download="Dwell Bookmark.pdf">Download to print</a>
-      <a class="btn ghost" href="/guidedsoar">Guided SOAR</a>
-    </div>
-    <p class="note">Prints three to a page. Cut along the lines.</p>
   </main>
+  <section class="dl">
+    <h2>Download</h2>
+    <div class="starts"><a href="/dwell-bookmark-sheet.pdf" download="Dwell Bookmark.pdf">Bookmark PDF &darr;</a></div>
+    <p class="note">Prints three to a page, front and back. Cut along the lines.</p>
+  </section>
 </body>
 </html>
