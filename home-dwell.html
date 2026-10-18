@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dwell | Building blocks for Biblical literacy</title>
+<meta name="description" content="Let the word of Christ dwell in you richly. Colossians 3:16">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Dwell"><meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="/site.css">
+<!-- The Dwell Study journal cover, as the homepage. The previous homepage lives at /home-original. -->
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: #111; }
+  body { min-height: 100svh; display: flex; flex-direction: column; font-family: 'DM Sans', sans-serif; }
+
+  /* ---------- the cover: the book's layout, scaled to fit the screen ---------- */
+  .stage { flex: 1; display: flex; align-items: center; justify-content: center; padding-bottom: 20px; }
+  /* frame = the four windows + circle with a 20pt margin, measured in the book's points (396 wide) */
+  .cover { width: var(--cover-w); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .win { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border-radius: calc(6 * var(--u));
+         background: #2c3b3f url(dwell-cover.jpg) no-repeat; background-size: calc(396 * var(--u)) calc(612 * var(--u)); }
+  /* each window shows the part of the photo behind it, exactly as on the printed cover */
+  .win.tl { left: calc(20 * var(--u));  top: calc(20 * var(--u));    background-position: calc(-20 * var(--u))  calc(-45.5 * var(--u)); }
+  .win.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u));    background-position: calc(-202 * var(--u)) calc(-45.5 * var(--u)); }
+  .win.bl { left: calc(20 * var(--u));  top: calc(284.5 * var(--u)); background-position: calc(-20 * var(--u))  calc(-310 * var(--u)); }
+  .win.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); background-position: calc(-202 * var(--u)) calc(-310 * var(--u)); }
+  .truth { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u));
+           border-radius: 50%; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;
+           gap: calc(6 * var(--u)); text-align: center; margin: 0; }
+  .truth span { font-style: italic; font-size: calc(15 * var(--u)); line-height: 1; white-space: nowrap; }
+  .truth b { font-weight: 700; }
+  .truth cite { margin-top: calc(6 * var(--u)); font: normal 600 calc(8 * var(--u))/1 'Fraunces', serif;
+                letter-spacing: calc(2 * var(--u)); padding-left: calc(2 * var(--u)); text-transform: uppercase; color: #4a5568; }
+
+  /* ---------- desktop: a slideshow of the three cards. Cover in the middle, blank template on the left,
+     leader guide on the right. The side cards sit back at low opacity; click one (or use the arrows) to bring it forward. ---------- */
+  .deck { position: relative; }
+  .slide.s-tpl, .slide.s-guide, .nav, .cap { display: none; }
+  /* whichever card is in the middle carries the shared names, so it morphs into the page you open */
+  .pos-c .vt-tl { view-transition-name: win-tl; } .pos-c .vt-tr { view-transition-name: win-tr; }
+  .pos-c .vt-bl { view-transition-name: win-bl; } .pos-c .vt-br { view-transition-name: win-br; }
+  .pos-c .vt-truth { view-transition-name: truth; }
+
+  .card { width: 100%; aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .gd-box { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border: calc(1.5 * var(--u)) solid #111; border-radius: calc(6 * var(--u));
+            background: #fff; display: flex; flex-direction: column; padding: calc(20 * var(--u)) calc(11 * var(--u)) calc(12 * var(--u)); }
+  .gd-box.tl { left: calc(20 * var(--u)); top: calc(20 * var(--u)); } .gd-box.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u)); }
+  .gd-box.bl { left: calc(20 * var(--u)); top: calc(284.5 * var(--u)); } .gd-box.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); }
+  .gd-box.bl, .gd-box.br { justify-content: flex-end; padding: calc(12 * var(--u)) calc(11 * var(--u)) calc(20 * var(--u)); }
+  .lbl { position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); background: #fff; padding: calc(3 * var(--u)) calc(8 * var(--u)) calc(3 * var(--u)) calc(10 * var(--u));
+         font: 700 calc(12.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+  .gd-box.bl .lbl, .gd-box.br .lbl { top: 100%; }
+  .gd-circle { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u)); border-radius: 50%;
+               border: calc(1.5 * var(--u)) solid #111; background: #fff; }
+  .gd-circle b { position: absolute; left: 0; right: 0; text-align: center; font: 900 calc(11.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; }
+  .gd-circle b:first-child { top: calc(34 * var(--u)); } .gd-circle b:last-of-type { top: calc(96 * var(--u)); }
+  .s-guide .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(22 * var(--u)); }
+  .s-guide .gd-circle b { position: static; margin-bottom: calc(4 * var(--u)); }
+  .s-guide .gd-circle p { margin: 0 0 calc(9 * var(--u)); font-style: italic; font-size: calc(9.8 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .s-guide .gd-circle p:last-child { margin-bottom: 0; }
+  .gq { list-style: none; margin: 0; padding: 0; }
+  .gq li { position: relative; padding-left: calc(8 * var(--u)); margin-bottom: calc(5 * var(--u)); font-size: calc(11 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .gq li::before { content: ''; position: absolute; left: 0; top: .5em; width: calc(2.8 * var(--u)); height: calc(2.8 * var(--u)); border-radius: 50%; background: #a3abb6; }
+
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .stage { overflow: hidden; }
+    .deck { --w: calc((100svh - 160px) * 396 / 561); width: var(--w); }
+    .slide { display: block !important; width: var(--w); transition: transform .55s cubic-bezier(.2, .75, .15, 1), opacity .55s; }
+    .slide .cover { width: 100%; }
+    .slide.pos-c { position: relative; z-index: 2; }
+    .slide.pos-l, .slide.pos-r { position: absolute; left: 0; top: 0; opacity: .3; cursor: pointer; z-index: 1; }
+    .slide.pos-l { transform: translateX(calc(-100% - 70px)) scale(.9); }
+    .slide.pos-r { transform: translateX(calc(100% + 70px)) scale(.9); }
+    .slide.pos-l:hover, .slide.pos-r:hover { opacity: .5; }
+    .slide.pos-l *, .slide.pos-r * { pointer-events: none; }
+    .cap { display: flex; align-items: center; justify-content: center; gap: 10px; height: 50px; margin-top: 14px; }
+    .cap a.open { background: #111; color: #fff; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
+    .cap a.need { border: 1.5px solid #111; color: #111; border-radius: 99px; padding: 9.5px 14px; font: 700 13px/1 'DM Sans', sans-serif; text-decoration: none; }
+    .cap a.need:hover { background: #f4f5f7; }
+    .cap .hint { font-size: 13px; color: #8a929c; letter-spacing: .04em; }
+    .nav { display: grid; place-items: center; position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%;
+           border: 1.5px solid #111; background: #fff; cursor: pointer; font-size: 22px; line-height: 1; color: #111; }
+    .nav.prev { left: 28px; } .nav.next { right: 28px; }
+    .nav:hover { background: #f4f5f7; }
+  }
+
+  /* ---------- phones and narrow windows: the same three cards, one at a time. Swipe (or tap a dot) to move between them.
+     The cards keep the cover's exact size and place, so each still lines up with the page it opens. ---------- */
+  .dots { display: none; }
+  @media (max-width: 999px), (max-height: 599px) {
+    body { overflow-x: hidden; }
+    .stage { overflow: hidden; }
+    .deck { width: var(--cover-w); touch-action: pan-y; }
+    .slide { display: block !important; width: 100%; transition: transform .45s cubic-bezier(.2, .75, .15, 1), opacity .45s; }
+    .slide .cover { width: 100%; }
+    .slide.pos-c { position: relative; }
+    .slide.pos-l, .slide.pos-r { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-l { transform: translateX(calc(-100% - 24px)); }
+    .slide.pos-r { transform: translateX(calc(100% + 24px)); }
+    .cap { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 30px; align-items: center; justify-content: center; gap: 8px; }
+    .cap a.open { background: #111; color: #fff; border-radius: 99px; padding: 10px 16px; font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
+    .cap a.need { border: 1.5px solid #111; color: #111; border-radius: 99px; padding: 8.5px 12px; font: 700 12px/1 'DM Sans', sans-serif; text-decoration: none; }
+    .dots { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 12px; justify-content: center; gap: 8px; z-index: 3; }
+    .dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #c9ced5; cursor: pointer; transition: background .2s, transform .2s; }
+    .dots button[aria-current="true"] { background: #111; transform: scale(1.15); }
+  }
+
+  /* a line of explanation for each card: above the card on phones, bottom left on desktop */
+  .note { display: none; }
+  .blurb b, .note b { display: block; font: 700 17px/1.15 'Fraunces', serif; margin-bottom: 4px; }
+  .blurb p, .note p { margin: 0; font-size: 13.5px; line-height: 1.4; color: #5b6878; }
+  @media (max-width: 999px), (max-height: 599px) {
+    .blurb { position: absolute; left: 12px; right: 12px; bottom: 100%; margin-bottom: 16px; text-align: center; }
+    .blurb p { max-width: 21em; margin: 0 auto; }
+  }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .slide .blurb { display: none; }
+    .note { display: block; position: fixed; left: 28px; bottom: 28px; max-width: 300px; background: #fff; padding: 16px 20px 16px 12px; border-radius: 6px; z-index: 4; transition: opacity .25s; }
+    .note.in { animation: blurb-in .5s ease backwards; }
+    .note b { font-size: 22px; margin-bottom: 6px; }
+    .note p { font-size: 15px; }
+    body.below .note { opacity: 0; visibility: hidden; }
+    @keyframes blurb-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
+
+  /* cards waiting off to the side, and the one-frame jump a card makes when the slideshow wraps around */
+  .slide.snap { transition: none !important; }
+  .slide.s-ex { display: none; }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .slide.pos-hl, .slide.pos-hr { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-hl { transform: translateX(calc(-200% - 140px)) scale(.9); }
+    .slide.pos-hr { transform: translateX(calc(200% + 140px)) scale(.9); }
+  }
+  @media (max-width: 999px), (max-height: 599px) {
+    .slide.pos-hl, .slide.pos-hr { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-hl { transform: translateX(calc(-200% - 48px)); }
+    .slide.pos-hr { transform: translateX(calc(200% + 48px)); }
+  }
+
+  /* the example: answers in a handwritten face */
+  .ex .hw { margin: 0; font: 600 calc(13.4 * var(--u))/1.18 'Caveat', cursive; color: #233; }
+  .ex .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(20 * var(--u)); }
+  .ex .gd-circle b { position: static; margin-bottom: calc(3 * var(--u)); }
+  .ex .gd-circle .hw { margin-bottom: calc(8 * var(--u)); font-size: calc(12.6 * var(--u)); }
+  .ex .gd-circle .hw:last-child { margin-bottom: 0; }
+  .ex .circ { display: inline-block; border: calc(1.2 * var(--u)) solid #233; border-radius: 50%; padding: calc(1 * var(--u)) calc(6 * var(--u)); margin-left: calc(-6 * var(--u)); }
+
+  /* ---------- about: below the slideshow ---------- */
+  .stage { min-height: calc(100svh - 72px); position: relative; }
+  .about { max-width: 620px; margin: 0 auto; padding: 56px 20px 72px; scroll-margin-top: 20px; }
+  .about h1 { font: 700 clamp(30px, 7vw, 42px)/1.05 'Fraunces', serif; letter-spacing: -0.01em; margin: 0 0 14px; }
+  .about .lede { font-size: 18px; line-height: 1.6; color: #3d4450; margin: 0 0 36px; }
+  .about h2 { font: 700 12px/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 16px; }
+  .steps { list-style: none; margin: 0 0 40px; padding: 0; counter-reset: s; }
+  .steps li { counter-increment: s; position: relative; padding: 0 0 18px 44px; font-size: 16.5px; line-height: 1.55; color: #3d4450; }
+  .steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #111;
+                      display: grid; place-items: center; font: 700 14px/1 'Fraunces', serif; color: #111; }
+  .steps li b { display: block; color: #111; font-size: 17px; margin-bottom: 2px; }
+  .starts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
+  .starts a { border: 1.5px solid #111; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; color: #111; text-decoration: none; }
+  .starts a.primary { background: #111; color: #fff; }
+  .about .verse { border-top: 1.5px solid #111; padding-top: 22px; text-align: center; }
+  .about .verse p { margin: 0; font-style: italic; font-size: 19px; line-height: 1.5; }
+  .about .verse cite { display: block; margin-top: 10px; font: normal 600 11px/1 'Fraunces', serif; letter-spacing: .22em; text-transform: uppercase; color: #5b6878; }
+</style></head>
+<body>
+  <header class="top">
+    <a class="logo" href="/" aria-label="Dwell Study home"><span class="side"><span>Dwell</span></span><span class="box">STUDY</span></a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    <nav class="menu" id="menu">
+      <a href="/howto"><b>Guide</b><small>How to think about each part</small></a>
+      <a href="/template"><b>Template</b><small>The four-corner study card</small></a>
+      <a href="/resources"><b>Tools</b><small>Tools for each corner, by level</small></a>
+    </nav>
+  </header>
+
+  <main class="stage">
+    <div class="deck">
+      <div class="slide s-tpl" data-name="Template" aria-label="Blank template">
+        <div class="blurb"><b>Blank template</b><p>Print it and study any passage.</p></div>
+        <div class="card" aria-hidden="true">
+          <div class="gd-box tl vt-tl"><span class="lbl">Perspective</span></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Words</span></div>
+          <div class="gd-box bl vt-bl"><span class="lbl">Connections</span></div>
+          <div class="gd-box br vt-br"><span class="lbl">Questions</span></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
+        </div>
+        <div class="cap"><a class="open" href="/template">Blank template &rarr;</a></div>
+      </div>
+      <div class="slide s-cover pos-c" data-name="Cover">
+        <div class="blurb"><b>Building blocks for Biblical literacy.</b><p>A Bible study rhythm for slowing down.</p></div>
+        <div class="cover">
+          <div class="win tl vt-tl" aria-hidden="true"></div>
+          <div class="win tr vt-tr" aria-hidden="true"></div>
+          <div class="win bl vt-bl" aria-hidden="true"></div>
+          <div class="win br vt-br" aria-hidden="true"></div>
+          <blockquote class="truth vt-truth">
+            <span>Let the word</span>
+            <span>of Christ <b>dwell</b></span>
+            <span>in you richly.</span>
+            <cite>Colossians 3:16</cite>
+          </blockquote>
+        </div>
+        <div class="cap"></div>
+      </div>
+      <div class="slide s-guide" data-name="Guide" aria-label="Guide">
+        <div class="blurb"><b>Guide</b><p>Questions for each corner, alone or with a group.</p></div>
+        <div class="card">
+          <div class="gd-box tl vt-tl"><span class="lbl">Perspective</span>
+            <ul class="gq"><li>Who wrote this book? Who was it written to?</li><li>When was it written? Why?</li></ul></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Words</span>
+            <ul class="gq"><li>What words or phrases repeat? What&rsquo;s the point of the repetition?</li><li>What words need clarity? Look them up or compare translations.</li></ul></div>
+          <div class="gd-box bl vt-bl"><span class="lbl">Connections</span>
+            <ul class="gq"><li>Read the surrounding chapters. How does this fit the whole book?</li><li>Follow cross-references. Where else does this theme show up?</li><li>How would the first readers have understood this?</li></ul></div>
+          <div class="gd-box br vt-br"><span class="lbl">Questions</span>
+            <ul class="gq"><li>Read slowly, expecting to discover something.</li><li>Write down every question. Did anything confuse or bother you?</li><li>Circle the one you most want answered.</li></ul></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p>What does this passage teach about who God is and how He works?</p><b>THEREFORE, I&hellip;</b><p>What does this reveal about who He made me to be?</p></div>
+        </div>
+        <div class="cap"><a class="open" href="/howto">Guide &rarr;</a><a class="need" href="/resources">Need resources?</a></div>
+      </div>
+      <div class="slide s-ex" data-name="Example" aria-label="Example: Exodus 3">
+        <div class="blurb"><b>Example: Exodus 3</b><p>A filled-out study of Moses and the burning bush.</p></div>
+        <div class="card ex">
+          <div class="gd-box tl vt-tl"><span class="lbl">Perspective</span>
+            <p class="hw">Moses &rarr; Israel, after the Exodus (around 1400s BC).<br>To show God keeps His covenant promises and rescues His people.</p></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Words</span>
+            <p class="hw">&ldquo;I AM WHO I AM&rdquo; (v.14) = God&rsquo;s name, the LORD.<br>&ldquo;I have seen&hellip; heard&hellip; I know&hellip; I have come down&rdquo; (vv.7&ndash;8)<br>holy ground (v.5)</p></div>
+          <div class="gd-box bl vt-bl"><span class="lbl">Connections</span>
+            <p class="hw">Gen 15:13&ndash;14 &mdash; rescue promised<br>Ex 2:24 &mdash; God remembered<br>John 8:58 &mdash; Jesus: &ldquo;before Abraham was, I am&rdquo;</p></div>
+          <div class="gd-box br vt-br"><span class="lbl">Questions</span>
+            <p class="hw">Why a bush that doesn&rsquo;t burn up?<br>Why take off his sandals?<br><span class="circ">What does &ldquo;I AM&rdquo; mean?</span></p></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p class="hw">holy and near. He sees, hears, and comes down to rescue.</p><b>THEREFORE, I&hellip;</b><p class="hw">can go where He sends me. He goes with me (v.12).</p></div>
+        </div>
+        <div class="cap"><a class="open" href="/template">Try it: blank template &rarr;</a></div>
+      </div>
+      <div class="dots" role="group" aria-label="Cards"><button type="button" aria-label="Blank template"></button><button type="button" aria-label="Cover"></button><button type="button" aria-label="Guide"></button><button type="button" aria-label="Example: Exodus 3"></button></div>
+    </div>
+    <button class="nav prev" type="button" aria-label="Previous">&larr;</button>
+    <button class="nav next" type="button" aria-label="Next">&rarr;</button>
+  </main>
+
+  <div class="note blurb-note" aria-live="polite"></div>
+
+  <section class="about" id="about">
+    <h1>Building blocks for Biblical literacy.</h1>
+    <p class="lede">Dwell is a Bible study rhythm to help you slow down in an age of speeding things up. Read with curiosity, patience, and fresh intention as you let the Holy Spirit do the transforming.</p>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Pray</b>Ask God for wisdom, and to correct any lies you believe, before you read a word.</li>
+      <li><b>Work the four corners</b>Perspective, Words, Connections, and Questions. Each one slows you down and helps you see what the passage actually says.</li>
+      <li><b>Find the central truth</b>What does this passage show about who God is? Therefore, what does that mean for who He made you to be?</li>
+      <li><b>Process it</b>Do you believe it? What lies get in the way? How will you live it out? Bring your remaining questions to your community.</li>
+    </ol>
+    <h2>Start here</h2>
+    <div class="starts"><a class="primary" href="/howto">Guide</a><a href="/template">Template</a><a href="/resources">Tools</a></div>
+    <div class="verse"><p>Let the word of Christ <b>dwell</b> in you richly.</p><cite>Colossians 3:16</cite></div>
+  </section>
+
+  <script src="/site.js"></script>
+  <script>
+    // Slideshow: the middle card is in front, its neighbors sit to the left and right, the rest wait off to the side.
+    // It loops: after the last card comes the first. A card that wraps around jumps (unseen) to the far side first,
+    // so nothing slides across the middle.
+    (function () {
+      var slides = [].slice.call(document.querySelectorAll('.deck .slide')), n = slides.length, at = 1;
+      var dots = [].slice.call(document.querySelectorAll('.dots button'));
+      var ALL = ['pos-l', 'pos-c', 'pos-r', 'pos-hl', 'pos-hr'];
+      function cur(el) { for (var k = 0; k < ALL.length; k++) if (el.classList.contains(ALL[k])) return ALL[k]; return null; }
+      function set(el, c) { el.classList.remove.apply(el.classList, ALL); el.classList.add(c); }
+      function paint(dir) {
+        slides.forEach(function (el, i) {
+          var off = ((i - at) % n + n) % n;
+          var next = off === 0 ? 'pos-c' : off === 1 ? 'pos-r' : off === n - 1 ? 'pos-l' : (dir < 0 ? 'pos-hr' : 'pos-hl');
+          var was = cur(el);
+          var entering = was === null || was === 'pos-hl' || was === 'pos-hr' || (was === 'pos-l' && next === 'pos-r') || (was === 'pos-r' && next === 'pos-l');
+          if (entering && next !== was && dir) {        // start just off the side it comes in from
+            el.classList.add('snap'); set(el, dir > 0 ? 'pos-hr' : 'pos-hl'); void el.offsetWidth; el.classList.remove('snap');
+          }
+          if (was === null) el.classList.add('snap');
+          set(el, next);
+          if (was === null) { void el.offsetWidth; el.classList.remove('snap'); }
+        });
+        dots.forEach(function (d, i) { d.setAttribute('aria-current', i === at); });
+        var note = document.querySelector('.note'), src = slides[at].querySelector('.blurb');
+        if (note && src) { note.innerHTML = src.innerHTML; note.classList.remove('in'); void note.offsetWidth; note.classList.add('in'); }
+      }
+      function go(d) { at = (at + d + n) % n; paint(d); }
+      function jump(i) { if (i === at) return; var f = ((i - at) % n + n) % n; at = i; paint(f <= n / 2 ? 1 : -1); }
+      dots.forEach(function (d, i) { d.addEventListener('click', function () { jump(i); }); });
+      var deck = document.querySelector('.deck'), x0 = null, y0 = 0;
+      deck.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      deck.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+      });
+      document.querySelector('.nav.prev').addEventListener('click', function () { go(-1); });
+      document.querySelector('.nav.next').addEventListener('click', function () { go(1); });
+      slides.forEach(function (el, i) { el.addEventListener('click', function () { var c = cur(el); if (c === 'pos-l') go(-1); else if (c === 'pos-r') go(1); }); });
+      paint(0);
+      document.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') go(-1); if (e.key === 'ArrowRight') go(1); });
+      // desktop: the note in the bottom-left corner belongs to the slideshow, so hide it once you scroll down to the About section
+      var stage = document.querySelector('.stage');
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { document.body.classList.toggle('below', es[0].intersectionRatio < .6); }, { threshold: [0, .6, 1] }).observe(stage);
+    })();
+  </script>
+</body>
+</html>

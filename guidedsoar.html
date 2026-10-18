@@ -1,240 +1,322 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Guided SOAR</title>
-<meta name="description" content="Guided SOAR: a simple way to read Scripture with God's character at the center. Templates and leader guide." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fredoka:wght@500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guided SOAR | Templates</title>
+<meta name="description" content="Guided SOAR: a simple way to read Scripture with God’s character at the center. Blank template, leader guide, and an example.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@600&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
-<meta name="apple-mobile-web-app-title" content="Dwell"><meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-title" content="Guided SOAR"><meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="/site.css">
+<!-- Guided SOAR: the same cover-and-cards slideshow the Dwell homepage used (that page now lives at /home-dwell). -->
 <style>
-  :root {
-    --sky-top: #16171a; --sky-mid: #24252a; --sky-low: #36373c;
-    --sun: #e4e5e8; --ridge-far: #28292d; --ground: #1f2023;
-    --card: #2a2b30; --card-hover: #33343a; --line: #3d3f45;
-    --text: #f3f4f6; --dim: #a3a7af;
-  }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body { background: var(--ground); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { margin: 0; background: #fff; color: #111; }
+  body { min-height: 100svh; display: flex; flex-direction: column; font-family: 'DM Sans', sans-serif; }
 
-  /* hero: the journal cover. As you scroll, the ridges rise over the sun and fill the screen,
-     then the page continues on the same ground color. */
-  .hero { position: relative; height: min(76svh, 620px); min-height: 460px; overflow: hidden;
-          background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-low) 72%); }
-  .sun { position: absolute; left: 50%; top: 50%; width: min(66vw, 300px); aspect-ratio: 1; margin: calc(min(66vw, 300px) / -2) 0 0 calc(min(66vw, 300px) / -2);
-         border-radius: 50%; background: var(--sun); display: flex; align-items: center; justify-content: center; will-change: transform; }
-  .sun img { width: 58%; height: auto; display: block; margin-top: -4%; }
-  /* both ridges share one coordinate space (same top, same scale) so the resting view matches the cover */
-  .layer { position: absolute; left: 0; right: 0; top: 52%; height: 200%; will-change: transform; }
-  .layer svg { display: block; width: 100%; height: 31.8%; }    /* 48% of the hero per 205 units, 272 units tall */
-  .layer .fill { height: 100%; margin-top: -1px; }
-  @media (prefers-reduced-motion: reduce) { .hero { position: relative; } }
+  /* ---------- the cover: the book's layout, scaled to fit the screen ---------- */
+  .stage { flex: 1; display: flex; align-items: center; justify-content: center; padding-bottom: 20px; }
+  /* frame = the four windows + circle with a 20pt margin, measured in the book's points (396 wide) */
+  .cover { width: var(--cover-w); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .win { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border-radius: calc(6 * var(--u));
+         background: #2c3b3f url(/dwell-cover.jpg) no-repeat; background-size: calc(396 * var(--u)) calc(612 * var(--u)); }
+  /* each window shows the part of the photo behind it, exactly as on the printed cover */
+  .win.tl { left: calc(20 * var(--u));  top: calc(20 * var(--u));    background-position: calc(-20 * var(--u))  calc(-45.5 * var(--u)); }
+  .win.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u));    background-position: calc(-202 * var(--u)) calc(-45.5 * var(--u)); }
+  .win.bl { left: calc(20 * var(--u));  top: calc(284.5 * var(--u)); background-position: calc(-20 * var(--u))  calc(-310 * var(--u)); }
+  .win.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); background-position: calc(-202 * var(--u)) calc(-310 * var(--u)); }
+  .truth { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u));
+           border-radius: 50%; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;
+           gap: calc(6 * var(--u)); text-align: center; margin: 0; }
+  .truth span { font-style: italic; font-size: calc(15 * var(--u)); line-height: 1; white-space: nowrap; }
+  .truth b { font-weight: 700; }
+  .truth cite { margin-top: calc(6 * var(--u)); font: normal 600 calc(8 * var(--u))/1 'Fraunces', serif;
+                letter-spacing: calc(2 * var(--u)); padding-left: calc(2 * var(--u)); text-transform: uppercase; color: #4a5568; }
 
-  main { max-width: 640px; margin-left: auto; margin-right: auto; padding: 0 16px 56px; }
-  .lede { font-size: 17px; line-height: 1.55; color: var(--text); text-align: center; margin: 0 auto 36px; max-width: 30em; }
-  .lede b { font-weight: 700; }
-  h2 { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dim); margin: 0 0 12px 4px; }
-  .list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
-  .card { display: flex; align-items: center; gap: 16px; padding: 18px 18px 18px 20px; background: var(--card); border: 1px solid var(--line);
-           border-radius: 16px; color: inherit; text-decoration: none; transition: background .15s, transform .15s; }
-  .card:hover { background: var(--card-hover); transform: translateY(-1px); }
-  .card:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-  .card > div { flex: 1; min-width: 0; }
-  .ct { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.15; }
-  .card p { margin: 4px 0 0; font-size: 14.5px; line-height: 1.45; color: var(--dim); }
-  .tag { display: inline-block; margin-top: 8px; font-size: 12px; color: var(--dim); }
-  .go { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--text); color: var(--ground);
-         display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; }
-  footer { text-align: center; font-size: 13px; color: var(--dim); }
-  footer a { color: var(--text); }
-  button.card { width: 100%; font: inherit; text-align: left; cursor: pointer; }
+  /* ---------- desktop: a slideshow of the three cards. Cover in the middle, blank template on the left,
+     leader guide on the right. The side cards sit back at low opacity; click one (or use the arrows) to bring it forward. ---------- */
+  .deck { position: relative; }
+  .slide.s-tpl, .slide.s-guide, .nav, .cap { display: none; }
+  /* whichever card is in the middle carries the shared names, so it morphs into the page you open */
+  .pos-c .vt-tl { view-transition-name: win-tl; } .pos-c .vt-tr { view-transition-name: win-tr; }
+  .pos-c .vt-bl { view-transition-name: win-bl; } .pos-c .vt-br { view-transition-name: win-br; }
+  .pos-c .vt-truth { view-transition-name: truth; }
 
-  /* one-sheet preview */
-  dialog.sheet { border: 0; padding: 0; background: transparent; color: var(--text); max-width: min(440px, calc(100vw - 32px)); width: 100%; max-height: calc(100dvh - 32px); overflow: visible; }
-  dialog.sheet::backdrop { background: rgba(10, 10, 12, .78); backdrop-filter: blur(3px); }
-  dialog.sheet[open] { animation: rise .22s ease-out; }
-  @keyframes rise { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
-  .sheet-in { display: flex; flex-direction: column; gap: 14px; max-height: calc(100dvh - 32px); }
-  .sheet-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .sheet-t { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 22px; }
-  .x { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--text); font-size: 22px; line-height: 1; cursor: pointer; }
-  .x:hover { background: var(--card-hover); }
-  .paper { flex: 1 1 auto; min-height: 0; display: flex; justify-content: center; }
-  .paper img { display: block; max-width: 100%; max-height: 100%; height: auto; object-fit: contain; background: #fff; border-radius: 6px; box-shadow: 0 18px 50px rgba(0,0,0,.5); }
-  .dl { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 18px; border-radius: 14px; background: var(--text); color: var(--ground);
-        font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 18px; text-decoration: none; }
-  .dl:hover { background: #fff; }
-  .dl-note { text-align: center; font-size: 13px; color: var(--dim); margin-top: -6px; }
+  .card { width: 100%; aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .gd-box { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border: calc(1.5 * var(--u)) solid #111; border-radius: calc(6 * var(--u));
+            background: #fff; display: flex; flex-direction: column; padding: calc(20 * var(--u)) calc(11 * var(--u)) calc(12 * var(--u)); }
+  .gd-box.tl { left: calc(20 * var(--u)); top: calc(20 * var(--u)); } .gd-box.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u)); }
+  .gd-box.bl { left: calc(20 * var(--u)); top: calc(284.5 * var(--u)); } .gd-box.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); }
+  .gd-box.bl, .gd-box.br { justify-content: flex-end; padding: calc(12 * var(--u)) calc(11 * var(--u)) calc(20 * var(--u)); }
+  .lbl { position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); background: #fff; padding: calc(3 * var(--u)) calc(8 * var(--u)) calc(3 * var(--u)) calc(10 * var(--u));
+         font: 700 calc(12.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+  .gd-box.bl .lbl, .gd-box.br .lbl { top: 100%; }
+  .gd-circle { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u)); border-radius: 50%;
+               border: calc(1.5 * var(--u)) solid #111; background: #fff; }
+  .gd-circle b { position: absolute; left: 0; right: 0; text-align: center; font: 900 calc(11.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; }
+  .gd-circle b:first-child { top: calc(34 * var(--u)); } .gd-circle b:last-of-type { top: calc(96 * var(--u)); }
+  .s-guide .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(22 * var(--u)); }
+  .s-guide .gd-circle b { position: static; margin-bottom: calc(4 * var(--u)); }
+  .s-guide .gd-circle p { margin: 0 0 calc(9 * var(--u)); font-style: italic; font-size: calc(9.8 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .s-guide .gd-circle p:last-child { margin-bottom: 0; }
+  .gq { list-style: none; margin: 0; padding: 0; }
+  .gq li { position: relative; padding-left: calc(8 * var(--u)); margin-bottom: calc(5 * var(--u)); font-size: calc(11 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .gq li::before { content: ''; position: absolute; left: 0; top: .5em; width: calc(2.8 * var(--u)); height: calc(2.8 * var(--u)); border-radius: 50%; background: #a3abb6; }
 
-  /* resources: a lighter, media-style treatment so they read differently from the template cards */
-  .res { border-top: 1px solid var(--line); padding-top: 18px; margin-bottom: 40px; }
-  .res-h { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 4px 12px; }
-  .pods { display: flex; flex-direction: column; gap: 22px; margin-bottom: 30px; }
-  .pod { color: inherit; text-decoration: none; display: flex; flex-direction: column; gap: 10px; }
-  .thumb { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #2a2b30; }
-  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s; }
-  .pod:hover .thumb img { transform: scale(1.04); }
-  .play { position: absolute; inset: 0; margin: auto; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.92); color: #111;
-          display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.35); }
-  .play svg { width: 20px; height: 20px; margin-left: 2px; }
-  .badge { position: absolute; left: 10px; top: 10px; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; background: rgba(0,0,0,.7); color: #fff; padding: 4px 8px; border-radius: 6px; }
-  .pod-b { display: flex; flex-direction: column; gap: 3px; padding: 0 4px; }
-  .pod-t { font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--text); }
-  .pod-d { font-size: 13.5px; line-height: 1.4; color: var(--dim); }
-  .play { width: 54px !important; height: 54px !important; } .play svg { width: 24px !important; height: 24px !important; }
-  .rows { display: flex; flex-direction: column; }
-  .row { display: flex; align-items: center; gap: 14px; padding: 14px 4px; color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); }
-  .row:last-child { border-bottom: 0; }
-  .row:hover .row-t { text-decoration: underline; text-underline-offset: 3px; }
-  .ic { flex: none; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--text); }
-  .ic svg { width: 18px; height: 18px; }
-  .row-b { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-  .row-t { font-size: 16px; font-weight: 700; }
-  .row-d { font-size: 13.5px; line-height: 1.4; color: var(--dim); }
-  .ext { flex: none; color: var(--dim); font-size: 18px; }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .stage { overflow: hidden; }
+    .deck { --w: calc((100svh - 160px) * 396 / 561); width: var(--w); }
+    .slide { display: block !important; width: var(--w); transition: transform .55s cubic-bezier(.2, .75, .15, 1), opacity .55s; }
+    .slide .cover { width: 100%; }
+    .slide.pos-c { position: relative; z-index: 2; }
+    .slide.pos-l, .slide.pos-r { position: absolute; left: 0; top: 0; opacity: .3; cursor: pointer; z-index: 1; }
+    .slide.pos-l { transform: translateX(calc(-100% - 70px)) scale(.9); }
+    .slide.pos-r { transform: translateX(calc(100% + 70px)) scale(.9); }
+    .slide.pos-l:hover, .slide.pos-r:hover { opacity: .5; }
+    .slide.pos-l *, .slide.pos-r * { pointer-events: none; }
+    .cap { display: flex; align-items: center; justify-content: center; gap: 10px; height: 50px; margin-top: 14px; }
+    .cap a.open { background: #111; color: #fff; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
+    .cap a.need { border: 1.5px solid #111; color: #111; border-radius: 99px; padding: 9.5px 14px; font: 700 13px/1 'DM Sans', sans-serif; text-decoration: none; }
+    .cap a.need:hover { background: #f4f5f7; }
+    .cap .hint { font-size: 13px; color: #8a929c; letter-spacing: .04em; }
+    .nav { display: grid; place-items: center; position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%;
+           border: 1.5px solid #111; background: #fff; cursor: pointer; font-size: 22px; line-height: 1; color: #111; }
+    .nav.prev { left: 28px; } .nav.next { right: 28px; }
+    .nav:hover { background: #f4f5f7; }
+  }
 
-  /* night sky: stars, a lit tent and a small fire on the front ridge */
-  .stars { position: absolute; inset: 0; will-change: transform; }
-  .stars i { position: absolute; width: var(--s); height: var(--s); border-radius: 50%; background: #fff; opacity: var(--o); animation: tw 3.6s ease-in-out infinite; }
-  @keyframes tw { 50% { opacity: .15; } }
-  .prop { position: absolute; transform: translate(-50%, -100%); }
-  .prop svg { display: block; width: 100%; height: auto; }
-  .tent { left: 58%; top: calc(31.8% * (494 - 340) / 272 + 2px); width: min(17vw, 80px); }
-  .fire { left: 50%; top: calc(31.8% * (494 - 340) / 272 + 3px); width: min(6vw, 28px); }
-  .flame { transform-box: fill-box; transform-origin: 50% 100%; }
-  .f1 { animation: flick1 1.6s ease-in-out infinite; } .f2 { animation: flick2 1.1s ease-in-out infinite; } .glow { animation: glowp 2.3s ease-in-out infinite; }
-  @keyframes flick1 { 0%,100% { transform: scale(1,1); } 25% { transform: scale(.94,1.08) skewX(-3deg); } 50% { transform: scale(1.04,.93) skewX(2deg); } 75% { transform: scale(.97,1.05); } }
-  @keyframes flick2 { 0%,100% { transform: scale(1,1); } 30% { transform: scale(1.08,.88); } 60% { transform: scale(.9,1.12) skewX(3deg); } }
-  @keyframes glowp { 0%,100% { opacity: .85; } 40% { opacity: 1; } 70% { opacity: .7; } }
-  @media (prefers-reduced-motion: reduce) { .stars i, .f1, .f2, .glow { animation: none; } }
+  /* ---------- phones and narrow windows: the same three cards, one at a time. Swipe (or tap a dot) to move between them.
+     The cards keep the cover's exact size and place, so each still lines up with the page it opens. ---------- */
+  .dots { display: none; }
+  @media (max-width: 999px), (max-height: 599px) {
+    body { overflow-x: hidden; }
+    .stage { overflow: hidden; }
+    .deck { width: var(--cover-w); touch-action: pan-y; }
+    .slide { display: block !important; width: 100%; transition: transform .45s cubic-bezier(.2, .75, .15, 1), opacity .45s; }
+    .slide .cover { width: 100%; }
+    .slide.pos-c { position: relative; }
+    .slide.pos-l, .slide.pos-r { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-l { transform: translateX(calc(-100% - 24px)); }
+    .slide.pos-r { transform: translateX(calc(100% + 24px)); }
+    .cap { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 30px; align-items: center; justify-content: center; gap: 8px; }
+    .cap a.open { background: #111; color: #fff; border-radius: 99px; padding: 10px 16px; font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
+    .cap a.need { border: 1.5px solid #111; color: #111; border-radius: 99px; padding: 8.5px 12px; font: 700 12px/1 'DM Sans', sans-serif; text-decoration: none; }
+    .dots { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 12px; justify-content: center; gap: 8px; z-index: 3; }
+    .dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #c9ced5; cursor: pointer; transition: background .2s, transform .2s; }
+    .dots button[aria-current="true"] { background: #111; transform: scale(1.15); }
+  }
 
-  /* leader resource guide: the card's sections, with prep vs student-led made obvious */
-  .guide { margin-bottom: 40px; }
-  .split { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-size: 14px; color: var(--dim); margin: 0 4px 14px; }
-  .split .dot { opacity: .5; }
-  .who { display: inline-block; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; border-radius: 99px; padding: 3px 9px; white-space: nowrap; }
-  .who.prep { background: var(--text); color: var(--ground); }
-  .who.stu { border: 1.5px dashed var(--dim); color: var(--text); }
-  .board { display: flex; flex-direction: column; gap: 10px; }
-  .q { border-radius: 16px; padding: 16px 16px 14px; }
-  .q.prep { background: var(--card); border: 1px solid var(--line); }
-  .q.stu { border: 1.5px dashed var(--line); }
-  .q.mid { border-radius: 26px; }
-  .q-h { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-  .q-l { flex: none; font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 34px; line-height: .9; width: 30px; text-align: center; }
-  .q-l.ring { font-size: 30px; }
-  .q-n { flex: 1; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 18px; line-height: 1.1; }
-  .q-n small { display: block; font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 12.5px; color: var(--dim); margin-top: 2px; }
-  .q-p { margin: 0 0 10px; font-size: 14.5px; line-height: 1.5; color: var(--text); }
-  .stu .q-p { margin-bottom: 6px; }
-  .rls { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
-  .rl { display: flex; flex-direction: column; gap: 2px; padding: 10px 2px; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
-  .rl:last-child { border-bottom: 0; padding-bottom: 2px; }
-  .rl-t { font-weight: 700; font-size: 15px; } .rl:hover .rl-t { text-decoration: underline; text-underline-offset: 3px; }
-  .rl-d { font-size: 13px; color: var(--dim); }
-  .tips { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.5; color: var(--dim); font-style: italic; }
-  .tips li { margin-bottom: 3px; }
-  @media (min-width: 560px) { .board { display: grid; grid-template-columns: 1fr 1fr; } .q.mid { grid-column: 1 / -1; } }
-</style>
-<style>
-  /* light theme to match the rest of dwellstudy.com */
-  :root { --ground: #fff; --card: #fff; --card-hover: #f6f7f8; --line: #111; --text: #111; --dim: #5b6878; }
-  body { background: #fff; }
-  .card { border-width: 1.5px; border-radius: 6px; }
-  .card:focus-visible { outline-color: #111; }
-  .ct { font-family: 'Fraunces', serif; font-weight: 700; }
-  h2 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .18em; color: #111; }
-  .lede { color: #3d4450; }
-  .x { background: #fff; }
-  main { padding-top: 8px; }
+  /* a line of explanation for each card: above the card on phones, bottom left on desktop */
+  .note { display: none; }
+  .blurb b, .note b { display: block; font: 700 17px/1.15 'Fraunces', serif; margin-bottom: 4px; }
+  .blurb p, .note p { margin: 0; font-size: 13.5px; line-height: 1.4; color: #5b6878; }
+  @media (max-width: 999px), (max-height: 599px) {
+    .blurb { position: absolute; left: 12px; right: 12px; bottom: 100%; margin-bottom: 16px; text-align: center; }
+    .blurb p { max-width: 21em; margin: 0 auto; }
+  }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .slide .blurb { display: none; }
+    .note { display: block; position: fixed; left: 28px; bottom: 28px; max-width: 300px; background: #fff; padding: 16px 20px 16px 12px; border-radius: 6px; z-index: 4; transition: opacity .25s; }
+    .note.in { animation: blurb-in .5s ease backwards; }
+    .note b { font-size: 22px; margin-bottom: 6px; }
+    .note p { font-size: 15px; }
+    body.below .note { opacity: 0; visibility: hidden; }
+    @keyframes blurb-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
 
-  /* hero: the SOAR template on the homepage cover's frame (396 x 561 pt), so the photo windows morph into its boxes */
-  .gs-hero { display: flex; flex-direction: column; align-items: center; padding: 6px 20px 30px; }
-  .gs-logo { height: 46px; width: auto; margin-bottom: 4px; }
-  .gs-card { width: min(100%, 400px); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
-  .gs-box { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border: calc(3 * var(--u)) solid #111; border-radius: calc(14 * var(--u)); background: #fff; }
-  .gs-box.tl { left: calc(20 * var(--u)); top: calc(20 * var(--u)); }
-  .gs-box.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u)); }
-  .gs-box.bl { left: calc(20 * var(--u)); top: calc(284.5 * var(--u)); }
-  .gs-box.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); }
-  .gs-box .t { position: absolute; top: calc(8 * var(--u)); left: calc(10 * var(--u)); display: flex; align-items: center; gap: calc(5 * var(--u)); font-family: 'Fredoka', sans-serif; }
-  .gs-box .t.r { left: auto; right: calc(10 * var(--u)); }
-  .gs-box .t.btm { top: auto; bottom: calc(8 * var(--u)); }
-  .gs-box .t b { font-weight: 700; font-size: calc(28 * var(--u)); line-height: 1; }
-  .gs-box .t span { font-weight: 600; font-size: calc(11 * var(--u)); }
-  .gs-circle { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u)); border-radius: 50%;
-               border: calc(3 * var(--u)) solid #111; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(40 * var(--u)); }
-  .gs-circle b { font: 700 calc(14 * var(--u))/1 'Fredoka', sans-serif; }
-</style>
-</head>
+  /* cards waiting off to the side, and the one-frame jump a card makes when the slideshow wraps around */
+  .slide.snap { transition: none !important; }
+  .slide.s-ex { display: none; }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .slide.pos-hl, .slide.pos-hr { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-hl { transform: translateX(calc(-200% - 140px)) scale(.9); }
+    .slide.pos-hr { transform: translateX(calc(200% + 140px)) scale(.9); }
+  }
+  @media (max-width: 999px), (max-height: 599px) {
+    .slide.pos-hl, .slide.pos-hr { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-hl { transform: translateX(calc(-200% - 48px)); }
+    .slide.pos-hr { transform: translateX(calc(200% + 48px)); }
+  }
+
+  /* the example: answers in a handwritten face */
+  .ex .hw { margin: 0; font: 600 calc(13.4 * var(--u))/1.18 'Caveat', cursive; color: #233; }
+  .ex .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(20 * var(--u)); }
+  .ex .gd-circle b { position: static; margin-bottom: calc(3 * var(--u)); }
+  .ex .gd-circle .hw { margin-bottom: calc(8 * var(--u)); font-size: calc(12.6 * var(--u)); }
+  .ex .gd-circle .hw:last-child { margin-bottom: 0; }
+  .ex .circ { display: inline-block; border: calc(1.2 * var(--u)) solid #233; border-radius: 50%; padding: calc(1 * var(--u)) calc(6 * var(--u)); margin-left: calc(-6 * var(--u)); }
+
+  /* ---------- about: below the slideshow ---------- */
+  .stage { min-height: calc(100svh - 72px); position: relative; }
+  .about { max-width: 620px; margin: 0 auto; padding: 56px 20px 72px; scroll-margin-top: 20px; }
+  .about h1 { font: 700 clamp(30px, 7vw, 42px)/1.05 'Fraunces', serif; letter-spacing: -0.01em; margin: 0 0 14px; }
+  .about .lede { font-size: 18px; line-height: 1.6; color: #3d4450; margin: 0 0 36px; }
+  .about h2 { font: 700 12px/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 16px; }
+  .steps { list-style: none; margin: 0 0 40px; padding: 0; counter-reset: s; }
+  .steps li { counter-increment: s; position: relative; padding: 0 0 18px 44px; font-size: 16.5px; line-height: 1.55; color: #3d4450; }
+  .steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #111;
+                      display: grid; place-items: center; font: 700 14px/1 'Fraunces', serif; color: #111; }
+  .steps li b { display: block; color: #111; font-size: 17px; margin-bottom: 2px; }
+  .starts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
+  .starts a { border: 1.5px solid #111; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; color: #111; text-decoration: none; }
+  .starts a.primary { background: #111; color: #fff; }
+  .about .verse { border-top: 1.5px solid #111; padding-top: 22px; text-align: center; }
+  .about .verse p { margin: 0; font-style: italic; font-size: 19px; line-height: 1.5; }
+  .about .verse cite { display: block; margin-top: 10px; font: normal 600 11px/1 'Fraunces', serif; letter-spacing: .22em; text-transform: uppercase; color: #5b6878; }
+
+  /* ---------- Guided SOAR additions ---------- */
+  .top .soar-logo img { height: 40px; width: auto; display: block; }
+  .truth .gs { font: 700 calc(46 * var(--u))/1 'Fredoka', sans-serif; letter-spacing: calc(1 * var(--u)); color: #111; }
+  .truth .gs-k { font: 700 calc(10 * var(--u))/1 'Fredoka', sans-serif; letter-spacing: calc(4 * var(--u)); padding-left: calc(4 * var(--u)); text-transform: uppercase; color: #111; }
+  .lbl i { font-style: normal; font-family: 'Fredoka', sans-serif; font-size: 1.25em; margin-right: calc(4 * var(--u)); vertical-align: -0.06em; }
+  .gd-box .sub { display: block; font-size: calc(8.6 * var(--u)); letter-spacing: .03em; color: #8a929c; text-align: center; margin: 0 0 calc(8 * var(--u)); }
+  .gd-box.bl .sub, .gd-box.br .sub { margin: calc(8 * var(--u)) 0 0; order: 9; }
+  .gd-box .lead { margin: 0 0 calc(5 * var(--u)); font-size: calc(10.6 * var(--u)); line-height: 1.3; color: #111; }
+  .ex .gd-box .hw + .hw { margin-top: calc(5 * var(--u)); }
+</style></head>
 <body>
-  <header class="top" style="background:#fff">
-    <a class="logo" href="/" aria-label="Dwell Study home"><span class="side"><span>Dwell</span></span><span class="box">STUDY</span></a>
-    <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
-    <nav class="menu" id="menu">
-      <a href="/howto"><b>Guide</b><small>How to think about each part</small></a>
-      <a href="/template"><b>Template</b><small>The four-corner study card</small></a>
-      <a href="/resources"><b>Tools</b><small>Tools for each corner, by level</small></a>
-    </nav>
+  <header class="top">
+    <a class="soar-logo" href="/guidedsoar" aria-label="Guided SOAR home"><img src="/guided-soar-logo.png" alt="Guided SOAR"></a>
   </header>
-  <section class="gs-hero">
-    <img class="gs-logo" src="guided-soar-logo.png" alt="Guided SOAR">
-    <div class="gs-card" aria-hidden="true">
-      <div class="gs-box tl" style="view-transition-name: win-tl"><span class="t"><b>S</b><span>Scripture</span></span></div>
-      <div class="gs-box tr" style="view-transition-name: win-tr"><span class="t r"><span>Observation</span><b>O</b></span></div>
-      <div class="gs-box bl" style="view-transition-name: win-bl"><span class="t btm"><b>A</b><span>Application</span></span></div>
-      <div class="gs-box br" style="view-transition-name: win-br"><span class="t r btm"><span>Reflection</span><b>R</b></span></div>
-      <div class="gs-circle" style="view-transition-name: truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
+
+  <main class="stage">
+    <div class="deck">
+      <div class="slide s-tpl" data-name="Template" aria-label="Blank template">
+        <div class="blurb"><b>Blank template</b><p>Print it and study any passage.</p></div>
+        <div class="card" aria-hidden="true">
+          <div class="gd-box tl vt-tl"><span class="lbl"><i>S</i>Scripture</span><span class="sub">author &middot; time &middot; purpose</span></div>
+          <div class="gd-box tr vt-tr"><span class="lbl"><i>O</i>Observation</span><span class="sub">words &middot; concepts &middot; connections</span></div>
+          <div class="gd-box bl vt-bl"><span class="lbl"><i>A</i>Application</span><span class="sub">thoughts &middot; words &middot; actions</span></div>
+          <div class="gd-box br vt-br"><span class="lbl"><i>R</i>Reflection</span><span class="sub">prayers &middot; questions &middot; insights</span></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
+        </div>
+        <div class="cap"><a class="open" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener">Blank template PDF &darr;</a></div>
+      </div>
+      <div class="slide s-cover pos-c" data-name="Cover">
+        <div class="blurb"><b>Guided SOAR</b><p>A simple way to read Scripture with God&rsquo;s character at the center.</p></div>
+        <div class="cover">
+          <div class="win tl vt-tl" aria-hidden="true"></div>
+          <div class="win tr vt-tr" aria-hidden="true"></div>
+          <div class="win bl vt-bl" aria-hidden="true"></div>
+          <div class="win br vt-br" aria-hidden="true"></div>
+          <div class="truth vt-truth">
+            <span class="gs-k">Guided</span>
+            <span class="gs">SOAR</span>
+            <cite>Templates</cite>
+          </div>
+        </div>
+        <div class="cap"></div>
+      </div>
+      <div class="slide s-guide" data-name="Leader guide" aria-label="Leader guide">
+        <div class="blurb"><b>Leader guide</b><p>The same card with prompts for every section, to help you prep.</p></div>
+        <div class="card">
+          <div class="gd-box tl vt-tl"><span class="lbl"><i>S</i>Scripture</span>
+            <p class="lead">Review 2&ndash;3 before reading to gain perspective:</p>
+            <ul class="gq"><li>Author</li><li>Time</li><li>Purpose</li><li>What comes before/after</li></ul></div>
+          <div class="gd-box tr vt-tr"><span class="lbl"><i>O</i>Observation</span>
+            <p class="lead">Review 2&ndash;3 while reading to bring clarity:</p>
+            <ul class="gq"><li>Define confusing terms</li><li>Explain difficult concepts</li><li>Make connections to other parts of the Bible</li></ul></div>
+          <div class="gd-box bl vt-bl"><span class="lbl"><i>A</i>Application</span>
+            <ul class="gq"><li>Do you believe the central truth?</li><li>What lies might keep a person from seeing this truth?</li><li>How can you live it out this week?</li></ul></div>
+          <div class="gd-box br vt-br"><span class="lbl"><i>R</i>Reflection</span>
+            <ul class="gq"><li>How can you ask God to help you live this out?</li><li>What questions do you still have about this passage?</li><li>Who can you tell about what God is teaching you?</li></ul></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p>What does <strong>this</strong> passage reveal about God&rsquo;s character and purpose?</p><b>THEREFORE, I&hellip;</b><p>What does this reveal about who He made me to be?</p></div>
+        </div>
+        <div class="cap"><a class="open" href="/guidedsoar/SOAR%20Leader%20Guide.pdf" target="_blank" rel="noopener">Leader guide PDF &darr;</a></div>
+      </div>
+      <div class="slide s-ex" data-name="Example" aria-label="Example: Exodus 3">
+        <div class="blurb"><b>Example: Exodus 3</b><p>A filled-out SOAR of Moses and the burning bush.</p></div>
+        <div class="card ex">
+          <div class="gd-box tl vt-tl"><span class="lbl"><i>S</i>Scripture</span>
+            <p class="hw">Moses &rarr; Israel, after the Exodus (around 1400s BC).</p>
+            <p class="hw">Before: Moses ran from Egypt (ch. 2). After: he goes back to Pharaoh.</p></div>
+          <div class="gd-box tr vt-tr"><span class="lbl"><i>O</i>Observation</span>
+            <p class="hw">&ldquo;I AM WHO I AM&rdquo; (v.14) = God&rsquo;s name, the LORD.</p>
+            <p class="hw">holy ground (v.5)</p>
+            <p class="hw">Gen 15:13&ndash;14 &mdash; rescue promised<br>John 8:58 &mdash; Jesus: &ldquo;I am&rdquo;</p></div>
+          <div class="gd-box bl vt-bl"><span class="lbl"><i>A</i>Application</span>
+            <p class="hw">Lie: &ldquo;Who am I?&rdquo; (v.11) &mdash; I&rsquo;m not enough.</p>
+            <p class="hw">This week: say yes to the hard thing instead of making excuses.</p></div>
+          <div class="gd-box br vt-br"><span class="lbl"><i>R</i>Reflection</span>
+            <p class="hw">Pray: &ldquo;Go with me, Lord.&rdquo;</p>
+            <p class="hw"><span class="circ">Why a bush that doesn&rsquo;t burn up?</span></p>
+            <p class="hw">Tell my small group.</p></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p class="hw">holy and near. He sees, hears, and comes down to rescue.</p><b>THEREFORE, I&hellip;</b><p class="hw">can go where He sends me. He goes with me (v.12).</p></div>
+        </div>
+        <div class="cap"><a class="open" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener">Try it: blank template &darr;</a></div>
+      </div>
+      <div class="dots" role="group" aria-label="Cards"><button type="button" aria-label="Blank template"></button><button type="button" aria-label="Cover"></button><button type="button" aria-label="Leader guide"></button><button type="button" aria-label="Example: Exodus 3"></button></div>
     </div>
-  </section>
-  <main>
-    <p class="lede">A simple way to read Scripture with <b>God&rsquo;s character at the center</b>. Read it, look closer, see who He is, and live it out.</p>
-
-    <h2>Templates</h2>
-    <div class="list"><button class="card" type="button" data-sheet="blank"><div><div class="ct">Blank Template</div><p>Two printable half-sheet cards for your own study.</p></div><span class="go" aria-hidden="true">&rarr;</span></button><button class="card" type="button" data-sheet="leader"><div><div class="ct">Leader Guide</div><p>The same card with prompts for every section, to help you prep.</p></div><span class="go" aria-hidden="true">&rarr;</span></button></div>
-
-
+    <button class="nav prev" type="button" aria-label="Previous">&larr;</button>
+    <button class="nav next" type="button" aria-label="Next">&rarr;</button>
   </main>
 
-  <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
-    <div class="sheet-in">
-      <div class="sheet-top"><div class="sheet-t" id="sheetTitle"></div><button class="x" type="button" id="sheetClose" aria-label="Close">&times;</button></div>
-      <div class="paper"><img id="sheetImg" alt=""></div>
-      <a class="dl" id="sheetDl" download>Download PDF <span aria-hidden="true">&darr;</span></a>
-      <div class="dl-note">Prints two to a page. Cut down the middle.</div>
-    </div>
-  </dialog>
+  <div class="note blurb-note" aria-live="polite"></div>
+
+  <section class="about" id="about">
+    <h1>Guided SOAR</h1>
+    <p class="lede">A simple way to read Scripture with <b>God&rsquo;s character at the center</b>. Read it, look closer, see who He is, and live it out.</p>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Scripture</b>Before you read, set the scene: who wrote it, when, why, and what comes before and after.</li>
+      <li><b>Observation</b>While you read, define confusing words, explain hard ideas, and connect it to the rest of the Bible.</li>
+      <li><b>God is&hellip; Therefore, I&hellip;</b>What does this passage show about who God is? What does that mean for who He made you to be?</li>
+      <li><b>Application</b>Do you believe it? What lies get in the way? How will you live it out this week?</li>
+      <li><b>Reflection</b>Pray it, write down your questions, and tell someone what God is teaching you.</li>
+    </ol>
+    <h2>Templates</h2>
+    <div class="starts"><a class="primary" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener">Blank template</a><a href="/guidedsoar/SOAR%20Leader%20Guide.pdf" target="_blank" rel="noopener">Leader guide</a></div>
+    <div class="verse"><p>Let the word of Christ <b>dwell</b> in you richly.</p><cite>Colossians 3:16</cite></div>
+  </section>
+
+  <script src="/site.js"></script>
   <script>
+    // Slideshow: the middle card is in front, its neighbors sit to the left and right, the rest wait off to the side.
+    // It loops: after the last card comes the first. A card that wraps around jumps (unseen) to the far side first,
+    // so nothing slides across the middle.
     (function () {
-      var sheets = {
-        blank:  { title: 'Blank Template', img: 'guidedsoar/blank-card.png',  pdf: 'guidedsoar/SOAR%20Blank%20Template.pdf', file: 'SOAR Blank Template.pdf' },
-        leader: { title: 'Leader Guide',   img: 'guidedsoar/leader-card.png', pdf: 'guidedsoar/SOAR%20Leader%20Guide.pdf',   file: 'SOAR Leader Guide.pdf' }
-      };
-      var dlg = document.getElementById('sheet'), img = document.getElementById('sheetImg'),
-          title = document.getElementById('sheetTitle'), dl = document.getElementById('sheetDl');
-      function open(key) {
-        var s = sheets[key]; if (!s) return;
-        title.textContent = s.title; img.src = s.img; img.alt = s.title + ' card';
-        dl.href = s.pdf; dl.setAttribute('download', s.file);
-        if (dlg.showModal) dlg.showModal(); else window.location.href = s.pdf;
-        if (location.hash !== '#' + key) history.replaceState(null, '', '#' + key);
+      var slides = [].slice.call(document.querySelectorAll('.deck .slide')), n = slides.length, at = 1;
+      var dots = [].slice.call(document.querySelectorAll('.dots button'));
+      var ALL = ['pos-l', 'pos-c', 'pos-r', 'pos-hl', 'pos-hr'];
+      function cur(el) { for (var k = 0; k < ALL.length; k++) if (el.classList.contains(ALL[k])) return ALL[k]; return null; }
+      function set(el, c) { el.classList.remove.apply(el.classList, ALL); el.classList.add(c); }
+      function paint(dir) {
+        slides.forEach(function (el, i) {
+          var off = ((i - at) % n + n) % n;
+          var next = off === 0 ? 'pos-c' : off === 1 ? 'pos-r' : off === n - 1 ? 'pos-l' : (dir < 0 ? 'pos-hr' : 'pos-hl');
+          var was = cur(el);
+          var entering = was === null || was === 'pos-hl' || was === 'pos-hr' || (was === 'pos-l' && next === 'pos-r') || (was === 'pos-r' && next === 'pos-l');
+          if (entering && next !== was && dir) {        // start just off the side it comes in from
+            el.classList.add('snap'); set(el, dir > 0 ? 'pos-hr' : 'pos-hl'); void el.offsetWidth; el.classList.remove('snap');
+          }
+          if (was === null) el.classList.add('snap');
+          set(el, next);
+          if (was === null) { void el.offsetWidth; el.classList.remove('snap'); }
+        });
+        dots.forEach(function (d, i) { d.setAttribute('aria-current', i === at); });
+        var note = document.querySelector('.note'), src = slides[at].querySelector('.blurb');
+        if (note && src) { note.innerHTML = src.innerHTML; note.classList.remove('in'); void note.offsetWidth; note.classList.add('in'); }
       }
-      function close() { dlg.close(); }
-      dlg.addEventListener('close', function () { history.replaceState(null, '', location.pathname); });
-      document.querySelectorAll('[data-sheet]').forEach(function (b) {
-        b.addEventListener('click', function () { open(b.getAttribute('data-sheet')); });
+      function go(d) { at = (at + d + n) % n; paint(d); }
+      function jump(i) { if (i === at) return; var f = ((i - at) % n + n) % n; at = i; paint(f <= n / 2 ? 1 : -1); }
+      dots.forEach(function (d, i) { d.addEventListener('click', function () { jump(i); }); });
+      var deck = document.querySelector('.deck'), x0 = null, y0 = 0;
+      deck.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      deck.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
       });
-      document.getElementById('sheetClose').addEventListener('click', close);
-      dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });   // tap outside the sheet
-      if (sheets[location.hash.slice(1)]) open(location.hash.slice(1));                    // shareable #blank / #leader
+      document.querySelector('.nav.prev').addEventListener('click', function () { go(-1); });
+      document.querySelector('.nav.next').addEventListener('click', function () { go(1); });
+      slides.forEach(function (el, i) { el.addEventListener('click', function () { var c = cur(el); if (c === 'pos-l') go(-1); else if (c === 'pos-r') go(1); }); });
+      paint(0);
+      document.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') go(-1); if (e.key === 'ArrowRight') go(1); });
+      // desktop: the note in the bottom-left corner belongs to the slideshow, so hide it once you scroll down to the About section
+      var stage = document.querySelector('.stage');
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { document.body.classList.toggle('below', es[0].intersectionRatio < .6); }, { threshold: [0, .6, 1] }).observe(stage);
     })();
   </script>
-  <script src="/site.js"></script>
 </body>
 </html>

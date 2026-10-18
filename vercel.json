@@ -2,6 +2,6 @@
   "cleanUrls": true,
   "redirects": [
     { "source": "/guideddwell", "destination": "/template", "permanent": true },
-    { "source": "/about", "destination": "/#about", "permanent": false }
+    { "source": "/about", "destination": "/guidedsoar#about", "permanent": false }
   ]
 }
