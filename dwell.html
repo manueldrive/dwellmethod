@@ -21,12 +21,15 @@
   figure { margin: 0; width: min(44vw, (100svh - 110px) * 264 / 612); }
   .fw { container-type: inline-size; border: 1px solid #d5d9de; border-radius: 4px; overflow: hidden; box-shadow: 0 8px 26px rgba(0,0,0,.10); }
   .fw .dwb { --u: calc(100cqw / 264); text-align: left; }
-  .dl { max-width: 620px; margin: 0 auto; padding: 36px 20px 72px; }
+  .dl { max-width: 620px; margin: 0 auto; padding: 36px 20px 40px; }
   .dl h2 { font: 700 12px/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 16px; }
   .starts { display: flex; flex-wrap: wrap; gap: 10px; }
   .starts a { border: 1.5px solid #111; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; color: #111; text-decoration: none; background: #111; color: #fff; }
   .dl .note { margin: 12px 0 0; font-size: 13.5px; color: #6b7480; }
   @media (max-width: 600px) { .faces { flex-direction: column; align-items: center; gap: 20px; } figure { width: min(100%, 420px); } }
+  .site-foot { text-align: center; padding: 8px 20px 28px; }
+  .site-foot a { font: 400 12px/1 'DM Sans', sans-serif; letter-spacing: .06em; color: #111; opacity: .35; text-decoration: none; }
+  .site-foot a:hover { opacity: .6; }
 </style></head>
 <body>
   <header class="top"><a href="/dwell" aria-label="Dwell Bookmark"><img src="/icons/dwell-title.png" alt="Dwell"></a></header>
@@ -41,5 +44,6 @@
     <div class="starts"><a href="/dwell-bookmark-sheet.pdf" download="Dwell Bookmark.pdf">Bookmark PDF &darr;</a></div>
     <p class="note">Prints three to a page, front and back. Cut along the lines.</p>
   </section>
+  <footer class="site-foot"><a href="/">dwellstudy.com</a></footer>
 </body>
 </html>
