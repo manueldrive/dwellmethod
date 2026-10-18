@@ -206,6 +206,18 @@
     .cap button.open { padding: 10px 16px; font-size: 13px; }
   }
   @media (prefers-reduced-motion: reduce) { body:not(.moved) .nav.next { animation: none; } }
+
+  /* ---------- cleanup: tabs sit above the card, no blurbs or download buttons, and the card gets the room ---------- */
+  .stage { flex-direction: column; padding-bottom: 16px; }
+  .pager { position: relative; left: auto; top: auto; transform: none; margin: 0 0 14px !important; }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .deck { --w: calc((100svh - 150px) * 396 / 561); }
+  }
+  @media (max-width: 999px), (max-height: 599px) {
+    .stage { justify-content: flex-start; padding-top: 4px; }
+    .pager { margin-bottom: 10px !important; }
+    .deck { width: min(100vw - 16px, (100svh - 140px) * 396 / 561); }
+  }
 </style></head>
 <body>
   <header class="top">
@@ -213,9 +225,9 @@
   </header>
 
   <main class="stage">
+    <div class="pager" role="group" aria-label="Cards"><button type="button">Cover</button><button type="button">Template</button><button type="button">Leader guide</button><button type="button">Example</button></div>
     <div class="deck">
       <div class="slide s-cover pos-c" data-name="Cover">
-        <div class="blurb"><b>Guided SOAR</b><p>A simple way to read Scripture with God&rsquo;s character at the center.</p></div>
         <div class="cover">
           <div class="win tl vt-tl" aria-hidden="true"></div>
           <div class="win tr vt-tr" aria-hidden="true"></div>
@@ -231,10 +243,8 @@
           </blockquote>
           <img class="cover-logo" src="/guided-soar-logo-white.png" alt="Guided SOAR">
         </div>
-        <div class="cap"><button class="open start" type="button">See the templates &rarr;</button></div>
       </div>
       <div class="slide s-tpl" data-name="Template" aria-label="Blank template">
-        <div class="blurb"><b>Blank template</b><p>Print it and study any passage.</p></div>
         <div class="card" aria-hidden="true">
           <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span></div>
           <div class="gd-box tr vt-tr"><span class="lbl">Observation</span></div>
@@ -242,10 +252,8 @@
           <div class="gd-box br vt-br"><span class="lbl">Reflection</span></div>
           <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
         </div>
-        <div class="cap"><a class="open" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener">Blank template PDF &darr;</a></div>
       </div>
       <div class="slide s-guide" data-name="Leader guide" aria-label="Leader guide">
-        <div class="blurb"><b>Leader guide</b><p>The same card with prompts for every section, to help you prep.</p></div>
         <div class="card">
           <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span>
             <p class="lead">Review 2&ndash;3 before reading to gain perspective:</p>
@@ -259,10 +267,8 @@
             <ul class="gq"><li>How can you ask God to help you live this out?</li><li>What questions do you still have about this passage?</li><li>Who can you tell about what God is teaching you?</li></ul></div>
           <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p>What does <strong>this</strong> passage reveal about God&rsquo;s character and purpose?</p><b>THEREFORE, I&hellip;</b><p>What does this reveal about who He made me to be?</p></div>
         </div>
-        <div class="cap"><a class="open" href="/guidedsoar/SOAR%20Leader%20Guide.pdf" target="_blank" rel="noopener">Leader guide PDF &darr;</a></div>
       </div>
       <div class="slide s-ex" data-name="Example" aria-label="Example: Exodus 3">
-        <div class="blurb"><b>Example: Exodus 3</b><p>A filled-out SOAR of Moses and the burning bush.</p></div>
         <div class="card ex">
           <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span>
             <p class="hw">Moses &rarr; Israel, after the Exodus (around 1400s BC).</p>
@@ -280,15 +286,11 @@
             <p class="hw">Tell my small group.</p></div>
           <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p class="hw">holy and near. He sees, hears, and comes down to rescue.</p><b>THEREFORE, I&hellip;</b><p class="hw">can go where He sends me. He goes with me (v.12).</p></div>
         </div>
-        <div class="cap"><a class="open" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener">Try it: blank template &darr;</a></div>
       </div>
-      <div class="pager" role="group" aria-label="Cards"><button type="button">Cover</button><button type="button">Template</button><button type="button">Leader guide</button><button type="button">Example</button></div>
     </div>
     <button class="nav prev" type="button" aria-label="Previous">&larr;</button>
     <button class="nav next" type="button" aria-label="Next">&rarr;</button>
   </main>
-
-  <div class="note blurb-note" aria-live="polite"></div>
 
   <section class="about" id="about">
     <h1>Guided SOAR</h1>
@@ -301,8 +303,6 @@
       <li><b>Application</b>Do you believe it? What lies get in the way? How will you live it out this week?</li>
       <li><b>Reflection</b>Pray it, write down your questions, and tell someone what God is teaching you.</li>
     </ol>
-    <h2>Templates</h2>
-    <div class="starts"><a class="primary" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener">Blank template</a><a href="/guidedsoar/SOAR%20Leader%20Guide.pdf" target="_blank" rel="noopener">Leader guide</a></div>
     <div class="verse"><p>Let the word of Christ <b>dwell</b> in you richly.</p><cite>Colossians 3:16</cite></div>
   </section>
 
