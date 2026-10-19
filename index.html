@@ -2,9 +2,9 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dwell</title>
-<meta name="description" content="Let the word of Christ dwell in you richly. Colossians 3:16">
+<meta name="description" content="Dwell Study: practical biblical literacy.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;700&family=Libre+Caslon+Text&family=Jost:wght@400&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
 <meta name="apple-mobile-web-app-title" content="Dwell"><meta name="theme-color" content="#ffffff">
@@ -15,10 +15,13 @@
   html, body { margin: 0; min-height: 100%; background: #fff; color: #111; }
   body { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 56px; padding: 48px 20px; font-family: 'DM Sans', sans-serif; }
 
-  blockquote { margin: 0; text-align: center; font-family: 'Fraunces', Georgia, serif; }
-  blockquote p { margin: 0; font-style: italic; font-weight: 400; font-size: clamp(24px, 5vw, 44px); line-height: 1.35; }
-  blockquote p b { font-weight: 600; }
-  cite { display: block; margin-top: 18px; font-style: normal; font-weight: 600; font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: #5b6878; }
+  /* logo lockup: the book-and-mountain mark with the logo's text set live */
+  .brand { margin: 0; display: flex; flex-direction: column; align-items: center; text-align: center; color: #2e3f34; }
+  .brand img { width: clamp(96px, 26vw, 132px); height: auto; display: block; }
+  .brand .word { margin: 6px 0 0; font: 400 clamp(72px, 20vw, 128px)/.9 'Libre Caslon Text', Georgia, serif; letter-spacing: -.01em; }
+  .brand .domain { margin-top: 8px; padding-left: .32em; font: 400 clamp(17px, 4.6vw, 26px)/1 'Jost', sans-serif; letter-spacing: .32em; }
+  .brand hr { width: 56px; margin: 26px 0 22px; border: 0; border-top: 1.5px solid currentColor; }
+  .brand .tag { margin: 0; padding-left: .3em; font: 400 clamp(11px, 3vw, 15px)/1.4 'Jost', sans-serif; letter-spacing: .3em; }
 
   .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; width: min(100%, 640px); }
   .card { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 22px 22px 20px; border: 1.5px solid #111; border-radius: 6px; background: #fff; color: #111; text-decoration: none; min-height: 180px; }
@@ -53,10 +56,13 @@
   .site-foot a:hover { opacity: .6; }
 </style></head>
 <body>
-  <blockquote>
-    <p>Let the word of Christ <b>dwell</b><br>in you richly.</p>
-    <cite>Colossians 3:16</cite>
-  </blockquote>
+  <header class="brand">
+    <img src="/dwell-logo-mark.png" alt="" width="294" height="294">
+    <h1 class="word">dwell</h1>
+    <div class="domain">STUDY.COM</div>
+    <hr>
+    <p class="tag">PRACTICAL BIBLICAL LITERACY</p>
+  </header>
 
   <nav class="cards" aria-label="Study tools">
     <a class="card" href="/guidedsoar">
