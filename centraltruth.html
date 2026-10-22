@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central Truth | Templates</title>
+<meta name="description" content="Central Truth: a simple, unintimidating way to read Scripture and discover who God is. One piece of context, one question, one word, one connection. Template, guide, reflection, and an example.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Kalam:wght@400&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Central Truth"><meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="/site.css">
+<!-- Central Truth: the Guided SOAR page (/guidedsoar), adapted. Four corners (Context, Curiosity, Clarity, Connections),
+     a larger God is / Therefore, I circle, plus a Reflection card. -->
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: #111; }
+  body { min-height: 100svh; display: flex; flex-direction: column; font-family: 'DM Sans', sans-serif; }
+
+  /* ---------- the cover: the book's layout, scaled to fit the screen ---------- */
+  .stage { flex: 1; display: flex; align-items: center; justify-content: center; padding-bottom: 20px; }
+  /* frame = the four windows + circle with a 20pt margin, measured in the book's points (396 wide) */
+  .cover { width: var(--cover-w); aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .win { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border-radius: calc(6 * var(--u));
+         background: #2c3b3f url(/dwell-cover.jpg) no-repeat; background-size: calc(396 * var(--u)) calc(612 * var(--u)); }
+  /* each window shows the part of the photo behind it, exactly as on the printed cover */
+  .win.tl { left: calc(20 * var(--u));  top: calc(20 * var(--u));    background-position: calc(-20 * var(--u))  calc(-45.5 * var(--u)); }
+  .win.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u));    background-position: calc(-202 * var(--u)) calc(-45.5 * var(--u)); }
+  .win.bl { left: calc(20 * var(--u));  top: calc(284.5 * var(--u)); background-position: calc(-20 * var(--u))  calc(-310 * var(--u)); }
+  .win.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); background-position: calc(-202 * var(--u)) calc(-310 * var(--u)); }
+  .truth { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u));
+           border-radius: 50%; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;
+           gap: calc(6 * var(--u)); text-align: center; margin: 0; }
+  .truth span { font-style: italic; font-size: calc(15 * var(--u)); line-height: 1; white-space: nowrap; }
+  .truth b { font-weight: 700; }
+  .truth cite { margin-top: calc(6 * var(--u)); font: normal 600 calc(8 * var(--u))/1 'Fraunces', serif;
+                letter-spacing: calc(2 * var(--u)); padding-left: calc(2 * var(--u)); text-transform: uppercase; color: #4a5568; }
+
+  /* ---------- desktop: a slideshow of the three cards. Cover in the middle, blank template on the left,
+     guide on the right. The side cards sit back at low opacity; click one (or use the arrows) to bring it forward. ---------- */
+  .deck { position: relative; }
+  .slide.s-tpl, .slide.s-guide, .slide.s-ref, .nav, .cap { display: none; }
+  /* whichever card is in the middle carries the shared names, so it morphs into the page you open */
+  .pos-c .vt-tl { view-transition-name: win-tl; } .pos-c .vt-tr { view-transition-name: win-tr; }
+  .pos-c .vt-bl { view-transition-name: win-bl; } .pos-c .vt-br { view-transition-name: win-br; }
+  .pos-c .vt-truth { view-transition-name: truth; }
+
+  .card { width: 100%; aspect-ratio: 396 / 561; position: relative; container-type: inline-size; --u: calc(100cqw / 396); }
+  .gd-box { position: absolute; width: calc(174 * var(--u)); height: calc(256.5 * var(--u)); border: calc(1.5 * var(--u)) solid #111; border-radius: calc(6 * var(--u));
+            background: #fff; display: flex; flex-direction: column; padding: calc(20 * var(--u)) calc(11 * var(--u)) calc(12 * var(--u)); }
+  .gd-box.tl { left: calc(20 * var(--u)); top: calc(20 * var(--u)); } .gd-box.tr { left: calc(202 * var(--u)); top: calc(20 * var(--u)); }
+  .gd-box.bl { left: calc(20 * var(--u)); top: calc(284.5 * var(--u)); } .gd-box.br { left: calc(202 * var(--u)); top: calc(284.5 * var(--u)); }
+  .gd-box.bl, .gd-box.br { justify-content: flex-end; padding: calc(12 * var(--u)) calc(11 * var(--u)) calc(20 * var(--u)); }
+  .lbl { position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); background: #fff; padding: calc(3 * var(--u)) calc(8 * var(--u)) calc(3 * var(--u)) calc(10 * var(--u));
+         font: 700 calc(12.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+  .gd-box.bl .lbl, .gd-box.br .lbl { top: 100%; }
+  .gd-circle { position: absolute; left: calc(106 * var(--u)); top: calc(188.5 * var(--u)); width: calc(184 * var(--u)); height: calc(184 * var(--u)); border-radius: 50%;
+               border: calc(1.5 * var(--u)) solid #111; background: #fff; }
+  .gd-circle b { position: absolute; left: 0; right: 0; text-align: center; font: 900 calc(11.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; }
+  .gd-circle b:first-child { top: calc(34 * var(--u)); } .gd-circle b:last-of-type { top: calc(96 * var(--u)); }
+  .s-guide .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(22 * var(--u)); }
+  .s-guide .gd-circle b { position: static; margin-bottom: calc(4 * var(--u)); }
+  .s-guide .gd-circle p { margin: 0 0 calc(9 * var(--u)); font-style: italic; font-size: calc(9.8 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .s-guide .gd-circle p:last-child { margin-bottom: 0; }
+  .gq { list-style: none; margin: 0; padding: 0; }
+  .gq li { position: relative; padding-left: calc(8 * var(--u)); margin-bottom: calc(5 * var(--u)); font-size: calc(11 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .gq li::before { content: ''; position: absolute; left: 0; top: .5em; width: calc(2.8 * var(--u)); height: calc(2.8 * var(--u)); border-radius: 50%; background: #a3abb6; }
+
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .stage { overflow: hidden; }
+    .deck { --w: calc((100svh - 160px) * 396 / 561); width: var(--w); }
+    .slide { display: block !important; width: var(--w); transition: transform .55s cubic-bezier(.2, .75, .15, 1), opacity .55s; }
+    .slide .cover { width: 100%; }
+    .slide.pos-c { position: relative; z-index: 2; }
+    .slide.pos-l, .slide.pos-r { position: absolute; left: 0; top: 0; opacity: .3; cursor: pointer; z-index: 1; }
+    .slide.pos-l { transform: translateX(calc(-100% - 70px)) scale(.9); }
+    .slide.pos-r { transform: translateX(calc(100% + 70px)) scale(.9); }
+    .slide.pos-l:hover, .slide.pos-r:hover { opacity: .5; }
+    .slide.pos-l *, .slide.pos-r * { pointer-events: none; }
+    .cap { display: flex; align-items: center; justify-content: center; gap: 10px; height: 50px; margin-top: 14px; }
+    .cap a.open { background: #111; color: #fff; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
+    .cap a.need { border: 1.5px solid #111; color: #111; border-radius: 99px; padding: 9.5px 14px; font: 700 13px/1 'DM Sans', sans-serif; text-decoration: none; }
+    .cap a.need:hover { background: #f4f5f7; }
+    .cap .hint { font-size: 13px; color: #8a929c; letter-spacing: .04em; }
+    .nav { display: grid; place-items: center; position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%;
+           border: 1.5px solid #111; background: #fff; cursor: pointer; font-size: 22px; line-height: 1; color: #111; }
+    .nav.prev { left: 28px; } .nav.next { right: 28px; }
+    .nav:hover { background: #f4f5f7; }
+  }
+
+  /* ---------- phones and narrow windows: the same three cards, one at a time. Swipe (or tap a dot) to move between them.
+     The cards keep the cover's exact size and place, so each still lines up with the page it opens. ---------- */
+  .dots { display: none; }
+  @media (max-width: 999px), (max-height: 599px) {
+    body { overflow-x: hidden; }
+    .stage { overflow: hidden; }
+    .deck { width: var(--cover-w); touch-action: pan-y; }
+    .slide { display: block !important; width: 100%; transition: transform .45s cubic-bezier(.2, .75, .15, 1), opacity .45s; }
+    .slide .cover { width: 100%; }
+    .slide.pos-c { position: relative; }
+    .slide.pos-l, .slide.pos-r { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-l { transform: translateX(calc(-100% - 24px)); }
+    .slide.pos-r { transform: translateX(calc(100% + 24px)); }
+    .cap { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 30px; align-items: center; justify-content: center; gap: 8px; }
+    .cap a.open { background: #111; color: #fff; border-radius: 99px; padding: 10px 16px; font: 700 13px/1 'DM Sans', sans-serif; letter-spacing: .04em; text-decoration: none; }
+    .cap a.need { border: 1.5px solid #111; color: #111; border-radius: 99px; padding: 8.5px 12px; font: 700 12px/1 'DM Sans', sans-serif; text-decoration: none; }
+    .dots { display: flex; position: absolute; left: 0; right: 0; top: 100%; margin-top: 12px; justify-content: center; gap: 8px; z-index: 3; }
+    .dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #c9ced5; cursor: pointer; transition: background .2s, transform .2s; }
+    .dots button[aria-current="true"] { background: #111; transform: scale(1.15); }
+  }
+
+  /* a line of explanation for each card: above the card on phones, bottom left on desktop */
+  .note { display: none; }
+  .blurb b, .note b { display: block; font: 700 17px/1.15 'Fraunces', serif; margin-bottom: 4px; }
+  .blurb p, .note p { margin: 0; font-size: 13.5px; line-height: 1.4; color: #5b6878; }
+  @media (max-width: 999px), (max-height: 599px) {
+    .blurb { position: absolute; left: 12px; right: 12px; bottom: 100%; margin-bottom: 16px; text-align: center; }
+    .blurb p { max-width: 21em; margin: 0 auto; }
+  }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .slide .blurb { display: none; }
+    .note { display: block; position: fixed; left: 28px; bottom: 28px; max-width: 300px; background: #fff; padding: 16px 20px 16px 12px; border-radius: 6px; z-index: 4; transition: opacity .25s; }
+    .note.in { animation: blurb-in .5s ease backwards; }
+    .note b { font-size: 22px; margin-bottom: 6px; }
+    .note p { font-size: 15px; }
+    body.below .note { opacity: 0; visibility: hidden; }
+    @keyframes blurb-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
+
+  /* cards waiting off to the side, and the one-frame jump a card makes when the slideshow wraps around */
+  .slide.snap { transition: none !important; }
+  .slide.s-ex { display: none; }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .slide.pos-hl, .slide.pos-hr { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-hl { transform: translateX(calc(-200% - 140px)) scale(.9); }
+    .slide.pos-hr { transform: translateX(calc(200% + 140px)) scale(.9); }
+  }
+  @media (max-width: 999px), (max-height: 599px) {
+    .slide.pos-hl, .slide.pos-hr { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; }
+    .slide.pos-hl { transform: translateX(calc(-200% - 48px)); }
+    .slide.pos-hr { transform: translateX(calc(200% + 48px)); }
+  }
+
+  /* the example: answers in a handwritten face */
+  .ex .hw { margin: 0; font: 600 calc(13.4 * var(--u))/1.18 'Caveat', cursive; color: #233; }
+  .ex .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(20 * var(--u)); }
+  .ex .gd-circle b { position: static; margin-bottom: calc(3 * var(--u)); }
+  .ex .gd-circle .hw { margin-bottom: calc(8 * var(--u)); font-size: calc(12.6 * var(--u)); }
+  .ex .gd-circle .hw:last-child { margin-bottom: 0; }
+  .ex .circ { display: inline-block; border: calc(1.2 * var(--u)) solid #233; border-radius: 50%; padding: calc(1 * var(--u)) calc(6 * var(--u)); margin-left: calc(-6 * var(--u)); }
+
+  /* ---------- about: below the slideshow ---------- */
+  .stage { min-height: calc(100svh - 72px); position: relative; }
+  .about { max-width: 620px; margin: 0 auto; padding: 56px 20px 40px; scroll-margin-top: 20px; }
+  .about h1 { font: 700 clamp(30px, 7vw, 42px)/1.05 'Fraunces', serif; letter-spacing: -0.01em; margin: 0 0 14px; }
+  .about .lede { font-size: 18px; line-height: 1.6; color: #3d4450; margin: 0 0 36px; }
+  .about h2 { font: 700 12px/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 16px; }
+  .steps { list-style: none; margin: 0 0 40px; padding: 0; counter-reset: s; }
+  .steps li { counter-increment: s; position: relative; padding: 0 0 18px 44px; font-size: 16.5px; line-height: 1.55; color: #3d4450; }
+  .steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #111;
+                      display: grid; place-items: center; font: 700 14px/1 'Fraunces', serif; color: #111; }
+  .steps li b { display: block; color: #111; font-size: 17px; margin-bottom: 2px; }
+  .starts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
+  .starts a { border: 1.5px solid #111; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; color: #111; text-decoration: none; }
+  .starts a.primary { background: #111; color: #fff; }
+  .about .verse { border-top: 1.5px solid #111; padding-top: 22px; text-align: center; }
+  .about .verse p { margin: 0; font-style: italic; font-size: 19px; line-height: 1.5; }
+  .about .verse cite { display: block; margin-top: 10px; font: normal 600 11px/1 'Fraunces', serif; letter-spacing: .22em; text-transform: uppercase; color: #5b6878; }
+
+  /* ---------- Central Truth ---------- */
+  .top .ct-home { display: block; color: #111; }
+  .ct-logo { display: block; height: 34px; width: auto; overflow: visible; }
+  .cover-ct { position: absolute; right: calc(32 * var(--u)); bottom: calc(30 * var(--u)); height: calc(30 * var(--u)); }
+  /* the circle is 15% larger than SOAR's (r 104.5 vs 91), on the same center */
+  .truth, .gd-circle { left: calc(93.5 * var(--u)); top: calc(176 * var(--u)); width: calc(209 * var(--u)); height: calc(209 * var(--u)); }
+  .truth.ct-verse { gap: calc(3 * var(--u)); }
+  .truth.ct-verse span { font-size: calc(12.6 * var(--u)); line-height: 1.12; }
+  .lbl { font-weight: 900; font-size: calc(12.4 * var(--u)); letter-spacing: .155em; }
+  .gd-circle b { font-size: calc(12 * var(--u)); }
+  .gd-circle b:first-child { top: calc(40 * var(--u)); } .gd-circle b:last-of-type { top: calc(109 * var(--u)); }
+  .s-guide .gd-circle { padding: 0 calc(28 * var(--u)); }
+  .s-guide .gd-circle p { font-size: calc(10.5 * var(--u)); }
+  .gd-box .gh { margin: 0 0 calc(3 * var(--u)); font: 700 calc(11.6 * var(--u))/1.2 'DM Sans', sans-serif; color: #111; }
+  .gd-box .gp { margin: 0; font-size: calc(10.6 * var(--u)); line-height: 1.32; color: #3d4450; }
+  /* reflection: one tall box, three prompts across the top, writing lines below */
+  .rf { position: absolute; left: calc(20 * var(--u)); top: calc(20 * var(--u)); right: calc(20 * var(--u)); bottom: calc(20 * var(--u));
+        border: calc(1.5 * var(--u)) solid #111; border-radius: calc(6 * var(--u)); background: #fff; padding: calc(22 * var(--u)) calc(16 * var(--u)) calc(18 * var(--u)); display: flex; flex-direction: column; }
+  .rf-cols { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+  .rf-cols div { padding: 0 calc(7 * var(--u)); }
+  .rf-cols div + div { border-left: calc(.8 * var(--u)) solid #c9ced5; }
+  .rf-cols b { display: block; font: 700 calc(11 * var(--u))/1.2 'DM Sans', sans-serif; margin-bottom: calc(4 * var(--u)); }
+  .rf-cols p { margin: 0; font-style: italic; font-size: calc(9.4 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .rf-lines { flex: 1; margin-top: calc(14 * var(--u));
+              background: repeating-linear-gradient(to bottom, transparent 0 calc(20.7 * var(--u)), #c9ced5 calc(20.7 * var(--u)) calc(21.5 * var(--u))); }
+  /* the example: handwritten, like the printed one */
+  .ex .hw { font: 400 calc(13 * var(--u))/1.25 'Kalam', cursive; color: #213b6b; }
+  .ex .gd-circle .hw { font-size: calc(12.6 * var(--u)); margin-bottom: calc(10 * var(--u)); }
+  .ex .gd-circle { padding: 0 calc(30 * var(--u)); }
+  .ex .gd-box .hw.gap { margin-top: calc(14 * var(--u)); }
+
+  /* ---------- making the slideshow obvious: a labeled pager under the card, a start button on the cover,
+     and a gentle pulse on the next arrow until the first move ---------- */
+  .dots { display: none !important; }
+  .pager { display: flex; justify-content: center; gap: 4px; position: absolute; left: 50%; transform: translateX(-50%); top: 100%; z-index: 3; white-space: nowrap; }
+  .pager button { border: 0; background: none; cursor: pointer; padding: 8px 10px 9px; font: 700 12px/1 'DM Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase;
+                  color: #8a929c; border-bottom: 2px solid #e1e4e8; transition: color .2s, border-color .2s; }
+  .pager button:hover { color: #111; }
+  .pager button[aria-current="true"] { color: #111; border-bottom-color: #111; }
+  .cap button.open { border: 0; cursor: pointer; background: #111; color: #fff; border-radius: 99px; padding: 11px 18px; font: 700 14px/1 'DM Sans', sans-serif; letter-spacing: .04em; }
+  @keyframes nudge { 0%, 100% { transform: translateY(-50%); box-shadow: 0 0 0 0 rgba(17,17,17,.35); } 50% { transform: translateY(-50%) translateX(4px); box-shadow: 0 0 0 8px rgba(17,17,17,0); } }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .deck { --w: calc((100svh - 210px) * 396 / 561); }
+    .pager { margin-top: 10px; }
+    body:not(.moved) .nav.next { animation: nudge 1.8s ease-in-out infinite; background: #111; color: #fff; }
+  }
+  @media (max-width: 999px), (max-height: 599px) {
+    .pager { margin-top: 8px; gap: 0; }
+    .pager button { padding: 8px 7px 9px; font-size: 10.5px; letter-spacing: .06em; }
+    .cap { margin-top: 52px; }
+    .cap button.open { padding: 10px 16px; font-size: 13px; }
+  }
+  @media (prefers-reduced-motion: reduce) { body:not(.moved) .nav.next { animation: none; } }
+
+  /* ---------- cleanup: tabs sit above the card, no blurbs or download buttons, and the card gets the room ---------- */
+  .stage { flex-direction: column; padding-bottom: 16px; }
+  .pager { position: relative; left: auto; top: auto; transform: none; margin: 0 0 14px !important; }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .deck { --w: calc((100svh - 150px) * 396 / 561); }
+  }
+  @media (max-width: 999px), (max-height: 599px) {
+    .stage { justify-content: flex-start; padding-top: 4px; }
+    .pager { margin-bottom: 10px !important; }
+    .deck { width: min(100vw - 16px, (100svh - 140px) * 396 / 561); }
+    .stage { min-height: 0; }
+  }
+  .about { padding-top: 28px; }
+  .about .starts { margin-bottom: 0; }
+  .site-foot { text-align: center; padding: 8px 20px 28px; }
+  .site-foot a { font: 400 12px/1 'DM Sans', sans-serif; letter-spacing: .06em; color: #111; opacity: .35; text-decoration: none; }
+  .site-foot a:hover { opacity: .6; }
+</style></head>
+<body>
+  <header class="top">
+    <a class="ct-home" href="/centraltruth" aria-label="Central Truth home"><svg class="ct-logo" viewBox="0 0 131.17 30" role="img" aria-label="Central Truth"><defs><mask id="mh"><rect width="30" height="30" fill="#fff"/><circle cx="15" cy="15" r="7.5" fill="#000"/></mask></defs><g fill="#111" mask="url(#mh)"><rect width="14.348" height="14.348" rx="2.935"/><rect x="15.652" width="14.348" height="14.348" rx="2.935"/><rect y="15.652" width="14.348" height="14.348" rx="2.935"/><rect x="15.652" y="15.652" width="14.348" height="14.348" rx="2.935"/></g><g fill="#111" font-family="DM Sans" font-weight="1000" font-size="17.442" letter-spacing="2.093" style="font-variation-settings:'opsz' 9"><text x="35" y="12.209">CENTRAL</text><text x="35" y="30">TRUTH</text></g></svg></a>
+  </header>
+
+  <main class="stage">
+    <div class="pager" role="group" aria-label="Cards"><button type="button">Cover</button><button type="button">Template</button><button type="button">Guide</button><button type="button">Reflection</button><button type="button">Example</button></div>
+    <div class="deck">
+      <div class="slide s-cover pos-c" data-name="Cover">
+        <div class="cover">
+          <div class="win tl vt-tl" aria-hidden="true"></div>
+          <div class="win tr vt-tr" aria-hidden="true"></div>
+          <div class="win bl vt-bl" aria-hidden="true"></div>
+          <div class="win br vt-br" aria-hidden="true"></div>
+          <blockquote class="truth ct-verse vt-truth">
+            <span>For even the Son of Man</span>
+            <span>did not come to be served, but</span>
+            <span>to <b>serve</b>, and to give His life</span>
+            <span>as a ransom for many.</span>
+            <cite>Mark 10:45</cite>
+          </blockquote>
+          <svg class="ct-logo cover-ct" viewBox="0 0 131.17 30" role="img" aria-label="Central Truth"><defs><mask id="mw"><rect width="30" height="30" fill="#fff"/><circle cx="15" cy="15" r="7.5" fill="#000"/></mask></defs><g fill="#fff" mask="url(#mw)"><rect width="14.348" height="14.348" rx="2.935"/><rect x="15.652" width="14.348" height="14.348" rx="2.935"/><rect y="15.652" width="14.348" height="14.348" rx="2.935"/><rect x="15.652" y="15.652" width="14.348" height="14.348" rx="2.935"/></g><g fill="#fff" font-family="DM Sans" font-weight="1000" font-size="17.442" letter-spacing="2.093" style="font-variation-settings:'opsz' 9"><text x="35" y="12.209">CENTRAL</text><text x="35" y="30">TRUTH</text></g></svg>
+        </div>
+      </div>
+      <div class="slide s-tpl" data-name="Template" aria-label="Blank template">
+        <div class="card" aria-hidden="true">
+          <div class="gd-box tl vt-tl"><span class="lbl">Context</span></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Curiosity</span></div>
+          <div class="gd-box bl vt-bl"><span class="lbl">Clarity</span></div>
+          <div class="gd-box br vt-br"><span class="lbl">Connections</span></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
+        </div>
+      </div>
+      <div class="slide s-guide" data-name="Guide" aria-label="Guide">
+        <div class="card">
+          <div class="gd-box tl vt-tl"><span class="lbl">Context</span>
+            <p class="gh">Set the Scene.</p><p class="gp">Every passage has a backstory. Find one thing about who wrote it, who it was for, when it was written, or what was going on.</p></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Curiosity</span>
+            <p class="gh">Ask One Question.</p><p class="gp">Every question is good. What&rsquo;s one thing this passage makes you wonder?</p></div>
+          <div class="gd-box bl vt-bl"><span class="lbl">Clarity</span>
+            <p class="gh">Define One Word.</p><p class="gp">Find one word or phrase you don&rsquo;t know, or one you think you know but couldn&rsquo;t explain. Look it up or compare another translation.</p></div>
+          <div class="gd-box br vt-br"><span class="lbl">Connections</span>
+            <p class="gh">Follow One Link.</p><p class="gp">Scripture often echoes itself. Follow one cross&#8209;reference, or look at the chapter before or after, to see where this idea shows up again.</p></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p>What does <strong>this</strong> passage reveal about God&rsquo;s character and purpose?</p><b>THEREFORE, I&hellip;</b><p>What does this reveal about who He made me to be?</p></div>
+        </div>
+      </div>
+      <div class="slide s-ref" data-name="Reflection" aria-label="Reflection journal">
+        <div class="card">
+          <div class="rf vt-tl"><span class="lbl">Reflection</span>
+            <div class="rf-cols">
+              <div><b>Believe it.</b><p>Do you believe this truth? What lies make it hard to believe?</p></div>
+              <div><b>Live it.</b><p>How will this truth shape what you think, say, and do?</p></div>
+              <div><b>Pray it.</b><p>Ask God to help you live it. Who can you bring questions to?</p></div>
+            </div>
+            <div class="rf-lines" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slide s-ex" data-name="Example" aria-label="Example: Mark 10:32&ndash;45">
+        <div class="card ex">
+          <div class="gd-box tl vt-tl"><span class="lbl">Context</span>
+            <p class="hw">The disciples have witnessed many things. They assumed earthly power was coming next.</p></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Curiosity</span>
+            <p class="hw">What does it mean to sit at the left and right in glory?</p></div>
+          <div class="gd-box bl vt-bl"><span class="lbl">Clarity</span>
+            <p class="hw">Glory &ndash; heavy; about importance and honor.</p></div>
+          <div class="gd-box br vt-br"><span class="lbl">Connections</span>
+            <p class="hw">This is the third time Jesus mentions His death. <span style="white-space:nowrap">(Ch.&nbsp;8&ndash;9)</span></p>
+            <p class="hw gap">OT: Isaiah 53, the suffering Servant.</p></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p class="hw">all powerful, yet He chooses to serve.</p><b>THEREFORE, I&hellip;</b><p class="hw">should look not to be served, but to serve.</p></div>
+        </div>
+      </div>
+    </div>
+    <button class="nav prev" type="button" aria-label="Previous">&larr;</button>
+    <button class="nav next" type="button" aria-label="Next">&rarr;</button>
+  </main>
+
+  <section class="about" id="about">
+    <h1>Central Truth</h1>
+    <p class="lede">A simple, unintimidating way to read Scripture and discover <b>who God is</b>. Just one thing in each corner, then the truth at the center.</p>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Context: Set the Scene</b>Find one thing about who wrote it, who it was for, when it was written, or what was going on.</li>
+      <li><b>Curiosity: Ask One Question</b>Every question is good. What&rsquo;s one thing this passage makes you wonder?</li>
+      <li><b>Clarity: Define One Word</b>A word or phrase you don&rsquo;t know, or one you think you know but couldn&rsquo;t explain. Look it up or compare another translation.</li>
+      <li><b>Connections: Follow One Link</b>Follow one cross&#8209;reference, or look at the chapter before or after, to see where the idea shows up again.</li>
+      <li><b>God is&hellip; Therefore, I&hellip;</b>What does this passage reveal about God&rsquo;s character and purpose? What does that reveal about who He made you to be?</li>
+      <li><b>Reflection</b>Believe it, live it, pray it. Then bring your questions to someone you trust.</li>
+    </ol>
+    <p class="lede" style="font-size:16px;margin-top:-14px">The example card is a leader&rsquo;s own study of <b>Mark 10:32&ndash;45</b>.</p>
+    <h2>Download</h2>
+    <div class="starts">
+      <a class="primary" href="/centraltruth/Central%20Truth%20Blank%20Template.pdf" target="_blank" rel="noopener">Blank template PDF &darr;</a>
+      <a href="/centraltruth/Central%20Truth%20Guide.pdf" target="_blank" rel="noopener">Leader guide PDF &darr;</a>
+      <a href="/centraltruth/Central%20Truth%20Template%20+%20Reflection.pdf" target="_blank" rel="noopener">Template + reflection (2-sided) &darr;</a>
+      <a href="/centraltruth/Central%20Truth%20Example%20-%20Mark%2010.pdf" target="_blank" rel="noopener">Mark 10 example &darr;</a>
+    </div>
+  </section>
+
+  <footer class="site-foot"><a href="/">dwellstudy.com</a></footer>
+  <script src="/site.js"></script>
+  <script>
+    // Slideshow: the middle card is in front, its neighbors sit to the left and right, the rest wait off to the side.
+    // It loops: after the last card comes the first. A card that wraps around jumps (unseen) to the far side first,
+    // so nothing slides across the middle.
+    (function () {
+      var slides = [].slice.call(document.querySelectorAll('.deck .slide')), n = slides.length, at = 0;
+      var dots = [].slice.call(document.querySelectorAll('.pager button'));
+      var ALL = ['pos-l', 'pos-c', 'pos-r', 'pos-hl', 'pos-hr'];
+      function cur(el) { for (var k = 0; k < ALL.length; k++) if (el.classList.contains(ALL[k])) return ALL[k]; return null; }
+      function set(el, c) { el.classList.remove.apply(el.classList, ALL); el.classList.add(c); }
+      function paint(dir) {
+        slides.forEach(function (el, i) {
+          var off = ((i - at) % n + n) % n;
+          var next = off === 0 ? 'pos-c' : off === 1 ? 'pos-r' : off === n - 1 ? 'pos-l' : (dir < 0 ? 'pos-hr' : 'pos-hl');
+          var was = cur(el);
+          var entering = was === null || was === 'pos-hl' || was === 'pos-hr' || (was === 'pos-l' && next === 'pos-r') || (was === 'pos-r' && next === 'pos-l');
+          if (entering && next !== was && dir) {        // start just off the side it comes in from
+            el.classList.add('snap'); set(el, dir > 0 ? 'pos-hr' : 'pos-hl'); void el.offsetWidth; el.classList.remove('snap');
+          }
+          if (was === null) el.classList.add('snap');
+          set(el, next);
+          if (was === null) { void el.offsetWidth; el.classList.remove('snap'); }
+        });
+        dots.forEach(function (d, i) { d.setAttribute('aria-current', i === at); });
+        var note = document.querySelector('.note'), src = slides[at].querySelector('.blurb');
+        if (note && src) { note.innerHTML = src.innerHTML; note.classList.remove('in'); void note.offsetWidth; note.classList.add('in'); }
+      }
+      function go(d) { at = (at + d + n) % n; paint(d); moved(); }
+      function moved() { document.body.classList.add('moved'); }
+      function jump(i) { if (i === at) return; var f = ((i - at) % n + n) % n; at = i; paint(f <= n / 2 ? 1 : -1); moved(); }
+      var st = document.querySelector('.start'); if (st) st.addEventListener('click', function (e) { e.stopPropagation(); go(1); });
+      dots.forEach(function (d, i) { d.addEventListener('click', function () { jump(i); }); });
+      var deck = document.querySelector('.deck'), x0 = null, y0 = 0;
+      deck.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      deck.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+      });
+      document.querySelector('.nav.prev').addEventListener('click', function () { go(-1); });
+      document.querySelector('.nav.next').addEventListener('click', function () { go(1); });
+      slides.forEach(function (el, i) { el.addEventListener('click', function () { var c = cur(el); if (c === 'pos-l') go(-1); else if (c === 'pos-r') go(1); }); });
+      paint(0);
+      document.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') go(-1); if (e.key === 'ArrowRight') go(1); });
+      // desktop: the note in the bottom-left corner belongs to the slideshow, so hide it once you scroll down to the About section
+      var stage = document.querySelector('.stage');
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { document.body.classList.toggle('below', es[0].intersectionRatio < .6); }, { threshold: [0, .6, 1] }).observe(stage);
+    })();
+  </script>
+</body>
+</html>
