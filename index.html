@@ -4,11 +4,11 @@
 <title>Dwell</title>
 <meta name="description" content="Dwell Study: practical biblical literacy.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;700&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,700;9..40,1000&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
 <meta name="apple-mobile-web-app-title" content="Dwell"><meta name="theme-color" content="#ffffff">
-<!-- Homepage while the Dwell ideas are tabled: the verse, plus a card for Guided SOAR and one for the Dwell Bookmark (coming soon).
+<!-- Homepage while the Dwell ideas are tabled: the verse, plus cards for Guided SOAR, Central Truth, and the Dwell Bookmark (coming soon).
      The previous homepage lives at /home-dwell. -->
 <style>
   * { box-sizing: border-box; }
@@ -21,7 +21,9 @@
   .brand .domain { margin: 22px 0 0; padding-left: .32em; font: 400 clamp(17px, 4.6vw, 26px)/1 'Jost', sans-serif; letter-spacing: .32em; }
   .brand .tag { margin: 12px 0 0; padding-left: .3em; font: 300 clamp(11px, 3vw, 15px)/1.4 'Jost', sans-serif; letter-spacing: .3em; color: #767676; }
 
-  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; width: min(100%, 640px); }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: min(100%, 940px); }
+  .card .mark svg { height: 34px; width: auto; display: block; overflow: visible; }
+  @media (max-width: 860px) and (min-width: 561px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(100%, 640px); } }
   .card { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 22px 22px 20px; border: 1.5px solid #111; border-radius: 6px; background: #fff; color: #111; text-decoration: none; min-height: 180px; }
   .card .mark { height: 40px; display: flex; align-items: center; }
   .card .mark img { height: 40px; width: auto; display: block; }
@@ -66,6 +68,13 @@
       <hr>
       <h2>Guided SOAR Card</h2>
       <p>A simple way to read Scripture with God&rsquo;s character at the center.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <a class="card" href="/centraltruth">
+      <span class="mark"><svg viewBox="0 0 131.17 30" role="img" aria-label="Central Truth"><defs><mask id="mh"><rect width="30" height="30" fill="#fff"/><circle cx="15" cy="15" r="7.5" fill="#000"/></mask></defs><g fill="#111" mask="url(#mh)"><rect width="14.348" height="14.348" rx="2.935"/><rect x="15.652" width="14.348" height="14.348" rx="2.935"/><rect y="15.652" width="14.348" height="14.348" rx="2.935"/><rect x="15.652" y="15.652" width="14.348" height="14.348" rx="2.935"/></g><g fill="#111" font-family="DM Sans" font-weight="1000" font-size="17.442" letter-spacing="2.093" style="font-variation-settings:'opsz' 9"><text x="35" y="12.209">CENTRAL</text><text x="35" y="30">TRUTH</text></g></svg></span>
+      <hr>
+      <h2>Central Truth Card</h2>
+      <p>A simpler, one-step-at-a-time way to discover who God is.</p>
       <span class="go">Open &rarr;</span>
     </a>
     <a class="card" href="/dwell">
