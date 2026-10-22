@@ -220,6 +220,50 @@
   }
   @media (prefers-reduced-motion: reduce) { body:not(.moved) .nav.next { animation: none; } }
 
+  /* ---------- cover intro: the four corners light up one at a time (Context, Curiosity, Clarity, Connections),
+     close in around the circle, "God is… / Therefore, I…" appears, then it all settles into the verse and the logo.
+     JS adds .intro plus one class per step (s1-s4, join, verse); taking the classes off leaves the finished cover,
+     so skipping just removes them. ---------- */
+  .win .wc, .ct-mid, .replay { display: none; }
+  .win::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: #0b1214; opacity: 0; pointer-events: none; }
+  .cover.intro .win .wc { display: flex; }
+  .cover.intro .ct-mid { display: flex; }
+  .cover.intro .win { transition: transform 1.1s cubic-bezier(.2, .75, .15, 1); }
+  .cover.intro .win::after { opacity: .74; transition: opacity .8s ease; }
+  .cover.intro:not(.join) .win.tl { transform: translate(calc(-7 * var(--u)), calc(-7 * var(--u))); }
+  .cover.intro:not(.join) .win.tr { transform: translate(calc(7 * var(--u)), calc(-7 * var(--u))); }
+  .cover.intro:not(.join) .win.bl { transform: translate(calc(-7 * var(--u)), calc(7 * var(--u))); }
+  .cover.intro:not(.join) .win.br { transform: translate(calc(7 * var(--u)), calc(7 * var(--u))); }
+  .cover.s1 .win.tl::after, .cover.s2 .win.tr::after, .cover.s3 .win.bl::after, .cover.s4 .win.br::after { opacity: .34; }
+  .cover.intro.join .win::after { opacity: 0; transition-duration: 1.2s; }
+  .wc { position: absolute; left: calc(15 * var(--u)); right: calc(15 * var(--u)); flex-direction: column; gap: calc(5 * var(--u)); color: #fff; z-index: 1;
+        text-shadow: 0 1px calc(8 * var(--u)) rgba(0, 0, 0, .45); opacity: 0; transform: translateY(calc(6 * var(--u))); transition: opacity .6s ease, transform .6s ease; }
+  .win.tl .wc, .win.tr .wc { top: calc(18 * var(--u)); }
+  .win.bl .wc, .win.br .wc { bottom: calc(18 * var(--u)); }
+  .win.tr .wc, .win.br .wc { text-align: right; align-items: flex-end; }
+  .wc i { font: normal 900 calc(10.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+  .wc b { font: 700 calc(17 * var(--u))/1.1 'DM Sans', sans-serif; letter-spacing: -.005em; }
+  .cover.s1 .win.tl .wc, .cover.s2 .win.tr .wc, .cover.s3 .win.bl .wc, .cover.s4 .win.br .wc { opacity: 1; transform: none; }
+  .cover.intro.join .win .wc { opacity: 0; transition-duration: .4s; }
+  .cover.intro .truth { opacity: 0; transform: scale(.35); transition: opacity .8s ease, transform 1.1s cubic-bezier(.2, .75, .15, 1); }
+  .cover.intro.join .truth { opacity: 1; transform: none; }
+  .cover.intro .truth > span, .cover.intro .truth > cite { opacity: 0; transition: opacity .9s ease; }
+  .cover.intro.verse .truth > span, .cover.intro.verse .truth > cite { opacity: 1; }
+  .ct-mid { position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; gap: calc(34 * var(--u)); pointer-events: none; }
+  .ct-mid b { font: 900 calc(13 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; color: #111; opacity: 0; transform: translateY(calc(5 * var(--u)));
+              transition: opacity .6s ease, transform .6s ease; }
+  .cover.join .ct-mid b:first-child { opacity: 1; transform: none; transition-delay: .7s; }
+  .cover.join .ct-mid b:last-child { opacity: 1; transform: none; transition-delay: 1.5s; }
+  .cover.intro.verse .ct-mid b { opacity: 0; transition-delay: 0s; transition-duration: .5s; }
+  .cover.intro .cover-ct { opacity: 0; }
+  .cover.intro.verse .cover-ct { opacity: 1; transition: opacity 1s ease .5s; }
+  .replay { position: absolute; left: calc(32 * var(--u)); bottom: calc(30 * var(--u)); width: calc(30 * var(--u)); height: calc(30 * var(--u)); border-radius: 50%; padding: 0;
+            border: calc(1.2 * var(--u)) solid rgba(255, 255, 255, .7); background: rgba(0, 0, 0, .15); color: #fff; font: 400 calc(17 * var(--u))/1 'DM Sans', sans-serif;
+            cursor: pointer; place-items: center; opacity: .75; transition: opacity .2s; }
+  .replay:hover { opacity: 1; }
+  .cover.played:not(.intro) .replay { display: grid; animation: fade-in .6s ease; }
+  @keyframes fade-in { from { opacity: 0; } }
+
   /* ---------- cleanup: tabs sit above the card, no blurbs or download buttons, and the card gets the room ---------- */
   .stage { flex-direction: column; padding-bottom: 16px; }
   .pager { position: relative; left: auto; top: auto; transform: none; margin: 0 0 14px !important; }
@@ -248,17 +292,19 @@
     <div class="deck">
       <div class="slide s-cover pos-c" data-name="Cover">
         <div class="cover">
-          <div class="win tl vt-tl" aria-hidden="true"></div>
-          <div class="win tr vt-tr" aria-hidden="true"></div>
-          <div class="win bl vt-bl" aria-hidden="true"></div>
-          <div class="win br vt-br" aria-hidden="true"></div>
+          <div class="win tl vt-tl" aria-hidden="true"><span class="wc"><i>Context</i><b>Set the scene.</b></span></div>
+          <div class="win tr vt-tr" aria-hidden="true"><span class="wc"><i>Curiosity</i><b>Ask one question.</b></span></div>
+          <div class="win bl vt-bl" aria-hidden="true"><span class="wc"><i>Clarity</i><b>Define one word.</b></span></div>
+          <div class="win br vt-br" aria-hidden="true"><span class="wc"><i>Connections</i><b>Follow one link.</b></span></div>
           <blockquote class="truth ct-verse vt-truth">
             <span>For even the Son of Man</span>
             <span>did not come to be served, but</span>
             <span>to <b>serve</b>, and to give His life</span>
             <span>as a ransom for many.</span>
             <cite>Mark 10:45</cite>
+            <div class="ct-mid" aria-hidden="true"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
           </blockquote>
+          <button class="replay" type="button" aria-label="Replay the intro">&#8635;</button>
           <svg class="ct-logo cover-ct" viewBox="0 0 131.17 30" role="img" aria-label="Central Truth"><defs><mask id="mw"><rect width="30" height="30" fill="#fff"/><circle cx="15" cy="15" r="7.5" fill="#000"/></mask></defs><g fill="#fff" mask="url(#mw)"><rect width="14.348" height="14.348" rx="2.935"/><rect x="15.652" width="14.348" height="14.348" rx="2.935"/><rect y="15.652" width="14.348" height="14.348" rx="2.935"/><rect x="15.652" y="15.652" width="14.348" height="14.348" rx="2.935"/></g><g fill="#fff" font-family="DM Sans" font-weight="1000" font-size="17.442" letter-spacing="2.093" style="font-variation-settings:'opsz' 9"><text x="35" y="12.209">CENTRAL</text><text x="35" y="30">TRUTH</text></g></svg>
         </div>
       </div>
@@ -386,6 +432,30 @@
       // desktop: the note in the bottom-left corner belongs to the slideshow, so hide it once you scroll down to the About section
       var stage = document.querySelector('.stage');
       if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { document.body.classList.toggle('below', es[0].intersectionRatio < .6); }, { threshold: [0, .6, 1] }).observe(stage);
+    })();
+  </script>
+  <script>
+    // Cover intro (about 9 seconds). Plays once on load; any tap, click, swipe, or key skips to the finished cover.
+    (function () {
+      var cover = document.querySelector('.s-cover .cover'); if (!cover) return;
+      var STEPS = [['s1', 300], ['s2', 1450], ['s3', 2600], ['s4', 3750], ['join', 5100], ['verse', 8000]], END = 9400;
+      var timers = [];
+      function finish() {
+        timers.forEach(clearTimeout); timers = [];
+        cover.classList.remove('intro', 's1', 's2', 's3', 's4', 'join', 'verse');
+        cover.classList.add('played');
+        ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) { document.removeEventListener(ev, finish, true); });
+      }
+      function play() {
+        finish(); cover.classList.remove('played');
+        cover.classList.add('intro'); void cover.offsetWidth;
+        STEPS.forEach(function (st) { timers.push(setTimeout(function () { cover.classList.add(st[0]); }, st[1])); });
+        timers.push(setTimeout(finish, END));
+        setTimeout(function () { ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) { document.addEventListener(ev, finish, true); }); }, 0);
+      }
+      cover.querySelector('.replay').addEventListener('click', function (e) { e.stopPropagation(); play(); });
+      var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (calm) cover.classList.add('played'); else play();
     })();
   </script>
 </body>
