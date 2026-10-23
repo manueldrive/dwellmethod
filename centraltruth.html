@@ -220,43 +220,60 @@
   }
   @media (prefers-reduced-motion: reduce) { body:not(.moved) .nav.next { animation: none; } }
 
-  /* ---------- cover intro: the four corners light up one at a time (Context, Curiosity, Clarity, Connections),
-     close in around the circle, "God is… / Therefore, I…" appears, then it all settles into the verse and the logo.
-     JS adds .intro plus one class per step (s1-s4, join, verse); taking the classes off leaves the finished cover,
-     so skipping just removes them. ---------- */
-  .win .wc, .ct-mid, .replay { display: none; }
+  /* ---------- cover intro: a short story of one study (Mark 10:32-45). Each corner lights up in turn, asks its question,
+     and a handwritten answer writes itself in. Then the corners close in, the circle answers "God is… / Therefore, I…",
+     and it all settles into Mark 10:45, the verse the study led to. JS adds .intro plus one class per beat
+     (tag, s1-s4, join, c1, c2, verse); taking the classes off leaves the finished cover, so skipping just removes them. ---------- */
+  .win .wc, .ct-mid, .ct-tag, .replay { display: none; }
   .win::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: #0b1214; opacity: 0; pointer-events: none; }
-  .cover.intro .win .wc { display: flex; }
-  .cover.intro .ct-mid { display: flex; }
+  .cover.intro .win .wc, .cover.intro .ct-mid, .cover.intro .ct-tag { display: flex; }
   .cover.intro .win { transition: transform 1.1s cubic-bezier(.2, .75, .15, 1); }
-  .cover.intro .win::after { opacity: .74; transition: opacity .8s ease; }
+  .cover.intro .win::after { opacity: .8; transition: opacity .8s ease; }
   .cover.intro:not(.join) .win.tl { transform: translate(calc(-7 * var(--u)), calc(-7 * var(--u))); }
   .cover.intro:not(.join) .win.tr { transform: translate(calc(7 * var(--u)), calc(-7 * var(--u))); }
   .cover.intro:not(.join) .win.bl { transform: translate(calc(-7 * var(--u)), calc(7 * var(--u))); }
   .cover.intro:not(.join) .win.br { transform: translate(calc(7 * var(--u)), calc(7 * var(--u))); }
-  .cover.s1 .win.tl::after, .cover.s2 .win.tr::after, .cover.s3 .win.bl::after, .cover.s4 .win.br::after { opacity: .34; }
-  .cover.intro.join .win::after { opacity: 0; transition-duration: 1.2s; }
-  .wc { position: absolute; left: calc(15 * var(--u)); right: calc(15 * var(--u)); flex-direction: column; gap: calc(5 * var(--u)); color: #fff; z-index: 1;
-        text-shadow: 0 1px calc(8 * var(--u)) rgba(0, 0, 0, .45); opacity: 0; transform: translateY(calc(6 * var(--u))); transition: opacity .6s ease, transform .6s ease; }
-  .win.tl .wc, .win.tr .wc { top: calc(18 * var(--u)); }
-  .win.bl .wc, .win.br .wc { bottom: calc(18 * var(--u)); }
-  .win.tr .wc, .win.br .wc { text-align: right; align-items: flex-end; }
-  .wc i { font: normal 900 calc(10.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
-  .wc b { font: 700 calc(17 * var(--u))/1.1 'DM Sans', sans-serif; letter-spacing: -.005em; }
+  /* the corner being worked on is bright; finished corners stay lit, a little dimmer */
+  .cover.s1 .win.tl::after, .cover.s2 .win.tr::after, .cover.s3 .win.bl::after, .cover.s4 .win.br::after { opacity: .42; }
+  .cover.s1.s2 .win.tl::after, .cover.s2.s3 .win.tr::after, .cover.s3.s4 .win.bl::after { opacity: .62; }
+  .cover.intro.join .win::after { opacity: 0 !important; transition-duration: 1.2s; }
+  .wc { position: absolute; left: calc(15 * var(--u)); right: calc(13 * var(--u)); flex-direction: column; align-items: flex-start; color: #fff; z-index: 1;
+        text-shadow: 0 1px calc(8 * var(--u)) rgba(0, 0, 0, .5); opacity: 0; transform: translateY(calc(6 * var(--u))); transition: opacity .6s ease, transform .6s ease; }
+  .win.tl .wc, .win.tr .wc { top: calc(17 * var(--u)); }
+  .win.bl .wc, .win.br .wc { bottom: calc(17 * var(--u)); }
+  .wc i { font: normal 900 calc(9.5 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .2em; text-transform: uppercase; opacity: .85; }
+  .wc b { margin-top: calc(6 * var(--u)); font: 700 calc(15.5 * var(--u))/1.12 'DM Sans', sans-serif; letter-spacing: -.005em; }
+  .wc .hw { margin: calc(9 * var(--u)) 0 0; font: 400 calc(14 * var(--u))/1.22 'Kalam', cursive; color: #fff; }
   .cover.s1 .win.tl .wc, .cover.s2 .win.tr .wc, .cover.s3 .win.bl .wc, .cover.s4 .win.br .wc { opacity: 1; transform: none; }
-  .cover.intro.join .win .wc { opacity: 0; transition-duration: .4s; }
+  .cover.s1.s2 .win.tl .wc, .cover.s2.s3 .win.tr .wc, .cover.s3.s4 .win.bl .wc { opacity: .55; }
+  .cover.intro.join .win .wc { opacity: 0 !important; transition-duration: .5s; }
+  /* handwriting writes itself in, one line at a time */
+  .cover .hw span { display: block; white-space: nowrap; clip-path: inset(0 100% 0 0); transition: clip-path .5s linear; }
+  .cover.s1 .win.tl .hw span, .cover.s2 .win.tr .hw span, .cover.s3 .win.bl .hw span, .cover.s4 .win.br .hw span,
+  .cover.c1 .hw.c1 span, .cover.c2 .hw.c2 span { clip-path: inset(0 0 0 0); }
+  .cover .hw span:nth-child(1) { transition-delay: .8s; } .cover .hw span:nth-child(2) { transition-delay: 1.3s; } .cover .hw span:nth-child(3) { transition-delay: 1.8s; }
+  .cover .ct-mid .hw span:nth-child(1) { transition-delay: .5s; } .cover .ct-mid .hw span:nth-child(2) { transition-delay: 1s; }
+  /* the passage tag sits where the circle will be */
+  .ct-tag { position: absolute; left: 0; right: 0; top: calc(267 * var(--u)); flex-direction: column; align-items: center; gap: calc(6 * var(--u)); z-index: 2; pointer-events: none;
+            opacity: 0; transition: opacity .6s ease; }
+  .ct-tag b { background: #111; color: #fff; border: calc(1.5 * var(--u)) solid #fff; border-radius: 99px; padding: calc(6 * var(--u)) calc(11 * var(--u)) calc(6 * var(--u)) calc(13 * var(--u));
+              font: 900 calc(10 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+  .cover.tag .ct-tag { opacity: 1; }
+  .cover.intro.join .ct-tag { opacity: 0; transition-duration: .3s; }
+  /* the circle grows in and answers the two questions, then gives way to the verse */
   .cover.intro .truth { opacity: 0; transform: scale(.35); transition: opacity .8s ease, transform 1.1s cubic-bezier(.2, .75, .15, 1); }
   .cover.intro.join .truth { opacity: 1; transform: none; }
   .cover.intro .truth > span, .cover.intro .truth > cite { opacity: 0; transition: opacity .9s ease; }
-  .cover.intro.verse .truth > span, .cover.intro.verse .truth > cite { opacity: 1; }
-  .ct-mid { position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; gap: calc(34 * var(--u)); pointer-events: none; }
-  .ct-mid b { font: 900 calc(13 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; color: #111; opacity: 0; transform: translateY(calc(5 * var(--u)));
-              transition: opacity .6s ease, transform .6s ease; }
-  .cover.join .ct-mid b:first-child { opacity: 1; transform: none; transition-delay: .7s; }
-  .cover.join .ct-mid b:last-child { opacity: 1; transform: none; transition-delay: 1.5s; }
-  .cover.intro.verse .ct-mid b { opacity: 0; transition-delay: 0s; transition-duration: .5s; }
+  .cover.intro.verse .truth > span, .cover.intro.verse .truth > cite { opacity: 1; transition-delay: .4s; }
+  .ct-mid { position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; transition: opacity .5s ease; }
+  .ct-mid b { font: 900 calc(12 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .16em; padding-left: .16em; color: #111; opacity: 0; transition: opacity .5s ease; }
+  .ct-mid b + .hw + b { margin-top: calc(14 * var(--u)); }
+  .truth .ct-mid .hw { margin: calc(5 * var(--u)) 0 0; text-align: center; }
+  .truth .ct-mid .hw span { font: 400 calc(12.6 * var(--u))/1.22 'Kalam', cursive; color: #213b6b; white-space: nowrap; }
+  .cover.c1 .ct-mid b:first-child, .cover.c2 .ct-mid b:nth-of-type(2) { opacity: 1; }
+  .cover.intro.verse .ct-mid { opacity: 0; }
   .cover.intro .cover-ct { opacity: 0; }
-  .cover.intro.verse .cover-ct { opacity: 1; transition: opacity 1s ease .5s; }
+  .cover.intro.verse .cover-ct { opacity: 1; transition: opacity 1s ease .8s; }
   .replay { position: absolute; left: calc(32 * var(--u)); bottom: calc(30 * var(--u)); width: calc(30 * var(--u)); height: calc(30 * var(--u)); border-radius: 50%; padding: 0;
             border: calc(1.2 * var(--u)) solid rgba(255, 255, 255, .7); background: rgba(0, 0, 0, .15); color: #fff; font: 400 calc(17 * var(--u))/1 'DM Sans', sans-serif;
             cursor: pointer; place-items: center; opacity: .75; transition: opacity .2s; }
@@ -292,18 +309,19 @@
     <div class="deck">
       <div class="slide s-cover pos-c" data-name="Cover">
         <div class="cover">
-          <div class="win tl vt-tl" aria-hidden="true"><span class="wc"><i>Context</i><b>Set the scene.</b></span></div>
-          <div class="win tr vt-tr" aria-hidden="true"><span class="wc"><i>Curiosity</i><b>Ask one question.</b></span></div>
-          <div class="win bl vt-bl" aria-hidden="true"><span class="wc"><i>Clarity</i><b>Define one word.</b></span></div>
-          <div class="win br vt-br" aria-hidden="true"><span class="wc"><i>Connections</i><b>Follow one link.</b></span></div>
+          <div class="win tl vt-tl" aria-hidden="true"><div class="wc"><i>Context</i><b>What context is important?</b><p class="hw"><span>The disciples think</span><span>earthly power is</span><span>coming next.</span></p></div></div>
+          <div class="win tr vt-tr" aria-hidden="true"><div class="wc"><i>Curiosity</i><b>What questions do you have?</b><p class="hw"><span>What does it mean</span><span>to sit at His right</span><span>and left in glory?</span></p></div></div>
+          <div class="win bl vt-bl" aria-hidden="true"><div class="wc"><i>Clarity</i><b>What needs to be clearer?</b><p class="hw"><span>Glory = heavy;</span><span>importance and honor.</span></p></div></div>
+          <div class="win br vt-br" aria-hidden="true"><div class="wc"><i>Connections</i><b>Where else does this show up?</b><p class="hw"><span>Isaiah 53, the</span><span>suffering Servant.</span></p></div></div>
           <blockquote class="truth ct-verse vt-truth">
             <span>For even the Son of Man</span>
             <span>did not come to be served, but</span>
             <span>to <b>serve</b>, and to give His life</span>
             <span>as a ransom for many.</span>
             <cite>Mark 10:45</cite>
-            <div class="ct-mid" aria-hidden="true"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
+            <div class="ct-mid" aria-hidden="true"><b>GOD IS&hellip;</b><p class="hw c1"><span>all powerful, yet</span><span>He chooses to serve.</span></p><b>THEREFORE, I&hellip;</b><p class="hw c2"><span>should look not to be</span><span>served, but to serve.</span></p></div>
           </blockquote>
+          <div class="ct-tag" aria-hidden="true"><b>Mark 10:32&ndash;45</b></div>
           <button class="replay" type="button" aria-label="Replay the intro">&#8635;</button>
           <svg class="ct-logo cover-ct" viewBox="0 0 131.17 30" role="img" aria-label="Central Truth"><defs><mask id="mw"><rect width="30" height="30" fill="#fff"/><circle cx="15" cy="15" r="7.5" fill="#000"/></mask></defs><g fill="#fff" mask="url(#mw)"><rect width="14.348" height="14.348" rx="2.935"/><rect x="15.652" width="14.348" height="14.348" rx="2.935"/><rect y="15.652" width="14.348" height="14.348" rx="2.935"/><rect x="15.652" y="15.652" width="14.348" height="14.348" rx="2.935"/></g><g fill="#fff" font-family="DM Sans" font-weight="1000" font-size="17.442" letter-spacing="2.093" style="font-variation-settings:'opsz' 9"><text x="35" y="12.209">CENTRAL</text><text x="35" y="30">TRUTH</text></g></svg>
         </div>
@@ -435,14 +453,14 @@
     })();
   </script>
   <script>
-    // Cover intro (about 9 seconds). Plays once on load; any tap, click, swipe, or key skips to the finished cover.
+    // Cover intro (about 20 seconds). Plays once on load; any tap, click, swipe, or key skips to the finished cover.
     (function () {
       var cover = document.querySelector('.s-cover .cover'); if (!cover) return;
-      var STEPS = [['s1', 300], ['s2', 1450], ['s3', 2600], ['s4', 3750], ['join', 5100], ['verse', 8000]], END = 9400;
+      var STEPS = [['tag', 150], ['s1', 1300], ['s2', 4000], ['s3', 6700], ['s4', 9400], ['join', 12300], ['c1', 13100], ['c2', 15000], ['verse', 17800]], END = 19600;
       var timers = [];
       function finish() {
         timers.forEach(clearTimeout); timers = [];
-        cover.classList.remove('intro', 's1', 's2', 's3', 's4', 'join', 'verse');
+        cover.classList.remove('intro', 'tag', 's1', 's2', 's3', 's4', 'join', 'c1', 'c2', 'verse');
         cover.classList.add('played');
         ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) { document.removeEventListener(ev, finish, true); });
       }
