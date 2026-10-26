@@ -233,6 +233,18 @@
   .s-tpl.c1 .cover-over .win.tl, .s-tpl.c2 .cover-over .win.tr, .s-tpl.c3 .cover-over .win.bl, .s-tpl.c4 .cover-over .win.br, .s-tpl.c4 .cover-over .cover-logo { opacity: 0; }
   .s-tpl.c1 .gd-box.tl .lbl, .s-tpl.c2 .gd-box.tr .lbl, .s-tpl.c3 .gd-box.bl .lbl, .s-tpl.c4 .gd-box.br .lbl { opacity: 1; }
   .s-tpl.done .cover-over { display: none; }
+
+  /* ---------- below the card: big buttons for the downloads and resources ---------- */
+  .links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 900px; margin: 0 auto; padding: 28px 20px 40px; }
+  .big { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 22px 56px 22px 24px; border: 1.5px solid #111; border-radius: 12px; color: #111; text-decoration: none; background: #fff; transition: background .2s, transform .2s; }
+  .big .t { font: 700 20px/1.15 'DM Sans', sans-serif; }
+  .big .d { font-size: 14px; color: #5b6878; }
+  .big .i { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font: 700 22px/1 'DM Sans', sans-serif; }
+  .big:hover { background: #f4f5f7; }
+  .big.primary { background: #111; color: #fff; }
+  .big.primary .d { color: #c9ced5; }
+  .big.primary:hover { background: #2a2d33; }
+  @media (max-width: 700px) { .links { grid-template-columns: minmax(0, 1fr); padding-top: 20px; } }
 </style></head>
 <body>
   <header class="top">
@@ -305,19 +317,10 @@
     <button class="nav next" type="button" aria-label="Next">&rarr;</button>
   </main>
 
-  <section class="about" id="about">
-    <h1>Guided SOAR</h1>
-    <p class="lede">A simple way to read Scripture with <b>God&rsquo;s character at the center</b>. Read it, look closer, see who He is, and live it out.</p>
-    <h2>How it works</h2>
-    <ol class="steps">
-      <li><b>Scripture</b>Before you read, set the scene: who wrote it, when, why, and what comes before and after.</li>
-      <li><b>Observation</b>While you read, define confusing words, explain hard ideas, and connect it to the rest of the Bible.</li>
-      <li><b>Central Truth (God is&hellip; Therefore, I&hellip;)</b>What does this passage show about who God is? What does that mean for who He made you to be?</li>
-      <li><b>Application</b>Do you believe it? What lies get in the way? How will you live it out this week?</li>
-      <li><b>Reflection</b>Pray it, write down your questions, and tell someone what God is teaching you.</li>
-    </ol>
-    <h2>Download</h2>
-    <div class="starts"><a class="primary" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener">Blank template PDF &darr;</a><a href="/guidedsoar/SOAR%20Guide.pdf" target="_blank" rel="noopener">Leader guide PDF &darr;</a></div>
+  <section class="links" id="about" aria-label="Downloads and resources">
+    <a class="big primary" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener"><span class="t">Blank template</span><span class="d">PDF &middot; two to a page</span><span class="i" aria-hidden="true">&darr;</span></a>
+    <a class="big" href="/guidedsoar/SOAR%20Guide.pdf" target="_blank" rel="noopener"><span class="t">Guide</span><span class="d">PDF &middot; prompts for each part</span><span class="i" aria-hidden="true">&darr;</span></a>
+    <a class="big" href="/resources#podcasts"><span class="t">Resources</span><span class="d">Podcast recommendations</span><span class="i" aria-hidden="true">&rarr;</span></a>
   </section>
 
   <footer class="site-foot"><a href="/">dwellstudy.com</a></footer>
