@@ -224,6 +224,15 @@
   .site-foot { text-align: center; padding: 8px 20px 28px; }
   .site-foot a { font: 400 12px/1 'DM Sans', sans-serif; letter-spacing: .06em; color: #111; opacity: .35; text-decoration: none; }
   .site-foot a:hover { opacity: .6; }
+
+  /* ---------- opening: the mountain cover sits over the template, then each window gives way to its box ---------- */
+  .cover-over { position: absolute; left: 0; top: 0; width: 100% !important; z-index: 2; pointer-events: none; }
+  .cover-over .win, .cover-over .truth, .cover-over .cover-logo { transition: opacity .9s ease; }
+  .s-tpl.intro .lbl { opacity: 0; transition: opacity .9s ease; }
+  .s-tpl.c0 .cover-over .truth { opacity: 0; }
+  .s-tpl.c1 .cover-over .win.tl, .s-tpl.c2 .cover-over .win.tr, .s-tpl.c3 .cover-over .win.bl, .s-tpl.c4 .cover-over .win.br, .s-tpl.c4 .cover-over .cover-logo { opacity: 0; }
+  .s-tpl.c1 .gd-box.tl .lbl, .s-tpl.c2 .gd-box.tr .lbl, .s-tpl.c3 .gd-box.bl .lbl, .s-tpl.c4 .gd-box.br .lbl { opacity: 1; }
+  .s-tpl.done .cover-over { display: none; }
 </style></head>
 <body>
   <header class="top">
@@ -231,15 +240,22 @@
   </header>
 
   <main class="stage">
-    <div class="pager" role="group" aria-label="Cards"><button type="button">Cover</button><button type="button">Template</button><button type="button">Guide</button><button type="button">Example</button></div>
+    <div class="pager" role="group" aria-label="Cards"><button type="button">Template</button><button type="button">Guide</button><button type="button">Example</button></div>
     <div class="deck">
-      <div class="slide s-cover pos-c" data-name="Cover">
-        <div class="cover">
-          <div class="win tl vt-tl" aria-hidden="true"></div>
-          <div class="win tr vt-tr" aria-hidden="true"></div>
-          <div class="win bl vt-bl" aria-hidden="true"></div>
-          <div class="win br vt-br" aria-hidden="true"></div>
-          <blockquote class="truth verse-m vt-truth">
+      <div class="slide s-tpl pos-c intro" data-name="Template" aria-label="Blank template">
+        <div class="card" aria-hidden="true">
+          <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Observation</span></div>
+          <div class="gd-box bl vt-bl"><span class="lbl">Application</span></div>
+          <div class="gd-box br vt-br"><span class="lbl">Reflection</span></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
+        </div>
+        <div class="cover cover-over" aria-hidden="true">
+          <div class="win tl"></div>
+          <div class="win tr"></div>
+          <div class="win bl"></div>
+          <div class="win br"></div>
+          <blockquote class="truth verse-m">
             <span>For even the Son of Man</span>
             <span>did not come to be served,</span>
             <span>but to <b>serve</b>, and to give</span>
@@ -248,15 +264,6 @@
             <cite>Mark 10:45</cite>
           </blockquote>
           <img class="cover-logo" src="/guided-soar-logo-white.png" alt="Guided SOAR">
-        </div>
-      </div>
-      <div class="slide s-tpl" data-name="Template" aria-label="Blank template">
-        <div class="card" aria-hidden="true">
-          <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span></div>
-          <div class="gd-box tr vt-tr"><span class="lbl">Observation</span></div>
-          <div class="gd-box bl vt-bl"><span class="lbl">Application</span></div>
-          <div class="gd-box br vt-br"><span class="lbl">Reflection</span></div>
-          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
         </div>
       </div>
       <div class="slide s-guide" data-name="Guide" aria-label="Guide">
@@ -362,6 +369,17 @@
       // desktop: the note in the bottom-left corner belongs to the slideshow, so hide it once you scroll down to the About section
       var stage = document.querySelector('.stage');
       if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { document.body.classList.toggle('below', es[0].intersectionRatio < .6); }, { threshold: [0, .6, 1] }).observe(stage);
+    })();
+
+    // Opening: hold the mountain cover a moment, then fade the verse and each window in turn to reveal the template. Any tap or key skips it.
+    (function () {
+      var tpl = document.querySelector('.s-tpl'); if (!tpl || !tpl.querySelector('.cover-over')) return;
+      var steps = ['c0', 'c1', 'c2', 'c3', 'c4', 'done'], times = [1800, 2600, 3200, 3800, 4400, 5400], timers = [];
+      function finish() { timers.forEach(clearTimeout); tpl.classList.remove('intro'); tpl.classList.add('done'); ['click', 'keydown', 'touchstart'].forEach(function (e) { document.removeEventListener(e, finish, true); }); }
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
+      tpl.classList.add('intro');
+      steps.forEach(function (c, i) { timers.push(setTimeout(function () { tpl.classList.add(c); if (c === 'done') finish(); }, times[i])); });
+      ['click', 'keydown', 'touchstart'].forEach(function (e) { document.addEventListener(e, finish, true); });
     })();
   </script>
 </body>
