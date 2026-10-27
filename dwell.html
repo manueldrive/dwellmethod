@@ -14,7 +14,19 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #fff; color: #111; }
   body { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
-  .top { display: flex; align-items: center; height: 72px; padding: 0 20px; }
+  .top { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 20px; }
+  .menu-btn { width: 44px; height: 44px; display: grid; place-content: center; gap: 5px; background: none; border: 0; cursor: pointer; padding: 0; }
+  .menu-btn i { display: block; width: 24px; height: 2px; background: #111; border-radius: 2px; transition: transform .2s, opacity .2s; }
+  .menu-btn[aria-expanded="true"] i:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] i:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded="true"] i:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .menu { position: absolute; top: 62px; right: 20px; width: 240px; background: #fff; border: 1.5px solid #111; border-radius: 6px; padding: 6px; display: none; }
+  .menu.open { display: block; }
+  .menu a { display: block; padding: 12px 14px; border-radius: 4px; color: #111; text-decoration: none; }
+  .menu a:hover, .menu a:focus-visible { background: #f1f2f4; outline: none; }
+  .menu b { display: block; font: 700 19px/1.1 'Fraunces', serif; }
+  .menu small { display: block; margin-top: 3px; font-size: 13px; color: #5b6878; }
+  .menu b { font-family: 'DM Sans', sans-serif; font-size: 18px; }
   .top img { height: 40px; width: auto; display: block; }
   main { padding: 4px 16px 0; }
   .faces { display: flex; gap: 24px; justify-content: center; align-items: flex-start; }
@@ -32,18 +44,28 @@
   .site-foot a:hover { opacity: .6; }
 </style></head>
 <body>
-  <header class="top"><a href="/dwell" aria-label="Dwell Bookmark"><img src="/icons/dwell-title.png" alt="Dwell"></a></header>
+  <header class="top">
+    <a href="/dwell" aria-label="Dwell Bookmark"><img src="/icons/dwell-title.png" alt="Dwell"></a>
+    <button class="menu-btn" aria-label="Downloads" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    <nav class="menu" id="menu" aria-label="Downloads">
+      <a href="/dwell-bookmark-sheet.pdf" download="Dwell Bookmark.pdf"><b>Bookmark</b><small>PDF &middot; three to a page, two-sided</small></a>
+    </nav>
+  </header>
   <main>
     <div class="faces">
       <figure aria-label="Front"><div class="fw"><div class="dwb side-a"><div class="hd"><div class="strip"><i></i><i></i><i></i><i></i><i></i></div><img class="wm" src="/icons/dwell-title.png" alt="Dwell"><div class="tag">a guide for meditating<br>on Scripture daily</div></div><p class="pray">Lord, grant me the spirit of wisdom and revelation in the knowledge of who You are. Amen.</p><div class="bar sage"><span class="n">1</span><span class="pipe">|</span>DISCOVER<span class="ic"><img src="/icons/discover.png" alt=""></span></div><p>Use a study Bible or trusted online resource to review historical context:</p><div class="ctx"><span>author</span><span>time frame</span><span>audience</span><span>purpose</span></div><p>Put away extra resources for now and read through the passage slowly, taking note of key characters and settings.</p><div class="bar sage"><span class="n">2</span><span class="pipe">|</span>WORD WORK<span class="ic"><img src="/icons/word-work.png" alt=""></span></div><p>Reread the passage&mdash;which words or phrases are being emphasized? (Look for repetition, lists, comparisons, etc.)</p><p>Which words need more clarity? Look them up&mdash;what do you learn?</p><p>How would you summarize the passage in <span style="white-space:nowrap">1&ndash;2</span> sentences?</p></div></div></figure>
       <figure aria-label="Back"><div class="fw"><div class="dwb side-b"><p class="pray" style="margin-top:calc(4 * var(--u))">Lord, correct any lies I believe. Let this knowledge increase my love for You and others, not my pride. Amen.</p><div class="bar slate"><span class="n">3</span><span class="pipe">|</span>EVALUATE<span class="ic"><img src="/icons/evaluate.png" alt=""></span></div><p>Reread the passage&mdash;what questions come to mind?</p><p>Review other translations, cross references &amp; surrounding passages&mdash;do they shed any light on your questions?</p><p style="margin-bottom:calc(22 * var(--u))">How would the original audience have understood this passage?</p><div class="bar slate"><span class="n">4</span><span class="pipe">|</span>LEARN<span class="ic"><img src="/icons/learn.png" alt=""></span></div><p>What truth does this passage reveal about God&rsquo;s character and purpose?</p><p>What cultural or personal lies does this truth challenge today?</p><p style="margin-bottom:calc(26 * var(--u))"><em>Check your findings in community.</em></p><div class="bar rose"><span class="n">5</span><span class="pipe">|</span>LIVE<span class="ic"><img src="/icons/live.png" alt=""></span></div><p>How will this truth shape your prayers, thoughts, words and/or actions today?</p></div></div></figure>
     </div>
   </main>
-  <section class="dl">
-    <h2>Download</h2>
-    <div class="starts"><a href="/dwell-bookmark-sheet.pdf" download="Dwell Bookmark.pdf">Bookmark PDF &darr;</a></div>
-    <p class="note">Prints three to a page, front and back. Cut along the lines.</p>
-  </section>
   <footer class="site-foot"><a href="/">dwellstudy.com</a></footer>
+  <script>
+    (function () {
+      var btn = document.querySelector('.menu-btn'), menu = document.getElementById('menu');
+      var set = function (open) { btn.setAttribute('aria-expanded', open); menu.classList.toggle('open', open); };
+      btn.addEventListener('click', function (e) { e.stopPropagation(); set(!menu.classList.contains('open')); });
+      document.addEventListener('click', function (e) { if (!menu.contains(e.target)) set(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    })();
+  </script>
 </body>
 </html>
