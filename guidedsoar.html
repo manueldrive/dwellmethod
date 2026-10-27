@@ -60,6 +60,7 @@
   .s-guide .gd-circle b { position: static; margin-bottom: calc(4 * var(--u)); }
   .s-guide .gd-circle p { margin: 0 0 calc(9 * var(--u)); font-style: italic; font-size: calc(9.8 * var(--u)); line-height: 1.3; color: #3d4450; }
   .s-guide .gd-circle p:last-child { margin-bottom: 0; }
+  .mk { align-self: flex-start; background: #15232a; color: #fff; font: 700 calc(7.4 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .14em; text-transform: uppercase; padding: calc(3.4 * var(--u)) calc(7 * var(--u)) calc(3 * var(--u)); border-radius: calc(3 * var(--u)); margin-bottom: calc(5 * var(--u)); }
   .gq { list-style: none; margin: 0; padding: 0; }
   .gq li { position: relative; padding-left: calc(8 * var(--u)); margin-bottom: calc(5 * var(--u)); font-size: calc(11 * var(--u)); line-height: 1.3; color: #3d4450; }
   .gq li::before { content: ''; position: absolute; left: 0; top: .5em; width: calc(2.8 * var(--u)); height: calc(2.8 * var(--u)); border-radius: 50%; background: #a3abb6; }
@@ -227,14 +228,6 @@
   .site-foot a { font: 400 12px/1 'DM Sans', sans-serif; letter-spacing: .06em; color: #111; opacity: .35; text-decoration: none; }
   .site-foot a:hover { opacity: .6; }
 
-  /* ---------- opening: the mountain cover sits over the template, then each window gives way to its box ---------- */
-  .cover-over { position: absolute; left: 0; top: 0; width: 100% !important; z-index: 2; pointer-events: none; }
-  .cover-over .win, .cover-over .truth, .cover-over .cover-logo { transition: opacity .9s ease; }
-  .s-tpl.intro .lbl { opacity: 0; transition: opacity .9s ease; }
-  .s-tpl.c0 .cover-over .truth { opacity: 0; }
-  .s-tpl.c1 .cover-over .win.tl, .s-tpl.c2 .cover-over .win.tr, .s-tpl.c3 .cover-over .win.bl, .s-tpl.c4 .cover-over .win.br, .s-tpl.c4 .cover-over .cover-logo { opacity: 0; }
-  .s-tpl.c1 .gd-box.tl .lbl, .s-tpl.c2 .gd-box.tr .lbl, .s-tpl.c3 .gd-box.bl .lbl, .s-tpl.c4 .gd-box.br .lbl { opacity: 1; }
-  .s-tpl.done .cover-over { display: none; }
 
   /* ---------- below the card: big buttons for the downloads and resources ---------- */
   .links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 900px; margin: 0 auto; padding: 28px 20px 40px; }
@@ -256,28 +249,13 @@
   <main class="stage">
     <div class="pager" role="group" aria-label="Cards"><button type="button">Template</button><button type="button">Guide</button><button type="button">Example</button></div>
     <div class="deck">
-      <div class="slide s-tpl pos-c intro" data-name="Template" aria-label="Blank template">
+      <div class="slide s-tpl pos-c" data-name="Template" aria-label="Blank template">
         <div class="card" aria-hidden="true">
           <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span></div>
           <div class="gd-box tr vt-tr"><span class="lbl">Observation</span></div>
           <div class="gd-box bl vt-bl"><span class="lbl">Application</span></div>
           <div class="gd-box br vt-br"><span class="lbl">Reflection</span></div>
           <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><b>THEREFORE, I&hellip;</b></div>
-        </div>
-        <div class="cover cover-over" aria-hidden="true">
-          <div class="win tl"></div>
-          <div class="win tr"></div>
-          <div class="win bl"></div>
-          <div class="win br"></div>
-          <blockquote class="truth verse-m">
-            <span>For even the Son of Man</span>
-            <span>did not come to be served,</span>
-            <span>but to <b>serve</b>, and to give</span>
-            <span>His life as a ransom</span>
-            <span>for many.</span>
-            <cite>Mark 10:45</cite>
-          </blockquote>
-          <img class="cover-logo" src="/guided-soar-logo-white.png" alt="Guided SOAR">
         </div>
       </div>
       <div class="slide s-guide" data-name="Guide" aria-label="Guide">
@@ -287,9 +265,9 @@
           <div class="gd-box tr vt-tr"><span class="lbl">Observation</span>
             <ul class="gq"><li>Define confusing terms</li><li>Explain difficult concepts</li><li>Make connections to other parts of the Bible</li></ul></div>
           <div class="gd-box bl vt-bl"><span class="lbl">Application</span>
-            <ul class="gq"><li>What makes this truth hard to believe or live out?</li><li>How can you live it out this week?</li></ul></div>
+            <span class="mk">Table time</span><ul class="gq"><li>What makes this truth hard to believe or live out?</li><li>How can you live this out this week? Think about your thoughts, words and actions.</li></ul></div>
           <div class="gd-box br vt-br"><span class="lbl">Reflection</span>
-            <ul class="gq"><li>How can you ask God to help you live this out?</li><li>What questions do you still have about this passage?</li><li>Who can you bring your remaining questions to?</li></ul></div>
+            <span class="mk">At home</span><ul class="gq"><li>How can you ask God to help you live this out?</li><li>Reread the passage. What questions do you still have? Bring them in next week.</li></ul></div>
           <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p>What does <strong>this</strong> passage reveal about God&rsquo;s character and purpose?</p><b>THEREFORE, I&hellip;</b><p>What does this reveal about who He made me to be?</p></div>
         </div>
       </div>
@@ -378,16 +356,6 @@
       if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { document.body.classList.toggle('below', es[0].intersectionRatio < .6); }, { threshold: [0, .6, 1] }).observe(stage);
     })();
 
-    // Opening: hold the mountain cover a moment, then fade the verse and each window in turn to reveal the template. Any tap or key skips it.
-    (function () {
-      var tpl = document.querySelector('.s-tpl'); if (!tpl || !tpl.querySelector('.cover-over')) return;
-      var steps = ['c0', 'c1', 'c2', 'c3', 'c4', 'done'], times = [1800, 2600, 3200, 3800, 4400, 5400], timers = [];
-      function finish() { timers.forEach(clearTimeout); tpl.classList.remove('intro'); tpl.classList.add('done'); ['click', 'keydown', 'touchstart'].forEach(function (e) { document.removeEventListener(e, finish, true); }); }
-      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
-      tpl.classList.add('intro');
-      steps.forEach(function (c, i) { timers.push(setTimeout(function () { tpl.classList.add(c); if (c === 'done') finish(); }, times[i])); });
-      ['click', 'keydown', 'touchstart'].forEach(function (e) { document.addEventListener(e, finish, true); });
-    })();
   </script>
 </body>
 </html>
