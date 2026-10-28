@@ -141,10 +141,9 @@
 
   /* the example: answers in a handwritten face */
   .ex .hw { margin: 0; font: 400 calc(11.6 * var(--u))/1.3 'DM Sans', sans-serif; color: #111; }
-  .ex .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(20 * var(--u)); }
-  .ex .gd-circle b { position: static; margin-bottom: calc(3 * var(--u)); }
-  .ex .gd-circle .hw { margin-bottom: calc(10 * var(--u)); font-size: calc(13 * var(--u)); }
-  .ex .gd-circle .hw:last-child { margin-bottom: 0; }
+  /* example: GOD IS / THEREFORE, I stay where they sit on the blank template; answers go right under each */
+  .ex .gd-circle .hw { position: absolute; left: calc(14 * var(--u)); right: calc(14 * var(--u)); text-align: center; font-size: calc(13 * var(--u)); line-height: 1.3; }
+  .ex .gd-circle .hw:first-of-type { top: calc(42 * var(--u)); } .ex .gd-circle .hw:last-of-type { top: calc(126 * var(--u)); }
   .ex .gd-box.sm .hw { font-size: calc(11.2 * var(--u)); line-height: 1.28; }
   .ex .gd-box.tr .hw { font-size: calc(11.2 * var(--u)); line-height: 1.28; }
   .ex .circ { display: inline-block; border: calc(1.2 * var(--u)) solid #233; border-radius: 50%; padding: calc(1 * var(--u)) calc(6 * var(--u)); margin-left: calc(-6 * var(--u)); }
