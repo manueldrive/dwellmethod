@@ -58,12 +58,11 @@
   .gd-circle b:first-child { top: calc(24 * var(--u)); } .gd-circle b:last-of-type { top: calc(108 * var(--u)); }
   .s-guide .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(22 * var(--u)); }
   .s-guide .gd-circle b { position: static; margin-bottom: calc(4 * var(--u)); }
-  .s-guide .gd-circle p { margin: 0 0 calc(9 * var(--u)); font-style: italic; font-size: calc(9.8 * var(--u)); line-height: 1.3; color: #3d4450; }
+  .s-guide .gd-circle p { margin: 0 0 calc(9 * var(--u)); font-style: italic; font-size: calc(11.2 * var(--u)); line-height: 1.3; color: #111; }
   .s-guide .gd-circle p:last-child { margin-bottom: 0; }
-  .mk { align-self: flex-start; background: #15232a; color: #fff; font: 700 calc(7.4 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: .14em; text-transform: uppercase; padding: calc(3.4 * var(--u)) calc(7 * var(--u)) calc(3 * var(--u)); border-radius: calc(3 * var(--u)); margin-bottom: calc(5 * var(--u)); }
   .gq { list-style: none; margin: 0; padding: 0; }
-  .gq li { position: relative; padding-left: calc(8 * var(--u)); margin-bottom: calc(5 * var(--u)); font-size: calc(11 * var(--u)); line-height: 1.3; color: #3d4450; }
-  .gq li::before { content: ''; position: absolute; left: 0; top: .5em; width: calc(2.8 * var(--u)); height: calc(2.8 * var(--u)); border-radius: 50%; background: #a3abb6; }
+  .gq li { position: relative; padding-left: calc(8 * var(--u)); margin-bottom: calc(6 * var(--u)); font-size: calc(11.2 * var(--u)); line-height: 1.29; color: #111; }
+  .gq li::before { content: ''; position: absolute; left: 0; top: .5em; width: calc(2.8 * var(--u)); height: calc(2.8 * var(--u)); border-radius: 50%; background: #111; }
 
   @media (min-width: 1000px) and (min-height: 600px) {
     .stage { overflow: hidden; }
@@ -141,13 +140,13 @@
   }
 
   /* the example: answers in a handwritten face */
-  .ex .hw { margin: 0; font: 600 calc(13.4 * var(--u))/1.18 'Caveat', cursive; color: #233; }
+  .ex .hw { margin: 0; font: 400 calc(11.6 * var(--u))/1.3 'DM Sans', sans-serif; color: #111; }
   .ex .gd-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(20 * var(--u)); }
   .ex .gd-circle b { position: static; margin-bottom: calc(3 * var(--u)); }
-  .ex .gd-circle .hw { margin-bottom: calc(10 * var(--u)); font-size: calc(15 * var(--u)); }
+  .ex .gd-circle .hw { margin-bottom: calc(10 * var(--u)); font-size: calc(13 * var(--u)); }
   .ex .gd-circle .hw:last-child { margin-bottom: 0; }
-  .ex .gd-box.sm .hw { font-size: calc(12 * var(--u)); line-height: 1.12; }
-  .ex .gd-box.tr .hw { font-size: calc(12.6 * var(--u)); }
+  .ex .gd-box.sm .hw { font-size: calc(11.2 * var(--u)); line-height: 1.28; }
+  .ex .gd-box.tr .hw { font-size: calc(11.2 * var(--u)); line-height: 1.28; }
   .ex .circ { display: inline-block; border: calc(1.2 * var(--u)) solid #233; border-radius: 50%; padding: calc(1 * var(--u)) calc(6 * var(--u)); margin-left: calc(-6 * var(--u)); }
 
   /* ---------- about: below the slideshow ---------- */
@@ -176,7 +175,10 @@
   .gd-box .sub { display: block; font-size: calc(8.6 * var(--u)); letter-spacing: .03em; color: #8a929c; text-align: center; margin: 0 0 calc(8 * var(--u)); }
   .gd-box.bl .sub, .gd-box.br .sub { margin: calc(8 * var(--u)) 0 0; order: 9; }
   .gd-box .lead { margin: 0 0 calc(5 * var(--u)); font-size: calc(10.6 * var(--u)); line-height: 1.3; color: #111; }
-  .ex .gd-box .hw + .hw { margin-top: calc(5 * var(--u)); }
+  .ex .gd-box .hw + .hw { margin-top: calc(7 * var(--u)); }
+  .tm { display: block; text-align: center; font: 700 calc(6.8 * var(--u))/1 'DM Sans', sans-serif; letter-spacing: calc(1.4 * var(--u)); padding-left: calc(1.4 * var(--u)); text-transform: uppercase; color: #8a929c; margin: calc(-4 * var(--u)) 0 calc(10 * var(--u)); }
+  .gd-box.bl .tm, .gd-box.br .tm { margin: calc(6 * var(--u)) 0 calc(-6 * var(--u)); }
+  .gd-circle .tm { margin: 0 0 calc(6 * var(--u)); }
   .truth.verse-m { gap: calc(3 * var(--u)); }
   .truth.verse-m span { font-size: calc(11.6 * var(--u)); line-height: 1.12; }
   .cover-logo { position: absolute; right: calc(32 * var(--u)); bottom: calc(32 * var(--u)); width: calc(104 * var(--u)); height: auto; }
@@ -256,15 +258,15 @@
       </div>
       <div class="slide s-guide" data-name="Guide" aria-label="Guide">
         <div class="card">
-          <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span>
+          <div class="gd-box tl vt-tl"><span class="lbl">Scripture</span><span class="tm">Before reading</span>
             <ul class="gq"><li>Who wrote it</li><li>When it was written</li><li>Why it was written</li><li>What happens right before and after</li></ul></div>
-          <div class="gd-box tr vt-tr"><span class="lbl">Observation</span>
-            <ul class="gq"><li>Define confusing terms</li><li>Explain difficult concepts</li><li>Make connections to other parts of the Bible</li></ul></div>
+          <div class="gd-box tr vt-tr"><span class="lbl">Observation</span><span class="tm">During reading</span>
+            <ul class="gq"><li>Retell what&rsquo;s happening in your own words</li><li>Define confusing terms</li><li>Explain difficult concepts</li><li>Make connections to other parts of the Bible</li></ul></div>
           <div class="gd-box bl vt-bl"><span class="lbl">Application</span>
-            <span class="mk">Table time</span><ul class="gq"><li>What makes this truth hard to believe or live out?</li><li>How can you live this out this week? Think about your thoughts, words and actions.</li></ul></div>
+            <ul class="gq"><li>What is your central truth? What makes it hard to believe or live out?</li><li>How can you live this out this week? (thoughts, words, actions)</li></ul><span class="tm">Table time</span></div>
           <div class="gd-box br vt-br"><span class="lbl">Reflection</span>
-            <span class="mk">At home</span><ul class="gq"><li>How can you ask God to help you live this out?</li><li>Reread the passage. What questions do you still have? Bring them in next week.</li></ul></div>
-          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p>What does <strong>this</strong> passage reveal about God&rsquo;s character and purpose?</p><b>THEREFORE, I&hellip;</b><p>What does this reveal about who He made me to be?</p></div>
+            <ul class="gq"><li>How can you ask God to help you live this out?</li><li>Reread the passage. What questions do you still have? Bring them in next week.</li></ul><span class="tm">At home</span></div>
+          <div class="gd-circle vt-truth"><span class="tm">After reading</span><b>GOD IS&hellip;</b><p>What does <strong>this</strong> passage<br>reveal about God&rsquo;s<br>character and purpose?</p><b>THEREFORE, I&hellip;</b><p>What does this reveal<br>about who He made<br>me to be?</p></div>
         </div>
       </div>
       <div class="slide s-ex" data-name="Example" aria-label="Example: Mark 10:32&ndash;45">
@@ -275,8 +277,7 @@
             <p class="hw">Date: Somewhere between <span style="white-space:nowrap">50&ndash;70 AD</span></p>
             <p class="hw">Purpose: To show Jesus as the Son of God</p></div>
           <div class="gd-box tr vt-tr"><span class="lbl">Observation</span>
-            <p class="hw">Third time Jesus predicts His death.</p>
-            <p class="hw">It&rsquo;s also mentioned multiple times in the OT. (Isaiah 53)</p>
+            <p class="hw">Third time Jesus predicts His death, which the OT also points to (Isaiah 53).</p>
             <p class="hw">The disciples still did not get it and instead pursued earthly glory.</p>
             <p class="hw">Glory &ndash; importance/honor</p></div>
           <div class="gd-box bl vt-bl sm"><span class="lbl">Application</span>
@@ -285,7 +286,7 @@
           <div class="gd-box br vt-br sm"><span class="lbl">Reflection</span>
             <p class="hw">God, help me live this out this week.</p>
             <p class="hw">Still wondering: what&rsquo;s the &ldquo;cup&rdquo; (v.38), and why ask for glory right then? I&rsquo;ll ask my small group leader.</p></div>
-          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p class="hw">all powerful, yet He chooses to serve.</p><b>THEREFORE, I&hellip;</b><p class="hw">look not to be served but to serve.</p></div>
+          <div class="gd-circle vt-truth"><b>GOD IS&hellip;</b><p class="hw">all powerful, yet He<br>chooses to serve.</p><b>THEREFORE, I&hellip;</b><p class="hw">look not to be served<br>but to serve.</p></div>
         </div>
       </div>
     </div>
