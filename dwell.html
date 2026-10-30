@@ -42,11 +42,13 @@
   .site-foot { text-align: center; padding: 8px 20px 28px; }
   .site-foot a { font: 400 12px/1 'DM Sans', sans-serif; letter-spacing: .06em; color: #111; opacity: .35; text-decoration: none; }
   .site-foot a:hover { opacity: .6; }
+  .menu-btn.dl { flex: none; align-self: center; margin: 0 0 0 auto; padding: 0; box-sizing: border-box; display: grid; place-items: center; border: 1.5px solid #111; border-radius: 50%; width: 42px; height: 42px; transition: background .2s; }
+  .menu-btn.dl:hover, .menu-btn.dl[aria-expanded="true"] { background: #f1f2f4; }
 </style></head>
 <body>
   <header class="top">
     <a href="/dwell" aria-label="Dwell Bookmark"><img src="/icons/dwell-title.png" alt="Dwell"></a>
-    <button class="menu-btn" aria-label="Downloads" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    <button class="menu-btn dl" aria-label="Downloads" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 20h16"/></svg></button>
     <nav class="menu" id="menu" aria-label="Downloads">
       <a href="/dwell-bookmark-sheet.pdf" download="Dwell Bookmark.pdf"><b>Bookmark</b><small>PDF &middot; three to a page, two-sided</small></a>
     </nav>
