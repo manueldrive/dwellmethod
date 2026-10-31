@@ -353,19 +353,6 @@
     .stage { padding-top: 0 !important; }
     .deck, .mnav { width: min(100vw - 40px, (100svh - 238px) * 396 / 612) !important; }
   }
-
-  /* phones: the top logo leads; card logos sit back, and the page opens logo first, then the card */
-  @keyframes logoIn { from { opacity: 0; transform: translateY(-6px) scale(.96); } to { opacity: 1; transform: none; } }
-  @keyframes cardUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  @media (max-width: 999px), (max-height: 599px) {
-    .slide .sh-logo { opacity: .65; }
-    .ov .slide .sh-logo { opacity: 1; }
-    .top .soar-logo img { animation: logoIn .5s cubic-bezier(.2,.7,.2,1) both; }
-    .pager { animation: cardUp .45s .3s cubic-bezier(.2,.7,.2,1) both; }
-    .deck { animation: cardUp .55s .4s cubic-bezier(.2,.7,.2,1) both; }
-    .mnav { animation: cardUp .45s .55s cubic-bezier(.2,.7,.2,1) both; }
-  }
-  @media (prefers-reduced-motion: reduce) { .top .soar-logo img, .pager, .deck, .mnav { animation: none !important; } }
 </style></head>
 <body>
   <header class="top">
