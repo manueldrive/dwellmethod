@@ -345,13 +345,12 @@
   .site-foot a:hover { opacity: .45 !important; }
   @media (max-width: 999px), (max-height: 599px) { .stage { min-height: 100svh !important; } }
 
-  /* logo centered at the top of the page (phones too); the card header keeps its fields/ribbon but drops its own logo */
+  /* logo centered at the top of the page (phones too); the cards keep their own logo */
   .top { justify-content: center !important; }
   @media (max-width: 999px), (max-height: 599px) {
     .top { display: flex !important; height: 60px; }
     .top .soar-logo img { height: 34px; }
     .stage { padding-top: 0 !important; }
-    .slide .sh-logo { visibility: hidden; }
     .deck, .mnav { width: min(100vw - 40px, (100svh - 220px) * 396 / 612) !important; }
   }
 </style></head>
