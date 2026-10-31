@@ -318,16 +318,36 @@
   .ov-hint { position: fixed; top: 20px; left: 16px; z-index: 51; font: 400 13px/1 'DM Sans', sans-serif; color: #5b6878; }
   body.ov-on { overflow: hidden; }
   .slide.pos-c { cursor: zoom-in; }
+
+  /* ---------- one download button that matches the card on screen; phones drop the site header (the card carries the logo) ---------- */
+  .dlbtn { display: inline-flex; align-items: center; gap: 8px; background: #111; color: #fff; text-decoration: none; border-radius: 99px; padding: 12px 18px;
+           font: 700 13.5px/1 'DM Sans', sans-serif; letter-spacing: .02em; white-space: nowrap; }
+  .dlbtn:hover { background: #2a2d33; }
+  .dlbtn[hidden], .mlabel[hidden] { display: none !important; }
+  @media (min-width: 1000px) and (min-height: 600px) {
+    .mnav { display: flex; justify-content: center; align-items: center; height: 44px; margin-top: 18px; }
+    .mnav .mprev, .mnav .mnext { display: none; }
+    .mlabel { font: 400 14px/1 'DM Sans', sans-serif; color: #5b6878; }
+    .deck { --w: calc((100svh - 190px) * 396 / 561) !important; }
+  }
+  @media (max-width: 999px), (max-height: 599px) {
+    .top { display: none; }
+    .stage { padding-top: 14px !important; }
+    .deck { width: min(100vw - 40px, (100svh - 170px) * 396 / 612) !important; }
+    .mnav { width: min(100vw - 40px, (100svh - 170px) * 396 / 612) !important; }
+    .mnav .mnext { background: #fff; color: #111; }
+    .dlbtn { padding: 12px 16px; font-size: 13px; }
+  }
+
+  /* the dwellstudy.com footer: far below the card and barely there */
+  .site-foot { padding: 72px 20px 22px !important; }
+  .site-foot a { font-size: 11px !important; opacity: .18 !important; }
+  .site-foot a:hover { opacity: .45 !important; }
+  @media (max-width: 999px), (max-height: 599px) { .stage { min-height: 100svh !important; } }
 </style></head>
 <body>
   <header class="top">
     <a class="soar-logo" href="/guidedsoar" aria-label="Guided SOAR home"><img src="/guided-soar-logo.png" alt="Guided SOAR"></a>
-    <button class="menu-btn dl" aria-label="Downloads and resources" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 20h16"/></svg></button>
-    <nav class="menu" id="menu" aria-label="Downloads and resources">
-      <a href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener"><b>Template</b><small>PDF &middot; two to a page</small></a>
-      <a href="/guidedsoar/SOAR%20Guide.pdf" target="_blank" rel="noopener"><b>Guide</b><small>PDF &middot; two to a page</small></a>
-      <!-- hidden for now: <a href="/resources#podcasts"><b>Resources</b><small>Podcast recommendations</small></a> -->
-    </nav>
   </header>
 
   <main class="stage">
@@ -380,7 +400,7 @@
     </div>
       </div>
     </div>
-    <div class="mnav" aria-hidden="true"><button type="button" class="mprev">&larr;</button><span class="mlabel">Swipe for the guide &amp; example</span><button type="button" class="mnext">&rarr;</button></div>
+    <div class="mnav"><button type="button" class="mprev" aria-label="Previous card">&larr;</button><a class="dlbtn" href="/guidedsoar/SOAR%20Blank%20Template.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 20h16"/></svg><span>Download template</span></a><span class="mlabel" hidden>Example &middot; Mark 10:32&ndash;45</span><button type="button" class="mnext" aria-label="Next card">&rarr;</button></div>
     <button class="nav prev" type="button" aria-label="Previous">&larr;</button>
     <button class="nav next" type="button" aria-label="Next">&rarr;</button>
   </main>
@@ -414,14 +434,15 @@
           if (was === null) { void el.offsetWidth; el.classList.remove('snap'); }
         });
         dots.forEach(function (d, i) { d.setAttribute('aria-current', i === at); });
-        var ml = document.querySelector('.mlabel'), names = ['Template', 'Guide', 'Example'];
-        if (ml && document.body.classList.contains('moved')) ml.textContent = names[at] + ' \u00b7 ' + (at + 1) + ' of ' + n;
+        var DL = [['/guidedsoar/SOAR%20Blank%20Template.pdf', 'Download template'], ['/guidedsoar/SOAR%20Guide.pdf', 'Download guide'], null];
+        var btn = document.querySelector('.dlbtn'), lab = document.querySelector('.mlabel'), d = DL[at];
+        if (btn) { btn.hidden = !d; lab.hidden = !!d; if (d) { btn.href = d[0]; btn.querySelector('span').textContent = d[1]; } }
         var note = document.querySelector('.note'), src = slides[at].querySelector('.blurb');
         if (note && src) { note.innerHTML = src.innerHTML; note.classList.remove('in'); void note.offsetWidth; note.classList.add('in'); }
       }
       var changed = 0;
       function go(d) { changed = Date.now(); document.querySelector('.deck').classList.remove('skip'); at = (at + d + n) % n; paint(d); moved(); }
-      function moved() { document.body.classList.add('moved'); var ml = document.querySelector('.mlabel'), names = ['Template', 'Guide', 'Example']; if (ml) ml.textContent = names[at] + ' \u00b7 ' + (at + 1) + ' of ' + n; }
+      function moved() { document.body.classList.add('moved'); }
       function jump(i) { if (i === at) return; changed = Date.now(); document.querySelector('.deck').classList.remove('skip'); var f = ((i - at) % n + n) % n; at = i; paint(f <= n / 2 ? 1 : -1); moved(); }
       var st = document.querySelector('.start'); if (st) st.addEventListener('click', function (e) { e.stopPropagation(); go(1); });
       dots.forEach(function (d, i) { d.addEventListener('click', function () { jump(i); }); });
