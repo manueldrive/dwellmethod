@@ -253,10 +253,11 @@
   @media (max-width: 999px), (max-height: 599px) {
     .slide, .slide.pos-l, .slide.pos-r, .slide.pos-hl, .slide.pos-hr { position: absolute; left: 0; top: 0; transform: none !important; opacity: 1 !important; transition: none !important; visibility: hidden; }
     .slide.pos-c { position: relative; visibility: visible; }
-    .slide.pos-c .tm, .slide.pos-c .gq li, .slide.pos-c .hw, .slide.pos-c .gd-circle p { animation: wordIn .4s cubic-bezier(.2,.7,.2,1) both; }
+    .slide.pos-c .tm, .slide.pos-c .gq li, .slide.pos-c .hw, .slide.pos-c .gd-circle p { animation-name: wordIn; animation-duration: .4s; animation-timing-function: cubic-bezier(.2,.7,.2,1); animation-fill-mode: both; }
     .slide.pos-c .gd-box.tl * { animation-delay: 0s; }
     .slide.pos-c .gd-box.tr * { animation-delay: .45s; }
     .slide.pos-c .gd-circle * { animation-delay: .9s; }
+    .slide.pos-c .gd-circle p:last-of-type { animation-delay: 1.05s; }
     .slide.pos-c .gd-box.bl * { animation-delay: 1.3s; }
     .slide.pos-c .gd-box.br * { animation-delay: 1.7s; }
     .slide.pos-c .gd-box.tl .gq li:nth-child(2), .slide.pos-c .gd-box.tl .hw:nth-of-type(2) { animation-delay: .08s; }
